@@ -22,7 +22,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#67](https://github.com/zendframework/zend-hydrator/pull/67) fixes an issue
+- [zendframework/zend-hydrator#67](https://github.com/zendframework/zend-hydrator/pull/67) fixes an issue
   in the `ArraySerializable::hydrate()` logic whereby nested array data was
   _merged_ instead of _replaced_ during hydration. The hydrator now correctly
   replaces such data.
@@ -31,19 +31,19 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#27](https://github.com/zendframework/zend-hydrator/pull/27) adds the
-  interface `Zend\Hydrator\HydratorProviderInterface` for use with the
-  zend-modulemanager `ServiceListener` implementation, and updates the
+- [zendframework/zend-hydrator#27](https://github.com/zendframework/zend-hydrator/pull/27) adds the
+  interface `Laminas\Hydrator\HydratorProviderInterface` for use with the
+  laminas-modulemanager `ServiceListener` implementation, and updates the
   `HydratorManager` definition for the `ServiceListener` to typehint on this new
-  interface instead of the one provided in zend-modulemanager.
+  interface instead of the one provided in laminas-modulemanager.
 
-  Users implementing the zend-modulemanager `Zend\ModuleManger\Feature\HydratorProviderInterface`
+  Users implementing the laminas-modulemanager `Laminas\ModuleManger\Feature\HydratorProviderInterface`
   will be unaffected, as the method it defines, `getHydratorConfig()`, will
   still be identified and used to inject he `HydratorPluginManager`. However, we
   recommend updating your `Module` classes to use the new interface instead.
 
-- [#44](https://github.com/zendframework/zend-hydrator/pull/44) adds
-  `Zend\Hydrator\Strategy\CollectionStrategy`. This class allows you to provide
+- [zendframework/zend-hydrator#44](https://github.com/zendframework/zend-hydrator/pull/44) adds
+  `Laminas\Hydrator\Strategy\CollectionStrategy`. This class allows you to provide
   a single hydrator to use with an array of objects or data that represent the
   same type.
 
@@ -57,12 +57,12 @@ All notable changes to this project will be documented in this file, in reverse 
   ));
   ```
 
-- [#63](https://github.com/zendframework/zend-hydrator/pull/63) adds support for
+- [zendframework/zend-hydrator#63](https://github.com/zendframework/zend-hydrator/pull/63) adds support for
   PHP 7.2.
 
 ### Changed
 
-- [#44](https://github.com/zendframework/zend-hydrator/pull/44) updates the
+- [zendframework/zend-hydrator#44](https://github.com/zendframework/zend-hydrator/pull/44) updates the
   `ClassMethods` hydrator to add a second, optional, boolean argument to the
   constructor, `$methodExistsCheck`, and a related method
   `setMethodExistsCheck()`. These allow you to specify a flag indicating whether
@@ -77,7 +77,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- [#63](https://github.com/zendframework/zend-hydrator/pull/63) removes support for HHVM.
+- [zendframework/zend-hydrator#63](https://github.com/zendframework/zend-hydrator/pull/63) removes support for HHVM.
 
 ### Fixed
 
@@ -103,7 +103,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#65](https://github.com/zendframework/zend-hydrator/pull/65) fixes the
+- [zendframework/zend-hydrator#65](https://github.com/zendframework/zend-hydrator/pull/65) fixes the
   hydration behavior of the `ArraySerializable` hydrator when using
   `exchangeArray()`. Previously, the method would clear any existing values from
   the instance, which is problematic when a partial update is provided as values
@@ -116,12 +116,12 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changes
 
-- [#42](https://github.com/zendframework/zend-hydrator/pull/42) updates the
+- [zendframework/zend-hydrator#42](https://github.com/zendframework/zend-hydrator/pull/42) updates the
   `ConfigProvider::getDependencies()` method to map the `HydratorPluginManager`
   class to the `HydratorPluginManagerFactory` class, and make the
   `HydratorManager` service an alias to the fully-qualified
   `HydratorPluginManager` class.
-- [#45](https://github.com/zendframework/zend-hydrator/pull/45) changes the
+- [zendframework/zend-hydrator#45](https://github.com/zendframework/zend-hydrator/pull/45) changes the
   `ClassMethods` hydrator to take into account naming strategies when present,
   making it act consistently with the other hydrators.
 
@@ -135,11 +135,11 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#59](https://github.com/zendframework/zend-hydrator/pull/59) fixes how the
+- [zendframework/zend-hydrator#59](https://github.com/zendframework/zend-hydrator/pull/59) fixes how the
   `HydratorPluginManagerFactory` factory initializes the plugin manager
   instance, ensuring it is injecting the relevant configuration from the
   `config` service and thus seeding it with configured hydrator services. This
-  means that the `hydrators` configuration will now be honored in non-zend-mvc
+  means that the `hydrators` configuration will now be honored in non-laminas-mvc
   contexts.
 
 ## 2.2.1 - 2016-04-18
@@ -158,7 +158,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#28](https://github.com/zendframework/zend-hydrator/pull/28) fixes the
+- [zendframework/zend-hydrator#28](https://github.com/zendframework/zend-hydrator/pull/28) fixes the
   `Module::init()` method to properly receive a `ModuleManager` instance, and
   not expect a `ModuleEvent`.
 
@@ -166,16 +166,16 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#26](https://github.com/zendframework/zend-hydrator/pull/26) exposes the
-  package as a ZF component and/or generic configuration provider, by adding the
+- [zendframework/zend-hydrator#26](https://github.com/zendframework/zend-hydrator/pull/26) exposes the
+  package as a Laminas component and/or generic configuration provider, by adding the
   following:
   - `HydratorPluginManagerFactory`, which can be consumed by container-interop /
-    zend-servicemanager to create and return a `HydratorPluginManager` instance.
+    laminas-servicemanager to create and return a `HydratorPluginManager` instance.
   - `ConfigProvider`, which maps the service `HydratorManager` to the above
     factory.
   - `Module`, which does the same as `ConfigProvider`, but specifically for
-    zend-mvc applications. It also provices a specification to
-    `Zend\ModuleManager\Listener\ServiceListener` to allow modules to provide
+    laminas-mvc applications. It also provices a specification to
+    `Laminas\ModuleManager\Listener\ServiceListener` to allow modules to provide
     hydrator configuration.
 
 ### Deprecated
@@ -194,9 +194,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#20](https://github.com/zendframework/zend-hydrator/pull/20) imports the
-  documentation from zend-stdlib, publishes it to
-  https://zendframework.github.io/zend-hydrator/, and automates building and
+- [zendframework/zend-hydrator#20](https://github.com/zendframework/zend-hydrator/pull/20) imports the
+  documentation from laminas-stdlib, publishes it to
+  https://docs.laminas.dev/laminas-hydrator/, and automates building and
   publishing the documentation.
 
 ### Deprecated
@@ -209,26 +209,26 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#6](https://github.com/zendframework/zend-hydrator/pull/6) add additional
+- [zendframework/zend-hydrator#6](https://github.com/zendframework/zend-hydrator/pull/6) add additional
   unit test coverage
-- [#17](https://github.com/zendframework/zend-hydrator/pull/17) and
-  [#23](https://github.com/zendframework/zend-hydrator/pull/23) update the code
-  to be forwards compatible with zend-servicemanager v3, and to depend on
-  zend-stdlib and zend-eventmanager v3.
+- [zendframework/zend-hydrator#17](https://github.com/zendframework/zend-hydrator/pull/17) and
+  [zendframework/zend-hydrator#23](https://github.com/zendframework/zend-hydrator/pull/23) update the code
+  to be forwards compatible with laminas-servicemanager v3, and to depend on
+  laminas-stdlib and laminas-eventmanager v3.
 
 ## 2.0.0 - 2015-09-17
 
 ### Added
 
 - The following classes were marked `final` (per their original implementation
-  in zend-stdlib):
-  - `Zend\Hydrator\NamingStrategy\IdentityNamingStrategy`
-  - `Zend\Hydrator\NamingStrategy\ArrayMapNamingStrategy`
-  - `Zend\Hydrator\NamingStrategy\CompositeNamingStrategy`
-  - `Zend\Hydrator\Strategy\ExplodeStrategy`
-  - `Zend\Hydrator\Strategy\StrategyChain`
-  - `Zend\Hydrator\Strategy\DateTimeFormatterStrategy`
-  - `Zend\Hydrator\Strategy\BooleanStrategy`
+  in laminas-stdlib):
+  - `Laminas\Hydrator\NamingStrategy\IdentityNamingStrategy`
+  - `Laminas\Hydrator\NamingStrategy\ArrayMapNamingStrategy`
+  - `Laminas\Hydrator\NamingStrategy\CompositeNamingStrategy`
+  - `Laminas\Hydrator\Strategy\ExplodeStrategy`
+  - `Laminas\Hydrator\Strategy\StrategyChain`
+  - `Laminas\Hydrator\Strategy\DateTimeFormatterStrategy`
+  - `Laminas\Hydrator\Strategy\BooleanStrategy`
 
 ### Deprecated
 
@@ -245,20 +245,20 @@ All notable changes to this project will be documented in this file, in reverse 
 ## 1.0.0 - 2015-09-17
 
 Initial release. This ports all hydrator classes and functionality from
-[zend-stdlib](https://github.com/zendframework/zend-stdlib) to a standalone
+[laminas-stdlib](https://github.com/laminas/laminas-stdlib) to a standalone
 repository. All final keywords are removed, to allow a deprecation cycle in the
-zend-stdlib component.
+laminas-stdlib component.
 
 Please note: the following classes will be marked as `final` for a version 2.0.0
 release to immediately follow 1.0.0:
 
-- `Zend\Hydrator\NamingStrategy\IdentityNamingStrategy`
-- `Zend\Hydrator\NamingStrategy\ArrayMapNamingStrategy`
-- `Zend\Hydrator\NamingStrategy\CompositeNamingStrategy`
-- `Zend\Hydrator\Strategy\ExplodeStrategy`
-- `Zend\Hydrator\Strategy\StrategyChain`
-- `Zend\Hydrator\Strategy\DateTimeFormatterStrategy`
-- `Zend\Hydrator\Strategy\BooleanStrategy`
+- `Laminas\Hydrator\NamingStrategy\IdentityNamingStrategy`
+- `Laminas\Hydrator\NamingStrategy\ArrayMapNamingStrategy`
+- `Laminas\Hydrator\NamingStrategy\CompositeNamingStrategy`
+- `Laminas\Hydrator\Strategy\ExplodeStrategy`
+- `Laminas\Hydrator\Strategy\StrategyChain`
+- `Laminas\Hydrator\Strategy\DateTimeFormatterStrategy`
+- `Laminas\Hydrator\Strategy\BooleanStrategy`
 
 As such, you should not extend them.
 
