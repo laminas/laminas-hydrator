@@ -1,8 +1,8 @@
-# zend-hydrator
+# laminas-hydrator
 
 Hydration is the act of populating an object from a set of data.
 
-zend-hydrator is a simple component to provide mechanisms both for hydrating
+laminas-hydrator is a simple component to provide mechanisms both for hydrating
 objects, as well as extracting data sets from them.
 
 The component consists of interfaces, and several implementations for common use cases.
@@ -12,7 +12,7 @@ The component consists of interfaces, and several implementations for common use
 ### ExtractionInterface
 
 ```php
-namespace Zend\Hydrator;
+namespace Laminas\Hydrator;
 
 interface ExtractionInterface
 {
@@ -29,7 +29,7 @@ interface ExtractionInterface
 ### HydrationInterface
 
 ```php
-namespace Zend\Hydrator;
+namespace Laminas\Hydrator;
 
 interface HydrationInterface
 {
@@ -47,7 +47,7 @@ interface HydrationInterface
 ### HydratorInterface
 
 ```php
-namespace Zend\Hydrator;
+namespace Laminas\Hydrator;
 
 interface HydratorInterface extends
     ExtractionInterface,
@@ -61,7 +61,7 @@ interface HydratorInterface extends
 Usage involves instantiating the hydrator, and then passing information to it.
 
 ```php
-use Zend\Hydrator;
+use Laminas\Hydrator;
 $hydrator = new Hydrator\ArraySerializable();
 
 $object = new ArrayObject(array());
@@ -74,17 +74,17 @@ $data = $hydrator->extract($object);
 
 ## Available Implementations
 
-### Zend\\Hydrator\\ArraySerializable
+### Laminas\\Hydrator\\ArraySerializable
 
 Follows the definition of `ArrayObject`. Objects must implement either the `exchangeArray()` or
 `populate()` methods to support hydration, and the `getArrayCopy()` method to support extraction.
 
-### Zend\\Hydrator\\ClassMethods
+### Laminas\\Hydrator\\ClassMethods
 
 Any data key matching a setter method will be called in order to hydrate; any method matching a
 getter method will be called for extraction.
 
-### Zend\\Hydrator\\DelegatingHydrator
+### Laminas\\Hydrator\\DelegatingHydrator
 
 Composes a hydrator locator, and will delegate `hydrate()` and `extract()` calls
 to the appropriate one based upon the class name of the object being operated
@@ -92,29 +92,29 @@ on.
 
 ```php
 // Instantiate each hydrator you wish to delegate to
-$albumHydrator = new Zend\Hydrator\ClassMethods;
-$artistHydrator = new Zend\Hydrator\ClassMethods;
+$albumHydrator = new Laminas\Hydrator\ClassMethods;
+$artistHydrator = new Laminas\Hydrator\ClassMethods;
 
 // Map the entity class name to the hydrator using the HydratorPluginManager.
 // In this case we have two entity classes, "Album" and "Artist".
-$hydrators = new Zend\Hydrator\HydratorPluginManager;
+$hydrators = new Laminas\Hydrator\HydratorPluginManager;
 $hydrators->setService('Album', $albumHydrator);
 $hydrators->setService('Artist', $artistHydrator);
 
 // Create the DelegatingHydrator and tell it to use our configured hydrator locator
-$delegating = new Zend\Hydrator\DelegatingHydrator($hydrators);
+$delegating = new Laminas\Hydrator\DelegatingHydrator($hydrators);
 
 // Now we can use $delegating to hydrate or extract any supported object
 $array = $delegating->extract(new Artist);
 $artist = $delegating->hydrate($data, new Artist);
 ```
 
-### Zend\\Hydrator\\ObjectProperty
+### Laminas\\Hydrator\\ObjectProperty
 
 Any data key matching a publicly accessible property will be hydrated; any public properties
 will be used for extraction.
 
-### Zend\\Hydrator\\Reflection
+### Laminas\\Hydrator\\Reflection
 
 Similar to the `ObjectProperty` hydrator, but uses [PHP's reflection API](http://php.net/manual/en/intro.reflection.php)
 to hydrate or extract properties of any visibility. Any data key matching an

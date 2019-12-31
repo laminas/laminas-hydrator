@@ -1,24 +1,22 @@
 <?php
 
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Hydrator;
+namespace LaminasTest\Hydrator;
 
+use Laminas\Hydrator\ArraySerializable;
+use Laminas\Hydrator\Exception\BadMethodCallException;
+use LaminasTest\Hydrator\TestAsset\ArraySerializable as ArraySerializableAsset;
 use PHPUnit\Framework\TestCase;
-use Zend\Hydrator\Exception\BadMethodCallException;
-use Zend\Hydrator\ArraySerializable;
-use ZendTest\Hydrator\TestAsset\ArraySerializable as ArraySerializableAsset;
 
 /**
  * Unit tests for {@see ArraySerializable}
  *
- * @covers \Zend\Hydrator\ArraySerializable
+ * @covers \Laminas\Hydrator\ArraySerializable
  */
 class ArraySerializableTest extends TestCase
 {
@@ -44,7 +42,7 @@ class ArraySerializableTest extends TestCase
     {
         $this->expectException(BadMethodCallException::class);
         $this->expectExceptionMessage(
-            'Zend\Hydrator\ArraySerializable::extract expects the provided object to implement getArrayCopy()'
+            'Laminas\Hydrator\ArraySerializable::extract expects the provided object to implement getArrayCopy()'
         );
         $this->hydrator->extract('thisIsNotAnObject');
     }
@@ -56,7 +54,7 @@ class ArraySerializableTest extends TestCase
     {
         $this->expectException(BadMethodCallException::class);
         $this->expectExceptionMessage(
-            'Zend\Hydrator\ArraySerializable::hydrate expects the provided object to implement'
+            'Laminas\Hydrator\ArraySerializable::hydrate expects the provided object to implement'
             . ' exchangeArray() or populate()'
         );
         $this->hydrator->hydrate(['some' => 'data'], 'thisIsNotAnObject');
@@ -124,7 +122,7 @@ class ArraySerializableTest extends TestCase
      */
     public function testWillReplaceArrayIfNoGetArrayCopy()
     {
-        $original = new \ZendTest\Hydrator\TestAsset\ArraySerializableNoGetArrayCopy();
+        $original = new \LaminasTest\Hydrator\TestAsset\ArraySerializableNoGetArrayCopy();
 
         $data = [
                 'bar' => 'foo1'
@@ -142,8 +140,8 @@ class ArraySerializableTest extends TestCase
         return [
             //               [ existing data,  submitted data,                   expected ]
             'empty'       => [['what-exists'], [],                               []],
-            'replacement' => [['what-exists'], ['zend-hydrator', 'zend-stdlib'], ['zend-hydrator', 'zend-stdlib']],
-            'partial'     => [['what-exists'], ['what-exists', 'zend-hydrator'], ['what-exists', 'zend-hydrator']],
+            'replacement' => [['what-exists'], ['laminas-hydrator', 'laminas-stdlib'], ['laminas-hydrator', 'laminas-stdlib']],
+            'partial'     => [['what-exists'], ['what-exists', 'laminas-hydrator'], ['what-exists', 'laminas-hydrator']],
         ];
         // @codingStandardsIgnoreEnd
     }

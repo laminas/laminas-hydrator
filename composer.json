@@ -1,48 +1,19 @@
 {
-    "name": "zendframework/zend-hydrator",
+    "name": "laminas/laminas-hydrator",
     "description": "Serialize objects to arrays, and vice versa",
     "license": "BSD-3-Clause",
     "keywords": [
-        "zf",
-        "zendframework",
+        "laminas",
         "hydrator"
     ],
+    "homepage": "https://laminas.dev",
     "support": {
-        "docs": "https://docs.zendframework.com/zend-hydrator/",
-        "issues": "https://github.com/zendframework/zend-hydrator/issues",
-        "source": "https://github.com/zendframework/zend-hydrator",
-        "rss": "https://github.com/zendframework/zend-hydrator/releases.atom",
-        "chat": "https://zendframework-slack.herokuapp.com",
-        "forum": "https://discourse.zendframework.com/c/questions/components"
-    },
-    "require": {
-        "php": "^5.6 || ^7.0",
-        "zendframework/zend-stdlib": "^3.0"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.2",
-        "zendframework/zend-coding-standard": "~1.0.0",
-        "zendframework/zend-eventmanager": "^2.6.2 || ^3.0",
-        "zendframework/zend-filter": "^2.6",
-        "zendframework/zend-inputfilter": "^2.6",
-        "zendframework/zend-serializer": "^2.6.1",
-        "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3"
-    },
-    "suggest": {
-        "zendframework/zend-eventmanager": "^2.6.2 || ^3.0, to support aggregate hydrator usage",
-        "zendframework/zend-filter": "^2.6, to support naming strategy hydrator usage",
-        "zendframework/zend-serializer": "^2.6.1, to use the SerializableStrategy",
-        "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3, to support hydrator plugin manager usage"
-    },
-    "autoload": {
-        "psr-4": {
-            "Zend\\Hydrator\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "ZendTest\\Hydrator\\": "test/"
-        }
+        "docs": "https://docs.laminas.dev/laminas-hydrator/",
+        "issues": "https://github.com/laminas/laminas-hydrator/issues",
+        "source": "https://github.com/laminas/laminas-hydrator",
+        "rss": "https://github.com/laminas/laminas-hydrator/releases.atom",
+        "chat": "https://laminas.dev/chat",
+        "forum": "https://discourse.laminas.dev"
     },
     "config": {
         "sort-packages": true
@@ -54,9 +25,39 @@
             "dev-master": "2.4.x-dev",
             "dev-develop": "2.5.x-dev"
         },
-        "zf": {
-            "component": "Zend\\Hydrator",
-            "config-provider": "Zend\\Hydrator\\ConfigProvider"
+        "laminas": {
+            "component": "Laminas\\Hydrator",
+            "config-provider": "Laminas\\Hydrator\\ConfigProvider"
+        }
+    },
+    "require": {
+        "php": "^5.6 || ^7.0",
+        "laminas/laminas-stdlib": "^3.0",
+        "laminas/laminas-zendframework-bridge": "^1.0"
+    },
+    "require-dev": {
+        "laminas/laminas-coding-standard": "~1.0.0",
+        "laminas/laminas-eventmanager": "^2.6.2 || ^3.0",
+        "laminas/laminas-filter": "^2.6",
+        "laminas/laminas-inputfilter": "^2.6",
+        "laminas/laminas-serializer": "^2.6.1",
+        "laminas/laminas-servicemanager": "^2.7.5 || ^3.0.3",
+        "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.2"
+    },
+    "suggest": {
+        "laminas/laminas-eventmanager": "^2.6.2 || ^3.0, to support aggregate hydrator usage",
+        "laminas/laminas-filter": "^2.6, to support naming strategy hydrator usage",
+        "laminas/laminas-serializer": "^2.6.1, to use the SerializableStrategy",
+        "laminas/laminas-servicemanager": "^2.7.5 || ^3.0.3, to support hydrator plugin manager usage"
+    },
+    "autoload": {
+        "psr-4": {
+            "Laminas\\Hydrator\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LaminasTest\\Hydrator\\": "test/"
         }
     },
     "scripts": {
@@ -68,5 +69,8 @@
         "cs-fix": "phpcbf",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
+    },
+    "replace": {
+        "zendframework/zend-hydrator": "self.version"
     }
 }
