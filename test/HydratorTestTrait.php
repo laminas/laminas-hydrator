@@ -1,17 +1,18 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-hydrator for the canonical source repository
- * @copyright Copyright (c) 2010-2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-hydrator/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
  */
 
 declare(strict_types=1);
 
-namespace ZendTest\Hydrator;
+namespace LaminasTest\Hydrator;
 
-use Zend\Hydrator\NamingStrategy\NamingStrategyInterface;
-use Zend\Hydrator\Strategy\StrategyInterface;
-use ZendTest\Hydrator\TestAsset\SimpleEntity;
+use Laminas\Hydrator\NamingStrategy\NamingStrategyInterface;
+use Laminas\Hydrator\Strategy\StrategyInterface;
+use LaminasTest\Hydrator\TestAsset\SimpleEntity;
 
 use function get_class;
 use function sprintf;

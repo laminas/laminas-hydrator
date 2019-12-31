@@ -1,25 +1,26 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-hydrator for the canonical source repository
- * @copyright Copyright (c) 2010-2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-hydrator/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
  */
 
 declare(strict_types=1);
 
-namespace ZendTest\Hydrator\Strategy;
+namespace LaminasTest\Hydrator\Strategy;
 
+use Laminas\Hydrator\Strategy\Exception\InvalidArgumentException;
+use Laminas\Hydrator\Strategy\ExplodeStrategy;
 use PHPUnit\Framework\TestCase;
 use TypeError;
-use Zend\Hydrator\Strategy\Exception\InvalidArgumentException;
-use Zend\Hydrator\Strategy\ExplodeStrategy;
 
 use function is_numeric;
 
 /**
  * Tests for {@see ExplodeStrategy}
  *
- * @covers \Zend\Hydrator\Strategy\ExplodeStrategy
+ * @covers \Laminas\Hydrator\Strategy\ExplodeStrategy
  */
 class ExplodeStrategyTest extends TestCase
 {
@@ -86,7 +87,7 @@ class ExplodeStrategyTest extends TestCase
 
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(
-            'Zend\Hydrator\Strategy\ExplodeStrategy::hydrate expects argument 1 to be string,'
+            'Laminas\Hydrator\Strategy\ExplodeStrategy::hydrate expects argument 1 to be string,'
             . ' array provided instead'
         );
 
@@ -99,7 +100,7 @@ class ExplodeStrategyTest extends TestCase
 
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(
-            'Zend\Hydrator\Strategy\ExplodeStrategy::hydrate expects argument 1 to be string,'
+            'Laminas\Hydrator\Strategy\ExplodeStrategy::hydrate expects argument 1 to be string,'
             . ' stdClass provided instead'
         );
 
@@ -112,7 +113,7 @@ class ExplodeStrategyTest extends TestCase
 
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(
-            'Zend\Hydrator\Strategy\ExplodeStrategy::extract expects argument 1 to be array,'
+            'Laminas\Hydrator\Strategy\ExplodeStrategy::extract expects argument 1 to be array,'
             . ' stdClass provided instead'
         );
 

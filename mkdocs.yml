@@ -1,6 +1,6 @@
 docs_dir: docs/book
 site_dir: docs/html
-pages:
+nav:
     - Home: index.md
     - "Quick Start": v3/quick-start.md
     - Reference:
@@ -35,6 +35,6 @@ pages:
         - "_naming_strategies-mapping": naming-strategy/map-naming-strategy.md
         - "_naming_strategies-underscore_mapping": naming-strategy/underscore-naming-strategy.md
         - "_naming_strategies-composite": naming-strategy/composite-naming-strategy.md
-site_name: zend-hydrator
+site_name: laminas-hydrator
 site_description: "Serialize objects to arrays, and vice versa"
-repo_url: 'https://github.com/zendframework/zend-hydrator'
+repo_url: 'https://github.com/laminas/laminas-hydrator'

@@ -1,26 +1,27 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-hydrator for the canonical source repository
- * @copyright Copyright (c) 2010-2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-hydrator/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
  */
 
 declare(strict_types=1);
 
-namespace ZendTest\Hydrator;
+namespace LaminasTest\Hydrator;
 
+use Laminas\Hydrator\ClassMethodsHydrator;
+use LaminasTest\Hydrator\TestAsset\ArraySerializable;
+use LaminasTest\Hydrator\TestAsset\ClassMethodsCamelCase;
+use LaminasTest\Hydrator\TestAsset\ClassMethodsCamelCaseMissing;
+use LaminasTest\Hydrator\TestAsset\ClassMethodsOptionalParameters;
 use PHPUnit\Framework\TestCase;
 use TypeError;
-use Zend\Hydrator\ClassMethodsHydrator;
-use ZendTest\Hydrator\TestAsset\ArraySerializable;
-use ZendTest\Hydrator\TestAsset\ClassMethodsCamelCase;
-use ZendTest\Hydrator\TestAsset\ClassMethodsCamelCaseMissing;
-use ZendTest\Hydrator\TestAsset\ClassMethodsOptionalParameters;
 
 /**
  * Unit tests for {@see ClassMethodsHydrator}
  *
- * @covers \Zend\Hydrator\ClassMethodsHydrator
+ * @covers \Laminas\Hydrator\ClassMethodsHydrator
  */
 class ClassMethodsHydratorTest extends TestCase
 {

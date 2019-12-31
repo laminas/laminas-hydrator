@@ -1,6 +1,6 @@
 # MapNamingStrategy
 
-`Zend\Hydrator\NamingStrategy\MapNamingStrategy` allows you to provide a map of
+`Laminas\Hydrator\NamingStrategy\MapNamingStrategy` allows you to provide a map of
 keys to use both during extraction and hydration; the map will translate the key
 based on the direction:
 
@@ -27,7 +27,7 @@ hydration map or an extraction map, but not both.
 ### Hydration map only
 
 ```php
-$namingStrategy = Zend\Hydrator\NamingStrategy\MapNamingStrategy::createFromHydrationMap(
+$namingStrategy = Laminas\Hydrator\NamingStrategy\MapNamingStrategy::createFromHydrationMap(
     [
         'foo' => 'bar',
         'baz' => 'bash'
@@ -43,7 +43,7 @@ echo $namingStrategy->hydrate('baz'); // outputs: bash
 ### Extraction map only
 
 ```php
-$namingStrategy = Zend\Hydrator\NamingStrategy\MapNamingStrategy::createFromExtractionMap(
+$namingStrategy = Laminas\Hydrator\NamingStrategy\MapNamingStrategy::createFromExtractionMap(
     null, // no hydration map
     [
         'foo' => 'bar',
@@ -60,7 +60,7 @@ echo $namingStrategy->hydrate('bash'); // outputs: baz
 ### Both hydration and extraction maps
 
 ```php
-$namingStrategy = Zend\Hydrator\NamingStrategy\MapNamingStrategy::createFromAssymetricMap(
+$namingStrategy = Laminas\Hydrator\NamingStrategy\MapNamingStrategy::createFromAssymetricMap(
     [
         'foo' => 'bar',
         'baz' => 'bash'
@@ -87,11 +87,11 @@ class Foo
     public $bar;
 }
 
-$namingStrategy = Zend\Hydrator\NamingStrategy\MapNamingStrategy::createFromHydrationMap([
+$namingStrategy = Laminas\Hydrator\NamingStrategy\MapNamingStrategy::createFromHydrationMap([
     'foo' => 'bar',
     'baz' => 'bash',
 ]);
-$hydrator = new Zend\Hydrator\ObjectPropertyHydrator();
+$hydrator = new Laminas\Hydrator\ObjectPropertyHydrator();
 $hydrator->setNamingStrategy($namingStrategy);
 
 $foo = new Foo();

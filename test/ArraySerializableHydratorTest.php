@@ -1,25 +1,26 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-hydrator for the canonical source repository
- * @copyright Copyright (c) 2010-2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-hydrator/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
  */
 
 declare(strict_types=1);
 
-namespace ZendTest\Hydrator;
+namespace LaminasTest\Hydrator;
 
+use Laminas\Hydrator\ArraySerializableHydrator;
+use LaminasTest\Hydrator\TestAsset\ArraySerializable as ArraySerializableAsset;
 use PHPUnit\Framework\TestCase;
 use TypeError;
-use Zend\Hydrator\ArraySerializableHydrator;
-use ZendTest\Hydrator\TestAsset\ArraySerializable as ArraySerializableAsset;
 
 use function array_merge;
 
 /**
  * Unit tests for {@see ArraySerializableHydrator}
  *
- * @covers \Zend\Hydrator\ArraySerializableHydrator
+ * @covers \Laminas\Hydrator\ArraySerializableHydrator
  */
 class ArraySerializableHydratorTest extends TestCase
 {
@@ -120,7 +121,7 @@ class ArraySerializableHydratorTest extends TestCase
      */
     public function testWillReplaceArrayIfNoGetArrayCopy()
     {
-        $original = new \ZendTest\Hydrator\TestAsset\ArraySerializableNoGetArrayCopy();
+        $original = new \LaminasTest\Hydrator\TestAsset\ArraySerializableNoGetArrayCopy();
 
         $data = [
                 'bar' => 'foo1'
@@ -138,8 +139,8 @@ class ArraySerializableHydratorTest extends TestCase
         return [
             //               [ existing data,  submitted data,                   expected ]
             'empty'       => [['what-exists'], [],                               []],
-            'replacement' => [['what-exists'], ['zend-hydrator', 'zend-stdlib'], ['zend-hydrator', 'zend-stdlib']],
-            'partial'     => [['what-exists'], ['what-exists', 'zend-hydrator'], ['what-exists', 'zend-hydrator']],
+            'replacement' => [['what-exists'], ['laminas-hydrator', 'laminas-stdlib'], ['laminas-hydrator', 'laminas-stdlib']],
+            'partial'     => [['what-exists'], ['what-exists', 'laminas-hydrator'], ['what-exists', 'laminas-hydrator']],
         ];
         // @codingStandardsIgnoreEnd
     }

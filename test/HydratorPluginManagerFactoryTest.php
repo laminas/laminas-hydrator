@@ -1,21 +1,22 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-hydrator for the canonical source repository
- * @copyright Copyright (c) 2010-2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-hydrator/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
  */
 
 declare(strict_types=1);
 
-namespace ZendTest\Hydrator;
+namespace LaminasTest\Hydrator;
 
 use Interop\Container\ContainerInterface;
+use Laminas\Hydrator\HydratorInterface;
+use Laminas\Hydrator\HydratorPluginManager;
+use Laminas\Hydrator\HydratorPluginManagerFactory;
+use Laminas\Hydrator\ReflectionHydrator;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 use PHPUnit\Framework\TestCase;
-use Zend\Hydrator\HydratorInterface;
-use Zend\Hydrator\HydratorPluginManager;
-use Zend\Hydrator\HydratorPluginManagerFactory;
-use Zend\Hydrator\ReflectionHydrator;
-use Zend\ServiceManager\ServiceLocatorInterface;
 
 class HydratorPluginManagerFactoryTest extends TestCase
 {
