@@ -1,4 +1,4 @@
-# Zend\\Hydrator\\Filter
+# Laminas\\Hydrator\\Filter
 
 Hydrator filters allow you to manipulate the behavior of the `extract()`
 operation.  This is especially useful, if you want to omit some internals (e.g.
@@ -10,7 +10,7 @@ start using them immediately in any custom extensions you write that extend that
 class.
 
 ```php
-namespace Zend\Hydrator\Filter;
+namespace Laminas\Hydrator\Filter;
 
 interface FilterInterface
 {
@@ -26,25 +26,25 @@ returns false, you'll not see them again.
 
 ## Filter implementations
 
-### Zend\\Hydrator\\Filter\\GetFilter
+### Laminas\\Hydrator\\Filter\\GetFilter
 
 This filter is used in the `ClassMethodsHydrator` to decide which getters will
 be extracted. It checks if the key to extract starts with `get` or the object
-contains a method beginning with `get` (e.g., `Zend\Foo\Bar::getFoo`).
+contains a method beginning with `get` (e.g., `Laminas\Foo\Bar::getFoo`).
 
-### Zend\\Hydrator\\Filter\\HasFilter
+### Laminas\\Hydrator\\Filter\\HasFilter
 
 This filter is used in the `ClassMethodsHydrator` to decide which `has` methods
 will be extracted. It checks if the key to extract begins with `has` or the
-object contains a method beginning with `has` (e.g., `Zend\Foo\Bar::hasFoo`).
+object contains a method beginning with `has` (e.g., `Laminas\Foo\Bar::hasFoo`).
 
-### Zend\\Hydrator\\Filter\\IsFilter
+### Laminas\\Hydrator\\Filter\\IsFilter
 
 This filter is used in the `ClassMethodsHydrator` to decide which `is` methods
 will be extracted. It checks if the key to extract begins with `is` or the
-object contains a method beginning with `is` (e.g., `Zend\Foo\Bar::isFoo`).
+object contains a method beginning with `is` (e.g., `Laminas\Foo\Bar::isFoo`).
 
-### Zend\\Hydrator\\Filter\\MethodMatchFilter
+### Laminas\\Hydrator\\Filter\\MethodMatchFilter
 
 This filter allows you to omit methods during extraction that match the
 condition defined in the composite.  The name of the method is specified in the
@@ -53,7 +53,7 @@ blacklisting to decide (whitelisting retains only the matching method, blacklist
 omits any matching method). The default is blacklisting - pass `false` to change
 the behavior.
 
-### Zend\\Hydrator\\Filter\\NumberOfParameterFilter
+### Laminas\\Hydrator\\Filter\\NumberOfParameterFilter
 
 This filter is used in the `ClassMethodsHydrator` to check the number of
 parameters. By convention, the `get`, `has` and `is` methods do not get any
@@ -70,12 +70,12 @@ can add the filters with a condition and accomplish complex requirements using
 different filters with different conditions. You can pass the following
 conditions to the 3rd parameter, when you add a filter:
 
-### Zend\\Hydrator\\Filter\\FilterComposite::CONDITION\_OR
+### Laminas\\Hydrator\\Filter\\FilterComposite::CONDITION\_OR
 
 At the given level of the composite, at least one filter set using
 `CONDITION_OR` must return true to extract the value.
 
-### Zend\\Hydrator\\Filter\\FilterComposite::CONDITION\_AND
+### Laminas\\Hydrator\\Filter\\FilterComposite::CONDITION\_AND
 
 At the given level of the composite, **all** filters set using `CONDITION_AND`
 must return true to extract the value.
@@ -153,11 +153,11 @@ extracted, except for `getServiceManager()` and `getEventManager()`.
 
 ## Using the provider interface
 
-`Zend\Hydrator\Filter\FilterProviderInterface` allows you to configure the
+`Laminas\Hydrator\Filter\FilterProviderInterface` allows you to configure the
 behavior of the hydrator inside your objects.
 
 ```php
-namespace Zend\Hydrator\Filter;
+namespace Laminas\Hydrator\Filter;
 
 interface FilterProviderInterface
 {
@@ -171,7 +171,7 @@ interface FilterProviderInterface
 ```
 
 (The `getFilter()` method is automatically excluded from `extract()`.) If the
-extracted object implements the `Zend\Hydrator\Filter\FilterProviderInterface`,
+extracted object implements the `Laminas\Hydrator\Filter\FilterProviderInterface`,
 the returned `FilterInterface` instance can also be a `FilterComposite`.
 
 For example:
@@ -237,10 +237,10 @@ excluded from extraction.
 ## Filter-enabled hydrators and the composite filter
 
 Hydrators can indicate they are filter-enabled by implementing
-`Zend\Hydrator\Filter\FilterEnabledInterface`:
+`Laminas\Hydrator\Filter\FilterEnabledInterface`:
 
 ```php
-namespace Zend\Hydrator\Filter;
+namespace Laminas\Hydrator\Filter;
 
 interface FilterEnabledInterface extends FilterProviderInterface
 {
@@ -288,7 +288,7 @@ interface FilterEnabledInterface extends FilterProviderInterface
 > includes the `getFilter()` method.
 
 The `FilterEnabledInterface` makes the assumption that the class will be backed
-by a `Zend\Hydrator\Filter\FilterComposite`; the various `addFilter()`,
+by a `Laminas\Hydrator\Filter\FilterComposite`; the various `addFilter()`,
 `hasFilter()`, and `removeFilter()` methods are expected to proxy to a
 `FilterComposite` instance.
 

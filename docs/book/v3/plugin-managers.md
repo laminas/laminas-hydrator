@@ -1,78 +1,78 @@
 # Plugin Managers
 
 It can be useful to compose a plugin manager from which you can retrieve
-hydrators; in fact, `Zend\Hydrator\DelegatingHydrator` does exactly that!
+hydrators; in fact, `Laminas\Hydrator\DelegatingHydrator` does exactly that!
 With such a manager, you can retrieve instances using short names, or instances
 that have dependencies on other services, without needing to know the details of
 how that works.
 
 Examples of Hydrator plugin managers in real-world scenarios include:
 
-- [hydrating database result sets](https://docs.zendframework.com/zend-db/result-set/#zend92db92resultset92hydratingresultset)
-- [preparing API payloads](https://docs.zendframework.com/zend-expressive-hal/resource-generator/#resourcegenerator)
+- [hydrating database result sets](https://docs.laminas.dev/laminas-db/result-set/#laminas92db92resultset92hydratingresultset)
+- [preparing API payloads](https://docs.mezzio.dev/mezzio-hal/resource-generator/#resourcegenerator)
 
 ## HydratorPluginManagerInterface
 
 We provide two plugin manager implementations. Essentially, they only need to
 implement the [PSR-11 ContainerInterface](https://www.php-fig.org/psr/psr-11/),
-but plugin managers in current versions of [zend-servicemanager](https://docs.zendframework.com/zend-servicemanager/)
+but plugin managers in current versions of [laminas-servicemanager](https://docs.laminas.dev/laminas-servicemanager/)
 only implement it indirectly via the container-interop project.
 
-As such, we ship `Zend\Hydrator\HydratorPluginManagerInterface`, which simply
+As such, we ship `Laminas\Hydrator\HydratorPluginManagerInterface`, which simply
 extends the PSR-11 `Psr\Container\ContainerInterface`. Each of our
 implementations implement it.
 
 ## HydratorPluginManager
 
-If you have used zend-hydrator prior to version 3, you are likely already
+If you have used laminas-hydrator prior to version 3, you are likely already
 familiar with this class, as it has been the implementation we have shipped from
-initial versions. The `HydratorPluginManager` extends the zend-servicemanager
+initial versions. The `HydratorPluginManager` extends the laminas-servicemanager
 `AbstractPluginManager`, and has the following behaviors:
 
-- It will only return `Zend\Hydrator\HydratorInterface` instances.
+- It will only return `Laminas\Hydrator\HydratorInterface` instances.
 - It defines short-name aliases for all shipped hydrators (the class name minus
   the namespace), in a variety of casing combinations.
 - All but the `DelegatingHydrator` are defined as invokable services (meaning
   they can be instantiated without any constructor arguments).
 - The `DelegatingHydrator` is configured as a factory-based service, mapping to
-  the `Zend\Hydrator\DelegatingHydratorFactory`.
+  the `Laminas\Hydrator\DelegatingHydratorFactory`.
 - No services are shared; a new instance is created each time you call `get()`.
 
 ### HydratorPluginManagerFactory
 
-`Zend\Hydrator\HydratorPluginManager` is mapped to the factory
-`Zend\Hydrator\HydratorPluginManagerFactory` when wired to the dependency
+`Laminas\Hydrator\HydratorPluginManager` is mapped to the factory
+`Laminas\Hydrator\HydratorPluginManagerFactory` when wired to the dependency
 injection container.
 
 The factory will look for the `config` service, and use the `hydrators`
 configuration key to seed it with additional services. This configuration key
-should map to an array that follows [standard zend-servicemanager configuration](https://docs.zendframework.com/zend-servicemanager/configuring-the-service-manager/).
+should map to an array that follows [standard laminas-servicemanager configuration](https://docs.laminas.dev/laminas-servicemanager/configuring-the-service-manager/).
 
 ## StandaloneHydratorPluginManager
 
-`Zend\Hydrator\StandaloneHydratorPluginManager` provides an implementation that
+`Laminas\Hydrator\StandaloneHydratorPluginManager` provides an implementation that
 has no dependencies on other libraries. **It can only load the hydrators shipped
-with zend-hydrator**.
+with laminas-hydrator**.
 
 ### StandardHydratorPluginManagerFactory
 
-`Zend\Hydrator\StandardHydratorPluginManager` is mapped to the factory
-`Zend\Hydrator\StandardHydratorPluginManagerFactory` when wired to the dependency
+`Laminas\Hydrator\StandardHydratorPluginManager` is mapped to the factory
+`Laminas\Hydrator\StandardHydratorPluginManagerFactory` when wired to the dependency
 injection container.
 
 ## HydratorManager alias
 
-`Zend\Hydrator\ConfigManager` defines an alias service, `HydratorManager`. That
-service will point to `Zend\Hydrator\HydratorPluginManager` if
-zend-servicemanager is installed, and `Zend\Hydrator\StandaloneHydratorPluginManager`
+`Laminas\Hydrator\ConfigManager` defines an alias service, `HydratorManager`. That
+service will point to `Laminas\Hydrator\HydratorPluginManager` if
+laminas-servicemanager is installed, and `Laminas\Hydrator\StandaloneHydratorPluginManager`
 otherwise.
 
 ## Custom plugin managers
 
-If you do not want to use zend-servicemanager, but want a plugin manager that is
+If you do not want to use laminas-servicemanager, but want a plugin manager that is
 customizable, or at least capable of loading the hydrators you have defined for
 your application, you should write a custom implementation of
-`Zend\Hydrator\HydratorPluginManagerInterface`, and wire it to the
+`Laminas\Hydrator\HydratorPluginManagerInterface`, and wire it to the
 `HydratorManager` service, and/or one of the existing service names.
 
 As an example, if you want a configurable solution that uses factories, and want
@@ -87,9 +87,9 @@ namespace YourApplication;
 use Psr\Container\NotFoundExceptionInterface;
 use Psr\Container\ContainerInterface;
 use RuntimeException;
-use Zend\Hydrator\HydratorInterface;
-use Zend\Hydrator\HydratorPluginManagerInterface;
-use Zend\Hydrator\StandaloneHydratorPluginManager;
+use Laminas\Hydrator\HydratorInterface;
+use Laminas\Hydrator\HydratorPluginManagerInterface;
+use Laminas\Hydrator\StandaloneHydratorPluginManager;
 
 class CustomHydratorPluginManager implements HydratorPluginManagerInterface
 {

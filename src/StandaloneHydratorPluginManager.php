@@ -1,13 +1,14 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-hydrator for the canonical source repository
- * @copyright Copyright (c) 2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-hydrator/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
  */
 
 declare(strict_types=1);
 
-namespace Zend\Hydrator;
+namespace Laminas\Hydrator;
 
 use Psr\Container\ContainerInterface;
 
@@ -30,7 +31,7 @@ use function strtolower;
  *   compatibility with v2 names).
  *
  * If you want to be able to configure additional services, you will need to
- * either install zend-servicemanager and use the HydratorPluginManager;
+ * either install laminas-servicemanager and use the HydratorPluginManager;
  * wire hydrators into your application container; or write your own
  * implementation.
  */
@@ -58,6 +59,12 @@ final class StandaloneHydratorPluginManager implements HydratorPluginManagerInte
         Reflection::class           => ReflectionHydrator::class,
         'reflectionhydrator'        => ReflectionHydrator::class,
         'reflection'                => ReflectionHydrator::class,
+
+        // Legacy Zend Framework aliases
+        \Zend\Hydrator\ArraySerializable::class => ArraySerializableHydrator::class,
+        \Zend\Hydrator\ClassMethods::class => ClassMethodsHydrator::class,
+        \Zend\Hydrator\ObjectProperty::class => ObjectPropertyHydrator::class,
+        \Zend\Hydrator\Reflection::class => ReflectionHydrator::class,
     ];
 
     /**
