@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Serialize objects to arrays, and vice versa">  
+    <link rel="canonical" href="https://docs.laminas.dev/v3/strategy/">
+    <link rel="shortcut icon" href="/img/trademark-laminas-foundation-rgb.svg">
+
+    <title>Strategies - laminas-hydrator - Laminas Docs</title>
+
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body id="page-top" class="components">
+
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        
+        <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
+            <img src="../../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+        </a>
+        <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
+            Documentation
+        </a>
+
+        
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
+                </li>
+            </ul>
+
+            
+            
+                <div class="d-block d-sm-none">
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="../..">laminas-hydrator</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../quick-start/" class="subnavigation__link">Quick Start</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Reference</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../filter/" class="subnavigation__link">Filters</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Strategies</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../aggregate/" class="subnavigation__link">Aggregates</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Naming Strategies</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../naming-strategy/intro/" class="subnavigation__link">Introduction</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../naming-strategy/identity-naming-strategy/" class="subnavigation__link">Identity</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../naming-strategy/map-naming-strategy/" class="subnavigation__link">Mapping</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../naming-strategy/underscore-naming-strategy/" class="subnavigation__link">Underscore Mapping</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../naming-strategy/composite-naming-strategy/" class="subnavigation__link">Composite</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../plugin-managers/" class="subnavigation__link">Plugin Managers</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../migration/" class="subnavigation__link">Migration</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                
+            
+        </ul>
+    </div>
+
+                </div>
+            
+
+            
+            <div class="d-block d-sm-none">
+                <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    
+    <header class="header">
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="col-6 offset-md-2">
+                <h1 class="header__title">
+                    Components
+
+                    
+                        <small class="header__subtitle">laminas-hydrator</small>
+                    
+                </h1>
+            </div>
+
+            
+            <div class="col-4 text-sm-right">
+                
+                    
+<div class="version-selector">
+    <div class="btn-group">
+        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            
+                v3
+            
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            
+                
+                    <li class="dropdown-menu__item dropdown-menu__item--selected">
+                        <a href="../quick-start/">
+                            
+                                v3 (latest)
+                            
+                        </a>
+                    </li>
+                
+            
+                
+                    <li class="dropdown-menu__item">
+                        <a href="../../v2/quick-start/">
+                            
+                                v2
+                            
+                        </a>
+                    </li>
+                
+            
+        </ul>
+    </div>
+</div>
+
+
+                    <a href="#" class="header__link header__link--search" data-toggle="modal" data-target="#mkdocs_search_modal" title="Open search">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                    <a href="https://github.com/laminas/laminas-hydrator/" class="header__link header__link--github" title="Go to repository of laminas-hydrator">
+                        <i class="fa fa-github"></i> GitHub
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+</header>
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 col-sm-12">
+                
+    
+
+    
+    
+        <div class="toc">
+            <h6 class="toc__headline">On this page</h6>
+            <ul class="toc__list">
+                
+                    <li class="toc__entry">
+                        <a href="#adding-strategies-to-the-hydrators" class="toc__link">Adding strategies to the hydrators</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#available-implementations" class="toc__link">Available implementations</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#writing-custom-strategies" class="toc__link">Writing custom strategies</a>
+                    </li>
+                
+            </ul>
+        </div>
+    
+
+            </div>
+            <div class="col-md-7 col-sm-12 content" role="main" data-spy="scroll" data-target=".toc">
+                
+                    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        
+            <li class="breadcrumb-item"><a href="">Overview</a></li>
+
+            
+                <li class="breadcrumb-item"><a href="../..">laminas-hydrator</a></li>
+
+                
+                    
+                        
+                        
+                    
+                
+                    
+                        
+                        
+                            <li class="breadcrumb-item">Reference</li>
+                        
+                    
+                
+
+                <li class="breadcrumb-item active" aria-current="page">Strategies</li>
+            
+        
+    </ol>
+</nav>
+
+
+
+
+
+
+    
+    
+        <h2 class="chapter__headline">Reference</h2>
+    
+
+    <h1 id="laminas92hydrator92strategy">Laminas\Hydrator\Strategy</h1>
+<p>You can compose <code>Laminas\Hydrator\Strategy\StrategyInterface</code> instances in any of
+the hydrators to manipulate the way they behave on <code>extract()</code> and <code>hydrate()</code>
+for specific key/value pairs. The interface offers the following definitions:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>namespace Laminas\Hydrator\Strategy;</span>
+
+<span class=x>interface StrategyInterface</span>
+<span class=x>{</span>
+<span class=x>    /**</span>
+<span class=x>     * Converts the given value so that it can be extracted by the hydrator.</span>
+<span class=x>     *</span>
+<span class=x>     * @param  mixed       $value The original value.</span>
+<span class=x>     * @param  null|object $object (optional) The original object for context.</span>
+<span class=x>     * @return mixed       Returns the value that should be extracted.</span>
+<span class=x>     */</span>
+<span class=x>    public function extract($value, ?object $object = null);</span>
+
+<span class=x>    /**</span>
+<span class=x>     * Converts the given value so that it can be hydrated by the hydrator.</span>
+<span class=x>     *</span>
+<span class=x>     * @param  mixed      $value The original value.</span>
+<span class=x>     * @param  null|array $data (optional) The original data for context.</span>
+<span class=x>     * @return mixed      Returns the value that should be hydrated.</span>
+<span class=x>     */</span>
+<span class=x>    public function hydrate($value, ?array $data = null);</span>
+<span class=x>}</span>
+</pre></div></p>
+<p>This interface is similar to what the <code>Laminas\Hydrator\ExtractionInterface</code> and
+<code>Laminas\Hydrator\HydrationInterface</code> provide; the reason is that strategies
+provide a proxy implementation for <code>hydrate()</code> and <code>extract()</code> on individual
+values. For this reason, their return types are listed as mixed, versus as
+<code>array</code> and <code>object</code>, respectively.</p>
+<h2 id="adding-strategies-to-the-hydrators">Adding strategies to the hydrators</h2>
+<p>This package provides the interface <code>Laminas\Hydrator\Strategy\StrategyEnabledInterface</code>.
+Hydrators can implement this interface, and then call on its <code>getStrategy()</code>
+method in order to extract or hydrate individual values. The interface has the
+following definition:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>namespace Laminas\Hydrator\Strategy;</span>
+
+<span class=x>interface StrategyEnabledInterface</span>
+<span class=x>{</span>
+<span class=x>    /**</span>
+<span class=x>     * Adds the given strategy under the given name.</span>
+<span class=x>     */</span>
+<span class=x>    public function addStrategy(string $name, StrategyInterface $strategy) : void;</span>
+
+<span class=x>    /**</span>
+<span class=x>     * Gets the strategy with the given name.</span>
+<span class=x>     */</span>
+<span class=x>    public function getStrategy(string $name) : StrategyInterface;</span>
+
+<span class=x>    /**</span>
+<span class=x>     * Checks if the strategy with the given name exists.</span>
+<span class=x>     */</span>
+<span class=x>    public function hasStrategy(string $name) : bool;</span>
+
+<span class=x>    /**</span>
+<span class=x>     * Removes the strategy with the given name.</span>
+<span class=x>     */</span>
+<span class=x>    public function removeStrategy(string $name) : void;</span>
+<span class=x>}</span>
+</pre></div></p>
+<p>We provide a default implementation of the interface as part of
+<code>Laminas\Hydrator\AbstractHydrator</code>; it uses an array property to store and
+retrieve strategies by name when extracting and hydrating values. Since all
+shipped hydrators are based on <code>AbstractHydrator</code>, they share these
+capabilities.</p>
+<p>Additionally, the functionality that consumes strategies within
+<code>AbstractHydrator</code> also contains checks if a naming strategy is composed, and,
+if present, will use it to translate the property name prior to looking up a
+  strategy for it.</p>
+<h2 id="available-implementations">Available implementations</h2>
+<h3>Laminas\Hydrator\Strategy\BooleanStrategy</h3>
+<p>This strategy converts values into Booleans and vice versa. It expects two
+arguments at the constructor, which are used to define value maps for <code>true</code> and
+<code>false</code>.</p>
+<h3>Laminas\Hydrator\Strategy\ClosureStrategy</h3>
+<p>This is a strategy that allows you to pass in options for:</p>
+<ul>
+<li><code>hydrate</code>, a callback to be called when hydrating a value, and</li>
+<li><code>extract</code>, a callback to be called when extracting a value.</li>
+</ul>
+<h3>Laminas\Hydrator\Strategy\DateTimeFormatterStrategy</h3>
+<p><code>DateTimeFormatterStrategy</code> provides bidirectional conversion between strings
+and DateTime instances. The input and output formats can be provided as
+constructor arguments.</p>
+<p>The strategy allows <code>DateTime</code> formats that use <code>!</code> to prepend the format, or
+<code>|</code> or <code>+</code> to append it; these ensure that, during hydration, the new <code>DateTime</code>
+instance created will set the time element accordingly. As a specific example,
+<code>Y-m-d|</code> will drop the time component, ensuring comparisons are based on a
+midnight time value.</p>
+<p>Starting in version 3.0, the constructor defines a third, optional argument,
+<code>$dateTimeFallback</code>.  If enabled and hydration fails, the given string is parsed
+by the <code>DateTime</code> constructor, as demonstrated below:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>// Previous behavior:</span>
+<span class=x>$strategy = new Laminas\Hydrator\Strategy\DateTimeFormatterStrategy(&#39;Y-m-d H:i:s.uP&#39;);</span>
+<span class=x>$hydrated1 = $strategy-&gt;hydrate(&#39;2016-03-04 10:29:40.123456+01&#39;); // Format is the same; returns DateTime instance</span>
+<span class=x>$hydrated2 = $strategy-&gt;hydrate(&#39;2016-03-04 10:29:40+01&#39;);        // Format is different; value is not hydrated</span>
+
+<span class=x>// Using new $dateTimeFallback flag; both values are hydrated:</span>
+<span class=x>$strategy = new Laminas\Hydrator\Strategy\DateTimeFormatterStrategy(&#39;Y-m-d H:i:s.uP&#39;, null, true);</span>
+<span class=x>$hydrated1 = $strategy-&gt;hydrate(&#39;2016-03-04 10:29:40.123456+01&#39;);</span>
+<span class=x>$hydrated2 = $strategy-&gt;hydrate(&#39;2016-03-04 10:29:40+01&#39;);</span>
+</pre></div></p>
+<h3>Laminas\Hydrator\Strategy\DefaultStrategy</h3>
+<p>The <code>DefaultStrategy</code> simply proxies everything through, without performing any
+conversion of values.</p>
+<h3>Laminas\Hydrator\Strategy\ExplodeStrategy</h3>
+<p>This strategy is a wrapper around PHP's <code>implode()</code> and <code>explode()</code> functions.
+The delimiter and a limit can be provided to the constructor; the limit will
+only be used for <code>extract</code> operations.</p>
+<h3>Laminas\Hydrator\Strategy\SerializableStrategy</h3>
+<p><code>SerializableStrategy</code> provides the functionality backing
+<code>Laminas\Hydrator\ArraySerializableHydrator</code>. You can use it with custom
+implementations for <code>Laminas\Serializer\Adapter\AdapterInterface</code> if you want to as
+well.</p>
+<h3>Laminas\Hydrator\Strategy\StrategyChain</h3>
+<p>This strategy takes an array of <code>StrategyInterface</code> instances and iterates
+over them when performing <code>extract()</code> and <code>hydrate()</code> operations. Each operates
+on the return value of the previous, allowing complex operations based on
+smaller, single-purpose strategies.</p>
+<h2 id="writing-custom-strategies">Writing custom strategies</h2>
+<p>The following example, while not terribly useful, will provide you with the
+basics for writing your own strategies, as well as provide ideas as to where and
+when to use them. This strategy simply transforms the value for the defined key
+using <code>str_rot13()</code> during both the <code>extract()</code> and <code>hydrate()</code> operations:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>class Rot13Strategy implements StrategyInterface</span>
+<span class=x>{</span>
+<span class=x>    public function extract($value)</span>
+<span class=x>    {</span>
+<span class=x>        return str_rot13($value);</span>
+<span class=x>    }</span>
+
+<span class=x>    public function hydrate($value)</span>
+<span class=x>    {</span>
+<span class=x>        return str_rot13($value);</span>
+<span class=x>    }</span>
+<span class=x>}</span>
+</pre></div></p>
+<p>This is the example class with which we want to use the hydrator example:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>class Foo</span>
+<span class=x>{</span>
+<span class=x>    protected $foo = null;</span>
+<span class=x>    protected $bar = null;</span>
+
+<span class=x>    public function getFoo()</span>
+<span class=x>    {</span>
+<span class=x>        return $this-&gt;foo;</span>
+<span class=x>    }</span>
+
+<span class=x>    public function setFoo($foo)</span>
+<span class=x>    {</span>
+<span class=x>        $this-&gt;foo = $foo;</span>
+<span class=x>    }</span>
+
+<span class=x>    public function getBar()</span>
+<span class=x>    {</span>
+<span class=x>        return $this-&gt;bar;</span>
+<span class=x>    }</span>
+
+<span class=x>    public function setBar($bar)</span>
+<span class=x>    {</span>
+<span class=x>        $this-&gt;bar = $bar;</span>
+<span class=x>    }</span>
+<span class=x>}</span>
+</pre></div></p>
+<p>Now, we'll add the <code>rot13</code> strategy to the method <code>getFoo()</code> and <code>setFoo($foo)</code>:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$foo = new Foo();</span>
+<span class=x>$foo-&gt;setFoo(&#39;bar&#39;);</span>
+<span class=x>$foo-&gt;setBar(&#39;foo&#39;);</span>
+
+<span class=x>$hydrator = new ClassMethodsHydrator();</span>
+<span class=x>$hydrator-&gt;addStrategy(&#39;foo&#39;, new Rot13Strategy());</span>
+</pre></div></p>
+<p>When you use the hydrator to extract an array for the object <code>$foo</code>, you'll
+receive the following:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$extractedArray = $hydrator-&gt;extract($foo);</span>
+
+<span class=x>// array(2) {</span>
+<span class=x>//     [&quot;foo&quot;]=&gt;</span>
+<span class=x>//     string(3) &quot;one&quot;</span>
+<span class=x>//     [&quot;bar&quot;]=&gt;</span>
+<span class=x>//     string(3) &quot;foo&quot;</span>
+<span class=x>// }</span>
+</pre></div></p>
+<p>And when hydrating a new <code>Foo</code> instance:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$hydrator-&gt;hydrate($extractedArray, $foo)</span>
+
+<span class=x>// object(Foo)#2 (2) {</span>
+<span class=x>//   [&quot;foo&quot;:protected]=&gt;</span>
+<span class=x>//   string(3) &quot;bar&quot;</span>
+<span class=x>//   [&quot;bar&quot;:protected]=&gt;</span>
+<span class=x>//   string(3) &quot;foo&quot;</span>
+<span class=x>// }</span>
+</pre></div></p>
+
+
+
+
+    <nav>
+    <ul class="page-nav hidden-print">
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../filter/">
+                    <i class="fa fa-chevron-left"></i> Previous
+                </a>
+            
+        </li>
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../aggregate/">
+                    Next <i class="fa fa-chevron-right"></i>
+                </a>
+            
+        </li>
+    </ul>
+</nav>
+
+
+
+
+    <div class="help-wanted">
+        <p>
+            Found a mistake or want to contribute to the documentation?
+            <a href="https://github.com/laminas/laminas-hydrator/edit/master/docs/book/v3/strategy.md" target="_blank" class="help-wanted__link">
+                Edit this page on GitHub!
+            </a>
+        </p>
+    </div>
+
+                
+            </div>
+            <div class="col-md-3 col-sm-12 sidebar">
+                
+                    <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="../..">laminas-hydrator</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../quick-start/" class="subnavigation__link">Quick Start</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Reference</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../filter/" class="subnavigation__link">Filters</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Strategies</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../aggregate/" class="subnavigation__link">Aggregates</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Naming Strategies</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../naming-strategy/intro/" class="subnavigation__link">Introduction</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../naming-strategy/identity-naming-strategy/" class="subnavigation__link">Identity</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../naming-strategy/map-naming-strategy/" class="subnavigation__link">Mapping</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../naming-strategy/underscore-naming-strategy/" class="subnavigation__link">Underscore Mapping</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../naming-strategy/composite-naming-strategy/" class="subnavigation__link">Composite</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../plugin-managers/" class="subnavigation__link">Plugin Managers</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../migration/" class="subnavigation__link">Migration</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                
+            
+        </ul>
+    </div>
+
+                
+            </div>
+        </div>
+    </div>
+
+    
+    <footer class="footer">
+    <div class="container">
+
+        
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a class="footer__button" href="#page-top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-7 offset-md-2">
+                <h5>Laminas</h5>
+                <ul>
+                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
+                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+
+            
+            <div class="col-md-4 offset-md-2">
+                <h4 class="footer__headline">Support</h4>
+                <ul class="support__list">
+                    <li class="support__list-item">
+                        <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://laminas.dev/chat" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://github.com/laminas" class="support__link" title="Github"><i class="fa fa-github"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://twitter.com/getlaminas" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://getlaminas.org/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://getlaminas.org/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
+                    </li>
+                </ul>
+            </div>
+
+            
+            <div class="col-md-3">
+                <h4 class="footer__headline">License</h4>
+                <p>
+                    Code licensed under <a
+                        href="https://github.com/laminas/laminas-hydrator//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                </p>
+            </div>
+
+            
+            <div class="col-md-3">
+                <h4 class="footer__headline">Copyright</h4>
+                <p>
+                    <!--Built with love by the Laminas team with the help of our
+                    <a href="https://github.com/laminas/laminas-hydrator//graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        let base_url = '../..',
+            project  = "components",
+            siteName = 'laminas-hydrator';
+    </script>
+    <script src="/js/scripts.js"></script>
+        <script src="../../search/main.js"></script>
+
+    
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Search</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search in laminas-hydrator" id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+</html>

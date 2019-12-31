@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Serialize objects to arrays, and vice versa">  
+    <link rel="canonical" href="https://docs.laminas.dev/v2/filter/">
+    <link rel="shortcut icon" href="/img/trademark-laminas-foundation-rgb.svg">
+
+    <title>Filters - laminas-hydrator - Laminas Docs</title>
+
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body id="page-top" class="components">
+
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        
+        <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
+            <img src="../../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+        </a>
+        <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
+            Documentation
+        </a>
+
+        
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
+                </li>
+            </ul>
+
+            
+            
+                <div class="d-block d-sm-none">
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="../..">laminas-hydrator</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                
+            
+
+                
+                
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../quick-start/" class="subnavigation__link">Quick Start</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Reference</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Filters</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../strategy/" class="subnavigation__link">Strategies</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../aggregate/" class="subnavigation__link">Aggregates</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Naming Strategies</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../naming-strategy/identity-naming-strategy/" class="subnavigation__link">Identity</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../naming-strategy/map-naming-strategy/" class="subnavigation__link">Mapping</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../naming-strategy/underscore-naming-strategy/" class="subnavigation__link">Underscore Mapping</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../naming-strategy/composite-naming-strategy/" class="subnavigation__link">Composite</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                
+            
+        </ul>
+    </div>
+
+                </div>
+            
+
+            
+            <div class="d-block d-sm-none">
+                <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    
+    <header class="header">
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="col-6 offset-md-2">
+                <h1 class="header__title">
+                    Components
+
+                    
+                        <small class="header__subtitle">laminas-hydrator</small>
+                    
+                </h1>
+            </div>
+
+            
+            <div class="col-4 text-sm-right">
+                
+                    
+<div class="version-selector">
+    <div class="btn-group">
+        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            
+                v2
+            
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            
+                
+                    <li class="dropdown-menu__item">
+                        <a href="../../v3/quick-start/">
+                            
+                                v3 (latest)
+                            
+                        </a>
+                    </li>
+                
+            
+                
+                    <li class="dropdown-menu__item dropdown-menu__item--selected">
+                        <a href="../quick-start/">
+                            
+                                v2
+                            
+                        </a>
+                    </li>
+                
+            
+        </ul>
+    </div>
+</div>
+
+
+                    <a href="#" class="header__link header__link--search" data-toggle="modal" data-target="#mkdocs_search_modal" title="Open search">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                    <a href="https://github.com/laminas/laminas-hydrator/" class="header__link header__link--github" title="Go to repository of laminas-hydrator">
+                        <i class="fa fa-github"></i> GitHub
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+</header>
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 col-sm-12">
+                
+    
+
+    
+    
+        <div class="toc">
+            <h6 class="toc__headline">On this page</h6>
+            <ul class="toc__list">
+                
+                    <li class="toc__entry">
+                        <a href="#filter-implementations" class="toc__link">Filter implementations</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#remove-filters" class="toc__link">Remove filters</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#add-filters" class="toc__link">Add filters</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#use-filtercomposite-for-complex-filters" class="toc__link">Use FilterComposite for complex filters</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#using-the-provider-interface" class="toc__link">Using the provider interface</a>
+                    </li>
+                
+            </ul>
+        </div>
+    
+
+            </div>
+            <div class="col-md-7 col-sm-12 content" role="main" data-spy="scroll" data-target=".toc">
+                
+                    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        
+            <li class="breadcrumb-item"><a href="">Overview</a></li>
+
+            
+                <li class="breadcrumb-item"><a href="../..">laminas-hydrator</a></li>
+
+                
+                    
+                        
+                        
+                    
+                
+                    
+                        
+                        
+                            <li class="breadcrumb-item">Reference</li>
+                        
+                    
+                
+
+                <li class="breadcrumb-item active" aria-current="page">Filters</li>
+            
+        
+    </ol>
+</nav>
+
+
+
+    <div class="alert alert-danger" role="alert">
+        <h4>Caution</h4>
+        <p>
+            The documentation you are viewing is for an older version of this component.<br>
+            <a href="../..">Switch to the latest (v3) version.</a>
+        </p>
+    </div>
+
+
+
+
+    
+    
+        <h2 class="chapter__headline">Reference</h2>
+    
+
+    <h1 id="laminas92hydrator92filter">Laminas\Hydrator\Filter</h1>
+<p>Hydrator filters allow you to manipulate the behavior of the <code>extract()</code>
+operation.  This is especially useful, if you want to omit some internals (e.g.
+<code>getServiceManager()</code>) from the array representation.</p>
+<p>It comes with a helpful <code>Composite</code> implementation, and several filters for
+common use cases. The filters are composed in the <code>AbstractHydrator</code>, so you can
+start using them immediately in any custom extensions you write that extend that
+class.</p>
+<p> <div class=codehilite><pre><span></span><span class=x>namespace Laminas\Hydrator\Filter;</span>
+
+<span class=x>interface FilterInterface</span>
+<span class=x>{</span>
+<span class=x>    /**</span>
+<span class=x>     * Should return true, if the given filter</span>
+<span class=x>     * does not match</span>
+<span class=x>     *</span>
+<span class=x>     * @param string $property The name of the property</span>
+<span class=x>     * @return bool</span>
+<span class=x>     */</span>
+<span class=x>    public function filter($property);</span>
+<span class=x>}</span>
+</pre></div></p>
+<p>If it returns true, the key/value pairs will be in the extracted arrays - if it
+returns false, you'll not see them again.</p>
+<h2 id="filter-implementations">Filter implementations</h2>
+<h3>Laminas\Hydrator\Filter\GetFilter</h3>
+<p>This filter is used in the <code>ClassMethods</code> hydrator to decide which getters will
+be extracted. It checks if the key to extract starts with <code>get</code> or the object
+contains a method beginning with <code>get</code> (e.g., <code>Laminas\Foo\Bar::getFoo</code>).</p>
+<h3>Laminas\Hydrator\Filter\HasFilter</h3>
+<p>This filter is used in the <code>ClassMethods</code> hydrator to decide which <code>has</code> methods
+will be extracted. It checks if the key to extract begins with <code>has</code> or the
+object contains a method beginning with <code>has</code> (e.g., <code>Laminas\Foo\Bar::hasFoo</code>).</p>
+<h3>Laminas\Hydrator\Filter\IsFilter</h3>
+<p>This filter is used in the <code>ClassMethods</code> hydrator to decide which <code>is</code> methods
+will be extracted. It checks if the key to extract begins with <code>is</code> or the
+object contains a method beginning with <code>is</code> (e.g., <code>Laminas\Foo\Bar::isFoo</code>).</p>
+<h3>Laminas\Hydrator\Filter\MethodMatchFilter</h3>
+<p>This filter allows you to omit methods during extraction that match the
+condition defined in the composite.  The name of the method is specified in the
+constructor of this filter; the second parameter decides whether to use white or
+blacklisting to decide (whitelisting retains only the matching method, blacklist
+omits any matching method). The default is blacklisting - pass <code>false</code> to change
+the behavior.</p>
+<h3>Laminas\Hydrator\Filter\NumberOfParameterFilter</h3>
+<p>This filter is used in the <code>ClassMethods</code> hydrator to check the number of
+parameters. By convention, the <code>get</code>, <code>has</code> and <code>is</code> methods do not get any
+parameters - but it may happen. You can add your own number of required
+parameters, simply add the number to the constructor. The default value is 0. If
+the method has more or fewer parameters than what the filter accepts, it will be
+omitted.</p>
+<h2 id="remove-filters">Remove filters</h2>
+<p>If you want to tell e.g. the <code>ClassMethods</code> hydrator, to not extract methods that start with <code>is</code>,
+remove the related filter:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$hydrator = new ClassMethods(false);</span>
+<span class=x>$hydrator-&gt;removeFilter(&#39;is&#39;);</span>
+</pre></div></p>
+<p>After performing the above, the key/value pairs for <code>is</code> methods will not end up
+in your extracted array anymore. The filters can be used in any hydrator, but
+the <code>ClassMethods</code> hydrator is the only one, that has pre-registered filters:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$this-&gt;filterComposite-&gt;addFilter(&#39;is&#39;, new IsFilter());</span>
+<span class=x>$this-&gt;filterComposite-&gt;addFilter(&#39;has&#39;, new HasFilter());</span>
+<span class=x>$this-&gt;filterComposite-&gt;addFilter(&#39;get&#39;, new GetFilter());</span>
+<span class=x>$this-&gt;filterComposite-&gt;addFilter(</span>
+<span class=x>    &#39;parameter&#39;,</span>
+<span class=x>    new NumberOfParameterFilter(),</span>
+<span class=x>    FilterComposite::CONDITION_AND</span>
+<span class=x>);</span>
+</pre></div></p>
+<p>If these are not appropriate for your object, you can unregister them as shown
+in the previous example.</p>
+<h2 id="add-filters">Add filters</h2>
+<p>You can add filters to any hydrator that extends the <code>AbstractHydrator</code>. Filters
+can either implement <code>FilterInterface</code>, or simply be PHP callables:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$hydrator-&gt;addFilter(&#39;len&#39;, function($property) {</span>
+<span class=x>    if (strlen($property) !== 3) {</span>
+<span class=x>        return false;</span>
+<span class=x>    }</span>
+<span class=x>    return true;</span>
+<span class=x>});</span>
+</pre></div></p>
+<p>By default, every filter you add will be added with a conditional <code>or</code>. If you
+want to add it with <code>and</code> (as the <code>NumberOfParameterFilter</code> that is added to the
+<code>ClassMethods</code> hydrator by default), provide the conditon as the third argument
+to <code>addFilter</code>:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$hydrator-&gt;addFilter(&#39;len&#39;, function($property) {</span>
+<span class=x>    if (strlen($property) !== 3) {</span>
+<span class=x>        return false;</span>
+<span class=x>    }</span>
+<span class=x>    return true;</span>
+<span class=x>}, FilterComposite::CONDITION_AND);</span>
+</pre></div></p>
+<p>One common use case for filters is to omit getters for values that you do not
+want to represent, such as a service manager instance:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$hydrator-&gt;addFilter(</span>
+<span class=x>  &#39;servicemanager&#39;,</span>
+<span class=x>  new MethodMatchFilter(&#39;getServiceManager&#39;),</span>
+<span class=x>  FilterComposite::CONDITION_AND</span>
+<span class=x>);</span>
+</pre></div></p>
+<p>The example above will exclude the <code>getServiceManager()</code> method and the
+<code>servicemanager</code> key from extraction, even if the <code>get</code> filter wants to add it.</p>
+<h2 id="use-filtercomposite-for-complex-filters">Use FilterComposite for complex filters</h2>
+<p><code>FilterComposite</code> implements <code>FilterInterface</code> as well, so you can add it as
+a regular filter to the hydrator. One benefit of this implementation is that you
+can add the filters with a condition and accomplish complex requirements using
+different composites with different conditions. You can pass the following
+conditions to the 3rd parameter, when you add a filter:</p>
+<h3>Laminas\Hydrator\Filter\FilterComposite::CONDITION_OR</h3>
+<p>At the given level of the composite, at least one filter in that condition block
+has to return true to extract the value.</p>
+<h3>Laminas\Hydrator\Filter\FilterComposite::CONDITION_AND</h3>
+<p>At the given level of the composite, all filters in that condition block must
+return true to extract the value.</p>
+<h3>FilterComposite Examples</h3>
+<p>This composition will have a similar logic as the if below:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$composite = new FilterComposite();</span>
+
+<span class=x>$composite-&gt;addFilter(&#39;one&#39;, $condition1);</span>
+<span class=x>$composite-&gt;addFilter(&#39;two&#39;, $condition2);</span>
+<span class=x>$composite-&gt;addFilter(&#39;three&#39;, $condition3);</span>
+<span class=x>$composite-&gt;addFilter(&#39;four&#39;, $condition4, FilterComposite::CONDITION_AND);</span>
+<span class=x>$composite-&gt;addFilter(&#39;five&#39;, $condition5, FilterComposite::CONDITION_AND);</span>
+
+<span class=x>// This is what&#39;s happening internally</span>
+<span class=x>if (</span>
+<span class=x>     ($condition1</span>
+<span class=x>        || $condition2</span>
+<span class=x>        || $condition3</span>
+<span class=x>     ) &amp;&amp; ($condition4</span>
+<span class=x>        &amp;&amp; $condition5</span>
+<span class=x>     )</span>
+<span class=x>) {</span>
+<span class=x>    //do extraction</span>
+<span class=x>}</span>
+</pre></div></p>
+<p>If you only have one condition (e.g., only an <code>and</code> or <code>or</code>) block, the other
+one will be completely ignored.</p>
+<p>A bit more complex filter can look like this:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>$composite = new FilterComposite();</span>
+<span class=x>$composite-&gt;addFilter(</span>
+<span class=x>    &#39;servicemanager&#39;,</span>
+<span class=x>    new MethodMatchFilter(&#39;getServiceManager&#39;),</span>
+<span class=x>    FilterComposite::CONDITION_AND</span>
+<span class=x>);</span>
+<span class=x>$composite-&gt;addFilter(</span>
+<span class=x>    &#39;eventmanager&#39;,</span>
+<span class=x>    new MethodMatchFilter(&#39;getEventManager&#39;),</span>
+<span class=x>    FilterComposite::CONDITION_AND</span>
+<span class=x>);</span>
+
+<span class=x>$hydrator-&gt;addFilter(&#39;excludes&#39;, $composite, FilterComposite::CONDITION_AND);</span>
+
+<span class=x>// Internal</span>
+<span class=x>if (( // default composite inside the hydrator</span>
+<span class=x>        ($getFilter</span>
+<span class=x>            || $hasFilter</span>
+<span class=x>            || $isFilter</span>
+<span class=x>        ) &amp;&amp; (</span>
+<span class=x>            $numberOfParameterFilter</span>
+<span class=x>        )</span>
+<span class=x>   ) &amp;&amp; ( // new composite, added to the one above</span>
+<span class=x>        $serviceManagerFilter</span>
+<span class=x>        &amp;&amp; $eventManagerFilter</span>
+<span class=x>   )</span>
+<span class=x>) {</span>
+<span class=x>    // do extraction</span>
+<span class=x>}</span>
+</pre></div></p>
+<p>If you perform this on the <code>ClassMethods</code> hydrator, all getters will get
+extracted, except for <code>getServiceManager()</code> and <code>getEventManager()</code>.</p>
+<h2 id="using-the-provider-interface">Using the provider interface</h2>
+<p><code>FilterProviderInterface</code> allows you to configure the behavior of the hydrator
+inside your objects.</p>
+<p> <div class=codehilite><pre><span></span><span class=x>namespace Laminas\Hydrator\Filter;</span>
+
+<span class=x>interface FilterProviderInterface</span>
+<span class=x>{</span>
+<span class=x>    /**</span>
+<span class=x>     * Provides a filter for hydration</span>
+<span class=x>     *</span>
+<span class=x>     * @return FilterInterface</span>
+<span class=x>     */</span>
+<span class=x>    public function getFilter();</span>
+<span class=x>}</span>
+</pre></div></p>
+<p>(The <code>getFilter()</code> method is automatically excluded from <code>extract()</code>.) If the
+extracted object implements the <code>Laminas\Hydrator\Filter\FilterProviderInterface</code>,
+the returned <code>FilterInterface</code> instance can also be a <code>FilterComposite</code>.</p>
+<p>For example:</p>
+<p> <div class=codehilite><pre><span></span><span class=x>Class Foo implements FilterProviderInterface</span>
+<span class=x>{</span>
+<span class=x>     public function getFoo()</span>
+<span class=x>     {</span>
+<span class=x>         return &#39;foo&#39;;</span>
+<span class=x>     }</span>
+
+<span class=x>     public function hasFoo()</span>
+<span class=x>     {</span>
+<span class=x>         return true;</span>
+<span class=x>     }</span>
+
+<span class=x>     public function getServiceManager()</span>
+<span class=x>     {</span>
+<span class=x>         return &#39;servicemanager&#39;;</span>
+<span class=x>     }</span>
+
+<span class=x>     public function getEventManager()</span>
+<span class=x>     {</span>
+<span class=x>         return &#39;eventmanager&#39;;</span>
+<span class=x>     }</span>
+
+<span class=x>     public function getFilter()</span>
+<span class=x>     {</span>
+<span class=x>         $composite = new FilterComposite();</span>
+<span class=x>         $composite-&gt;addFilter(&#39;get&#39;, new GetFilter());</span>
+
+<span class=x>         $exclusionComposite = new FilterComposite();</span>
+<span class=x>         $exclusionComposite-&gt;addFilter(</span>
+<span class=x>             &#39;servicemanager&#39;,</span>
+<span class=x>             new MethodMatchFilter(&#39;getServiceManager&#39;),</span>
+<span class=x>             FilterComposite::CONDITION_AND</span>
+<span class=x>             );</span>
+<span class=x>         $exclusionComposite-&gt;addFilter(</span>
+<span class=x>             &#39;eventmanager&#39;,</span>
+<span class=x>             new MethodMatchFilter(&#39;getEventManager&#39;),</span>
+<span class=x>             FilterComposite::CONDITION_AND</span>
+<span class=x>         );</span>
+
+<span class=x>         $composite-&gt;addFilter(&#39;excludes&#39;, $exclusionComposite, FilterComposite::CONDITION_AND);</span>
+
+<span class=x>         return $composite;</span>
+<span class=x>     }</span>
+<span class=x>}</span>
+
+<span class=x>$hydrator = new ClassMethods(false);</span>
+<span class=x>$extractedArray = $hydrator-&gt;extract(new Foo());</span>
+</pre></div></p>
+<p><code>$extractedArray</code> will only have 'foo' =&gt; 'foo'; all other values are
+excluded from extraction.</p>
+<blockquote>
+<h3>Note</h3>
+<p>All pre-registered filters from the <code>ClassMethods</code> hydrator are ignored when
+this interface is used.</p>
+</blockquote>
+
+
+
+
+    <nav>
+    <ul class="page-nav hidden-print">
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../quick-start/">
+                    <i class="fa fa-chevron-left"></i> Previous
+                </a>
+            
+        </li>
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../strategy/">
+                    Next <i class="fa fa-chevron-right"></i>
+                </a>
+            
+        </li>
+    </ul>
+</nav>
+
+
+
+
+    <div class="help-wanted">
+        <p>
+            Found a mistake or want to contribute to the documentation?
+            <a href="https://github.com/laminas/laminas-hydrator/edit/master/docs/book/v2/filter.md" target="_blank" class="help-wanted__link">
+                Edit this page on GitHub!
+            </a>
+        </p>
+    </div>
+
+                
+            </div>
+            <div class="col-md-3 col-sm-12 sidebar">
+                
+                    <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="../..">laminas-hydrator</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                
+            
+
+                
+                
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../quick-start/" class="subnavigation__link">Quick Start</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Reference</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Filters</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../strategy/" class="subnavigation__link">Strategies</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../aggregate/" class="subnavigation__link">Aggregates</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Naming Strategies</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../naming-strategy/identity-naming-strategy/" class="subnavigation__link">Identity</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../naming-strategy/map-naming-strategy/" class="subnavigation__link">Mapping</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../naming-strategy/underscore-naming-strategy/" class="subnavigation__link">Underscore Mapping</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../naming-strategy/composite-naming-strategy/" class="subnavigation__link">Composite</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                
+            
+        </ul>
+    </div>
+
+                
+            </div>
+        </div>
+    </div>
+
+    
+    <footer class="footer">
+    <div class="container">
+
+        
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a class="footer__button" href="#page-top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-7 offset-md-2">
+                <h5>Laminas</h5>
+                <ul>
+                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
+                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+
+            
+            <div class="col-md-4 offset-md-2">
+                <h4 class="footer__headline">Support</h4>
+                <ul class="support__list">
+                    <li class="support__list-item">
+                        <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://laminas.dev/chat" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://github.com/laminas" class="support__link" title="Github"><i class="fa fa-github"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://twitter.com/getlaminas" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://getlaminas.org/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://getlaminas.org/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
+                    </li>
+                </ul>
+            </div>
+
+            
+            <div class="col-md-3">
+                <h4 class="footer__headline">License</h4>
+                <p>
+                    Code licensed under <a
+                        href="https://github.com/laminas/laminas-hydrator//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                </p>
+            </div>
+
+            
+            <div class="col-md-3">
+                <h4 class="footer__headline">Copyright</h4>
+                <p>
+                    <!--Built with love by the Laminas team with the help of our
+                    <a href="https://github.com/laminas/laminas-hydrator//graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        let base_url = '../..',
+            project  = "components",
+            siteName = 'laminas-hydrator';
+    </script>
+    <script src="/js/scripts.js"></script>
+        <script src="../../search/main.js"></script>
+
+    
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Search</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search in laminas-hydrator" id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+</html>
