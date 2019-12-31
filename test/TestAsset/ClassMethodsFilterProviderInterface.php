@@ -1,18 +1,17 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Hydrator\TestAsset;
+namespace LaminasTest\Hydrator\TestAsset;
 
-use Zend\Hydrator\Filter\FilterComposite;
-use Zend\Hydrator\Filter\FilterProviderInterface;
-use Zend\Hydrator\Filter\MethodMatchFilter;
-use Zend\Hydrator\Filter\GetFilter;
+use Laminas\Hydrator\Filter\FilterComposite;
+use Laminas\Hydrator\Filter\FilterProviderInterface;
+use Laminas\Hydrator\Filter\GetFilter;
+use Laminas\Hydrator\Filter\MethodMatchFilter;
 
 class ClassMethodsFilterProviderInterface implements FilterProviderInterface
 {
