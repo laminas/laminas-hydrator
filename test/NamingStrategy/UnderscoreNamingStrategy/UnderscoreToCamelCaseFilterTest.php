@@ -1,24 +1,25 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-hydrator for the canonical source repository
- * @copyright Copyright (c) 2018 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-hydrator/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
  */
 
 declare(strict_types=1);
 
-namespace ZendTest\Hydrator\NamingStrategy\UnderscoreNamingStrategy;
+namespace LaminasTest\Hydrator\NamingStrategy\UnderscoreNamingStrategy;
 
+use Laminas\Hydrator\NamingStrategy\UnderscoreNamingStrategy\UnderscoreToCamelCaseFilter;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
-use Zend\Hydrator\NamingStrategy\UnderscoreNamingStrategy\UnderscoreToCamelCaseFilter;
 
 use function extension_loaded;
 
 /**
  * Tests for {@see UnderscoreToCamelCaseFilter}
  *
- * @covers Zend\Hydrator\NamingStrategy\UnderscoreNamingStrategy\UnderscoreToCamelCaseFilter
+ * @covers Laminas\Hydrator\NamingStrategy\UnderscoreNamingStrategy\UnderscoreToCamelCaseFilter
  */
 class UnderscoreToCamelCaseFilterTest extends TestCase
 {
@@ -105,7 +106,7 @@ class UnderscoreToCamelCaseFilterTest extends TestCase
                 'test_Šuma',
                 'testŠuma'
             ],
-            'unicode character [ZF-10517]' => [
+            'unicode character [Laminas-10517]' => [
                 'test_šuma',
                 'testŠuma'
             ]

@@ -1,12 +1,12 @@
 # UnderscoreNamingStrategy
 
-`Zend\Hydrator\NamingStrategy\UnderscoreNamingStrategy` converts snake case strings (e.g.
+`Laminas\Hydrator\NamingStrategy\UnderscoreNamingStrategy` converts snake case strings (e.g.
 `foo_bar_baz`) to camel-case strings (e.g. `fooBarBaz`) and vice versa.
 
 ## Basic Usage
 
 ```php
-$namingStrategy = new Zend\Hydrator\NamingStrategy\UnderscoreNamingStrategy();
+$namingStrategy = new Laminas\Hydrator\NamingStrategy\UnderscoreNamingStrategy();
 
 echo $namingStrategy->extract('foo_bar'); // outputs: foo_bar
 echo $namingStrategy->extract('Foo_Bar'); // outputs: foo_bar
@@ -25,8 +25,8 @@ class Foo
     public $fooBar;
 }
 
-$hydrator = new Zend\Hydrator\ObjectPropertyHydrator();
-$hydrator->setNamingStrategy(new Zend\Hydrator\NamingStrategy\UnderscoreNamingStrategy());
+$hydrator = new Laminas\Hydrator\ObjectPropertyHydrator();
+$hydrator->setNamingStrategy(new Laminas\Hydrator\NamingStrategy\UnderscoreNamingStrategy());
 
 $foo = new Foo();
 $hydrator->hydrate(['foo_bar' => 123], $foo);

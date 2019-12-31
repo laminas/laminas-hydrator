@@ -5,7 +5,7 @@ extra:
   versions:
     - v3
     - v2
-pages:
+nav:
     - Home: index.md
     - v3:
       - "Quick Start": v3/quick-start.md
@@ -41,6 +41,6 @@ pages:
         - "_naming_strategies-mapping": naming-strategy/map-naming-strategy.md
         - "_naming_strategies-underscore_mapping": naming-strategy/underscore-naming-strategy.md
         - "_naming_strategies-composite": naming-strategy/composite-naming-strategy.md
-site_name: zend-hydrator
+site_name: laminas-hydrator
 site_description: "Serialize objects to arrays, and vice versa"
-repo_url: 'https://github.com/zendframework/zend-hydrator'
+repo_url: 'https://github.com/laminas/laminas-hydrator'

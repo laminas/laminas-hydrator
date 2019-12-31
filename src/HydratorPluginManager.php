@@ -1,17 +1,18 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-hydrator for the canonical source repository
- * @copyright Copyright (c) 2010-2018 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-hydrator/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
  */
 
 declare(strict_types=1);
 
-namespace Zend\Hydrator;
+namespace Laminas\Hydrator;
 
-use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\Exception\InvalidServiceException;
-use Zend\ServiceManager\Factory\InvokableFactory;
+use Laminas\ServiceManager\AbstractPluginManager;
+use Laminas\ServiceManager\Exception\InvalidServiceException;
+use Laminas\ServiceManager\Factory\InvokableFactory;
 
 use function get_class;
 use function gettype;
@@ -61,6 +62,17 @@ class HydratorPluginManager extends AbstractPluginManager implements HydratorPlu
         'reflectionhydrator'        => ReflectionHydrator::class,
         'reflectionHydrator'        => ReflectionHydrator::class,
         'ReflectionHydrator'        => ReflectionHydrator::class,
+
+        // Legacy Zend Framework aliases
+        \Zend\Hydrator\ArraySerializableHydrator::class => ArraySerializableHydrator::class,
+        \Zend\Hydrator\ClassMethodsHydrator::class => ClassMethodsHydrator::class,
+        \Zend\Hydrator\DelegatingHydrator::class => DelegatingHydrator::class,
+        \Zend\Hydrator\ObjectPropertyHydrator::class => ObjectPropertyHydrator::class,
+        \Zend\Hydrator\ReflectionHydrator::class => ReflectionHydrator::class,
+        \Zend\Hydrator\ArraySerializable::class => ArraySerializableHydrator::class,
+        \Zend\Hydrator\ClassMethods::class => ClassMethodsHydrator::class,
+        \Zend\Hydrator\ObjectProperty::class => ObjectPropertyHydrator::class,
+        \Zend\Hydrator\Reflection::class => ReflectionHydrator::class,
     ];
 
     /**

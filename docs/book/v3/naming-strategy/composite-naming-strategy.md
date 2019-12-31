@@ -1,6 +1,6 @@
 # CompositeNamingStrategy
 
-`Zend\Hydrator\NamingStrategy\CompositeNamingStrategy` allows you to specify which naming
+`Laminas\Hydrator\NamingStrategy\CompositeNamingStrategy` allows you to specify which naming
 strategy should be used for each key encountered during hydration or extraction.
 
 # Basic Usage
@@ -16,18 +16,18 @@ class Foo
     public $barBat;
 }
 
-$mapStrategy = new Zend\Hydrator\NamingStrategy\MapNamingStrategy([
+$mapStrategy = new Laminas\Hydrator\NamingStrategy\MapNamingStrategy([
     'foo' => 'bar'
 ]);
 
-$underscoreNamingStrategy = new Zend\Hydrator\NamingStrategy\UnderscoreNamingStrategy();
+$underscoreNamingStrategy = new Laminas\Hydrator\NamingStrategy\UnderscoreNamingStrategy();
 
-$namingStrategy = new Zend\Hydrator\NamingStrategy\CompositeNamingStrategy([
+$namingStrategy = new Laminas\Hydrator\NamingStrategy\CompositeNamingStrategy([
     'bar' => $mapStrategy,
     'barBat' => $underscoreNamingStrategy,
 ]);
 
-$hydrator = new Zend\Hydrator\ObjectPropertyHydrator();
+$hydrator = new Laminas\Hydrator\ObjectPropertyHydrator();
 $hydrator->setNamingStrategy($namingStrategy);
 
 $foo = new Foo();
@@ -49,13 +49,13 @@ class Foo
     public $barBat;
 }
 
-$mapStrategy = new Zend\Hydrator\NamingStrategy\MapNamingStrategy([
+$mapStrategy = new Laminas\Hydrator\NamingStrategy\MapNamingStrategy([
     'foo' => 'bar'
 ]);
 
-$underscoreNamingStrategy = new Zend\Hydrator\NamingStrategy\UnderscoreNamingStrategy();
+$underscoreNamingStrategy = new Laminas\Hydrator\NamingStrategy\UnderscoreNamingStrategy();
 
-$namingStrategy = new Zend\Hydrator\NamingStrategy\CompositeNamingStrategy([
+$namingStrategy = new Laminas\Hydrator\NamingStrategy\CompositeNamingStrategy([
     // Define both directions for the foo => bar mapping
     'bar' => $mapStrategy,
     'foo' => $mapStrategy,
@@ -64,7 +64,7 @@ $namingStrategy = new Zend\Hydrator\NamingStrategy\CompositeNamingStrategy([
     'bar_bat' => $underscoreNamingStrategy,
 ]);
 
-$hydrator = new Zend\Hydrator\ObjectPropertyHydrator();
+$hydrator = new Laminas\Hydrator\ObjectPropertyHydrator();
 $hydrator->setNamingStrategy($namingStrategy);
 
 $foo = new Foo();
