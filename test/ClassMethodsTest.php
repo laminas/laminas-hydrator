@@ -1,27 +1,26 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Hydrator;
+namespace LaminasTest\Hydrator;
 
+use Laminas\Hydrator\ClassMethods;
+use Laminas\Hydrator\Exception\BadMethodCallException;
+use Laminas\Hydrator\Exception\InvalidArgumentException;
+use LaminasTest\Hydrator\TestAsset\ArraySerializable;
+use LaminasTest\Hydrator\TestAsset\ClassMethodsCamelCase;
+use LaminasTest\Hydrator\TestAsset\ClassMethodsCamelCaseMissing;
+use LaminasTest\Hydrator\TestAsset\ClassMethodsOptionalParameters;
 use PHPUnit\Framework\TestCase;
-use Zend\Hydrator\ClassMethods;
-use Zend\Hydrator\Exception\BadMethodCallException;
-use Zend\Hydrator\Exception\InvalidArgumentException;
-use ZendTest\Hydrator\TestAsset\ClassMethodsCamelCaseMissing;
-use ZendTest\Hydrator\TestAsset\ClassMethodsOptionalParameters;
-use ZendTest\Hydrator\TestAsset\ClassMethodsCamelCase;
-use ZendTest\Hydrator\TestAsset\ArraySerializable;
 
 /**
  * Unit tests for {@see ClassMethods}
  *
- * @covers \Zend\Hydrator\ClassMethods
+ * @covers \Laminas\Hydrator\ClassMethods
  */
 class ClassMethodsTest extends TestCase
 {
@@ -111,7 +110,7 @@ class ClassMethodsTest extends TestCase
     {
         $this->expectException(BadMethodCallException::class);
         $this->expectExceptionMessage(
-            'Zend\Hydrator\ClassMethods::extract expects the provided $object to be a PHP object)'
+            'Laminas\Hydrator\ClassMethods::extract expects the provided $object to be a PHP object)'
         );
         $this->hydrator->extract('non-object');
     }
@@ -123,7 +122,7 @@ class ClassMethodsTest extends TestCase
     {
         $this->expectException(BadMethodCallException::class);
         $this->expectExceptionMessage(
-            'Zend\Hydrator\ClassMethods::hydrate expects the provided $object to be a PHP object)'
+            'Laminas\Hydrator\ClassMethods::hydrate expects the provided $object to be a PHP object)'
         );
         $this->hydrator->hydrate([], 'non-object');
     }

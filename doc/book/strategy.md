@@ -1,13 +1,13 @@
-# Zend\\Hydrator\\Strategy
+# Laminas\\Hydrator\\Strategy
 
-You can add `Zend\Hydrator\Strategy\StrategyInterface` to any of the hydrators
-(except if it extends `Zend\Hydrator\AbstractHydrator` or implements
-`Zend\Hydrator\HydratorInterface` and `Zend\Hydrator\Strategy\StrategyEnabledInterface`)
+You can add `Laminas\Hydrator\Strategy\StrategyInterface` to any of the hydrators
+(except if it extends `Laminas\Hydrator\AbstractHydrator` or implements
+`Laminas\Hydrator\HydratorInterface` and `Laminas\Hydrator\Strategy\StrategyEnabledInterface`)
 to manipulate the way how they behave on `extract()` and `hydrate()` for
 specific key / value pairs. This is the interface that needs to be implemented:
 
 ```php
-namespace Zend\Hydrator\Strategy;
+namespace Laminas\Hydrator\Strategy;
 
 interface StrategyInterface
 {
@@ -29,18 +29,18 @@ interface StrategyInterface
 }
 ```
 
-This interface is similar to `Zend\Hydrator\HydratorInterface`; the reason
+This interface is similar to `Laminas\Hydrator\HydratorInterface`; the reason
 is that strategies provide a proxy implementation for `hydrate()` and `extract()`.
 
 ## Adding strategies to the hydrators
 
-To allow strategies within your hydrator, `Zend\Hydrator\Strategy\StrategyEnabledInterface`
+To allow strategies within your hydrator, `Laminas\Hydrator\Strategy\StrategyEnabledInterface`
 provides the following methods:
 
 ```php
-namespace Zend\Hydrator;
+namespace Laminas\Hydrator;
 
-use Zend\Hydrator\Strategy\StrategyInterface;
+use Laminas\Hydrator\Strategy\StrategyInterface;
 
 interface StrategyEnabledInterface
 {
@@ -85,43 +85,43 @@ functionality in your own hydrators, you should extend `AbstractHydrator`.
 
 ## Available implementations
 
-### Zend\\Hydrator\\Strategy\\BooleanStrategy
+### Laminas\\Hydrator\\Strategy\\BooleanStrategy
 
 This strategy converts values into Booleans and vice versa. It expects two
 arguments at the constructor, which are used to define value maps for `true` and
 `false`.
 
-### Zend\\Hydrator\\Strategy\\ClosureStrategy
+### Laminas\\Hydrator\\Strategy\\ClosureStrategy
 
 This is a strategy that allows you to pass in options for:
 
 - `hydrate`, a callback to be called when hydrating a value, and
 - `extract`, a callback to be called when extracting a value.
 
-### Zend\\Hydrator\\Strategy\\DateTimeFormatterStrategy 
+### Laminas\\Hydrator\\Strategy\\DateTimeFormatterStrategy 
 
 `DateTimeFormatterStrategy` provides bidirectional conversion between strings
 and DateTime instances. The input and output formats can be provided as
 constructor arguments.
 
-### Zend\\Hydrator\\Strategy\\DefaultStrategy
+### Laminas\\Hydrator\\Strategy\\DefaultStrategy
 
 The `DefaultStrategy` simply proxies everything through, without performing any
 conversion of values.
 
-### Zend\\Hydrator\\Strategy\\ExplodeStrategy 
+### Laminas\\Hydrator\\Strategy\\ExplodeStrategy 
 
 This strategy is a wrapper around PHP's `implode()` and `explode()` functions.
 The delimiter and a limit can be provided to the constructor; the limit will
 only be used for `extract` operations.
 
-### Zend\\Hydrator\\Strategy\\SerializableStrategy
+### Laminas\\Hydrator\\Strategy\\SerializableStrategy
 
 `SerializableStrategy` provides the functionality backing
-`Zend\Hydrator\ArraySerializable`. You can use it with custom implementations
-for `Zend\Serializer\Adapter\AdapterInterface` if you want to as well.
+`Laminas\Hydrator\ArraySerializable`. You can use it with custom implementations
+for `Laminas\Serializer\Adapter\AdapterInterface` if you want to as well.
 
-### Zend\\Hydrator\\Strategy\\StrategyChain
+### Laminas\\Hydrator\\Strategy\\StrategyChain
 
 This strategy takes an array of `StrategyInterface` instances and iterates 
 over them when performing `extract()` and `hydrate()` operations. Each operates

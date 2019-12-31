@@ -1,34 +1,33 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Hydrator;
+namespace LaminasTest\Hydrator;
 
+use Laminas\Hydrator\ArraySerializable;
+use Laminas\Hydrator\ClassMethods;
+use Laminas\Hydrator\Filter\FilterComposite;
+use Laminas\Hydrator\ObjectProperty;
+use Laminas\Hydrator\Reflection;
+use Laminas\Hydrator\Strategy\DefaultStrategy;
+use Laminas\Hydrator\Strategy\SerializableStrategy;
+use LaminasTest\Hydrator\TestAsset\ArraySerializable as ArraySerializableAsset;
+use LaminasTest\Hydrator\TestAsset\ClassMethodsCamelCase;
+use LaminasTest\Hydrator\TestAsset\ClassMethodsCamelCaseMissing;
+use LaminasTest\Hydrator\TestAsset\ClassMethodsFilterProviderInterface;
+use LaminasTest\Hydrator\TestAsset\ClassMethodsInvalidParameter;
+use LaminasTest\Hydrator\TestAsset\ClassMethodsMagicMethodSetter;
+use LaminasTest\Hydrator\TestAsset\ClassMethodsProtectedSetter;
+use LaminasTest\Hydrator\TestAsset\ClassMethodsTitleCase;
+use LaminasTest\Hydrator\TestAsset\ClassMethodsUnderscore;
+use LaminasTest\Hydrator\TestAsset\ObjectProperty as ObjectPropertyAsset;
+use LaminasTest\Hydrator\TestAsset\Reflection as ReflectionAsset;
+use LaminasTest\Hydrator\TestAsset\ReflectionFilter;
 use PHPUnit\Framework\TestCase;
-use Zend\Hydrator\ArraySerializable;
-use Zend\Hydrator\ClassMethods;
-use Zend\Hydrator\ObjectProperty;
-use Zend\Hydrator\Reflection;
-use Zend\Hydrator\Filter\FilterComposite;
-use Zend\Hydrator\Strategy\DefaultStrategy;
-use Zend\Hydrator\Strategy\SerializableStrategy;
-use ZendTest\Hydrator\TestAsset\ClassMethodsCamelCase;
-use ZendTest\Hydrator\TestAsset\ClassMethodsTitleCase;
-use ZendTest\Hydrator\TestAsset\ClassMethodsFilterProviderInterface;
-use ZendTest\Hydrator\TestAsset\ClassMethodsMagicMethodSetter;
-use ZendTest\Hydrator\TestAsset\ClassMethodsProtectedSetter;
-use ZendTest\Hydrator\TestAsset\ClassMethodsUnderscore;
-use ZendTest\Hydrator\TestAsset\ClassMethodsCamelCaseMissing;
-use ZendTest\Hydrator\TestAsset\ClassMethodsInvalidParameter;
-use ZendTest\Hydrator\TestAsset\Reflection as ReflectionAsset;
-use ZendTest\Hydrator\TestAsset\ReflectionFilter;
-use ZendTest\Hydrator\TestAsset\ObjectProperty as ObjectPropertyAsset;
-use ZendTest\Hydrator\TestAsset\ArraySerializable as ArraySerializableAsset;
 
 class HydratorTest extends TestCase
 {
