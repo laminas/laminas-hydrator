@@ -12,6 +12,6 @@ nav:
         - "Mapping": naming-strategy/map-naming-strategy.md
         - "Underscore Mapping": naming-strategy/underscore-naming-strategy.md
         - "Composite": naming-strategy/composite-naming-strategy.md
-site_name: zend-hydrator
+site_name: laminas-hydrator
 site_description: "Serialize objects to arrays, and vice versa"
-repo_url: 'https://github.com/zendframework/zend-hydrator'
+repo_url: 'https://github.com/laminas/laminas-hydrator'

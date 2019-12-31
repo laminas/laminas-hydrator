@@ -1,13 +1,13 @@
 # MapNamingStrategy
 
-`Zend\Hydrator\NamingStrategy\MapNamingStrategy` allows you to provide a map of
+`Laminas\Hydrator\NamingStrategy\MapNamingStrategy` allows you to provide a map of
 keys to use when hydrating and extracting; the map will translate the key based
 on the direction.
 
 ## Basic Usage
 
 ```php
-$namingStrategy = new Zend\Hydrator\NamingStrategy\MapNamingStrategy(array(
+$namingStrategy = new Laminas\Hydrator\NamingStrategy\MapNamingStrategy(array(
     'foo' => 'bar',
     'baz' => 'bash'
 ));
@@ -26,11 +26,11 @@ class Foo
     public $bar;
 }
 
-$namingStrategy = new Zend\Hydrator\NamingStrategy\MapNamingStrategy([
+$namingStrategy = new Laminas\Hydrator\NamingStrategy\MapNamingStrategy([
     'foo' => 'bar',
     'baz' => 'bash'
 ]);
-$hydrator = new Zend\Hydrator\ObjectProperty();
+$hydrator = new Laminas\Hydrator\ObjectProperty();
 $hydrator->setNamingStrategy($namingStrategy);
 
 $foo = new Foo();
