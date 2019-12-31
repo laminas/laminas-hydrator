@@ -1,6 +1,6 @@
 docs_dir: doc/book
 site_dir: doc/html
-pages:
+nav:
     - index.md
     - "Quick Start": quick-start.md
     - Reference:
@@ -12,7 +12,6 @@ pages:
         - "Mapping": naming-strategy/map-naming-strategy.md
         - "Underscore Mapping": naming-strategy/underscore-naming-strategy.md
         - "Composite": naming-strategy/composite-naming-strategy.md
-site_name: zend-hydrator
-site_description: zend-hydrator
-repo_url: 'https://github.com/zendframework/zend-hydrator'
-copyright: 'Copyright (c) 2016 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a>'
+site_name: laminas-hydrator
+site_description: laminas-hydrator
+repo_url: 'https://github.com/laminas/laminas-hydrator'

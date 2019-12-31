@@ -1,26 +1,27 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-hydrator for the canonical source repository
- * @copyright Copyright (c) 2017 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-hydrator/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Hydrator\Strategy;
+namespace LaminasTest\Hydrator\Strategy;
 
+use Laminas\Hydrator\Exception;
+use Laminas\Hydrator\HydratorInterface;
+use Laminas\Hydrator\Reflection;
+use Laminas\Hydrator\Strategy\CollectionStrategy;
+use Laminas\Hydrator\Strategy\StrategyInterface;
+use LaminasTest\Hydrator\TestAsset;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use stdClass;
-use Zend\Hydrator\Exception;
-use Zend\Hydrator\HydratorInterface;
-use Zend\Hydrator\Reflection;
-use Zend\Hydrator\Strategy\CollectionStrategy;
-use Zend\Hydrator\Strategy\StrategyInterface;
-use ZendTest\Hydrator\TestAsset;
 
 /**
  * Tests for {@see CollectionStrategy}
  *
- * @covers \Zend\Hydrator\Strategy\CollectionStrategy
+ * @covers \Laminas\Hydrator\Strategy\CollectionStrategy
  */
 class CollectionStrategyTest extends TestCase
 {
