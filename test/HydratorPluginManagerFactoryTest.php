@@ -1,18 +1,19 @@
 <?php
+
 /**
- * @link      http://github.com/zendframework/zend-hydrator for the canonical source repository
- * @copyright Copyright (c) 2005-2016 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Hydrator;
+namespace LaminasTest\Hydrator;
 
 use Interop\Container\ContainerInterface;
+use Laminas\Hydrator\HydratorInterface;
+use Laminas\Hydrator\HydratorPluginManager;
+use Laminas\Hydrator\HydratorPluginManagerFactory;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\Hydrator\HydratorInterface;
-use Zend\Hydrator\HydratorPluginManager;
-use Zend\Hydrator\HydratorPluginManagerFactory;
-use Zend\ServiceManager\ServiceLocatorInterface;
 
 class HydratorPluginManagerFactoryTest extends TestCase
 {
@@ -25,10 +26,10 @@ class HydratorPluginManagerFactoryTest extends TestCase
         $this->assertInstanceOf(HydratorPluginManager::class, $hydrators);
 
         if (method_exists($hydrators, 'configure')) {
-            // zend-servicemanager v3
+            // laminas-servicemanager v3
             $this->assertAttributeSame($container, 'creationContext', $hydrators);
         } else {
-            // zend-servicemanager v2
+            // laminas-servicemanager v2
             $this->assertSame($container, $hydrators->getServiceLocator());
         }
     }
