@@ -1,22 +1,23 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-hydrator for the canonical source repository
- * @copyright Copyright (c) 2010-2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-hydrator/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
  */
 
 declare(strict_types=1);
 
-namespace ZendTest\Hydrator\Iterator;
+namespace LaminasTest\Hydrator\Iterator;
 
 use ArrayObject;
+use Laminas\Hydrator\ArraySerializableHydrator;
+use Laminas\Hydrator\Exception\InvalidArgumentException;
+use Laminas\Hydrator\Iterator\HydratingArrayIterator;
 use PHPUnit\Framework\TestCase;
-use Zend\Hydrator\ArraySerializableHydrator;
-use Zend\Hydrator\Exception\InvalidArgumentException;
-use Zend\Hydrator\Iterator\HydratingArrayIterator;
 
 /**
- * @covers Zend\Hydrator\Iterator\HydratingArrayIterator<extended>
+ * @covers Laminas\Hydrator\Iterator\HydratingArrayIterator<extended>
  */
 class HydratingArrayIteratorTest extends TestCase
 {

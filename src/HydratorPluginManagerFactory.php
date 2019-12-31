@@ -1,16 +1,17 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-hydrator for the canonical source repository
- * @copyright Copyright (c) 2010-2018 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-hydrator/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
  */
 
 declare(strict_types=1);
 
-namespace Zend\Hydrator;
+namespace Laminas\Hydrator;
 
+use Laminas\ServiceManager\Config;
 use Psr\Container\ContainerInterface;
-use Zend\ServiceManager\Config;
 
 use function class_exists;
 use function is_array;
@@ -26,18 +27,18 @@ class HydratorPluginManagerFactory
      * manager. In such cases, the array should follow standard container
      * configuration.
      *
-     * @see https://docs.zendframework.com/zend-expressive/v3/features/container/config/
-     * @throws Exception\DomainException if zend-servicemanager is not installed.
+     * @see https://docs.mezzio.dev/mezzio/v3/features/container/config/
+     * @throws Exception\DomainException if laminas-servicemanager is not installed.
      */
     public function __invoke(ContainerInterface $container, string $name, ?array $options = []) : HydratorPluginManager
     {
         if (! class_exists(Config::class)) {
             throw new Exception\DomainException(sprintf(
-                '%s requires the zendframework/zend-servicemanager package, which is not installed.'
+                '%s requires the laminas/laminas-servicemanager package, which is not installed.'
                 . ' If you do not want to install that package, you can use the %s instead;'
                 . ' however, that version does not have support for the "hydrators"'
                 . ' configuration outside of aliases, invokables, and factories. If you'
-                . ' need those features, please install zendframework/zend-servicemanager.',
+                . ' need those features, please install laminas/laminas-servicemanager.',
                 HydratorPluginManager::class,
                 StandaloneHydratorPluginManager::class
             ));
@@ -45,7 +46,7 @@ class HydratorPluginManagerFactory
 
         $pluginManager = new HydratorPluginManager($container, $options ?: []);
 
-        // If this is in a zend-mvc application, the ServiceListener will inject
+        // If this is in a laminas-mvc application, the ServiceListener will inject
         // merged configuration during bootstrap.
         if ($container->has('ServiceListener')) {
             return $pluginManager;

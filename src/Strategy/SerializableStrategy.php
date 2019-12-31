@@ -1,17 +1,18 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-hydrator for the canonical source repository
- * @copyright Copyright (c) 2010-2018 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-hydrator/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
  */
 
 declare(strict_types=1);
 
-namespace Zend\Hydrator\Strategy;
+namespace Laminas\Hydrator\Strategy;
 
-use Zend\Hydrator\Exception\InvalidArgumentException;
-use Zend\Serializer\Adapter\AdapterInterface as SerializerAdapter;
-use Zend\Serializer\Serializer as SerializerFactory;
+use Laminas\Hydrator\Exception\InvalidArgumentException;
+use Laminas\Serializer\Adapter\AdapterInterface as SerializerAdapter;
+use Laminas\Serializer\Serializer as SerializerFactory;
 
 use function get_class;
 use function gettype;
@@ -78,7 +79,7 @@ class SerializableStrategy implements StrategyInterface
     {
         if (! is_string($serializer) && ! $serializer instanceof SerializerAdapter) {
             throw new InvalidArgumentException(sprintf(
-                '%s expects either a string serializer name or Zend\Serializer\Adapter\AdapterInterface instance; '
+                '%s expects either a string serializer name or Laminas\Serializer\Adapter\AdapterInterface instance; '
                 . 'received "%s"',
                 __METHOD__,
                 is_object($serializer) ? get_class($serializer) : gettype($serializer)

@@ -5,16 +5,16 @@ the property itself. As an example, when serializing an object for a JSON
 payload, you may want to convert camelCase properties to underscore_separated
 properties, and vice versa when deserializing JSON to an object.
 
-To make that possible, zend-hydrator provides _naming strategies_. These are
+To make that possible, laminas-hydrator provides _naming strategies_. These are
 similar to [strategies](../strategies.md), but instead of operating on the
 _value_, they operate on the _name_.
 
 ## NamingStrategyInterface
 
-Naming strategies implement `Zend\Hydrator\NamingStrategy\NamingStrategyInterface`:
+Naming strategies implement `Laminas\Hydrator\NamingStrategy\NamingStrategyInterface`:
 
 ```php
-namespace Zend\Hydrator\NamingStrategy;
+namespace Laminas\Hydrator\NamingStrategy;
 
 /**
  * Allow property extraction / hydration for hydrator
@@ -40,10 +40,10 @@ interface NamingStrategyInterface
 ## Providing naming strategies
 
 Hydrators can indicate they will consume naming strategies, as well as allow
-registration of them, by implementing `Zend\Hydrator\NamingStrategy\NamingStrategyEnabledInterface`:
+registration of them, by implementing `Laminas\Hydrator\NamingStrategy\NamingStrategyEnabledInterface`:
 
 ```php
-namespace Zend\Hydrator\NamingStrategy;
+namespace Laminas\Hydrator\NamingStrategy;
 
 interface NamingStrategyEnabledInterface
 {
@@ -70,7 +70,7 @@ interface NamingStrategyEnabledInterface
 ```
 
 We provide a default implementation of this interface within the
-`Zend\Hydrator\AbstractHydrator` definition. Its `getNamingStrategy()` will
+`Laminas\Hydrator\AbstractHydrator` definition. Its `getNamingStrategy()` will
 lazy-load an `IdentityNamingStrategy` if none has been previously registered.
 Since all shipped hydrators extend `AbstractHydrator`, they can consume naming
 strategies.

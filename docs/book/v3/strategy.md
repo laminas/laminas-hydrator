@@ -1,11 +1,11 @@
-# Zend\\Hydrator\\Strategy
+# Laminas\\Hydrator\\Strategy
 
-You can compose `Zend\Hydrator\Strategy\StrategyInterface` instances in any of
+You can compose `Laminas\Hydrator\Strategy\StrategyInterface` instances in any of
 the hydrators to manipulate the way they behave on `extract()` and `hydrate()`
 for specific key/value pairs. The interface offers the following definitions:
 
 ```php
-namespace Zend\Hydrator\Strategy;
+namespace Laminas\Hydrator\Strategy;
 
 interface StrategyInterface
 {
@@ -29,21 +29,21 @@ interface StrategyInterface
 }
 ```
 
-This interface is similar to what the `Zend\Hydrator\ExtractionInterface` and
-`Zend\Hydrator\HydrationInterface` provide; the reason is that strategies
+This interface is similar to what the `Laminas\Hydrator\ExtractionInterface` and
+`Laminas\Hydrator\HydrationInterface` provide; the reason is that strategies
 provide a proxy implementation for `hydrate()` and `extract()` on individual
 values. For this reason, their return types are listed as mixed, versus as
 `array` and `object`, respectively.
 
 ## Adding strategies to the hydrators
 
-This package provides the interface `Zend\Hydrator\Strategy\StrategyEnabledInterface`.
+This package provides the interface `Laminas\Hydrator\Strategy\StrategyEnabledInterface`.
 Hydrators can implement this interface, and then call on its `getStrategy()`
 method in order to extract or hydrate individual values. The interface has the
 following definition:
 
 ```php
-namespace Zend\Hydrator\Strategy;
+namespace Laminas\Hydrator\Strategy;
 
 interface StrategyEnabledInterface
 {
@@ -70,7 +70,7 @@ interface StrategyEnabledInterface
 ```
 
 We provide a default implementation of the interface as part of
-`Zend\Hydrator\AbstractHydrator`; it uses an array property to store and
+`Laminas\Hydrator\AbstractHydrator`; it uses an array property to store and
 retrieve strategies by name when extracting and hydrating values. Since all
 shipped hydrators are based on `AbstractHydrator`, they share these
 capabilities.
@@ -82,20 +82,20 @@ if present, will use it to translate the property name prior to looking up a
 
 ## Available implementations
 
-### Zend\\Hydrator\\Strategy\\BooleanStrategy
+### Laminas\\Hydrator\\Strategy\\BooleanStrategy
 
 This strategy converts values into Booleans and vice versa. It expects two
 arguments at the constructor, which are used to define value maps for `true` and
 `false`.
 
-### Zend\\Hydrator\\Strategy\\ClosureStrategy
+### Laminas\\Hydrator\\Strategy\\ClosureStrategy
 
 This is a strategy that allows you to pass in options for:
 
 - `hydrate`, a callback to be called when hydrating a value, and
 - `extract`, a callback to be called when extracting a value.
 
-### Zend\\Hydrator\\Strategy\\DateTimeFormatterStrategy
+### Laminas\\Hydrator\\Strategy\\DateTimeFormatterStrategy
 
 `DateTimeFormatterStrategy` provides bidirectional conversion between strings
 and DateTime instances. The input and output formats can be provided as
@@ -113,35 +113,35 @@ by the `DateTime` constructor, as demonstrated below:
 
 ```php
 // Previous behavior:
-$strategy = new Zend\Hydrator\Strategy\DateTimeFormatterStrategy('Y-m-d H:i:s.uP');
+$strategy = new Laminas\Hydrator\Strategy\DateTimeFormatterStrategy('Y-m-d H:i:s.uP');
 $hydrated1 = $strategy->hydrate('2016-03-04 10:29:40.123456+01'); // Format is the same; returns DateTime instance
 $hydrated2 = $strategy->hydrate('2016-03-04 10:29:40+01');        // Format is different; value is not hydrated
 
 // Using new $dateTimeFallback flag; both values are hydrated:
-$strategy = new Zend\Hydrator\Strategy\DateTimeFormatterStrategy('Y-m-d H:i:s.uP', null, true);
+$strategy = new Laminas\Hydrator\Strategy\DateTimeFormatterStrategy('Y-m-d H:i:s.uP', null, true);
 $hydrated1 = $strategy->hydrate('2016-03-04 10:29:40.123456+01');
 $hydrated2 = $strategy->hydrate('2016-03-04 10:29:40+01');
 ```
 
-### Zend\\Hydrator\\Strategy\\DefaultStrategy
+### Laminas\\Hydrator\\Strategy\\DefaultStrategy
 
 The `DefaultStrategy` simply proxies everything through, without performing any
 conversion of values.
 
-### Zend\\Hydrator\\Strategy\\ExplodeStrategy
+### Laminas\\Hydrator\\Strategy\\ExplodeStrategy
 
 This strategy is a wrapper around PHP's `implode()` and `explode()` functions.
 The delimiter and a limit can be provided to the constructor; the limit will
 only be used for `extract` operations.
 
-### Zend\\Hydrator\\Strategy\\SerializableStrategy
+### Laminas\\Hydrator\\Strategy\\SerializableStrategy
 
 `SerializableStrategy` provides the functionality backing
-`Zend\Hydrator\ArraySerializableHydrator`. You can use it with custom
-implementations for `Zend\Serializer\Adapter\AdapterInterface` if you want to as
+`Laminas\Hydrator\ArraySerializableHydrator`. You can use it with custom
+implementations for `Laminas\Serializer\Adapter\AdapterInterface` if you want to as
 well.
 
-### Zend\\Hydrator\\Strategy\\StrategyChain
+### Laminas\\Hydrator\\Strategy\\StrategyChain
 
 This strategy takes an array of `StrategyInterface` instances and iterates
 over them when performing `extract()` and `hydrate()` operations. Each operates
