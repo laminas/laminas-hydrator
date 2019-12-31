@@ -1,24 +1,25 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-hydrator for the canonical source repository
- * @copyright Copyright (c) 2010-2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-hydrator/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
  */
 
 declare(strict_types=1);
 
-namespace ZendTest\Hydrator\Strategy;
+namespace LaminasTest\Hydrator\Strategy;
 
+use Laminas\Hydrator\Exception\InvalidArgumentException;
+use Laminas\Hydrator\Strategy\SerializableStrategy;
+use Laminas\Serializer\Adapter\PhpSerialize;
+use Laminas\Serializer\Serializer;
 use PHPUnit\Framework\TestCase as TestCase;
-use Zend\Hydrator\Exception\InvalidArgumentException;
-use Zend\Hydrator\Strategy\SerializableStrategy;
-use Zend\Serializer\Adapter\PhpSerialize;
-use Zend\Serializer\Serializer;
 
 use function get_class;
 
 /**
- * @covers Zend\Hydrator\Strategy\SerializableStrategy<extended>
+ * @covers Laminas\Hydrator\Strategy\SerializableStrategy<extended>
  */
 class SerializableStrategyTest extends TestCase
 {

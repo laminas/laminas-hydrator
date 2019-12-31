@@ -1,7 +1,7 @@
 # AggregateHydrator
 
-`Zend\Hydrator\Aggregate\AggregateHydrator` is an implementation of
-`Zend\Hydrator\HydratorInterface` that composes multiple hydrators via event listeners.
+`Laminas\Hydrator\Aggregate\AggregateHydrator` is an implementation of
+`Laminas\Hydrator\HydratorInterface` that composes multiple hydrators via event listeners.
 
 You typically want to use an aggregate hydrator when you want to hydrate or extract data from
 complex objects that implement multiple interfaces, and therefore need multiple hydrators to handle
@@ -9,11 +9,11 @@ that in subsequent steps.
 
 ## Installation requirements
 
-The `AggregateHydrator` depends on the zend-eventmanager component, so be sure to have it
+The `AggregateHydrator` depends on the laminas-eventmanager component, so be sure to have it
 installed before getting started:
 
 ```bash
-$ composer require zendframework/zend-eventmanager
+$ composer require laminas/laminas-eventmanager
 ```
 
 ## Basic usage
@@ -22,7 +22,7 @@ A simple use case may be hydrating a `BlogPost` object, which contains data for 
 created it, the time it was created, the current publishing status, etc:
 
 ```php
-use Zend\Hydrator\Aggregate\AggregateHydrator;
+use Laminas\Hydrator\Aggregate\AggregateHydrator;
 
 $hydrator = new AggregateHydrator();
 
@@ -56,7 +56,7 @@ ignore any unknown object type passed in:
 ```php
 namespace My;
 
-use Zend\Hydrator\HydratorInterface
+use Laminas\Hydrator\HydratorInterface
 
 class BlogPostHydrator implements HydratorInterface
 {
@@ -96,9 +96,9 @@ In the following example, a cache listener is introduced to speed up hydration, 
 very useful when the same data is requested multiple times:
 
 ```php
-use Zend\Hydrator\Aggregate\AggregateHydrator;
-use Zend\Hydrator\Aggregate\ExtractEvent;
-use Zend\Cache\Storage\Adapter\Memory;
+use Laminas\Hydrator\Aggregate\AggregateHydrator;
+use Laminas\Hydrator\Aggregate\ExtractEvent;
+use Laminas\Cache\Storage\Adapter\Memory;
 
 $hydrator = new AggregateHydrator();
 

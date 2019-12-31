@@ -1,23 +1,24 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-hydrator for the canonical source repository
- * @copyright Copyright (c) 2010-2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-hydrator/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
  */
 
 declare(strict_types=1);
 
-namespace ZendTest\Hydrator\NamingStrategy;
+namespace LaminasTest\Hydrator\NamingStrategy;
 
 use Error;
+use Laminas\Hydrator\Exception;
+use Laminas\Hydrator\NamingStrategy\MapNamingStrategy;
 use PHPUnit\Framework\TestCase;
-use Zend\Hydrator\Exception;
-use Zend\Hydrator\NamingStrategy\MapNamingStrategy;
 
 /**
  * Tests for {@see MapNamingStrategy}
  *
- * @covers \Zend\Hydrator\NamingStrategy\MapNamingStrategy
+ * @covers \Laminas\Hydrator\NamingStrategy\MapNamingStrategy
  */
 class MapNamingStrategyTest extends TestCase
 {
