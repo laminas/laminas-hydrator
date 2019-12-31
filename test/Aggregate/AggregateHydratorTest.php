@@ -1,22 +1,21 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Hydrator\Aggregate;
+namespace LaminasTest\Hydrator\Aggregate;
 
+use Laminas\EventManager\EventManager;
+use Laminas\Hydrator\Aggregate\AggregateHydrator;
+use Laminas\Hydrator\Aggregate\ExtractEvent;
+use Laminas\Hydrator\Aggregate\HydrateEvent;
+use Laminas\Hydrator\HydratorInterface;
 use PHPUnit_Framework_TestCase;
 use Prophecy\Argument;
 use stdClass;
-use Zend\EventManager\EventManager;
-use Zend\Hydrator\Aggregate\AggregateHydrator;
-use Zend\Hydrator\Aggregate\ExtractEvent;
-use Zend\Hydrator\Aggregate\HydrateEvent;
-use Zend\Hydrator\HydratorInterface;
 
 /**
  * Unit tests for {@see AggregateHydrator}
@@ -29,7 +28,7 @@ class AggregateHydratorTest extends PHPUnit_Framework_TestCase
     protected $hydrator;
 
     /**
-     * @var \Zend\EventManager\EventManager|\PHPUnit_Framework_MockObject_MockObject
+     * @var \Laminas\EventManager\EventManager|\PHPUnit_Framework_MockObject_MockObject
      */
     protected $eventManager;
 
@@ -45,7 +44,7 @@ class AggregateHydratorTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \Zend\Hydrator\Aggregate\AggregateHydrator::add
+     * @covers \Laminas\Hydrator\Aggregate\AggregateHydrator::add
      */
     public function testAdd()
     {
@@ -62,7 +61,7 @@ class AggregateHydratorTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \Zend\Hydrator\Aggregate\AggregateHydrator::hydrate
+     * @covers \Laminas\Hydrator\Aggregate\AggregateHydrator::hydrate
      */
     public function testHydrate()
     {
@@ -76,7 +75,7 @@ class AggregateHydratorTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \Zend\Hydrator\Aggregate\AggregateHydrator::extract
+     * @covers \Laminas\Hydrator\Aggregate\AggregateHydrator::extract
      */
     public function testExtract()
     {
@@ -90,8 +89,8 @@ class AggregateHydratorTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \Zend\Hydrator\Aggregate\AggregateHydrator::getEventManager
-     * @covers \Zend\Hydrator\Aggregate\AggregateHydrator::setEventManager
+     * @covers \Laminas\Hydrator\Aggregate\AggregateHydrator::getEventManager
+     * @covers \Laminas\Hydrator\Aggregate\AggregateHydrator::setEventManager
      */
     public function testGetSetManager()
     {
