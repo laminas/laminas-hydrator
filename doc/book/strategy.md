@@ -1,13 +1,13 @@
-# Zend\\Hydrator\\Strategy
+# Laminas\\Hydrator\\Strategy
 
-You can add `Zend\Hydrator\Strategy\StrategyInterface` to any of the hydrators
-(except if it extends `Zend\Hydrator\AbstractHydrator` or implements
-`Zend\Hydrator\HydratorInterface` and `Zend\Hydrator\Strategy\StrategyEnabledInterface`)
+You can add `Laminas\Hydrator\Strategy\StrategyInterface` to any of the hydrators
+(except if it extends `Laminas\Hydrator\AbstractHydrator` or implements
+`Laminas\Hydrator\HydratorInterface` and `Laminas\Hydrator\Strategy\StrategyEnabledInterface`)
 to manipulate the way how they behave on `extract()` and `hydrate()` for
 specific key / value pairs. This is the interface that needs to be implemented:
 
 ```php
-namespace Zend\Hydrator\Strategy;
+namespace Laminas\Hydrator\Strategy;
 
 interface StrategyInterface
 {
@@ -29,18 +29,18 @@ interface StrategyInterface
 }
 ```
 
-This interface is similar to `Zend\Hydrator\HydratorInterface`; the reason
+This interface is similar to `Laminas\Hydrator\HydratorInterface`; the reason
 is that strategies provide a proxy implementation for `hydrate()` and `extract()`.
 
 ## Adding strategies to the hydrators
 
-To allow strategies within your hydrator, `Zend\Hydrator\Strategy\StrategyEnabledInterface`
+To allow strategies within your hydrator, `Laminas\Hydrator\Strategy\StrategyEnabledInterface`
 provides the following methods:
 
 ```php
-namespace Zend\Hydrator;
+namespace Laminas\Hydrator;
 
-use Zend\Hydrator\Strategy\StrategyInterface;
+use Laminas\Hydrator\Strategy\StrategyInterface;
 
 interface StrategyEnabledInterface
 {
@@ -85,19 +85,19 @@ functionality in your own hydrators, you should extend `AbstractHydrator`.
 
 ## Available implementations
 
-### Zend\\Hydrator\\Strategy\\SerializableStrategy
+### Laminas\\Hydrator\\Strategy\\SerializableStrategy
 
 This is a strategy that provides the functionality for
-`Zend\Hydrator\ArraySerializable`.  You can use it with custom implementations
-for `Zend\Serializer\Adapter\AdapterInterface` if you want to as well.
+`Laminas\Hydrator\ArraySerializable`.  You can use it with custom implementations
+for `Laminas\Serializer\Adapter\AdapterInterface` if you want to as well.
 
-### Zend\\Hydrator\\Strategy\\ClosureStrategy
+### Laminas\\Hydrator\\Strategy\\ClosureStrategy
 
 This is a strategy that allows you to pass in a `hydrate` callback to be called
 in the event of hydration, and an `extract` callback to be called in the event
 of extraction.
 
-### Zend\\Hydrator\\Strategy\\DefaultStrategy
+### Laminas\\Hydrator\\Strategy\\DefaultStrategy
 
 This is a "dummy"-implementation that simply proxies everything through, without
 doing anything on the parameters.

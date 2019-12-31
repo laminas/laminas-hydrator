@@ -1,12 +1,12 @@
 # IdentityNamingStrategy
 
-`Zend\Hydrator\NamingStrategy\IdentityNamingStrategy` uses the keys provided to
+`Laminas\Hydrator\NamingStrategy\IdentityNamingStrategy` uses the keys provided to
 it for hydration and extraction.
 
 ## Basic Usage
 
 ```php
-$namingStrategy = new Zend\Hydrator\NamingStrategy\IdentityNamingStrategy();
+$namingStrategy = new Laminas\Hydrator\NamingStrategy\IdentityNamingStrategy();
 
 echo $namingStrategy->hydrate('foo'); // outputs: foo
 echo $namingStrategy->extract('bar'); // outputs: bar
@@ -20,8 +20,8 @@ class Foo
     public $foo;
 }
 
-$namingStrategy = new Zend\Hydrator\NamingStrategy\IdentityNamingStrategy();
-$hydrator = new Zend\Hydrator\ObjectProperty();
+$namingStrategy = new Laminas\Hydrator\NamingStrategy\IdentityNamingStrategy();
+$hydrator = new Laminas\Hydrator\ObjectProperty();
 $hydrator->setNamingStrategy($namingStrategy);
 
 $foo = new Foo();

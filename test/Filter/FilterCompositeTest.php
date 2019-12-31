@@ -1,25 +1,24 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Hydrator\Filter;
+namespace LaminasTest\Hydrator\Filter;
 
-use Zend\Hydrator\Filter\FilterComposite;
-use Zend\Hydrator\Exception\InvalidArgumentException;
-use Zend\Hydrator\Filter\GetFilter;
-use Zend\Hydrator\Filter\HasFilter;
-use Zend\Hydrator\Filter\IsFilter;
-use Zend\Hydrator\Filter\NumberOfParameterFilter;
+use Laminas\Hydrator\Exception\InvalidArgumentException;
+use Laminas\Hydrator\Filter\FilterComposite;
+use Laminas\Hydrator\Filter\GetFilter;
+use Laminas\Hydrator\Filter\HasFilter;
+use Laminas\Hydrator\Filter\IsFilter;
+use Laminas\Hydrator\Filter\NumberOfParameterFilter;
 
 /**
  * Unit tests for {@see FilterComposite}
  *
- * @covers \Zend\Hydrator\Filter\FilterComposite
+ * @covers \Laminas\Hydrator\Filter\FilterComposite
  */
 class FilterCompositeTest extends \PHPUnit_Framework_TestCase
 {
@@ -39,7 +38,7 @@ class FilterCompositeTest extends \PHPUnit_Framework_TestCase
                 InvalidArgumentException::class,
                 sprintf(
                     'The value of %s should be either a callable or an ' .
-                    'instance of Zend\Hydrator\Filter\FilterInterface',
+                    'instance of Laminas\Hydrator\Filter\FilterInterface',
                     $key
                 )
             );

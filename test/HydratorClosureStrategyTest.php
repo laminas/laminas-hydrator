@@ -1,16 +1,15 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Hydrator;
+namespace LaminasTest\Hydrator;
 
-use Zend\Hydrator\ObjectProperty;
-use Zend\Hydrator\Strategy\ClosureStrategy;
+use Laminas\Hydrator\ObjectProperty;
+use Laminas\Hydrator\Strategy\ClosureStrategy;
 
 class HydratorClosureStrategyTest extends \PHPUnit_Framework_TestCase
 {
@@ -112,6 +111,6 @@ class HydratorClosureStrategyTest extends \PHPUnit_Framework_TestCase
         $this->hydrator->hydrate($values, $entity);
         $this->assertCount(3, (array) $entity);
 
-        $this->assertInstanceOf('ZendTest\Hydrator\TestAsset\HydratorClosureStrategyEntity', $entity->field3);
+        $this->assertInstanceOf('LaminasTest\Hydrator\TestAsset\HydratorClosureStrategyEntity', $entity->field3);
     }
 }
