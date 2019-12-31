@@ -1,17 +1,16 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Hydrator\Iterator;
+namespace LaminasTest\Hydrator\Iterator;
 
 use ArrayObject;
-use Zend\Hydrator\ArraySerializable;
-use Zend\Hydrator\Iterator\HydratingArrayIterator;
+use Laminas\Hydrator\ArraySerializable;
+use Laminas\Hydrator\Iterator\HydratingArrayIterator;
 
 class HydratingArrayIteratorTest extends \PHPUnit_Framework_TestCase
 {
@@ -52,7 +51,7 @@ class HydratingArrayIteratorTest extends \PHPUnit_Framework_TestCase
 
     public function testThrowingInvalidArguementExceptionWhenSettingPrototypeToInvalidClass()
     {
-        $this->setExpectedException('Zend\Hydrator\Exception\InvalidArgumentException');
+        $this->setExpectedException('Laminas\Hydrator\Exception\InvalidArgumentException');
         $hydratingIterator = new HydratingArrayIterator(new ArraySerializable(), [], 'not a real class');
     }
 }

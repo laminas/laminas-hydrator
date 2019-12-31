@@ -1,19 +1,18 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Hydrator\Aggregate;
+namespace LaminasTest\Hydrator\Aggregate;
 
+use Laminas\Hydrator\Aggregate\ExtractEvent;
+use Laminas\Hydrator\Aggregate\HydrateEvent;
+use Laminas\Hydrator\Aggregate\HydratorListener;
 use PHPUnit_Framework_TestCase;
 use stdClass;
-use Zend\Hydrator\Aggregate\ExtractEvent;
-use Zend\Hydrator\Aggregate\HydrateEvent;
-use Zend\Hydrator\Aggregate\HydratorListener;
 
 /**
  * Unit tests for {@see HydratorListener}
@@ -21,7 +20,7 @@ use Zend\Hydrator\Aggregate\HydratorListener;
 class HydratorListenerTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @var \Zend\Hydrator\HydratorInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var \Laminas\Hydrator\HydratorInterface|\PHPUnit_Framework_MockObject_MockObject
      */
     protected $hydrator;
 
@@ -33,20 +32,20 @@ class HydratorListenerTest extends PHPUnit_Framework_TestCase
     /**
      * {@inheritDoc}
      *
-     * @covers \Zend\Hydrator\Aggregate\HydratorListener::__construct
+     * @covers \Laminas\Hydrator\Aggregate\HydratorListener::__construct
      */
     public function setUp()
     {
-        $this->hydrator = $this->getMock('Zend\Hydrator\HydratorInterface');
+        $this->hydrator = $this->getMock('Laminas\Hydrator\HydratorInterface');
         $this->listener = new HydratorListener($this->hydrator);
     }
 
     /**
-     * @covers \Zend\Hydrator\Aggregate\HydratorListener::attach
+     * @covers \Laminas\Hydrator\Aggregate\HydratorListener::attach
      */
     public function testAttach()
     {
-        $eventManager = $this->getMock('Zend\EventManager\EventManagerInterface');
+        $eventManager = $this->getMock('Laminas\EventManager\EventManagerInterface');
 
         $eventManager
             ->expects($this->exactly(2))
@@ -63,7 +62,7 @@ class HydratorListenerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \Zend\Hydrator\Aggregate\HydratorListener::onHydrate
+     * @covers \Laminas\Hydrator\Aggregate\HydratorListener::onHydrate
      */
     public function testOnHydrate()
     {
@@ -71,7 +70,7 @@ class HydratorListenerTest extends PHPUnit_Framework_TestCase
         $hydrated = new stdClass();
         $data     = ['foo' => 'bar'];
         $event    = $this
-            ->getMockBuilder('Zend\Hydrator\Aggregate\HydrateEvent')
+            ->getMockBuilder('Laminas\Hydrator\Aggregate\HydrateEvent')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -90,14 +89,14 @@ class HydratorListenerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \Zend\Hydrator\Aggregate\HydratorListener::onExtract
+     * @covers \Laminas\Hydrator\Aggregate\HydratorListener::onExtract
      */
     public function testOnExtract()
     {
         $object = new stdClass();
         $data   = ['foo' => 'bar'];
         $event  = $this
-            ->getMockBuilder('Zend\Hydrator\Aggregate\ExtractEvent')
+            ->getMockBuilder('Laminas\Hydrator\Aggregate\ExtractEvent')
             ->disableOriginalConstructor()
             ->getMock();
 

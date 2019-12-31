@@ -1,17 +1,16 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Hydrator\Aggregate;
+namespace LaminasTest\Hydrator\Aggregate;
 
+use Laminas\Hydrator\Aggregate\AggregateHydrator;
 use PHPUnit_Framework_TestCase;
 use stdClass;
-use Zend\Hydrator\Aggregate\AggregateHydrator;
 
 /**
  * Unit tests for {@see AggregateHydrator}
@@ -24,7 +23,7 @@ class AggregateHydratorTest extends PHPUnit_Framework_TestCase
     protected $hydrator;
 
     /**
-     * @var \Zend\EventManager\EventManagerInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var \Laminas\EventManager\EventManagerInterface|\PHPUnit_Framework_MockObject_MockObject
      */
     protected $eventManager;
 
@@ -33,30 +32,30 @@ class AggregateHydratorTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->eventManager = $this->getMock('Zend\EventManager\EventManagerInterface');
+        $this->eventManager = $this->getMock('Laminas\EventManager\EventManagerInterface');
         $this->hydrator     = new AggregateHydrator();
 
         $this->hydrator->setEventManager($this->eventManager);
     }
 
     /**
-     * @covers \Zend\Hydrator\Aggregate\AggregateHydrator::add
+     * @covers \Laminas\Hydrator\Aggregate\AggregateHydrator::add
      */
     public function testAdd()
     {
-        $attached = $this->getMock('Zend\Hydrator\HydratorInterface');
+        $attached = $this->getMock('Laminas\Hydrator\HydratorInterface');
 
         $this
             ->eventManager
             ->expects($this->once())
             ->method('attachAggregate')
-            ->with($this->isInstanceOf('Zend\Hydrator\Aggregate\HydratorListener'), 123);
+            ->with($this->isInstanceOf('Laminas\Hydrator\Aggregate\HydratorListener'), 123);
 
         $this->hydrator->add($attached, 123);
     }
 
     /**
-     * @covers \Zend\Hydrator\Aggregate\AggregateHydrator::hydrate
+     * @covers \Laminas\Hydrator\Aggregate\AggregateHydrator::hydrate
      */
     public function testHydrate()
     {
@@ -66,13 +65,13 @@ class AggregateHydratorTest extends PHPUnit_Framework_TestCase
             ->eventManager
             ->expects($this->once())
             ->method('trigger')
-            ->with($this->isInstanceOf('Zend\Hydrator\Aggregate\HydrateEvent'));
+            ->with($this->isInstanceOf('Laminas\Hydrator\Aggregate\HydrateEvent'));
 
         $this->assertSame($object, $this->hydrator->hydrate(['foo' => 'bar'], $object));
     }
 
     /**
-     * @covers \Zend\Hydrator\Aggregate\AggregateHydrator::extract
+     * @covers \Laminas\Hydrator\Aggregate\AggregateHydrator::extract
      */
     public function testExtract()
     {
@@ -82,29 +81,29 @@ class AggregateHydratorTest extends PHPUnit_Framework_TestCase
             ->eventManager
             ->expects($this->once())
             ->method('trigger')
-            ->with($this->isInstanceOf('Zend\Hydrator\Aggregate\ExtractEvent'));
+            ->with($this->isInstanceOf('Laminas\Hydrator\Aggregate\ExtractEvent'));
 
         $this->assertSame([], $this->hydrator->extract($object));
     }
 
     /**
-     * @covers \Zend\Hydrator\Aggregate\AggregateHydrator::getEventManager
-     * @covers \Zend\Hydrator\Aggregate\AggregateHydrator::setEventManager
+     * @covers \Laminas\Hydrator\Aggregate\AggregateHydrator::getEventManager
+     * @covers \Laminas\Hydrator\Aggregate\AggregateHydrator::setEventManager
      */
     public function testGetSetManager()
     {
         $hydrator     = new AggregateHydrator();
-        $eventManager = $this->getMock('Zend\EventManager\EventManagerInterface');
+        $eventManager = $this->getMock('Laminas\EventManager\EventManagerInterface');
 
-        $this->assertInstanceOf('Zend\EventManager\EventManagerInterface', $hydrator->getEventManager());
+        $this->assertInstanceOf('Laminas\EventManager\EventManagerInterface', $hydrator->getEventManager());
 
         $eventManager
             ->expects($this->once())
             ->method('setIdentifiers')
             ->with(
                 [
-                     'Zend\Hydrator\Aggregate\AggregateHydrator',
-                     'Zend\Hydrator\Aggregate\AggregateHydrator',
+                     'Laminas\Hydrator\Aggregate\AggregateHydrator',
+                     'Laminas\Hydrator\Aggregate\AggregateHydrator',
                 ]
             );
 
