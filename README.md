@@ -1,6 +1,6 @@
 # laminas-hydrator
 
-[![Build Status](https://travis-ci.org/laminas/laminas-hydrator.svg?branch=master)](https://travis-ci.org/laminas/laminas-hydrator)
+[![Build Status](https://travis-ci.com/laminas/laminas-hydrator.svg?branch=master)](https://travis-ci.com/laminas/laminas-hydrator)
 [![Coverage Status](https://coveralls.io/repos/github/laminas/laminas-hydrator/badge.svg?branch=master)](https://coveralls.io/github/laminas/laminas-hydrator?branch=master)
 
 `Laminas\Hydrator` provides utilities for mapping arrays to objects, and vice
