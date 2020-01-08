@@ -20,7 +20,7 @@
     <div class="container">
         
         <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
-            <img src="../../../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+            <img src="../../../img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
             Documentation
@@ -36,13 +36,17 @@
             
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="https://docs.laminas.dev/components">Components</a>
+                            <a class="dropdown-item" href="https://docs.mezzio.dev/">Mezzio</a>
+                            <a class="dropdown-item" href="https://api-tools.getlaminas.org/docs">API Tools</a>
+                            <a class="dropdown-item" href="https://docs.laminas.dev/mvc">MVC</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
@@ -335,56 +339,54 @@ similar to <a href="../strategies.md">strategies</a>, but instead of operating o
 <em>value</em>, they operate on the <em>name</em>.</p>
 <h2 id="namingstrategyinterface">NamingStrategyInterface</h2>
 <p>Naming strategies implement <code>Laminas\Hydrator\NamingStrategy\NamingStrategyInterface</code>:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>namespace Laminas\Hydrator\NamingStrategy;</span>
+<pre class=codehilite><code class=language-php>namespace Laminas\Hydrator\NamingStrategy;
 
-<span class=x>/**</span>
-<span class=x> * Allow property extraction / hydration for hydrator</span>
-<span class=x> */</span>
-<span class=x>interface NamingStrategyInterface</span>
-<span class=x>{</span>
-<span class=x>    /**</span>
-<span class=x>     * Converts the given name so that it can be extracted by the hydrator.</span>
-<span class=x>     *</span>
-<span class=x>     * @param null|mixed[] $data The original data for context.</span>
-<span class=x>     */</span>
-<span class=x>    public function hydrate(string $name, ?array $data = null) : string;</span>
+/**
+ * Allow property extraction / hydration for hydrator
+ */
+interface NamingStrategyInterface
+{
+    /**
+     * Converts the given name so that it can be extracted by the hydrator.
+     *
+     * @param null|mixed[] $data The original data for context.
+     */
+    public function hydrate(string $name, ?array $data = null) : string;
 
-<span class=x>    /**</span>
-<span class=x>     * Converts the given name so that it can be hydrated by the hydrator.</span>
-<span class=x>     *</span>
-<span class=x>     * @param null|object $object The original object for context.</span>
-<span class=x>     */</span>
-<span class=x>    public function extract(string $name, ?object $object = null) : string;</span>
-<span class=x>}</span>
-</pre></div></p>
+    /**
+     * Converts the given name so that it can be hydrated by the hydrator.
+     *
+     * @param null|object $object The original object for context.
+     */
+    public function extract(string $name, ?object $object = null) : string;
+}</code></pre>
 <h2 id="providing-naming-strategies">Providing naming strategies</h2>
 <p>Hydrators can indicate they will consume naming strategies, as well as allow
 registration of them, by implementing <code>Laminas\Hydrator\NamingStrategy\NamingStrategyEnabledInterface</code>:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>namespace Laminas\Hydrator\NamingStrategy;</span>
+<pre class=codehilite><code class=language-php>namespace Laminas\Hydrator\NamingStrategy;
 
-<span class=x>interface NamingStrategyEnabledInterface</span>
-<span class=x>{</span>
-<span class=x>    /**</span>
-<span class=x>     * Sets the naming strategy.</span>
-<span class=x>     */</span>
-<span class=x>    public function setNamingStrategy(NamingStrategyInterface $strategy) : void;</span>
+interface NamingStrategyEnabledInterface
+{
+    /**
+     * Sets the naming strategy.
+     */
+    public function setNamingStrategy(NamingStrategyInterface $strategy) : void;
 
-<span class=x>    /**</span>
-<span class=x>     * Gets the naming strategy.</span>
-<span class=x>     */</span>
-<span class=x>    public function getNamingStrategy() : NamingStrategyInterface;</span>
+    /**
+     * Gets the naming strategy.
+     */
+    public function getNamingStrategy() : NamingStrategyInterface;
 
-<span class=x>    /**</span>
-<span class=x>     * Checks if a naming strategy exists.</span>
-<span class=x>     */</span>
-<span class=x>    public function hasNamingStrategy() : bool;</span>
+    /**
+     * Checks if a naming strategy exists.
+     */
+    public function hasNamingStrategy() : bool;
 
-<span class=x>    /**</span>
-<span class=x>     * Removes the naming strategy.</span>
-<span class=x>     */</span>
-<span class=x>    public function removeNamingStrategy() : void;</span>
-<span class=x>}</span>
-</pre></div></p>
+    /**
+     * Removes the naming strategy.
+     */
+    public function removeNamingStrategy() : void;
+}</code></pre>
 <p>We provide a default implementation of this interface within the
 <code>Laminas\Hydrator\AbstractHydrator</code> definition. Its <code>getNamingStrategy()</code> will
 lazy-load an <code>IdentityNamingStrategy</code> if none has been previously registered.
@@ -580,9 +582,10 @@ strategies.</p>
             <div class="col-md-7 offset-md-2">
                 <h5>Laminas</h5>
                 <ul>
-                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
-                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
-                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
+                    <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
                 </ul>
             </div>
         </div>
@@ -619,7 +622,7 @@ strategies.</p>
                 <h4 class="footer__headline">License</h4>
                 <p>
                     Code licensed under <a
-                        href="https://github.com/laminas/laminas-hydrator//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                        href="https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md">BSD 3-Clause</a>.
                 </p>
             </div>
 
@@ -628,8 +631,8 @@ strategies.</p>
                 <h4 class="footer__headline">Copyright</h4>
                 <p>
                     <!--Built with love by the Laminas team with the help of our
-                    <a href="https://github.com/laminas/laminas-hydrator//graphs/contributors">contributors</a>.<br>-->
-                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                    <a href="https://github.com/laminas/laminas-hydrator/graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2020 by <a href="https://getlaminas.org/">The Laminas Project</a>.
                 </p>
             </div>
         </div>

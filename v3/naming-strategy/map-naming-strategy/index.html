@@ -20,7 +20,7 @@
     <div class="container">
         
         <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
-            <img src="../../../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+            <img src="../../../img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
             Documentation
@@ -36,13 +36,17 @@
             
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="https://docs.laminas.dev/components">Components</a>
+                            <a class="dropdown-item" href="https://docs.mezzio.dev/">Mezzio</a>
+                            <a class="dropdown-item" href="https://api-tools.getlaminas.org/docs">API Tools</a>
+                            <a class="dropdown-item" href="https://docs.laminas.dev/mvc">MVC</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
@@ -349,69 +353,65 @@ based on the direction:</p>
 hydration map or an extraction map, but not both.</p>
 <h2 id="creating-maps">Creating maps</h2>
 <h3>Hydration map only</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>$namingStrategy = Laminas\Hydrator\NamingStrategy\MapNamingStrategy::createFromHydrationMap(</span>
-<span class=x>    [</span>
-<span class=x>        &#39;foo&#39; =&gt; &#39;bar&#39;,</span>
-<span class=x>        &#39;baz&#39; =&gt; &#39;bash&#39;</span>
-<span class=x>    ]</span>
-<span class=x>);</span>
-<span class=x>echo $namingStrategy-&gt;extract(&#39;bar&#39;); // outputs: foo</span>
-<span class=x>echo $namingStrategy-&gt;extract(&#39;bash&#39;); // outputs: baz</span>
+<pre class=codehilite><code class=language-php>$namingStrategy = Laminas\Hydrator\NamingStrategy\MapNamingStrategy::createFromHydrationMap(
+    [
+        'foo' =&gt; 'bar',
+        'baz' =&gt; 'bash'
+    ]
+);
+echo $namingStrategy-&gt;extract('bar'); // outputs: foo
+echo $namingStrategy-&gt;extract('bash'); // outputs: baz
 
-<span class=x>echo $namingStrategy-&gt;hydrate(&#39;foo&#39;); // outputs: bar</span>
-<span class=x>echo $namingStrategy-&gt;hydrate(&#39;baz&#39;); // outputs: bash</span>
-</pre></div></p>
+echo $namingStrategy-&gt;hydrate('foo'); // outputs: bar
+echo $namingStrategy-&gt;hydrate('baz'); // outputs: bash</code></pre>
 <h3>Extraction map only</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>$namingStrategy = Laminas\Hydrator\NamingStrategy\MapNamingStrategy::createFromExtractionMap(</span>
-<span class=x>    null, // no hydration map</span>
-<span class=x>    [</span>
-<span class=x>        &#39;foo&#39; =&gt; &#39;bar&#39;,</span>
-<span class=x>        &#39;baz&#39; =&gt; &#39;bash&#39;</span>
-<span class=x>    ]</span>
-<span class=x>);</span>
-<span class=x>echo $namingStrategy-&gt;extract(&#39;foo&#39;); // outputs: bar</span>
-<span class=x>echo $namingStrategy-&gt;extract(&#39;baz&#39;); // outputs: bash</span>
+<pre class=codehilite><code class=language-php>$namingStrategy = Laminas\Hydrator\NamingStrategy\MapNamingStrategy::createFromExtractionMap(
+    null, // no hydration map
+    [
+        'foo' =&gt; 'bar',
+        'baz' =&gt; 'bash'
+    ]
+);
+echo $namingStrategy-&gt;extract('foo'); // outputs: bar
+echo $namingStrategy-&gt;extract('baz'); // outputs: bash
 
-<span class=x>echo $namingStrategy-&gt;hydrate(&#39;bar&#39;); // outputs: foo</span>
-<span class=x>echo $namingStrategy-&gt;hydrate(&#39;bash&#39;); // outputs: baz</span>
-</pre></div></p>
+echo $namingStrategy-&gt;hydrate('bar'); // outputs: foo
+echo $namingStrategy-&gt;hydrate('bash'); // outputs: baz</code></pre>
 <h3>Both hydration and extraction maps</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>$namingStrategy = Laminas\Hydrator\NamingStrategy\MapNamingStrategy::createFromAsymmetricMap(</span>
-<span class=x>    [</span>
-<span class=x>        &#39;foo&#39; =&gt; &#39;bar&#39;,</span>
-<span class=x>        &#39;baz&#39; =&gt; &#39;bash&#39;</span>
-<span class=x>    ],</span>
-<span class=x>    [</span>
-<span class=x>        &#39;is_bar&#39;   =&gt; &#39;foo&#39;,</span>
-<span class=x>        &#39;bashable&#39; =&gt; &#39;baz&#39;,</span>
-<span class=x>    ]</span>
-<span class=x>);</span>
-<span class=x>echo $namingStrategy-&gt;extract(&#39;foo&#39;); // outputs: bar</span>
-<span class=x>echo $namingStrategy-&gt;extract(&#39;baz&#39;); // outputs: bash</span>
+<pre class=codehilite><code class=language-php>$namingStrategy = Laminas\Hydrator\NamingStrategy\MapNamingStrategy::createFromAsymmetricMap(
+    [
+        'foo' =&gt; 'bar',
+        'baz' =&gt; 'bash'
+    ],
+    [
+        'is_bar'   =&gt; 'foo',
+        'bashable' =&gt; 'baz',
+    ]
+);
+echo $namingStrategy-&gt;extract('foo'); // outputs: bar
+echo $namingStrategy-&gt;extract('baz'); // outputs: bash
 
-<span class=x>echo $namingStrategy-&gt;hydrate(&#39;is_bar&#39;); // outputs: foo</span>
-<span class=x>echo $namingStrategy-&gt;hydrate(&#39;bashable&#39;); // outputs: baz</span>
-</pre></div></p>
+echo $namingStrategy-&gt;hydrate('is_bar'); // outputs: foo
+echo $namingStrategy-&gt;hydrate('bashable'); // outputs: baz</code></pre>
 <h2 id="mapping-keys-for-hydrators">Mapping keys for hydrators</h2>
 <p>This strategy can be used in hydrators to dictate how keys should be mapped:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>class Foo</span>
-<span class=x>{</span>
-<span class=x>    public $bar;</span>
-<span class=x>}</span>
+<pre class=codehilite><code class=language-php>class Foo
+{
+    public $bar;
+}
 
-<span class=x>$namingStrategy = Laminas\Hydrator\NamingStrategy\MapNamingStrategy::createFromHydrationMap([</span>
-<span class=x>    &#39;foo&#39; =&gt; &#39;bar&#39;,</span>
-<span class=x>    &#39;baz&#39; =&gt; &#39;bash&#39;,</span>
-<span class=x>]);</span>
-<span class=x>$hydrator = new Laminas\Hydrator\ObjectPropertyHydrator();</span>
-<span class=x>$hydrator-&gt;setNamingStrategy($namingStrategy);</span>
+$namingStrategy = Laminas\Hydrator\NamingStrategy\MapNamingStrategy::createFromHydrationMap([
+    'foo' =&gt; 'bar',
+    'baz' =&gt; 'bash',
+]);
+$hydrator = new Laminas\Hydrator\ObjectPropertyHydrator();
+$hydrator-&gt;setNamingStrategy($namingStrategy);
 
-<span class=x>$foo = new Foo();</span>
-<span class=x>$hydrator-&gt;hydrate([&#39;foo&#39; =&gt; 123], $foo);</span>
+$foo = new Foo();
+$hydrator-&gt;hydrate(['foo' =&gt; 123], $foo);
 
-<span class=x>print_r($foo); // Foo Object ( [bar] =&gt; 123 )</span>
-<span class=x>print_r($hydrator-&gt;extract($foo)); // Array ( &quot;foo&quot; =&gt; 123 )</span>
-</pre></div></p>
+print_r($foo); // Foo Object ( [bar] =&gt; 123 )
+print_r($hydrator-&gt;extract($foo)); // Array ( &quot;foo&quot; =&gt; 123 )</code></pre>
 
 
 
@@ -594,9 +594,10 @@ hydration map or an extraction map, but not both.</p>
             <div class="col-md-7 offset-md-2">
                 <h5>Laminas</h5>
                 <ul>
-                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
-                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
-                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
+                    <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
                 </ul>
             </div>
         </div>
@@ -633,7 +634,7 @@ hydration map or an extraction map, but not both.</p>
                 <h4 class="footer__headline">License</h4>
                 <p>
                     Code licensed under <a
-                        href="https://github.com/laminas/laminas-hydrator//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                        href="https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md">BSD 3-Clause</a>.
                 </p>
             </div>
 
@@ -642,8 +643,8 @@ hydration map or an extraction map, but not both.</p>
                 <h4 class="footer__headline">Copyright</h4>
                 <p>
                     <!--Built with love by the Laminas team with the help of our
-                    <a href="https://github.com/laminas/laminas-hydrator//graphs/contributors">contributors</a>.<br>-->
-                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                    <a href="https://github.com/laminas/laminas-hydrator/graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2020 by <a href="https://getlaminas.org/">The Laminas Project</a>.
                 </p>
             </div>
         </div>

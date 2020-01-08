@@ -20,7 +20,7 @@
     <div class="container">
         
         <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
-            <img src="../../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+            <img src="../../img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
             Documentation
@@ -36,13 +36,17 @@
             
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="https://docs.laminas.dev/components">Components</a>
+                            <a class="dropdown-item" href="https://docs.mezzio.dev/">Mezzio</a>
+                            <a class="dropdown-item" href="https://api-tools.getlaminas.org/docs">API Tools</a>
+                            <a class="dropdown-item" href="https://docs.laminas.dev/mvc">MVC</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
@@ -324,20 +328,19 @@ operation.  This is especially useful, if you want to omit some internals (e.g.
 common use cases. The filters are composed in the <code>AbstractHydrator</code>, so you can
 start using them immediately in any custom extensions you write that extend that
 class.</p>
-<p> <div class=codehilite><pre><span></span><span class=x>namespace Laminas\Hydrator\Filter;</span>
+<pre class=codehilite><code class=language-php>namespace Laminas\Hydrator\Filter;
 
-<span class=x>interface FilterInterface</span>
-<span class=x>{</span>
-<span class=x>    /**</span>
-<span class=x>     * Should return true, if the given filter</span>
-<span class=x>     * does not match</span>
-<span class=x>     *</span>
-<span class=x>     * @param string $property The name of the property</span>
-<span class=x>     * @return bool</span>
-<span class=x>     */</span>
-<span class=x>    public function filter($property);</span>
-<span class=x>}</span>
-</pre></div></p>
+interface FilterInterface
+{
+    /**
+     * Should return true, if the given filter
+     * does not match
+     *
+     * @param string $property The name of the property
+     * @return bool
+     */
+    public function filter($property);
+}</code></pre>
 <p>If it returns true, the key/value pairs will be in the extracted arrays - if it
 returns false, you'll not see them again.</p>
 <h2 id="filter-implementations">Filter implementations</h2>
@@ -370,52 +373,47 @@ omitted.</p>
 <h2 id="remove-filters">Remove filters</h2>
 <p>If you want to tell e.g. the <code>ClassMethods</code> hydrator, to not extract methods that start with <code>is</code>,
 remove the related filter:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$hydrator = new ClassMethods(false);</span>
-<span class=x>$hydrator-&gt;removeFilter(&#39;is&#39;);</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>$hydrator = new ClassMethods(false);
+$hydrator-&gt;removeFilter('is');</code></pre>
 <p>After performing the above, the key/value pairs for <code>is</code> methods will not end up
 in your extracted array anymore. The filters can be used in any hydrator, but
 the <code>ClassMethods</code> hydrator is the only one, that has pre-registered filters:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$this-&gt;filterComposite-&gt;addFilter(&#39;is&#39;, new IsFilter());</span>
-<span class=x>$this-&gt;filterComposite-&gt;addFilter(&#39;has&#39;, new HasFilter());</span>
-<span class=x>$this-&gt;filterComposite-&gt;addFilter(&#39;get&#39;, new GetFilter());</span>
-<span class=x>$this-&gt;filterComposite-&gt;addFilter(</span>
-<span class=x>    &#39;parameter&#39;,</span>
-<span class=x>    new NumberOfParameterFilter(),</span>
-<span class=x>    FilterComposite::CONDITION_AND</span>
-<span class=x>);</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>$this-&gt;filterComposite-&gt;addFilter('is', new IsFilter());
+$this-&gt;filterComposite-&gt;addFilter('has', new HasFilter());
+$this-&gt;filterComposite-&gt;addFilter('get', new GetFilter());
+$this-&gt;filterComposite-&gt;addFilter(
+    'parameter',
+    new NumberOfParameterFilter(),
+    FilterComposite::CONDITION_AND
+);</code></pre>
 <p>If these are not appropriate for your object, you can unregister them as shown
 in the previous example.</p>
 <h2 id="add-filters">Add filters</h2>
 <p>You can add filters to any hydrator that extends the <code>AbstractHydrator</code>. Filters
 can either implement <code>FilterInterface</code>, or simply be PHP callables:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$hydrator-&gt;addFilter(&#39;len&#39;, function($property) {</span>
-<span class=x>    if (strlen($property) !== 3) {</span>
-<span class=x>        return false;</span>
-<span class=x>    }</span>
-<span class=x>    return true;</span>
-<span class=x>});</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>$hydrator-&gt;addFilter('len', function($property) {
+    if (strlen($property) !== 3) {
+        return false;
+    }
+    return true;
+});</code></pre>
 <p>By default, every filter you add will be added with a conditional <code>or</code>. If you
 want to add it with <code>and</code> (as the <code>NumberOfParameterFilter</code> that is added to the
 <code>ClassMethods</code> hydrator by default), provide the conditon as the third argument
 to <code>addFilter</code>:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$hydrator-&gt;addFilter(&#39;len&#39;, function($property) {</span>
-<span class=x>    if (strlen($property) !== 3) {</span>
-<span class=x>        return false;</span>
-<span class=x>    }</span>
-<span class=x>    return true;</span>
-<span class=x>}, FilterComposite::CONDITION_AND);</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>$hydrator-&gt;addFilter('len', function($property) {
+    if (strlen($property) !== 3) {
+        return false;
+    }
+    return true;
+}, FilterComposite::CONDITION_AND);</code></pre>
 <p>One common use case for filters is to omit getters for values that you do not
 want to represent, such as a service manager instance:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$hydrator-&gt;addFilter(</span>
-<span class=x>  &#39;servicemanager&#39;,</span>
-<span class=x>  new MethodMatchFilter(&#39;getServiceManager&#39;),</span>
-<span class=x>  FilterComposite::CONDITION_AND</span>
-<span class=x>);</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>$hydrator-&gt;addFilter(
+  'servicemanager',
+  new MethodMatchFilter('getServiceManager'),
+  FilterComposite::CONDITION_AND
+);</code></pre>
 <p>The example above will exclude the <code>getServiceManager()</code> method and the
 <code>servicemanager</code> key from extraction, even if the <code>get</code> filter wants to add it.</p>
 <h2 id="use-filtercomposite-for-complex-filters">Use FilterComposite for complex filters</h2>
@@ -432,128 +430,124 @@ has to return true to extract the value.</p>
 return true to extract the value.</p>
 <h3>FilterComposite Examples</h3>
 <p>This composition will have a similar logic as the if below:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$composite = new FilterComposite();</span>
+<pre class=codehilite><code class=language-php>$composite = new FilterComposite();
 
-<span class=x>$composite-&gt;addFilter(&#39;one&#39;, $condition1);</span>
-<span class=x>$composite-&gt;addFilter(&#39;two&#39;, $condition2);</span>
-<span class=x>$composite-&gt;addFilter(&#39;three&#39;, $condition3);</span>
-<span class=x>$composite-&gt;addFilter(&#39;four&#39;, $condition4, FilterComposite::CONDITION_AND);</span>
-<span class=x>$composite-&gt;addFilter(&#39;five&#39;, $condition5, FilterComposite::CONDITION_AND);</span>
+$composite-&gt;addFilter('one', $condition1);
+$composite-&gt;addFilter('two', $condition2);
+$composite-&gt;addFilter('three', $condition3);
+$composite-&gt;addFilter('four', $condition4, FilterComposite::CONDITION_AND);
+$composite-&gt;addFilter('five', $condition5, FilterComposite::CONDITION_AND);
 
-<span class=x>// This is what&#39;s happening internally</span>
-<span class=x>if (</span>
-<span class=x>     ($condition1</span>
-<span class=x>        || $condition2</span>
-<span class=x>        || $condition3</span>
-<span class=x>     ) &amp;&amp; ($condition4</span>
-<span class=x>        &amp;&amp; $condition5</span>
-<span class=x>     )</span>
-<span class=x>) {</span>
-<span class=x>    //do extraction</span>
-<span class=x>}</span>
-</pre></div></p>
+// This is what's happening internally
+if (
+     ($condition1
+        || $condition2
+        || $condition3
+     ) &amp;&amp; ($condition4
+        &amp;&amp; $condition5
+     )
+) {
+    //do extraction
+}</code></pre>
 <p>If you only have one condition (e.g., only an <code>and</code> or <code>or</code>) block, the other
 one will be completely ignored.</p>
 <p>A bit more complex filter can look like this:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>$composite = new FilterComposite();</span>
-<span class=x>$composite-&gt;addFilter(</span>
-<span class=x>    &#39;servicemanager&#39;,</span>
-<span class=x>    new MethodMatchFilter(&#39;getServiceManager&#39;),</span>
-<span class=x>    FilterComposite::CONDITION_AND</span>
-<span class=x>);</span>
-<span class=x>$composite-&gt;addFilter(</span>
-<span class=x>    &#39;eventmanager&#39;,</span>
-<span class=x>    new MethodMatchFilter(&#39;getEventManager&#39;),</span>
-<span class=x>    FilterComposite::CONDITION_AND</span>
-<span class=x>);</span>
+<pre class=codehilite><code class=language-php>$composite = new FilterComposite();
+$composite-&gt;addFilter(
+    'servicemanager',
+    new MethodMatchFilter('getServiceManager'),
+    FilterComposite::CONDITION_AND
+);
+$composite-&gt;addFilter(
+    'eventmanager',
+    new MethodMatchFilter('getEventManager'),
+    FilterComposite::CONDITION_AND
+);
 
-<span class=x>$hydrator-&gt;addFilter(&#39;excludes&#39;, $composite, FilterComposite::CONDITION_AND);</span>
+$hydrator-&gt;addFilter('excludes', $composite, FilterComposite::CONDITION_AND);
 
-<span class=x>// Internal</span>
-<span class=x>if (( // default composite inside the hydrator</span>
-<span class=x>        ($getFilter</span>
-<span class=x>            || $hasFilter</span>
-<span class=x>            || $isFilter</span>
-<span class=x>        ) &amp;&amp; (</span>
-<span class=x>            $numberOfParameterFilter</span>
-<span class=x>        )</span>
-<span class=x>   ) &amp;&amp; ( // new composite, added to the one above</span>
-<span class=x>        $serviceManagerFilter</span>
-<span class=x>        &amp;&amp; $eventManagerFilter</span>
-<span class=x>   )</span>
-<span class=x>) {</span>
-<span class=x>    // do extraction</span>
-<span class=x>}</span>
-</pre></div></p>
+// Internal
+if (( // default composite inside the hydrator
+        ($getFilter
+            || $hasFilter
+            || $isFilter
+        ) &amp;&amp; (
+            $numberOfParameterFilter
+        )
+   ) &amp;&amp; ( // new composite, added to the one above
+        $serviceManagerFilter
+        &amp;&amp; $eventManagerFilter
+   )
+) {
+    // do extraction
+}</code></pre>
 <p>If you perform this on the <code>ClassMethods</code> hydrator, all getters will get
 extracted, except for <code>getServiceManager()</code> and <code>getEventManager()</code>.</p>
 <h2 id="using-the-provider-interface">Using the provider interface</h2>
 <p><code>FilterProviderInterface</code> allows you to configure the behavior of the hydrator
 inside your objects.</p>
-<p> <div class=codehilite><pre><span></span><span class=x>namespace Laminas\Hydrator\Filter;</span>
+<pre class=codehilite><code class=language-php>namespace Laminas\Hydrator\Filter;
 
-<span class=x>interface FilterProviderInterface</span>
-<span class=x>{</span>
-<span class=x>    /**</span>
-<span class=x>     * Provides a filter for hydration</span>
-<span class=x>     *</span>
-<span class=x>     * @return FilterInterface</span>
-<span class=x>     */</span>
-<span class=x>    public function getFilter();</span>
-<span class=x>}</span>
-</pre></div></p>
+interface FilterProviderInterface
+{
+    /**
+     * Provides a filter for hydration
+     *
+     * @return FilterInterface
+     */
+    public function getFilter();
+}</code></pre>
 <p>(The <code>getFilter()</code> method is automatically excluded from <code>extract()</code>.) If the
 extracted object implements the <code>Laminas\Hydrator\Filter\FilterProviderInterface</code>,
 the returned <code>FilterInterface</code> instance can also be a <code>FilterComposite</code>.</p>
 <p>For example:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>Class Foo implements FilterProviderInterface</span>
-<span class=x>{</span>
-<span class=x>     public function getFoo()</span>
-<span class=x>     {</span>
-<span class=x>         return &#39;foo&#39;;</span>
-<span class=x>     }</span>
+<pre class=codehilite><code class=language-php>Class Foo implements FilterProviderInterface
+{
+     public function getFoo()
+     {
+         return 'foo';
+     }
 
-<span class=x>     public function hasFoo()</span>
-<span class=x>     {</span>
-<span class=x>         return true;</span>
-<span class=x>     }</span>
+     public function hasFoo()
+     {
+         return true;
+     }
 
-<span class=x>     public function getServiceManager()</span>
-<span class=x>     {</span>
-<span class=x>         return &#39;servicemanager&#39;;</span>
-<span class=x>     }</span>
+     public function getServiceManager()
+     {
+         return 'servicemanager';
+     }
 
-<span class=x>     public function getEventManager()</span>
-<span class=x>     {</span>
-<span class=x>         return &#39;eventmanager&#39;;</span>
-<span class=x>     }</span>
+     public function getEventManager()
+     {
+         return 'eventmanager';
+     }
 
-<span class=x>     public function getFilter()</span>
-<span class=x>     {</span>
-<span class=x>         $composite = new FilterComposite();</span>
-<span class=x>         $composite-&gt;addFilter(&#39;get&#39;, new GetFilter());</span>
+     public function getFilter()
+     {
+         $composite = new FilterComposite();
+         $composite-&gt;addFilter('get', new GetFilter());
 
-<span class=x>         $exclusionComposite = new FilterComposite();</span>
-<span class=x>         $exclusionComposite-&gt;addFilter(</span>
-<span class=x>             &#39;servicemanager&#39;,</span>
-<span class=x>             new MethodMatchFilter(&#39;getServiceManager&#39;),</span>
-<span class=x>             FilterComposite::CONDITION_AND</span>
-<span class=x>             );</span>
-<span class=x>         $exclusionComposite-&gt;addFilter(</span>
-<span class=x>             &#39;eventmanager&#39;,</span>
-<span class=x>             new MethodMatchFilter(&#39;getEventManager&#39;),</span>
-<span class=x>             FilterComposite::CONDITION_AND</span>
-<span class=x>         );</span>
+         $exclusionComposite = new FilterComposite();
+         $exclusionComposite-&gt;addFilter(
+             'servicemanager',
+             new MethodMatchFilter('getServiceManager'),
+             FilterComposite::CONDITION_AND
+             );
+         $exclusionComposite-&gt;addFilter(
+             'eventmanager',
+             new MethodMatchFilter('getEventManager'),
+             FilterComposite::CONDITION_AND
+         );
 
-<span class=x>         $composite-&gt;addFilter(&#39;excludes&#39;, $exclusionComposite, FilterComposite::CONDITION_AND);</span>
+         $composite-&gt;addFilter('excludes', $exclusionComposite, FilterComposite::CONDITION_AND);
 
-<span class=x>         return $composite;</span>
-<span class=x>     }</span>
-<span class=x>}</span>
+         return $composite;
+     }
+}
 
-<span class=x>$hydrator = new ClassMethods(false);</span>
-<span class=x>$extractedArray = $hydrator-&gt;extract(new Foo());</span>
-</pre></div></p>
+$hydrator = new ClassMethods(false);
+$extractedArray = $hydrator-&gt;extract(new Foo());</code></pre>
 <p><code>$extractedArray</code> will only have 'foo' =&gt; 'foo'; all other values are
 excluded from extraction.</p>
 <blockquote>
@@ -725,9 +719,10 @@ this interface is used.</p>
             <div class="col-md-7 offset-md-2">
                 <h5>Laminas</h5>
                 <ul>
-                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
-                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
-                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
+                    <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
                 </ul>
             </div>
         </div>
@@ -764,7 +759,7 @@ this interface is used.</p>
                 <h4 class="footer__headline">License</h4>
                 <p>
                     Code licensed under <a
-                        href="https://github.com/laminas/laminas-hydrator//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                        href="https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md">BSD 3-Clause</a>.
                 </p>
             </div>
 
@@ -773,8 +768,8 @@ this interface is used.</p>
                 <h4 class="footer__headline">Copyright</h4>
                 <p>
                     <!--Built with love by the Laminas team with the help of our
-                    <a href="https://github.com/laminas/laminas-hydrator//graphs/contributors">contributors</a>.<br>-->
-                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                    <a href="https://github.com/laminas/laminas-hydrator/graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2020 by <a href="https://getlaminas.org/">The Laminas Project</a>.
                 </p>
             </div>
         </div>

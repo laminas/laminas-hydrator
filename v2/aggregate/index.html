@@ -20,7 +20,7 @@
     <div class="container">
         
         <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
-            <img src="../../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+            <img src="../../img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
             Documentation
@@ -36,13 +36,17 @@
             
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="https://docs.laminas.dev/components">Components</a>
+                            <a class="dropdown-item" href="https://docs.mezzio.dev/">Mezzio</a>
+                            <a class="dropdown-item" href="https://api-tools.getlaminas.org/docs">API Tools</a>
+                            <a class="dropdown-item" href="https://docs.laminas.dev/mvc">MVC</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
@@ -317,31 +321,29 @@ that in subsequent steps.</p>
 <h2 id="installation-requirements">Installation requirements</h2>
 <p>The <code>AggregateHydrator</code> depends on the laminas-eventmanager component, so be sure to have it
 installed before getting started:</p>
-<p> <div class=codehilite><pre><span></span>$ composer require laminas/laminas-eventmanager
-</pre></div></p>
+<pre class=codehilite><code class=language-bash>$ composer require laminas/laminas-eventmanager</code></pre>
 <h2 id="basic-usage">Basic usage</h2>
 <p>A simple use case may be hydrating a <code>BlogPost</code> object, which contains data for the user that
 created it, the time it was created, the current publishing status, etc:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\Hydrator\Aggregate\AggregateHydrator;</span>
+<pre class=codehilite><code class=language-php>use Laminas\Hydrator\Aggregate\AggregateHydrator;
 
-<span class=x>$hydrator = new AggregateHydrator();</span>
+$hydrator = new AggregateHydrator();
 
-<span class=x>// attach the various hydrators capable of handling simpler interfaces</span>
-<span class=x>$hydrator-&gt;add(new My\BlogPostHydrator());</span>
-<span class=x>$hydrator-&gt;add(new My\UserAwareObjectHydrator());</span>
-<span class=x>$hydrator-&gt;add(new My\TimestampedObjectHydrator());</span>
-<span class=x>$hydrator-&gt;add(new My\PublishableObjectHydrator());</span>
-<span class=x>// ...</span>
+// attach the various hydrators capable of handling simpler interfaces
+$hydrator-&gt;add(new My\BlogPostHydrator());
+$hydrator-&gt;add(new My\UserAwareObjectHydrator());
+$hydrator-&gt;add(new My\TimestampedObjectHydrator());
+$hydrator-&gt;add(new My\PublishableObjectHydrator());
+// ...
 
-<span class=x>// Now retrieve the BlogPost object</span>
-<span class=x>// ...</span>
+// Now retrieve the BlogPost object
+// ...
 
-<span class=x>// you can now extract complex data from a blogpost</span>
-<span class=x>$data = $hydrator-&gt;extract($blogPost);</span>
+// you can now extract complex data from a blogpost
+$data = $hydrator-&gt;extract($blogPost);
 
-<span class=x>// or you can fill the object with complex data</span>
-<span class=x>$blogPost = $hydrator-&gt;hydrate($data, $blogPost);</span>
-</pre></div></p>
+// or you can fill the object with complex data
+$blogPost = $hydrator-&gt;hydrate($data, $blogPost);</code></pre>
 <blockquote>
 <h3>Hydrator priorities</h3>
 <p><code>AggregateHydrator::add</code> has a second optional argument, <code>$priority</code>. If you
@@ -351,31 +353,30 @@ integer priority, respectively, to this argument.</p>
 </blockquote>
 <p>In order to work with this logic, each of the hydrators that are attached should
 ignore any unknown object type passed in:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>namespace My;</span>
+<pre class=codehilite><code class=language-php>namespace My;
 
-<span class=x>use Laminas\Hydrator\HydratorInterface</span>
+use Laminas\Hydrator\HydratorInterface
 
-<span class=x>class BlogPostHydrator implements HydratorInterface</span>
-<span class=x>{</span>
-<span class=x>    public function hydrate($data, $object)</span>
-<span class=x>    {</span>
-<span class=x>        if (! $object instanceof BlogPost) {</span>
-<span class=x>            return $object;</span>
-<span class=x>        }</span>
+class BlogPostHydrator implements HydratorInterface
+{
+    public function hydrate($data, $object)
+    {
+        if (! $object instanceof BlogPost) {
+            return $object;
+        }
 
-<span class=x>        // ... continue hydration ...</span>
-<span class=x>    }</span>
+        // ... continue hydration ...
+    }
 
-<span class=x>    public function extract($object)</span>
-<span class=x>    {</span>
-<span class=x>        if (! $object instanceof BlogPost) {</span>
-<span class=x>            return array();</span>
-<span class=x>        }</span>
+    public function extract($object)
+    {
+        if (! $object instanceof BlogPost) {
+            return array();
+        }
 
-<span class=x>        // ... continue extraction ...</span>
-<span class=x>    }</span>
-<span class=x>}</span>
-</pre></div></p>
+        // ... continue extraction ...
+    }
+}</code></pre>
 <h2 id="advanced-use-cases">Advanced use cases</h2>
 <p>Since the <code>AggregateHydrator</code> is event-driven, you can use the <code>EventManager</code>
 API to tweak its behaviour.</p>
@@ -388,50 +389,49 @@ API to tweak its behaviour.</p>
 </ul>
 <p>In the following example, a cache listener is introduced to speed up hydration, which can be
 very useful when the same data is requested multiple times:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\Hydrator\Aggregate\AggregateHydrator;</span>
-<span class=x>use Laminas\Hydrator\Aggregate\ExtractEvent;</span>
-<span class=x>use Laminas\Cache\Storage\Adapter\Memory;</span>
+<pre class=codehilite><code class=language-php>use Laminas\Hydrator\Aggregate\AggregateHydrator;
+use Laminas\Hydrator\Aggregate\ExtractEvent;
+use Laminas\Cache\Storage\Adapter\Memory;
 
-<span class=x>$hydrator = new AggregateHydrator();</span>
+$hydrator = new AggregateHydrator();
 
-<span class=x>// Attach the various hydrators:</span>
-<span class=x>$hydrator-&gt;add(new My\BlogPostHydrator());</span>
-<span class=x>$hydrator-&gt;add(new My\UserAwareObjectHydrator());</span>
-<span class=x>$hydrator-&gt;add(new My\TimestampedObjectHydrator());</span>
-<span class=x>$hydrator-&gt;add(new My\PublishableObjectHydrator());</span>
-<span class=x>// ...</span>
+// Attach the various hydrators:
+$hydrator-&gt;add(new My\BlogPostHydrator());
+$hydrator-&gt;add(new My\UserAwareObjectHydrator());
+$hydrator-&gt;add(new My\TimestampedObjectHydrator());
+$hydrator-&gt;add(new My\PublishableObjectHydrator());
+// ...
 
-<span class=x>$cache             = new Memory();</span>
-<span class=x>$cacheReadListener = function (ExtractEvent $event) use ($cache) {</span>
-<span class=x>    $object = $event-&gt;getExtractionObject();</span>
+$cache             = new Memory();
+$cacheReadListener = function (ExtractEvent $event) use ($cache) {
+    $object = $event-&gt;getExtractionObject();
 
-<span class=x>    if (! $object instanceof BlogPost) {</span>
-<span class=x>        return;</span>
-<span class=x>    }</span>
+    if (! $object instanceof BlogPost) {
+        return;
+    }
 
-<span class=x>    if ($cache-&gt;hasItem($object-&gt;getId())) {</span>
-<span class=x>        $event-&gt;setExtractedData($cache-&gt;getItem($object-&gt;getId()));</span>
-<span class=x>        $event-&gt;stopPropagation();</span>
-<span class=x>    }</span>
-<span class=x>};</span>
+    if ($cache-&gt;hasItem($object-&gt;getId())) {
+        $event-&gt;setExtractedData($cache-&gt;getItem($object-&gt;getId()));
+        $event-&gt;stopPropagation();
+    }
+};
 
-<span class=x>$cacheWriteListener = function (ExtractEvent $event) use ($cache) {</span>
-<span class=x>    $object = $event-&gt;getExtractionObject();</span>
+$cacheWriteListener = function (ExtractEvent $event) use ($cache) {
+    $object = $event-&gt;getExtractionObject();
 
-<span class=x>    if (! $object instanceof BlogPost) {</span>
-<span class=x>        return;</span>
-<span class=x>    }</span>
+    if (! $object instanceof BlogPost) {
+        return;
+    }
 
-<span class=x>    $cache-&gt;setItem($object-&gt;getId(), $event-&gt;getExtractedData());</span>
-<span class=x>};</span>
+    $cache-&gt;setItem($object-&gt;getId(), $event-&gt;getExtractedData());
+};
 
-<span class=x>// Attaching a high priority listener executed before extraction logic:</span>
-<span class=x>$eventManager = $hydrator-&gt;getEventManager();</span>
-<span class=x>$eventManager()-&gt;attach(ExtractEvent::EVENT_EXTRACT, $cacheReadListener, 1000);</span>
+// Attaching a high priority listener executed before extraction logic:
+$eventManager = $hydrator-&gt;getEventManager();
+$eventManager()-&gt;attach(ExtractEvent::EVENT_EXTRACT, $cacheReadListener, 1000);
 
-<span class=x>// Attaching a low priority listener executed after extraction logic:</span>
-<span class=x>$eventManager()-&gt;attach(ExtractEvent::EVENT_EXTRACT, $cacheWriteListener, -1000);</span>
-</pre></div></p>
+// Attaching a low priority listener executed after extraction logic:
+$eventManager()-&gt;attach(ExtractEvent::EVENT_EXTRACT, $cacheWriteListener, -1000);</code></pre>
 <p>With an aggregate hydrator configured in this way, any
 <code>$hydrator-&gt;extract($blogPost)</code> operation will be cached.</p>
 
@@ -598,9 +598,10 @@ very useful when the same data is requested multiple times:</p>
             <div class="col-md-7 offset-md-2">
                 <h5>Laminas</h5>
                 <ul>
-                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
-                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
-                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
+                    <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
                 </ul>
             </div>
         </div>
@@ -637,7 +638,7 @@ very useful when the same data is requested multiple times:</p>
                 <h4 class="footer__headline">License</h4>
                 <p>
                     Code licensed under <a
-                        href="https://github.com/laminas/laminas-hydrator//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                        href="https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md">BSD 3-Clause</a>.
                 </p>
             </div>
 
@@ -646,8 +647,8 @@ very useful when the same data is requested multiple times:</p>
                 <h4 class="footer__headline">Copyright</h4>
                 <p>
                     <!--Built with love by the Laminas team with the help of our
-                    <a href="https://github.com/laminas/laminas-hydrator//graphs/contributors">contributors</a>.<br>-->
-                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                    <a href="https://github.com/laminas/laminas-hydrator/graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2020 by <a href="https://getlaminas.org/">The Laminas Project</a>.
                 </p>
             </div>
         </div>

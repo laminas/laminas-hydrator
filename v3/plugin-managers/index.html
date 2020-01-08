@@ -20,7 +20,7 @@
     <div class="container">
         
         <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
-            <img src="../../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+            <img src="../../img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
             Documentation
@@ -36,13 +36,17 @@
             
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="https://docs.laminas.dev/components">Components</a>
+                            <a class="dropdown-item" href="https://docs.mezzio.dev/">Mezzio</a>
+                            <a class="dropdown-item" href="https://api-tools.getlaminas.org/docs">API Tools</a>
+                            <a class="dropdown-item" href="https://docs.laminas.dev/mvc">MVC</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
@@ -389,126 +393,123 @@ your application, you should write a custom implementation of
 <p>As an example, if you want a configurable solution that uses factories, and want
 those factories capable of pulling application-level dependencies, you might do
 something like the following:</p>
-<div class=md-fenced-code-tabs id=tab-tab-group-0><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-0-0_php-panel role=tab id=tab-group-0-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-0-0_php-panel aria-selected=true>Php</a></li><li class=nav-item><a class="nav-link " href=#tab-group-0-1_php-panel role=tab id=tab-group-0-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-0-1_php-panel aria-selected=false>Php</a></li><li class=nav-item><a class="nav-link " href=#tab-group-0-2_php-panel role=tab id=tab-group-0-2_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-0-2_php-panel aria-selected=false>Php</a></li></ul><div class=tab-content><div id=tab-group-0-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-0-0_php-tab><div class=codehilite><pre><span></span><span class=x>// In src/YourApplication/CustomHydratorPluginManager.php:</span>
+<div class=md-fenced-code-tabs id=tab-tab-group-0><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-0-0_php-panel role=tab id=tab-group-0-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-0-0_php-panel aria-selected=true>Php</a></li><li class=nav-item><a class="nav-link " href=#tab-group-0-1_php-panel role=tab id=tab-group-0-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-0-1_php-panel aria-selected=false>Php</a></li><li class=nav-item><a class="nav-link " href=#tab-group-0-2_php-panel role=tab id=tab-group-0-2_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-0-2_php-panel aria-selected=false>Php</a></li></ul><div class=tab-content><div id=tab-group-0-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-0-0_php-tab><pre class=codehilite><code class=language-php>// In src/YourApplication/CustomHydratorPluginManager.php:
 
-<span class=x>namespace YourApplication;</span>
+namespace YourApplication;
 
-<span class=x>use Psr\Container\NotFoundExceptionInterface;</span>
-<span class=x>use Psr\Container\ContainerInterface;</span>
-<span class=x>use RuntimeException;</span>
-<span class=x>use Laminas\Hydrator\HydratorInterface;</span>
-<span class=x>use Laminas\Hydrator\HydratorPluginManagerInterface;</span>
-<span class=x>use Laminas\Hydrator\StandaloneHydratorPluginManager;</span>
+use Psr\Container\NotFoundExceptionInterface;
+use Psr\Container\ContainerInterface;
+use RuntimeException;
+use Laminas\Hydrator\HydratorInterface;
+use Laminas\Hydrator\HydratorPluginManagerInterface;
+use Laminas\Hydrator\StandaloneHydratorPluginManager;
 
-<span class=x>class CustomHydratorPluginManager implements HydratorPluginManagerInterface</span>
-<span class=x>{</span>
-<span class=x>    /** @var ContainerInterface */</span>
-<span class=x>    private $appContainer;</span>
+class CustomHydratorPluginManager implements HydratorPluginManagerInterface
+{
+    /** @var ContainerInterface */
+    private $appContainer;
 
-<span class=x>    /** @var StandaloneHydratorPluginManager */</span>
-<span class=x>    private $defaults;</span>
+    /** @var StandaloneHydratorPluginManager */
+    private $defaults;
 
-<span class=x>    /** @var array&lt;string, string|callable&gt; */</span>
-<span class=x>    private $factories = [];</span>
+    /** @var array&lt;string, string|callable&gt; */
+    private $factories = [];
 
-<span class=x>    public function __construct(ContainerInterface $appContainer)</span>
-<span class=x>    {</span>
-<span class=x>        $this-&gt;appContainer = $appContainer;</span>
-<span class=x>        $this-&gt;defaults = new StandaloneHydratorPluginManager();</span>
-<span class=x>    }</span>
+    public function __construct(ContainerInterface $appContainer)
+    {
+        $this-&gt;appContainer = $appContainer;
+        $this-&gt;defaults = new StandaloneHydratorPluginManager();
+    }
 
-<span class=x>    /**</span>
-<span class=x>     * {@inheritDoc}</span>
-<span class=x>     */</span>
-<span class=x>    public function get($id) : HydratorInterface</span>
-<span class=x>    {</span>
-<span class=x>        if (! isset($this-&gt;factories[$id]) &amp;&amp; ! $this-&gt;defaults-&gt;has($id)) {</span>
-<span class=x>            $message = sprintf(&#39;Hydrator service %s not found&#39;, $id);</span>
-<span class=x>            throw new class($message) extends RuntimeException implements NotFoundExceptionInterface {};</span>
-<span class=x>        }</span>
+    /**
+     * {@inheritDoc}
+     */
+    public function get($id) : HydratorInterface
+    {
+        if (! isset($this-&gt;factories[$id]) &amp;&amp; ! $this-&gt;defaults-&gt;has($id)) {
+            $message = sprintf('Hydrator service %s not found', $id);
+            throw new class($message) extends RuntimeException implements NotFoundExceptionInterface {};
+        }
 
-<span class=x>        // Default was requested; fallback to standalone container</span>
-<span class=x>        if (! isset($this-&gt;factories[$id])) {</span>
-<span class=x>            return $this-&gt;defaults-&gt;get($id);</span>
-<span class=x>        }</span>
+        // Default was requested; fallback to standalone container
+        if (! isset($this-&gt;factories[$id])) {
+            return $this-&gt;defaults-&gt;get($id);
+        }
 
-<span class=x>        $factory = $this-&gt;factories[$id];</span>
-<span class=x>        if (is_string($factory)) {</span>
-<span class=x>            $this-&gt;factories[$id] = $factory = new $factory();</span>
-<span class=x>        }</span>
+        $factory = $this-&gt;factories[$id];
+        if (is_string($factory)) {
+            $this-&gt;factories[$id] = $factory = new $factory();
+        }
 
-<span class=x>        return $factory($this-&gt;appContainer, $id);</span>
-<span class=x>    }</span>
+        return $factory($this-&gt;appContainer, $id);
+    }
 
-<span class=x>    public function has($id) : bool</span>
-<span class=x>    {</span>
-<span class=x>        return isset($this-&gt;factories[$id]) || $this-&gt;defaults-&gt;has($id);</span>
-<span class=x>    }</span>
+    public function has($id) : bool
+    {
+        return isset($this-&gt;factories[$id]) || $this-&gt;defaults-&gt;has($id);
+    }
 
-<span class=x>    public function setFactoryClass(string $name, string $factory) : void</span>
-<span class=x>    {</span>
-<span class=x>        $this-&gt;factories[$name] = $factory;</span>
-<span class=x>    }</span>
+    public function setFactoryClass(string $name, string $factory) : void
+    {
+        $this-&gt;factories[$name] = $factory;
+    }
 
-<span class=x>    public function setFactory(string $name, callable $factory) : void</span>
-<span class=x>    {</span>
-<span class=x>        $this-&gt;factories[$name] = $factory;</span>
-<span class=x>    }</span>
-<span class=x>}</span>
-</pre></div></div><div id=tab-group-0-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-0-1_php-tab><div class=codehilite><pre><span></span><span class=x>// In src/YourApplication/CustomHydratorPluginManagerFactory.php:</span>
+    public function setFactory(string $name, callable $factory) : void
+    {
+        $this-&gt;factories[$name] = $factory;
+    }
+}</code></pre></div><div id=tab-group-0-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-0-1_php-tab><pre class=codehilite><code class=language-php>// In src/YourApplication/CustomHydratorPluginManagerFactory.php:
 
-<span class=x>namespace YourApplication;</span>
+namespace YourApplication;
 
-<span class=x>use Psr\Container\ContainerInterface;</span>
+use Psr\Container\ContainerInterface;
 
-<span class=x>class CustomHydratorPluginManagerFactory</span>
-<span class=x>{</span>
-<span class=x>    public function __invoke(ContainerInterface $container) : CustomHydratorPluginManager</span>
-<span class=x>    {</span>
-<span class=x>        $config = $container-&gt;has(&#39;config&#39;) ? $container-&gt;get(&#39;config&#39;) : [];</span>
-<span class=x>        $config = $config[&#39;hydrators&#39;][&#39;factories&#39;] ?? [];</span>
+class CustomHydratorPluginManagerFactory
+{
+    public function __invoke(ContainerInterface $container) : CustomHydratorPluginManager
+    {
+        $config = $container-&gt;has('config') ? $container-&gt;get('config') : [];
+        $config = $config['hydrators']['factories'] ?? [];
 
-<span class=x>        $manager = new CustomHydratorPluginManager($this);</span>
+        $manager = new CustomHydratorPluginManager($this);
 
-<span class=x>        if ([] !== $config) {</span>
-<span class=x>            $this-&gt;configureManager($manager, $config);</span>
-<span class=x>        }</span>
+        if ([] !== $config) {
+            $this-&gt;configureManager($manager, $config);
+        }
 
-<span class=x>        return $manager;</span>
-<span class=x>    }</span>
+        return $manager;
+    }
 
-<span class=x>    /**</span>
-<span class=x>     * @param array&lt;string, string|callable&gt; $config</span>
-<span class=x>     */</span>
-<span class=x>    private function configureManager(CustomHydratorPluginManager $manager, array $config) : void</span>
-<span class=x>    {</span>
-<span class=x>        foreach ($config as $name =&gt; $factory) {</span>
-<span class=x>            is_string($factory)</span>
-<span class=x>                ? $manager-&gt;setFactoryClass($name, $factory)</span>
-<span class=x>                : $manager-&gt;setFactory($name, $factory);</span>
-<span class=x>        }</span>
-<span class=x>    }</span>
-<span class=x>}</span>
-</pre></div></div><div id=tab-group-0-2_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-0-2_php-tab><div class=codehilite><pre><span></span><span class=x>// in config/autoload/hydrators.global.php or similar:</span>
+    /**
+     * @param array&lt;string, string|callable&gt; $config
+     */
+    private function configureManager(CustomHydratorPluginManager $manager, array $config) : void
+    {
+        foreach ($config as $name =&gt; $factory) {
+            is_string($factory)
+                ? $manager-&gt;setFactoryClass($name, $factory)
+                : $manager-&gt;setFactory($name, $factory);
+        }
+    }
+}</code></pre></div><div id=tab-group-0-2_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-0-2_php-tab><pre class=codehilite><code class=language-php>// in config/autoload/hydrators.global.php or similar:
 
-<span class=x>return [</span>
-<span class=x>    &#39;dependencies&#39; =&gt; [</span>
-<span class=x>        &#39;aliases&#39; =&gt; [</span>
-<span class=x>            &#39;HydratorManager&#39; =&gt; \YourApplication\CustomHydratorPluginManager::class,</span>
-<span class=x>        ],</span>
-<span class=x>        &#39;factories&#39; =&gt; [</span>
-<span class=x>            \YourApplication\CustomHydratorPluginManager::class =&gt; \YourApplication\CustomHydratorPluginManagerFactory::class</span>
-<span class=x>        ],</span>
-<span class=x>    ],</span>
-<span class=x>    &#39;hydrators&#39; =&gt; [</span>
-<span class=x>        &#39;factories&#39; =&gt; [</span>
-<span class=x>            \Blog\PostHydrator::class =&gt; \Blog\PostHydratorFactory::class,</span>
-<span class=x>            \News\ItemHydrator::class =&gt; \News\ItemHydratorFactory::class,</span>
-<span class=x>            // etc.</span>
-<span class=x>        ],</span>
-<span class=x>    ],</span>
-<span class=x>];</span>
-</pre></div></div></div></div>
+return [
+    'dependencies' =&gt; [
+        'aliases' =&gt; [
+            'HydratorManager' =&gt; \YourApplication\CustomHydratorPluginManager::class,
+        ],
+        'factories' =&gt; [
+            \YourApplication\CustomHydratorPluginManager::class =&gt; \YourApplication\CustomHydratorPluginManagerFactory::class
+        ],
+    ],
+    'hydrators' =&gt; [
+        'factories' =&gt; [
+            \Blog\PostHydrator::class =&gt; \Blog\PostHydratorFactory::class,
+            \News\ItemHydrator::class =&gt; \News\ItemHydratorFactory::class,
+            // etc.
+        ],
+    ],
+];</code></pre></div></div></div>
 
 
 
@@ -691,9 +692,10 @@ something like the following:</p>
             <div class="col-md-7 offset-md-2">
                 <h5>Laminas</h5>
                 <ul>
-                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
-                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
-                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
+                    <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
                 </ul>
             </div>
         </div>
@@ -730,7 +732,7 @@ something like the following:</p>
                 <h4 class="footer__headline">License</h4>
                 <p>
                     Code licensed under <a
-                        href="https://github.com/laminas/laminas-hydrator//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                        href="https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md">BSD 3-Clause</a>.
                 </p>
             </div>
 
@@ -739,8 +741,8 @@ something like the following:</p>
                 <h4 class="footer__headline">Copyright</h4>
                 <p>
                     <!--Built with love by the Laminas team with the help of our
-                    <a href="https://github.com/laminas/laminas-hydrator//graphs/contributors">contributors</a>.<br>-->
-                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                    <a href="https://github.com/laminas/laminas-hydrator/graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2020 by <a href="https://getlaminas.org/">The Laminas Project</a>.
                 </p>
             </div>
         </div>

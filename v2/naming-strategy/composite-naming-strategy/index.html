@@ -20,7 +20,7 @@
     <div class="container">
         
         <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
-            <img src="../../../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+            <img src="../../../img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
             Documentation
@@ -36,13 +36,17 @@
             
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="https://docs.laminas.dev/components">Components</a>
+                            <a class="dropdown-item" href="https://docs.mezzio.dev/">Mezzio</a>
+                            <a class="dropdown-item" href="https://api-tools.getlaminas.org/docs">API Tools</a>
+                            <a class="dropdown-item" href="https://docs.laminas.dev/mvc">MVC</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
@@ -308,74 +312,72 @@ strategy should be used for each key encountered during hydration or extraction.
 <p>When invoked, the following composite strategy will extract the property <code>bar</code>
 to the array key <code>foo</code> (using the <code>MapNamingStrategy</code>), and the property
 <code>barBat</code> to the array key <code>bar_bat</code> (using the <code>UnderscoreNamingStrategy</code>):</p>
-<p> <div class=codehilite><pre><span></span><span class=x>class Foo</span>
-<span class=x>{</span>
-<span class=x>    public $bar;</span>
-<span class=x>    public $barBat;</span>
-<span class=x>}</span>
+<pre class=codehilite><code class=language-php>class Foo
+{
+    public $bar;
+    public $barBat;
+}
 
-<span class=x>$mapStrategy = new Laminas\Hydrator\NamingStrategy\MapNamingStrategy([</span>
-<span class=x>    &#39;foo&#39; =&gt; &#39;bar&#39;</span>
-<span class=x>]);</span>
+$mapStrategy = new Laminas\Hydrator\NamingStrategy\MapNamingStrategy([
+    'foo' =&gt; 'bar'
+]);
 
-<span class=x>$underscoreNamingStrategy = new Laminas\Hydrator\NamingStrategy\UnderscoreNamingStrategy();</span>
+$underscoreNamingStrategy = new Laminas\Hydrator\NamingStrategy\UnderscoreNamingStrategy();
 
-<span class=x>$namingStrategy = new Laminas\Hydrator\NamingStrategy\CompositeNamingStrategy([</span>
-<span class=x>    &#39;bar&#39; =&gt; $mapStrategy,</span>
-<span class=x>    &#39;barBat&#39; =&gt; $underscoreNamingStrategy,</span>
-<span class=x>]);</span>
+$namingStrategy = new Laminas\Hydrator\NamingStrategy\CompositeNamingStrategy([
+    'bar' =&gt; $mapStrategy,
+    'barBat' =&gt; $underscoreNamingStrategy,
+]);
 
-<span class=x>$hydrator = new Laminas\Hydrator\ObjectProperty();</span>
-<span class=x>$hydrator-&gt;setNamingStrategy($namingStrategy);</span>
+$hydrator = new Laminas\Hydrator\ObjectProperty();
+$hydrator-&gt;setNamingStrategy($namingStrategy);
 
-<span class=x>$foo = new Foo();</span>
-<span class=x>$foo-&gt;bar = 123;</span>
-<span class=x>$foo-&gt;barBat = 42;</span>
+$foo = new Foo();
+$foo-&gt;bar = 123;
+$foo-&gt;barBat = 42;
 
-<span class=x>print_r($foo); // Foo Object ( [bar] =&gt; 123 [barBat] =&gt; 42 )</span>
-<span class=x>print_r($hydrator-&gt;extract($foo)); // Array ( [foo] =&gt; 123 [bar_bat] =&gt; 42 )</span>
-</pre></div></p>
+print_r($foo); // Foo Object ( [bar] =&gt; 123 [barBat] =&gt; 42 )
+print_r($hydrator-&gt;extract($foo)); // Array ( [foo] =&gt; 123 [bar_bat] =&gt; 42 )</code></pre>
 <p>Unfortunately, the <code>CompositeNamingStrategy</code> can only be used for extraction as it will not know how
 to handle the keys necessary for hydration (<code>foo</code> and <code>bar_bat</code>, respectively). To rectify this we
 have to cover the keys for both hydration and extraction in our composite strategy:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>class Foo</span>
-<span class=x>{</span>
-<span class=x>    public $bar;</span>
-<span class=x>    public $barBat;</span>
-<span class=x>}</span>
+<pre class=codehilite><code class=language-php>class Foo
+{
+    public $bar;
+    public $barBat;
+}
 
-<span class=x>$mapStrategy = new Laminas\Hydrator\NamingStrategy\MapNamingStrategy([</span>
-<span class=x>    &#39;foo&#39; =&gt; &#39;bar&#39;</span>
-<span class=x>]);</span>
+$mapStrategy = new Laminas\Hydrator\NamingStrategy\MapNamingStrategy([
+    'foo' =&gt; 'bar'
+]);
 
-<span class=x>$underscoreNamingStrategy = new Laminas\Hydrator\NamingStrategy\UnderscoreNamingStrategy();</span>
+$underscoreNamingStrategy = new Laminas\Hydrator\NamingStrategy\UnderscoreNamingStrategy();
 
-<span class=x>$namingStrategy = new Laminas\Hydrator\NamingStrategy\CompositeNamingStrategy([</span>
-<span class=x>    // Define both directions for the foo =&gt; bar mapping</span>
-<span class=x>    &#39;bar&#39; =&gt; $mapStrategy,</span>
-<span class=x>    &#39;foo&#39; =&gt; $mapStrategy,</span>
-<span class=x>    // Define both directions for the barBat =&gt; bar_bat mapping</span>
-<span class=x>    &#39;barBat&#39; =&gt; $underscoreNamingStrategy,</span>
-<span class=x>    &#39;bar_bat&#39; =&gt; $underscoreNamingStrategy,</span>
-<span class=x>]);</span>
+$namingStrategy = new Laminas\Hydrator\NamingStrategy\CompositeNamingStrategy([
+    // Define both directions for the foo =&gt; bar mapping
+    'bar' =&gt; $mapStrategy,
+    'foo' =&gt; $mapStrategy,
+    // Define both directions for the barBat =&gt; bar_bat mapping
+    'barBat' =&gt; $underscoreNamingStrategy,
+    'bar_bat' =&gt; $underscoreNamingStrategy,
+]);
 
-<span class=x>$hydrator = new Laminas\Hydrator\ObjectProperty();</span>
-<span class=x>$hydrator-&gt;setNamingStrategy($namingStrategy);</span>
+$hydrator = new Laminas\Hydrator\ObjectProperty();
+$hydrator-&gt;setNamingStrategy($namingStrategy);
 
-<span class=x>$foo = new Foo();</span>
-<span class=x>$foo-&gt;bar = 123;</span>
-<span class=x>$foo-&gt;barBat = 42;</span>
+$foo = new Foo();
+$foo-&gt;bar = 123;
+$foo-&gt;barBat = 42;
 
-<span class=x>$array = $hydrator-&gt;extract($foo);</span>
+$array = $hydrator-&gt;extract($foo);
 
-<span class=x>print_r($foo); // Foo Object ( [bar] =&gt; 123 [barBat] =&gt; 42 )</span>
-<span class=x>print_r($array); // Array ( [foo] =&gt; 123 [bar_bat] =&gt; 42 )</span>
+print_r($foo); // Foo Object ( [bar] =&gt; 123 [barBat] =&gt; 42 )
+print_r($array); // Array ( [foo] =&gt; 123 [bar_bat] =&gt; 42 )
 
-<span class=x>$foo2 = new Foo();</span>
-<span class=x>$hydrator-&gt;hydrate($array, $foo2);</span>
+$foo2 = new Foo();
+$hydrator-&gt;hydrate($array, $foo2);
 
-<span class=x>print_r($foo2); // Foo Object ( [bar] =&gt; 123 [barBat] =&gt; 42 )</span>
-</pre></div></p>
+print_r($foo2); // Foo Object ( [bar] =&gt; 123 [barBat] =&gt; 42 )</code></pre>
 
 
 
@@ -540,9 +542,10 @@ have to cover the keys for both hydration and extraction in our composite strate
             <div class="col-md-7 offset-md-2">
                 <h5>Laminas</h5>
                 <ul>
-                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
-                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
-                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
+                    <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
                 </ul>
             </div>
         </div>
@@ -579,7 +582,7 @@ have to cover the keys for both hydration and extraction in our composite strate
                 <h4 class="footer__headline">License</h4>
                 <p>
                     Code licensed under <a
-                        href="https://github.com/laminas/laminas-hydrator//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                        href="https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md">BSD 3-Clause</a>.
                 </p>
             </div>
 
@@ -588,8 +591,8 @@ have to cover the keys for both hydration and extraction in our composite strate
                 <h4 class="footer__headline">Copyright</h4>
                 <p>
                     <!--Built with love by the Laminas team with the help of our
-                    <a href="https://github.com/laminas/laminas-hydrator//graphs/contributors">contributors</a>.<br>-->
-                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                    <a href="https://github.com/laminas/laminas-hydrator/graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2020 by <a href="https://getlaminas.org/">The Laminas Project</a>.
                 </p>
             </div>
         </div>

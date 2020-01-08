@@ -20,7 +20,7 @@
     <div class="container">
         
         <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
-            <img src="../../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+            <img src="../../img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
             Documentation
@@ -36,13 +36,17 @@
             
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="https://docs.laminas.dev/components">Components</a>
+                            <a class="dropdown-item" href="https://docs.mezzio.dev/">Mezzio</a>
+                            <a class="dropdown-item" href="https://api-tools.getlaminas.org/docs">API Tools</a>
+                            <a class="dropdown-item" href="https://docs.laminas.dev/mvc">MVC</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
@@ -316,54 +320,50 @@ objects, as well as extracting data sets from them.</p>
 <p>The component consists of interfaces, and several implementations for common use cases.</p>
 <h2 id="base-interfaces">Base Interfaces</h2>
 <h3>ExtractionInterface</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>namespace Laminas\Hydrator;</span>
+<pre class=codehilite><code class=language-php>namespace Laminas\Hydrator;
 
-<span class=x>interface ExtractionInterface</span>
-<span class=x>{</span>
-<span class=x>    /**</span>
-<span class=x>     * Extract values from an object</span>
-<span class=x>     *</span>
-<span class=x>     * @return mixed[]</span>
-<span class=x>     */</span>
-<span class=x>    public function extract(object $object) : array;</span>
-<span class=x>}</span>
-</pre></div></p>
+interface ExtractionInterface
+{
+    /**
+     * Extract values from an object
+     *
+     * @return mixed[]
+     */
+    public function extract(object $object) : array;
+}</code></pre>
 <h3>HydrationInterface</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>namespace Laminas\Hydrator;</span>
+<pre class=codehilite><code class=language-php>namespace Laminas\Hydrator;
 
-<span class=x>interface HydrationInterface</span>
-<span class=x>{</span>
-<span class=x>    /**</span>
-<span class=x>     * Hydrate $object with the provided $data.</span>
-<span class=x>     *</span>
-<span class=x>     * @param mixed[] $data</span>
-<span class=x>     * @return object The implementation should return an object of any type.</span>
-<span class=x>     *     By purposely omitting the return type from the signature,</span>
-<span class=x>     *     implementations may choose to specify a more specific type.</span>
-<span class=x>     */</span>
-<span class=x>    public function hydrate(array $data, object $object);</span>
-<span class=x>}</span>
-</pre></div></p>
+interface HydrationInterface
+{
+    /**
+     * Hydrate $object with the provided $data.
+     *
+     * @param mixed[] $data
+     * @return object The implementation should return an object of any type.
+     *     By purposely omitting the return type from the signature,
+     *     implementations may choose to specify a more specific type.
+     */
+    public function hydrate(array $data, object $object);
+}</code></pre>
 <h3>HydratorInterface</h3>
-<p> <div class=codehilite><pre><span></span><span class=x>namespace Laminas\Hydrator;</span>
+<pre class=codehilite><code class=language-php>namespace Laminas\Hydrator;
 
-<span class=x>interface HydratorInterface extends</span>
-<span class=x>    ExtractionInterface,</span>
-<span class=x>    HydrationInterface</span>
-<span class=x>{</span>
-<span class=x>}</span>
-</pre></div></p>
+interface HydratorInterface extends
+    ExtractionInterface,
+    HydrationInterface
+{
+}</code></pre>
 <h2 id="usage">Usage</h2>
 <p>Usage involves instantiating the hydrator, and then passing information to it.</p>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\Hydrator;</span>
-<span class=x>$hydrator = new Hydrator\ArraySerializableHydrator();</span>
+<pre class=codehilite><code class=language-php>use Laminas\Hydrator;
+$hydrator = new Hydrator\ArraySerializableHydrator();
 
-<span class=x>// To hydrate an object from values in an array:</span>
-<span class=x>$object = $hydrator-&gt;hydrate($data, new ArrayObject());</span>
+// To hydrate an object from values in an array:
+$object = $hydrator-&gt;hydrate($data, new ArrayObject());
 
-<span class=x>// or, going the other way and extracting the values from an object as an array:</span>
-<span class=x>$data = $hydrator-&gt;extract($object);</span>
-</pre></div></p>
+// or, going the other way and extracting the values from an object as an array:
+$data = $hydrator-&gt;extract($object);</code></pre>
 <h2 id="available-implementations">Available Implementations</h2>
 <h3>Laminas\Hydrator\ArraySerializableHydrator</h3>
 <p>Follows the definition of <code>ArrayObject</code>. Objects must implement either the <code>exchangeArray()</code> or
@@ -380,23 +380,22 @@ getter method will be called for extraction, according to the following rules:</
 <p>Composes a hydrator locator, and will delegate <code>hydrate()</code> and <code>extract()</code> calls
 to the appropriate one based upon the class name of the object being operated
 on.</p>
-<p> <div class=codehilite><pre><span></span><span class=x>// Instantiate each hydrator you wish to delegate to</span>
-<span class=x>$albumHydrator = new Laminas\Hydrator\ClassMethodsHydrator();</span>
-<span class=x>$artistHydrator = new Laminas\Hydrator\ClassMethodsHydrator();</span>
+<pre class=codehilite><code class=language-php>// Instantiate each hydrator you wish to delegate to
+$albumHydrator = new Laminas\Hydrator\ClassMethodsHydrator();
+$artistHydrator = new Laminas\Hydrator\ClassMethodsHydrator();
 
-<span class=x>// Map the entity class name to the hydrator using the HydratorPluginManager.</span>
-<span class=x>// In this case we have two entity classes, &quot;Album&quot; and &quot;Artist&quot;.</span>
-<span class=x>$hydrators = new Laminas\Hydrator\HydratorPluginManager;</span>
-<span class=x>$hydrators-&gt;setService(&#39;Album&#39;, $albumHydrator);</span>
-<span class=x>$hydrators-&gt;setService(&#39;Artist&#39;, $artistHydrator);</span>
+// Map the entity class name to the hydrator using the HydratorPluginManager.
+// In this case we have two entity classes, &quot;Album&quot; and &quot;Artist&quot;.
+$hydrators = new Laminas\Hydrator\HydratorPluginManager;
+$hydrators-&gt;setService('Album', $albumHydrator);
+$hydrators-&gt;setService('Artist', $artistHydrator);
 
-<span class=x>// Create the DelegatingHydrator and tell it to use our configured hydrator locator</span>
-<span class=x>$delegating = new Laminas\Hydrator\DelegatingHydrator($hydrators);</span>
+// Create the DelegatingHydrator and tell it to use our configured hydrator locator
+$delegating = new Laminas\Hydrator\DelegatingHydrator($hydrators);
 
-<span class=x>// Now we can use $delegating to hydrate or extract any supported object</span>
-<span class=x>$array  = $delegating-&gt;extract(new Artist());</span>
-<span class=x>$artist = $delegating-&gt;hydrate($data, new Artist());</span>
-</pre></div></p>
+// Now we can use $delegating to hydrate or extract any supported object
+$array  = $delegating-&gt;extract(new Artist());
+$artist = $delegating-&gt;hydrate($data, new Artist());</code></pre>
 <h3>Laminas\Hydrator\ObjectPropertyHydrator</h3>
 <p>Any data key matching a publicly accessible property will be hydrated; any public properties
 will be used for extraction.</p>
@@ -587,9 +586,10 @@ extraction.</p>
             <div class="col-md-7 offset-md-2">
                 <h5>Laminas</h5>
                 <ul>
-                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
-                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
-                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
+                    <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
                 </ul>
             </div>
         </div>
@@ -626,7 +626,7 @@ extraction.</p>
                 <h4 class="footer__headline">License</h4>
                 <p>
                     Code licensed under <a
-                        href="https://github.com/laminas/laminas-hydrator//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                        href="https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md">BSD 3-Clause</a>.
                 </p>
             </div>
 
@@ -635,8 +635,8 @@ extraction.</p>
                 <h4 class="footer__headline">Copyright</h4>
                 <p>
                     <!--Built with love by the Laminas team with the help of our
-                    <a href="https://github.com/laminas/laminas-hydrator//graphs/contributors">contributors</a>.<br>-->
-                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                    <a href="https://github.com/laminas/laminas-hydrator/graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2020 by <a href="https://getlaminas.org/">The Laminas Project</a>.
                 </p>
             </div>
         </div>
