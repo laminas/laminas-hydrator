@@ -1,143 +1,143 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-     <loc>https://docs.laminas.dev/</loc>
-     <lastmod>2020-01-08</lastmod>
+     <loc>https://docs.laminas.dev/laminas-hydrator/</loc>
+     <lastmod>2020-01-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.laminas.dev/v3/quick-start/</loc>
-     <lastmod>2020-01-08</lastmod>
+     <loc>https://docs.laminas.dev/laminas-hydrator/v3/quick-start/</loc>
+     <lastmod>2020-01-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.laminas.dev/v3/filter/</loc>
-     <lastmod>2020-01-08</lastmod>
+     <loc>https://docs.laminas.dev/laminas-hydrator/v3/filter/</loc>
+     <lastmod>2020-01-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.laminas.dev/v3/strategy/</loc>
-     <lastmod>2020-01-08</lastmod>
+     <loc>https://docs.laminas.dev/laminas-hydrator/v3/strategy/</loc>
+     <lastmod>2020-01-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.laminas.dev/v3/aggregate/</loc>
-     <lastmod>2020-01-08</lastmod>
+     <loc>https://docs.laminas.dev/laminas-hydrator/v3/aggregate/</loc>
+     <lastmod>2020-01-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.laminas.dev/v3/naming-strategy/intro/</loc>
-     <lastmod>2020-01-08</lastmod>
+     <loc>https://docs.laminas.dev/laminas-hydrator/v3/naming-strategy/intro/</loc>
+     <lastmod>2020-01-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.laminas.dev/v3/naming-strategy/identity-naming-strategy/</loc>
-     <lastmod>2020-01-08</lastmod>
+     <loc>https://docs.laminas.dev/laminas-hydrator/v3/naming-strategy/identity-naming-strategy/</loc>
+     <lastmod>2020-01-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.laminas.dev/v3/naming-strategy/map-naming-strategy/</loc>
-     <lastmod>2020-01-08</lastmod>
+     <loc>https://docs.laminas.dev/laminas-hydrator/v3/naming-strategy/map-naming-strategy/</loc>
+     <lastmod>2020-01-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.laminas.dev/v3/naming-strategy/underscore-naming-strategy/</loc>
-     <lastmod>2020-01-08</lastmod>
+     <loc>https://docs.laminas.dev/laminas-hydrator/v3/naming-strategy/underscore-naming-strategy/</loc>
+     <lastmod>2020-01-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.laminas.dev/v3/naming-strategy/composite-naming-strategy/</loc>
-     <lastmod>2020-01-08</lastmod>
+     <loc>https://docs.laminas.dev/laminas-hydrator/v3/naming-strategy/composite-naming-strategy/</loc>
+     <lastmod>2020-01-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.laminas.dev/v3/plugin-managers/</loc>
-     <lastmod>2020-01-08</lastmod>
+     <loc>https://docs.laminas.dev/laminas-hydrator/v3/plugin-managers/</loc>
+     <lastmod>2020-01-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.laminas.dev/v3/migration/</loc>
-     <lastmod>2020-01-08</lastmod>
+     <loc>https://docs.laminas.dev/laminas-hydrator/v3/migration/</loc>
+     <lastmod>2020-01-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.laminas.dev/v2/quick-start/</loc>
-     <lastmod>2020-01-08</lastmod>
+     <loc>https://docs.laminas.dev/laminas-hydrator/v2/quick-start/</loc>
+     <lastmod>2020-01-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.laminas.dev/v2/filter/</loc>
-     <lastmod>2020-01-08</lastmod>
+     <loc>https://docs.laminas.dev/laminas-hydrator/v2/filter/</loc>
+     <lastmod>2020-01-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.laminas.dev/v2/strategy/</loc>
-     <lastmod>2020-01-08</lastmod>
+     <loc>https://docs.laminas.dev/laminas-hydrator/v2/strategy/</loc>
+     <lastmod>2020-01-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.laminas.dev/v2/aggregate/</loc>
-     <lastmod>2020-01-08</lastmod>
+     <loc>https://docs.laminas.dev/laminas-hydrator/v2/aggregate/</loc>
+     <lastmod>2020-01-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.laminas.dev/v2/naming-strategy/identity-naming-strategy/</loc>
-     <lastmod>2020-01-08</lastmod>
+     <loc>https://docs.laminas.dev/laminas-hydrator/v2/naming-strategy/identity-naming-strategy/</loc>
+     <lastmod>2020-01-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.laminas.dev/v2/naming-strategy/map-naming-strategy/</loc>
-     <lastmod>2020-01-08</lastmod>
+     <loc>https://docs.laminas.dev/laminas-hydrator/v2/naming-strategy/map-naming-strategy/</loc>
+     <lastmod>2020-01-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.laminas.dev/v2/naming-strategy/underscore-naming-strategy/</loc>
-     <lastmod>2020-01-08</lastmod>
+     <loc>https://docs.laminas.dev/laminas-hydrator/v2/naming-strategy/underscore-naming-strategy/</loc>
+     <lastmod>2020-01-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.laminas.dev/v2/naming-strategy/composite-naming-strategy/</loc>
-     <lastmod>2020-01-08</lastmod>
+     <loc>https://docs.laminas.dev/laminas-hydrator/v2/naming-strategy/composite-naming-strategy/</loc>
+     <lastmod>2020-01-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.laminas.dev/quick-start/</loc>
-     <lastmod>2020-01-08</lastmod>
+     <loc>https://docs.laminas.dev/laminas-hydrator/quick-start/</loc>
+     <lastmod>2020-01-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.laminas.dev/filter/</loc>
-     <lastmod>2020-01-08</lastmod>
+     <loc>https://docs.laminas.dev/laminas-hydrator/filter/</loc>
+     <lastmod>2020-01-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.laminas.dev/strategy/</loc>
-     <lastmod>2020-01-08</lastmod>
+     <loc>https://docs.laminas.dev/laminas-hydrator/strategy/</loc>
+     <lastmod>2020-01-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.laminas.dev/aggregate/</loc>
-     <lastmod>2020-01-08</lastmod>
+     <loc>https://docs.laminas.dev/laminas-hydrator/aggregate/</loc>
+     <lastmod>2020-01-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.laminas.dev/naming-strategy/identity-naming-strategy/</loc>
-     <lastmod>2020-01-08</lastmod>
+     <loc>https://docs.laminas.dev/laminas-hydrator/naming-strategy/identity-naming-strategy/</loc>
+     <lastmod>2020-01-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.laminas.dev/naming-strategy/map-naming-strategy/</loc>
-     <lastmod>2020-01-08</lastmod>
+     <loc>https://docs.laminas.dev/laminas-hydrator/naming-strategy/map-naming-strategy/</loc>
+     <lastmod>2020-01-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.laminas.dev/naming-strategy/underscore-naming-strategy/</loc>
-     <lastmod>2020-01-08</lastmod>
+     <loc>https://docs.laminas.dev/laminas-hydrator/naming-strategy/underscore-naming-strategy/</loc>
+     <lastmod>2020-01-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.laminas.dev/naming-strategy/composite-naming-strategy/</loc>
-     <lastmod>2020-01-08</lastmod>
+     <loc>https://docs.laminas.dev/laminas-hydrator/naming-strategy/composite-naming-strategy/</loc>
+     <lastmod>2020-01-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>

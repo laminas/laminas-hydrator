@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Serialize objects to arrays, and vice versa">  
-    <link rel="canonical" href="https://docs.laminas.dev/v3/naming-strategy/composite-naming-strategy/">
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-hydrator/v3/naming-strategy/composite-naming-strategy/">
     <link rel="shortcut icon" href="/img/trademark-laminas-foundation-rgb.svg">
 
     <title>Composite - laminas-hydrator - Laminas Docs</title>
 
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
 </head>
 <body id="page-top" class="components">
 
@@ -207,35 +207,30 @@
                     
 <div class="version-selector">
     <div class="btn-group">
-        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="version-selector-dropdown">
             
                 v3
             
-            <span class="caret"></span>
         </button>
-        <ul class="dropdown-menu">
+        <div class="dropdown-menu" aria-labelledby="version-selector-dropdown">
             
                 
-                    <li class="dropdown-menu__item dropdown-menu__item--selected">
-                        <a href="../../quick-start/">
-                            
-                                v3 (latest)
-                            
-                        </a>
-                    </li>
+                    <a href="../../quick-start/" class="dropdown-item active">
+                        
+                            v3 (latest)
+                        
+                    </a>
                 
             
                 
-                    <li class="dropdown-menu__item">
-                        <a href="../../../v2/quick-start/">
-                            
-                                v2
-                            
-                        </a>
-                    </li>
+                    <a href="../../../v2/quick-start/" class="dropdown-item">
+                        
+                            v2
+                        
+                    </a>
                 
             
-        </ul>
+        </div>
     </div>
 </div>
 
@@ -273,7 +268,8 @@
                     <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         
-            <li class="breadcrumb-item"><a href="">Overview</a></li>
+            <li class="breadcrumb-item"><a href="https://docs.laminas.dev/">Overview</a></li>
+            <li class="breadcrumb-item"><a href="https://docs.laminas.dev/components/">Components</a></li>
 
             
                 <li class="breadcrumb-item"><a href="../../..">laminas-hydrator</a></li>
@@ -632,7 +628,7 @@ print_r($foo2); // Foo Object ( [bar] =&gt; 123 [barBat] =&gt; 42 )</code></pre>
             project  = "components",
             siteName = 'laminas-hydrator';
     </script>
-    <script src="/js/scripts.js"></script>
+    <script src="https://docs.laminas.dev/js/scripts.js"></script>
         <script src="../../../search/main.js"></script>
 
     
