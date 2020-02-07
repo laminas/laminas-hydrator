@@ -40,7 +40,7 @@
         "laminas/laminas-modulemanager": "^2.8",
         "laminas/laminas-serializer": "^2.9",
         "laminas/laminas-servicemanager": "^3.3.2",
-        "phpspec/prophecy": "^1.7.5",
+        "phpspec/prophecy": ">=1.10.2",
         "phpstan/phpstan": "^0.10.5",
         "phpunit/phpunit": "^8.5.2 || ^9.0"
     },
