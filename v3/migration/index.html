@@ -12,14 +12,15 @@
     <title>Migration - laminas-hydrator - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
+    
 </head>
-<body id="page-top" class="components">
+<body id="page-top" class="components" data-spy="scroll" data-target=".toc" data-offset="20">
 
     
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
         
-        <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
+        <a class="logo-link navbar-brand" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
             <img src="https://docs.laminas.dev/img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
@@ -191,7 +192,7 @@
         <div class="row">
 
             
-            <div class="col-6 offset-md-2">
+            <div class="col-8">
                 <h1 class="header__title">
                     Components
 
@@ -250,7 +251,7 @@
     
     <div class="container">
         <div class="row">
-            <div class="col-md-2 col-sm-12">
+            <div class="col-md-9 col-sm-12 content" role="main">
                 
                 
                     
@@ -263,31 +264,31 @@
             <ul class="toc__list">
                 
                     <li class="toc__entry">
-                        <a href="#minimum-supported-versions" class="toc__link">Minimum supported versions</a>
+                        <a href="#minimum-supported-versions" class="toc__link nav-link">Minimum supported versions</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#renamed-interfaces" class="toc__link">Renamed interfaces</a>
+                        <a href="#renamed-interfaces" class="toc__link nav-link">Renamed interfaces</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#renamed-classes" class="toc__link">Renamed classes</a>
+                        <a href="#renamed-classes" class="toc__link nav-link">Renamed classes</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#interface-changes" class="toc__link">Interface changes</a>
+                        <a href="#interface-changes" class="toc__link nav-link">Interface changes</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#typehints" class="toc__link">Typehints</a>
+                        <a href="#typehints" class="toc__link nav-link">Typehints</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#arraymapnamingstrategy-and-mapnamingstrategy-merged" class="toc__link">ArrayMapNamingStrategy and MapNamingStrategy merged</a>
+                        <a href="#arraymapnamingstrategy-and-mapnamingstrategy-merged" class="toc__link nav-link">ArrayMapNamingStrategy and MapNamingStrategy merged</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#hydratorpluginmanager" class="toc__link">HydratorPluginManager</a>
+                        <a href="#hydratorpluginmanager" class="toc__link nav-link">HydratorPluginManager</a>
                     </li>
                 
             </ul>
@@ -295,8 +296,7 @@
     
 
                 
-            </div>
-            <div class="col-md-7 col-sm-12 content" role="main" data-spy="scroll" data-target=".toc">
+
                 
                     <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -779,7 +779,7 @@ See the <a href="../plugin-managers/">plugin managers chapter</a> for more detai
         </div>
 
         <div class="row">
-            <div class="col-md-10 offset-md-2">
+            <div class="col-md-12">
                 <h5>Laminas</h5>
                 <ul>
                     <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
@@ -791,7 +791,7 @@ See the <a href="../plugin-managers/">plugin managers chapter</a> for more detai
         </div>
 
         <div class="row">
-            <div class="col-md-10 offset-md-2"> 
+            <div class="col-md-12">
                 <div class="row">
 
                     
@@ -849,7 +849,9 @@ See the <a href="../plugin-managers/">plugin managers chapter</a> for more detai
             siteName = 'laminas-hydrator';
     </script>
     <script src="https://docs.laminas.dev/js/scripts.js"></script>
+    
         <script src="../../search/main.js"></script>
+    
 
     
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
