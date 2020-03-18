@@ -3,7 +3,7 @@
 `Laminas\Hydrator\NamingStrategy\CompositeNamingStrategy` allows you to specify which naming
 strategy should be used for each key encountered during hydration or extraction.
 
-# Basic Usage
+## Basic Usage
 
 When invoked, the following composite strategy will extract the property `bar`
 to the array key `foo` (using the `MapNamingStrategy`), and the property

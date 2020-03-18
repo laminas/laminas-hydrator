@@ -97,7 +97,7 @@ $composite->addFilter('five', $condition5, FilterComposite::CONDITION_AND);
 
 The above is roughly equivalent to the following conditional:
 
-```
+```php
 // This is what's happening internally
 if (
      ($condition1
