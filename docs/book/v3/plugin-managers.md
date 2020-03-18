@@ -79,9 +79,10 @@ As an example, if you want a configurable solution that uses factories, and want
 those factories capable of pulling application-level dependencies, you might do
 something like the following:
 
-```php
-// In src/YourApplication/CustomHydratorPluginManager.php:
+Create a custom plugin manager class, e.g.
+`src/YourApplication/CustomHydratorPluginManager.php`:
 
+```php
 namespace YourApplication;
 
 use Psr\Container\NotFoundExceptionInterface;
@@ -148,9 +149,10 @@ class CustomHydratorPluginManager implements HydratorPluginManagerInterface
 }
 ```
 
-```php
-// In src/YourApplication/CustomHydratorPluginManagerFactory.php:
+Create a factory for the custom plugin manager, e.g.
+`src/YourApplication/CustomHydratorPluginManagerFactory.php`:
 
+```php
 namespace YourApplication;
 
 use Psr\Container\ContainerInterface;
@@ -185,9 +187,10 @@ class CustomHydratorPluginManagerFactory
 }
 ```
 
-```php
-// in config/autoload/hydrators.global.php or similar:
+Register the custom plugin manager in the application configuration, e.g.
+`config/autoload/hydrators.global.php`:
 
+```php
 return [
     'dependencies' => [
         'aliases' => [
