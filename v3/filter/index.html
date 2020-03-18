@@ -449,7 +449,7 @@ $composite-&gt;addFilter('three', $condition3);
 $composite-&gt;addFilter('four', $condition4, FilterComposite::CONDITION_AND);
 $composite-&gt;addFilter('five', $condition5, FilterComposite::CONDITION_AND);</code></pre>
 <p>The above is roughly equivalent to the following conditional:</p>
-<pre class=codehilite><code>// This is what's happening internally
+<pre class=codehilite><code class=language-php>// This is what's happening internally
 if (
      ($condition1
         || $condition2

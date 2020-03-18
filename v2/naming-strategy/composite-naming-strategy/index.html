@@ -296,10 +296,16 @@
 
     
     
-
-    
-
-    
+        <div class="toc">
+            <h6 class="toc__headline">On this page</h6>
+            <ul class="toc__list">
+                
+                    <li class="toc__entry">
+                        <a href="#basic-usage" class="toc__link nav-link">Basic Usage</a>
+                    </li>
+                
+            </ul>
+        </div>
     
 
                 
@@ -362,7 +368,7 @@
     <h1 id="compositenamingstrategy">CompositeNamingStrategy</h1>
 <p><code>Laminas\Hydrator\NamingStrategy\CompositeNamingStrategy</code> allows you to specify which naming
 strategy should be used for each key encountered during hydration or extraction.</p>
-<h1 id="basic-usage">Basic Usage</h1>
+<h2 id="basic-usage">Basic Usage</h2>
 <p>When invoked, the following composite strategy will extract the property <code>bar</code>
 to the array key <code>foo</code> (using the <code>MapNamingStrategy</code>), and the property
 <code>barBat</code> to the array key <code>bar_bat</code> (using the <code>UnderscoreNamingStrategy</code>):</p>

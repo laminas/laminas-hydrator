@@ -447,9 +447,9 @@ your application, you should write a custom implementation of
 <p>As an example, if you want a configurable solution that uses factories, and want
 those factories capable of pulling application-level dependencies, you might do
 something like the following:</p>
-<div class=md-fenced-code-tabs id=tab-tab-group-0><ul class="nav nav-tabs"><li class=nav-item><a class="nav-link active" href=#tab-group-0-0_php-panel role=tab id=tab-group-0-0_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-0-0_php-panel aria-selected=true>Php</a></li><li class=nav-item><a class="nav-link " href=#tab-group-0-1_php-panel role=tab id=tab-group-0-1_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-0-1_php-panel aria-selected=false>Php</a></li><li class=nav-item><a class="nav-link " href=#tab-group-0-2_php-panel role=tab id=tab-group-0-2_php-tab data-toggle=tab data-lang=php aria-controls=tab-group-0-2_php-panel aria-selected=false>Php</a></li></ul><div class=tab-content><div id=tab-group-0-0_php-panel class="tab-pane show active" role=tabpanel aria-labelledby=tab-group-0-0_php-tab><pre class=codehilite><code class=language-php>// In src/YourApplication/CustomHydratorPluginManager.php:
-
-namespace YourApplication;
+<p>Create a custom plugin manager class, e.g.
+<code>src/YourApplication/CustomHydratorPluginManager.php</code>:</p>
+<pre class=codehilite><code class=language-php>namespace YourApplication;
 
 use Psr\Container\NotFoundExceptionInterface;
 use Psr\Container\ContainerInterface;
@@ -512,9 +512,10 @@ class CustomHydratorPluginManager implements HydratorPluginManagerInterface
     {
         $this-&gt;factories[$name] = $factory;
     }
-}</code></pre></div><div id=tab-group-0-1_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-0-1_php-tab><pre class=codehilite><code class=language-php>// In src/YourApplication/CustomHydratorPluginManagerFactory.php:
-
-namespace YourApplication;
+}</code></pre>
+<p>Create a factory for the custom plugin manager, e.g.
+<code>src/YourApplication/CustomHydratorPluginManagerFactory.php</code>:</p>
+<pre class=codehilite><code class=language-php>namespace YourApplication;
 
 use Psr\Container\ContainerInterface;
 
@@ -545,9 +546,10 @@ class CustomHydratorPluginManagerFactory
                 : $manager-&gt;setFactory($name, $factory);
         }
     }
-}</code></pre></div><div id=tab-group-0-2_php-panel class="tab-pane " role=tabpanel aria-labelledby=tab-group-0-2_php-tab><pre class=codehilite><code class=language-php>// in config/autoload/hydrators.global.php or similar:
-
-return [
+}</code></pre>
+<p>Register the custom plugin manager in the application configuration, e.g.
+<code>config/autoload/hydrators.global.php</code>:</p>
+<pre class=codehilite><code class=language-php>return [
     'dependencies' =&gt; [
         'aliases' =&gt; [
             'HydratorManager' =&gt; \YourApplication\CustomHydratorPluginManager::class,
@@ -563,7 +565,7 @@ return [
             // etc.
         ],
     ],
-];</code></pre></div></div></div>
+];</code></pre>
 
 
 
