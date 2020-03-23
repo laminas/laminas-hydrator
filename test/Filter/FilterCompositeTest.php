@@ -12,6 +12,7 @@ namespace LaminasTest\Hydrator\Filter;
 
 use Laminas\Hydrator\Exception\InvalidArgumentException;
 use Laminas\Hydrator\Filter\FilterComposite;
+use Laminas\Hydrator\Filter\FilterInterface;
 use Laminas\Hydrator\Filter\GetFilter;
 use Laminas\Hydrator\Filter\HasFilter;
 use Laminas\Hydrator\Filter\IsFilter;
@@ -28,27 +29,10 @@ use function sprintf;
 class FilterCompositeTest extends TestCase
 {
     /**
-     * @dataProvider getDataProvider
+     * @dataProvider validFiltersProvider
      */
-    public function testFilters($orFilters, $andFilters, $exceptionThrown)
+    public function testFilters(array $orFilters, array $andFilters)
     {
-        if ($exceptionThrown) {
-            if (empty($orFilters)) {
-                $key = 'bar';
-            } else {
-                $key = 'foo';
-            }
-
-            $this->expectException(InvalidArgumentException::class);
-            $this->expectExceptionMessage(
-                sprintf(
-                    'The value of %s should be either a callable or an ' .
-                    'instance of Laminas\Hydrator\Filter\FilterInterface',
-                    $key
-                )
-            );
-        }
-
         $filter = new FilterComposite($orFilters, $andFilters);
 
         foreach ($orFilters as $name => $value) {
@@ -56,31 +40,12 @@ class FilterCompositeTest extends TestCase
         }
     }
 
-    /**
-     * @return array
-     */
-    public function getDataProvider()
+    public function validFiltersProvider() : array
     {
         return [
             [
-                ['foo' => 'bar'],
-                [],
-                'exception' => true,
-            ],
-            [
-                [],
-                ['bar' => 'foo'],
-                'exception' => true,
-            ],
-            [
-                ['foo' => ''],
-                ['bar' => ''],
-                'exception' => true,
-            ],
-            [
                 ['foo' => new HasFilter()],
                 ['bar' => new GetFilter()],
-                'exception' => false,
             ],
             [
                 [
@@ -91,8 +56,57 @@ class FilterCompositeTest extends TestCase
                     'bar1' => new GetFilter(),
                     'bar2' => new NumberOfParameterFilter(),
                 ],
-                'exception' => false,
             ],
         ];
+    }
+
+    public function invalidFiltersProvider() : array
+    {
+        $callback = static function () {
+            return true;
+        };
+
+        return [
+            [
+                ['foo' => 'bar'],
+                [],
+                'foo',
+            ],
+            [
+                [],
+                ['bar' => 'foo'],
+                'bar',
+            ],
+            [
+                ['foo' => ''],
+                ['bar' => ''],
+                'foo',
+            ],
+            [
+                ['foo' => $callback],
+                ['bar' => ''],
+                'bar',
+            ],
+            [
+                ['foo' => ''],
+                ['bar' => $callback],
+                'foo',
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider invalidFiltersProvider
+     */
+    public function testConstructWithInvalidFilter(array $orFilters, array $andFilters, string $expectedKey)
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage(sprintf(
+            'The value of %s should be either a callable or an instance of %s',
+            $expectedKey,
+            FilterInterface::class
+        ));
+
+        new FilterComposite($orFilters, $andFilters);
     }
 }
