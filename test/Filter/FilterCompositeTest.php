@@ -12,6 +12,7 @@ namespace LaminasTest\Hydrator\Filter;
 
 use Laminas\Hydrator\Exception\InvalidArgumentException;
 use Laminas\Hydrator\Filter\FilterComposite;
+use Laminas\Hydrator\Filter\FilterInterface;
 use Laminas\Hydrator\Filter\GetFilter;
 use Laminas\Hydrator\Filter\HasFilter;
 use Laminas\Hydrator\Filter\IsFilter;
@@ -28,9 +29,9 @@ use function sprintf;
 class FilterCompositeTest extends TestCase
 {
     /**
-     * @dataProvider getDataProvider
+     * @dataProvider validFiltersProvider
      */
-    public function testFilters($orFilters, $andFilters)
+    public function testFilters(array $orFilters, array $andFilters)
     {
         $filter = new FilterComposite($orFilters, $andFilters);
 
@@ -39,10 +40,7 @@ class FilterCompositeTest extends TestCase
         }
     }
 
-    /**
-     * @return array
-     */
-    public function getDataProvider()
+    public function validFiltersProvider() : array
     {
         return [
             [
@@ -62,9 +60,9 @@ class FilterCompositeTest extends TestCase
         ];
     }
 
-    public function providerConstructWithInvalidFilter(): array
+    public function invalidFiltersProvider() : array
     {
-        $callback = function () {
+        $callback = static function () {
             return true;
         };
 
@@ -98,19 +96,17 @@ class FilterCompositeTest extends TestCase
     }
 
     /**
-     * @dataProvider providerConstructWithInvalidFilter
+     * @dataProvider invalidFiltersProvider
      */
-    public function testConstructWithInvalidFilter($orFilters, $andFilters, $expectedKey)
+    public function testConstructWithInvalidFilter(array $orFilters, array $andFilters, string $expectedKey)
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage(
-            sprintf(
-                'The value of %s should be either a callable or an instance of %s',
-                $expectedKey,
-                'Laminas\Hydrator\Filter\FilterInterface'
-            )
-        );
+        $this->expectExceptionMessage(sprintf(
+            'The value of %s should be either a callable or an instance of %s',
+            $expectedKey,
+            FilterInterface::class
+        ));
 
-        $filter = new FilterComposite($orFilters, $andFilters);
+        new FilterComposite($orFilters, $andFilters);
     }
 }
