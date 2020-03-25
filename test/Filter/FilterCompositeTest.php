@@ -109,4 +109,103 @@ class FilterCompositeTest extends TestCase
 
         new FilterComposite($orFilters, $andFilters);
     }
+
+    public function testNoFilters()
+    {
+        $filter = new FilterComposite();
+        self::assertTrue($filter->filter('any_value'));
+    }
+
+    private function buildFilters(array $values) : array
+    {
+        $filters = [];
+        foreach ($values as $value) {
+            $filters[] = new class($value) implements FilterInterface
+            {
+                public function __construct($value)
+                {
+                    $this->value = $value;
+                }
+                public function filter(string $property) : bool
+                {
+                    return $this->value;
+                }
+            };
+        }
+        return $filters;
+    }
+
+    private function generateFilters(array $orCompositionFilters, array $andCompositionFilters, bool $expected)
+    {
+        foreach ($orCompositionFilters as $orFilters) {
+            foreach ($andCompositionFilters as $andFilters) {
+                yield [
+                    'orFilters' => $this->buildFilters($orFilters),  // boolean sum : true
+                    'andFilters' => $this->buildFilters($andFilters),
+                    'expected' => $expected,
+                ];
+            }
+        }
+    }
+
+    public function providerCompositionFiltering()
+    {
+        $orCompositionFilters = [
+            'truthy' => [
+                [],
+                [true],
+                [true, false],
+                [true, true],
+                [false, true],
+            ],
+            'falsy' => [
+                [false],
+                [false, false],
+            ]
+        ];
+
+        $andCompositionFilters = [
+            'truthy' => [
+                [],
+                [true],
+                [true, true],
+            ],
+            'falsy' => [
+                [false],
+                [true, false],
+                [false, true],
+                [false, false],
+            ]
+        ];
+
+        yield from $this->generateFilters(
+            $orCompositionFilters['truthy'],
+            $andCompositionFilters['truthy'],
+            true
+        );
+        yield from $this->generateFilters(
+            $orCompositionFilters['truthy'],
+            $andCompositionFilters['falsy'],
+            false
+        );
+        yield from $this->generateFilters(
+            $orCompositionFilters['falsy'],
+            $andCompositionFilters['truthy'],
+            false
+        );
+        yield from $this->generateFilters(
+            $orCompositionFilters['falsy'],
+            $andCompositionFilters['falsy'],
+            false
+        );
+    }
+
+    /**
+     * @dataProvider providerCompositionFiltering
+     */
+    public function testCompositionFiltering(array $orFilters, array $andFilters, bool $expected)
+    {
+        $filter = new FilterComposite($orFilters, $andFilters);
+        self::assertSame($expected, $filter->filter('any_value'));
+    }
 }
