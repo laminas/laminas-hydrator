@@ -15,6 +15,7 @@ use LaminasTest\Hydrator\TestAsset\ArraySerializable;
 use LaminasTest\Hydrator\TestAsset\ClassMethodsCamelCase;
 use LaminasTest\Hydrator\TestAsset\ClassMethodsCamelCaseMissing;
 use LaminasTest\Hydrator\TestAsset\ClassMethodsOptionalParameters;
+use LaminasTest\Hydrator\TestAsset\ClassMethodsTypeDeclaration;
 use PHPUnit\Framework\TestCase;
 use TypeError;
 
@@ -120,5 +121,12 @@ class ClassMethodsHydratorTest extends TestCase
         $this->expectException(TypeError::class);
         $this->expectExceptionMessage('must be an object');
         $this->hydrator->hydrate([], 'non-object');
+    }
+
+    public function testHydrateWithNonStrictTypes()
+    {
+        $expected = 42;
+        $typeDeclaration = $this->hydrator->hydrate(['int' => (string) $expected], new ClassMethodsTypeDeclaration());
+        $this->assertSame($expected, $typeDeclaration->getInt());
     }
 }
