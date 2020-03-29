@@ -121,4 +121,12 @@ class ClassMethodsHydratorTest extends TestCase
         $this->expectExceptionMessage('must be an object');
         $this->hydrator->hydrate([], 'non-object');
     }
+
+    public function testExtractClassWithoutAnyMethod()
+    {
+        $data = $this->hydrator->extract(
+            new TestAsset\ClassWithoutAnyMethod()
+        );
+        self::assertSame([], $data);
+    }
 }
