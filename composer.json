@@ -71,6 +71,6 @@
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
     "replace": {
-        "zendframework/zend-hydrator": "self.version"
+        "zendframework/zend-hydrator": "^3.0.2"
     }
 }
