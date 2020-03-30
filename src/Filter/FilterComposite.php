@@ -124,46 +124,49 @@ class FilterComposite implements FilterInterface
      */
     public function filter(string $property) : bool
     {
-        $andCount = count($this->andFilter);
-        $orCount = count($this->orFilter);
-        // return true if no filters are registered
-        if ($orCount === 0 && $andCount === 0) {
+        return $this->atLeastOneOrFilterIsTrue($property) && $this->allAndFiltersAreTrue($property);
+    }
+
+    private function atLeastOneOrFilterIsTrue(string $property) : bool
+    {
+        if (count($this->orFilter) === 0) {
             return true;
         }
 
-        $returnValue = $orCount === 0 && $andCount !== 0;
-
-        // Check if 1 from the or filters return true
         foreach ($this->orFilter as $filter) {
-            if (is_callable($filter)) {
-                if ($filter($property) === true) {
-                    $returnValue = true;
-                    break;
-                }
-                continue;
-            }
-
-            if ($filter->filter($property) === true) {
-                $returnValue = true;
-                break;
+            if ($this->executeFilter($filter, $property) === true) {
+                return true;
             }
         }
 
-        // Check if all of the and condition return true
-        foreach ($this->andFilter as $filter) {
-            if (is_callable($filter)) {
-                if ($filter($property) === false) {
-                    return false;
-                }
-                continue;
-            }
+        return false;
+    }
 
-            if ($filter->filter($property) === false) {
+    private function allAndFiltersAreTrue(string $property) : bool
+    {
+        if (count($this->andFilter) === 0) {
+            return true;
+        }
+
+        foreach ($this->andFilter as $filter) {
+            if ($this->executeFilter($filter, $property) === false) {
                 return false;
             }
         }
 
-        return $returnValue;
+        return true;
+    }
+
+    /**
+     * @param callable|FilterInterface $filter
+     */
+    private function executeFilter($filter, string $property) : bool
+    {
+        if (is_callable($filter)) {
+            return $filter($property);
+        }
+
+        return $filter->filter($property);
     }
 
     /**
