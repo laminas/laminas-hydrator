@@ -138,6 +138,7 @@ class FilterComposite implements FilterInterface
                 return true;
             }
         }
+
         return false;
     }
 
@@ -152,15 +153,19 @@ class FilterComposite implements FilterInterface
                 return false;
             }
         }
+
         return true;
     }
 
-    private function executeFilter($filter, string $property)
+    /**
+     * @param callable|FilterInterface $filter
+     */
+    private function executeFilter($filter, string $property) : bool
     {
         if (is_callable($filter)) {
             return $filter($property);
         }
-        /** @var FilterInterface $filter */
+
         return $filter->filter($property);
     }
 
