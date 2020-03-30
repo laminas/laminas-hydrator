@@ -149,15 +149,9 @@ class ClassMethodsHydrator extends AbstractHydrator implements HydratorOptionsIn
         // pass 1 - finding out which properties can be extracted, with which methods (populate hydration cache)
         if (! isset($this->extractionMethodsCache[$objectClass])) {
             $this->extractionMethodsCache[$objectClass] = [];
-            $filter                                     = $this->getCompositeFilter();
-            $methods                                    = get_class_methods($object);
 
-            if ($object instanceof Filter\FilterProviderInterface) {
-                $filter = new Filter\FilterComposite(
-                    [$object->getFilter()],
-                    [new Filter\MethodMatchFilter('getFilter')]
-                );
-            }
+            $filter  = $this->initCompositeFilter($object);
+            $methods = get_class_methods($object);
 
             foreach ($methods as $method) {
                 $methodFqn = $objectClass . '::' . $method;
@@ -166,16 +160,7 @@ class ClassMethodsHydrator extends AbstractHydrator implements HydratorOptionsIn
                     continue;
                 }
 
-                $attribute = $method;
-
-                if (strpos($method, 'get') === 0) {
-                    $attribute = substr($method, 3);
-                    if (! property_exists($object, $attribute)) {
-                        $attribute = lcfirst($attribute);
-                    }
-                }
-
-                $this->extractionMethodsCache[$objectClass][$method] = $attribute;
+                $this->extractionMethodsCache[$objectClass][$method] = $this->identifyAttributeName($object, $method);
             }
         }
 
@@ -192,6 +177,27 @@ class ClassMethodsHydrator extends AbstractHydrator implements HydratorOptionsIn
         }
 
         return $values;
+    }
+
+    private function initCompositeFilter(object $object) : Filter\FilterComposite
+    {
+        if ($object instanceof Filter\FilterProviderInterface) {
+            return new Filter\FilterComposite(
+                [$object->getFilter()],
+                [new Filter\MethodMatchFilter('getFilter')]
+            );
+        }
+
+        return $this->getCompositeFilter();
+    }
+
+    private function identifyAttributeName(object $object, string $method) : string
+    {
+        if (strpos($method, 'get') === 0) {
+            $attribute = substr($method, 3);
+            return property_exists($object, $attribute) ? $attribute : lcfirst($attribute);
+        }
+        return $method;
     }
 
     /**
