@@ -374,7 +374,7 @@ objects, as well as extracting data sets from them.</p>
 <p>The component consists of interfaces, and several implementations for common use cases.</p>
 <h2 id="base-interfaces">Base Interfaces</h2>
 <h3>ExtractionInterface</h3>
-<pre class=codehilite><code class=language-php>namespace Laminas\Hydrator;
+<pre class="highlight"><code class="language-php">namespace Laminas\Hydrator;
 
 interface ExtractionInterface
 {
@@ -385,8 +385,9 @@ interface ExtractionInterface
      */
     public function extract(object $object) : array;
 }</code></pre>
+
 <h3>HydrationInterface</h3>
-<pre class=codehilite><code class=language-php>namespace Laminas\Hydrator;
+<pre class="highlight"><code class="language-php">namespace Laminas\Hydrator;
 
 interface HydrationInterface
 {
@@ -400,17 +401,19 @@ interface HydrationInterface
      */
     public function hydrate(array $data, object $object);
 }</code></pre>
+
 <h3>HydratorInterface</h3>
-<pre class=codehilite><code class=language-php>namespace Laminas\Hydrator;
+<pre class="highlight"><code class="language-php">namespace Laminas\Hydrator;
 
 interface HydratorInterface extends
     ExtractionInterface,
     HydrationInterface
 {
 }</code></pre>
+
 <h2 id="usage">Usage</h2>
 <p>Usage involves instantiating the hydrator, and then passing information to it.</p>
-<pre class=codehilite><code class=language-php>use Laminas\Hydrator;
+<pre class="highlight"><code class="language-php">use Laminas\Hydrator;
 $hydrator = new Hydrator\ArraySerializableHydrator();
 
 // To hydrate an object from values in an array:
@@ -418,6 +421,7 @@ $object = $hydrator-&gt;hydrate($data, new ArrayObject());
 
 // or, going the other way and extracting the values from an object as an array:
 $data = $hydrator-&gt;extract($object);</code></pre>
+
 <h2 id="available-implementations">Available Implementations</h2>
 <h3>Laminas\Hydrator\ArraySerializableHydrator</h3>
 <p>Follows the definition of <code>ArrayObject</code>. Objects must implement either the <code>exchangeArray()</code> or
@@ -434,12 +438,12 @@ getter method will be called for extraction, according to the following rules:</
 <p>Composes a hydrator locator, and will delegate <code>hydrate()</code> and <code>extract()</code> calls
 to the appropriate one based upon the class name of the object being operated
 on.</p>
-<pre class=codehilite><code class=language-php>// Instantiate each hydrator you wish to delegate to
+<pre class="highlight"><code class="language-php">// Instantiate each hydrator you wish to delegate to
 $albumHydrator = new Laminas\Hydrator\ClassMethodsHydrator();
 $artistHydrator = new Laminas\Hydrator\ClassMethodsHydrator();
 
 // Map the entity class name to the hydrator using the HydratorPluginManager.
-// In this case we have two entity classes, &quot;Album&quot; and &quot;Artist&quot;.
+// In this case we have two entity classes, "Album" and "Artist".
 $hydrators = new Laminas\Hydrator\HydratorPluginManager;
 $hydrators-&gt;setService('Album', $albumHydrator);
 $hydrators-&gt;setService('Artist', $artistHydrator);
@@ -450,6 +454,7 @@ $delegating = new Laminas\Hydrator\DelegatingHydrator($hydrators);
 // Now we can use $delegating to hydrate or extract any supported object
 $array  = $delegating-&gt;extract(new Artist());
 $artist = $delegating-&gt;hydrate($data, new Artist());</code></pre>
+
 <h3>Laminas\Hydrator\ObjectPropertyHydrator</h3>
 <p>Any data key matching a publicly accessible property will be hydrated; any public properties
 will be used for extraction.</p>

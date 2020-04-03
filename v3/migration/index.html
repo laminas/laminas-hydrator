@@ -636,9 +636,10 @@ typehints:</p>
 same duties, but in reverse. As such, for version 3, we have merged the two into
 <code>MapNamingStrategy</code>. To accommodate the three different use cases, we provide
 three "named constructors":</p>
-<pre class=codehilite><code class=language-php>public static function createFromExtractionMap(array $extractionMap) : MapNamingStrategy;
+<pre class="highlight"><code class="language-php">public static function createFromExtractionMap(array $extractionMap) : MapNamingStrategy;
 public static function createFromHydrationMap(array $hydrationMap) : MapNamingStrategy;
 public static function createFromAsymmetricMap(array $extractionMap, array $hydrationMap) : MapNamingStrategy;</code></pre>
+
 <p>In the first two cases, the constructor will flip the arrays for purposes of the
 opposite interaction; e.g., using <code>createFromExtractionMap()</code> will create a
 hydration map based on an <code>array_flip()</code> of the extraction map provided.</p>

@@ -370,7 +370,7 @@
 keys to use when hydrating and extracting; the map will translate the key based
 on the direction.</p>
 <h2 id="basic-usage">Basic Usage</h2>
-<pre class=codehilite><code class=language-php>$namingStrategy = new Laminas\Hydrator\NamingStrategy\MapNamingStrategy(array(
+<pre class="highlight"><code class="language-php">$namingStrategy = new Laminas\Hydrator\NamingStrategy\MapNamingStrategy(array(
     'foo' =&gt; 'bar',
     'baz' =&gt; 'bash'
 ));
@@ -379,8 +379,9 @@ echo $namingStrategy-&gt;hydrate('baz'); // outputs: bash
 
 echo $namingStrategy-&gt;extract('bar'); // outputs: foo
 echo $namingStrategy-&gt;extract('bash'); // outputs: baz</code></pre>
+
 <p>This strategy can be used in hydrators to dictate how keys should be mapped:</p>
-<pre class=codehilite><code class=language-php>class Foo
+<pre class="highlight"><code class="language-php">class Foo
 {
     public $bar;
 }

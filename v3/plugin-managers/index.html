@@ -449,7 +449,7 @@ those factories capable of pulling application-level dependencies, you might do
 something like the following:</p>
 <p>Create a custom plugin manager class, e.g.
 <code>src/YourApplication/CustomHydratorPluginManager.php</code>:</p>
-<pre class=codehilite><code class=language-php>namespace YourApplication;
+<pre class="highlight"><code class="language-php">namespace YourApplication;
 
 use Psr\Container\NotFoundExceptionInterface;
 use Psr\Container\ContainerInterface;
@@ -513,9 +513,10 @@ class CustomHydratorPluginManager implements HydratorPluginManagerInterface
         $this-&gt;factories[$name] = $factory;
     }
 }</code></pre>
+
 <p>Create a factory for the custom plugin manager, e.g.
 <code>src/YourApplication/CustomHydratorPluginManagerFactory.php</code>:</p>
-<pre class=codehilite><code class=language-php>namespace YourApplication;
+<pre class="highlight"><code class="language-php">namespace YourApplication;
 
 use Psr\Container\ContainerInterface;
 
@@ -547,9 +548,10 @@ class CustomHydratorPluginManagerFactory
         }
     }
 }</code></pre>
+
 <p>Register the custom plugin manager in the application configuration, e.g.
 <code>config/autoload/hydrators.global.php</code>:</p>
-<pre class=codehilite><code class=language-php>return [
+<pre class="highlight"><code class="language-php">return [
     'dependencies' =&gt; [
         'aliases' =&gt; [
             'HydratorManager' =&gt; \YourApplication\CustomHydratorPluginManager::class,

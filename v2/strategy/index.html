@@ -372,7 +372,7 @@
 <code>Laminas\Hydrator\HydratorInterface</code> and <code>Laminas\Hydrator\Strategy\StrategyEnabledInterface</code>)
 to manipulate the way how they behave on <code>extract()</code> and <code>hydrate()</code> for
 specific key / value pairs. This is the interface that needs to be implemented:</p>
-<pre class=codehilite><code class=language-php>namespace Laminas\Hydrator\Strategy;
+<pre class="highlight"><code class="language-php">namespace Laminas\Hydrator\Strategy;
 
 interface StrategyInterface
 {
@@ -392,12 +392,13 @@ interface StrategyInterface
       */
      public function hydrate($value);
 }</code></pre>
+
 <p>This interface is similar to <code>Laminas\Hydrator\HydratorInterface</code>; the reason
 is that strategies provide a proxy implementation for <code>hydrate()</code> and <code>extract()</code>.</p>
 <h2 id="adding-strategies-to-the-hydrators">Adding strategies to the hydrators</h2>
 <p>To allow strategies within your hydrator, <code>Laminas\Hydrator\Strategy\StrategyEnabledInterface</code>
 provides the following methods:</p>
-<pre class=codehilite><code class=language-php>namespace Laminas\Hydrator;
+<pre class="highlight"><code class="language-php">namespace Laminas\Hydrator;
 
 use Laminas\Hydrator\Strategy\StrategyInterface;
 
@@ -436,6 +437,7 @@ interface StrategyEnabledInterface
      */
     public function removeStrategy($name);
 }</code></pre>
+
 <p>Every hydrator shipped by default provides this functionality;
 <code>AbstractHydrator</code> fully implements it as well. As such, if you want to use this
 functionality in your own hydrators, you should extend <code>AbstractHydrator</code>.</p>
@@ -480,7 +482,7 @@ smaller, single-purpose strategies.</p>
 basics for writing your own strategies, as well as provide ideas as to where and
 when to use them. This strategy simply transforms the value for the defined key
 using <code>str_rot13()</code> during both the <code>extract()</code> and <code>hydrate()</code> operations:</p>
-<pre class=codehilite><code class=language-php>class Rot13Strategy implements StrategyInterface
+<pre class="highlight"><code class="language-php">class Rot13Strategy implements StrategyInterface
 {
     public function extract($value)
     {
@@ -492,8 +494,9 @@ using <code>str_rot13()</code> during both the <code>extract()</code> and <code>
         return str_rot13($value);
     }
 }</code></pre>
+
 <p>This is the example class with which we want to use the hydrator example:</p>
-<pre class=codehilite><code class=language-php>class Foo
+<pre class="highlight"><code class="language-php">class Foo
 {
     protected $foo = null;
     protected $bar = null;
@@ -518,31 +521,34 @@ using <code>str_rot13()</code> during both the <code>extract()</code> and <code>
         $this-&gt;bar = $bar;
     }
 }</code></pre>
+
 <p>Now, we'll add the <code>rot13</code> strategy to the method <code>getFoo()</code> and <code>setFoo($foo)</code>:</p>
-<pre class=codehilite><code class=language-php>$foo = new Foo();
+<pre class="highlight"><code class="language-php">$foo = new Foo();
 $foo-&gt;setFoo('bar');
 $foo-&gt;setBar('foo');
 
 $hydrator = new ClassMethods();
 $hydrator-&gt;addStrategy('foo', new Rot13Strategy());</code></pre>
+
 <p>When you use the hydrator to extract an array for the object <code>$foo</code>, you'll
 receive the following:</p>
-<pre class=codehilite><code class=language-php>$extractedArray = $hydrator-&gt;extract($foo);
+<pre class="highlight"><code class="language-php">$extractedArray = $hydrator-&gt;extract($foo);
 
 // array(2) {
-//     [&quot;foo&quot;]=&gt;
-//     string(3) &quot;one&quot;
-//     [&quot;bar&quot;]=&gt;
-//     string(3) &quot;foo&quot;
+//     ["foo"]=&gt;
+//     string(3) "one"
+//     ["bar"]=&gt;
+//     string(3) "foo"
 // }</code></pre>
+
 <p>And when hydrating a new <code>Foo</code> instance:</p>
-<pre class=codehilite><code class=language-php>$hydrator-&gt;hydrate($extractedArray, $foo)
+<pre class="highlight"><code class="language-php">$hydrator-&gt;hydrate($extractedArray, $foo)
 
 // object(Foo)#2 (2) {
-//   [&quot;foo&quot;:protected]=&gt;
-//   string(3) &quot;bar&quot;
-//   [&quot;bar&quot;:protected]=&gt;
-//   string(3) &quot;foo&quot;
+//   ["foo":protected]=&gt;
+//   string(3) "bar"
+//   ["bar":protected]=&gt;
+//   string(3) "foo"
 // }</code></pre>
 
 

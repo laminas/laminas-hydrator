@@ -388,7 +388,7 @@ operation.  This is especially useful, if you want to omit some internals (e.g.
 common use cases. The filters are composed in the <code>AbstractHydrator</code>, so you can
 start using them immediately in any custom extensions you write that extend that
 class.</p>
-<pre class=codehilite><code class=language-php>namespace Laminas\Hydrator\Filter;
+<pre class="highlight"><code class="language-php">namespace Laminas\Hydrator\Filter;
 
 interface FilterInterface
 {
@@ -397,6 +397,7 @@ interface FilterInterface
      */
     public function filter(string $property) : bool;
 }</code></pre>
+
 <p>If it returns true, the key/value pairs will be in the extracted arrays - if it
 returns false, you'll not see them again.</p>
 <h2 id="filter-implementations">Filter implementations</h2>
@@ -441,15 +442,16 @@ must return true to extract the value.</p>
 <h3>FilterComposite Examples</h3>
 <p>To illustrate how conditions apply when composing filters, consider the
 following set of filters:</p>
-<pre class=codehilite><code class=language-php>$composite = new FilterComposite();
+<pre class="highlight"><code class="language-php">$composite = new FilterComposite();
 
 $composite-&gt;addFilter('one', $condition1);
 $composite-&gt;addFilter('two', $condition2);
 $composite-&gt;addFilter('three', $condition3);
 $composite-&gt;addFilter('four', $condition4, FilterComposite::CONDITION_AND);
 $composite-&gt;addFilter('five', $condition5, FilterComposite::CONDITION_AND);</code></pre>
+
 <p>The above is roughly equivalent to the following conditional:</p>
-<pre class=codehilite><code class=language-php>// This is what's happening internally
+<pre class="highlight"><code class="language-php">// This is what's happening internally
 if (
      ($condition1
         || $condition2
@@ -460,10 +462,11 @@ if (
 ) {
     // do extraction
 }</code></pre>
+
 <p>If you only have one condition block (e.g., only <code>AND</code> or <code>OR</code> filters), the
 other condition type will be completely ignored.</p>
 <p>A bit more complex filter can look like this:</p>
-<pre class=codehilite><code class=language-php>$composite = new FilterComposite();
+<pre class="highlight"><code class="language-php">$composite = new FilterComposite();
 $composite-&gt;addFilter(
     'servicemanager',
     new MethodMatchFilter('getServiceManager'),
@@ -492,12 +495,13 @@ if (( // default composite inside the ClassMethodsHydrator:
 ) {
     // do extraction
 }</code></pre>
+
 <p>If you perform this on the <code>ClassMethodsHydrator</code>, all getters will get
 extracted, except for <code>getServiceManager()</code> and <code>getEventManager()</code>.</p>
 <h2 id="using-the-provider-interface">Using the provider interface</h2>
 <p><code>Laminas\Hydrator\Filter\FilterProviderInterface</code> allows you to configure the
 behavior of the hydrator inside your objects.</p>
-<pre class=codehilite><code class=language-php>namespace Laminas\Hydrator\Filter;
+<pre class="highlight"><code class="language-php">namespace Laminas\Hydrator\Filter;
 
 interface FilterProviderInterface
 {
@@ -508,11 +512,12 @@ interface FilterProviderInterface
      */
     public function getFilter();
 }</code></pre>
+
 <p>(The <code>getFilter()</code> method is automatically excluded from <code>extract()</code>.) If the
 extracted object implements the <code>Laminas\Hydrator\Filter\FilterProviderInterface</code>,
 the returned <code>FilterInterface</code> instance can also be a <code>FilterComposite</code>.</p>
 <p>For example:</p>
-<pre class=codehilite><code class=language-php>Class Foo implements FilterProviderInterface
+<pre class="highlight"><code class="language-php">Class Foo implements FilterProviderInterface
 {
      public function getFoo()
      {
@@ -559,6 +564,7 @@ the returned <code>FilterInterface</code> instance can also be a <code>FilterCom
 
 $hydrator = new ClassMethodsHydrator(false);
 $extractedArray = $hydrator-&gt;extract(new Foo());</code></pre>
+
 <p><code>$extractedArray</code> will only have 'foo' =&gt; 'foo'; all other values are
 excluded from extraction.</p>
 <blockquote>
@@ -569,7 +575,7 @@ this interface is used. More on those methods below.</p>
 <h2 id="filter-enabled-hydrators-and-the-composite-filter">Filter-enabled hydrators and the composite filter</h2>
 <p>Hydrators can indicate they are filter-enabled by implementing
 <code>Laminas\Hydrator\Filter\FilterEnabledInterface</code>:</p>
-<pre class=codehilite><code class=language-php>namespace Laminas\Hydrator\Filter;
+<pre class="highlight"><code class="language-php">namespace Laminas\Hydrator\Filter;
 
 interface FilterEnabledInterface extends FilterProviderInterface
 {
@@ -579,7 +585,7 @@ interface FilterEnabledInterface extends FilterProviderInterface
      *
      * &lt;code&gt;
      * $composite-&gt;addFilter(
-     *     &quot;servicelocator&quot;,
+     *     "servicelocator",
      *     function ($property) {
      *         [$class, $method] = explode('::', $property, 2);
      *         return $method !== 'getServiceLocator';
@@ -603,7 +609,7 @@ interface FilterEnabledInterface extends FilterProviderInterface
     /**
      * Remove a filter from the composition.
      *
-     * To not extract &quot;has&quot; methods, you simply need to unregister it
+     * To not extract "has" methods, you simply need to unregister it
      *
      * &lt;code&gt;
      * $filterComposite-&gt;removeFilter('has');
@@ -611,6 +617,7 @@ interface FilterEnabledInterface extends FilterProviderInterface
      */
     public function removeFilter(string $name) : void;
 }</code></pre>
+
 <blockquote>
 <p>Note that the interface extends <code>FilterProviderInterface</code>, which means it also
 includes the <code>getFilter()</code> method.</p>
@@ -623,7 +630,7 @@ by a <code>Laminas\Hydrator\Filter\FilterComposite</code>; the various <code>add
 built, implements <code>FilterEnabledInterface</code>. Of the hydrators shipped, only one,
 <code>ClassMethodsHydrator</code>, defines any filters from the outset. Its constructor
 includes the following:</p>
-<pre class=codehilite><code class=language-php>$this-&gt;filterComposite-&gt;addFilter('is', new IsFilter());
+<pre class="highlight"><code class="language-php">$this-&gt;filterComposite-&gt;addFilter('is', new IsFilter());
 $this-&gt;filterComposite-&gt;addFilter('has', new HasFilter());
 $this-&gt;filterComposite-&gt;addFilter('get', new GetFilter());
 $this-&gt;filterComposite-&gt;addFilter(
@@ -631,33 +638,38 @@ $this-&gt;filterComposite-&gt;addFilter(
     new NumberOfParameterFilter(),
     FilterComposite::CONDITION_AND
 );</code></pre>
+
 <h3>Remove filters</h3>
 <p>If you want to tell a filter-enabled hydrator such as <code>ClassMethodsHydrator</code> not
 to extract methods that start with <code>is</code>, remove the related filter:</p>
-<pre class=codehilite><code class=language-php>$hydrator = new ClassMethodsHydrator(false);
+<pre class="highlight"><code class="language-php">$hydrator = new ClassMethodsHydrator(false);
 $hydrator-&gt;removeFilter('is');</code></pre>
+
 <p>After performing the above, the key/value pairs for <code>is</code> methods will no longer
 end up in your extracted array.</p>
 <h3>Add filters</h3>
 <p>You can add filters using the <code>addFilter()</code> method. Filters can either implement
 <code>FilterInterface</code>, or simply be PHP callables:</p>
-<pre class=codehilite><code class=language-php>$hydrator-&gt;addFilter('len', function($property) {
+<pre class="highlight"><code class="language-php">$hydrator-&gt;addFilter('len', function($property) {
     return strlen($property) === 3;
 });</code></pre>
+
 <p>By default, every filter you add will be added with a conditional <code>OR</code>. If you
 want to add it with <code>AND</code> (such as the <code>ClassMethodsHydrator</code> does with its
 composed <code>NumberOfParameterFilter</code>, demonstrated above) provide the conditon as
 the third argument to <code>addFilter</code>:</p>
-<pre class=codehilite><code class=language-php>$hydrator-&gt;addFilter('len', function($property) {
+<pre class="highlight"><code class="language-php">$hydrator-&gt;addFilter('len', function($property) {
     return strlen($property) === 3;
 }, FilterComposite::CONDITION_AND);</code></pre>
+
 <p>One common use case for filters is to omit getters for values that you do not
 want to represent, such as a service manager instance:</p>
-<pre class=codehilite><code class=language-php>$hydrator-&gt;addFilter(
+<pre class="highlight"><code class="language-php">$hydrator-&gt;addFilter(
     'servicemanager',
     new MethodMatchFilter('getServiceManager'),
     FilterComposite::CONDITION_AND
 );</code></pre>
+
 <p>The example above will exclude the <code>getServiceManager()</code> method and the
 <code>servicemanager</code> key from extraction, even if the <code>get</code> filter wants to add it.</p>
 
