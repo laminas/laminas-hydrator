@@ -17,7 +17,7 @@ use Laminas\Hydrator\Iterator\HydratingArrayIterator;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers Laminas\Hydrator\Iterator\HydratingArrayIterator<extended>
+ * @covers Laminas\Hydrator\Iterator\HydratingArrayIterator
  */
 class HydratingArrayIteratorTest extends TestCase
 {
