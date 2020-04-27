@@ -19,7 +19,7 @@ use PHPUnit\Framework\TestCase as TestCase;
 use function get_class;
 
 /**
- * @covers Laminas\Hydrator\Strategy\SerializableStrategy<extended>
+ * @covers Laminas\Hydrator\Strategy\SerializableStrategy
  */
 class SerializableStrategyTest extends TestCase
 {
