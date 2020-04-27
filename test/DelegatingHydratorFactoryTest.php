@@ -18,7 +18,7 @@ use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 
 /**
- * @covers Laminas\Hydrator\DelegatingHydratorFactory<extended>
+ * @covers Laminas\Hydrator\DelegatingHydratorFactory
  */
 class DelegatingHydratorFactoryTest extends TestCase
 {

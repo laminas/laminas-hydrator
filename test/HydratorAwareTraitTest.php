@@ -13,8 +13,7 @@ namespace LaminasTest\Hydrator;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @requires PHP 5.4
- * @covers Laminas\Hydrator\HydratorAwareTrait<extended>
+ * @covers Laminas\Hydrator\HydratorAwareTrait
  */
 class HydratorAwareTraitTest extends TestCase
 {
