@@ -1,4 +1,4 @@
-# Laminas\\Hydrator\\Strategy
+# Introduction
 
 You can compose `Laminas\Hydrator\Strategy\StrategyInterface` instances in any of
 the hydrators to manipulate the way they behave on `extract()` and `hydrate()`
