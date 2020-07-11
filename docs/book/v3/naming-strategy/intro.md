@@ -6,7 +6,7 @@ payload, you may want to convert camelCase properties to underscore_separated
 properties, and vice versa when deserializing JSON to an object.
 
 To make that possible, laminas-hydrator provides _naming strategies_. These are
-similar to [strategies](../strategies.md), but instead of operating on the
+similar to [strategies](../strategy.md), but instead of operating on the
 _value_, they operate on the _name_.
 
 ## NamingStrategyInterface
