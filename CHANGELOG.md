@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#16](https://github.com/laminas/laminas-hydrator/pull/16) adds a new strategy implementation, `Laminas\Hydrator\Strategy\Hydrator`. It can be used to hydrate nested objects and vice versa.
 
 ### Changed
 
