@@ -44,7 +44,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#5](https://github.com/laminas/laminas-hydrator/pull/5) Fixes error with array_walk() overriden by swoole not accepting array callable. Array callable is converted closure
 
 ## 3.0.2 - 2019-03-15
 
