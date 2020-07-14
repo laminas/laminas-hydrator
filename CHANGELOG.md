@@ -26,11 +26,13 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - Nothing.
 
-## 3.0.3 - TBD
+## 3.0.3 - 2020-07-14
 
 ### Added
 
-- Nothing.
+- [#17](https://github.com/laminas/laminas-hydrator/pull/17) adds a new strategy, `DateTimeImmutableFormatterStrategy`, to provide bidirectional conversion between strings and `DateTimeImmutable` instances.
+
+- [#16](https://github.com/laminas/laminas-hydrator/pull/16) adds a new strategy implementation, `Laminas\Hydrator\Strategy\Hydrator`. It can be used to hydrate nested objects and vice versa.
 
 ### Changed
 
@@ -46,7 +48,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#5](https://github.com/laminas/laminas-hydrator/pull/5) fixes an error that occurs in `Laminas\Hydrator\Filter\FilterComposite` when used under the Swoole extension.
 
 ## 3.0.2 - 2019-03-15
 
