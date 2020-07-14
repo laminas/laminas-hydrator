@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
+- [#17](https://github.com/laminas/laminas-hydrator/pull/17) adds a new strategy, `DateTimeImmutableFormatterStrategy`, to provide bidirectional conversion between strings and `DateTimeImmutable` instances.
+
 - [#16](https://github.com/laminas/laminas-hydrator/pull/16) adds a new strategy implementation, `Laminas\Hydrator\Strategy\Hydrator`. It can be used to hydrate nested objects and vice versa.
 
 ### Changed
