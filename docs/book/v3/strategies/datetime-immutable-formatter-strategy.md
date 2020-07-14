@@ -9,7 +9,7 @@ can be set.
 
 ## Basic Usage
 
-The following code example shows the isolated usage without adding the strategy
+The following code example shows standalone usage without adding the strategy
 to a hydrator.
 
 ### Create and configure strategy
@@ -43,9 +43,9 @@ echo $extracted // '2020-07-01'
 
 ## Example
 
-The following example shows the hydration for a class with a property.
+The following example demonstrates hydration for a class with a property.
 
-An example class which represents a music album with a release date.
+An example class which represents a music album with a release date:
 
 ```php
 class Album
@@ -66,7 +66,7 @@ class Album
 
 ### Create hydrator and add strategy
 
-Create a hydrator and add `DateTimeImmutableFormatterStrategy` as strategy.
+Create a hydrator and add `DateTimeImmutableFormatterStrategy` as strategy:
 
 ```php
 $hydrator = new Laminas\Hydrator\ReflectionHydrator();
@@ -80,7 +80,7 @@ $hydrator->addStrategy(
 
 ### Hydrate data
 
-Create an instance of the example class and hydrate data.
+Create an instance of the example class and hydrate data:
 
 ```php
 $album = new Album();
