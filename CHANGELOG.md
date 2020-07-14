@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 3.1.0 - TBD
+## 3.0.3 - 2020-07-14
 
 ### Added
 
@@ -22,29 +22,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
-
-## 3.0.3 - TBD
-
-### Added
-
-- Nothing.
-
-### Changed
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- [#5](https://github.com/laminas/laminas-hydrator/pull/5) Fixes error with array_walk() overriden by swoole not accepting array callable. Array callable is converted closure
+- [#5](https://github.com/laminas/laminas-hydrator/pull/5) fixes an error that occurs in `Laminas\Hydrator\Filter\FilterComposite` when used under the Swoole extension.
 
 ## 3.0.2 - 2019-03-15
 
