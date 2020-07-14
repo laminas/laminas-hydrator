@@ -1,16 +1,18 @@
 # Hydrator
 
-The `HydratorStrategy` can be used to **hydrate an object and his child objects
-with data from a nested array and vice versa**. 
+- Since 3.1.0
+
+The `HydratorStrategy` can be used to **hydrate an object and its child objects
+with data from a nested array and vice versa**.
 
 ## Basic usage
 
-The following code example shows the isolated usage without adding the strategy
+The following code example shows standalone usage without adding the strategy
 to a hydrator.
 
 ### Create and configure strategy
 
-Create the strategy and set a hydrator and a classname for the handled object. 
+Create the strategy and set a hydrator and a classname for the handled object.
 
 ```php
 $strategy = new Laminas\Hydrator\Strategy\HydratorStrategy(
@@ -117,7 +119,7 @@ class Artist
 
 ### Create hydrator and add strategy
 
-Create a hydrator and add `HydratorStrategy` as strategy with a hydrator and a
+Create a hydrator and add `HydratorStrategy` as a strategy, with a hydrator and a
 classname for the handled object.
 
 ```php
