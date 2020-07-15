@@ -1,5 +1,7 @@
 # DateTimeImmutableFormatter
 
+> Available since version 3.1.0
+
 `DateTimeImmutableFormatterStrategy` provides **bidirectional conversion between
 strings and `DateTimeImmutable` instances**.
 
