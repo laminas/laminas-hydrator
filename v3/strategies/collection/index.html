@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Serialize objects to arrays, and vice versa">  
-    <link rel="canonical" href="https://docs.laminas.dev/laminas-hydrator/v3/strategies/hydrator/">
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-hydrator/v3/strategies/collection/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>Hydrator - laminas-hydrator - Laminas Docs</title>
+    <title>Collection - laminas-hydrator - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
     
@@ -150,8 +150,8 @@
 
             
                 
-    <li class="subnavigation__list-item ">
-        <a href="../collection/" class="subnavigation__link">Collection</a>
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Collection</a>
     </li>
 
             
@@ -162,8 +162,8 @@
 
             
                 
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Hydrator</a>
+    <li class="subnavigation__list-item ">
+        <a href="../hydrator/" class="subnavigation__link">Hydrator</a>
     </li>
 
             
@@ -374,7 +374,7 @@
                     
                 
 
-                <li class="breadcrumb-item active" aria-current="page">Hydrator</li>
+                <li class="breadcrumb-item active" aria-current="page">Collection</li>
             
         
     </ol>
@@ -390,65 +390,96 @@
         <h2 class="chapter__headline">Strategies</h2>
     
 
-    <h1 id="hydrator">Hydrator</h1>
-<blockquote>
-<p>Available since version 3.1.0</p>
-</blockquote>
-<p>The <code>HydratorStrategy</code> can be used to <strong>hydrate an object and its child objects
-with data from a nested array and vice versa</strong>.</p>
+    <h1 id="collection">Collection</h1>
+<p>The <code>CollectionStrategy</code> can be used to <strong>hydrate a collection of objects
+with data from an array with multiple items and vice versa</strong>.</p>
+<p>The strategy uses a hydrator to hydrate and extract data from each item of a
+collection. </p>
 <h2 id="basic-usage">Basic usage</h2>
 <p>The following code example shows standalone usage without adding the strategy
 to a hydrator.</p>
 <h3>Create and configure strategy</h3>
-<p>Create the strategy and set a hydrator and a classname for the handled object.</p>
-<pre class="highlight"><code class="language-php">$strategy = new Laminas\Hydrator\Strategy\HydratorStrategy(
+<p>Create the strategy and set a hydrator and a classname for the handled object
+items.</p>
+<pre class="highlight"><code class="language-php">$strategy = new Laminas\Hydrator\Strategy\CollectionStrategy(
     new Laminas\Hydrator\ObjectPropertyHydrator(),
     stdClass::class
 );</code></pre>
 
 <h3>Hydrate data</h3>
 <pre class="highlight"><code class="language-php">$hydrated = $strategy-&gt;hydrate([
-    'firstName' =&gt; 'David',
-    'lastName'  =&gt; 'Bowie',
+    [
+        'title'    =&gt; 'Modern Love',
+        'duration' =&gt; '4:46',
+    ],
+    [
+        'title'    =&gt; 'China Girl',
+        'duration' =&gt; '5:32',
+    ],
+    // …
 ]);
 
-echo $hydrated-&gt;firstName; // 'David'
-echo $hydrated-&gt;lastName; // 'Bowie'</code></pre>
+echo $hydrated[1]-&gt;title; // 'China Girl'
+echo $hydrated[1]-&gt;duration; // '5:32'</code></pre>
 
 <h3>Extract data</h3>
-<pre class="highlight"><code class="language-php">$class            = new stdClass();
-$class-&gt;firstName = 'David';
-$class-&gt;lastName  = 'Bowie';
+<pre class="highlight"><code class="language-php">// Define array with objects
+$track1           = new stdClass();
+$track1-&gt;title    = 'Modern Love';
+$track1-&gt;duration = '4:46';
 
-$extracted = $strategy-&gt;extract($class);
+$track2           = new stdClass();
+$track2-&gt;title    = 'China Girl';
+$track2-&gt;duration = '5:32';
 
-var_dump($extracted); // ['firstName' =&gt; 'David', 'lastName' =&gt; 'Bowie']</code></pre>
+$data = [
+    $track1,
+    $track2,
+];
+
+// Extract
+$extracted = $strategy-&gt;extract($data);
+
+var_dump($extracted);
+/*
+array(2) {
+  [0] =&gt;
+  array(2) {
+    'title' =&gt;
+    string(11) "Modern Love"
+    'duration' =&gt;
+    string(4) "4:46"
+  }
+  [1] =&gt;
+  array(2) {
+    'title' =&gt;
+    string(10) "China Girl"
+    'duration' =&gt;
+    string(4) "5:32"
+  }
+}
+*/</code></pre>
 
 <h2 id="example">Example</h2>
 <p>The following example shows the hydration for a class with a property that
-consumes another class.</p>
-<p>An example class which represents a music album.</p>
+consumes array of classes.</p>
+<p>An example class which represents a music album with tracks.</p>
 <pre class="highlight"><code class="language-php">class Album
 {
-    private ?int $id = null;
+    private ?string $title;
 
-    private ?string $title = null;
+    private ?string $artist;
 
-    private ?Artist $artist = null;
+    private array $tracks;
 
     public function __construct(
-        ?int $id = null,
         ?string $title = null,
-        ?Artist $artist = null
+        ?string $artist = null,
+        array $tracks = []
     ) {
-        $this-&gt;id     = $id;
         $this-&gt;title  = $title;
         $this-&gt;artist = $artist;
-    }
-
-    public function getId() : ?int
-    {
-        return $this-&gt;id;
+        $this-&gt;tracks = $tracks;
     }
 
     public function getTitle() : ?string
@@ -456,47 +487,52 @@ consumes another class.</p>
         return $this-&gt;title;
     }
 
-    public function getArtist() : ?Artist
+    public function getArtist() : ?string
     {
         return $this-&gt;artist;
     }
+
+    public function getTracks() : array
+    {
+        return $this-&gt;tracks;
+    }
 }</code></pre>
 
-<p>An example class representing the artist of an album.</p>
-<pre class="highlight"><code class="language-php">class Artist
+<p>An example class representing a track of an album.</p>
+<pre class="highlight"><code class="language-php">class Track
 {
-    private ?string $firstName;
+    private ?string $title;
 
-    private ?string $lastName;
+    private ?string $duration;
 
     public function __construct(
-        ?string $firstName = null,
-        ?string $lastName = null
+        ?string $title = null,
+        ?string $duration = null
     ) {
-        $this-&gt;firstName = $firstName;
-        $this-&gt;lastName  = $lastName;
+        $this-&gt;title    = $title;
+        $this-&gt;duration = $duration;
     }
 
-    public function getFirstName() : ?string
+    public function getTitle() : ?string
     {
-        return $this-&gt;firstName;
+        return $this-&gt;title;
     }
 
-    public function getLastName() : ?string
+    public function getDuration() : ?string
     {
-        return $this-&gt;lastName;
+        return $this-&gt;duration;
     }
 }</code></pre>
 
 <h3>Create hydrator and add strategy</h3>
-<p>Create a hydrator and add <code>HydratorStrategy</code> as a strategy, with a hydrator and a
-classname for the handled object.</p>
+<p>Create a hydrator and add <code>CollectionStrategy</code> as a strategy, with a hydrator
+and a classname for the handled object items.</p>
 <pre class="highlight"><code class="language-php">$hydrator = new Laminas\Hydrator\ReflectionHydrator();
 $hydrator-&gt;addStrategy(
-    'artist',
-    new Laminas\Hydrator\Strategy\HydratorStrategy(
+    'tracks',
+    new Laminas\Hydrator\Strategy\CollectionStrategy(
         new Laminas\Hydrator\ReflectionHydrator(),
-        Artist::class
+        Track::class
     )
 );</code></pre>
 
@@ -505,36 +541,65 @@ $hydrator-&gt;addStrategy(
 <pre class="highlight"><code class="language-php">$album = new Album();
 $hydrator-&gt;hydrate(
     [
-        'id'     =&gt; 100,
-        'title'  =&gt; 'The Next Day (Deluxe Version)',
-        'artist' =&gt; [
-            'firstName' =&gt; 'David',
-            'lastName'  =&gt; 'Bowie',
+        'artist' =&gt; 'David Bowie',
+        'title'  =&gt; 'Let\'s Dance',
+        'tracks' =&gt; [
+            [
+                'title'    =&gt; 'Modern Love',
+                'duration' =&gt; '4:46',
+            ],
+            [
+                'title'    =&gt; 'China Girl',
+                'duration' =&gt; '5:32',
+            ],
+            [
+                'title'    =&gt; 'Let\'s Dance',
+                'duration' =&gt; '7:38',
+            ],
+            // …
         ],
     ],
     $album
 );
 
-echo $album-&gt;getTitle(); // 'The Next Day (Deluxe Version)'
-echo $album-&gt;getArtist()-&gt;getFirstName(); // 'David'
-echo $album-&gt;getArtist()-&gt;getLastName(); // 'Bowie'</code></pre>
+echo $album-&gt;getTitle(); // "Let's Dance"
+echo $album-&gt;getArtist(); // 'David Bowie'
+echo $album-&gt;getTracks()[1]-&gt;getTitle(); // 'China Girl'
+echo $album-&gt;getTracks()[1]-&gt;getDuration(); // '5:32'</code></pre>
 
 <h3>Extract data</h3>
 <pre class="highlight"><code class="language-php">var_dump($hydrator-&gt;extract($album));
 /*
 array(3) {
-  'id' =&gt;
-  int(100)
   'title' =&gt;
-  string(29) "The Next Day (Deluxe Version)"
+  string(11) "Let's Dance"
   'artist' =&gt;
-  array(2) {
-    'firstName' =&gt;
-    string(5) "David"
-    'lastName' =&gt;
-    string(5) "Bowie"
+  string(11) "David Bowie"
+  'tracks' =&gt;
+  array(3) {
+    [0] =&gt;
+    array(2) {
+      'title' =&gt;
+      string(11) "Modern Love"
+      'duration' =&gt;
+      string(4) "4:46"
+    }
+    [1] =&gt;
+    array(2) {
+      'title' =&gt;
+      string(10) "China Girl"
+      'duration' =&gt;
+      string(4) "5:32"
+    }
+    [2] =&gt;
+    array(2) {
+      'title' =&gt;
+      string(11) "Let's Dance"
+      'duration' =&gt;
+      string(4) "7:38"
+    }
   }
-}
+} 
 */</code></pre>
 
 
@@ -546,7 +611,7 @@ array(3) {
         
         <li class="page-nav__item">
             
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../datetime-immutable-formatter-strategy/">
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../../strategy/">
                     <i class="fa fa-chevron-left"></i> Previous
                 </a>
             
@@ -555,7 +620,7 @@ array(3) {
         
         <li class="page-nav__item">
             
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../../aggregate/">
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../datetime-immutable-formatter-strategy/">
                     Next <i class="fa fa-chevron-right"></i>
                 </a>
             
@@ -569,7 +634,7 @@ array(3) {
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/laminas/laminas-hydrator/edit/master/docs/book/v3/strategies/hydrator.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/laminas/laminas-hydrator/edit/master/docs/book/v3/strategies/collection.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>
@@ -633,8 +698,8 @@ array(3) {
 
             
                 
-    <li class="subnavigation__list-item ">
-        <a href="../collection/" class="subnavigation__link">Collection</a>
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Collection</a>
     </li>
 
             
@@ -645,8 +710,8 @@ array(3) {
 
             
                 
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Hydrator</a>
+    <li class="subnavigation__list-item ">
+        <a href="../hydrator/" class="subnavigation__link">Hydrator</a>
     </li>
 
             
