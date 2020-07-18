@@ -13,6 +13,7 @@ nav:
       - "Filters": v3/filter.md
       - "Strategies":
         - Introduction: v3/strategy.md
+        - Collection: v3/strategies/collection.md
         - DateTimeImmutableFormatter: v3/strategies/datetime-immutable-formatter-strategy.md
         - Hydrator: v3/strategies/hydrator.md
       - "Aggregates": v3/aggregate.md
