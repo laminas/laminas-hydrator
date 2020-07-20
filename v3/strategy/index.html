@@ -167,6 +167,12 @@
     </li>
 
             
+                
+    <li class="subnavigation__list-item ">
+        <a href="../strategies/serializable/" class="subnavigation__link">Serializable</a>
+    </li>
+
+            
         </ul>
     </li>
 
@@ -505,11 +511,6 @@ conversion of values.</p>
 <p>This strategy is a wrapper around PHP's <code>implode()</code> and <code>explode()</code> functions.
 The delimiter and a limit can be provided to the constructor; the limit will
 only be used for <code>extract</code> operations.</p>
-<h3>Laminas\Hydrator\Strategy\SerializableStrategy</h3>
-<p><code>SerializableStrategy</code> provides the functionality backing
-<code>Laminas\Hydrator\ArraySerializableHydrator</code>. You can use it with custom
-implementations for <code>Laminas\Serializer\Adapter\AdapterInterface</code> if you want to as
-well.</p>
 <h3>Laminas\Hydrator\Strategy\StrategyChain</h3>
 <p>This strategy takes an array of <code>StrategyInterface</code> instances and iterates
 over them when performing <code>extract()</code> and <code>hydrate()</code> operations. Each operates
@@ -699,6 +700,12 @@ receive the following:</p>
                 
     <li class="subnavigation__list-item ">
         <a href="../strategies/hydrator/" class="subnavigation__link">Hydrator</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../strategies/serializable/" class="subnavigation__link">Serializable</a>
     </li>
 
             
