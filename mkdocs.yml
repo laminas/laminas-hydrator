@@ -16,6 +16,7 @@ nav:
         - Collection: v3/strategies/collection.md
         - DateTimeImmutableFormatter: v3/strategies/datetime-immutable-formatter-strategy.md
         - Hydrator: v3/strategies/hydrator.md
+        - Serializable: v3/strategies/serializable.md
       - "Aggregates": v3/aggregate.md
       - "Naming Strategies":
         - "Introduction": v3/naming-strategy/intro.md

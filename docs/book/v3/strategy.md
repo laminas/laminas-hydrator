@@ -134,13 +134,6 @@ This strategy is a wrapper around PHP's `implode()` and `explode()` functions.
 The delimiter and a limit can be provided to the constructor; the limit will
 only be used for `extract` operations.
 
-### Laminas\\Hydrator\\Strategy\\SerializableStrategy
-
-`SerializableStrategy` provides the functionality backing
-`Laminas\Hydrator\ArraySerializableHydrator`. You can use it with custom
-implementations for `Laminas\Serializer\Adapter\AdapterInterface` if you want to as
-well.
-
 ### Laminas\\Hydrator\\Strategy\\StrategyChain
 
 This strategy takes an array of `StrategyInterface` instances and iterates
