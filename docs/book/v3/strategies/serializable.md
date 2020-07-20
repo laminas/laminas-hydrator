@@ -26,16 +26,7 @@ For available serializer adapters see the [documentation of laminas-serializer](
 ### Hydrate data
 
 ```php
-$json = '[
-  {
-    "title": "Modern Love",
-    "duration": "4:46"
-  },
-  {
-    "title": "China Girl",
-    "duration": "5:32"
-  }
-]';
+$json = '[{"title":"Modern Love","duration":"4:46"},{"title":"China Girl","duration":"5:32"}]';
 $hydrated = $strategy->hydrate($json);
 
 echo $hydrated[1]['title']; // 'China Girl'
