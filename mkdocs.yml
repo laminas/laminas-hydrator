@@ -47,5 +47,5 @@ nav:
         - "_naming_strategies-underscore_mapping": naming-strategy/underscore-naming-strategy.md
         - "_naming_strategies-composite": naming-strategy/composite-naming-strategy.md
 site_name: laminas-hydrator
-site_description: "Serialize objects to arrays, and vice versa"
+site_description: "laminas-hydrator provides functionality for hydrating objects and extracting data from them. The component contains concrete implementations for a number of common use cases and provides interfaces for creating custom implementations."
 repo_url: 'https://github.com/laminas/laminas-hydrator'
