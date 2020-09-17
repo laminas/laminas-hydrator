@@ -1,6 +1,6 @@
 {
     "name": "laminas/laminas-hydrator",
-    "description": "Serialize objects to arrays, and vice versa",
+    "description": "laminas-hydrator provides functionality for hydrating objects and extracting data from them. The component contains concrete implementations for a number of common use cases and provides interfaces for creating custom implementations.",
     "license": "BSD-3-Clause",
     "keywords": [
         "laminas",
