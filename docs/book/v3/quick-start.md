@@ -1,27 +1,25 @@
-# laminas-hydrator
+# Quick Start
 
 The laminas-hydrator component provides functionality for hydrating objects (which is the act of populating an object from a set of data) and extracting data from them.
 
 The component contains [concrete implementations](#available_implementations) for a number of common use cases, such as by using arrays, object methods, and reflection, and provides [interfaces](#base_interfaces) for creating custom implementations.
 
-## Usage
+## Basic Usage
 
 ### Hydrating an Object
 
 To hydrate an object with data, instantiate the hydrator and then pass to it the data for hydrating the object.
 
 ```php
-<?php
-
 use Laminas\Hydrator;
 
 $hydrator = new Hydrator\ArraySerializableHydrator();
 
 $data = [
-    'first_name' => 'James',
-    'last_name' => 'Kahn',
+    'first_name'    => 'James',
+    'last_name'     => 'Kahn',
     'email_address' => 'james.kahn@example.org',
-    'phone_number' => '+61 419 1234 5678',
+    'phone_number'  => '+61 419 1234 5678',
 ];
 
 $object = $hydrator->hydrate($data, new ArrayObject());
@@ -32,19 +30,11 @@ $object = $hydrator->hydrate($data, new ArrayObject());
 To extract data from an object, instantiate the applicable hydrator and then call `extract`, passing to it the object to extract data from.
 
 ```php
-<?php
-
 use Laminas\Hydrator;
 
 $hydrator = new Hydrator\ArraySerializableHydrator();
 
-$data = [
-    'first_name' => 'James',
-    'last_name' => 'Kahn',
-    'email_address' => 'james.kahn@example.org',
-    'phone_number' => '+61 419 1234 5678',
-];
-
+// ... Assuming that $object has already been initialised
 $data = $hydrator->extract($object);
 ```
 
