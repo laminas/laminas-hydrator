@@ -61,10 +61,10 @@ use Laminas\Hydrator;
 
 class User
 {
-    private string $firstName;
-    private string $lastName;
-    private string $emailAddress;
-    private string $phoneNumber;
+    private $firstName;
+    private $lastName;
+    private $emailAddress;
+    private $phoneNumber;
 
     public function setFirstName(string $firstName) {
         $this->firstName = $firstName;
@@ -91,8 +91,8 @@ $data = [
 ];
 
 $hydrator = new Hydrator\ClassMethodsHydrator();
-$user = $delegating->hydrate($data, new User());
-$data = $delegating->extract(new User());
+$user = $hydrator->hydrate($data, new User());
+$data = $hydrator->extract(new User());
 ```
 
 ### ObjectPropertyHydrator
@@ -106,10 +106,10 @@ use Laminas\Hydrator;
 
 class User
 {
-    public string $firstName;
-    public string $lastName;
-    public string $emailAddress;
-    public string $phoneNumber;
+    private $firstName;
+    private $lastName;
+    private $emailAddress;
+    private $phoneNumber;
 }
 
 $data = [
@@ -120,8 +120,8 @@ $data = [
 ];
 
 $hydrator = new Hydrator\ObjectPropertyHydrator();
-$user = $delegating->hydrate($data, new User());
-$data = $delegating->extract(new User());
+$user = $hydrator->hydrate($data, new User());
+$data = $hydrator->extract(new User());
 ```
 
 ### ReflectionHydrator
@@ -137,10 +137,10 @@ use Laminas\Hydrator;
 
 class User
 {
-    private string $firstName;
-    private string $lastName;
-    private string $emailAddress;
-    private string $phoneNumber;
+    private $firstName;
+    private $lastName;
+    private $emailAddress;
+    private $phoneNumber;
 }
 
 $data = [
@@ -151,8 +151,8 @@ $data = [
 ];
 
 $hydrator = new Hydrator\ReflectionHydrator();
-$user = $delegating->hydrate($data, new User());
-$data = $delegating->extract(new User());
+$user = $hydrator->hydrate($data, new User());
+$data = $hydrator->extract(new User());
 ```
 
 ### DelegatingHydrator
@@ -176,6 +176,7 @@ $hydrators->setService('Artist', $artistHydrator);
 $delegating = new Laminas\Hydrator\DelegatingHydrator($hydrators);
 
 // Now we can use $delegating to hydrate or extract any supported object
+// Assumes that $data and Artist have already been initialised
 $array  = $delegating->extract(new Artist());
 $artist = $delegating->hydrate($data, new Artist());
 ```
