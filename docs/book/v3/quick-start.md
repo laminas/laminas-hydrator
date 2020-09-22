@@ -38,7 +38,6 @@ $hydrator = new Hydrator\ArraySerializableHydrator();
 $data = $hydrator->extract($object);
 ```
 
-<a name="available_implementations"></a>
 ## Available Implementations
 
 ### ArraySerializableHydrator
@@ -181,7 +180,6 @@ $array  = $delegating->extract(new Artist());
 $artist = $delegating->hydrate($data, new Artist());
 ```
 
-<a name="base_interfaces"></a>
 ## Base Interfaces
 
 ### ExtractionInterface
