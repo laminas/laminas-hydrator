@@ -129,4 +129,10 @@ class ClassMethodsHydratorTest extends TestCase
         );
         self::assertSame([], $data);
     }
+
+    public function testCanExtractFromAnonymousClassMethods()
+    {
+        $anonymous = new class extends ClassMethodsOptionalParameters {};
+        $this->assertSame(['foo' => 'bar'], $this->hydrator->extract($anonymous));
+    }
 }
