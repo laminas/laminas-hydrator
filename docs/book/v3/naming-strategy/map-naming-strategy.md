@@ -44,7 +44,6 @@ echo $namingStrategy->hydrate('baz'); // outputs: bash
 
 ```php
 $namingStrategy = Laminas\Hydrator\NamingStrategy\MapNamingStrategy::createFromExtractionMap(
-    null, // no hydration map
     [
         'foo' => 'bar',
         'baz' => 'bash'
