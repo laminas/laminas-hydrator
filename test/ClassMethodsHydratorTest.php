@@ -43,7 +43,7 @@ class ClassMethodsHydratorTest extends TestCase
     /**
      * Verifies that extraction can happen even when a getter has parameters if those are all optional
      */
-    public function testCanExtractFromMethodsWithOptionalParameters()
+    public function testCanExtractFromMethodsWithOptionalParameters(): void
     {
         $this->assertSame(['foo' => 'bar'], $this->hydrator->extract(new ClassMethodsOptionalParameters()));
     }
@@ -51,7 +51,7 @@ class ClassMethodsHydratorTest extends TestCase
     /**
      * Verifies that the hydrator can act on different instance types
      */
-    public function testCanHydratedPromiscuousInstances()
+    public function testCanHydratedPromiscuousInstances(): void
     {
         /* @var $classMethodsCamelCase ClassMethodsCamelCase */
         $classMethodsCamelCase = $this->hydrator->hydrate(
@@ -82,7 +82,7 @@ class ClassMethodsHydratorTest extends TestCase
     /**
      * Verifies the options must be an array or Traversable
      */
-    public function testSetOptionsThrowsException()
+    public function testSetOptionsThrowsException(): void
     {
         $this->expectException(TypeError::class);
         $this->expectExceptionMessage('iterable');
@@ -92,7 +92,7 @@ class ClassMethodsHydratorTest extends TestCase
     /**
      * Verifies options can be set from a Traversable object
      */
-    public function testSetOptionsFromTraversable()
+    public function testSetOptionsFromTraversable(): void
     {
         $options = new \ArrayObject([
             'underscoreSeparatedKeys' => false,
@@ -105,7 +105,7 @@ class ClassMethodsHydratorTest extends TestCase
     /**
      * Verifies a TypeError is thrown for extracting a non-object
      */
-    public function testExtractNonObjectThrowsTypeError()
+    public function testExtractNonObjectThrowsTypeError(): void
     {
         $this->expectException(TypeError::class);
         $this->expectExceptionMessage('object');
@@ -115,14 +115,14 @@ class ClassMethodsHydratorTest extends TestCase
     /**
      * Verifies a TypeError is thrown for hydrating a non-object
      */
-    public function testHydrateNonObjectThrowsTypeError()
+    public function testHydrateNonObjectThrowsTypeError(): void
     {
         $this->expectException(TypeError::class);
         $this->expectExceptionMessage('object');
         $this->hydrator->hydrate([], 'non-object');
     }
 
-    public function testExtractClassWithoutAnyMethod()
+    public function testExtractClassWithoutAnyMethod(): void
     {
         $data = $this->hydrator->extract(
             new TestAsset\ClassWithoutAnyMethod()
@@ -130,9 +130,10 @@ class ClassMethodsHydratorTest extends TestCase
         self::assertSame([], $data);
     }
 
-    public function testCanExtractFromAnonymousClassMethods()
+    public function testCanExtractFromAnonymousClassMethods(): void
     {
-        $anonymous = new class extends ClassMethodsOptionalParameters {};
+        $anonymous = new class extends ClassMethodsOptionalParameters {
+        };
         $this->assertSame(['foo' => 'bar'], $this->hydrator->extract($anonymous));
     }
 }

@@ -41,7 +41,7 @@ class ObjectPropertyHydratorTest extends TestCase
     /**
      * Verify that we get an exception when trying to extract on a non-object
      */
-    public function testHydratorExtractThrowsExceptionOnNonObjectParameter()
+    public function testHydratorExtractThrowsExceptionOnNonObjectParameter(): void
     {
         $this->expectException(TypeError::class);
         $this->hydrator->extract('thisIsNotAnObject');
@@ -50,7 +50,7 @@ class ObjectPropertyHydratorTest extends TestCase
     /**
      * Verify that we get an exception when trying to hydrate a non-object
      */
-    public function testHydratorHydrateThrowsExceptionOnNonObjectParameter()
+    public function testHydratorHydrateThrowsExceptionOnNonObjectParameter(): void
     {
         $this->expectException(TypeError::class);
         $this->hydrator->hydrate(['some' => 'data'], 'thisIsNotAnObject');
@@ -59,7 +59,7 @@ class ObjectPropertyHydratorTest extends TestCase
     /**
      * Verifies that the hydrator can extract from property of stdClass objects
      */
-    public function testCanExtractFromStdClass()
+    public function testCanExtractFromStdClass(): void
     {
         $object = new \stdClass();
         $object->foo = 'bar';
@@ -70,7 +70,7 @@ class ObjectPropertyHydratorTest extends TestCase
     /**
      * Verifies that the extraction process works on classes that aren't stdClass
      */
-    public function testCanExtractFromGenericClass()
+    public function testCanExtractFromGenericClass(): void
     {
         $this->assertSame(
             [
@@ -86,7 +86,7 @@ class ObjectPropertyHydratorTest extends TestCase
     /**
      * Verify hydration of {@see \stdClass}
      */
-    public function testCanHydrateStdClass()
+    public function testCanHydrateStdClass(): void
     {
         $object = new \stdClass();
         $object->foo = 'bar';
@@ -99,7 +99,7 @@ class ObjectPropertyHydratorTest extends TestCase
     /**
      * Verify that new properties are created if the object is stdClass
      */
-    public function testCanHydrateAdditionalPropertiesToStdClass()
+    public function testCanHydrateAdditionalPropertiesToStdClass(): void
     {
         $object = new \stdClass();
         $object->foo = 'bar';
@@ -114,7 +114,7 @@ class ObjectPropertyHydratorTest extends TestCase
     /**
      * Verify that it can hydrate our class public properties
      */
-    public function testCanHydrateGenericClassPublicProperties()
+    public function testCanHydrateGenericClassPublicProperties(): void
     {
         $object = $this->hydrator->hydrate(
             [
@@ -137,7 +137,7 @@ class ObjectPropertyHydratorTest extends TestCase
     /**
      * Verify that it can hydrate new properties on generic classes
      */
-    public function testCanHydrateGenericClassNonExistingProperties()
+    public function testCanHydrateGenericClassNonExistingProperties(): void
     {
         $object = $this->hydrator->hydrate(['newProperty' => 'newPropertyValue'], new ObjectPropertyTestAsset());
 
@@ -147,7 +147,7 @@ class ObjectPropertyHydratorTest extends TestCase
     /**
      * Verify that hydration is skipped for class properties (it is an object hydrator after all)
      */
-    public function testSkipsPublicStaticClassPropertiesHydration()
+    public function testSkipsPublicStaticClassPropertiesHydration(): void
     {
         $this->hydrator->hydrate(
             ['foo' => '1', 'bar' => '2', 'baz' => '3'],
@@ -162,8 +162,46 @@ class ObjectPropertyHydratorTest extends TestCase
     /**
      * Verify that extraction is skipped for class properties (it is an object hydrator after all)
      */
-    public function testSkipsPublicStaticClassPropertiesExtraction()
+    public function testSkipsPublicStaticClassPropertiesExtraction(): void
     {
         $this->assertEmpty($this->hydrator->extract(new ClassWithPublicStaticProperties()));
+    }
+
+    public function testCanExtractFromAnonymousClass(): void
+    {
+        /** @psalm-var ObjectPropertyTestAsset $anonymous */
+        $anonymous = new class extends ObjectPropertyTestAsset {
+        };
+        $this->assertSame(
+            [
+                'foo' => 'bar',
+                'bar' => 'foo',
+                'blubb' => 'baz',
+                'quo' => 'blubb'
+            ],
+            $this->hydrator->extract($anonymous)
+        );
+    }
+
+    public function testCanHydrateAnonymousClass(): void
+    {
+        /** @psalm-var ObjectPropertyTestAsset $object */
+        $object = $this->hydrator->hydrate(
+            [
+                'foo' => 'foo',
+                'bar' => 'bar',
+                'blubb' => 'blubb',
+                'quo' => 'quo',
+                'quin' => 'quin'
+            ],
+            new class extends ObjectPropertyTestAsset {
+            }
+        );
+
+        $this->assertSame('foo', $object->get('foo'));
+        $this->assertSame('bar', $object->get('bar'));
+        $this->assertSame('blubb', $object->get('blubb'));
+        $this->assertSame('quo', $object->get('quo'));
+        $this->assertNotSame('quin', $object->get('quin'));
     }
 }

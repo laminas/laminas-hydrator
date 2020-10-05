@@ -12,6 +12,7 @@ namespace LaminasTest\Hydrator;
 
 use Laminas\Hydrator\ReflectionHydrator;
 use PHPUnit\Framework\TestCase;
+use ReflectionProperty;
 use stdClass;
 use TypeError;
 
@@ -37,19 +38,19 @@ class ReflectionHydratorTest extends TestCase
         $this->hydrator = new ReflectionHydrator();
     }
 
-    public function testCanExtract()
+    public function testCanExtract(): void
     {
         $this->assertSame([], $this->hydrator->extract(new stdClass()));
     }
 
-    public function testCanHydrate()
+    public function testCanHydrate(): void
     {
         $object = new stdClass();
 
         $this->assertSame($object, $this->hydrator->hydrate(['foo' => 'bar'], $object));
     }
 
-    public function testExtractRaisesExceptionForInvalidInput()
+    public function testExtractRaisesExceptionForInvalidInput(): void
     {
         $argument = (int) 1;
 
@@ -59,7 +60,7 @@ class ReflectionHydratorTest extends TestCase
         $this->hydrator->extract($argument);
     }
 
-    public function testHydrateRaisesExceptionForInvalidArgument()
+    public function testHydrateRaisesExceptionForInvalidArgument(): void
     {
         $argument = (int) 1;
 
@@ -67,5 +68,34 @@ class ReflectionHydratorTest extends TestCase
         $this->expectExceptionMessage('object');
 
         $this->hydrator->hydrate([ 'foo' => 'bar' ], $argument);
+    }
+
+    public function testCanExtractFromAnonymousClass(): void
+    {
+        $instance = new class {
+            /** @var string */
+            private $foo = 'bar';
+            /** @var string */
+            private $bar = 'baz';
+        };
+        $this->assertSame([
+            'foo' => 'bar',
+            'bar' => 'baz',
+        ], $this->hydrator->extract($instance));
+    }
+
+    public function testCanHydrateAnonymousObject(): void
+    {
+        $instance = new class {
+            /** @var null|string */
+            private $foo;
+        };
+
+        $hydrated = $this->hydrator->hydrate(['foo' => 'bar'], $instance);
+
+        $this->assertSame($instance, $hydrated);
+        $r = new ReflectionProperty($hydrated, 'foo');
+        $r->setAccessible(true);
+        $this->assertSame('bar', $r->getValue($hydrated));
     }
 }

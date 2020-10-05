@@ -140,6 +140,11 @@ class ClassMethodsHydrator extends AbstractHydrator implements HydratorOptionsIn
     public function extract(object $object) : array
     {
         $objectClass = get_class($object);
+        $isAnonymous = false !== strpos($objectClass, '@anonymous');
+
+        if ($isAnonymous) {
+            $objectClass = spl_object_hash($object);
+        }
 
         // reset the hydrator's hydrator's cache for this object, as the filter may be per-instance
         if ($object instanceof Filter\FilterProviderInterface) {
@@ -154,9 +159,13 @@ class ClassMethodsHydrator extends AbstractHydrator implements HydratorOptionsIn
             $methods = get_class_methods($object);
 
             foreach ($methods as $method) {
-                $methodFqn = $objectClass . '::' . $method;
+                $methodFqn = $isAnonymous
+                    ? $method
+                    : $objectClass . '::' . $method;
 
-                if (! ($filter->filter($methodFqn) && $this->callableMethodFilter->filter($methodFqn))) {
+                if (! $filter->filter($methodFqn, $isAnonymous ? $object : null)
+                    || ! $this->callableMethodFilter->filter($methodFqn, $isAnonymous ? $object : null)
+                ) {
                     continue;
                 }
 

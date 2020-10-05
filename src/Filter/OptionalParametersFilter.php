@@ -38,14 +38,20 @@ class OptionalParametersFilter implements FilterInterface
      * @throws InvalidArgumentException if reflection fails due to the method
      *     not existing.
      */
-    public function filter(string $property) : bool
+    public function filter(string $property, ?object $instance = null) : bool
     {
-        if (isset(static::$propertiesCache[$property])) {
-            return static::$propertiesCache[$property];
+        $cacheName = $instance !== null
+            ? (new ReflectionMethod($instance, $property))->getName()
+            : $property;
+
+        if (array_key_exists($cacheName, static::$propertiesCache)) {
+            return static::$propertiesCache[$cacheName];
         }
 
         try {
-            $reflectionMethod = new ReflectionMethod($property);
+            $reflectionMethod = $instance !== null
+                ? new ReflectionMethod($instance, $property)
+                : new ReflectionMethod($property);
         } catch (ReflectionException $exception) {
             throw new InvalidArgumentException(sprintf('Method %s does not exist', $property));
         }
@@ -57,6 +63,6 @@ class OptionalParametersFilter implements FilterInterface
             }
         );
 
-        return static::$propertiesCache[$property] = empty($mandatoryParameters);
+        return static::$propertiesCache[$cacheName] = empty($mandatoryParameters);
     }
 }

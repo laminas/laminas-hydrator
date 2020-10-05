@@ -36,10 +36,12 @@ class NumberOfParameterFilter implements FilterInterface
     /**
      * @throws InvalidArgumentException
      */
-    public function filter(string $property) : bool
+    public function filter(string $property, ?object $instance = null) : bool
     {
         try {
-            $reflectionMethod = new ReflectionMethod($property);
+            $reflectionMethod = $instance !== null
+                ? new ReflectionMethod($instance, $property)
+                : new ReflectionMethod($property);
         } catch (ReflectionException $exception) {
             throw new InvalidArgumentException(sprintf(
                 'Method %s does not exist',

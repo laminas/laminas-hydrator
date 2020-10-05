@@ -39,7 +39,7 @@ class MethodMatchFilter implements FilterInterface
         $this->exclude = $exclude;
     }
 
-    public function filter(string $property) : bool
+    public function filter(string $property, ?object $instance = null) : bool
     {
         $pos = strpos($property, '::');
         if ($pos !== false) {

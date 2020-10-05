@@ -126,7 +126,7 @@ class FilterCompositeTest extends TestCase
                 {
                     $this->value = $value;
                 }
-                public function filter(string $property) : bool
+                public function filter(string $property, ?object $instance = null) : bool
                 {
                     return $this->value;
                 }

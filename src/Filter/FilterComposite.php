@@ -123,19 +123,20 @@ class FilterComposite implements FilterInterface
      *
      * @param string $property Parameter will be e.g. Parent\Namespace\Class::method
      */
-    public function filter(string $property) : bool
+    public function filter(string $property, ?object $instance = null) : bool
     {
-        return $this->atLeastOneOrFilterIsTrue($property) && $this->allAndFiltersAreTrue($property);
+        return $this->atLeastOneOrFilterIsTrue($property, $instance)
+            && $this->allAndFiltersAreTrue($property, $instance);
     }
 
-    private function atLeastOneOrFilterIsTrue(string $property) : bool
+    private function atLeastOneOrFilterIsTrue(string $property, ?object $instance = null) : bool
     {
         if (count($this->orFilter) === 0) {
             return true;
         }
 
         foreach ($this->orFilter as $filter) {
-            if ($this->executeFilter($filter, $property) === true) {
+            if ($this->executeFilter($filter, $property, $instance) === true) {
                 return true;
             }
         }
@@ -143,14 +144,14 @@ class FilterComposite implements FilterInterface
         return false;
     }
 
-    private function allAndFiltersAreTrue(string $property) : bool
+    private function allAndFiltersAreTrue(string $property, ?object $instance = null) : bool
     {
         if (count($this->andFilter) === 0) {
             return true;
         }
 
         foreach ($this->andFilter as $filter) {
-            if ($this->executeFilter($filter, $property) === false) {
+            if ($this->executeFilter($filter, $property, $instance) === false) {
                 return false;
             }
         }
@@ -161,13 +162,14 @@ class FilterComposite implements FilterInterface
     /**
      * @param callable|FilterInterface $filter
      */
-    private function executeFilter($filter, string $property) : bool
+    private function executeFilter($filter, string $property, ?object $instance = null) : bool
     {
         if (is_callable($filter)) {
-            return $filter($property);
+            /** @psalm-var callable(string, ?object):bool $filter */
+            return $filter($property, $instance);
         }
 
-        return $filter->filter($property);
+        return $filter->filter($property, $instance);
     }
 
     /**

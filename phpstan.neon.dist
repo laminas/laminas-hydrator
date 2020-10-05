@@ -4,3 +4,4 @@ parameters:
         - src/
     ignoreErrors:
         - '#Result of \|{2} is always true#'
+        - '#Method Laminas\\Hydrator\\Filter\\FilterInterface::filter\(\) invoked with 2 parameters, 1 required#'
