@@ -2,16 +2,33 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 3.1.1 - 2020-10-06
+## 3.2.0 - TBD
 
+### Added
+
+- Nothing.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
+## 3.1.1 -2020-10-06
 
 -----
 
 ### Release Notes for [3.1.1](https://github.com/laminas/laminas-hydrator/milestone/5)
-
-
-
-### 3.1.1
 
 - Total issues resolved: **0**
 - Total pull requests resolved: **3**
