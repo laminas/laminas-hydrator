@@ -6,11 +6,11 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#32](https://github.com/laminas/laminas-hydrator/pull/32) adds support for PHP 8.
 
 ### Changed
 
-- Nothing.
+- [#32](https://github.com/laminas/laminas-hydrator/pull/32) changes the minimum supported version of laminas-stdlib from 3.2 to 3.3.
 
 ### Deprecated
 
@@ -18,7 +18,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- Nothing.
+- [#32](https://github.com/laminas/laminas-hydrator/pull/32) removes support for PHP versions prior to 7.3.
 
 ### Fixed
 
