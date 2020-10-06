@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 4.0.0 - TBD
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## 3.2.0 - 2020-10-06
 
 ### Added
@@ -16,14 +38,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - [#32](https://github.com/laminas/laminas-hydrator/pull/32) removes support for PHP versions prior to 7.3.
 
-
 -----
 
 ### Release Notes for [3.2.0](https://github.com/laminas/laminas-hydrator/milestone/4)
-
-
-
-### 3.2.0
 
 - Total issues resolved: **1**
 - Total pull requests resolved: **2**
