@@ -24,6 +24,28 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - Nothing.
 
+## 3.1.1 -2020-10-06
+
+-----
+
+### Release Notes for [3.1.1](https://github.com/laminas/laminas-hydrator/milestone/5)
+
+- Total issues resolved: **0**
+- Total pull requests resolved: **3**
+- Total contributors: **3**
+
+#### Documentation
+
+ - [27: Update map-naming-strategy.md](https://github.com/laminas/laminas-hydrator/pull/27) thanks to @xorock
+
+#### Documentation,Enhancement,Review Needed
+
+ - [24: Rework the Index and Quick Start guide](https://github.com/laminas/laminas-hydrator/pull/24) thanks to @settermjd
+
+#### Bug,Documentation
+
+ - [23: Fixed StrategyInterface::hydrate() docblock because it is not optional](https://github.com/laminas/laminas-hydrator/pull/23) thanks to @svycka
+
 ## 3.1.0 - 2020-07-14
 
 ### Added

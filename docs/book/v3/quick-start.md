@@ -1,101 +1,154 @@
-# laminas-hydrator
+# Quick Start
 
-Hydration is the act of populating an object from a set of data.
+The laminas-hydrator component provides functionality for hydrating objects (which is the act of populating an object from a set of data) and extracting data from them.
 
-laminas-hydrator is a simple component to provide mechanisms both for hydrating
-objects, as well as extracting data sets from them.
+The component contains [concrete implementations](#available_implementations) for a number of common use cases, such as by using arrays, object methods, and reflection, and provides [interfaces](#base_interfaces) for creating custom implementations.
 
-The component consists of interfaces, and several implementations for common use cases.
+## Basic Usage
 
-## Base Interfaces
+### Hydrating an Object
 
-### ExtractionInterface
-
-```php
-namespace Laminas\Hydrator;
-
-interface ExtractionInterface
-{
-    /**
-     * Extract values from an object
-     *
-     * @return mixed[]
-     */
-    public function extract(object $object) : array;
-}
-```
-
-### HydrationInterface
+To hydrate an object with data, instantiate the hydrator and then pass to it the data for hydrating the object.
 
 ```php
-namespace Laminas\Hydrator;
+$hydrator = new Laminas\Hydrator\ArraySerializableHydrator();
 
-interface HydrationInterface
-{
-    /**
-     * Hydrate $object with the provided $data.
-     *
-     * @param mixed[] $data
-     * @return object The implementation should return an object of any type.
-     *     By purposely omitting the return type from the signature,
-     *     implementations may choose to specify a more specific type.
-     */
-    public function hydrate(array $data, object $object);
-}
-```
+$data = [
+    'first_name'    => 'James',
+    'last_name'     => 'Kahn',
+    'email_address' => 'james.kahn@example.org',
+    'phone_number'  => '+61 419 1234 5678',
+];
 
-### HydratorInterface
-
-```php
-namespace Laminas\Hydrator;
-
-interface HydratorInterface extends
-    ExtractionInterface,
-    HydrationInterface
-{
-}
-```
-
-## Usage
-
-Usage involves instantiating the hydrator, and then passing information to it.
-
-```php
-use Laminas\Hydrator;
-$hydrator = new Hydrator\ArraySerializableHydrator();
-
-// To hydrate an object from values in an array:
 $object = $hydrator->hydrate($data, new ArrayObject());
+```
 
-// or, going the other way and extracting the values from an object as an array:
+### Extracting Values From an Object
+
+To extract data from an object, instantiate the applicable hydrator and then call `extract`, passing to it the object to extract data from.
+
+```php
+$hydrator = new Laminas\Hydrator\ArraySerializableHydrator();
+
+// ... Assuming that $object has already been initialised
 $data = $hydrator->extract($object);
 ```
 
 ## Available Implementations
 
-### Laminas\\Hydrator\\ArraySerializableHydrator
+### ArraySerializableHydrator
 
-Follows the definition of `ArrayObject`. Objects must implement either the `exchangeArray()` or
-`populate()` methods to support hydration, and the `getArrayCopy()` method to support extraction.
+The ArraySerializableHydrator hydrates data from an array and extracts an object’s data returning it as an array.
+Objects passed to the hydrate method must implement either `exchangeArray()` or `populate()` to support hydration, and must implement `getArrayCopy()` to support extraction.
 
-### Laminas\\Hydrator\\ClassMethodsHydrator
+### ClassMethodsHydrator
 
-Any data key matching a setter method will be called in order to hydrate; any method matching a
-getter method will be called for extraction, according to the following rules:
+The ClassMethodsHydrator calls "setter" methods matching keys in the data set to hydrate objects and calls "getter" methods matching keys in the data set during extraction, based on the following rules:
 
-- `is*()`, `has*()`, and `get*()` methods will be extracted, and the method
-  prefix will be removed from the property name.
+- `is*()`, `has*()`, and `get*()` methods will be used when extracting data.
+  The method prefix will be removed from the key's name.
 - `set*()` methods will be used when hydrating properties.
 
-### Laminas\\Hydrator\\DelegatingHydrator
+```php
+class User
+{
+    private $firstName;
+    private $lastName;
+    private $emailAddress;
+    private $phoneNumber;
 
-Composes a hydrator locator, and will delegate `hydrate()` and `extract()` calls
-to the appropriate one based upon the class name of the object being operated
-on.
+    public function setFirstName(string $firstName)
+    {
+        $this->firstName = $firstName;
+    }
+
+    public function setLastName(string $lastName)
+    {
+        $this->lastName = $lastName;
+    }
+
+    public function setEmailAddress(string $emailAddress)
+    {
+        $this->emailAddress = $emailAddress;
+    }
+
+    public function setPhoneNumber(string $phoneNumber)
+    {
+        $this->phoneNumber = $phoneNumber;
+    }
+}
+
+$data = [
+    'first_name'    => 'James',
+    'last_name'     => 'Kahn',
+    'email_address' => 'james.kahn@example.org',
+    'phone_number'  => '+61 419 1234 5678',
+];
+
+$hydrator = new Laminas\Hydrator\ClassMethodsHydrator();
+$user     = $hydrator->hydrate($data, new User());
+$data     = $hydrator->extract(new User());
+```
+
+### ObjectPropertyHydrator
+
+The ObjectPropertyHydrator hydrates objects and extracts data using publicly accessible properties which match a key in the data set.
+
+```php
+class User
+{
+    private $firstName;
+    private $lastName;
+    private $emailAddress;
+    private $phoneNumber;
+}
+
+$data = [
+    'first_name'    => 'James',
+    'last_name'     => 'Kahn',
+    'email_address' => 'james.kahn@example.org',
+    'phone_number'  => '+61 419 1234 5678',
+];
+
+$hydrator = new Laminas\Hydrator\ObjectPropertyHydrator();
+$user     = $hydrator->hydrate($data, new User());
+$data     = $hydrator->extract(new User());
+```
+
+### ReflectionHydrator
+
+The ReflectionHydrator is similar to the `ObjectPropertyHydrator`, however it uses [PHP's reflection API](http://php.net/manual/en/intro.reflection.php) to hydrate or extract properties of any visibility.
+Any data key matching an existing property will be hydrated.
+Any existing properties will be used for extracting data.
+
+```php
+class User
+{
+    private $firstName;
+    private $lastName;
+    private $emailAddress;
+    private $phoneNumber;
+}
+
+$data = [
+    'first_name'    => 'James',
+    'last_name'     => 'Kahn',
+    'email_address' => 'james.kahn@example.org',
+    'phone_number'  => '+61 419 1234 5678',
+];
+
+$hydrator = new Laminas\Hydrator\ReflectionHydrator();
+$user     = $hydrator->hydrate($data, new User());
+$data     = $hydrator->extract(new User());
+```
+
+### DelegatingHydrator
+
+The DelegatingHydrator composes a hydrator locator, and will delegate `hydrate()` and `extract()` calls to the appropriate one based upon the class name of the object being operated on.
 
 ```php
 // Instantiate each hydrator you wish to delegate to
-$albumHydrator = new Laminas\Hydrator\ClassMethodsHydrator();
+$albumHydrator  = new Laminas\Hydrator\ClassMethodsHydrator();
 $artistHydrator = new Laminas\Hydrator\ClassMethodsHydrator();
 
 // Map the entity class name to the hydrator using the HydratorPluginManager.
@@ -108,18 +161,7 @@ $hydrators->setService('Artist', $artistHydrator);
 $delegating = new Laminas\Hydrator\DelegatingHydrator($hydrators);
 
 // Now we can use $delegating to hydrate or extract any supported object
+// Assumes that $data and Artist have already been initialised
 $array  = $delegating->extract(new Artist());
 $artist = $delegating->hydrate($data, new Artist());
 ```
-
-### Laminas\\Hydrator\\ObjectPropertyHydrator
-
-Any data key matching a publicly accessible property will be hydrated; any public properties
-will be used for extraction.
-
-### Laminas\\Hydrator\\ReflectionHydrator
-
-Similar to the `ObjectPropertyHydrator`, but uses [PHP's reflection API](http://php.net/manual/en/intro.reflection.php)
-to hydrate or extract properties of any visibility. Any data key matching an
-existing property will be hydrated; any existing properties will be used for
-extraction.
