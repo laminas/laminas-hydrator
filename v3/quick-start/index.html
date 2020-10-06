@@ -403,14 +403,12 @@ $data = [
 ];
 
 $object = $hydrator-&gt;hydrate($data, new ArrayObject());</code></pre>
-
 <h3>Extracting Values From an Object</h3>
 <p>To extract data from an object, instantiate the applicable hydrator and then call <code>extract</code>, passing to it the object to extract data from.</p>
 <pre class="highlight"><code class="language-php">$hydrator = new Laminas\Hydrator\ArraySerializableHydrator();
 
 // ... Assuming that $object has already been initialised
 $data = $hydrator-&gt;extract($object);</code></pre>
-
 <h2 id="available-implementations">Available Implementations</h2>
 <h3>ArraySerializableHydrator</h3>
 <p>The ArraySerializableHydrator hydrates data from an array and extracts an object’s data returning it as an array.
@@ -460,7 +458,6 @@ $data = [
 $hydrator = new Laminas\Hydrator\ClassMethodsHydrator();
 $user     = $hydrator-&gt;hydrate($data, new User());
 $data     = $hydrator-&gt;extract(new User());</code></pre>
-
 <h3>ObjectPropertyHydrator</h3>
 <p>The ObjectPropertyHydrator hydrates objects and extracts data using publicly accessible properties which match a key in the data set.</p>
 <pre class="highlight"><code class="language-php">class User
@@ -481,7 +478,6 @@ $data = [
 $hydrator = new Laminas\Hydrator\ObjectPropertyHydrator();
 $user     = $hydrator-&gt;hydrate($data, new User());
 $data     = $hydrator-&gt;extract(new User());</code></pre>
-
 <h3>ReflectionHydrator</h3>
 <p>The ReflectionHydrator is similar to the <code>ObjectPropertyHydrator</code>, however it uses <a href="http://php.net/manual/en/intro.reflection.php">PHP's reflection API</a> to hydrate or extract properties of any visibility.
 Any data key matching an existing property will be hydrated.
@@ -504,7 +500,6 @@ $data = [
 $hydrator = new Laminas\Hydrator\ReflectionHydrator();
 $user     = $hydrator-&gt;hydrate($data, new User());
 $data     = $hydrator-&gt;extract(new User());</code></pre>
-
 <h3>DelegatingHydrator</h3>
 <p>The DelegatingHydrator composes a hydrator locator, and will delegate <code>hydrate()</code> and <code>extract()</code> calls to the appropriate one based upon the class name of the object being operated on.</p>
 <pre class="highlight"><code class="language-php">// Instantiate each hydrator you wish to delegate to

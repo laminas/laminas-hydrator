@@ -411,7 +411,6 @@ to a hydrator.</p>
     new Laminas\Hydrator\ObjectPropertyHydrator(),
     stdClass::class
 );</code></pre>
-
 <h3>Hydrate data</h3>
 <pre class="highlight"><code class="language-php">$hydrated = $strategy-&gt;hydrate([
     'firstName' =&gt; 'David',
@@ -420,7 +419,6 @@ to a hydrator.</p>
 
 echo $hydrated-&gt;firstName; // 'David'
 echo $hydrated-&gt;lastName; // 'Bowie'</code></pre>
-
 <h3>Extract data</h3>
 <pre class="highlight"><code class="language-php">$class            = new stdClass();
 $class-&gt;firstName = 'David';
@@ -429,7 +427,6 @@ $class-&gt;lastName  = 'Bowie';
 $extracted = $strategy-&gt;extract($class);
 
 var_dump($extracted); // ['firstName' =&gt; 'David', 'lastName' =&gt; 'Bowie']</code></pre>
-
 <h2 id="example">Example</h2>
 <p>The following example shows the hydration for a class with a property that
 consumes another class.</p>
@@ -467,7 +464,6 @@ consumes another class.</p>
         return $this-&gt;artist;
     }
 }</code></pre>
-
 <p>An example class representing the artist of an album.</p>
 <pre class="highlight"><code class="language-php">class Artist
 {
@@ -493,7 +489,6 @@ consumes another class.</p>
         return $this-&gt;lastName;
     }
 }</code></pre>
-
 <h3>Create hydrator and add strategy</h3>
 <p>Create a hydrator and add <code>HydratorStrategy</code> as a strategy, with a hydrator and a
 classname for the handled object.</p>
@@ -505,7 +500,6 @@ $hydrator-&gt;addStrategy(
         Artist::class
     )
 );</code></pre>
-
 <h3>Hydrate data</h3>
 <p>Create an instance of the example <code>Album</code> class and hydrate data.</p>
 <pre class="highlight"><code class="language-php">$album = new Album();
@@ -524,7 +518,6 @@ $hydrator-&gt;hydrate(
 echo $album-&gt;getTitle(); // 'The Next Day (Deluxe Version)'
 echo $album-&gt;getArtist()-&gt;getFirstName(); // 'David'
 echo $album-&gt;getArtist()-&gt;getLastName(); // 'Bowie'</code></pre>
-
 <h3>Extract data</h3>
 <pre class="highlight"><code class="language-php">var_dump($hydrator-&gt;extract($album));
 /*

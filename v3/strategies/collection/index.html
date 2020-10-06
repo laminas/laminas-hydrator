@@ -411,7 +411,6 @@ items.</p>
     new Laminas\Hydrator\ObjectPropertyHydrator(),
     stdClass::class
 );</code></pre>
-
 <h3>Hydrate data</h3>
 <pre class="highlight"><code class="language-php">$hydrated = $strategy-&gt;hydrate([
     [
@@ -427,7 +426,6 @@ items.</p>
 
 echo $hydrated[1]-&gt;title; // 'China Girl'
 echo $hydrated[1]-&gt;duration; // '5:32'</code></pre>
-
 <h3>Extract data</h3>
 <pre class="highlight"><code class="language-php">// Define array with objects
 $track1           = new stdClass();
@@ -465,7 +463,6 @@ array(2) {
   }
 }
 */</code></pre>
-
 <h2 id="example">Example</h2>
 <p>The following example shows the hydration for a class with a property that
 consumes array of classes.</p>
@@ -503,7 +500,6 @@ consumes array of classes.</p>
         return $this-&gt;tracks;
     }
 }</code></pre>
-
 <p>An example class representing a track of an album.</p>
 <pre class="highlight"><code class="language-php">class Track
 {
@@ -529,7 +525,6 @@ consumes array of classes.</p>
         return $this-&gt;duration;
     }
 }</code></pre>
-
 <h3>Create hydrator and add strategy</h3>
 <p>Create a hydrator and add <code>CollectionStrategy</code> as a strategy, with a hydrator
 and a classname for the handled object items.</p>
@@ -541,7 +536,6 @@ $hydrator-&gt;addStrategy(
         Track::class
     )
 );</code></pre>
-
 <h3>Hydrate data</h3>
 <p>Create an instance of the example <code>Album</code> class and hydrate data.</p>
 <pre class="highlight"><code class="language-php">$album = new Album();
@@ -572,7 +566,6 @@ echo $album-&gt;getTitle(); // "Let's Dance"
 echo $album-&gt;getArtist(); // 'David Bowie'
 echo $album-&gt;getTracks()[1]-&gt;getTitle(); // 'China Girl'
 echo $album-&gt;getTracks()[1]-&gt;getDuration(); // '5:32'</code></pre>
-
 <h3>Extract data</h3>
 <pre class="highlight"><code class="language-php">var_dump($hydrator-&gt;extract($album));
 /*

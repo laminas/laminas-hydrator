@@ -392,7 +392,6 @@ interface StrategyInterface
       */
      public function hydrate($value);
 }</code></pre>
-
 <p>This interface is similar to <code>Laminas\Hydrator\HydratorInterface</code>; the reason
 is that strategies provide a proxy implementation for <code>hydrate()</code> and <code>extract()</code>.</p>
 <h2 id="adding-strategies-to-the-hydrators">Adding strategies to the hydrators</h2>
@@ -437,7 +436,6 @@ interface StrategyEnabledInterface
      */
     public function removeStrategy($name);
 }</code></pre>
-
 <p>Every hydrator shipped by default provides this functionality;
 <code>AbstractHydrator</code> fully implements it as well. As such, if you want to use this
 functionality in your own hydrators, you should extend <code>AbstractHydrator</code>.</p>
@@ -494,7 +492,6 @@ using <code>str_rot13()</code> during both the <code>extract()</code> and <code>
         return str_rot13($value);
     }
 }</code></pre>
-
 <p>This is the example class with which we want to use the hydrator example:</p>
 <pre class="highlight"><code class="language-php">class Foo
 {
@@ -521,7 +518,6 @@ using <code>str_rot13()</code> during both the <code>extract()</code> and <code>
         $this-&gt;bar = $bar;
     }
 }</code></pre>
-
 <p>Now, we'll add the <code>rot13</code> strategy to the method <code>getFoo()</code> and <code>setFoo($foo)</code>:</p>
 <pre class="highlight"><code class="language-php">$foo = new Foo();
 $foo-&gt;setFoo('bar');
@@ -529,7 +525,6 @@ $foo-&gt;setBar('foo');
 
 $hydrator = new ClassMethods();
 $hydrator-&gt;addStrategy('foo', new Rot13Strategy());</code></pre>
-
 <p>When you use the hydrator to extract an array for the object <code>$foo</code>, you'll
 receive the following:</p>
 <pre class="highlight"><code class="language-php">$extractedArray = $hydrator-&gt;extract($foo);
@@ -540,7 +535,6 @@ receive the following:</p>
 //     ["bar"]=&gt;
 //     string(3) "foo"
 // }</code></pre>
-
 <p>And when hydrating a new <code>Foo</code> instance:</p>
 <pre class="highlight"><code class="language-php">$hydrator-&gt;hydrate($extractedArray, $foo)
 

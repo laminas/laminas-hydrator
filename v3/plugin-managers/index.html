@@ -528,7 +528,6 @@ class CustomHydratorPluginManager implements HydratorPluginManagerInterface
         $this-&gt;factories[$name] = $factory;
     }
 }</code></pre>
-
 <p>Create a factory for the custom plugin manager, e.g.
 <code>src/YourApplication/CustomHydratorPluginManagerFactory.php</code>:</p>
 <pre class="highlight"><code class="language-php">namespace YourApplication;
@@ -563,7 +562,6 @@ class CustomHydratorPluginManagerFactory
         }
     }
 }</code></pre>
-
 <p>Register the custom plugin manager in the application configuration, e.g.
 <code>config/autoload/hydrators.global.php</code>:</p>
 <pre class="highlight"><code class="language-php">return [

@@ -431,7 +431,6 @@ interface NamingStrategyInterface
      */
     public function extract(string $name, ?object $object = null) : string;
 }</code></pre>
-
 <h2 id="providing-naming-strategies">Providing naming strategies</h2>
 <p>Hydrators can indicate they will consume naming strategies, as well as allow
 registration of them, by implementing <code>Laminas\Hydrator\NamingStrategy\NamingStrategyEnabledInterface</code>:</p>
@@ -459,7 +458,6 @@ interface NamingStrategyEnabledInterface
      */
     public function removeNamingStrategy() : void;
 }</code></pre>
-
 <p>We provide a default implementation of this interface within the
 <code>Laminas\Hydrator\AbstractHydrator</code> definition. Its <code>getNamingStrategy()</code> will
 lazy-load an <code>IdentityNamingStrategy</code> if none has been previously registered.

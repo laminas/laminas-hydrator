@@ -435,7 +435,6 @@ echo $namingStrategy-&gt;extract('bash'); // outputs: baz
 
 echo $namingStrategy-&gt;hydrate('foo'); // outputs: bar
 echo $namingStrategy-&gt;hydrate('baz'); // outputs: bash</code></pre>
-
 <h3>Extraction map only</h3>
 <pre class="highlight"><code class="language-php">$namingStrategy = Laminas\Hydrator\NamingStrategy\MapNamingStrategy::createFromExtractionMap(
     [
@@ -448,7 +447,6 @@ echo $namingStrategy-&gt;extract('baz'); // outputs: bash
 
 echo $namingStrategy-&gt;hydrate('bar'); // outputs: foo
 echo $namingStrategy-&gt;hydrate('bash'); // outputs: baz</code></pre>
-
 <h3>Both hydration and extraction maps</h3>
 <pre class="highlight"><code class="language-php">$namingStrategy = Laminas\Hydrator\NamingStrategy\MapNamingStrategy::createFromAsymmetricMap(
     [
@@ -465,7 +463,6 @@ echo $namingStrategy-&gt;extract('baz'); // outputs: bash
 
 echo $namingStrategy-&gt;hydrate('is_bar'); // outputs: foo
 echo $namingStrategy-&gt;hydrate('bashable'); // outputs: baz</code></pre>
-
 <h2 id="mapping-keys-for-hydrators">Mapping keys for hydrators</h2>
 <p>This strategy can be used in hydrators to dictate how keys should be mapped:</p>
 <pre class="highlight"><code class="language-php">class Foo

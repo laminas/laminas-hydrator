@@ -414,19 +414,16 @@ via the <code>DateTimeFormatterStrategy</code>.</p>
 <pre class="highlight"><code class="language-php">$strategy = new Laminas\Hydrator\Strategy\DateTimeImmutableFormatterStrategy(
     new Laminas\Hydrator\Strategy\DateTimeFormatterStrategy('Y-m-d')
 );</code></pre>
-
 <h3>Hydrate data</h3>
 <pre class="highlight"><code class="language-php">$hydrated = $strategy-&gt;hydrate('2020-07-01');
 
 var_dump($hydrated instanceof DateTimeImmutable); // true</code></pre>
-
 <h3>Extract data</h3>
 <pre class="highlight"><code class="language-php">$extracted = $strategy-&gt;extract(
     DateTimeImmutable::createFromFormat('Y-m-d', '2020-07-01')
 );
 
 echo $extracted // '2020-07-01'</code></pre>
-
 <h2 id="example">Example</h2>
 <p>The following example demonstrates hydration for a class with a property.</p>
 <p>An example class which represents a music album with a release date:</p>
@@ -444,7 +441,6 @@ echo $extracted // '2020-07-01'</code></pre>
         return $this-&gt;releaseDate;
     }
 }</code></pre>
-
 <h3>Create hydrator and add strategy</h3>
 <p>Create a hydrator and add <code>DateTimeImmutableFormatterStrategy</code> as strategy:</p>
 <pre class="highlight"><code class="language-php">$hydrator = new Laminas\Hydrator\ReflectionHydrator();
@@ -454,14 +450,12 @@ $hydrator-&gt;addStrategy(
         new Laminas\Hydrator\Strategy\DateTimeFormatterStrategy('Y-m-d')
     )
 );</code></pre>
-
 <h3>Hydrate data</h3>
 <p>Create an instance of the example class and hydrate data:</p>
 <pre class="highlight"><code class="language-php">$album = new Album();
 $hydrator-&gt;hydrate(['releaseDate' =&gt; '2020-07-01'], $album);
 
 var_dump($album-&gt;getReleaseDate() instanceof DateTimeImmutable); // true</code></pre>
-
 <h3>Extract data</h3>
 <pre class="highlight"><code class="language-php">$extracted = $hydrator-&gt;extract($album);
 

@@ -409,7 +409,6 @@ to a hydrator.</p>
 <pre class="highlight"><code class="language-php">$strategy = new Laminas\Hydrator\Strategy\SerializableStrategy(
     new Laminas\Serializer\Adapter\Json()
 );</code></pre>
-
 <p>For available serializer adapters see the <a href="https://docs.laminas.dev/laminas-serializer/adapter/">documentation of laminas-serializer</a>.</p>
 <h3>Hydrate data</h3>
 <pre class="highlight"><code class="language-php">$json = '[{"title":"Modern Love","duration":"4:46"},{"title":"China Girl","duration":"5:32"}]';
@@ -417,7 +416,6 @@ $hydrated = $strategy-&gt;hydrate($json);
 
 echo $hydrated[1]['title']; // 'China Girl'
 echo $hydrated[1]['duration']; // '5:32'</code></pre>
-
 <h3>Extract data</h3>
 <pre class="highlight"><code class="language-php">$data = [
     [
@@ -434,7 +432,6 @@ echo $hydrated[1]['duration']; // '5:32'</code></pre>
 $extracted = $strategy-&gt;extract($data);
 
 echo $extracted; // '[{"title":"Modern Love","duration":"4:46"},{"title":"China Girl","duration":"5:32"}]'</code></pre>
-
 <h2 id="example">Example</h2>
 <p>The following example shows the hydration for a class with a property where the
 data is provided by a JSON string.</p>
@@ -472,7 +469,6 @@ data is provided by a JSON string.</p>
         return $this-&gt;tracks;
     }
 }</code></pre>
-
 <h3>Create hydrator and add strategy</h3>
 <p>Create a hydrator and add <code>SerializableStrategy</code> as a strategy, with a
 serializer adapter which converts the JSON string to <code>array</code> and vice versa.</p>
@@ -483,7 +479,6 @@ $hydrator-&gt;addStrategy(
         new Laminas\Serializer\Adapter\Json()
     )
 );</code></pre>
-
 <h3>Hydrate data</h3>
 <p>Create an instance of the example <code>Album</code> class and hydrate data.</p>
 <pre class="highlight"><code class="language-php">$album = new Album();
@@ -500,7 +495,6 @@ echo $album-&gt;getTitle(); // "Let's Dance"
 echo $album-&gt;getArtist(); // 'David Bowie'
 echo $album-&gt;getTracks()[1]['title']; // 'China Girl'
 echo $album-&gt;getTracks()[1]['duration']; // '5:32'</code></pre>
-
 <h3>Extract data</h3>
 <pre class="highlight"><code class="language-php">var_dump($hydrator-&gt;extract($album));
 /*

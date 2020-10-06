@@ -398,7 +398,6 @@ $foo-&gt;barBat = 42;
 
 print_r($foo); // Foo Object ( [bar] =&gt; 123 [barBat] =&gt; 42 )
 print_r($hydrator-&gt;extract($foo)); // Array ( [foo] =&gt; 123 [bar_bat] =&gt; 42 )</code></pre>
-
 <p>Unfortunately, the <code>CompositeNamingStrategy</code> can only be used for extraction as it will not know how
 to handle the keys necessary for hydration (<code>foo</code> and <code>bar_bat</code>, respectively). To rectify this we
 have to cover the keys for both hydration and extraction in our composite strategy:</p>
