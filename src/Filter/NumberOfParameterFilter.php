@@ -16,7 +16,7 @@ use ReflectionMethod;
 
 use function sprintf;
 
-class NumberOfParameterFilter implements FilterInterface
+final class NumberOfParameterFilter implements FilterInterface
 {
     /**
      * The number of parameters being accepted

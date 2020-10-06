@@ -21,7 +21,7 @@ use function sprintf;
 /**
  * Filter that includes methods which have no parameters or only optional parameters
  */
-class OptionalParametersFilter implements FilterInterface
+final class OptionalParametersFilter implements FilterInterface
 {
     /**
      * Map of methods already analyzed

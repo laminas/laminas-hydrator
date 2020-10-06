@@ -19,7 +19,7 @@ use function count;
 use function is_callable;
 use function sprintf;
 
-class FilterComposite implements FilterInterface
+final class FilterComposite implements FilterInterface
 {
     /**
      * Constant to add with "or" condition

@@ -10,6 +10,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
+- [#30](https://github.com/laminas/laminas-hydrator/pull/30) modifies all `Laminas\Hydrator\Filter\FilterInterface` implementations shipped with the package, marking them as `final`. If you previously extended them, you will need to copy and paste the implementations, or open an issue requesting removal of the `final` keyword, detailing your use case.
+
 - [#30](https://github.com/laminas/laminas-hydrator/pull/30) changes the signature of `Laminas\Hydrator\Filter\FilterInterface::filter()` to now accept a second, optional argument, `?object $instance = null`.  This argument's primary use case is with anonymous objects, to facilitate reflection; the `ClassMethodsHydrator`, for instance, was updated to pass the `$instance` value only when an anonymous object is detected.  All filter implementations have been updated to the new signature.
 
 ### Deprecated
@@ -22,7 +24,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#30](https://github.com/laminas/laminas-hydrator/pull/30) fixes the filter system to allow usage with anonymous objects.
 
 ## 3.2.0 - 2020-10-06
 

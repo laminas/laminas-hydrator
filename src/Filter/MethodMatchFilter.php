@@ -13,7 +13,7 @@ namespace Laminas\Hydrator\Filter;
 use function strpos;
 use function substr;
 
-class MethodMatchFilter implements FilterInterface
+final class MethodMatchFilter implements FilterInterface
 {
     /**
      * The method to exclude

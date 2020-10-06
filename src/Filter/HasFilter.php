@@ -12,7 +12,7 @@ namespace Laminas\Hydrator\Filter;
 
 use function strpos;
 
-class HasFilter implements FilterInterface
+final class HasFilter implements FilterInterface
 {
     public function filter(string $property, ?object $instance = null) : bool
     {
