@@ -85,7 +85,7 @@ class ClassMethodsHydratorTest extends TestCase
     public function testSetOptionsThrowsException()
     {
         $this->expectException(TypeError::class);
-        $this->expectExceptionMessage('must be iterable');
+        $this->expectExceptionMessage('iterable');
         $this->hydrator->setOptions('invalid options');
     }
 
@@ -108,7 +108,7 @@ class ClassMethodsHydratorTest extends TestCase
     public function testExtractNonObjectThrowsTypeError()
     {
         $this->expectException(TypeError::class);
-        $this->expectExceptionMessage('must be an object');
+        $this->expectExceptionMessage('object');
         $this->hydrator->extract('non-object');
     }
 
@@ -118,7 +118,7 @@ class ClassMethodsHydratorTest extends TestCase
     public function testHydrateNonObjectThrowsTypeError()
     {
         $this->expectException(TypeError::class);
-        $this->expectExceptionMessage('must be an object');
+        $this->expectExceptionMessage('object');
         $this->hydrator->hydrate([], 'non-object');
     }
 

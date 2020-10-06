@@ -25,8 +25,8 @@
         }
     },
     "require": {
-        "php": "^7.2",
-        "laminas/laminas-stdlib": "^3.2.1",
+        "php": "^7.3 || ~8.0.0",
+        "laminas/laminas-stdlib": "^3.3",
         "laminas/laminas-zendframework-bridge": "^1.0"
     },
     "require-dev": {
@@ -35,9 +35,8 @@
         "laminas/laminas-modulemanager": "^2.8",
         "laminas/laminas-serializer": "^2.9",
         "laminas/laminas-servicemanager": "^3.3.2",
-        "phpspec/prophecy": ">=1.10.2",
-        "phpstan/phpstan": "^0.10.5",
-        "phpunit/phpunit": "^8.5.2 || ^9.0"
+        "phpunit/phpunit": "~9.3.0",
+        "vimeo/psalm": "^3.16"
     },
     "suggest": {
         "laminas/laminas-eventmanager": "^3.2, to support aggregate hydrator usage",
@@ -55,13 +54,13 @@
         }
     },
     "scripts": {
-        "analyse": "phpstan analyse --no-progress",
         "check": [
             "@cs-check",
             "@test"
         ],
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
+        "static-analysis": "psalm --shepherd --stats",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },

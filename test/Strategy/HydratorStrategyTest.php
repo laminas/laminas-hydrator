@@ -56,14 +56,14 @@ class HydratorStrategyTest extends TestCase
     {
         // @codingStandardsIgnoreStart
         return [
-            'array'                     => [[], TypeError::class, 'must be of the type string'],
-            'boolean-false'             => [false, TypeError::class, 'must be of the type string'],
-            'boolean-true'              => [true, TypeError::class, 'must be of the type string'],
-            'float'                     => [mt_rand() / mt_getrandmax(), TypeError::class, 'must be of the type string'],
-            'integer'                   => [mt_rand(), TypeError::class, 'must be of the type string'],
-            'null'                      => [null, TypeError::class, 'must be of the type string'],
-            'object'                    => [new stdClass(), TypeError::class, 'must be of the type string'],
-            'resource'                  => [fopen(__FILE__, 'r'), TypeError::class, 'must be of the type string'],
+            'array'                     => [[], TypeError::class, 'type string'],
+            'boolean-false'             => [false, TypeError::class, 'type string'],
+            'boolean-true'              => [true, TypeError::class, 'type string'],
+            'float'                     => [mt_rand() / mt_getrandmax(), TypeError::class, 'type string'],
+            'integer'                   => [mt_rand(), TypeError::class, 'type string'],
+            'null'                      => [null, TypeError::class, 'type string'],
+            'object'                    => [new stdClass(), TypeError::class, 'type string'],
+            'resource'                  => [fopen(__FILE__, 'r'), TypeError::class, 'type string'],
             'string-non-existent-class' => ['FooBarBaz9000', InvalidArgumentException::class, 'class name needs to be the name of an existing class'],
         ];
         // @codingStandardsIgnoreEnd

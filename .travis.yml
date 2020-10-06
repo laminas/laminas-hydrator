@@ -6,31 +6,31 @@ cache:
 
 env:
   global:
-    - COMPOSER_ARGS="--no-interaction"
+    - COMPOSER_ARGS="--no-interaction --ignore-platform-reqs"
     - COVERAGE_DEPS="php-coveralls/php-coveralls"
 
 matrix:
   fast_finish: true
   include:
-    - php: 7.2
+    - php: 7.3
       env:
         - DEPS=lowest
-    - php: 7.2
+    - php: 7.3
       env:
         - DEPS=latest
-    - php: 7.3
+    - php: 7.4
       env:
         - DEPS=lowest
-    - php: 7.3
+    - php: 7.4
       env:
         - DEPS=latest
         - CS_CHECK=true
         - TEST_COVERAGE=true
         - STATIC_ANALYSIS=true
-    - php: 7.4
+    - php: nightly
       env:
         - DEPS=lowest
-    - php: 7.4
+    - php: nightly
       env:
         - DEPS=latest
 
@@ -45,7 +45,7 @@ install:
   - stty cols 120 && composer show
 
 script:
-  - if [[ $STATIC_ANALYSIS == 'true' ]]; then composer analyse ; fi
+  - if [[ $STATIC_ANALYSIS == 'true' ]]; then composer static-analysis ; fi
   - if [[ $TEST_COVERAGE == 'true' ]]; then composer test-coverage ; else composer test ; fi
   - if [[ $CS_CHECK == 'true' ]]; then composer cs-check ; fi
 

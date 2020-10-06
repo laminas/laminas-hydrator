@@ -16,7 +16,6 @@ use Laminas\Hydrator\Aggregate\ExtractEvent;
 use Laminas\Hydrator\Aggregate\HydrateEvent;
 use Laminas\Hydrator\HydratorInterface;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
 use stdClass;
 
 /**
@@ -30,7 +29,8 @@ class AggregateHydratorTest extends TestCase
     protected $hydrator;
 
     /**
-     * @var \Laminas\EventManager\EventManager|\PHPUnit_Framework_MockObject_MockObject
+     * @var EventManager|\PHPUnit\Framework\MockObject\MockObject
+     * @psalm-var EventManager&\PHPUnit\Framework\MockObject\MockObject
      */
     protected $eventManager;
 
@@ -39,10 +39,10 @@ class AggregateHydratorTest extends TestCase
      */
     protected function setUp() : void
     {
-        $this->eventManager = $this->prophesize(EventManager::class);
+        $this->eventManager = $this->createMock(EventManager::class);
         $this->hydrator     = new AggregateHydrator();
 
-        $this->hydrator->setEventManager($this->eventManager->reveal());
+        $this->hydrator->setEventManager($this->eventManager);
     }
 
     /**
@@ -50,16 +50,17 @@ class AggregateHydratorTest extends TestCase
      */
     public function testAdd()
     {
-        $attached = $this->prophesize(HydratorInterface::class);
+        $attached = $this->createMock(HydratorInterface::class);
 
         $this->eventManager
-            ->attach(HydrateEvent::EVENT_HYDRATE, Argument::type('callable'), 123)
-            ->shouldBeCalled();
-        $this->eventManager
-            ->attach(ExtractEvent::EVENT_EXTRACT, Argument::type('callable'), 123)
-            ->shouldBeCalled();
+            ->expects($this->exactly(2))
+            ->method('attach')
+            ->withConsecutive(
+                [HydrateEvent::EVENT_HYDRATE, $this->isType('callable'), 123],
+                [ExtractEvent::EVENT_EXTRACT, $this->isType('callable'), 123],
+            );
 
-        $this->hydrator->add($attached->reveal(), 123);
+        $this->hydrator->add($attached, 123);
     }
 
     /**
@@ -70,8 +71,9 @@ class AggregateHydratorTest extends TestCase
         $object = new stdClass();
 
         $this->eventManager
-            ->triggerEvent(Argument::type(HydrateEvent::class))
-            ->shouldBeCalled();
+            ->expects($this->once())
+            ->method('triggerEvent')
+            ->with($this->isInstanceOf(HydrateEvent::class));
 
         $this->assertSame($object, $this->hydrator->hydrate(['foo' => 'bar'], $object));
     }
@@ -84,8 +86,9 @@ class AggregateHydratorTest extends TestCase
         $object = new stdClass();
 
         $this->eventManager
-            ->triggerEvent(Argument::type(ExtractEvent::class))
-            ->shouldBeCalled();
+            ->expects($this->once())
+            ->method('triggerEvent')
+            ->with($this->isInstanceOf(ExtractEvent::class));
 
         $this->assertSame([], $this->hydrator->extract($object));
     }
@@ -97,16 +100,17 @@ class AggregateHydratorTest extends TestCase
     public function testGetSetManager()
     {
         $hydrator     = new AggregateHydrator();
-        $eventManager = $this->prophesize(EventManager::class);
+        $eventManager = $this->createMock(EventManager::class);
 
         $this->assertInstanceOf(EventManager::class, $hydrator->getEventManager());
 
         $eventManager
-            ->setIdentifiers([AggregateHydrator::class, AggregateHydrator::class])
-            ->shouldBeCalled();
+            ->expects($this->once())
+            ->method('setIdentifiers')
+            ->with([AggregateHydrator::class, AggregateHydrator::class]);
 
-        $hydrator->setEventManager($eventManager->reveal());
+        $hydrator->setEventManager($eventManager);
 
-        $this->assertSame($eventManager->reveal(), $hydrator->getEventManager());
+        $this->assertSame($eventManager, $hydrator->getEventManager());
     }
 }

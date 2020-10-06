@@ -15,7 +15,6 @@ use Interop\Container\ContainerInterface;
 use Laminas\Hydrator\DelegatingHydrator;
 use Laminas\Hydrator\HydratorInterface;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
 
 /**
  * Unit tests for {@see DelegatingHydrator}
@@ -30,7 +29,8 @@ class DelegatingHydratorTest extends TestCase
     protected $hydrator;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var ContainerInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @psalm-var ContainerInterface&\PHPUnit\Framework\MockObject\MockObject
      */
     protected $hydrators;
 
@@ -44,29 +44,35 @@ class DelegatingHydratorTest extends TestCase
      */
     protected function setUp() : void
     {
-        $this->hydrators = $this->prophesize(ContainerInterface::class);
-        $this->hydrator = new DelegatingHydrator($this->hydrators->reveal());
+        $this->hydrators = $this->createMock(ContainerInterface::class);
+        $this->hydrator = new DelegatingHydrator($this->hydrators);
         $this->object = new ArrayObject;
     }
 
     public function testExtract()
     {
-        $hydrator = $this->prophesize(HydratorInterface::class);
-        $hydrator->extract($this->object)->willReturn(['foo' => 'bar']);
+        $hydrator = $this->createMock(HydratorInterface::class);
+        $hydrator->expects($this->once())->method('extract')->with($this->object)->willReturn(['foo' => 'bar']);
 
-        $this->hydrators->has(Argument::type(ArrayObject::class))->willReturn(true);
-        $this->hydrators->get(ArrayObject::class)->willReturn($hydrator->reveal());
+        $this->hydrators
+            ->expects($this->once())
+            ->method('get')
+            ->with(ArrayObject::class)
+            ->willReturn($hydrator);
 
         $this->assertEquals(['foo' => 'bar'], $this->hydrator->extract($this->object));
     }
 
     public function testHydrate()
     {
-        $hydrator = $this->prophesize(HydratorInterface::class);
-        $hydrator->hydrate(['foo' => 'bar'], $this->object)->willReturn($this->object);
+        $hydrator = $this->createMock(HydratorInterface::class);
+        $hydrator->expects($this->once())->method('hydrate')->with(['foo' => 'bar'])->willReturn($this->object);
 
-        $this->hydrators->has(Argument::type(ArrayObject::class))->willReturn(true);
-        $this->hydrators->get(ArrayObject::class)->willReturn($hydrator->reveal());
+        $this->hydrators
+            ->expects($this->once())
+            ->method('get')
+            ->with(ArrayObject::class)
+            ->willReturn($hydrator);
 
         $this->assertEquals($this->object, $this->hydrator->hydrate(['foo' => 'bar'], $this->object));
     }

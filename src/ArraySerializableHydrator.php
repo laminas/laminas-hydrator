@@ -79,7 +79,7 @@ class ArraySerializableHydrator extends AbstractHydrator
             // Ensure any previously populated values not in the replacement
             // remain following population.
             if (method_exists($object, 'getArrayCopy') && is_callable([$object, 'getArrayCopy'])) {
-                $original = $object->getArrayCopy($object);
+                $original = $object->getArrayCopy();
                 $replacement = array_merge($original, $replacement);
             }
             $object->exchangeArray($replacement);

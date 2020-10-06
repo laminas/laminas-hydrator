@@ -35,11 +35,11 @@ class CompositeNamingStrategyTest extends TestCase
     {
         /* @var $defaultNamingStrategy NamingStrategyInterface|\PHPUnit_Framework_MockObject_MockObject*/
         $defaultNamingStrategy = $this->createMock(NamingStrategyInterface::class);
-        $defaultNamingStrategy->expects($this->at(0))
+        $defaultNamingStrategy->expects($this->once())
             ->method('hydrate')
             ->with('foo')
             ->will($this->returnValue('Foo'));
-        $defaultNamingStrategy->expects($this->at(1))
+        $defaultNamingStrategy->expects($this->once())
             ->method('extract')
             ->with('Foo')
             ->will($this->returnValue('foo'));
