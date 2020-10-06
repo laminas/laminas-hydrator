@@ -33,8 +33,10 @@ class ClassMethodsOptionalParameters
     /**
      * @param string $foo
      * @param mixed  $optional
+     *
+     * @return void
      */
-    public function setFoo($foo, $optional = null)
+    public function setFoo($foo, $optional = null): void
     {
         $this->foo = (string) $foo;
     }

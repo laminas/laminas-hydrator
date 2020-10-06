@@ -23,8 +23,10 @@ class NumberOfParameterFilterTest extends TestCase
 {
     /**
      * @group 6083
+     *
+     * @return void
      */
-    public function testArityZero()
+    public function testArityZero(): void
     {
         $filter = new NumberOfParameterFilter();
         $this->assertTrue($filter->filter(__CLASS__ . '::methodWithNoParameters'));
@@ -33,8 +35,10 @@ class NumberOfParameterFilterTest extends TestCase
 
     /**
      * @group 6083
+     *
+     * @return void
      */
-    public function testArityOne()
+    public function testArityOne(): void
     {
         $filter = new NumberOfParameterFilter(1);
         $this->assertFalse($filter->filter(__CLASS__ . '::methodWithNoParameters'));
@@ -43,8 +47,10 @@ class NumberOfParameterFilterTest extends TestCase
 
     /**
      * Verifies an InvalidArgumentException is thrown for a method that doesn't exist
+     *
+     * @return void
      */
-    public function testFilterPropertyDoesNotExist()
+    public function testFilterPropertyDoesNotExist(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(
@@ -56,15 +62,19 @@ class NumberOfParameterFilterTest extends TestCase
 
     /**
      * Test asset method
+     *
+     * @return void
      */
-    public function methodWithOptionalParameters($parameter = 'foo')
+    public function methodWithOptionalParameters($parameter = 'foo'): void
     {
     }
 
     /**
      * Test asset method
+     *
+     * @return void
      */
-    public function methodWithNoParameters()
+    public function methodWithNoParameters(): void
     {
     }
 }

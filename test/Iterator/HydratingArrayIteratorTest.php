@@ -21,7 +21,7 @@ use PHPUnit\Framework\TestCase;
  */
 class HydratingArrayIteratorTest extends TestCase
 {
-    public function testHydratesObjectAndClonesOnCurrent()
+    public function testHydratesObjectAndClonesOnCurrent(): void
     {
         $data = [
             ['foo' => 'bar'],
@@ -44,7 +44,7 @@ class HydratingArrayIteratorTest extends TestCase
         $this->assertEquals(new ArrayObject($data[1]), $hydratingIterator->current());
     }
 
-    public function testUsingStringForObjectName()
+    public function testUsingStringForObjectName(): void
     {
         $data = [
             ['foo' => 'bar'],
@@ -56,7 +56,7 @@ class HydratingArrayIteratorTest extends TestCase
         $this->assertEquals(new ArrayObject($data[0]), $hydratingIterator->current());
     }
 
-    public function testThrowingInvalidArgumentExceptionWhenSettingPrototypeToInvalidClass()
+    public function testThrowingInvalidArgumentExceptionWhenSettingPrototypeToInvalidClass(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $hydratingIterator = new HydratingArrayIterator(new ArraySerializableHydrator(), [], 'not a real class');

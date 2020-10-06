@@ -19,7 +19,7 @@ use function sprintf;
 
 trait HydratorTestTrait
 {
-    public function testHydrateWithNamingStrategyAndStrategy()
+    public function testHydrateWithNamingStrategyAndStrategy(): void
     {
         $namingStrategy = $this->createMock(NamingStrategyInterface::class);
         $namingStrategy
@@ -48,7 +48,7 @@ trait HydratorTestTrait
         );
     }
 
-    public function testExtractWithNamingStrategyAndStrategy()
+    public function testExtractWithNamingStrategyAndStrategy(): void
     {
         $entity = new SimpleEntity();
         $entity->setValue('foo');

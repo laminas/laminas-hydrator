@@ -16,7 +16,7 @@ use PHPUnit\Framework\TestCase;
 
 class ArraySerializableTest extends TestCase
 {
-    public function testTriggerUserDeprecatedError()
+    public function testTriggerUserDeprecatedError(): void
     {
         $test = (object) ['message' => false];
 

@@ -29,7 +29,7 @@ class HydratorStrategyTest extends TestCase
         $this->hydrator = new ClassMethodsHydrator();
     }
 
-    public function testAddingStrategy()
+    public function testAddingStrategy(): void
     {
         $this->assertFalse($this->hydrator->hasStrategy('myStrategy'));
 
@@ -38,19 +38,19 @@ class HydratorStrategyTest extends TestCase
         $this->assertTrue($this->hydrator->hasStrategy('myStrategy'));
     }
 
-    public function testCheckStrategyEmpty()
+    public function testCheckStrategyEmpty(): void
     {
         $this->assertFalse($this->hydrator->hasStrategy('myStrategy'));
     }
 
-    public function testCheckStrategyNotEmpty()
+    public function testCheckStrategyNotEmpty(): void
     {
         $this->hydrator->addStrategy('myStrategy', new TestAsset\HydratorStrategy());
 
         $this->assertTrue($this->hydrator->hasStrategy('myStrategy'));
     }
 
-    public function testRemovingStrategy()
+    public function testRemovingStrategy(): void
     {
         $this->assertFalse($this->hydrator->hasStrategy('myStrategy'));
 
@@ -61,7 +61,7 @@ class HydratorStrategyTest extends TestCase
         $this->assertFalse($this->hydrator->hasStrategy('myStrategy'));
     }
 
-    public function testRetrieveStrategy()
+    public function testRetrieveStrategy(): void
     {
         $strategy = new TestAsset\HydratorStrategy();
         $this->hydrator->addStrategy('myStrategy', $strategy);
@@ -69,7 +69,7 @@ class HydratorStrategyTest extends TestCase
         $this->assertEquals($strategy, $this->hydrator->getStrategy('myStrategy'));
     }
 
-    public function testExtractingObjects()
+    public function testExtractingObjects(): void
     {
         $this->hydrator->addStrategy('entities', new TestAsset\HydratorStrategy());
 
@@ -83,7 +83,7 @@ class HydratorStrategyTest extends TestCase
         $this->assertContains(222, $attributes['entities']);
     }
 
-    public function testHydratingObjects()
+    public function testHydratingObjects(): void
     {
         $this->hydrator->addStrategy('entities', new TestAsset\HydratorStrategy());
 
@@ -102,11 +102,13 @@ class HydratorStrategyTest extends TestCase
 
     /**
      * @dataProvider underscoreHandlingDataProvider
+     *
+     * @return void
      */
     public function testWhenUsingUnderscoreSeparatedKeysHydratorStrategyIsAlwaysConsideredUnderscoreSeparatedToo(
         $underscoreSeparatedKeys,
         $formFieldKey
-    ) {
+    ): void {
         $hydrator = new ClassMethodsHydrator($underscoreSeparatedKeys);
 
         $strategy = $this->createMock(StrategyInterface::class);
@@ -135,7 +137,12 @@ class HydratorStrategyTest extends TestCase
         $hydrator->hydrate($attributes, $entity);
     }
 
-    public function underscoreHandlingDataProvider()
+    /**
+     * @return (bool|string)[][]
+     *
+     * @psalm-return array{0: array{0: true, 1: string}, 1: array{0: false, 1: string}}
+     */
+    public function underscoreHandlingDataProvider(): array
     {
         return [
             [true, 'foo_bar'],
@@ -143,7 +150,7 @@ class HydratorStrategyTest extends TestCase
         ];
     }
 
-    public function testContextAwarenessExtract()
+    public function testContextAwarenessExtract(): void
     {
         $strategy = new TestAsset\HydratorStrategyContextAware();
         $this->hydrator->addStrategy('field2', $strategy);
@@ -154,7 +161,7 @@ class HydratorStrategyTest extends TestCase
         $this->assertEquals($entityB, $strategy->object);
     }
 
-    public function testContextAwarenessHydrate()
+    public function testContextAwarenessHydrate(): void
     {
         $strategy = new TestAsset\HydratorStrategyContextAware();
         $this->hydrator->addStrategy('field2', $strategy);

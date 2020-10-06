@@ -49,7 +49,7 @@ class DelegatingHydratorTest extends TestCase
         $this->object = new ArrayObject;
     }
 
-    public function testExtract()
+    public function testExtract(): void
     {
         $hydrator = $this->createMock(HydratorInterface::class);
         $hydrator->expects($this->once())->method('extract')->with($this->object)->willReturn(['foo' => 'bar']);
@@ -63,7 +63,7 @@ class DelegatingHydratorTest extends TestCase
         $this->assertEquals(['foo' => 'bar'], $this->hydrator->extract($this->object));
     }
 
-    public function testHydrate()
+    public function testHydrate(): void
     {
         $hydrator = $this->createMock(HydratorInterface::class);
         $hydrator->expects($this->once())->method('hydrate')->with(['foo' => 'bar'])->willReturn($this->object);

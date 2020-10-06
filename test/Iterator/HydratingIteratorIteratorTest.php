@@ -22,7 +22,7 @@ use PHPUnit\Framework\TestCase;
  */
 class HydratingIteratorIteratorTest extends TestCase
 {
-    public function testHydratesObjectAndClonesOnCurrent()
+    public function testHydratesObjectAndClonesOnCurrent(): void
     {
         $data = [
             ['foo' => 'bar'],
@@ -46,7 +46,7 @@ class HydratingIteratorIteratorTest extends TestCase
         $this->assertEquals(new ArrayObject($data[1]), $hydratingIterator->current());
     }
 
-    public function testUsingStringForObjectName()
+    public function testUsingStringForObjectName(): void
     {
         $data = [
             ['foo' => 'bar'],
@@ -60,7 +60,7 @@ class HydratingIteratorIteratorTest extends TestCase
         $this->assertEquals(new ArrayObject($data[0]), $hydratingIterator->current());
     }
 
-    public function testThrowingInvalidArgumentExceptionWhenSettingPrototypeToInvalidClass()
+    public function testThrowingInvalidArgumentExceptionWhenSettingPrototypeToInvalidClass(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $hydratingIterator = new HydratingIteratorIterator(

@@ -21,7 +21,7 @@ class HydratorStrategyEntityA
         $this->entities = [];
     }
 
-    public function addEntity(HydratorStrategyEntityB $entity)
+    public function addEntity(HydratorStrategyEntityB $entity): void
     {
         $this->entities[] = $entity;
     }
@@ -31,19 +31,24 @@ class HydratorStrategyEntityA
         return $this->entities;
     }
 
-    public function setEntities($entities)
+    public function setEntities($entities): void
     {
         $this->entities = $entities;
     }
 
     // Add the getArrayCopy method so we can test the ArraySerializable hydrator:
-    public function getArrayCopy()
+    /**
+     * @return array
+     *
+     * @psalm-return array<string, mixed>
+     */
+    public function getArrayCopy(): array
     {
         return get_object_vars($this);
     }
 
     // Add the populate method so we can test the ArraySerializable hydrator:
-    public function populate($data)
+    public function populate($data): void
     {
         foreach ($data as $name => $value) {
             $this->$name = $value;

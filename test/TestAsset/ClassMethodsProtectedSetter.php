@@ -15,12 +15,12 @@ class ClassMethodsProtectedSetter
     protected $foo;
     protected $bar;
 
-    protected function setFoo($foo)
+    protected function setFoo($foo): void
     {
         $this->foo = $foo;
     }
 
-    public function setBar($bar)
+    public function setBar($bar): void
     {
         $this->bar = $bar;
     }

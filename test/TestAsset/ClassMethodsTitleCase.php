@@ -29,7 +29,7 @@ class ClassMethodsTitleCase
         return $this->FooBar;
     }
 
-    public function setFooBar($value)
+    public function setFooBar($value): self
     {
         $this->FooBar = $value;
         return $this;
@@ -40,7 +40,7 @@ class ClassMethodsTitleCase
         return $this->FooBarBaz;
     }
 
-    public function setFooBarBaz($value)
+    public function setFooBarBaz($value): self
     {
         $this->FooBarBaz = $value;
         return $this;
@@ -51,7 +51,7 @@ class ClassMethodsTitleCase
         return $this->IsFoo;
     }
 
-    public function setIsFoo($IsFoo)
+    public function setIsFoo($IsFoo): self
     {
         $this->IsFoo = $IsFoo;
         return $this;
@@ -62,7 +62,7 @@ class ClassMethodsTitleCase
         return $this->IsBar;
     }
 
-    public function setIsBar($IsBar)
+    public function setIsBar($IsBar): self
     {
         $this->IsBar = $IsBar;
         return $this;
@@ -78,13 +78,13 @@ class ClassMethodsTitleCase
         return $this->HasBar;
     }
 
-    public function setHasFoo($HasFoo)
+    public function setHasFoo($HasFoo): self
     {
         $this->HasFoo = $HasFoo;
         return $this;
     }
 
-    public function setHasBar($HasBar)
+    public function setHasBar($HasBar): void
     {
         $this->HasBar = $HasBar;
     }

@@ -25,7 +25,7 @@ class HydratorObjectPropertyTest extends TestCase
         $this->hydrator = new ObjectPropertyHydrator();
     }
 
-    public function testMultipleInvocationsWithDifferentFiltersFindsAllProperties()
+    public function testMultipleInvocationsWithDifferentFiltersFindsAllProperties(): void
     {
         $instance = (object) [];
 

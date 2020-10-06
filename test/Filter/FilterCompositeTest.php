@@ -30,8 +30,10 @@ class FilterCompositeTest extends TestCase
 {
     /**
      * @dataProvider validFiltersProvider
+     *
+     * @return void
      */
-    public function testFilters(array $orFilters, array $andFilters)
+    public function testFilters(array $orFilters, array $andFilters): void
     {
         $filter = new FilterComposite($orFilters, $andFilters);
 
@@ -62,7 +64,10 @@ class FilterCompositeTest extends TestCase
 
     public function invalidFiltersProvider() : array
     {
-        $callback = static function () {
+        $callback = /**
+         * @return true
+         */
+        static function (): bool {
             return true;
         };
 
@@ -97,8 +102,10 @@ class FilterCompositeTest extends TestCase
 
     /**
      * @dataProvider invalidFiltersProvider
+     *
+     * @return void
      */
-    public function testConstructWithInvalidFilter(array $orFilters, array $andFilters, string $expectedKey)
+    public function testConstructWithInvalidFilter(array $orFilters, array $andFilters, string $expectedKey): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(sprintf(
@@ -110,7 +117,7 @@ class FilterCompositeTest extends TestCase
         new FilterComposite($orFilters, $andFilters);
     }
 
-    public function testNoFilters()
+    public function testNoFilters(): void
     {
         $filter = new FilterComposite();
         self::assertTrue($filter->filter('any_value'));
@@ -135,7 +142,12 @@ class FilterCompositeTest extends TestCase
         return $filters;
     }
 
-    private function generateFilters(array $orCompositionFilters, array $andCompositionFilters, bool $expected)
+    /**
+     * @return \Generator
+     *
+     * @psalm-return \Generator<int, array{orFilters: array, andFilters: array, expected: bool}, mixed, void>
+     */
+    private function generateFilters(array $orCompositionFilters, array $andCompositionFilters, bool $expected): \Generator
     {
         foreach ($orCompositionFilters as $orFilters) {
             foreach ($andCompositionFilters as $andFilters) {
@@ -148,7 +160,12 @@ class FilterCompositeTest extends TestCase
         }
     }
 
-    public function providerCompositionFiltering()
+    /**
+     * @return \Generator
+     *
+     * @psalm-return \Generator<mixed, mixed, mixed, void>
+     */
+    public function providerCompositionFiltering(): \Generator
     {
         $orCompositionFilters = [
             'truthy' => [
@@ -202,8 +219,10 @@ class FilterCompositeTest extends TestCase
 
     /**
      * @dataProvider providerCompositionFiltering
+     *
+     * @return void
      */
-    public function testCompositionFiltering(array $orFilters, array $andFilters, bool $expected)
+    public function testCompositionFiltering(array $orFilters, array $andFilters, bool $expected): void
     {
         $filter = new FilterComposite($orFilters, $andFilters);
         self::assertSame($expected, $filter->filter('any_value'));

@@ -25,7 +25,7 @@ use PHPUnit\Framework\TestCase;
 class DateTimeFormatterStrategyTest extends TestCase
 {
 
-    public function testHydrate()
+    public function testHydrate(): void
     {
         $strategy = new DateTimeFormatterStrategy('Y-m-d');
         $this->assertEquals('2014-04-26', $strategy->hydrate('2014-04-26')->format('Y-m-d'));
@@ -36,20 +36,20 @@ class DateTimeFormatterStrategyTest extends TestCase
         $this->assertEquals('Asia/Kathmandu', $date->getTimezone()->getName());
     }
 
-    public function testExtract()
+    public function testExtract(): void
     {
         $strategy = new DateTimeFormatterStrategy('d/m/Y');
         $this->assertEquals('26/04/2014', $strategy->extract(new \DateTime('2014-04-26')));
     }
 
-    public function testGetNullWithInvalidDateOnHydration()
+    public function testGetNullWithInvalidDateOnHydration(): void
     {
         $strategy = new DateTimeFormatterStrategy('Y-m-d');
         $this->assertEquals(null, $strategy->hydrate(null));
         $this->assertEquals(null, $strategy->hydrate(''));
     }
 
-    public function testCanExtractIfNotDateTime()
+    public function testCanExtractIfNotDateTime(): void
     {
         $strategy = new DateTimeFormatterStrategy();
         $date = $strategy->extract(new \stdClass);
@@ -57,13 +57,13 @@ class DateTimeFormatterStrategyTest extends TestCase
         $this->assertInstanceOf(\stdClass::class, $date);
     }
 
-    public function testCanHydrateWithInvalidDateTime()
+    public function testCanHydrateWithInvalidDateTime(): void
     {
         $strategy = new DateTimeFormatterStrategy('d/m/Y');
         $this->assertSame('foo bar baz', $strategy->hydrate('foo bar baz'));
     }
 
-    public function testCanExtractAnyDateTimeInterface()
+    public function testCanExtractAnyDateTimeInterface(): void
     {
         $dateMock = $this
             ->getMockBuilder(DateTime::class)
@@ -92,10 +92,13 @@ class DateTimeFormatterStrategyTest extends TestCase
 
     /**
      * @dataProvider formatsWithSpecialCharactersProvider
+     *
      * @param string $format
      * @param string $expectedValue
+     *
+     * @return void
      */
-    public function testAcceptsCreateFromFormatSpecialCharacters($format, $expectedValue)
+    public function testAcceptsCreateFromFormatSpecialCharacters($format, $expectedValue): void
     {
         $strategy = new DateTimeFormatterStrategy($format);
         $hydrated = $strategy->hydrate($expectedValue);
@@ -106,10 +109,13 @@ class DateTimeFormatterStrategyTest extends TestCase
 
     /**
      * @dataProvider formatsWithSpecialCharactersProvider
+     *
      * @param string $format
      * @param string $expectedValue
+     *
+     * @return void
      */
-    public function testCanExtractWithCreateFromFormatSpecialCharacters($format, $expectedValue)
+    public function testCanExtractWithCreateFromFormatSpecialCharacters($format, $expectedValue): void
     {
         $date      = DateTime::createFromFormat($format, $expectedValue);
         $strategy  = new DateTimeFormatterStrategy($format);
@@ -118,7 +124,7 @@ class DateTimeFormatterStrategyTest extends TestCase
         $this->assertEquals($expectedValue, $extracted);
     }
 
-    public function testCanExtractWithCreateFromFormatEscapedSpecialCharacters()
+    public function testCanExtractWithCreateFromFormatEscapedSpecialCharacters(): void
     {
         $date      = DateTime::createFromFormat('Y-m-d', '2018-02-05');
         $strategy  = new DateTimeFormatterStrategy('Y-m-d\\+');
@@ -126,7 +132,12 @@ class DateTimeFormatterStrategyTest extends TestCase
         $this->assertEquals('2018-02-05+', $extracted);
     }
 
-    public function formatsWithSpecialCharactersProvider()
+    /**
+     * @return string[][]
+     *
+     * @psalm-return array<string, array{0: string, 1: string}>
+     */
+    public function formatsWithSpecialCharactersProvider(): array
     {
         return [
             '!-prepended' => ['!Y-m-d', '2018-02-05'],
@@ -135,7 +146,7 @@ class DateTimeFormatterStrategyTest extends TestCase
         ];
     }
 
-    public function testCanHydrateWithDateTimeFallback()
+    public function testCanHydrateWithDateTimeFallback(): void
     {
         $strategy = new DateTimeFormatterStrategy('Y-m-d', null, true);
         $date = $strategy->hydrate('2018-09-06T12:10:30');
@@ -162,9 +173,12 @@ class DateTimeFormatterStrategyTest extends TestCase
 
     /**
      * @dataProvider invalidValuesForHydration
+     *
      * @param mixed $value
+     *
+     * @return void
      */
-    public function testHydrateRaisesExceptionIfValueIsInvalid($value)
+    public function testHydrateRaisesExceptionIfValueIsInvalid($value): void
     {
         $strategy = new DateTimeFormatterStrategy('Y-m-d');
 
@@ -184,9 +198,12 @@ class DateTimeFormatterStrategyTest extends TestCase
 
     /**
      * @dataProvider validUnhydratableValues
+     *
      * @param mixed $value
+     *
+     * @return void
      */
-    public function testReturnsValueVerbatimUnderSpecificConditions($value)
+    public function testReturnsValueVerbatimUnderSpecificConditions($value): void
     {
         $strategy = new DateTimeFormatterStrategy('Y-m-d');
         $hydrated = $strategy->hydrate($value);

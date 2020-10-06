@@ -18,32 +18,38 @@ use Laminas\Hydrator\Filter\MethodMatchFilter;
 
 class ClassMethodsFilterProviderInterface implements FilterProviderInterface
 {
-    public function getBar()
+    public function getBar(): string
     {
         return "foo";
     }
 
-    public function getFoo()
+    public function getFoo(): string
     {
         return "bar";
     }
 
-    public function isScalar($foo)
+    /**
+     * @return false
+     */
+    public function isScalar($foo): bool
     {
         return false;
     }
 
-    public function hasFooBar()
+    /**
+     * @return true
+     */
+    public function hasFooBar(): bool
     {
         return true;
     }
 
-    public function getServiceManager()
+    public function getServiceManager(): string
     {
         return "servicemanager";
     }
 
-    public function getEventManager()
+    public function getEventManager(): string
     {
         return "eventmanager";
     }

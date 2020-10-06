@@ -78,7 +78,7 @@ class HydratorTest extends TestCase
         $this->classMethodsInvalidParameter = new ClassMethodsInvalidParameter();
     }
 
-    public function testInitiateValues()
+    public function testInitiateValues(): void
     {
         self::assertSame('1', $this->classMethodsCamelCase->getFooBar());
         self::assertSame('2', $this->classMethodsCamelCase->getFooBarBaz());
@@ -102,7 +102,7 @@ class HydratorTest extends TestCase
         self::assertSame(true, $this->classMethodsUnderscore->hasBar());
     }
 
-    public function testHydratorReflection()
+    public function testHydratorReflection(): void
     {
         $hydrator = new ReflectionHydrator();
         $datas    = $hydrator->extract($this->reflection);
@@ -119,7 +119,7 @@ class HydratorTest extends TestCase
         self::assertSame('baz', $test->getFooBarBaz());
     }
 
-    public function testHydratorClassMethodsCamelCase()
+    public function testHydratorClassMethodsCamelCase(): void
     {
         $hydrator = new ClassMethodsHydrator(false);
         $datas = $hydrator->extract($this->classMethodsCamelCase);
@@ -155,7 +155,7 @@ class HydratorTest extends TestCase
         self::assertSame(false, $test->hasBar());
     }
 
-    public function testHydratorClassMethodsTitleCase()
+    public function testHydratorClassMethodsTitleCase(): void
     {
         $hydrator = new ClassMethodsHydrator(false);
         $datas = $hydrator->extract($this->classMethodsTitleCase);
@@ -191,7 +191,7 @@ class HydratorTest extends TestCase
         self::assertSame(false, $test->getHasBar());
     }
 
-    public function testHydratorClassMethodsUnderscore()
+    public function testHydratorClassMethodsUnderscore(): void
     {
         $hydrator = new ClassMethodsHydrator(true);
         $datas = $hydrator->extract($this->classMethodsUnderscore);
@@ -231,7 +231,7 @@ class HydratorTest extends TestCase
         self::assertSame(false, $test->hasBar());
     }
 
-    public function testHydratorClassMethodsUnderscoreWithUnderscoreUpperCasedHydrateDataKeys()
+    public function testHydratorClassMethodsUnderscoreWithUnderscoreUpperCasedHydrateDataKeys(): void
     {
         $hydrator = new ClassMethodsHydrator(true);
         $datas = $hydrator->extract($this->classMethodsUnderscore);
@@ -255,7 +255,7 @@ class HydratorTest extends TestCase
         self::assertSame(false, $test->hasBar());
     }
 
-    public function testHydratorClassMethodsOptions()
+    public function testHydratorClassMethodsOptions(): void
     {
         $hydrator = new ClassMethodsHydrator();
         self::assertTrue($hydrator->getUnderscoreSeparatedKeys());
@@ -265,7 +265,7 @@ class HydratorTest extends TestCase
         self::assertTrue($hydrator->getUnderscoreSeparatedKeys());
     }
 
-    public function testHydratorClassMethodsIgnoresInvalidValues()
+    public function testHydratorClassMethodsIgnoresInvalidValues(): void
     {
         $hydrator = new ClassMethodsHydrator(true);
         $data = [
@@ -277,7 +277,7 @@ class HydratorTest extends TestCase
         self::assertSame($this->classMethodsUnderscore, $test);
     }
 
-    public function testHydratorClassMethodsDefaultBehaviorIsConvertUnderscoreToCamelCase()
+    public function testHydratorClassMethodsDefaultBehaviorIsConvertUnderscoreToCamelCase(): void
     {
         $hydrator = new ClassMethodsHydrator();
         $datas = $hydrator->extract($this->classMethodsUnderscore);
@@ -291,7 +291,7 @@ class HydratorTest extends TestCase
         self::assertSame('bar', $test->getFooBarBaz());
     }
 
-    public function testRetrieveWildStrategyAndOther()
+    public function testRetrieveWildStrategyAndOther(): void
     {
         $hydrator = new ClassMethodsHydrator();
         $hydrator->addStrategy('default', new DefaultStrategy());
@@ -302,7 +302,7 @@ class HydratorTest extends TestCase
         self::assertInstanceOf(SerializableStrategy::class, $serializable);
     }
 
-    public function testUseWildStrategyByDefault()
+    public function testUseWildStrategyByDefault(): void
     {
         $hydrator = new ClassMethodsHydrator();
         $datas = $hydrator->extract($this->classMethodsUnderscore);
@@ -315,7 +315,7 @@ class HydratorTest extends TestCase
         self::assertSame('s:1:"1";', $datas['foo_bar']);
     }
 
-    public function testUseWildStrategyAndOther()
+    public function testUseWildStrategyAndOther(): void
     {
         $hydrator = new ClassMethodsHydrator();
         $datas = $hydrator->extract($this->classMethodsUnderscore);
@@ -328,7 +328,7 @@ class HydratorTest extends TestCase
         self::assertSame('s:1:"2";', $datas['foo_bar_baz']);
     }
 
-    public function testHydratorClassMethodsCamelCaseWithSetterMissing()
+    public function testHydratorClassMethodsCamelCaseWithSetterMissing(): void
     {
         $hydrator = new ClassMethodsHydrator(false);
 
@@ -343,7 +343,7 @@ class HydratorTest extends TestCase
         self::assertSame('2', $test->getFooBarBaz());
     }
 
-    public function testHydratorClassMethodsManipulateFilter()
+    public function testHydratorClassMethodsManipulateFilter(): void
     {
         $hydrator = new ClassMethodsHydrator(false);
         $datas = $hydrator->extract($this->classMethodsCamelCase);
@@ -367,7 +367,7 @@ class HydratorTest extends TestCase
         self::assertArrayNotHaskey('hasBar', $datas); //method is hasBar
     }
 
-    public function testHydratorClassMethodsWithCustomFilter()
+    public function testHydratorClassMethodsWithCustomFilter(): void
     {
         $hydrator = new ClassMethodsHydrator(false);
         $datas = $hydrator->extract($this->classMethodsCamelCase);
@@ -391,8 +391,10 @@ class HydratorTest extends TestCase
 
     /**
      * @dataProvider filterProvider
+     *
+     * @return void
      */
-    public function testArraySerializableFilter($hydrator, $serializable)
+    public function testArraySerializableFilter($hydrator, $serializable): void
     {
         self::assertSame(
             [
@@ -449,7 +451,10 @@ class HydratorTest extends TestCase
         );
     }
 
-    public function filterProvider()
+    /**
+     * @psalm-return list<array{0: \Laminas\Hydrator\HydratorInterface, 1: object}>
+     */
+    public function filterProvider(): array
     {
         return [
             [new ObjectPropertyHydrator(), new ObjectPropertyAsset],
@@ -458,7 +463,7 @@ class HydratorTest extends TestCase
         ];
     }
 
-    public function testHydratorClassMethodsWithInvalidNumberOfParameters()
+    public function testHydratorClassMethodsWithInvalidNumberOfParameters(): void
     {
         $hydrator = new ClassMethodsHydrator(false);
         $datas = $hydrator->extract($this->classMethodsInvalidParameter);
@@ -468,7 +473,7 @@ class HydratorTest extends TestCase
         self::assertFalse($datas['isBla']);
     }
 
-    public function testObjectBasedFilters()
+    public function testObjectBasedFilters(): void
     {
         $hydrator = new ClassMethodsHydrator(false);
         $foo = new ClassMethodsFilterProviderInterface();
@@ -478,7 +483,7 @@ class HydratorTest extends TestCase
         self::assertSame('foo', $data['bar']);
     }
 
-    public function testHydratorClassMethodsWithProtectedSetter()
+    public function testHydratorClassMethodsWithProtectedSetter(): void
     {
         $hydrator = new ClassMethodsHydrator(false);
         $object = new ClassMethodsProtectedSetter();
@@ -488,7 +493,7 @@ class HydratorTest extends TestCase
         self::assertSame('BAR', $data['bar']);
     }
 
-    public function testHydratorClassMethodsWithMagicMethodSetter()
+    public function testHydratorClassMethodsWithMagicMethodSetter(): void
     {
         $hydrator = new ClassMethodsHydrator(false);
         $object = new ClassMethodsMagicMethodSetter();
@@ -498,7 +503,7 @@ class HydratorTest extends TestCase
         self::assertSame('bar', $data['foo']);
     }
 
-    public function testHydratorClassMethodsWithMagicMethodSetterAndMethodExistsCheck()
+    public function testHydratorClassMethodsWithMagicMethodSetterAndMethodExistsCheck(): void
     {
         $hydrator = new ClassMethodsHydrator(false, true);
         $object = new ClassMethodsMagicMethodSetter();

@@ -23,26 +23,26 @@ use function get_class;
  */
 class SerializableStrategyTest extends TestCase
 {
-    public function testCannotUseBadArgumentSerializer()
+    public function testCannotUseBadArgumentSerializer(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $serializerStrategy = new SerializableStrategy(false);
     }
 
-    public function testUseBadSerializerObject()
+    public function testUseBadSerializerObject(): void
     {
         $serializer = Serializer::factory('phpserialize');
         $serializerStrategy = new SerializableStrategy($serializer);
         $this->assertEquals($serializer, $serializerStrategy->getSerializer());
     }
 
-    public function testUseBadSerializerString()
+    public function testUseBadSerializerString(): void
     {
         $serializerStrategy = new SerializableStrategy('phpserialize');
         $this->assertEquals(PhpSerialize::class, get_class($serializerStrategy->getSerializer()));
     }
 
-    public function testCanSerialize()
+    public function testCanSerialize(): void
     {
         $serializer = Serializer::factory('phpserialize');
         $serializerStrategy = new SerializableStrategy($serializer);
@@ -50,7 +50,7 @@ class SerializableStrategyTest extends TestCase
         $this->assertEquals($serialized, 's:3:"foo";');
     }
 
-    public function testCanUnserialize()
+    public function testCanUnserialize(): void
     {
         $serializer = Serializer::factory('phpserialize');
         $serializerStrategy = new SerializableStrategy($serializer);

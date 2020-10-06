@@ -36,8 +36,10 @@ class AggregateObject
 
     /**
      * @param string $maintainer
+     *
+     * @return void
      */
-    public function setMaintainer($maintainer)
+    public function setMaintainer($maintainer): void
     {
         $this->maintainer = $maintainer;
     }
@@ -52,8 +54,10 @@ class AggregateObject
 
     /**
      * @param array $data
+     *
+     * @return void
      */
-    public function exchangeArray(array $data)
+    public function exchangeArray(array $data): void
     {
         $this->arrayData = $data;
     }

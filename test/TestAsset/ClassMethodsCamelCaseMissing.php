@@ -21,7 +21,7 @@ class ClassMethodsCamelCaseMissing
         return $this->fooBar;
     }
 
-    public function setFooBar($value)
+    public function setFooBar($value): self
     {
         $this->fooBar = $value;
         return $this;

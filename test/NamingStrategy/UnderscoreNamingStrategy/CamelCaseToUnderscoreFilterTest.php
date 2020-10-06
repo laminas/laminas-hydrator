@@ -25,10 +25,13 @@ class CamelCaseToUnderscoreFilterTest extends TestCase
 {
     /**
      * @dataProvider nonUnicodeProvider
+     *
      * @param string $string
      * @param string $expected
+     *
+     * @return void
      */
-    public function testFilterUnderscoresNonUnicodeStrings($string, $expected)
+    public function testFilterUnderscoresNonUnicodeStrings($string, $expected): void
     {
         $filter   = new CamelCaseToUnderscoreFilter();
 
@@ -45,10 +48,13 @@ class CamelCaseToUnderscoreFilterTest extends TestCase
 
     /**
      * @dataProvider unicodeProvider
+     *
      * @param string $string
      * @param string $expected
+     *
+     * @return void
      */
-    public function testFilterUnderscoresUnicodeStrings($string, $expected)
+    public function testFilterUnderscoresUnicodeStrings($string, $expected): void
     {
         if (! extension_loaded('mbstring')) {
             $this->markTestSkipped('Extension mbstring not available');
@@ -64,10 +70,13 @@ class CamelCaseToUnderscoreFilterTest extends TestCase
 
     /**
      * @dataProvider unicodeProviderWithoutMbStrings
+     *
      * @param string $string
      * @param string $expected
+     *
+     * @return void
      */
-    public function testFilterUnderscoresUnicodeStringsWithoutMbStrings($string, $expected)
+    public function testFilterUnderscoresUnicodeStringsWithoutMbStrings($string, $expected): void
     {
         $filter   = new CamelCaseToUnderscoreFilter();
 
@@ -82,7 +91,12 @@ class CamelCaseToUnderscoreFilterTest extends TestCase
         $this->assertEquals($expected, $filtered);
     }
 
-    public function nonUnicodeProvider()
+    /**
+     * @return string[][]
+     *
+     * @psalm-return array<string, array{0: string, 1: string}>
+     */
+    public function nonUnicodeProvider(): array
     {
         return [
             'upcased first letter' => [
@@ -112,7 +126,12 @@ class CamelCaseToUnderscoreFilterTest extends TestCase
         ];
     }
 
-    public function unicodeProvider()
+    /**
+     * @return string[][]
+     *
+     * @psalm-return array<string, array{0: string, 1: string}>
+     */
+    public function unicodeProvider(): array
     {
         return [
             'upcased first letter' => [
@@ -142,7 +161,12 @@ class CamelCaseToUnderscoreFilterTest extends TestCase
         ];
     }
 
-    public function unicodeProviderWithoutMbStrings()
+    /**
+     * @return string[][]
+     *
+     * @psalm-return array<string, array{0: string, 1: string}>
+     */
+    public function unicodeProviderWithoutMbStrings(): array
     {
         return [
             'upcased first letter' => [

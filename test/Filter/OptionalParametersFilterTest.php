@@ -41,8 +41,10 @@ class OptionalParametersFilterTest extends TestCase
      * @param bool   $expectedResult
      *
      * @dataProvider methodProvider
+     *
+     * @return void
      */
-    public function testMethods($method, $expectedResult)
+    public function testMethods($method, $expectedResult): void
     {
         $this->assertSame($expectedResult, $this->filter->filter($method));
     }
@@ -55,15 +57,17 @@ class OptionalParametersFilterTest extends TestCase
      * @param bool   $expectedResult
      *
      * @dataProvider methodProvider
+     *
+     * @return void
      */
-    public function testMethodsOnSubsequentCalls($method, $expectedResult)
+    public function testMethodsOnSubsequentCalls($method, $expectedResult): void
     {
         for ($i = 0; $i < 5; $i += 1) {
             $this->assertSame($expectedResult, $this->filter->filter($method));
         }
     }
 
-    public function testTriggersExceptionOnUnknownMethod()
+    public function testTriggersExceptionOnUnknownMethod(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->filter->filter(__CLASS__ . '::' . 'nonExistingMethod');
@@ -87,36 +91,46 @@ class OptionalParametersFilterTest extends TestCase
 
     /**
      * Test asset method
+     *
+     * @return void
      */
-    public function methodWithoutParameters()
+    public function methodWithoutParameters(): void
     {
     }
 
     /**
      * Test asset method
+     *
+     * @return void
      */
-    public function methodWithSingleMandatoryParameter($parameter)
+    public function methodWithSingleMandatoryParameter($parameter): void
     {
     }
 
     /**
      * Test asset method
+     *
+     * @return void
      */
-    public function methodWithSingleOptionalParameter($parameter = null)
+    public function methodWithSingleOptionalParameter($parameter = null): void
     {
     }
 
     /**
      * Test asset method
+     *
+     * @return void
      */
-    public function methodWithMultipleMandatoryParameters($parameter, $otherParameter)
+    public function methodWithMultipleMandatoryParameters($parameter, $otherParameter): void
     {
     }
 
     /**
      * Test asset method
+     *
+     * @return void
      */
-    public function methodWithMultipleOptionalParameters($parameter = null, $otherParameter = null)
+    public function methodWithMultipleOptionalParameters($parameter = null, $otherParameter = null): void
     {
     }
 }

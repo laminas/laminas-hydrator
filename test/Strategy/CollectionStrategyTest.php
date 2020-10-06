@@ -39,7 +39,7 @@ use function sprintf;
  */
 class CollectionStrategyTest extends TestCase
 {
-    public function testImplementsStrategyInterface()
+    public function testImplementsStrategyInterface(): void
     {
         $reflection = new ReflectionClass(CollectionStrategy::class);
 
@@ -54,12 +54,14 @@ class CollectionStrategyTest extends TestCase
      * @dataProvider providerInvalidObjectClassName
      *
      * @param mixed $objectClassName
+     *
+     * @return void
      */
     public function testConstructorRejectsInvalidObjectClassName(
         $objectClassName,
         string $expectedExceptionType,
         string $expectedExceptionMessage
-    ) {
+    ): void {
         $this->expectException($expectedExceptionType);
         $this->expectExceptionMessage($expectedExceptionMessage);
 
@@ -90,8 +92,10 @@ class CollectionStrategyTest extends TestCase
      * @dataProvider providerInvalidValueForExtraction
      *
      * @param mixed $value
+     *
+     * @return void
      */
-    public function testExtractRejectsInvalidValue($value)
+    public function testExtractRejectsInvalidValue($value): void
     {
         $strategy = new CollectionStrategy(
             $this->createHydratorMock(),
@@ -132,8 +136,10 @@ class CollectionStrategyTest extends TestCase
      * @dataProvider providerInvalidObjectForExtraction
      *
      * @param mixed $object
+     *
+     * @return void
      */
-    public function testExtractRejectsInvalidObject($object)
+    public function testExtractRejectsInvalidObject($object): void
     {
         $value = [$object];
 
@@ -173,7 +179,7 @@ class CollectionStrategyTest extends TestCase
         }
     }
 
-    public function testExtractUsesHydratorToExtractValues()
+    public function testExtractUsesHydratorToExtractValues(): void
     {
         $value = [
             new TestAsset\User(),
@@ -181,7 +187,12 @@ class CollectionStrategyTest extends TestCase
             new TestAsset\User(),
         ];
 
-        $extraction = function (TestAsset\User $value) {
+        $extraction = /**
+         * @return string[]
+         *
+         * @psalm-return array{value: string}
+         */
+        function (TestAsset\User $value): array {
             return [
                 'value' => spl_object_hash($value)
             ];
@@ -208,8 +219,10 @@ class CollectionStrategyTest extends TestCase
      * @dataProvider providerInvalidValueForHydration
      *
      * @param mixed $value
+     *
+     * @return void
      */
-    public function testHydrateRejectsInvalidValue($value)
+    public function testHydrateRejectsInvalidValue($value): void
     {
         $strategy = new CollectionStrategy(
             $this->createHydratorMock(),
@@ -246,7 +259,7 @@ class CollectionStrategyTest extends TestCase
         }
     }
 
-    public function testHydrateUsesHydratorToHydrateValues()
+    public function testHydrateUsesHydratorToHydrateValues(): void
     {
         $value = [
             ['name' => 'Suzie Q.'],

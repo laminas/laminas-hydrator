@@ -24,8 +24,10 @@ class IdentityNamingStrategyTest extends TestCase
      * @dataProvider getTestedNames
      *
      * @param string $name
+     *
+     * @return void
      */
-    public function testHydrate($name)
+    public function testHydrate($name): void
     {
         $namingStrategy = new IdentityNamingStrategy();
 
@@ -36,8 +38,10 @@ class IdentityNamingStrategyTest extends TestCase
      * @dataProvider getTestedNames
      *
      * @param string $name
+     *
+     * @return void
      */
-    public function testExtract($name)
+    public function testExtract($name): void
     {
         $namingStrategy = new IdentityNamingStrategy();
 

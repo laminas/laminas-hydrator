@@ -21,8 +21,10 @@ class HydrateEventTest extends TestCase
 {
     /**
      * @covers \Laminas\Hydrator\Aggregate\HydrateEvent
+     *
+     * @return void
      */
-    public function testEvent()
+    public function testEvent(): void
     {
         $target    = new stdClass();
         $hydrated1 = new stdClass();

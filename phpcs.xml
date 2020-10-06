@@ -10,6 +10,12 @@
         <exclude-pattern>src/Reflection.php</exclude-pattern>
     </rule>
 
+    <rule ref="Generic.Files.LineLength.TooLong">
+        <exclude-pattern>test/DelegatingHydratorFactoryTest.php</exclude-pattern>
+        <exclude-pattern>test/Filter/FilterCompositeTest.php</exclude-pattern>
+        <exclude-pattern>test/NamingStrategy/MapNamingStrategyTest.php</exclude-pattern>
+    </rule>
+
     <!-- Paths to check -->
     <file>src</file>
     <file>test</file>

@@ -19,14 +19,14 @@ use PHPUnit\Framework\TestCase;
  */
 class StrategyChainTest extends TestCase
 {
-    public function testEmptyStrategyChainReturnsOriginalValue()
+    public function testEmptyStrategyChainReturnsOriginalValue(): void
     {
         $chain = new StrategyChain([]);
         $this->assertEquals('something', $chain->hydrate('something'));
         $this->assertEquals('something', $chain->extract('something'));
     }
 
-    public function testExtract()
+    public function testExtract(): void
     {
         $chain = new StrategyChain([
             new ClosureStrategy(
@@ -71,7 +71,7 @@ class StrategyChainTest extends TestCase
         $this->assertEquals(2, $chain->extract(30));
     }
 
-    public function testHydrate()
+    public function testHydrate(): void
     {
         $chain = new StrategyChain([
             new ClosureStrategy(

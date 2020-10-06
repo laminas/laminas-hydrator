@@ -31,13 +31,13 @@ class HydratorStrategyEntityB
         return $this->field2;
     }
 
-    public function setField1($value)
+    public function setField1($value): self
     {
         $this->field1 = $value;
         return $this;
     }
 
-    public function setField2($value)
+    public function setField2($value): self
     {
         $this->field2 = $value;
         return $this;

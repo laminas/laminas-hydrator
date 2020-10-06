@@ -25,6 +25,9 @@ class HydratorPluginManagerCompatibilityTest extends TestCase
         return new HydratorPluginManager(new ServiceManager());
     }
 
+    /**
+     * @return void
+     */
     protected function getV2InvalidPluginException()
     {
         // no-op

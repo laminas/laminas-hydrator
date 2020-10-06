@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
  */
 class HydratorAwareTraitTest extends TestCase
 {
-    public function testSetHydrator()
+    public function testSetHydrator(): void
     {
         $object = $this->getObjectForTrait('\Laminas\Hydrator\HydratorAwareTrait');
 
@@ -30,7 +30,7 @@ class HydratorAwareTraitTest extends TestCase
         $this->assertSame($hydrator, $object->getHydrator());
     }
 
-    public function testGetHydrator()
+    public function testGetHydrator(): void
     {
         $object = $this->getObjectForTrait('\Laminas\Hydrator\HydratorAwareTrait');
 

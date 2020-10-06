@@ -21,8 +21,10 @@ class ExtractEventTest extends TestCase
 {
     /**
      * @covers \Laminas\Hydrator\Aggregate\ExtractEvent
+     *
+     * @return void
      */
-    public function testEvent()
+    public function testEvent(): void
     {
         $target    = new stdClass();
         $object1   = new stdClass();

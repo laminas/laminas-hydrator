@@ -27,17 +27,23 @@ class ClassMethodsInvalidParameter
         return $bar;
     }
 
-    public function hasBar()
+    /**
+     * @return true
+     */
+    public function hasBar(): bool
     {
         return true;
     }
 
-    public function getFoo()
+    public function getFoo(): string
     {
         return "Bar";
     }
 
-    public function isBla()
+    /**
+     * @return false
+     */
+    public function isBla(): bool
     {
         return false;
     }

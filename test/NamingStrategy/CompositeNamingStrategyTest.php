@@ -21,7 +21,7 @@ use PHPUnit\Framework\TestCase;
  */
 class CompositeNamingStrategyTest extends TestCase
 {
-    public function testGetSameNameWhenNoNamingStrategyExistsForTheName()
+    public function testGetSameNameWhenNoNamingStrategyExistsForTheName(): void
     {
         $compositeNamingStrategy = new CompositeNamingStrategy([
             'foo' => $this->createMock(NamingStrategyInterface::class)
@@ -31,7 +31,7 @@ class CompositeNamingStrategyTest extends TestCase
         $this->assertEquals('bar', $compositeNamingStrategy->extract('bar'));
     }
 
-    public function testUseDefaultNamingStrategy()
+    public function testUseDefaultNamingStrategy(): void
     {
         /* @var $defaultNamingStrategy NamingStrategyInterface|\PHPUnit_Framework_MockObject_MockObject*/
         $defaultNamingStrategy = $this->createMock(NamingStrategyInterface::class);
@@ -52,7 +52,7 @@ class CompositeNamingStrategyTest extends TestCase
         $this->assertEquals('foo', $compositeNamingStrategy->extract('Foo'));
     }
 
-    public function testHydrate()
+    public function testHydrate(): void
     {
         $fooNamingStrategy = $this->createMock(NamingStrategyInterface::class);
         $fooNamingStrategy->expects($this->once())
@@ -63,7 +63,7 @@ class CompositeNamingStrategyTest extends TestCase
         $this->assertEquals('FOO', $compositeNamingStrategy->hydrate('foo'));
     }
 
-    public function testExtract()
+    public function testExtract(): void
     {
         $fooNamingStrategy = $this->createMock(NamingStrategyInterface::class);
         $fooNamingStrategy->expects($this->once())

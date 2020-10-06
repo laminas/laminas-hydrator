@@ -41,7 +41,7 @@ class StandaloneHydratorPluginManagerFactoryTest extends TestCase
     public function assertDefaultServices(
         StandaloneHydratorPluginManager $manager,
         string $message = self::MESSAGE_DEFAULT_SERVICES
-    ) {
+    ): void {
         $this->assertTrue($manager->has('ArraySerializable'), sprintf($message, 'ArraySerializable'));
         $this->assertTrue($manager->has('ArraySerializableHydrator'), sprintf($message, 'ArraySerializableHydrator'));
         $this->assertTrue($manager->has(ArraySerializable::class), sprintf($message, ArraySerializable::class));
@@ -72,7 +72,7 @@ class StandaloneHydratorPluginManagerFactoryTest extends TestCase
         $this->assertTrue($manager->has(ReflectionHydrator::class), sprintf($message, ReflectionHydrator::class));
     }
 
-    public function testCreatesPluginManagerWithDefaultServices()
+    public function testCreatesPluginManagerWithDefaultServices(): void
     {
         $manager = ($this->factory)($this->container);
         $this->assertDefaultServices($manager);

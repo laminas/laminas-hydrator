@@ -157,7 +157,12 @@ class HydratorStrategyTest extends TestCase
     {
         $value = new TestAsset\User();
 
-        $extraction = static function (TestAsset\User $value) {
+        $extraction = /**
+         * @return string[]
+         *
+         * @psalm-return array{value: string}
+         */
+        static function (TestAsset\User $value): array {
             return [
                 'value' => spl_object_hash($value),
             ];

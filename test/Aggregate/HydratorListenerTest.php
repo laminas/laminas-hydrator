@@ -46,8 +46,10 @@ class HydratorListenerTest extends TestCase
 
     /**
      * @covers \Laminas\Hydrator\Aggregate\HydratorListener::attach
+     *
+     * @return void
      */
-    public function testAttach()
+    public function testAttach(): void
     {
         $eventManager = $this->createMock(EventManagerInterface::class);
 
@@ -67,8 +69,10 @@ class HydratorListenerTest extends TestCase
 
     /**
      * @covers \Laminas\Hydrator\Aggregate\HydratorListener::onHydrate
+     *
+     * @return void
      */
-    public function testOnHydrate()
+    public function testOnHydrate(): void
     {
         $object   = new stdClass();
         $hydrated = new stdClass();
@@ -94,8 +98,10 @@ class HydratorListenerTest extends TestCase
 
     /**
      * @covers \Laminas\Hydrator\Aggregate\HydratorListener::onExtract
+     *
+     * @return void
      */
-    public function testOnExtract()
+    public function testOnExtract(): void
     {
         $object = new stdClass();
         $data   = ['foo' => 'bar'];

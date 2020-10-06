@@ -47,8 +47,10 @@ class AggregateHydratorTest extends TestCase
 
     /**
      * @covers \Laminas\Hydrator\Aggregate\AggregateHydrator::add
+     *
+     * @return void
      */
-    public function testAdd()
+    public function testAdd(): void
     {
         $attached = $this->createMock(HydratorInterface::class);
 
@@ -65,8 +67,10 @@ class AggregateHydratorTest extends TestCase
 
     /**
      * @covers \Laminas\Hydrator\Aggregate\AggregateHydrator::hydrate
+     *
+     * @return void
      */
-    public function testHydrate()
+    public function testHydrate(): void
     {
         $object = new stdClass();
 
@@ -80,8 +84,10 @@ class AggregateHydratorTest extends TestCase
 
     /**
      * @covers \Laminas\Hydrator\Aggregate\AggregateHydrator::extract
+     *
+     * @return void
      */
-    public function testExtract()
+    public function testExtract(): void
     {
         $object = new stdClass();
 
@@ -96,8 +102,10 @@ class AggregateHydratorTest extends TestCase
     /**
      * @covers \Laminas\Hydrator\Aggregate\AggregateHydrator::getEventManager
      * @covers \Laminas\Hydrator\Aggregate\AggregateHydrator::setEventManager
+     *
+     * @return void
      */
-    public function testGetSetManager()
+    public function testGetSetManager(): void
     {
         $hydrator     = new AggregateHydrator();
         $eventManager = $this->createMock(EventManager::class);

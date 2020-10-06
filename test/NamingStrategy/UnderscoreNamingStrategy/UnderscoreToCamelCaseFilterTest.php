@@ -25,10 +25,13 @@ class UnderscoreToCamelCaseFilterTest extends TestCase
 {
     /**
      * @dataProvider nonUnicodeProvider
+     *
      * @param string $string
      * @param string $expected
+     *
+     * @return void
      */
-    public function testFilterCamelCasesNonUnicodeStrings($string, $expected)
+    public function testFilterCamelCasesNonUnicodeStrings($string, $expected): void
     {
         $filter   = new UnderscoreToCamelCaseFilter();
 
@@ -43,7 +46,12 @@ class UnderscoreToCamelCaseFilterTest extends TestCase
         $this->assertEquals($expected, $filtered);
     }
 
-    public function nonUnicodeProvider()
+    /**
+     * @return string[][]
+     *
+     * @psalm-return array<string, array{0: string, 1: string}>
+     */
+    public function nonUnicodeProvider(): array
     {
         return [
             'one word' => [
@@ -67,10 +75,13 @@ class UnderscoreToCamelCaseFilterTest extends TestCase
 
     /**
      * @dataProvider unicodeProvider
+     *
      * @param string $string
      * @param string $expected
+     *
+     * @return void
      */
-    public function testFilterCamelCasesUnicodeStrings($string, $expected)
+    public function testFilterCamelCasesUnicodeStrings($string, $expected): void
     {
         if (! extension_loaded('mbstring')) {
             $this->markTestSkipped('Extension mbstring not available');
@@ -83,7 +94,12 @@ class UnderscoreToCamelCaseFilterTest extends TestCase
         $this->assertEquals($expected, $filtered);
     }
 
-    public function unicodeProvider()
+    /**
+     * @return string[][]
+     *
+     * @psalm-return array<string, array{0: string, 1: string}>
+     */
+    public function unicodeProvider(): array
     {
         return [
             'uppercase first letter' => [
@@ -115,13 +131,16 @@ class UnderscoreToCamelCaseFilterTest extends TestCase
 
     /**
      * @dataProvider unicodeWithoutMbStringsProvider
+     *
      * @param string $string
      * @param string $expected
+     *
+     * @return void
      */
     public function testFilterCamelCasesUnicodeStringsWithoutMbStrings(
         $string,
         $expected
-    ) {
+    ): void {
 
         $filter   = new UnderscoreToCamelCaseFilter();
 
@@ -134,7 +153,12 @@ class UnderscoreToCamelCaseFilterTest extends TestCase
         $this->assertEquals($expected, $filtered);
     }
 
-    public function unicodeWithoutMbStringsProvider()
+    /**
+     * @return string[][]
+     *
+     * @psalm-return array<string, array{0: string, 1: string}>
+     */
+    public function unicodeWithoutMbStringsProvider(): array
     {
         return [
             'multiple words' => [

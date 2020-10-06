@@ -21,17 +21,17 @@ use PHPUnit\Framework\TestCase;
  */
 class BooleanStrategyTest extends TestCase
 {
-    public function testConstructorWithValidInteger()
+    public function testConstructorWithValidInteger(): void
     {
         $this->assertInstanceOf(BooleanStrategy::class, new BooleanStrategy(1, 0));
     }
 
-    public function testConstructorWithValidString()
+    public function testConstructorWithValidString(): void
     {
         $this->assertInstanceOf(BooleanStrategy::class, new BooleanStrategy('true', 'false'));
     }
 
-    public function testExceptionOnWrongTrueValueInConstructor()
+    public function testExceptionOnWrongTrueValueInConstructor(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Expected int or string as $trueValue.');
@@ -39,7 +39,7 @@ class BooleanStrategyTest extends TestCase
         new BooleanStrategy(true, 0);
     }
 
-    public function testExceptionOnWrongFalseValueInConstructor()
+    public function testExceptionOnWrongFalseValueInConstructor(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Expected int or string as $falseValue.');
@@ -47,14 +47,14 @@ class BooleanStrategyTest extends TestCase
         new BooleanStrategy(1, false);
     }
 
-    public function testExtractString()
+    public function testExtractString(): void
     {
         $hydrator = new BooleanStrategy('true', 'false');
         $this->assertEquals('true', $hydrator->extract(true));
         $this->assertEquals('false', $hydrator->extract(false));
     }
 
-    public function testExtractInteger()
+    public function testExtractInteger(): void
     {
         $hydrator = new BooleanStrategy(1, 0);
 
@@ -62,7 +62,7 @@ class BooleanStrategyTest extends TestCase
         $this->assertEquals(0, $hydrator->extract(false));
     }
 
-    public function testExtractThrowsExceptionOnUnknownValue()
+    public function testExtractThrowsExceptionOnUnknownValue(): void
     {
         $hydrator = new BooleanStrategy(1, 0);
 
@@ -72,28 +72,28 @@ class BooleanStrategyTest extends TestCase
         $hydrator->extract(5);
     }
 
-    public function testHydrateString()
+    public function testHydrateString(): void
     {
         $hydrator = new BooleanStrategy('true', 'false');
         $this->assertEquals(true, $hydrator->hydrate('true'));
         $this->assertEquals(false, $hydrator->hydrate('false'));
     }
 
-    public function testHydrateInteger()
+    public function testHydrateInteger(): void
     {
         $hydrator = new BooleanStrategy(1, 0);
         $this->assertEquals(true, $hydrator->hydrate(1));
         $this->assertEquals(false, $hydrator->hydrate(0));
     }
 
-    public function testHydrateBool()
+    public function testHydrateBool(): void
     {
         $hydrator = new BooleanStrategy(1, 0);
         $this->assertEquals(true, $hydrator->hydrate(true));
         $this->assertEquals(false, $hydrator->hydrate(false));
     }
 
-    public function testHydrateUnexpectedValueThrowsException()
+    public function testHydrateUnexpectedValueThrowsException(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Unexpected value');
@@ -101,7 +101,7 @@ class BooleanStrategyTest extends TestCase
         $hydrator->hydrate(2);
     }
 
-    public function testHydrateInvalidArgument()
+    public function testHydrateInvalidArgument(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Unable to hydrate');

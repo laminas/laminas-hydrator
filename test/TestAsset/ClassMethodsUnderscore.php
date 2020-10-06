@@ -29,7 +29,7 @@ class ClassMethodsUnderscore
         return $this->foo_bar;
     }
 
-    public function setFooBar($value)
+    public function setFooBar($value): self
     {
         $this->foo_bar = $value;
         return $this;
@@ -40,7 +40,7 @@ class ClassMethodsUnderscore
         return $this->foo_bar_baz;
     }
 
-    public function setFooBarBaz($value)
+    public function setFooBarBaz($value): self
     {
         $this->foo_bar_baz = $value;
         return $this;
@@ -51,7 +51,7 @@ class ClassMethodsUnderscore
         return $this->is_foo;
     }
 
-    public function setIsFoo($value)
+    public function setIsFoo($value): self
     {
         $this->is_foo = $value;
         return $this;
@@ -62,7 +62,7 @@ class ClassMethodsUnderscore
         return $this->is_bar;
     }
 
-    public function setIsBar($value)
+    public function setIsBar($value): self
     {
         $this->is_bar = $value;
         return $this;
@@ -73,7 +73,7 @@ class ClassMethodsUnderscore
         return $this->has_foo;
     }
 
-    public function setHasFoo($value)
+    public function setHasFoo($value): self
     {
         $this->has_foo = $value;
         return $this;
@@ -84,7 +84,7 @@ class ClassMethodsUnderscore
         return $this->has_bar;
     }
 
-    public function setHasBar($value)
+    public function setHasBar($value): self
     {
         $this->has_bar = $value;
         return $this;

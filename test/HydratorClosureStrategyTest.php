@@ -31,7 +31,7 @@ class HydratorClosureStrategyTest extends TestCase
         $this->hydrator = new ObjectPropertyHydrator();
     }
 
-    public function testAddingStrategy()
+    public function testAddingStrategy(): void
     {
         $this->assertFalse($this->hydrator->hasStrategy('myStrategy'));
 
@@ -40,19 +40,19 @@ class HydratorClosureStrategyTest extends TestCase
         $this->assertTrue($this->hydrator->hasStrategy('myStrategy'));
     }
 
-    public function testCheckStrategyEmpty()
+    public function testCheckStrategyEmpty(): void
     {
         $this->assertFalse($this->hydrator->hasStrategy('myStrategy'));
     }
 
-    public function testCheckStrategyNotEmpty()
+    public function testCheckStrategyNotEmpty(): void
     {
         $this->hydrator->addStrategy('myStrategy', new ClosureStrategy());
 
         $this->assertTrue($this->hydrator->hasStrategy('myStrategy'));
     }
 
-    public function testRemovingStrategy()
+    public function testRemovingStrategy(): void
     {
         $this->assertFalse($this->hydrator->hasStrategy('myStrategy'));
 
@@ -63,7 +63,7 @@ class HydratorClosureStrategyTest extends TestCase
         $this->assertFalse($this->hydrator->hasStrategy('myStrategy'));
     }
 
-    public function testRetrieveStrategy()
+    public function testRetrieveStrategy(): void
     {
         $strategy = new ClosureStrategy();
         $this->hydrator->addStrategy('myStrategy', $strategy);
@@ -71,7 +71,7 @@ class HydratorClosureStrategyTest extends TestCase
         $this->assertEquals($strategy, $this->hydrator->getStrategy('myStrategy'));
     }
 
-    public function testExtractingObjects()
+    public function testExtractingObjects(): void
     {
         $this->hydrator->addStrategy('field1', new ClosureStrategy(
             function ($value) {
@@ -93,7 +93,7 @@ class HydratorClosureStrategyTest extends TestCase
         $this->assertEquals('hello, world!', $values['field2']);
     }
 
-    public function testHydratingObjects()
+    public function testHydratingObjects(): void
     {
         $this->hydrator->addStrategy('field2', new ClosureStrategy(
             null,

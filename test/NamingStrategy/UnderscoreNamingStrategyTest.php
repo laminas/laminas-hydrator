@@ -20,13 +20,13 @@ use PHPUnit\Framework\TestCase;
  */
 class UnderscoreNamingStrategyTest extends TestCase
 {
-    public function testNameHydratesToCamelCase()
+    public function testNameHydratesToCamelCase(): void
     {
         $strategy = new UnderscoreNamingStrategy();
         $this->assertEquals('fooBarBaz', $strategy->hydrate('foo_bar_baz'));
     }
 
-    public function testNameExtractsToUnderscore()
+    public function testNameExtractsToUnderscore(): void
     {
         $strategy = new UnderscoreNamingStrategy();
         $this->assertEquals('foo_bar_baz', $strategy->extract('fooBarBaz'));
@@ -35,8 +35,10 @@ class UnderscoreNamingStrategyTest extends TestCase
     /**
      * @group 6422
      * @group 6420
+     *
+     * @return void
      */
-    public function testNameHydratesToStudlyCaps()
+    public function testNameHydratesToStudlyCaps(): void
     {
         $strategy = new UnderscoreNamingStrategy();
 

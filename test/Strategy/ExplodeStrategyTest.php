@@ -30,8 +30,10 @@ class ExplodeStrategyTest extends TestCase
      * @param string   $expected
      * @param string   $delimiter
      * @param string[] $extractValue
+     *
+     * @return void
      */
-    public function testExtract($expected, $delimiter, $extractValue)
+    public function testExtract($expected, $delimiter, $extractValue): void
     {
         $strategy = new ExplodeStrategy($delimiter);
 
@@ -42,7 +44,7 @@ class ExplodeStrategyTest extends TestCase
         }
     }
 
-    public function testGetExceptionWithInvalidArgumentOnExtraction()
+    public function testGetExceptionWithInvalidArgumentOnExtraction(): void
     {
         $strategy = new ExplodeStrategy();
 
@@ -51,28 +53,28 @@ class ExplodeStrategyTest extends TestCase
         $strategy->extract('');
     }
 
-    public function testGetEmptyArrayWhenHydratingNullValue()
+    public function testGetEmptyArrayWhenHydratingNullValue(): void
     {
         $strategy = new ExplodeStrategy();
 
         $this->assertSame([], $strategy->hydrate(null));
     }
 
-    public function testGetExceptionWithEmptyDelimiter()
+    public function testGetExceptionWithEmptyDelimiter(): void
     {
         $this->expectException(InvalidArgumentException::class);
 
         new ExplodeStrategy('');
     }
 
-    public function testGetExceptionWithInvalidDelimiter()
+    public function testGetExceptionWithInvalidDelimiter(): void
     {
         $this->expectException(TypeError::class);
 
         new ExplodeStrategy([]);
     }
 
-    public function testHydrateWithExplodeLimit()
+    public function testHydrateWithExplodeLimit(): void
     {
         $strategy = new ExplodeStrategy('-', 2);
         $this->assertSame(['foo', 'bar-baz-bat'], $strategy->hydrate('foo-bar-baz-bat'));
@@ -81,7 +83,7 @@ class ExplodeStrategyTest extends TestCase
         $this->assertSame(['foo', 'bar', 'baz-bat'], $strategy->hydrate('foo-bar-baz-bat'));
     }
 
-    public function testHydrateWithInvalidScalarType()
+    public function testHydrateWithInvalidScalarType(): void
     {
         $strategy = new ExplodeStrategy();
 
@@ -94,7 +96,7 @@ class ExplodeStrategyTest extends TestCase
         $strategy->hydrate([]);
     }
 
-    public function testHydrateWithInvalidObjectType()
+    public function testHydrateWithInvalidObjectType(): void
     {
         $strategy = new ExplodeStrategy();
 
@@ -107,7 +109,7 @@ class ExplodeStrategyTest extends TestCase
         $strategy->hydrate(new \stdClass());
     }
 
-    public function testExtractWithInvalidObjectType()
+    public function testExtractWithInvalidObjectType(): void
     {
         $strategy = new ExplodeStrategy();
 
@@ -126,8 +128,10 @@ class ExplodeStrategyTest extends TestCase
      * @param mixed    $value
      * @param string   $delimiter
      * @param string[] $expected
+     *
+     * @return void
      */
-    public function testHydration($value, $delimiter, array $expected)
+    public function testHydration($value, $delimiter, array $expected): void
     {
         $strategy = new ExplodeStrategy($delimiter);
 

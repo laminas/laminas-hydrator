@@ -54,8 +54,10 @@ class StandaloneHydratorPluginManagerTest extends TestCase
 
     /**
      * @dataProvider hydratorsWithoutConstructors
+     *
+     * @return void
      */
-    public function testInstantiationInitializesFactoriesForHydratorsWithoutConstructorArguments(string $class)
+    public function testInstantiationInitializesFactoriesForHydratorsWithoutConstructorArguments(string $class): void
     {
         $factories = $this->reflectProperty($this->manager, 'factories');
 
@@ -63,7 +65,7 @@ class StandaloneHydratorPluginManagerTest extends TestCase
         $this->assertInstanceOf(Closure::class, $factories[$class]);
     }
 
-    public function testDelegatingHydratorFactoryIsInitialized()
+    public function testDelegatingHydratorFactoryIsInitialized(): void
     {
         $factories = $this->reflectProperty($this->manager, 'factories');
         $this->assertInstanceOf(
@@ -72,7 +74,7 @@ class StandaloneHydratorPluginManagerTest extends TestCase
         );
     }
 
-    public function testHasReturnsFalseForUnknownNames()
+    public function testHasReturnsFalseForUnknownNames(): void
     {
         $this->assertFalse($this->manager->has('unknown-service-name'));
     }
@@ -94,13 +96,15 @@ class StandaloneHydratorPluginManagerTest extends TestCase
 
     /**
      * @dataProvider knownServices
+     *
+     * @return void
      */
-    public function testHasReturnsTrueForKnownServices(string $service)
+    public function testHasReturnsTrueForKnownServices(string $service): void
     {
         $this->assertTrue($this->manager->has($service));
     }
 
-    public function testGetRaisesExceptionForUnknownService()
+    public function testGetRaisesExceptionForUnknownService(): void
     {
         $this->expectException(Hydrator\Exception\MissingHydratorServiceException::class);
         $this->manager->get('unknown-service-name');
@@ -108,8 +112,10 @@ class StandaloneHydratorPluginManagerTest extends TestCase
 
     /**
      * @dataProvider knownServices
+     *
+     * @return void
      */
-    public function testGetReturnsExpectedTypesForKnownServices(string $service, string $expectedType)
+    public function testGetReturnsExpectedTypesForKnownServices(string $service, string $expectedType): void
     {
         $instance = $this->manager->get($service);
         $this->assertInstanceOf($expectedType, $instance);

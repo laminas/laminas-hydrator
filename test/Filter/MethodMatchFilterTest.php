@@ -15,7 +15,12 @@ use PHPUnit\Framework\TestCase;
 
 class MethodMatchFilterTest extends TestCase
 {
-    public function providerFilter()
+    /**
+     * @return (bool|string)[][]
+     *
+     * @psalm-return list<array{0: string, 1: bool}>
+     */
+    public function providerFilter(): array
     {
         return [
             ['foo', true,],
@@ -27,8 +32,10 @@ class MethodMatchFilterTest extends TestCase
 
     /**
      * @dataProvider providerFilter
+     *
+     * @return void
      */
-    public function testFilter($methodName, $expected)
+    public function testFilter($methodName, $expected): void
     {
         $testedInstance = new MethodMatchFilter('foo', false);
         self::assertEquals($expected, $testedInstance->filter($methodName));

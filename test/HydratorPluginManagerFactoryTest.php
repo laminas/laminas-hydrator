@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
 
 class HydratorPluginManagerFactoryTest extends TestCase
 {
-    public function testFactoryReturnsPluginManager()
+    public function testFactoryReturnsPluginManager(): void
     {
         $container = $this->createMock(ContainerInterface::class);
         $factory = new HydratorPluginManagerFactory();
@@ -31,8 +31,10 @@ class HydratorPluginManagerFactoryTest extends TestCase
 
     /**
      * @depends testFactoryReturnsPluginManager
+     *
+     * @return void
      */
-    public function testFactoryConfiguresPluginManagerUnderContainerInterop()
+    public function testFactoryConfiguresPluginManagerUnderContainerInterop(): void
     {
         $container = $this->createMock(ContainerInterface::class);
         $hydrator = $this->createMock(HydratorInterface::class);
@@ -46,7 +48,7 @@ class HydratorPluginManagerFactoryTest extends TestCase
         $this->assertSame($hydrator, $hydrators->get('test'));
     }
 
-    public function testConfiguresHydratorServicesWhenFound()
+    public function testConfiguresHydratorServicesWhenFound(): void
     {
         $hydrator = $this->createMock(HydratorInterface::class);
         $config = [
@@ -55,7 +57,8 @@ class HydratorPluginManagerFactoryTest extends TestCase
                     'test' => ReflectionHydrator::class,
                 ],
                 'factories' => [
-                    'test-too' => function ($container) use ($hydrator) {
+                    /** @psalm-return \PHPUnit\Framework\MockObject\MockObject&HydratorInterface */
+                    'test-too' => function ($container) use ($hydrator): HydratorInterface {
                         return $hydrator;
                     },
                 ],
@@ -90,7 +93,7 @@ class HydratorPluginManagerFactoryTest extends TestCase
         $this->assertSame($hydrator, $hydrators->get('test-too'));
     }
 
-    public function testDoesNotConfigureHydratorServicesWhenServiceListenerPresent()
+    public function testDoesNotConfigureHydratorServicesWhenServiceListenerPresent(): void
     {
         $container = $this->createMock(ServiceLocatorInterface::class);
         $container
@@ -116,7 +119,7 @@ class HydratorPluginManagerFactoryTest extends TestCase
         $this->assertFalse($hydrators->has('test-too'));
     }
 
-    public function testDoesNotConfigureHydratorServicesWhenConfigServiceNotPresent()
+    public function testDoesNotConfigureHydratorServicesWhenConfigServiceNotPresent(): void
     {
         $container = $this->createMock(ServiceLocatorInterface::class);
         $container
@@ -140,7 +143,7 @@ class HydratorPluginManagerFactoryTest extends TestCase
         $this->assertInstanceOf(HydratorPluginManager::class, $hydrators);
     }
 
-    public function testDoesNotConfigureHydratorServicesWhenConfigServiceDoesNotContainHydratorsConfig()
+    public function testDoesNotConfigureHydratorServicesWhenConfigServiceDoesNotContainHydratorsConfig(): void
     {
         $container = $this->createMock(ServiceLocatorInterface::class);
         $container

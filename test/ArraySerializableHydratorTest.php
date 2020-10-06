@@ -42,8 +42,10 @@ class ArraySerializableHydratorTest extends TestCase
 
     /**
      * Verify that we get an exception when trying to extract on a non-object
+     *
+     * @return void
      */
-    public function testHydratorExtractThrowsExceptionOnNonObjectParameter()
+    public function testHydratorExtractThrowsExceptionOnNonObjectParameter(): void
     {
         $this->expectException(TypeError::class);
         $this->expectExceptionMessage('object');
@@ -52,8 +54,10 @@ class ArraySerializableHydratorTest extends TestCase
 
     /**
      * Verify that we get an exception when trying to hydrate a non-object
+     *
+     * @return void
      */
-    public function testHydratorHydrateThrowsExceptionOnNonObjectParameter()
+    public function testHydratorHydrateThrowsExceptionOnNonObjectParameter(): void
     {
         $this->expectException(TypeError::class);
         $this->expectExceptionMessage('object');
@@ -62,8 +66,10 @@ class ArraySerializableHydratorTest extends TestCase
 
     /**
      * Verifies that we can extract from an ArraySerializableInterface
+     *
+     * @return void
      */
-    public function testCanExtractFromArraySerializableObject()
+    public function testCanExtractFromArraySerializableObject(): void
     {
         $this->assertSame(
             [
@@ -78,8 +84,10 @@ class ArraySerializableHydratorTest extends TestCase
 
     /**
      * Verifies we can hydrate an ArraySerializableInterface
+     *
+     * @return void
      */
-    public function testCanHydrateToArraySerializableObject()
+    public function testCanHydrateToArraySerializableObject(): void
     {
         $data = [
             'foo'   => 'bar1',
@@ -98,8 +106,10 @@ class ArraySerializableHydratorTest extends TestCase
      * existing properties should get overwritten
      *
      * @group 65
+     *
+     * @return void
      */
-    public function testWillPreserveOriginalPropsAtHydration()
+    public function testWillPreserveOriginalPropsAtHydration(): void
     {
         $original = new ArraySerializableAsset();
 
@@ -119,8 +129,10 @@ class ArraySerializableHydratorTest extends TestCase
      * by the to-be hydrated object, simply exchange the array
      *
      * @group 65
+     *
+     * @return void
      */
-    public function testWillReplaceArrayIfNoGetArrayCopy()
+    public function testWillReplaceArrayIfNoGetArrayCopy(): void
     {
         $original = new \LaminasTest\Hydrator\TestAsset\ArraySerializableNoGetArrayCopy();
 
@@ -134,7 +146,12 @@ class ArraySerializableHydratorTest extends TestCase
         $this->assertSame($expected, $actual->getData());
     }
 
-    public function arrayDataProvider()
+    /**
+     * @return string[][][]
+     *
+     * @psalm-return array<string, array{0: string[], 1: string[], 2: string[]}>
+     */
+    public function arrayDataProvider(): array
     {
         // @codingStandardsIgnoreStart
         return [
@@ -154,9 +171,12 @@ class ArraySerializableHydratorTest extends TestCase
      * submitted value should _replace_ the original.
      *
      * @group 66
+     *
      * @dataProvider arrayDataProvider
+     *
+     * @return void
      */
-    public function testHydrationWillReplaceNestedArrayData($start, $submit, $expected)
+    public function testHydrationWillReplaceNestedArrayData($start, $submit, $expected): void
     {
         $original = new ArraySerializableAsset();
         $original->exchangeArray([
@@ -172,7 +192,7 @@ class ArraySerializableHydratorTest extends TestCase
         $this->assertSame($expected, $final['tags']);
     }
 
-    public function testExtractArrayObject()
+    public function testExtractArrayObject(): void
     {
         $arrayObject = new ArrayObject([
             'value1',

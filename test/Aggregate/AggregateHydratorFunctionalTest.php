@@ -41,8 +41,10 @@ class AggregateHydratorFunctionalTest extends TestCase
 
     /**
      * Verifies that no interaction happens when the aggregate hydrator is empty
+     *
+     * @return void
      */
-    public function testEmptyAggregate()
+    public function testEmptyAggregate(): void
     {
         $object = new ArrayObject(['zaphod' => 'beeblebrox']);
 
@@ -54,10 +56,12 @@ class AggregateHydratorFunctionalTest extends TestCase
 
     /**
      * @dataProvider getHydratorSet
-     *
+
      * Verifies that using a single hydrator will have the aggregate hydrator behave like that single hydrator
+     *
+     * @return void
      */
-    public function testSingleHydratorExtraction(HydratorInterface $comparisonHydrator, $object)
+    public function testSingleHydratorExtraction(HydratorInterface $comparisonHydrator, $object): void
     {
         $blueprint = clone $object;
 
@@ -68,10 +72,12 @@ class AggregateHydratorFunctionalTest extends TestCase
 
     /**
      * @dataProvider getHydratorSet
-     *
+
      * Verifies that using a single hydrator will have the aggregate hydrator behave like that single hydrator
+     *
+     * @return void
      */
-    public function testSingleHydratorHydration(HydratorInterface $comparisonHydrator, $object, $data)
+    public function testSingleHydratorHydration(HydratorInterface $comparisonHydrator, $object, $data): void
     {
         $blueprint = clone $object;
 
@@ -89,8 +95,10 @@ class AggregateHydratorFunctionalTest extends TestCase
 
     /**
      * Verifies that multiple hydrators in an aggregate merge the extracted data
+     *
+     * @return void
      */
-    public function testExtractWithMultipleHydrators()
+    public function testExtractWithMultipleHydrators(): void
     {
         $this->hydrator->add(new ClassMethodsHydrator());
         $this->hydrator->add(new ArraySerializableHydrator());
@@ -107,8 +115,10 @@ class AggregateHydratorFunctionalTest extends TestCase
 
     /**
      * Verifies that multiple hydrators in an aggregate merge the extracted data
+     *
+     * @return void
      */
-    public function testHydrateWithMultipleHydrators()
+    public function testHydrateWithMultipleHydrators(): void
     {
         $this->hydrator->add(new ClassMethodsHydrator());
         $this->hydrator->add(new ArraySerializableHydrator());
@@ -130,11 +140,13 @@ class AggregateHydratorFunctionalTest extends TestCase
     /**
      * Verifies that stopping propagation within a listener in the hydrator allows modifying how the
      * hydrator behaves
+     *
+     * @return void
      */
-    public function testStoppedPropagationInExtraction()
+    public function testStoppedPropagationInExtraction(): void
     {
         $object   = new ArrayObject(['president' => 'Zaphod']);
-        $callback = function (ExtractEvent $event) {
+        $callback = function (ExtractEvent $event): void {
             $event->setExtractedData(['Ravenous Bugblatter Beast of Traal']);
             $event->stopPropagation();
         };
@@ -148,12 +160,14 @@ class AggregateHydratorFunctionalTest extends TestCase
     /**
      * Verifies that stopping propagation within a listener in the hydrator allows modifying how the
      * hydrator behaves
+     *
+     * @return void
      */
-    public function testStoppedPropagationInHydration()
+    public function testStoppedPropagationInHydration(): void
     {
         $object        = new ArrayObject();
         $swappedObject = new stdClass();
-        $callback = function (HydrateEvent $event) use ($swappedObject) {
+        $callback = function (HydrateEvent $event) use ($swappedObject): void {
             $event->setHydratedObject($swappedObject);
             $event->stopPropagation();
         };

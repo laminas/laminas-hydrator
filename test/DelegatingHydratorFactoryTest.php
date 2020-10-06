@@ -22,7 +22,7 @@ use ReflectionProperty;
  */
 class DelegatingHydratorFactoryTest extends TestCase
 {
-    public function testFactoryUsesContainerToSeedDelegatingHydratorWhenItIsAHydratorPluginManager()
+    public function testFactoryUsesContainerToSeedDelegatingHydratorWhenItIsAHydratorPluginManager(): void
     {
         $hydrators = $this->createMock(HydratorPluginManager::class);
         $factory = new DelegatingHydratorFactory();
@@ -31,8 +31,9 @@ class DelegatingHydratorFactoryTest extends TestCase
         $this->assertInstanceOf(DelegatingHydrator::class, $hydrator);
     }
 
-    public function testFactoryUsesHydratorPluginManagerServiceFromContainerToSeedDelegatingHydratorWhenAvailable()
+    public function testFactoryUsesHydratorPluginManagerServiceFromContainerToSeedDelegatingHydratorWhenAvailable(): void
     {
+        // phpcs:enable
         $hydrators = $this->createMock(HydratorPluginManager::class);
         $container = $this->createMock(ContainerInterface::class);
         $container->expects($this->once())->method('has')->with(HydratorPluginManager::class)->willReturn(true);
@@ -44,7 +45,7 @@ class DelegatingHydratorFactoryTest extends TestCase
         $this->assertInstanceOf(DelegatingHydrator::class, $hydrator);
     }
 
-    public function testFactoryUsesHydratorManagerServiceFromContainerToSeedDelegatingHydratorWhenAvailable()
+    public function testFactoryUsesHydratorManagerServiceFromContainerToSeedDelegatingHydratorWhenAvailable(): void
     {
         $hydrators = $this->createMock(HydratorPluginManager::class);
         $container = $this->createMock(ContainerInterface::class);
@@ -69,7 +70,7 @@ class DelegatingHydratorFactoryTest extends TestCase
         $this->assertInstanceOf(DelegatingHydrator::class, $hydrator);
     }
 
-    public function testFactoryCreatesHydratorPluginManagerToSeedDelegatingHydratorAsFallback()
+    public function testFactoryCreatesHydratorPluginManagerToSeedDelegatingHydratorAsFallback(): void
     {
         $hydrators = $this->createMock(HydratorPluginManager::class);
         $container = $this->createMock(ContainerInterface::class);

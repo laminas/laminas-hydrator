@@ -16,7 +16,7 @@ use PHPUnit\Framework\TestCase;
 
 class ClassMethodsTest extends TestCase
 {
-    public function testTriggerUserDeprecatedError()
+    public function testTriggerUserDeprecatedError(): void
     {
         $test = (object) ['message' => false];
 

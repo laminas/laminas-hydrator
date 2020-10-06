@@ -74,7 +74,7 @@ final class StandaloneHydratorPluginManager implements HydratorPluginManagerInte
 
     public function __construct()
     {
-        $invokableFactory = function (ContainerInterface $container, string $class) {
+        $invokableFactory = function (ContainerInterface $container, string $class): object {
             return new $class();
         };
 
