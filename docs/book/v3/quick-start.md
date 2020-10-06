@@ -11,9 +11,7 @@ The component contains [concrete implementations](#available_implementations) fo
 To hydrate an object with data, instantiate the hydrator and then pass to it the data for hydrating the object.
 
 ```php
-use Laminas\Hydrator;
-
-$hydrator = new Hydrator\ArraySerializableHydrator();
+$hydrator = new Laminas\Hydrator\ArraySerializableHydrator();
 
 $data = [
     'first_name'    => 'James',
@@ -30,9 +28,7 @@ $object = $hydrator->hydrate($data, new ArrayObject());
 To extract data from an object, instantiate the applicable hydrator and then call `extract`, passing to it the object to extract data from.
 
 ```php
-use Laminas\Hydrator;
-
-$hydrator = new Hydrator\ArraySerializableHydrator();
+$hydrator = new Laminas\Hydrator\ArraySerializableHydrator();
 
 // ... Assuming that $object has already been initialised
 $data = $hydrator->extract($object);
@@ -54,10 +50,6 @@ The ClassMethodsHydrator calls "setter" methods matching keys in the data set to
 - `set*()` methods will be used when hydrating properties.
 
 ```php
-<?php
-
-use Laminas\Hydrator;
-
 class User
 {
     private $firstName;
@@ -65,33 +57,37 @@ class User
     private $emailAddress;
     private $phoneNumber;
 
-    public function setFirstName(string $firstName) {
+    public function setFirstName(string $firstName)
+    {
         $this->firstName = $firstName;
     }
 
-    public function setLastName(string $lastName) {
+    public function setLastName(string $lastName)
+    {
         $this->lastName = $lastName;
     }
 
-    public function setEmailAddress(string $emailAddress) {
+    public function setEmailAddress(string $emailAddress)
+    {
         $this->emailAddress = $emailAddress;
     }
 
-    public function setPhoneNumber(string $phoneNumber) {
+    public function setPhoneNumber(string $phoneNumber)
+    {
         $this->phoneNumber = $phoneNumber;
     }
 }
 
 $data = [
-    'first_name' => 'James',
-    'last_name' => 'Kahn',
+    'first_name'    => 'James',
+    'last_name'     => 'Kahn',
     'email_address' => 'james.kahn@example.org',
-    'phone_number' => '+61 419 1234 5678',
+    'phone_number'  => '+61 419 1234 5678',
 ];
 
-$hydrator = new Hydrator\ClassMethodsHydrator();
-$user = $hydrator->hydrate($data, new User());
-$data = $hydrator->extract(new User());
+$hydrator = new Laminas\Hydrator\ClassMethodsHydrator();
+$user     = $hydrator->hydrate($data, new User());
+$data     = $hydrator->extract(new User());
 ```
 
 ### ObjectPropertyHydrator
@@ -99,10 +95,6 @@ $data = $hydrator->extract(new User());
 The ObjectPropertyHydrator hydrates objects and extracts data using publicly accessible properties which match a key in the data set.
 
 ```php
-<?php
-
-use Laminas\Hydrator;
-
 class User
 {
     private $firstName;
@@ -112,15 +104,15 @@ class User
 }
 
 $data = [
-    'first_name' => 'James',
-    'last_name' => 'Kahn',
+    'first_name'    => 'James',
+    'last_name'     => 'Kahn',
     'email_address' => 'james.kahn@example.org',
-    'phone_number' => '+61 419 1234 5678',
+    'phone_number'  => '+61 419 1234 5678',
 ];
 
-$hydrator = new Hydrator\ObjectPropertyHydrator();
-$user = $hydrator->hydrate($data, new User());
-$data = $hydrator->extract(new User());
+$hydrator = new Laminas\Hydrator\ObjectPropertyHydrator();
+$user     = $hydrator->hydrate($data, new User());
+$data     = $hydrator->extract(new User());
 ```
 
 ### ReflectionHydrator
@@ -130,10 +122,6 @@ Any data key matching an existing property will be hydrated.
 Any existing properties will be used for extracting data.
 
 ```php
-<?php
-
-use Laminas\Hydrator;
-
 class User
 {
     private $firstName;
@@ -143,15 +131,15 @@ class User
 }
 
 $data = [
-    'first_name' => 'James',
-    'last_name' => 'Kahn',
+    'first_name'    => 'James',
+    'last_name'     => 'Kahn',
     'email_address' => 'james.kahn@example.org',
-    'phone_number' => '+61 419 1234 5678',
+    'phone_number'  => '+61 419 1234 5678',
 ];
 
-$hydrator = new Hydrator\ReflectionHydrator();
-$user = $hydrator->hydrate($data, new User());
-$data = $hydrator->extract(new User());
+$hydrator = new Laminas\Hydrator\ReflectionHydrator();
+$user     = $hydrator->hydrate($data, new User());
+$data     = $hydrator->extract(new User());
 ```
 
 ### DelegatingHydrator
@@ -159,10 +147,8 @@ $data = $hydrator->extract(new User());
 The DelegatingHydrator composes a hydrator locator, and will delegate `hydrate()` and `extract()` calls to the appropriate one based upon the class name of the object being operated on.
 
 ```php
-<?php
-
 // Instantiate each hydrator you wish to delegate to
-$albumHydrator = new Laminas\Hydrator\ClassMethodsHydrator();
+$albumHydrator  = new Laminas\Hydrator\ClassMethodsHydrator();
 $artistHydrator = new Laminas\Hydrator\ClassMethodsHydrator();
 
 // Map the entity class name to the hydrator using the HydratorPluginManager.
@@ -178,59 +164,4 @@ $delegating = new Laminas\Hydrator\DelegatingHydrator($hydrators);
 // Assumes that $data and Artist have already been initialised
 $array  = $delegating->extract(new Artist());
 $artist = $delegating->hydrate($data, new Artist());
-```
-
-## Base Interfaces
-
-### ExtractionInterface
-
-```php
-<?php
-
-namespace Laminas\Hydrator;
-
-interface ExtractionInterface
-{
-    /**
-     * Extract values from an object
-     *
-     * @return mixed[]
-     */
-    public function extract(object $object) : array;
-}
-```
-
-### HydrationInterface
-
-```php
-<?php
-
-namespace Laminas\Hydrator;
-
-interface HydrationInterface
-{
-    /**
-     * Hydrate $object with the provided $data.
-     *
-     * @param mixed[] $data
-     * @return object The implementation should return an object of any type.
-     *     By purposely omitting the return type from the signature,
-     *     implementations may choose to specify a more specific type.
-     */
-    public function hydrate(array $data, object $object);
-}
-```
-
-### HydratorInterface
-
-```php
-<?php
-
-namespace Laminas\Hydrator;
-
-interface HydratorInterface extends
-    ExtractionInterface,
-    HydrationInterface
-{
-}
 ```
