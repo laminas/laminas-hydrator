@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 3.2.0 - TBD
+## 3.2.0 - 2020-10-06
 
 ### Added
 
@@ -12,17 +12,27 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - [#32](https://github.com/laminas/laminas-hydrator/pull/32) changes the minimum supported version of laminas-stdlib from 3.2 to 3.3.
 
-### Deprecated
-
-- Nothing.
-
 ### Removed
 
 - [#32](https://github.com/laminas/laminas-hydrator/pull/32) removes support for PHP versions prior to 7.3.
 
-### Fixed
 
-- Nothing.
+-----
+
+### Release Notes for [3.2.0](https://github.com/laminas/laminas-hydrator/milestone/4)
+
+
+
+### 3.2.0
+
+- Total issues resolved: **1**
+- Total pull requests resolved: **2**
+- Total contributors: **2**
+
+#### Enhancement
+
+ - [33: Adds Psalm integration](https://github.com/laminas/laminas-hydrator/pull/33) thanks to @weierophinney and @boesing
+ - [32: Feature/php 8 support](https://github.com/laminas/laminas-hydrator/pull/32) thanks to @weierophinney
 
 ## 3.1.1 -2020-10-06
 
