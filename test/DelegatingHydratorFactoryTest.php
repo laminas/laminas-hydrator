@@ -24,7 +24,7 @@ class DelegatingHydratorFactoryTest extends TestCase
 {
     public function testFactoryUsesContainerToSeedDelegatingHydratorWhenItIsAHydratorPluginManager()
     {
-        $hydrators = $this->prophesize(HydratorPluginManager::class)->reveal();
+        $hydrators = $this->createMock(HydratorPluginManager::class);
         $factory = new DelegatingHydratorFactory();
 
         $hydrator = $factory($hydrators, '');
@@ -33,42 +33,64 @@ class DelegatingHydratorFactoryTest extends TestCase
 
     public function testFactoryUsesHydratorPluginManagerServiceFromContainerToSeedDelegatingHydratorWhenAvailable()
     {
-        $hydrators = $this->prophesize(HydratorPluginManager::class)->reveal();
-        $container = $this->prophesize(ContainerInterface::class);
-        $container->has(HydratorPluginManager::class)->willReturn(true);
-        $container->get(HydratorPluginManager::class)->willReturn($hydrators);
+        $hydrators = $this->createMock(HydratorPluginManager::class);
+        $container = $this->createMock(ContainerInterface::class);
+        $container->expects($this->once())->method('has')->with(HydratorPluginManager::class)->willReturn(true);
+        $container->expects($this->once())->method('get')->with(HydratorPluginManager::class)->willReturn($hydrators);
 
         $factory = new DelegatingHydratorFactory();
 
-        $hydrator = $factory($container->reveal(), '');
+        $hydrator = $factory($container, '');
         $this->assertInstanceOf(DelegatingHydrator::class, $hydrator);
     }
 
     public function testFactoryUsesHydratorManagerServiceFromContainerToSeedDelegatingHydratorWhenAvailable()
     {
-        $hydrators = $this->prophesize(HydratorPluginManager::class)->reveal();
-        $container = $this->prophesize(ContainerInterface::class);
-        $container->has(HydratorPluginManager::class)->willReturn(false);
-        $container->has(\Zend\Hydrator\HydratorPluginManager::class)->willReturn(false);
-        $container->has('HydratorManager')->willReturn(true);
-        $container->get('HydratorManager')->willReturn($hydrators);
+        $hydrators = $this->createMock(HydratorPluginManager::class);
+        $container = $this->createMock(ContainerInterface::class);
+        $container
+            ->expects($this->exactly(3))
+            ->method('has')
+            ->withConsecutive(
+                [HydratorPluginManager::class],
+                [\Zend\Hydrator\HydratorPluginManager::class],
+                ['HydratorManager']
+            )
+            ->willReturnOnConsecutiveCalls(
+                false,
+                false,
+                true
+            );
+        $container->expects($this->once())->method('get')->with('HydratorManager')->willReturn($hydrators);
 
         $factory = new DelegatingHydratorFactory();
 
-        $hydrator = $factory($container->reveal(), '');
+        $hydrator = $factory($container, '');
         $this->assertInstanceOf(DelegatingHydrator::class, $hydrator);
     }
 
     public function testFactoryCreatesHydratorPluginManagerToSeedDelegatingHydratorAsFallback()
     {
-        $container = $this->prophesize(ContainerInterface::class);
-        $container->has(HydratorPluginManager::class)->willReturn(false);
-        $container->has(\Zend\Hydrator\HydratorPluginManager::class)->willReturn(false);
-        $container->has('HydratorManager')->willReturn(false);
+        $hydrators = $this->createMock(HydratorPluginManager::class);
+        $container = $this->createMock(ContainerInterface::class);
+        $container
+            ->expects($this->exactly(3))
+            ->method('has')
+            ->withConsecutive(
+                [HydratorPluginManager::class],
+                [\Zend\Hydrator\HydratorPluginManager::class],
+                ['HydratorManager']
+            )
+            ->willReturnOnConsecutiveCalls(
+                false,
+                false,
+                false
+            );
+        $container->expects($this->never())->method('get');
 
         $factory = new DelegatingHydratorFactory();
 
-        $hydrator = $factory($container->reveal(), '');
+        $hydrator = $factory($container, '');
         $this->assertInstanceOf(DelegatingHydrator::class, $hydrator);
 
         $r = new ReflectionProperty($hydrator, 'hydrators');

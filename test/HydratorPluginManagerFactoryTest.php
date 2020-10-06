@@ -22,7 +22,7 @@ class HydratorPluginManagerFactoryTest extends TestCase
 {
     public function testFactoryReturnsPluginManager()
     {
-        $container = $this->prophesize(ContainerInterface::class)->reveal();
+        $container = $this->createMock(ContainerInterface::class);
         $factory = new HydratorPluginManagerFactory();
 
         $hydrators = $factory($container, HydratorPluginManagerFactory::class);
@@ -34,8 +34,8 @@ class HydratorPluginManagerFactoryTest extends TestCase
      */
     public function testFactoryConfiguresPluginManagerUnderContainerInterop()
     {
-        $container = $this->prophesize(ContainerInterface::class)->reveal();
-        $hydrator = $this->prophesize(HydratorInterface::class)->reveal();
+        $container = $this->createMock(ContainerInterface::class);
+        $hydrator = $this->createMock(HydratorInterface::class);
 
         $factory = new HydratorPluginManagerFactory();
         $hydrators = $factory($container, HydratorPluginManagerFactory::class, [
@@ -48,7 +48,7 @@ class HydratorPluginManagerFactoryTest extends TestCase
 
     public function testConfiguresHydratorServicesWhenFound()
     {
-        $hydrator = $this->prophesize(HydratorInterface::class)->reveal();
+        $hydrator = $this->createMock(HydratorInterface::class);
         $config = [
             'hydrators' => [
                 'aliases' => [
@@ -62,15 +62,26 @@ class HydratorPluginManagerFactoryTest extends TestCase
             ],
         ];
 
-        $container = $this->prophesize(ServiceLocatorInterface::class);
-        $container->willImplement(ContainerInterface::class);
-
-        $container->has('ServiceListener')->willReturn(false);
-        $container->has('config')->willReturn(true);
-        $container->get('config')->willReturn($config);
+        $container = $this->createMock(ServiceLocatorInterface::class);
+        $container
+            ->expects($this->exactly(2))
+            ->method('has')
+            ->withConsecutive(
+                ['ServiceListener'],
+                ['config']
+            )
+            ->willReturnOnConsecutiveCalls(
+                false,
+                true
+            );
+        $container
+            ->expects($this->once())
+            ->method('get')
+            ->with('config')
+            ->willReturn($config);
 
         $factory = new HydratorPluginManagerFactory();
-        $hydrators = $factory($container->reveal(), 'HydratorManager');
+        $hydrators = $factory($container, 'HydratorManager');
 
         $this->assertInstanceOf(HydratorPluginManager::class, $hydrators);
         $this->assertTrue($hydrators->has('test'));
@@ -81,29 +92,24 @@ class HydratorPluginManagerFactoryTest extends TestCase
 
     public function testDoesNotConfigureHydratorServicesWhenServiceListenerPresent()
     {
-        $hydrator = $this->prophesize(HydratorInterface::class)->reveal();
-        $config = [
-            'hydrators' => [
-                'aliases' => [
-                    'test' => ReflectionHydrator::class,
-                ],
-                'factories' => [
-                    'test-too' => function ($container) use ($hydrator) {
-                        return $hydrator;
-                    },
-                ],
-            ],
-        ];
-
-        $container = $this->prophesize(ServiceLocatorInterface::class);
-        $container->willImplement(ContainerInterface::class);
-
-        $container->has('ServiceListener')->willReturn(true);
-        $container->has('config')->shouldNotBeCalled();
-        $container->get('config')->shouldNotBeCalled();
+        $container = $this->createMock(ServiceLocatorInterface::class);
+        $container
+            ->expects($this->exactly(2))
+            ->method('has')
+            ->withConsecutive(
+                ['ServiceListener'],
+                ['config']
+            )
+            ->willReturnOnConsecutiveCalls(
+                false,
+                false
+            );
+        $container
+            ->expects($this->never())
+            ->method('get');
 
         $factory = new HydratorPluginManagerFactory();
-        $hydrators = $factory($container->reveal(), 'HydratorManager');
+        $hydrators = $factory($container, 'HydratorManager');
 
         $this->assertInstanceOf(HydratorPluginManager::class, $hydrators);
         $this->assertFalse($hydrators->has('test'));
@@ -112,30 +118,50 @@ class HydratorPluginManagerFactoryTest extends TestCase
 
     public function testDoesNotConfigureHydratorServicesWhenConfigServiceNotPresent()
     {
-        $container = $this->prophesize(ServiceLocatorInterface::class);
-        $container->willImplement(ContainerInterface::class);
-
-        $container->has('ServiceListener')->willReturn(false);
-        $container->has('config')->willReturn(false);
-        $container->get('config')->shouldNotBeCalled();
+        $container = $this->createMock(ServiceLocatorInterface::class);
+        $container
+            ->expects($this->exactly(2))
+            ->method('has')
+            ->withConsecutive(
+                ['ServiceListener'],
+                ['config']
+            )
+            ->willReturnOnConsecutiveCalls(
+                false,
+                false
+            );
+        $container
+            ->expects($this->never())
+            ->method('get');
 
         $factory = new HydratorPluginManagerFactory();
-        $hydrators = $factory($container->reveal(), 'HydratorManager');
+        $hydrators = $factory($container, 'HydratorManager');
 
         $this->assertInstanceOf(HydratorPluginManager::class, $hydrators);
     }
 
     public function testDoesNotConfigureHydratorServicesWhenConfigServiceDoesNotContainHydratorsConfig()
     {
-        $container = $this->prophesize(ServiceLocatorInterface::class);
-        $container->willImplement(ContainerInterface::class);
-
-        $container->has('ServiceListener')->willReturn(false);
-        $container->has('config')->willReturn(true);
-        $container->get('config')->willReturn(['foo' => 'bar']);
+        $container = $this->createMock(ServiceLocatorInterface::class);
+        $container
+            ->expects($this->exactly(2))
+            ->method('has')
+            ->withConsecutive(
+                ['ServiceListener'],
+                ['config']
+            )
+            ->willReturnOnConsecutiveCalls(
+                false,
+                true
+            );
+        $container
+            ->expects($this->once())
+            ->method('get')
+            ->with('config')
+            ->willReturn(['foo' => 'bar']);
 
         $factory = new HydratorPluginManagerFactory();
-        $hydrators = $factory($container->reveal(), 'HydratorManager');
+        $hydrators = $factory($container, 'HydratorManager');
 
         $this->assertInstanceOf(HydratorPluginManager::class, $hydrators);
         $this->assertFalse($hydrators->has('foo'));

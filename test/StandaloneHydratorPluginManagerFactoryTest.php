@@ -35,7 +35,7 @@ class StandaloneHydratorPluginManagerFactoryTest extends TestCase
     protected function setUp() : void
     {
         $this->factory   = new StandaloneHydratorPluginManagerFactory();
-        $this->container = $this->prophesize(ContainerInterface::class);
+        $this->container = $this->createMock(ContainerInterface::class);
     }
 
     public function assertDefaultServices(
@@ -74,7 +74,7 @@ class StandaloneHydratorPluginManagerFactoryTest extends TestCase
 
     public function testCreatesPluginManagerWithDefaultServices()
     {
-        $manager = ($this->factory)($this->container->reveal());
+        $manager = ($this->factory)($this->container);
         $this->assertDefaultServices($manager);
     }
 }

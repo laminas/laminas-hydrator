@@ -46,7 +46,7 @@ class ArraySerializableHydratorTest extends TestCase
     public function testHydratorExtractThrowsExceptionOnNonObjectParameter()
     {
         $this->expectException(TypeError::class);
-        $this->expectExceptionMessage('must be an object');
+        $this->expectExceptionMessage('object');
         $this->hydrator->extract('thisIsNotAnObject');
     }
 
@@ -56,7 +56,7 @@ class ArraySerializableHydratorTest extends TestCase
     public function testHydratorHydrateThrowsExceptionOnNonObjectParameter()
     {
         $this->expectException(TypeError::class);
-        $this->expectExceptionMessage('must be an object');
+        $this->expectExceptionMessage('object');
         $this->hydrator->hydrate(['some' => 'data'], 'thisIsNotAnObject');
     }
 

@@ -54,7 +54,7 @@ class ReflectionHydratorTest extends TestCase
         $argument = (int) 1;
 
         $this->expectException(TypeError::class);
-        $this->expectExceptionMessage('must be an object');
+        $this->expectExceptionMessage('object');
 
         $this->hydrator->extract($argument);
     }
@@ -64,7 +64,7 @@ class ReflectionHydratorTest extends TestCase
         $argument = (int) 1;
 
         $this->expectException(TypeError::class);
-        $this->expectExceptionMessage('must be an object');
+        $this->expectExceptionMessage('object');
 
         $this->hydrator->hydrate([ 'foo' => 'bar' ], $argument);
     }
