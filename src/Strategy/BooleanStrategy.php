@@ -65,7 +65,7 @@ final class BooleanStrategy implements StrategyInterface
      *
      * @param  bool|null $value The original value.
      * @throws InvalidArgumentException
-     * @return int|string Returns the value that should be extracted.
+     * @return int|string|null Returns the value that should be extracted.
      */
     public function extract($value, ?object $object = null)
     {
@@ -88,7 +88,7 @@ final class BooleanStrategy implements StrategyInterface
      *
      * @param  bool|int|string|null $value The original value.
      * @throws InvalidArgumentException
-     * @return bool Returns the value that should be hydrated.
+     * @return bool|null Returns the value that should be hydrated.
      */
     public function hydrate($value, ?array $data = null)
     {

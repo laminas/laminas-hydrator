@@ -88,7 +88,7 @@ class CollectionStrategy implements StrategyInterface
      *
      * @param  mixed[]|null $value The original value.
      * @throws Exception\InvalidArgumentException
-     * @return object[] Returns the value that should be hydrated.
+     * @return object[]|null Returns the value that should be hydrated.
      */
     public function hydrate($value, ?array $data = null)
     {
