@@ -63,12 +63,16 @@ final class BooleanStrategy implements StrategyInterface
     /**
      * Converts the given value so that it can be extracted by the hydrator.
      *
-     * @param  bool $value The original value.
+     * @param  bool|null $value The original value.
      * @throws InvalidArgumentException
      * @return int|string Returns the value that should be extracted.
      */
     public function extract($value, ?object $object = null)
     {
+        if (null === $value) {
+            return $value;
+        }
+
         if (! is_bool($value)) {
             throw new InvalidArgumentException(sprintf(
                 'Unable to extract. Expected bool. %s was given.',
@@ -82,12 +86,16 @@ final class BooleanStrategy implements StrategyInterface
     /**
      * Converts the given value so that it can be hydrated by the hydrator.
      *
-     * @param  bool|int|string $value The original value.
+     * @param  bool|int|string|null $value The original value.
      * @throws InvalidArgumentException
      * @return bool Returns the value that should be hydrated.
      */
     public function hydrate($value, ?array $data = null)
     {
+        if (null === $value) {
+            return $value;
+        }
+
         if (is_bool($value)) {
             return $value;
         }

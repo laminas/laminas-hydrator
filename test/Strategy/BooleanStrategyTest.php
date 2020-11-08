@@ -62,6 +62,13 @@ class BooleanStrategyTest extends TestCase
         $this->assertEquals(0, $hydrator->extract(false));
     }
 
+    public function testExtractNull(): void
+    {
+        $hydrator = new BooleanStrategy(1, 0);
+
+        $this->assertEquals(null, $hydrator->extract(null));
+    }
+
     public function testExtractThrowsExceptionOnUnknownValue(): void
     {
         $hydrator = new BooleanStrategy(1, 0);
@@ -91,6 +98,12 @@ class BooleanStrategyTest extends TestCase
         $hydrator = new BooleanStrategy(1, 0);
         $this->assertEquals(true, $hydrator->hydrate(true));
         $this->assertEquals(false, $hydrator->hydrate(false));
+    }
+
+    public function testHydrateNull(): void
+    {
+        $hydrator = new BooleanStrategy(1, 0);
+        $this->assertEquals(null, $hydrator->hydrate(null));
     }
 
     public function testHydrateUnexpectedValueThrowsException(): void

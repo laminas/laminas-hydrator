@@ -53,12 +53,16 @@ class CollectionStrategy implements StrategyInterface
     /**
      * Converts the given value so that it can be extracted by the hydrator.
      *
-     * @param  mixed[] $value The original value.
+     * @param  mixed[]|null $value The original value.
      * @throws Exception\InvalidArgumentException
      * @return mixed Returns the value that should be extracted.
      */
     public function extract($value, ?object $object = null)
     {
+        if (null === $value) {
+            return $value;
+        }
+
         if (! is_array($value)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Value needs to be an array, got "%s" instead.',
@@ -82,12 +86,16 @@ class CollectionStrategy implements StrategyInterface
     /**
      * Converts the given value so that it can be hydrated by the hydrator.
      *
-     * @param  mixed[] $value The original value.
+     * @param  mixed[]|null $value The original value.
      * @throws Exception\InvalidArgumentException
      * @return object[] Returns the value that should be hydrated.
      */
     public function hydrate($value, ?array $data = null)
     {
+        if (null === $value) {
+            return $value;
+        }
+
         if (! is_array($value)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Value needs to be an array, got "%s" instead.',
