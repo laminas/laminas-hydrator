@@ -2,12 +2,31 @@ docs_dir: docs/book
 site_dir: docs/html
 extra:
   project: Components
-  current_version: v3
+  current_version: v4
   versions:
+    - v4
     - v3
     - v2
 nav:
     - Home: index.md
+    - v4:
+      - "Quick Start": v4/quick-start.md
+      - "Filters": v4/filter.md
+      - "Strategies":
+        - Introduction: v4/strategy.md
+        - Collection: v4/strategies/collection.md
+        - DateTimeImmutableFormatter: v4/strategies/datetime-immutable-formatter-strategy.md
+        - Hydrator: v4/strategies/hydrator.md
+        - Serializable: v4/strategies/serializable.md
+      - "Aggregates": v4/aggregate.md
+      - "Naming Strategies":
+        - "Introduction": v4/naming-strategy/intro.md
+        - "Identity": v4/naming-strategy/identity-naming-strategy.md
+        - "Mapping": v4/naming-strategy/map-naming-strategy.md
+        - "Underscore Mapping": v4/naming-strategy/underscore-naming-strategy.md
+        - "Composite": v4/naming-strategy/composite-naming-strategy.md
+      - "Plugin Managers": v4/plugin-managers.md
+      - Migration: v4/migration.md
     - v3:
       - "Quick Start": v3/quick-start.md
       - "Filters": v3/filter.md
