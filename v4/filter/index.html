@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Serialize objects to arrays, and vice versa">  
-    <link rel="canonical" href="https://docs.laminas.dev/laminas-hydrator/v2/aggregate/">
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-hydrator/v4/filter/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>Aggregates - laminas-hydrator - Laminas Docs</title>
+    <title>Filters - laminas-hydrator - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
     
@@ -125,22 +125,6 @@
 
                 
                 
-
-                    
-                    
-                
-            
-
-                
-                
-
-                    
-                    
-                
-            
-
-                
-                
                     
                         
     <li class="subnavigation__list-item ">
@@ -149,32 +133,66 @@
 
                     
                         
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Filters</a>
+    </li>
+
+                    
+                        
     <li class="subnavigation__list-item">
-        <span class="subnavigation__headline">Reference</span>
+        <span class="subnavigation__headline">Strategies</span>
         <ul class="subnavigation__list">
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../filter/" class="subnavigation__link">Filters</a>
+        <a href="../strategy/" class="subnavigation__link">Introduction</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../strategy/" class="subnavigation__link">Strategies</a>
+        <a href="../strategies/collection/" class="subnavigation__link">Collection</a>
     </li>
 
             
                 
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Aggregates</a>
+    <li class="subnavigation__list-item ">
+        <a href="../strategies/datetime-immutable-formatter-strategy/" class="subnavigation__link">DateTimeImmutableFormatter</a>
     </li>
 
             
                 
+    <li class="subnavigation__list-item ">
+        <a href="../strategies/hydrator/" class="subnavigation__link">Hydrator</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../strategies/serializable/" class="subnavigation__link">Serializable</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../aggregate/" class="subnavigation__link">Aggregates</a>
+    </li>
+
+                    
+                        
     <li class="subnavigation__list-item">
         <span class="subnavigation__headline">Naming Strategies</span>
         <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../naming-strategy/intro/" class="subnavigation__link">Introduction</a>
+    </li>
+
             
                 
     <li class="subnavigation__list-item ">
@@ -203,10 +221,34 @@
         </ul>
     </li>
 
-            
-        </ul>
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../plugin-managers/" class="subnavigation__link">Plugin Managers</a>
     </li>
 
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../migration/" class="subnavigation__link">Migration</a>
+    </li>
+
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                
+            
+
+                
+                
+
+                    
                     
                 
             
@@ -255,13 +297,13 @@
     <div class="btn-group">
         <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false" id="version-selector-dropdown">
             
-                v2
+                v4
             
         </button>
         <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left" aria-labelledby="version-selector-dropdown">
             
                 
-                    <a href="../../v4/quick-start/" class="dropdown-item">
+                    <a href="../quick-start/" class="dropdown-item active">
                         
                             v4 (latest)
                         
@@ -277,7 +319,7 @@
                 
             
                 
-                    <a href="../quick-start/" class="dropdown-item active">
+                    <a href="../../v2/quick-start/" class="dropdown-item">
                         
                             v2
                         
@@ -317,15 +359,19 @@
             <ul class="toc__list">
                 
                     <li class="toc__entry">
-                        <a href="#installation-requirements" class="toc__link nav-link">Installation requirements</a>
+                        <a href="#filter-implementations" class="toc__link nav-link">Filter implementations</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#basic-usage" class="toc__link nav-link">Basic usage</a>
+                        <a href="#use-filtercomposite-for-complex-filters" class="toc__link nav-link">Use FilterComposite for complex filters</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#advanced-use-cases" class="toc__link nav-link">Advanced use cases</a>
+                        <a href="#using-the-provider-interface" class="toc__link nav-link">Using the provider interface</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#filter-enabled-hydrators-and-the-composite-filter" class="toc__link nav-link">Filter-enabled hydrators and the composite filter</a>
                     </li>
                 
             </ul>
@@ -350,15 +396,8 @@
                         
                     
                 
-                    
-                        
-                        
-                            <li class="breadcrumb-item">Reference</li>
-                        
-                    
-                
 
-                <li class="breadcrumb-item active" aria-current="page">Aggregates</li>
+                <li class="breadcrumb-item active" aria-current="page">Filters</li>
             
         
     </ol>
@@ -366,144 +405,294 @@
 
 
 
-    <div class="alert alert-danger" role="alert">
-        <h4>Caution</h4>
-        <p>
-            The documentation you are viewing is for an older version of this component.<br>
-            <a href="../..">Switch to the latest (v4) version.</a>
-        </p>
-    </div>
-
 
 
 
     
     
-        <h2 class="chapter__headline">Reference</h2>
-    
 
-    <h1 id="aggregatehydrator">AggregateHydrator</h1>
-<p><code>Laminas\Hydrator\Aggregate\AggregateHydrator</code> is an implementation of
-<code>Laminas\Hydrator\HydratorInterface</code> that composes multiple hydrators via event listeners.</p>
-<p>You typically want to use an aggregate hydrator when you want to hydrate or extract data from
-complex objects that implement multiple interfaces, and therefore need multiple hydrators to handle
-that in subsequent steps.</p>
-<h2 id="installation-requirements">Installation requirements</h2>
-<p>The <code>AggregateHydrator</code> depends on the laminas-eventmanager component, so be sure to have it
-installed before getting started:</p>
-<pre class="highlight"><code class="language-bash">$ composer require laminas/laminas-eventmanager</code></pre>
-<h2 id="basic-usage">Basic usage</h2>
-<p>A simple use case may be hydrating a <code>BlogPost</code> object, which contains data for the user that
-created it, the time it was created, the current publishing status, etc:</p>
-<pre class="highlight"><code class="language-php">use Laminas\Hydrator\Aggregate\AggregateHydrator;
+    <h1 id="laminashydratorfilter">Laminas\Hydrator\Filter</h1>
+<p>Hydrator filters allow you to manipulate the behavior of the <code>extract()</code>
+operation.  This is especially useful, if you want to omit some internals (e.g.
+<code>getServiceManager()</code>) from the array representation.</p>
+<p>It comes with a helpful <code>Composite</code> implementation, and several filters for
+common use cases. The filters are composed in the <code>AbstractHydrator</code>, so you can
+start using them immediately in any custom extensions you write that extend that
+class.</p>
+<pre class="highlight"><code class="language-php">namespace Laminas\Hydrator\Filter;
 
-$hydrator = new AggregateHydrator();
-
-// attach the various hydrators capable of handling simpler interfaces
-$hydrator-&gt;add(new My\BlogPostHydrator());
-$hydrator-&gt;add(new My\UserAwareObjectHydrator());
-$hydrator-&gt;add(new My\TimestampedObjectHydrator());
-$hydrator-&gt;add(new My\PublishableObjectHydrator());
-// ...
-
-// Now retrieve the BlogPost object
-// ...
-
-// you can now extract complex data from a blogpost
-$data = $hydrator-&gt;extract($blogPost);
-
-// or you can fill the object with complex data
-$blogPost = $hydrator-&gt;hydrate($data, $blogPost);</code></pre>
-<blockquote>
-<h3>Hydrator priorities</h3>
-<p><code>AggregateHydrator::add</code> has a second optional argument, <code>$priority</code>. If you
-have two or more hydrators that conflict with each other for same data keys,
-you may decide which one to execute first or last by passing a higher or lower
-integer priority, respectively, to this argument.</p>
-</blockquote>
-<p>In order to work with this logic, each of the hydrators that are attached should
-ignore any unknown object type passed in:</p>
-<pre class="highlight"><code class="language-php">namespace My;
-
-use Laminas\Hydrator\HydratorInterface
-
-class BlogPostHydrator implements HydratorInterface
+interface FilterInterface
 {
-    public function hydrate($data, $object)
-    {
-        if (! $object instanceof BlogPost) {
-            return $object;
-        }
-
-        // ... continue hydration ...
-    }
-
-    public function extract($object)
-    {
-        if (! $object instanceof BlogPost) {
-            return array();
-        }
-
-        // ... continue extraction ...
-    }
+    /**
+     * Should return true, if the given filter does not match.
+     */
+    public function filter(string $property, ?object $instance = null) : bool;
 }</code></pre>
-<h2 id="advanced-use-cases">Advanced use cases</h2>
-<p>Since the <code>AggregateHydrator</code> is event-driven, you can use the <code>EventManager</code>
-API to tweak its behaviour.</p>
-<p>Common use cases include:</p>
-<ul>
-<li>Removal of hydrated data keys (passwords/confidential information) depending
-  on business rules.</li>
-<li>Caching of the hydration/extraction process.</li>
-<li>Transformations on extracted data, for compatibility with third-party APIs.</li>
-</ul>
-<p>In the following example, a cache listener is introduced to speed up hydration, which can be
-very useful when the same data is requested multiple times:</p>
-<pre class="highlight"><code class="language-php">use Laminas\Hydrator\Aggregate\AggregateHydrator;
-use Laminas\Hydrator\Aggregate\ExtractEvent;
-use Laminas\Cache\Storage\Adapter\Memory;
+<p>If it returns true, the key/value pairs will be in the extracted arrays - if it
+returns false, you'll not see them again.</p>
+<p>The <code>$instance</code> value will typically be passed by extractors when the <code>$object</code> they are extracting is an anonymous object.
+(The <code>ClassMethodsHydrator</code> uses this facility, as the Reflection API does not work on anonymous objects.)</p>
+<h2 id="filter-implementations">Filter implementations</h2>
+<h3>Laminas\Hydrator\Filter\GetFilter</h3>
+<p>This filter is used in the <code>ClassMethodsHydrator</code> to decide which getters will
+be extracted. It checks if the key to extract starts with <code>get</code> or the object
+contains a method beginning with <code>get</code> (e.g., <code>Laminas\Foo\Bar::getFoo</code>).</p>
+<h3>Laminas\Hydrator\Filter\HasFilter</h3>
+<p>This filter is used in the <code>ClassMethodsHydrator</code> to decide which <code>has</code> methods
+will be extracted. It checks if the key to extract begins with <code>has</code> or the
+object contains a method beginning with <code>has</code> (e.g., <code>Laminas\Foo\Bar::hasFoo</code>).</p>
+<h3>Laminas\Hydrator\Filter\IsFilter</h3>
+<p>This filter is used in the <code>ClassMethodsHydrator</code> to decide which <code>is</code> methods
+will be extracted. It checks if the key to extract begins with <code>is</code> or the
+object contains a method beginning with <code>is</code> (e.g., <code>Laminas\Foo\Bar::isFoo</code>).</p>
+<h3>Laminas\Hydrator\Filter\MethodMatchFilter</h3>
+<p>This filter allows you to omit methods during extraction that match the
+condition defined in the composite.  The name of the method is specified in the
+constructor of this filter; the second parameter decides whether to use white or
+blacklisting to decide (whitelisting retains only the matching method, blacklist
+omits any matching method). The default is blacklisting - pass <code>false</code> to change
+the behavior.</p>
+<h3>Laminas\Hydrator\Filter\NumberOfParameterFilter</h3>
+<p>This filter is used in the <code>ClassMethodsHydrator</code> to check the number of
+parameters. By convention, the <code>get</code>, <code>has</code> and <code>is</code> methods do not get any
+parameters - but it may happen. You can add your own number of required
+parameters, simply add the number to the constructor. The default value is 0. If
+the method has more or fewer parameters than what the filter accepts, it will be
+omitted.</p>
+<h2 id="use-filtercomposite-for-complex-filters">Use FilterComposite for complex filters</h2>
+<p><code>FilterComposite</code> implements <code>FilterInterface</code> as well, so you can add it as a
+regular filter to the hydrator. One benefit of this implementation is that you
+can add the filters with a condition and accomplish complex requirements using
+different filters with different conditions. You can pass the following
+conditions to the 3rd parameter, when you add a filter:</p>
+<h3>Laminas\Hydrator\Filter\FilterComposite::CONDITION_OR</h3>
+<p>At the given level of the composite, at least one filter set using
+<code>CONDITION_OR</code> must return true to extract the value.</p>
+<h3>Laminas\Hydrator\Filter\FilterComposite::CONDITION_AND</h3>
+<p>At the given level of the composite, <strong>all</strong> filters set using <code>CONDITION_AND</code>
+must return true to extract the value.</p>
+<h3>FilterComposite Examples</h3>
+<p>To illustrate how conditions apply when composing filters, consider the
+following set of filters:</p>
+<pre class="highlight"><code class="language-php">$composite = new FilterComposite();
 
-$hydrator = new AggregateHydrator();
+$composite-&gt;addFilter('one', $condition1);
+$composite-&gt;addFilter('two', $condition2);
+$composite-&gt;addFilter('three', $condition3);
+$composite-&gt;addFilter('four', $condition4, FilterComposite::CONDITION_AND);
+$composite-&gt;addFilter('five', $condition5, FilterComposite::CONDITION_AND);</code></pre>
+<p>The above is roughly equivalent to the following conditional:</p>
+<pre class="highlight"><code class="language-php">// This is what's happening internally
+if (
+     ($condition1
+        || $condition2
+        || $condition3
+     ) &amp;&amp; ($condition4
+        &amp;&amp; $condition5
+     )
+) {
+    // do extraction
+}</code></pre>
+<p>If you only have one condition block (e.g., only <code>AND</code> or <code>OR</code> filters), the
+other condition type will be completely ignored.</p>
+<p>A bit more complex filter can look like this:</p>
+<pre class="highlight"><code class="language-php">$composite = new FilterComposite();
+$composite-&gt;addFilter(
+    'servicemanager',
+    new MethodMatchFilter('getServiceManager'),
+    FilterComposite::CONDITION_AND
+);
+$composite-&gt;addFilter(
+    'eventmanager',
+    new MethodMatchFilter('getEventManager'),
+    FilterComposite::CONDITION_AND
+);
 
-// Attach the various hydrators:
-$hydrator-&gt;add(new My\BlogPostHydrator());
-$hydrator-&gt;add(new My\UserAwareObjectHydrator());
-$hydrator-&gt;add(new My\TimestampedObjectHydrator());
-$hydrator-&gt;add(new My\PublishableObjectHydrator());
-// ...
+$hydrator-&gt;addFilter('excludes', $composite, FilterComposite::CONDITION_AND);
 
-$cache             = new Memory();
-$cacheReadListener = function (ExtractEvent $event) use ($cache) {
-    $object = $event-&gt;getExtractionObject();
+// Internal
+if (( // default composite inside the ClassMethodsHydrator:
+        ($getFilter
+            || $hasFilter
+            || $isFilter
+        ) &amp;&amp; (
+            $numberOfParameterFilter
+        )
+   ) &amp;&amp; ( // new composite, added to the one above
+        $serviceManagerFilter
+        &amp;&amp; $eventManagerFilter
+   )
+) {
+    // do extraction
+}</code></pre>
+<p>If you perform this on the <code>ClassMethodsHydrator</code>, all getters will get
+extracted, except for <code>getServiceManager()</code> and <code>getEventManager()</code>.</p>
+<h2 id="using-the-provider-interface">Using the provider interface</h2>
+<p><code>Laminas\Hydrator\Filter\FilterProviderInterface</code> allows you to configure the
+behavior of the hydrator inside your objects.</p>
+<pre class="highlight"><code class="language-php">namespace Laminas\Hydrator\Filter;
 
-    if (! $object instanceof BlogPost) {
-        return;
-    }
+interface FilterProviderInterface
+{
+    /**
+     * Provides a filter for hydration
+     *
+     * @return FilterInterface
+     */
+    public function getFilter();
+}</code></pre>
+<p>(The <code>getFilter()</code> method is automatically excluded from <code>extract()</code>.) If the
+extracted object implements the <code>Laminas\Hydrator\Filter\FilterProviderInterface</code>,
+the returned <code>FilterInterface</code> instance can also be a <code>FilterComposite</code>.</p>
+<p>For example:</p>
+<pre class="highlight"><code class="language-php">Class Foo implements FilterProviderInterface
+{
+     public function getFoo()
+     {
+         return 'foo';
+     }
 
-    if ($cache-&gt;hasItem($object-&gt;getId())) {
-        $event-&gt;setExtractedData($cache-&gt;getItem($object-&gt;getId()));
-        $event-&gt;stopPropagation();
-    }
-};
+     public function hasFoo()
+     {
+         return true;
+     }
 
-$cacheWriteListener = function (ExtractEvent $event) use ($cache) {
-    $object = $event-&gt;getExtractionObject();
+     public function getServiceManager()
+     {
+         return 'servicemanager';
+     }
 
-    if (! $object instanceof BlogPost) {
-        return;
-    }
+     public function getEventManager()
+     {
+         return 'eventmanager';
+     }
 
-    $cache-&gt;setItem($object-&gt;getId(), $event-&gt;getExtractedData());
-};
+     public function getFilter()
+     {
+         $composite = new FilterComposite();
+         $composite-&gt;addFilter('get', new GetFilter());
 
-// Attaching a high priority listener executed before extraction logic:
-$eventManager = $hydrator-&gt;getEventManager();
-$eventManager()-&gt;attach(ExtractEvent::EVENT_EXTRACT, $cacheReadListener, 1000);
+         $exclusionComposite = new FilterComposite();
+         $exclusionComposite-&gt;addFilter(
+             'servicemanager',
+             new MethodMatchFilter('getServiceManager'),
+             FilterComposite::CONDITION_AND
+             );
+         $exclusionComposite-&gt;addFilter(
+             'eventmanager',
+             new MethodMatchFilter('getEventManager'),
+             FilterComposite::CONDITION_AND
+         );
 
-// Attaching a low priority listener executed after extraction logic:
-$eventManager()-&gt;attach(ExtractEvent::EVENT_EXTRACT, $cacheWriteListener, -1000);</code></pre>
-<p>With an aggregate hydrator configured in this way, any
-<code>$hydrator-&gt;extract($blogPost)</code> operation will be cached.</p>
+         $composite-&gt;addFilter('excludes', $exclusionComposite, FilterComposite::CONDITION_AND);
+
+         return $composite;
+     }
+}
+
+$hydrator = new ClassMethodsHydrator(false);
+$extractedArray = $hydrator-&gt;extract(new Foo());</code></pre>
+<p><code>$extractedArray</code> will only have 'foo' =&gt; 'foo'; all other values are
+excluded from extraction.</p>
+<blockquote>
+<h3>Note</h3>
+<p>All pre-registered filters from the <code>ClassMethodsHydrator</code> hydrator are ignored when
+this interface is used. More on those methods below.</p>
+</blockquote>
+<h2 id="filter-enabled-hydrators-and-the-composite-filter">Filter-enabled hydrators and the composite filter</h2>
+<p>Hydrators can indicate they are filter-enabled by implementing
+<code>Laminas\Hydrator\Filter\FilterEnabledInterface</code>:</p>
+<pre class="highlight"><code class="language-php">namespace Laminas\Hydrator\Filter;
+
+interface FilterEnabledInterface extends FilterProviderInterface
+{
+    /**
+     * Add a new filter to take care of what needs to be hydrated.
+     * To exclude e.g. the method getServiceLocator:
+     *
+     * &lt;code&gt;
+     * $composite-&gt;addFilter(
+     *     "servicelocator",
+     *     function ($property) {
+     *         [$class, $method] = explode('::', $property, 2);
+     *         return $method !== 'getServiceLocator';
+     *     },
+     *     FilterComposite::CONDITION_AND
+     * );
+     * &lt;/code&gt;
+     *
+     * @param string $name Index in the composite
+     * @param callable|FilterInterface $filter
+     */
+    public function addFilter(string $name, $filter, int $condition = FilterComposite::CONDITION_OR) : void;
+
+    /**
+     * Check whether a specific filter exists at key $name or not
+     *
+     * @param string $name Index in the composite
+     */
+    public function hasFilter(string $name) : bool;
+
+    /**
+     * Remove a filter from the composition.
+     *
+     * To not extract "has" methods, you simply need to unregister it
+     *
+     * &lt;code&gt;
+     * $filterComposite-&gt;removeFilter('has');
+     * &lt;/code&gt;
+     */
+    public function removeFilter(string $name) : void;
+}</code></pre>
+<blockquote>
+<p>Note that the interface extends <code>FilterProviderInterface</code>, which means it also
+includes the <code>getFilter()</code> method.</p>
+</blockquote>
+<p>The <code>FilterEnabledInterface</code> makes the assumption that the class will be backed
+by a <code>Laminas\Hydrator\Filter\FilterComposite</code>; the various <code>addFilter()</code>,
+<code>hasFilter()</code>, and <code>removeFilter()</code> methods are expected to proxy to a
+<code>FilterComposite</code> instance.</p>
+<p><code>AbstractHydrator</code>, on which all the hydrators shipped in this package are
+built, implements <code>FilterEnabledInterface</code>. Of the hydrators shipped, only one,
+<code>ClassMethodsHydrator</code>, defines any filters from the outset. Its constructor
+includes the following:</p>
+<pre class="highlight"><code class="language-php">$this-&gt;filterComposite-&gt;addFilter('is', new IsFilter());
+$this-&gt;filterComposite-&gt;addFilter('has', new HasFilter());
+$this-&gt;filterComposite-&gt;addFilter('get', new GetFilter());
+$this-&gt;filterComposite-&gt;addFilter(
+    'parameter',
+    new NumberOfParameterFilter(),
+    FilterComposite::CONDITION_AND
+);</code></pre>
+<h3>Remove filters</h3>
+<p>If you want to tell a filter-enabled hydrator such as <code>ClassMethodsHydrator</code> not
+to extract methods that start with <code>is</code>, remove the related filter:</p>
+<pre class="highlight"><code class="language-php">$hydrator = new ClassMethodsHydrator(false);
+$hydrator-&gt;removeFilter('is');</code></pre>
+<p>After performing the above, the key/value pairs for <code>is</code> methods will no longer
+end up in your extracted array.</p>
+<h3>Add filters</h3>
+<p>You can add filters using the <code>addFilter()</code> method. Filters can either implement
+<code>FilterInterface</code>, or simply be PHP callables:</p>
+<pre class="highlight"><code class="language-php">$hydrator-&gt;addFilter('len', function($property) {
+    return strlen($property) === 3;
+});</code></pre>
+<p>By default, every filter you add will be added with a conditional <code>OR</code>. If you
+want to add it with <code>AND</code> (such as the <code>ClassMethodsHydrator</code> does with its
+composed <code>NumberOfParameterFilter</code>, demonstrated above) provide the conditon as
+the third argument to <code>addFilter</code>:</p>
+<pre class="highlight"><code class="language-php">$hydrator-&gt;addFilter('len', function($property) {
+    return strlen($property) === 3;
+}, FilterComposite::CONDITION_AND);</code></pre>
+<p>One common use case for filters is to omit getters for values that you do not
+want to represent, such as a service manager instance:</p>
+<pre class="highlight"><code class="language-php">$hydrator-&gt;addFilter(
+    'servicemanager',
+    new MethodMatchFilter('getServiceManager'),
+    FilterComposite::CONDITION_AND
+);</code></pre>
+<p>The example above will exclude the <code>getServiceManager()</code> method and the
+<code>servicemanager</code> key from extraction, even if the <code>get</code> filter wants to add it.</p>
 
 
 
@@ -514,7 +703,7 @@ $eventManager()-&gt;attach(ExtractEvent::EVENT_EXTRACT, $cacheWriteListener, -10
         
         <li class="page-nav__item">
             
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../strategy/">
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../quick-start/">
                     <i class="fa fa-chevron-left"></i> Previous
                 </a>
             
@@ -523,7 +712,7 @@ $eventManager()-&gt;attach(ExtractEvent::EVENT_EXTRACT, $cacheWriteListener, -10
         
         <li class="page-nav__item">
             
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../naming-strategy/identity-naming-strategy/">
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../strategy/">
                     Next <i class="fa fa-chevron-right"></i>
                 </a>
             
@@ -537,7 +726,7 @@ $eventManager()-&gt;attach(ExtractEvent::EVENT_EXTRACT, $cacheWriteListener, -10
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/laminas/laminas-hydrator/edit/master/docs/book/v2/aggregate.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/laminas/laminas-hydrator/edit/master/docs/book/v4/filter.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>
@@ -576,22 +765,6 @@ $eventManager()-&gt;attach(ExtractEvent::EVENT_EXTRACT, $cacheWriteListener, -10
 
                 
                 
-
-                    
-                    
-                
-            
-
-                
-                
-
-                    
-                    
-                
-            
-
-                
-                
                     
                         
     <li class="subnavigation__list-item ">
@@ -600,32 +773,66 @@ $eventManager()-&gt;attach(ExtractEvent::EVENT_EXTRACT, $cacheWriteListener, -10
 
                     
                         
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Filters</a>
+    </li>
+
+                    
+                        
     <li class="subnavigation__list-item">
-        <span class="subnavigation__headline">Reference</span>
+        <span class="subnavigation__headline">Strategies</span>
         <ul class="subnavigation__list">
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../filter/" class="subnavigation__link">Filters</a>
+        <a href="../strategy/" class="subnavigation__link">Introduction</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../strategy/" class="subnavigation__link">Strategies</a>
+        <a href="../strategies/collection/" class="subnavigation__link">Collection</a>
     </li>
 
             
                 
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Aggregates</a>
+    <li class="subnavigation__list-item ">
+        <a href="../strategies/datetime-immutable-formatter-strategy/" class="subnavigation__link">DateTimeImmutableFormatter</a>
     </li>
 
             
                 
+    <li class="subnavigation__list-item ">
+        <a href="../strategies/hydrator/" class="subnavigation__link">Hydrator</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../strategies/serializable/" class="subnavigation__link">Serializable</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../aggregate/" class="subnavigation__link">Aggregates</a>
+    </li>
+
+                    
+                        
     <li class="subnavigation__list-item">
         <span class="subnavigation__headline">Naming Strategies</span>
         <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../naming-strategy/intro/" class="subnavigation__link">Introduction</a>
+    </li>
+
             
                 
     <li class="subnavigation__list-item ">
@@ -654,10 +861,34 @@ $eventManager()-&gt;attach(ExtractEvent::EVENT_EXTRACT, $cacheWriteListener, -10
         </ul>
     </li>
 
-            
-        </ul>
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../plugin-managers/" class="subnavigation__link">Plugin Managers</a>
     </li>
 
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../migration/" class="subnavigation__link">Migration</a>
+    </li>
+
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                
+            
+
+                
+                
+
+                    
                     
                 
             

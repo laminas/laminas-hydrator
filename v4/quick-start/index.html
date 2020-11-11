@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Serialize objects to arrays, and vice versa">  
-    <link rel="canonical" href="https://docs.laminas.dev/laminas-hydrator/v2/aggregate/">
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-hydrator/v4/quick-start/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>Aggregates - laminas-hydrator - Laminas Docs</title>
+    <title>Quick Start - laminas-hydrator - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
     
@@ -125,56 +125,74 @@
 
                 
                 
-
-                    
-                    
-                
-            
-
-                
-                
-
-                    
-                    
-                
-            
-
-                
-                
                     
                         
-    <li class="subnavigation__list-item ">
-        <a href="../quick-start/" class="subnavigation__link">Quick Start</a>
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Quick Start</a>
     </li>
 
                     
                         
-    <li class="subnavigation__list-item">
-        <span class="subnavigation__headline">Reference</span>
-        <ul class="subnavigation__list">
-            
-                
     <li class="subnavigation__list-item ">
         <a href="../filter/" class="subnavigation__link">Filters</a>
     </li>
 
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Strategies</span>
+        <ul class="subnavigation__list">
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../strategy/" class="subnavigation__link">Strategies</a>
+        <a href="../strategy/" class="subnavigation__link">Introduction</a>
     </li>
 
             
                 
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Aggregates</a>
+    <li class="subnavigation__list-item ">
+        <a href="../strategies/collection/" class="subnavigation__link">Collection</a>
     </li>
 
             
                 
+    <li class="subnavigation__list-item ">
+        <a href="../strategies/datetime-immutable-formatter-strategy/" class="subnavigation__link">DateTimeImmutableFormatter</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../strategies/hydrator/" class="subnavigation__link">Hydrator</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../strategies/serializable/" class="subnavigation__link">Serializable</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../aggregate/" class="subnavigation__link">Aggregates</a>
+    </li>
+
+                    
+                        
     <li class="subnavigation__list-item">
         <span class="subnavigation__headline">Naming Strategies</span>
         <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../naming-strategy/intro/" class="subnavigation__link">Introduction</a>
+    </li>
+
             
                 
     <li class="subnavigation__list-item ">
@@ -203,10 +221,34 @@
         </ul>
     </li>
 
-            
-        </ul>
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../plugin-managers/" class="subnavigation__link">Plugin Managers</a>
     </li>
 
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../migration/" class="subnavigation__link">Migration</a>
+    </li>
+
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                
+            
+
+                
+                
+
+                    
                     
                 
             
@@ -255,13 +297,13 @@
     <div class="btn-group">
         <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false" id="version-selector-dropdown">
             
-                v2
+                v4
             
         </button>
         <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left" aria-labelledby="version-selector-dropdown">
             
                 
-                    <a href="../../v4/quick-start/" class="dropdown-item">
+                    <a href="./" class="dropdown-item active">
                         
                             v4 (latest)
                         
@@ -277,7 +319,7 @@
                 
             
                 
-                    <a href="../quick-start/" class="dropdown-item active">
+                    <a href="../../v2/quick-start/" class="dropdown-item">
                         
                             v2
                         
@@ -317,15 +359,11 @@
             <ul class="toc__list">
                 
                     <li class="toc__entry">
-                        <a href="#installation-requirements" class="toc__link nav-link">Installation requirements</a>
+                        <a href="#basic-usage" class="toc__link nav-link">Basic Usage</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#basic-usage" class="toc__link nav-link">Basic usage</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#advanced-use-cases" class="toc__link nav-link">Advanced use cases</a>
+                        <a href="#available-implementations" class="toc__link nav-link">Available Implementations</a>
                     </li>
                 
             </ul>
@@ -350,15 +388,8 @@
                         
                     
                 
-                    
-                        
-                        
-                            <li class="breadcrumb-item">Reference</li>
-                        
-                    
-                
 
-                <li class="breadcrumb-item active" aria-current="page">Aggregates</li>
+                <li class="breadcrumb-item active" aria-current="page">Quick Start</li>
             
         
     </ol>
@@ -366,144 +397,144 @@
 
 
 
-    <div class="alert alert-danger" role="alert">
-        <h4>Caution</h4>
-        <p>
-            The documentation you are viewing is for an older version of this component.<br>
-            <a href="../..">Switch to the latest (v4) version.</a>
-        </p>
-    </div>
-
 
 
 
     
     
-        <h2 class="chapter__headline">Reference</h2>
-    
 
-    <h1 id="aggregatehydrator">AggregateHydrator</h1>
-<p><code>Laminas\Hydrator\Aggregate\AggregateHydrator</code> is an implementation of
-<code>Laminas\Hydrator\HydratorInterface</code> that composes multiple hydrators via event listeners.</p>
-<p>You typically want to use an aggregate hydrator when you want to hydrate or extract data from
-complex objects that implement multiple interfaces, and therefore need multiple hydrators to handle
-that in subsequent steps.</p>
-<h2 id="installation-requirements">Installation requirements</h2>
-<p>The <code>AggregateHydrator</code> depends on the laminas-eventmanager component, so be sure to have it
-installed before getting started:</p>
-<pre class="highlight"><code class="language-bash">$ composer require laminas/laminas-eventmanager</code></pre>
-<h2 id="basic-usage">Basic usage</h2>
-<p>A simple use case may be hydrating a <code>BlogPost</code> object, which contains data for the user that
-created it, the time it was created, the current publishing status, etc:</p>
-<pre class="highlight"><code class="language-php">use Laminas\Hydrator\Aggregate\AggregateHydrator;
+    <h1 id="quick-start">Quick Start</h1>
+<p>The laminas-hydrator component provides functionality for hydrating objects (which is the act of populating an object from a set of data) and extracting data from them.</p>
+<p>The component contains <a href="#available_implementations">concrete implementations</a> for a number of common use cases, such as by using arrays, object methods, and reflection, and provides <a href="#base_interfaces">interfaces</a> for creating custom implementations.</p>
+<h2 id="basic-usage">Basic Usage</h2>
+<h3>Hydrating an Object</h3>
+<p>To hydrate an object with data, instantiate the hydrator and then pass to it the data for hydrating the object.</p>
+<pre class="highlight"><code class="language-php">$hydrator = new Laminas\Hydrator\ArraySerializableHydrator();
 
-$hydrator = new AggregateHydrator();
+$data = [
+    'first_name'    =&gt; 'James',
+    'last_name'     =&gt; 'Kahn',
+    'email_address' =&gt; 'james.kahn@example.org',
+    'phone_number'  =&gt; '+61 419 1234 5678',
+];
 
-// attach the various hydrators capable of handling simpler interfaces
-$hydrator-&gt;add(new My\BlogPostHydrator());
-$hydrator-&gt;add(new My\UserAwareObjectHydrator());
-$hydrator-&gt;add(new My\TimestampedObjectHydrator());
-$hydrator-&gt;add(new My\PublishableObjectHydrator());
-// ...
+$object = $hydrator-&gt;hydrate($data, new ArrayObject());</code></pre>
+<h3>Extracting Values From an Object</h3>
+<p>To extract data from an object, instantiate the applicable hydrator and then call <code>extract</code>, passing to it the object to extract data from.</p>
+<pre class="highlight"><code class="language-php">$hydrator = new Laminas\Hydrator\ArraySerializableHydrator();
 
-// Now retrieve the BlogPost object
-// ...
-
-// you can now extract complex data from a blogpost
-$data = $hydrator-&gt;extract($blogPost);
-
-// or you can fill the object with complex data
-$blogPost = $hydrator-&gt;hydrate($data, $blogPost);</code></pre>
-<blockquote>
-<h3>Hydrator priorities</h3>
-<p><code>AggregateHydrator::add</code> has a second optional argument, <code>$priority</code>. If you
-have two or more hydrators that conflict with each other for same data keys,
-you may decide which one to execute first or last by passing a higher or lower
-integer priority, respectively, to this argument.</p>
-</blockquote>
-<p>In order to work with this logic, each of the hydrators that are attached should
-ignore any unknown object type passed in:</p>
-<pre class="highlight"><code class="language-php">namespace My;
-
-use Laminas\Hydrator\HydratorInterface
-
-class BlogPostHydrator implements HydratorInterface
-{
-    public function hydrate($data, $object)
-    {
-        if (! $object instanceof BlogPost) {
-            return $object;
-        }
-
-        // ... continue hydration ...
-    }
-
-    public function extract($object)
-    {
-        if (! $object instanceof BlogPost) {
-            return array();
-        }
-
-        // ... continue extraction ...
-    }
-}</code></pre>
-<h2 id="advanced-use-cases">Advanced use cases</h2>
-<p>Since the <code>AggregateHydrator</code> is event-driven, you can use the <code>EventManager</code>
-API to tweak its behaviour.</p>
-<p>Common use cases include:</p>
+// ... Assuming that $object has already been initialised
+$data = $hydrator-&gt;extract($object);</code></pre>
+<h2 id="available-implementations">Available Implementations</h2>
+<h3>ArraySerializableHydrator</h3>
+<p>The ArraySerializableHydrator hydrates data from an array and extracts an object’s data returning it as an array.
+Objects passed to the hydrate method must implement either <code>exchangeArray()</code> or <code>populate()</code> to support hydration, and must implement <code>getArrayCopy()</code> to support extraction.</p>
+<h3>ClassMethodsHydrator</h3>
+<p>The ClassMethodsHydrator calls "setter" methods matching keys in the data set to hydrate objects and calls "getter" methods matching keys in the data set during extraction, based on the following rules:</p>
 <ul>
-<li>Removal of hydrated data keys (passwords/confidential information) depending
-  on business rules.</li>
-<li>Caching of the hydration/extraction process.</li>
-<li>Transformations on extracted data, for compatibility with third-party APIs.</li>
+<li><code>is*()</code>, <code>has*()</code>, and <code>get*()</code> methods will be used when extracting data.
+  The method prefix will be removed from the key's name.</li>
+<li><code>set*()</code> methods will be used when hydrating properties.</li>
 </ul>
-<p>In the following example, a cache listener is introduced to speed up hydration, which can be
-very useful when the same data is requested multiple times:</p>
-<pre class="highlight"><code class="language-php">use Laminas\Hydrator\Aggregate\AggregateHydrator;
-use Laminas\Hydrator\Aggregate\ExtractEvent;
-use Laminas\Cache\Storage\Adapter\Memory;
+<pre class="highlight"><code class="language-php">class User
+{
+    private $firstName;
+    private $lastName;
+    private $emailAddress;
+    private $phoneNumber;
 
-$hydrator = new AggregateHydrator();
-
-// Attach the various hydrators:
-$hydrator-&gt;add(new My\BlogPostHydrator());
-$hydrator-&gt;add(new My\UserAwareObjectHydrator());
-$hydrator-&gt;add(new My\TimestampedObjectHydrator());
-$hydrator-&gt;add(new My\PublishableObjectHydrator());
-// ...
-
-$cache             = new Memory();
-$cacheReadListener = function (ExtractEvent $event) use ($cache) {
-    $object = $event-&gt;getExtractionObject();
-
-    if (! $object instanceof BlogPost) {
-        return;
+    public function setFirstName(string $firstName)
+    {
+        $this-&gt;firstName = $firstName;
     }
 
-    if ($cache-&gt;hasItem($object-&gt;getId())) {
-        $event-&gt;setExtractedData($cache-&gt;getItem($object-&gt;getId()));
-        $event-&gt;stopPropagation();
-    }
-};
-
-$cacheWriteListener = function (ExtractEvent $event) use ($cache) {
-    $object = $event-&gt;getExtractionObject();
-
-    if (! $object instanceof BlogPost) {
-        return;
+    public function setLastName(string $lastName)
+    {
+        $this-&gt;lastName = $lastName;
     }
 
-    $cache-&gt;setItem($object-&gt;getId(), $event-&gt;getExtractedData());
-};
+    public function setEmailAddress(string $emailAddress)
+    {
+        $this-&gt;emailAddress = $emailAddress;
+    }
 
-// Attaching a high priority listener executed before extraction logic:
-$eventManager = $hydrator-&gt;getEventManager();
-$eventManager()-&gt;attach(ExtractEvent::EVENT_EXTRACT, $cacheReadListener, 1000);
+    public function setPhoneNumber(string $phoneNumber)
+    {
+        $this-&gt;phoneNumber = $phoneNumber;
+    }
+}
 
-// Attaching a low priority listener executed after extraction logic:
-$eventManager()-&gt;attach(ExtractEvent::EVENT_EXTRACT, $cacheWriteListener, -1000);</code></pre>
-<p>With an aggregate hydrator configured in this way, any
-<code>$hydrator-&gt;extract($blogPost)</code> operation will be cached.</p>
+$data = [
+    'first_name'    =&gt; 'James',
+    'last_name'     =&gt; 'Kahn',
+    'email_address' =&gt; 'james.kahn@example.org',
+    'phone_number'  =&gt; '+61 419 1234 5678',
+];
+
+$hydrator = new Laminas\Hydrator\ClassMethodsHydrator();
+$user     = $hydrator-&gt;hydrate($data, new User());
+$data     = $hydrator-&gt;extract(new User());</code></pre>
+<h3>ObjectPropertyHydrator</h3>
+<p>The ObjectPropertyHydrator hydrates objects and extracts data using publicly accessible properties which match a key in the data set.</p>
+<pre class="highlight"><code class="language-php">class User
+{
+    private $firstName;
+    private $lastName;
+    private $emailAddress;
+    private $phoneNumber;
+}
+
+$data = [
+    'first_name'    =&gt; 'James',
+    'last_name'     =&gt; 'Kahn',
+    'email_address' =&gt; 'james.kahn@example.org',
+    'phone_number'  =&gt; '+61 419 1234 5678',
+];
+
+$hydrator = new Laminas\Hydrator\ObjectPropertyHydrator();
+$user     = $hydrator-&gt;hydrate($data, new User());
+$data     = $hydrator-&gt;extract(new User());</code></pre>
+<h3>ReflectionHydrator</h3>
+<p>The ReflectionHydrator is similar to the <code>ObjectPropertyHydrator</code>, however it uses <a href="http://php.net/manual/en/intro.reflection.php">PHP's reflection API</a> to hydrate or extract properties of any visibility.
+Any data key matching an existing property will be hydrated.
+Any existing properties will be used for extracting data.</p>
+<pre class="highlight"><code class="language-php">class User
+{
+    private $firstName;
+    private $lastName;
+    private $emailAddress;
+    private $phoneNumber;
+}
+
+$data = [
+    'first_name'    =&gt; 'James',
+    'last_name'     =&gt; 'Kahn',
+    'email_address' =&gt; 'james.kahn@example.org',
+    'phone_number'  =&gt; '+61 419 1234 5678',
+];
+
+$hydrator = new Laminas\Hydrator\ReflectionHydrator();
+$user     = $hydrator-&gt;hydrate($data, new User());
+$data     = $hydrator-&gt;extract(new User());</code></pre>
+<h3>DelegatingHydrator</h3>
+<p>The DelegatingHydrator composes a hydrator locator, and will delegate <code>hydrate()</code> and <code>extract()</code> calls to the appropriate one based upon the class name of the object being operated on.</p>
+<pre class="highlight"><code class="language-php">// Instantiate each hydrator you wish to delegate to
+$albumHydrator  = new Laminas\Hydrator\ClassMethodsHydrator();
+$artistHydrator = new Laminas\Hydrator\ClassMethodsHydrator();
+
+// Map the entity class name to the hydrator using the HydratorPluginManager.
+// In this case we have two entity classes, "Album" and "Artist".
+$hydrators = new Laminas\Hydrator\HydratorPluginManager;
+$hydrators-&gt;setService('Album', $albumHydrator);
+$hydrators-&gt;setService('Artist', $artistHydrator);
+
+// Create the DelegatingHydrator and tell it to use our configured hydrator locator
+$delegating = new Laminas\Hydrator\DelegatingHydrator($hydrators);
+
+// Now we can use $delegating to hydrate or extract any supported object
+// Assumes that $data and Artist have already been initialised
+$array  = $delegating-&gt;extract(new Artist());
+$artist = $delegating-&gt;hydrate($data, new Artist());</code></pre>
 
 
 
@@ -514,7 +545,7 @@ $eventManager()-&gt;attach(ExtractEvent::EVENT_EXTRACT, $cacheWriteListener, -10
         
         <li class="page-nav__item">
             
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../strategy/">
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../..">
                     <i class="fa fa-chevron-left"></i> Previous
                 </a>
             
@@ -523,7 +554,7 @@ $eventManager()-&gt;attach(ExtractEvent::EVENT_EXTRACT, $cacheWriteListener, -10
         
         <li class="page-nav__item">
             
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../naming-strategy/identity-naming-strategy/">
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../filter/">
                     Next <i class="fa fa-chevron-right"></i>
                 </a>
             
@@ -537,7 +568,7 @@ $eventManager()-&gt;attach(ExtractEvent::EVENT_EXTRACT, $cacheWriteListener, -10
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/laminas/laminas-hydrator/edit/master/docs/book/v2/aggregate.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/laminas/laminas-hydrator/edit/master/docs/book/v4/quick-start.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>
@@ -576,56 +607,74 @@ $eventManager()-&gt;attach(ExtractEvent::EVENT_EXTRACT, $cacheWriteListener, -10
 
                 
                 
-
-                    
-                    
-                
-            
-
-                
-                
-
-                    
-                    
-                
-            
-
-                
-                
                     
                         
-    <li class="subnavigation__list-item ">
-        <a href="../quick-start/" class="subnavigation__link">Quick Start</a>
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Quick Start</a>
     </li>
 
                     
                         
-    <li class="subnavigation__list-item">
-        <span class="subnavigation__headline">Reference</span>
-        <ul class="subnavigation__list">
-            
-                
     <li class="subnavigation__list-item ">
         <a href="../filter/" class="subnavigation__link">Filters</a>
     </li>
 
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Strategies</span>
+        <ul class="subnavigation__list">
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../strategy/" class="subnavigation__link">Strategies</a>
+        <a href="../strategy/" class="subnavigation__link">Introduction</a>
     </li>
 
             
                 
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Aggregates</a>
+    <li class="subnavigation__list-item ">
+        <a href="../strategies/collection/" class="subnavigation__link">Collection</a>
     </li>
 
             
                 
+    <li class="subnavigation__list-item ">
+        <a href="../strategies/datetime-immutable-formatter-strategy/" class="subnavigation__link">DateTimeImmutableFormatter</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../strategies/hydrator/" class="subnavigation__link">Hydrator</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../strategies/serializable/" class="subnavigation__link">Serializable</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../aggregate/" class="subnavigation__link">Aggregates</a>
+    </li>
+
+                    
+                        
     <li class="subnavigation__list-item">
         <span class="subnavigation__headline">Naming Strategies</span>
         <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../naming-strategy/intro/" class="subnavigation__link">Introduction</a>
+    </li>
+
             
                 
     <li class="subnavigation__list-item ">
@@ -654,10 +703,34 @@ $eventManager()-&gt;attach(ExtractEvent::EVENT_EXTRACT, $cacheWriteListener, -10
         </ul>
     </li>
 
-            
-        </ul>
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../plugin-managers/" class="subnavigation__link">Plugin Managers</a>
     </li>
 
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../migration/" class="subnavigation__link">Migration</a>
+    </li>
+
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                
+            
+
+                
+                
+
+                    
                     
                 
             

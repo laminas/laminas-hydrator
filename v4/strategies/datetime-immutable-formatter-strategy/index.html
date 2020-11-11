@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Serialize objects to arrays, and vice versa">  
-    <link rel="canonical" href="https://docs.laminas.dev/laminas-hydrator/v2/aggregate/">
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-hydrator/v4/strategies/datetime-immutable-formatter-strategy/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>Aggregates - laminas-hydrator - Laminas Docs</title>
+    <title>DateTimeImmutableFormatter - laminas-hydrator - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
     
@@ -115,7 +115,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="../..">laminas-hydrator</a>
+            <a href="../../..">laminas-hydrator</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -125,88 +125,130 @@
 
                 
                 
-
-                    
-                    
-                
-            
-
-                
-                
-
-                    
-                    
-                
-            
-
-                
-                
                     
                         
     <li class="subnavigation__list-item ">
-        <a href="../quick-start/" class="subnavigation__link">Quick Start</a>
+        <a href="../../quick-start/" class="subnavigation__link">Quick Start</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../filter/" class="subnavigation__link">Filters</a>
     </li>
 
                     
                         
     <li class="subnavigation__list-item">
-        <span class="subnavigation__headline">Reference</span>
+        <span class="subnavigation__headline">Strategies</span>
         <ul class="subnavigation__list">
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../filter/" class="subnavigation__link">Filters</a>
+        <a href="../../strategy/" class="subnavigation__link">Introduction</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../strategy/" class="subnavigation__link">Strategies</a>
+        <a href="../collection/" class="subnavigation__link">Collection</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Aggregates</a>
+        <a href="./" class="subnavigation__link">DateTimeImmutableFormatter</a>
     </li>
 
             
                 
+    <li class="subnavigation__list-item ">
+        <a href="../hydrator/" class="subnavigation__link">Hydrator</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../serializable/" class="subnavigation__link">Serializable</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../aggregate/" class="subnavigation__link">Aggregates</a>
+    </li>
+
+                    
+                        
     <li class="subnavigation__list-item">
         <span class="subnavigation__headline">Naming Strategies</span>
         <ul class="subnavigation__list">
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../naming-strategy/identity-naming-strategy/" class="subnavigation__link">Identity</a>
+        <a href="../../naming-strategy/intro/" class="subnavigation__link">Introduction</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../naming-strategy/map-naming-strategy/" class="subnavigation__link">Mapping</a>
+        <a href="../../naming-strategy/identity-naming-strategy/" class="subnavigation__link">Identity</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../naming-strategy/underscore-naming-strategy/" class="subnavigation__link">Underscore Mapping</a>
+        <a href="../../naming-strategy/map-naming-strategy/" class="subnavigation__link">Mapping</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../naming-strategy/composite-naming-strategy/" class="subnavigation__link">Composite</a>
+        <a href="../../naming-strategy/underscore-naming-strategy/" class="subnavigation__link">Underscore Mapping</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../naming-strategy/composite-naming-strategy/" class="subnavigation__link">Composite</a>
     </li>
 
             
         </ul>
     </li>
 
-            
-        </ul>
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../plugin-managers/" class="subnavigation__link">Plugin Managers</a>
     </li>
 
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../migration/" class="subnavigation__link">Migration</a>
+    </li>
+
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                
+            
+
+                
+                
+
+                    
                     
                 
             
@@ -255,13 +297,13 @@
     <div class="btn-group">
         <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false" id="version-selector-dropdown">
             
-                v2
+                v4
             
         </button>
         <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left" aria-labelledby="version-selector-dropdown">
             
                 
-                    <a href="../../v4/quick-start/" class="dropdown-item">
+                    <a href="../../quick-start/" class="dropdown-item active">
                         
                             v4 (latest)
                         
@@ -269,7 +311,7 @@
                 
             
                 
-                    <a href="../../v3/quick-start/" class="dropdown-item">
+                    <a href="../../../v3/quick-start/" class="dropdown-item">
                         
                             v3
                         
@@ -277,7 +319,7 @@
                 
             
                 
-                    <a href="../quick-start/" class="dropdown-item active">
+                    <a href="../../../v2/quick-start/" class="dropdown-item">
                         
                             v2
                         
@@ -317,15 +359,11 @@
             <ul class="toc__list">
                 
                     <li class="toc__entry">
-                        <a href="#installation-requirements" class="toc__link nav-link">Installation requirements</a>
+                        <a href="#basic-usage" class="toc__link nav-link">Basic Usage</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#basic-usage" class="toc__link nav-link">Basic usage</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#advanced-use-cases" class="toc__link nav-link">Advanced use cases</a>
+                        <a href="#example" class="toc__link nav-link">Example</a>
                     </li>
                 
             </ul>
@@ -342,7 +380,7 @@
             <li class="breadcrumb-item"><a href="https://docs.laminas.dev/components/">Components</a></li>
 
             
-                <li class="breadcrumb-item"><a href="../..">laminas-hydrator</a></li>
+                <li class="breadcrumb-item"><a href="../../..">laminas-hydrator</a></li>
 
                 
                     
@@ -353,12 +391,12 @@
                     
                         
                         
-                            <li class="breadcrumb-item">Reference</li>
+                            <li class="breadcrumb-item">Strategies</li>
                         
                     
                 
 
-                <li class="breadcrumb-item active" aria-current="page">Aggregates</li>
+                <li class="breadcrumb-item active" aria-current="page">DateTimeImmutableFormatter</li>
             
         
     </ol>
@@ -366,144 +404,78 @@
 
 
 
-    <div class="alert alert-danger" role="alert">
-        <h4>Caution</h4>
-        <p>
-            The documentation you are viewing is for an older version of this component.<br>
-            <a href="../..">Switch to the latest (v4) version.</a>
-        </p>
-    </div>
-
 
 
 
     
     
-        <h2 class="chapter__headline">Reference</h2>
+        <h2 class="chapter__headline">Strategies</h2>
     
 
-    <h1 id="aggregatehydrator">AggregateHydrator</h1>
-<p><code>Laminas\Hydrator\Aggregate\AggregateHydrator</code> is an implementation of
-<code>Laminas\Hydrator\HydratorInterface</code> that composes multiple hydrators via event listeners.</p>
-<p>You typically want to use an aggregate hydrator when you want to hydrate or extract data from
-complex objects that implement multiple interfaces, and therefore need multiple hydrators to handle
-that in subsequent steps.</p>
-<h2 id="installation-requirements">Installation requirements</h2>
-<p>The <code>AggregateHydrator</code> depends on the laminas-eventmanager component, so be sure to have it
-installed before getting started:</p>
-<pre class="highlight"><code class="language-bash">$ composer require laminas/laminas-eventmanager</code></pre>
-<h2 id="basic-usage">Basic usage</h2>
-<p>A simple use case may be hydrating a <code>BlogPost</code> object, which contains data for the user that
-created it, the time it was created, the current publishing status, etc:</p>
-<pre class="highlight"><code class="language-php">use Laminas\Hydrator\Aggregate\AggregateHydrator;
-
-$hydrator = new AggregateHydrator();
-
-// attach the various hydrators capable of handling simpler interfaces
-$hydrator-&gt;add(new My\BlogPostHydrator());
-$hydrator-&gt;add(new My\UserAwareObjectHydrator());
-$hydrator-&gt;add(new My\TimestampedObjectHydrator());
-$hydrator-&gt;add(new My\PublishableObjectHydrator());
-// ...
-
-// Now retrieve the BlogPost object
-// ...
-
-// you can now extract complex data from a blogpost
-$data = $hydrator-&gt;extract($blogPost);
-
-// or you can fill the object with complex data
-$blogPost = $hydrator-&gt;hydrate($data, $blogPost);</code></pre>
+    <h1 id="datetimeimmutableformatter">DateTimeImmutableFormatter</h1>
 <blockquote>
-<h3>Hydrator priorities</h3>
-<p><code>AggregateHydrator::add</code> has a second optional argument, <code>$priority</code>. If you
-have two or more hydrators that conflict with each other for same data keys,
-you may decide which one to execute first or last by passing a higher or lower
-integer priority, respectively, to this argument.</p>
+<p>Available since version 3.1.0</p>
 </blockquote>
-<p>In order to work with this logic, each of the hydrators that are attached should
-ignore any unknown object type passed in:</p>
-<pre class="highlight"><code class="language-php">namespace My;
+<p><code>DateTimeImmutableFormatterStrategy</code> provides <strong>bidirectional conversion between
+strings and <code>DateTimeImmutable</code> instances</strong>.</p>
+<p>The strategy uses <code>DateTimeFormatterStrategy</code> for conversion where the
+<a href="../../strategy/#laminas-hydrator-strategy-datetimeformatterstrategy">input and output formats</a>
+can be set.</p>
+<h2 id="basic-usage">Basic Usage</h2>
+<p>The following code example shows standalone usage without adding the strategy
+to a hydrator.</p>
+<h3>Create and configure strategy</h3>
+<p>Create the strategy and set the <a href="../../strategy/#laminas-hydrator-strategy-datetimeformatterstrategy">input and output formats</a>
+via the <code>DateTimeFormatterStrategy</code>.</p>
+<pre class="highlight"><code class="language-php">$strategy = new Laminas\Hydrator\Strategy\DateTimeImmutableFormatterStrategy(
+    new Laminas\Hydrator\Strategy\DateTimeFormatterStrategy('Y-m-d')
+);</code></pre>
+<h3>Hydrate data</h3>
+<pre class="highlight"><code class="language-php">$hydrated = $strategy-&gt;hydrate('2020-07-01');
 
-use Laminas\Hydrator\HydratorInterface
+var_dump($hydrated instanceof DateTimeImmutable); // true</code></pre>
+<h3>Extract data</h3>
+<pre class="highlight"><code class="language-php">$extracted = $strategy-&gt;extract(
+    DateTimeImmutable::createFromFormat('Y-m-d', '2020-07-01')
+);
 
-class BlogPostHydrator implements HydratorInterface
+echo $extracted // '2020-07-01'</code></pre>
+<h2 id="example">Example</h2>
+<p>The following example demonstrates hydration for a class with a property.</p>
+<p>An example class which represents a music album with a release date:</p>
+<pre class="highlight"><code class="language-php">class Album
 {
-    public function hydrate($data, $object)
-    {
-        if (! $object instanceof BlogPost) {
-            return $object;
-        }
+    private ?DateTimeImmutable $releaseDate;
 
-        // ... continue hydration ...
+    public function __construct(?DateTimeImmutable $releaseDate = null)
+    {
+        $this-&gt;releaseDate = $releaseDate;
     }
 
-    public function extract($object)
+    public function getReleaseDate() : ?DateTimeImmutable
     {
-        if (! $object instanceof BlogPost) {
-            return array();
-        }
-
-        // ... continue extraction ...
+        return $this-&gt;releaseDate;
     }
 }</code></pre>
-<h2 id="advanced-use-cases">Advanced use cases</h2>
-<p>Since the <code>AggregateHydrator</code> is event-driven, you can use the <code>EventManager</code>
-API to tweak its behaviour.</p>
-<p>Common use cases include:</p>
-<ul>
-<li>Removal of hydrated data keys (passwords/confidential information) depending
-  on business rules.</li>
-<li>Caching of the hydration/extraction process.</li>
-<li>Transformations on extracted data, for compatibility with third-party APIs.</li>
-</ul>
-<p>In the following example, a cache listener is introduced to speed up hydration, which can be
-very useful when the same data is requested multiple times:</p>
-<pre class="highlight"><code class="language-php">use Laminas\Hydrator\Aggregate\AggregateHydrator;
-use Laminas\Hydrator\Aggregate\ExtractEvent;
-use Laminas\Cache\Storage\Adapter\Memory;
+<h3>Create hydrator and add strategy</h3>
+<p>Create a hydrator and add <code>DateTimeImmutableFormatterStrategy</code> as strategy:</p>
+<pre class="highlight"><code class="language-php">$hydrator = new Laminas\Hydrator\ReflectionHydrator();
+$hydrator-&gt;addStrategy(
+    'releaseDate',
+    new Laminas\Hydrator\Strategy\DateTimeImmutableFormatterStrategy(
+        new Laminas\Hydrator\Strategy\DateTimeFormatterStrategy('Y-m-d')
+    )
+);</code></pre>
+<h3>Hydrate data</h3>
+<p>Create an instance of the example class and hydrate data:</p>
+<pre class="highlight"><code class="language-php">$album = new Album();
+$hydrator-&gt;hydrate(['releaseDate' =&gt; '2020-07-01'], $album);
 
-$hydrator = new AggregateHydrator();
+var_dump($album-&gt;getReleaseDate() instanceof DateTimeImmutable); // true</code></pre>
+<h3>Extract data</h3>
+<pre class="highlight"><code class="language-php">$extracted = $hydrator-&gt;extract($album);
 
-// Attach the various hydrators:
-$hydrator-&gt;add(new My\BlogPostHydrator());
-$hydrator-&gt;add(new My\UserAwareObjectHydrator());
-$hydrator-&gt;add(new My\TimestampedObjectHydrator());
-$hydrator-&gt;add(new My\PublishableObjectHydrator());
-// ...
-
-$cache             = new Memory();
-$cacheReadListener = function (ExtractEvent $event) use ($cache) {
-    $object = $event-&gt;getExtractionObject();
-
-    if (! $object instanceof BlogPost) {
-        return;
-    }
-
-    if ($cache-&gt;hasItem($object-&gt;getId())) {
-        $event-&gt;setExtractedData($cache-&gt;getItem($object-&gt;getId()));
-        $event-&gt;stopPropagation();
-    }
-};
-
-$cacheWriteListener = function (ExtractEvent $event) use ($cache) {
-    $object = $event-&gt;getExtractionObject();
-
-    if (! $object instanceof BlogPost) {
-        return;
-    }
-
-    $cache-&gt;setItem($object-&gt;getId(), $event-&gt;getExtractedData());
-};
-
-// Attaching a high priority listener executed before extraction logic:
-$eventManager = $hydrator-&gt;getEventManager();
-$eventManager()-&gt;attach(ExtractEvent::EVENT_EXTRACT, $cacheReadListener, 1000);
-
-// Attaching a low priority listener executed after extraction logic:
-$eventManager()-&gt;attach(ExtractEvent::EVENT_EXTRACT, $cacheWriteListener, -1000);</code></pre>
-<p>With an aggregate hydrator configured in this way, any
-<code>$hydrator-&gt;extract($blogPost)</code> operation will be cached.</p>
+echo $extracted; // '2020-07-01'</code></pre>
 
 
 
@@ -514,7 +486,7 @@ $eventManager()-&gt;attach(ExtractEvent::EVENT_EXTRACT, $cacheWriteListener, -10
         
         <li class="page-nav__item">
             
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../strategy/">
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../collection/">
                     <i class="fa fa-chevron-left"></i> Previous
                 </a>
             
@@ -523,7 +495,7 @@ $eventManager()-&gt;attach(ExtractEvent::EVENT_EXTRACT, $cacheWriteListener, -10
         
         <li class="page-nav__item">
             
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../naming-strategy/identity-naming-strategy/">
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../hydrator/">
                     Next <i class="fa fa-chevron-right"></i>
                 </a>
             
@@ -537,7 +509,7 @@ $eventManager()-&gt;attach(ExtractEvent::EVENT_EXTRACT, $cacheWriteListener, -10
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/laminas/laminas-hydrator/edit/master/docs/book/v2/aggregate.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/laminas/laminas-hydrator/edit/master/docs/book/v4/strategies/datetime-immutable-formatter-strategy.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>
@@ -566,7 +538,7 @@ $eventManager()-&gt;attach(ExtractEvent::EVENT_EXTRACT, $cacheWriteListener, -10
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="../..">laminas-hydrator</a>
+            <a href="../../..">laminas-hydrator</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -576,88 +548,130 @@ $eventManager()-&gt;attach(ExtractEvent::EVENT_EXTRACT, $cacheWriteListener, -10
 
                 
                 
-
-                    
-                    
-                
-            
-
-                
-                
-
-                    
-                    
-                
-            
-
-                
-                
                     
                         
     <li class="subnavigation__list-item ">
-        <a href="../quick-start/" class="subnavigation__link">Quick Start</a>
+        <a href="../../quick-start/" class="subnavigation__link">Quick Start</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../filter/" class="subnavigation__link">Filters</a>
     </li>
 
                     
                         
     <li class="subnavigation__list-item">
-        <span class="subnavigation__headline">Reference</span>
+        <span class="subnavigation__headline">Strategies</span>
         <ul class="subnavigation__list">
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../filter/" class="subnavigation__link">Filters</a>
+        <a href="../../strategy/" class="subnavigation__link">Introduction</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../strategy/" class="subnavigation__link">Strategies</a>
+        <a href="../collection/" class="subnavigation__link">Collection</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Aggregates</a>
+        <a href="./" class="subnavigation__link">DateTimeImmutableFormatter</a>
     </li>
 
             
                 
+    <li class="subnavigation__list-item ">
+        <a href="../hydrator/" class="subnavigation__link">Hydrator</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../serializable/" class="subnavigation__link">Serializable</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../aggregate/" class="subnavigation__link">Aggregates</a>
+    </li>
+
+                    
+                        
     <li class="subnavigation__list-item">
         <span class="subnavigation__headline">Naming Strategies</span>
         <ul class="subnavigation__list">
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../naming-strategy/identity-naming-strategy/" class="subnavigation__link">Identity</a>
+        <a href="../../naming-strategy/intro/" class="subnavigation__link">Introduction</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../naming-strategy/map-naming-strategy/" class="subnavigation__link">Mapping</a>
+        <a href="../../naming-strategy/identity-naming-strategy/" class="subnavigation__link">Identity</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../naming-strategy/underscore-naming-strategy/" class="subnavigation__link">Underscore Mapping</a>
+        <a href="../../naming-strategy/map-naming-strategy/" class="subnavigation__link">Mapping</a>
     </li>
 
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../naming-strategy/composite-naming-strategy/" class="subnavigation__link">Composite</a>
+        <a href="../../naming-strategy/underscore-naming-strategy/" class="subnavigation__link">Underscore Mapping</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../naming-strategy/composite-naming-strategy/" class="subnavigation__link">Composite</a>
     </li>
 
             
         </ul>
     </li>
 
-            
-        </ul>
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../plugin-managers/" class="subnavigation__link">Plugin Managers</a>
     </li>
 
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../migration/" class="subnavigation__link">Migration</a>
+    </li>
+
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                
+            
+
+                
+                
+
+                    
                     
                 
             
@@ -746,13 +760,13 @@ $eventManager()-&gt;attach(ExtractEvent::EVENT_EXTRACT, $cacheWriteListener, -10
 </footer>
 
     <script>
-        let base_url = '../..',
+        let base_url = '../../..',
             project  = "components",
             siteName = 'laminas-hydrator';
     </script>
     <script src="https://docs.laminas.dev/js/scripts.js"></script>
     
-        <script src="../../search/main.js"></script>
+        <script src="../../../search/main.js"></script>
     
 
     
