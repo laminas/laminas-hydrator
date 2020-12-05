@@ -19,6 +19,16 @@ use PHPUnit\Framework\TestCase;
  */
 class NullableStrategyTest extends TestCase
 {
+    /**
+     * @var bool
+     */
+    protected $backupStaticAttributes = false;
+
+    /**
+     * @var bool
+     */
+    protected $runTestInSeparateProcess = false;
+
     public function testExtractNonNullValue() : void
     {
         $strategy = $this->createMock(StrategyInterface::class);
