@@ -18,15 +18,18 @@ class NullableStrategy implements StrategyInterface
     private $strategy;
 
     /**
-     * @param StrategyInterface $strategy
+     * @var bool
      */
-    public function __construct(StrategyInterface $strategy)
+    private $treatEmptyAsNull;
+
+    public function __construct(StrategyInterface $strategy, bool $treatEmptyAsNull = false)
     {
         $this->strategy = $strategy;
+        $this->treatEmptyAsNull = $treatEmptyAsNull;
     }
 
     /**
-     * Check the given value for NULL so that it can be extracted by the hydrator.
+     * Check the given value for NULL or empty string so that it can be extracted by the hydrator.
      *
      * {@inheritDoc}
      */
@@ -36,17 +39,25 @@ class NullableStrategy implements StrategyInterface
             return null;
         }
 
+        if ($this->treatEmptyAsNull && $value === '') {
+            return null;
+        }
+
         return $this->strategy->extract($value, $object);
     }
 
     /**
-     * Check the given value for NULL so that it can be hydrated by the hydrator.
+     * Check the given value for NULL or empty string so that it can be hydrated by the hydrator.
      *
      * {@inheritDoc}
      */
     public function hydrate($value, ?array $data = null)
     {
-        if ($value === '' || $value === null) {
+        if ($value === null) {
+            return null;
+        }
+
+        if ($this->treatEmptyAsNull && $value === '') {
             return null;
         }
 
