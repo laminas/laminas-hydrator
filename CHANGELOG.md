@@ -2,27 +2,28 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 4.1.0 - TBD
+## 4.1.0 - 2020-12-16
 
-### Added
 
-- Nothing.
+-----
 
-### Changed
+### Release Notes for [4.1.0](https://github.com/laminas/laminas-hydrator/milestone/10)
 
-- Nothing.
+Feature release (minor)
 
-### Deprecated
+### 4.1.0
 
-- Nothing.
+- Total issues resolved: **1**
+- Total pull requests resolved: **1**
+- Total contributors: **1**
 
-### Removed
+#### Documentation Needed,Enhancement
 
-- Nothing.
+ - [43: Add NullableStrategy](https://github.com/laminas/laminas-hydrator/pull/43) thanks to @eugene-borovov
 
-### Fixed
+#### Feature Request
 
-- Nothing.
+ - [42: HydratorStrategy extract empty value](https://github.com/laminas/laminas-hydrator/issues/42) thanks to @eugene-borovov
 
 ## 4.0.2 - 2020-12-16
 
