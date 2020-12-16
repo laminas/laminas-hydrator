@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="3.16@d03e5ef057d6adc656c0ff7e166c50b73b4f48f3">
+<files psalm-version="4.3.1@2feba22a005a18bf31d4c7b9bdb9252c73897476">
   <file src="src/Aggregate/AggregateHydrator.php">
     <DocblockTypeContradiction occurrences="1">
       <code>null === $this-&gt;eventManager</code>
@@ -14,8 +14,7 @@
     </DeprecatedClass>
   </file>
   <file src="src/ArraySerializableHydrator.php">
-    <MixedArgument occurrences="2">
-      <code>$name</code>
+    <MixedArgument occurrences="1">
       <code>$original</code>
     </MixedArgument>
     <MixedArgumentTypeCoercion occurrences="1">
@@ -28,10 +27,9 @@
     <MixedArrayAssignment occurrences="1">
       <code>$data[$name]</code>
     </MixedArrayAssignment>
-    <MixedAssignment occurrences="8">
+    <MixedAssignment occurrences="7">
       <code>$data</code>
       <code>$data[$name]</code>
-      <code>$extractedName</code>
       <code>$name</code>
       <code>$original</code>
       <code>$replacement[$name]</code>
@@ -55,18 +53,16 @@
       <code>$options instanceof Traversable</code>
       <code>null === $this-&gt;extractionMethodsCache[$objectClass]</code>
     </DocblockTypeContradiction>
-    <MixedArgument occurrences="4">
+    <MixedArgument occurrences="3">
       <code>$options</code>
       <code>$options['methodExistsCheck']</code>
       <code>$options['underscoreSeparatedKeys']</code>
-      <code>$realAttributeName</code>
     </MixedArgument>
     <MixedArgumentTypeCoercion occurrences="2">
       <code>$property</code>
       <code>$property</code>
     </MixedArgumentTypeCoercion>
-    <MixedAssignment occurrences="3">
-      <code>$realAttributeName</code>
+    <MixedAssignment occurrences="2">
       <code>$value</code>
       <code>$values[$realAttributeName]</code>
     </MixedAssignment>
@@ -102,12 +98,6 @@
       <code>$filter</code>
       <code>$filter</code>
     </MixedAssignment>
-    <MixedInferredReturnType occurrences="1">
-      <code>bool</code>
-    </MixedInferredReturnType>
-    <MixedReturnStatement occurrences="1">
-      <code>$filter($property)</code>
-    </MixedReturnStatement>
   </file>
   <file src="src/HydratorPluginManager.php">
     <DeprecatedClass occurrences="8">
@@ -131,12 +121,6 @@
     <MixedArgument occurrences="1">
       <code>$config['hydrators']</code>
     </MixedArgument>
-    <MixedArrayAccess occurrences="1">
-      <code>$config['hydrators']</code>
-    </MixedArrayAccess>
-    <MixedAssignment occurrences="1">
-      <code>$config</code>
-    </MixedAssignment>
   </file>
   <file src="src/Iterator/HydratingIteratorIterator.php">
     <MissingParamType occurrences="1">
@@ -245,19 +229,17 @@
     </DeprecatedClass>
   </file>
   <file src="src/ObjectPropertyHydrator.php">
-    <MixedArgument occurrences="1">
-      <code>$name</code>
-    </MixedArgument>
     <MixedArgumentTypeCoercion occurrences="1">
       <code>$name</code>
     </MixedArgumentTypeCoercion>
-    <MixedAssignment occurrences="5">
+    <MixedAssignment occurrences="3">
       <code>$data[$name]</code>
-      <code>$extracted</code>
-      <code>$name</code>
       <code>$value</code>
       <code>$value</code>
     </MixedAssignment>
+    <UndefinedVariable occurrences="1">
+      <code>$properties</code>
+    </UndefinedVariable>
   </file>
   <file src="src/Reflection.php">
     <DeprecatedClass occurrences="1">
@@ -265,14 +247,10 @@
     </DeprecatedClass>
   </file>
   <file src="src/ReflectionHydrator.php">
-    <MixedArgument occurrences="1">
-      <code>$propertyName</code>
-    </MixedArgument>
     <MixedArgumentTypeCoercion occurrences="1">
       <code>$key</code>
     </MixedArgumentTypeCoercion>
-    <MixedAssignment occurrences="4">
-      <code>$propertyName</code>
+    <MixedAssignment occurrences="3">
       <code>$result[$propertyName]</code>
       <code>$value</code>
       <code>$value</code>
@@ -298,22 +276,16 @@
     <InvalidStringClass occurrences="1">
       <code>new $class()</code>
     </InvalidStringClass>
-    <MissingClosureReturnType occurrences="1">
-      <code>function (ContainerInterface $container, string $class) {</code>
-    </MissingClosureReturnType>
     <MixedAssignment occurrences="1">
       <code>$instance</code>
     </MixedAssignment>
   </file>
   <file src="src/Strategy/BooleanStrategy.php">
-    <DocblockTypeContradiction occurrences="7">
+    <DocblockTypeContradiction occurrences="4">
       <code>! is_int($falseValue) &amp;&amp; ! is_string($falseValue)</code>
       <code>! is_int($trueValue) &amp;&amp; ! is_string($trueValue)</code>
       <code>! is_string($value) &amp;&amp; ! is_int($value)</code>
       <code>is_bool($value)</code>
-      <code>is_int($value)</code>
-      <code>is_string($falseValue)</code>
-      <code>is_string($trueValue)</code>
     </DocblockTypeContradiction>
     <MoreSpecificImplementedParamType occurrences="2">
       <code>$value</code>
@@ -351,6 +323,10 @@
       <code>$value</code>
       <code>$value</code>
     </MoreSpecificImplementedParamType>
+    <RedundantCast occurrences="2">
+      <code>(string) $value</code>
+      <code>(string) $value</code>
+    </RedundantCast>
     <RedundantConditionGivenDocblockType occurrences="1">
       <code>is_string($value)</code>
     </RedundantConditionGivenDocblockType>
@@ -398,24 +374,11 @@
     </MixedPropertyTypeCoercion>
   </file>
   <file src="test/Aggregate/AggregateHydratorFunctionalTest.php">
-    <MissingClosureReturnType occurrences="2">
-      <code>function (ExtractEvent $event) {</code>
-      <code>function (HydrateEvent $event) use ($swappedObject) {</code>
-    </MissingClosureReturnType>
     <MissingParamType occurrences="3">
       <code>$data</code>
       <code>$object</code>
       <code>$object</code>
     </MissingParamType>
-    <MissingReturnType occurrences="7">
-      <code>testEmptyAggregate</code>
-      <code>testExtractWithMultipleHydrators</code>
-      <code>testHydrateWithMultipleHydrators</code>
-      <code>testSingleHydratorExtraction</code>
-      <code>testSingleHydratorHydration</code>
-      <code>testStoppedPropagationInExtraction</code>
-      <code>testStoppedPropagationInHydration</code>
-    </MissingReturnType>
     <MixedArgument occurrences="5">
       <code>$blueprint</code>
       <code>$blueprint</code>
@@ -438,12 +401,6 @@
     </PropertyNotSetInConstructor>
   </file>
   <file src="test/Aggregate/AggregateHydratorTest.php">
-    <MissingReturnType occurrences="4">
-      <code>testAdd</code>
-      <code>testExtract</code>
-      <code>testGetSetManager</code>
-      <code>testHydrate</code>
-    </MissingReturnType>
     <PropertyNotSetInConstructor occurrences="4">
       <code>$eventManager</code>
       <code>$hydrator</code>
@@ -452,18 +409,12 @@
     </PropertyNotSetInConstructor>
   </file>
   <file src="test/Aggregate/ExtractEventTest.php">
-    <MissingReturnType occurrences="1">
-      <code>testEvent</code>
-    </MissingReturnType>
     <PropertyNotSetInConstructor occurrences="2">
       <code>ExtractEventTest</code>
       <code>ExtractEventTest</code>
     </PropertyNotSetInConstructor>
   </file>
   <file src="test/Aggregate/HydrateEventTest.php">
-    <MissingReturnType occurrences="1">
-      <code>testEvent</code>
-    </MissingReturnType>
     <PropertyNotSetInConstructor occurrences="2">
       <code>HydrateEventTest</code>
       <code>HydrateEventTest</code>
@@ -474,11 +425,6 @@
       <code>onExtract</code>
       <code>onHydrate</code>
     </InternalMethod>
-    <MissingReturnType occurrences="3">
-      <code>testAttach</code>
-      <code>testOnExtract</code>
-      <code>testOnHydrate</code>
-    </MissingReturnType>
     <MixedMethodCall occurrences="6">
       <code>method</code>
       <code>method</code>
@@ -511,17 +457,6 @@
       <code>$start</code>
       <code>$submit</code>
     </MissingParamType>
-    <MissingReturnType occurrences="9">
-      <code>arrayDataProvider</code>
-      <code>testCanExtractFromArraySerializableObject</code>
-      <code>testCanHydrateToArraySerializableObject</code>
-      <code>testExtractArrayObject</code>
-      <code>testHydrationWillReplaceNestedArrayData</code>
-      <code>testHydratorExtractThrowsExceptionOnNonObjectParameter</code>
-      <code>testHydratorHydrateThrowsExceptionOnNonObjectParameter</code>
-      <code>testWillPreserveOriginalPropsAtHydration</code>
-      <code>testWillReplaceArrayIfNoGetArrayCopy</code>
-    </MissingReturnType>
     <MixedMethodCall occurrences="3">
       <code>getArrayCopy</code>
       <code>getArrayCopy</code>
@@ -541,9 +476,6 @@
       <code>$errno</code>
       <code>$errstr</code>
     </MissingClosureParamType>
-    <MissingReturnType occurrences="1">
-      <code>testTriggerUserDeprecatedError</code>
-    </MissingReturnType>
     <PropertyNotSetInConstructor occurrences="2">
       <code>ArraySerializableTest</code>
       <code>ArraySerializableTest</code>
@@ -559,15 +491,6 @@
       <code>'non-object'</code>
       <code>'non-object'</code>
     </InvalidArgument>
-    <MissingReturnType occurrences="7">
-      <code>testCanExtractFromMethodsWithOptionalParameters</code>
-      <code>testCanHydratedPromiscuousInstances</code>
-      <code>testExtractClassWithoutAnyMethod</code>
-      <code>testExtractNonObjectThrowsTypeError</code>
-      <code>testHydrateNonObjectThrowsTypeError</code>
-      <code>testSetOptionsFromTraversable</code>
-      <code>testSetOptionsThrowsException</code>
-    </MissingReturnType>
     <MixedMethodCall occurrences="3">
       <code>getArrayCopy</code>
       <code>getFooBar</code>
@@ -587,9 +510,6 @@
       <code>$errno</code>
       <code>$errstr</code>
     </MissingClosureParamType>
-    <MissingReturnType occurrences="1">
-      <code>testTriggerUserDeprecatedError</code>
-    </MissingReturnType>
     <PropertyNotSetInConstructor occurrences="2">
       <code>ClassMethodsTest</code>
       <code>ClassMethodsTest</code>
@@ -599,12 +519,6 @@
     </RedundantCondition>
   </file>
   <file src="test/DelegatingHydratorFactoryTest.php">
-    <MissingReturnType occurrences="4">
-      <code>testFactoryCreatesHydratorPluginManagerToSeedDelegatingHydratorAsFallback</code>
-      <code>testFactoryUsesContainerToSeedDelegatingHydratorWhenItIsAHydratorPluginManager</code>
-      <code>testFactoryUsesHydratorManagerServiceFromContainerToSeedDelegatingHydratorWhenAvailable</code>
-      <code>testFactoryUsesHydratorPluginManagerServiceFromContainerToSeedDelegatingHydratorWhenAvailable</code>
-    </MissingReturnType>
     <MixedAssignment occurrences="1">
       <code>$hydrators</code>
     </MixedAssignment>
@@ -626,10 +540,6 @@
     </TooManyArguments>
   </file>
   <file src="test/DelegatingHydratorTest.php">
-    <MissingReturnType occurrences="2">
-      <code>testExtract</code>
-      <code>testHydrate</code>
-    </MissingReturnType>
     <PropertyNotSetInConstructor occurrences="5">
       <code>$hydrator</code>
       <code>$hydrators</code>
@@ -639,20 +549,9 @@
     </PropertyNotSetInConstructor>
   </file>
   <file src="test/Filter/FilterCompositeTest.php">
-    <MissingClosureReturnType occurrences="1">
-      <code>static function () {</code>
-    </MissingClosureReturnType>
     <MissingParamType occurrences="1">
       <code>$value</code>
     </MissingParamType>
-    <MissingReturnType occurrences="6">
-      <code>generateFilters</code>
-      <code>providerCompositionFiltering</code>
-      <code>testCompositionFiltering</code>
-      <code>testConstructWithInvalidFilter</code>
-      <code>testFilters</code>
-      <code>testNoFilters</code>
-    </MissingReturnType>
     <MixedArgument occurrences="2">
       <code>$andFilters</code>
       <code>$orFilters</code>
@@ -694,10 +593,6 @@
       <code>$expected</code>
       <code>$methodName</code>
     </MissingParamType>
-    <MissingReturnType occurrences="2">
-      <code>providerFilter</code>
-      <code>testFilter</code>
-    </MissingReturnType>
     <MixedArgument occurrences="1">
       <code>$methodName</code>
     </MixedArgument>
@@ -710,13 +605,6 @@
     <MissingParamType occurrences="1">
       <code>$parameter</code>
     </MissingParamType>
-    <MissingReturnType occurrences="5">
-      <code>methodWithNoParameters</code>
-      <code>methodWithOptionalParameters</code>
-      <code>testArityOne</code>
-      <code>testArityZero</code>
-      <code>testFilterPropertyDoesNotExist</code>
-    </MissingReturnType>
     <PropertyNotSetInConstructor occurrences="2">
       <code>NumberOfParameterFilterTest</code>
       <code>NumberOfParameterFilterTest</code>
@@ -731,16 +619,6 @@
       <code>$parameter</code>
       <code>$parameter</code>
     </MissingParamType>
-    <MissingReturnType occurrences="8">
-      <code>methodWithMultipleMandatoryParameters</code>
-      <code>methodWithMultipleOptionalParameters</code>
-      <code>methodWithSingleMandatoryParameter</code>
-      <code>methodWithSingleOptionalParameter</code>
-      <code>methodWithoutParameters</code>
-      <code>testMethods</code>
-      <code>testMethodsOnSubsequentCalls</code>
-      <code>testTriggersExceptionOnUnknownMethod</code>
-    </MissingReturnType>
     <PropertyNotSetInConstructor occurrences="3">
       <code>$filter</code>
       <code>OptionalParametersFilterTest</code>
@@ -752,10 +630,6 @@
       <code>'\Laminas\Hydrator\AbstractHydrator'</code>
       <code>'\Laminas\Hydrator\AbstractHydrator'</code>
     </ArgumentTypeCoercion>
-    <MissingReturnType occurrences="2">
-      <code>testGetHydrator</code>
-      <code>testSetHydrator</code>
-    </MissingReturnType>
     <MixedMethodCall occurrences="6">
       <code>getHydrator</code>
       <code>getHydrator</code>
@@ -776,15 +650,6 @@
       <code>$value</code>
       <code>$value</code>
     </MissingClosureParamType>
-    <MissingReturnType occurrences="7">
-      <code>testAddingStrategy</code>
-      <code>testCheckStrategyEmpty</code>
-      <code>testCheckStrategyNotEmpty</code>
-      <code>testExtractingObjects</code>
-      <code>testHydratingObjects</code>
-      <code>testRemovingStrategy</code>
-      <code>testRetrieveStrategy</code>
-    </MissingReturnType>
     <MixedArgument occurrences="4">
       <code>$value</code>
       <code>$value</code>
@@ -824,9 +689,6 @@
       <code>$property</code>
       <code>$property</code>
     </MissingClosureParamType>
-    <MissingReturnType occurrences="1">
-      <code>testMultipleInvocationsWithDifferentFiltersFindsAllProperties</code>
-    </MissingReturnType>
     <PropertyNotSetInConstructor occurrences="3">
       <code>$hydrator</code>
       <code>HydratorObjectPropertyTest</code>
@@ -834,9 +696,6 @@
     </PropertyNotSetInConstructor>
   </file>
   <file src="test/HydratorPluginManagerCompatibilityTest.php">
-    <InvalidReturnType occurrences="1">
-      <code>getV2InvalidPluginException</code>
-    </InvalidReturnType>
     <PropertyNotSetInConstructor occurrences="2">
       <code>HydratorPluginManagerCompatibilityTest</code>
       <code>HydratorPluginManagerCompatibilityTest</code>
@@ -846,17 +705,6 @@
     <MissingClosureParamType occurrences="1">
       <code>$container</code>
     </MissingClosureParamType>
-    <MissingClosureReturnType occurrences="1">
-      <code>function ($container) use ($hydrator) {</code>
-    </MissingClosureReturnType>
-    <MissingReturnType occurrences="6">
-      <code>testConfiguresHydratorServicesWhenFound</code>
-      <code>testDoesNotConfigureHydratorServicesWhenConfigServiceDoesNotContainHydratorsConfig</code>
-      <code>testDoesNotConfigureHydratorServicesWhenConfigServiceNotPresent</code>
-      <code>testDoesNotConfigureHydratorServicesWhenServiceListenerPresent</code>
-      <code>testFactoryConfiguresPluginManagerUnderContainerInterop</code>
-      <code>testFactoryReturnsPluginManager</code>
-    </MissingReturnType>
     <PropertyNotSetInConstructor occurrences="2">
       <code>HydratorPluginManagerFactoryTest</code>
       <code>HydratorPluginManagerFactoryTest</code>
@@ -878,19 +726,6 @@
       <code>$strategy-&gt;data</code>
       <code>$strategy-&gt;object</code>
     </MissingPropertyType>
-    <MissingReturnType occurrences="11">
-      <code>testAddingStrategy</code>
-      <code>testCheckStrategyEmpty</code>
-      <code>testCheckStrategyNotEmpty</code>
-      <code>testContextAwarenessExtract</code>
-      <code>testContextAwarenessHydrate</code>
-      <code>testExtractingObjects</code>
-      <code>testHydratingObjects</code>
-      <code>testRemovingStrategy</code>
-      <code>testRetrieveStrategy</code>
-      <code>testWhenUsingUnderscoreSeparatedKeysHydratorStrategyIsAlwaysConsideredUnderscoreSeparatedToo</code>
-      <code>underscoreHandlingDataProvider</code>
-    </MissingReturnType>
     <MixedArgument occurrences="5">
       <code>$attributes['entities']</code>
       <code>$attributes['entities']</code>
@@ -940,30 +775,6 @@
       <code>$hydrator</code>
       <code>$serializable</code>
     </MissingParamType>
-    <MissingReturnType occurrences="22">
-      <code>filterProvider</code>
-      <code>testArraySerializableFilter</code>
-      <code>testHydratorClassMethodsCamelCase</code>
-      <code>testHydratorClassMethodsCamelCaseWithSetterMissing</code>
-      <code>testHydratorClassMethodsDefaultBehaviorIsConvertUnderscoreToCamelCase</code>
-      <code>testHydratorClassMethodsIgnoresInvalidValues</code>
-      <code>testHydratorClassMethodsManipulateFilter</code>
-      <code>testHydratorClassMethodsOptions</code>
-      <code>testHydratorClassMethodsTitleCase</code>
-      <code>testHydratorClassMethodsUnderscore</code>
-      <code>testHydratorClassMethodsUnderscoreWithUnderscoreUpperCasedHydrateDataKeys</code>
-      <code>testHydratorClassMethodsWithCustomFilter</code>
-      <code>testHydratorClassMethodsWithInvalidNumberOfParameters</code>
-      <code>testHydratorClassMethodsWithMagicMethodSetter</code>
-      <code>testHydratorClassMethodsWithMagicMethodSetterAndMethodExistsCheck</code>
-      <code>testHydratorClassMethodsWithProtectedSetter</code>
-      <code>testHydratorReflection</code>
-      <code>testInitiateValues</code>
-      <code>testObjectBasedFilters</code>
-      <code>testRetrieveWildStrategyAndOther</code>
-      <code>testUseWildStrategyAndOther</code>
-      <code>testUseWildStrategyByDefault</code>
-    </MissingReturnType>
     <MixedArgument occurrences="2">
       <code>$property</code>
       <code>$property</code>
@@ -992,72 +803,35 @@
     </PropertyNotSetInConstructor>
   </file>
   <file src="test/HydratorTestTrait.php">
-    <MissingReturnType occurrences="2">
-      <code>testExtractWithNamingStrategyAndStrategy</code>
-      <code>testHydrateWithNamingStrategyAndStrategy</code>
-    </MissingReturnType>
     <MixedMethodCall occurrences="1">
       <code>getValue</code>
     </MixedMethodCall>
   </file>
   <file src="test/Iterator/HydratingArrayIteratorTest.php">
-    <MissingReturnType occurrences="3">
-      <code>testHydratesObjectAndClonesOnCurrent</code>
-      <code>testThrowingInvalidArgumentExceptionWhenSettingPrototypeToInvalidClass</code>
-      <code>testUsingStringForObjectName</code>
-    </MissingReturnType>
     <PropertyNotSetInConstructor occurrences="2">
       <code>HydratingArrayIteratorTest</code>
       <code>HydratingArrayIteratorTest</code>
     </PropertyNotSetInConstructor>
   </file>
   <file src="test/Iterator/HydratingIteratorIteratorTest.php">
-    <MissingReturnType occurrences="3">
-      <code>testHydratesObjectAndClonesOnCurrent</code>
-      <code>testThrowingInvalidArgumentExceptionWhenSettingPrototypeToInvalidClass</code>
-      <code>testUsingStringForObjectName</code>
-    </MissingReturnType>
     <PropertyNotSetInConstructor occurrences="2">
       <code>HydratingIteratorIteratorTest</code>
       <code>HydratingIteratorIteratorTest</code>
     </PropertyNotSetInConstructor>
   </file>
   <file src="test/NamingStrategy/CompositeNamingStrategyTest.php">
-    <MissingReturnType occurrences="4">
-      <code>testExtract</code>
-      <code>testGetSameNameWhenNoNamingStrategyExistsForTheName</code>
-      <code>testHydrate</code>
-      <code>testUseDefaultNamingStrategy</code>
-    </MissingReturnType>
     <PropertyNotSetInConstructor occurrences="2">
       <code>CompositeNamingStrategyTest</code>
       <code>CompositeNamingStrategyTest</code>
     </PropertyNotSetInConstructor>
   </file>
   <file src="test/NamingStrategy/IdentityNamingStrategyTest.php">
-    <MissingReturnType occurrences="2">
-      <code>testExtract</code>
-      <code>testHydrate</code>
-    </MissingReturnType>
     <PropertyNotSetInConstructor occurrences="2">
       <code>IdentityNamingStrategyTest</code>
       <code>IdentityNamingStrategyTest</code>
     </PropertyNotSetInConstructor>
   </file>
   <file src="test/NamingStrategy/MapNamingStrategyTest.php">
-    <MissingReturnType occurrences="11">
-      <code>testExtractReturnsVerbatimWhenEmptyExtractionMapProvided</code>
-      <code>testExtractUsesFlippedHydrationMapWhenOnlyHydrationMapProvided</code>
-      <code>testExtractUsesProvidedExtractionMap</code>
-      <code>testExtractionMapConstructorRaisesExceptionWhenFlippingHydrationMapForInvalidKeys</code>
-      <code>testExtractionMapConstructorRaisesExceptionWhenFlippingHydrationMapForInvalidValues</code>
-      <code>testHydrateAndExtractUseAsymmetricMapProvided</code>
-      <code>testHydrateReturnsVerbatimWhenEmptyHydrationMapProvided</code>
-      <code>testHydrateUsesFlippedExtractionMapOnlyExtractionMapProvided</code>
-      <code>testHydrateUsesProvidedHydrationMap</code>
-      <code>testHydrationMapConstructorRaisesExceptionWhenFlippingExtractionMapForInvalidKeys</code>
-      <code>testHydrationMapConstructorRaisesExceptionWhenFlippingExtractionMapForInvalidValues</code>
-    </MissingReturnType>
     <MixedArgumentTypeCoercion occurrences="4">
       <code>[$invalidKey =&gt; 'foo']</code>
       <code>[$invalidKey =&gt; 'foo']</code>
@@ -1080,14 +854,6 @@
       <code>filter</code>
       <code>filter</code>
     </InternalMethod>
-    <MissingReturnType occurrences="6">
-      <code>nonUnicodeProvider</code>
-      <code>testFilterUnderscoresNonUnicodeStrings</code>
-      <code>testFilterUnderscoresUnicodeStrings</code>
-      <code>testFilterUnderscoresUnicodeStringsWithoutMbStrings</code>
-      <code>unicodeProvider</code>
-      <code>unicodeProviderWithoutMbStrings</code>
-    </MissingReturnType>
     <PropertyNotSetInConstructor occurrences="2">
       <code>CamelCaseToUnderscoreFilterTest</code>
       <code>CamelCaseToUnderscoreFilterTest</code>
@@ -1104,25 +870,12 @@
       <code>filter</code>
       <code>filter</code>
     </InternalMethod>
-    <MissingReturnType occurrences="6">
-      <code>nonUnicodeProvider</code>
-      <code>testFilterCamelCasesNonUnicodeStrings</code>
-      <code>testFilterCamelCasesUnicodeStrings</code>
-      <code>testFilterCamelCasesUnicodeStringsWithoutMbStrings</code>
-      <code>unicodeProvider</code>
-      <code>unicodeWithoutMbStringsProvider</code>
-    </MissingReturnType>
     <PropertyNotSetInConstructor occurrences="2">
       <code>UnderscoreToCamelCaseFilterTest</code>
       <code>UnderscoreToCamelCaseFilterTest</code>
     </PropertyNotSetInConstructor>
   </file>
   <file src="test/NamingStrategy/UnderscoreNamingStrategyTest.php">
-    <MissingReturnType occurrences="3">
-      <code>testNameExtractsToUnderscore</code>
-      <code>testNameHydratesToCamelCase</code>
-      <code>testNameHydratesToStudlyCaps</code>
-    </MissingReturnType>
     <PropertyNotSetInConstructor occurrences="2">
       <code>UnderscoreNamingStrategyTest</code>
       <code>UnderscoreNamingStrategyTest</code>
@@ -1133,18 +886,6 @@
       <code>'thisIsNotAnObject'</code>
       <code>'thisIsNotAnObject'</code>
     </InvalidArgument>
-    <MissingReturnType occurrences="10">
-      <code>testCanExtractFromGenericClass</code>
-      <code>testCanExtractFromStdClass</code>
-      <code>testCanHydrateAdditionalPropertiesToStdClass</code>
-      <code>testCanHydrateGenericClassNonExistingProperties</code>
-      <code>testCanHydrateGenericClassPublicProperties</code>
-      <code>testCanHydrateStdClass</code>
-      <code>testHydratorExtractThrowsExceptionOnNonObjectParameter</code>
-      <code>testHydratorHydrateThrowsExceptionOnNonObjectParameter</code>
-      <code>testSkipsPublicStaticClassPropertiesExtraction</code>
-      <code>testSkipsPublicStaticClassPropertiesHydration</code>
-    </MissingReturnType>
     <MixedMethodCall occurrences="6">
       <code>get</code>
       <code>get</code>
@@ -1167,9 +908,6 @@
       <code>$errno</code>
       <code>$errstr</code>
     </MissingClosureParamType>
-    <MissingReturnType occurrences="1">
-      <code>testTriggerUserDeprecatedError</code>
-    </MissingReturnType>
     <PropertyNotSetInConstructor occurrences="2">
       <code>ObjectPropertyTest</code>
       <code>ObjectPropertyTest</code>
@@ -1183,12 +921,6 @@
       <code>$argument</code>
       <code>$argument</code>
     </InvalidArgument>
-    <MissingReturnType occurrences="4">
-      <code>testCanExtract</code>
-      <code>testCanHydrate</code>
-      <code>testExtractRaisesExceptionForInvalidInput</code>
-      <code>testHydrateRaisesExceptionForInvalidArgument</code>
-    </MissingReturnType>
     <PropertyNotSetInConstructor occurrences="3">
       <code>$hydrator</code>
       <code>ReflectionHydratorTest</code>
@@ -1203,9 +935,6 @@
       <code>$errno</code>
       <code>$errstr</code>
     </MissingClosureParamType>
-    <MissingReturnType occurrences="1">
-      <code>testTriggerUserDeprecatedError</code>
-    </MissingReturnType>
     <PropertyNotSetInConstructor occurrences="2">
       <code>ReflectionTest</code>
       <code>ReflectionTest</code>
@@ -1225,10 +954,6 @@
       <code>Reflection::class</code>
       <code>Reflection::class</code>
     </DeprecatedClass>
-    <MissingReturnType occurrences="2">
-      <code>assertDefaultServices</code>
-      <code>testCreatesPluginManagerWithDefaultServices</code>
-    </MissingReturnType>
     <MixedArgument occurrences="1">
       <code>$manager</code>
     </MixedArgument>
@@ -1261,19 +986,8 @@
       <code>Hydrator\ObjectProperty::class</code>
       <code>Hydrator\Reflection::class</code>
     </DeprecatedClass>
-    <MissingReturnType occurrences="6">
-      <code>testDelegatingHydratorFactoryIsInitialized</code>
-      <code>testGetRaisesExceptionForUnknownService</code>
-      <code>testGetReturnsExpectedTypesForKnownServices</code>
-      <code>testHasReturnsFalseForUnknownNames</code>
-      <code>testHasReturnsTrueForKnownServices</code>
-      <code>testInstantiationInitializesFactoriesForHydratorsWithoutConstructorArguments</code>
-    </MissingReturnType>
-    <MixedArgument occurrences="6">
-      <code>$data</code>
+    <MixedArgument occurrences="3">
       <code>$factories</code>
-      <code>$key</code>
-      <code>$key</code>
       <code>$this-&gt;manager</code>
       <code>$this-&gt;manager</code>
     </MixedArgument>
@@ -1281,9 +995,7 @@
       <code>$factories[$class]</code>
       <code>$factories[Hydrator\DelegatingHydrator::class]</code>
     </MixedArrayAccess>
-    <MixedAssignment occurrences="5">
-      <code>$class</code>
-      <code>$data</code>
+    <MixedAssignment occurrences="3">
       <code>$factories</code>
       <code>$factories</code>
       <code>$instance</code>
@@ -1318,20 +1030,6 @@
       <code>5</code>
       <code>true</code>
     </InvalidScalarArgument>
-    <MissingReturnType occurrences="12">
-      <code>testConstructorWithValidInteger</code>
-      <code>testConstructorWithValidString</code>
-      <code>testExceptionOnWrongFalseValueInConstructor</code>
-      <code>testExceptionOnWrongTrueValueInConstructor</code>
-      <code>testExtractInteger</code>
-      <code>testExtractString</code>
-      <code>testExtractThrowsExceptionOnUnknownValue</code>
-      <code>testHydrateBool</code>
-      <code>testHydrateInteger</code>
-      <code>testHydrateInvalidArgument</code>
-      <code>testHydrateString</code>
-      <code>testHydrateUnexpectedValueThrowsException</code>
-    </MissingReturnType>
     <PossiblyFalseArgument occurrences="1">
       <code>false</code>
     </PossiblyFalseArgument>
@@ -1347,19 +1045,9 @@
     <MissingClosureParamType occurrences="1">
       <code>$data</code>
     </MissingClosureParamType>
-    <MissingClosureReturnType occurrences="2">
+    <MissingClosureReturnType occurrences="1">
       <code>function ($data) {</code>
-      <code>function (TestAsset\User $value) {</code>
     </MissingClosureReturnType>
-    <MissingReturnType occurrences="7">
-      <code>testConstructorRejectsInvalidObjectClassName</code>
-      <code>testExtractRejectsInvalidObject</code>
-      <code>testExtractRejectsInvalidValue</code>
-      <code>testExtractUsesHydratorToExtractValues</code>
-      <code>testHydrateRejectsInvalidValue</code>
-      <code>testHydrateUsesHydratorToHydrateValues</code>
-      <code>testImplementsStrategyInterface</code>
-    </MissingReturnType>
     <MixedArgument occurrences="4">
       <code>$data</code>
       <code>$objectClassName</code>
@@ -1396,21 +1084,6 @@
     </UndefinedInterfaceMethod>
   </file>
   <file src="test/Strategy/DateTimeFormatterStrategyTest.php">
-    <MissingReturnType occurrences="13">
-      <code>formatsWithSpecialCharactersProvider</code>
-      <code>testAcceptsCreateFromFormatSpecialCharacters</code>
-      <code>testCanExtractAnyDateTimeInterface</code>
-      <code>testCanExtractIfNotDateTime</code>
-      <code>testCanExtractWithCreateFromFormatEscapedSpecialCharacters</code>
-      <code>testCanExtractWithCreateFromFormatSpecialCharacters</code>
-      <code>testCanHydrateWithDateTimeFallback</code>
-      <code>testCanHydrateWithInvalidDateTime</code>
-      <code>testExtract</code>
-      <code>testGetNullWithInvalidDateOnHydration</code>
-      <code>testHydrate</code>
-      <code>testHydrateRaisesExceptionIfValueIsInvalid</code>
-      <code>testReturnsValueVerbatimUnderSpecificConditions</code>
-    </MissingReturnType>
     <MixedAssignment occurrences="6">
       <code>$date</code>
       <code>$date</code>
@@ -1450,18 +1123,6 @@
       <code>new \stdClass()</code>
       <code>new \stdClass()</code>
     </InvalidArgument>
-    <MissingReturnType occurrences="10">
-      <code>testExtract</code>
-      <code>testExtractWithInvalidObjectType</code>
-      <code>testGetEmptyArrayWhenHydratingNullValue</code>
-      <code>testGetExceptionWithEmptyDelimiter</code>
-      <code>testGetExceptionWithInvalidArgumentOnExtraction</code>
-      <code>testGetExceptionWithInvalidDelimiter</code>
-      <code>testHydrateWithExplodeLimit</code>
-      <code>testHydrateWithInvalidObjectType</code>
-      <code>testHydrateWithInvalidScalarType</code>
-      <code>testHydration</code>
-    </MissingReturnType>
     <MixedArgument occurrences="1">
       <code>$value</code>
     </MixedArgument>
@@ -1477,9 +1138,8 @@
     <MissingClosureParamType occurrences="1">
       <code>$data</code>
     </MissingClosureParamType>
-    <MissingClosureReturnType occurrences="2">
+    <MissingClosureReturnType occurrences="1">
       <code>static function ($data) {</code>
-      <code>static function (TestAsset\User $value) {</code>
     </MissingClosureReturnType>
     <MixedArgument occurrences="4">
       <code>$data</code>
@@ -1512,14 +1172,13 @@
       <code>HydratorStrategyTest</code>
     </PropertyNotSetInConstructor>
   </file>
+  <file src="test/Strategy/NullableStrategyTest.php">
+    <PropertyNotSetInConstructor occurrences="2">
+      <code>NullableStrategyTest</code>
+      <code>NullableStrategyTest</code>
+    </PropertyNotSetInConstructor>
+  </file>
   <file src="test/Strategy/SerializableStrategyTest.php">
-    <MissingReturnType occurrences="5">
-      <code>testCanSerialize</code>
-      <code>testCanUnserialize</code>
-      <code>testCannotUseBadArgumentSerializer</code>
-      <code>testUseBadSerializerObject</code>
-      <code>testUseBadSerializerString</code>
-    </MissingReturnType>
     <MixedAssignment occurrences="2">
       <code>$serialized</code>
       <code>$serialized</code>
@@ -1561,11 +1220,6 @@
       <code>function ($value) {</code>
       <code>function ($value) {</code>
     </MissingClosureReturnType>
-    <MissingReturnType occurrences="3">
-      <code>testEmptyStrategyChainReturnsOriginalValue</code>
-      <code>testExtract</code>
-      <code>testHydrate</code>
-    </MissingReturnType>
     <MixedOperand occurrences="12">
       <code>$value</code>
       <code>$value</code>
@@ -1584,12 +1238,6 @@
       <code>StrategyChainTest</code>
       <code>StrategyChainTest</code>
     </PropertyNotSetInConstructor>
-  </file>
-  <file src="test/TestAsset/AggregateObject.php">
-    <MissingReturnType occurrences="2">
-      <code>exchangeArray</code>
-      <code>setMaintainer</code>
-    </MissingReturnType>
   </file>
   <file src="test/TestAsset/ArrayObjectIterator.php">
     <InvalidReturnStatement occurrences="1">
@@ -1661,19 +1309,13 @@
       <code>$isBar</code>
       <code>$isFoo</code>
     </MissingPropertyType>
-    <MissingReturnType occurrences="12">
+    <MissingReturnType occurrences="6">
       <code>getFooBar</code>
       <code>getFooBarBaz</code>
       <code>getHasFoo</code>
       <code>getIsFoo</code>
       <code>hasBar</code>
       <code>isBar</code>
-      <code>setFooBar</code>
-      <code>setFooBarBaz</code>
-      <code>setHasBar</code>
-      <code>setHasFoo</code>
-      <code>setIsBar</code>
-      <code>setIsFoo</code>
     </MissingReturnType>
   </file>
   <file src="test/TestAsset/ClassMethodsCamelCaseMissing.php">
@@ -1684,24 +1326,15 @@
       <code>$fooBar</code>
       <code>$fooBarBaz</code>
     </MissingPropertyType>
-    <MissingReturnType occurrences="3">
+    <MissingReturnType occurrences="2">
       <code>getFooBar</code>
       <code>getFooBarBaz</code>
-      <code>setFooBar</code>
     </MissingReturnType>
   </file>
   <file src="test/TestAsset/ClassMethodsFilterProviderInterface.php">
     <MissingParamType occurrences="1">
       <code>$foo</code>
     </MissingParamType>
-    <MissingReturnType occurrences="6">
-      <code>getBar</code>
-      <code>getEventManager</code>
-      <code>getFoo</code>
-      <code>getServiceManager</code>
-      <code>hasFooBar</code>
-      <code>isScalar</code>
-    </MissingReturnType>
   </file>
   <file src="test/TestAsset/ClassMethodsInvalidParameter.php">
     <MissingParamType occurrences="3">
@@ -1709,12 +1342,9 @@
       <code>$bar</code>
       <code>$foo</code>
     </MissingParamType>
-    <MissingReturnType occurrences="6">
-      <code>getFoo</code>
+    <MissingReturnType occurrences="3">
       <code>getTest</code>
       <code>hasAlias</code>
-      <code>hasBar</code>
-      <code>isBla</code>
       <code>isTest</code>
     </MissingReturnType>
   </file>
@@ -1737,11 +1367,6 @@
       <code>$args[0]</code>
     </MixedArrayAccess>
   </file>
-  <file src="test/TestAsset/ClassMethodsOptionalParameters.php">
-    <MissingReturnType occurrences="1">
-      <code>setFoo</code>
-    </MissingReturnType>
-  </file>
   <file src="test/TestAsset/ClassMethodsProtectedSetter.php">
     <MissingParamType occurrences="2">
       <code>$bar</code>
@@ -1751,10 +1376,8 @@
       <code>$bar</code>
       <code>$foo</code>
     </MissingPropertyType>
-    <MissingReturnType occurrences="3">
+    <MissingReturnType occurrences="1">
       <code>getBar</code>
-      <code>setBar</code>
-      <code>setFoo</code>
     </MissingReturnType>
   </file>
   <file src="test/TestAsset/ClassMethodsTitleCase.php">
@@ -1774,19 +1397,13 @@
       <code>$IsBar</code>
       <code>$IsFoo</code>
     </MissingPropertyType>
-    <MissingReturnType occurrences="12">
+    <MissingReturnType occurrences="6">
       <code>getFooBar</code>
       <code>getFooBarBaz</code>
       <code>getHasBar</code>
       <code>getHasFoo</code>
       <code>getIsBar</code>
       <code>getIsFoo</code>
-      <code>setFooBar</code>
-      <code>setFooBarBaz</code>
-      <code>setHasBar</code>
-      <code>setHasFoo</code>
-      <code>setIsBar</code>
-      <code>setIsFoo</code>
     </MissingReturnType>
   </file>
   <file src="test/TestAsset/ClassMethodsUnderscore.php">
@@ -1806,19 +1423,13 @@
       <code>$is_bar</code>
       <code>$is_foo</code>
     </MissingPropertyType>
-    <MissingReturnType occurrences="12">
+    <MissingReturnType occurrences="6">
       <code>getFooBar</code>
       <code>getFooBarBaz</code>
       <code>getHasFoo</code>
       <code>getIsFoo</code>
       <code>hasBar</code>
       <code>isBar</code>
-      <code>setFooBar</code>
-      <code>setFooBarBaz</code>
-      <code>setHasBar</code>
-      <code>setHasFoo</code>
-      <code>setIsBar</code>
-      <code>setIsFoo</code>
     </MissingReturnType>
   </file>
   <file src="test/TestAsset/ClassWithoutAnyMethod.php">
@@ -1864,19 +1475,14 @@
     </MissingPropertyType>
   </file>
   <file src="test/TestAsset/HydratorStrategyEntityA.php">
-    <MissingParamType occurrences="2">
-      <code>$data</code>
+    <MissingParamType occurrences="1">
       <code>$entities</code>
     </MissingParamType>
     <MissingPropertyType occurrences="1">
       <code>$entities</code>
     </MissingPropertyType>
-    <MissingReturnType occurrences="5">
-      <code>addEntity</code>
-      <code>getArrayCopy</code>
+    <MissingReturnType occurrences="1">
       <code>getEntities</code>
-      <code>populate</code>
-      <code>setEntities</code>
     </MissingReturnType>
     <MixedArrayAssignment occurrences="1">
       <code>$this-&gt;entities[]</code>
@@ -1896,11 +1502,9 @@
       <code>$field1</code>
       <code>$field2</code>
     </MissingPropertyType>
-    <MissingReturnType occurrences="4">
+    <MissingReturnType occurrences="2">
       <code>getField1</code>
       <code>getField2</code>
-      <code>setField1</code>
-      <code>setField2</code>
     </MissingReturnType>
   </file>
   <file src="test/TestAsset/ObjectProperty.php">

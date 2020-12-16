@@ -36,7 +36,8 @@
         "laminas/laminas-serializer": "^2.9",
         "laminas/laminas-servicemanager": "^3.3.2",
         "phpunit/phpunit": "~9.3.0",
-        "vimeo/psalm": "^3.16"
+        "psalm/plugin-phpunit": "^0.15.0",
+        "vimeo/psalm": "^4.2"
     },
     "suggest": {
         "laminas/laminas-eventmanager": "^3.2, to support aggregate hydrator usage",

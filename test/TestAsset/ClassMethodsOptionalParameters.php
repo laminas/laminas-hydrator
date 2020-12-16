@@ -38,6 +38,6 @@ class ClassMethodsOptionalParameters
      */
     public function setFoo($foo, $optional = null): void
     {
-        $this->foo = (string) $foo;
+        $this->foo = $foo;
     }
 }

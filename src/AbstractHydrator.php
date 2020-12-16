@@ -145,7 +145,7 @@ abstract class AbstractHydrator implements
      *
      * @param  string      $name    The name to convert.
      * @param  null|object $object  The object is optionally provided as context.
-     * @return mixed
+     * @return string
      */
     public function extractName(string $name, ?object $object = null)
     {
