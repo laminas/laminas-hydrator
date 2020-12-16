@@ -24,9 +24,17 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - Nothing.
 
-## 4.0.1 - 2020-11-11
+## 4.0.2 - 2020-12-16
 
------
+### Release Notes for [4.0.2](https://github.com/laminas/laminas-hydrator/milestone/12)
+
+- Total issues resolved: **0**
+- Total pull requests resolved: **1**
+- Total contributors: **1**
+
+- [36: Fix example in quick-start.md](https://github.com/laminas/laminas-hydrator/pull/36) thanks to @vjik
+
+## 4.0.1 - 2020-11-11
 
 ### Release Notes for [4.0.1](https://github.com/laminas/laminas-hydrator/milestone/9)
 
