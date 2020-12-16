@@ -2,33 +2,41 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 4.1.0 - TBD
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## 4.0.2 - 2020-12-16
 
-
------
-
 ### Release Notes for [4.0.2](https://github.com/laminas/laminas-hydrator/milestone/12)
-
-4.0.x bugfix release (patch)
-
-### 4.0.2
 
 - Total issues resolved: **0**
 - Total pull requests resolved: **1**
 - Total contributors: **1**
 
- - [36: Fix example in quick-start.md](https://github.com/laminas/laminas-hydrator/pull/36) thanks to @vjik
+- [36: Fix example in quick-start.md](https://github.com/laminas/laminas-hydrator/pull/36) thanks to @vjik
 
 ## 4.0.1 - 2020-11-11
 
-
------
-
 ### Release Notes for [4.0.1](https://github.com/laminas/laminas-hydrator/milestone/9)
-
-4.0.x bugfix release (patch)
-
-### 4.0.1
 
 - Total issues resolved: **1**
 - Total pull requests resolved: **1**
@@ -36,7 +44,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 #### Documentation
 
- - [39: Provide v4 documentation](https://github.com/laminas/laminas-hydrator/pull/39) thanks to @weierophinney and @rieschl
+- [39: Provide v4 documentation](https://github.com/laminas/laminas-hydrator/pull/39) thanks to @weierophinney and @rieschl
 
 ## 4.0.0 - 2020-10-06
 
