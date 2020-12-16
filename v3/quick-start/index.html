@@ -486,10 +486,10 @@ $data     = $hydrator-&gt;extract(new User());</code></pre>
 <p>The ObjectPropertyHydrator hydrates objects and extracts data using publicly accessible properties which match a key in the data set.</p>
 <pre class="highlight"><code class="language-php">class User
 {
-    private $firstName;
-    private $lastName;
-    private $emailAddress;
-    private $phoneNumber;
+    public $firstName;
+    public $lastName;
+    public $emailAddress;
+    public $phoneNumber;
 }
 
 $data = [
