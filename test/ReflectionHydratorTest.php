@@ -52,7 +52,7 @@ class ReflectionHydratorTest extends TestCase
 
     public function testExtractRaisesExceptionForInvalidInput(): void
     {
-        $argument = (int) 1;
+        $argument = 1;
 
         $this->expectException(TypeError::class);
         $this->expectExceptionMessage('object');
@@ -62,7 +62,7 @@ class ReflectionHydratorTest extends TestCase
 
     public function testHydrateRaisesExceptionForInvalidArgument(): void
     {
-        $argument = (int) 1;
+        $argument = 1;
 
         $this->expectException(TypeError::class);
         $this->expectExceptionMessage('object');

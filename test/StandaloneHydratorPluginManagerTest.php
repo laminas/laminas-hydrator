@@ -36,6 +36,9 @@ class StandaloneHydratorPluginManagerTest extends TestCase
         return $r->getValue($class);
     }
 
+    /**
+     * @psalm-return iterable<string, array{0: string}>
+     */
     public function hydratorsWithoutConstructors() : iterable
     {
         yield 'ArraySerializable'               => [Hydrator\ArraySerializableHydrator::class];

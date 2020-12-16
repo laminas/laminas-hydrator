@@ -36,8 +36,9 @@ class HydratorStrategyEntityA
         $this->entities = $entities;
     }
 
-    // Add the getArrayCopy method so we can test the ArraySerializable hydrator:
     /**
+     * Add the getArrayCopy method so we can test the ArraySerializable hydrator:
+     *
      * @return array
      *
      * @psalm-return array<string, mixed>
@@ -47,7 +48,12 @@ class HydratorStrategyEntityA
         return get_object_vars($this);
     }
 
-    // Add the populate method so we can test the ArraySerializable hydrator:
+    /**
+     * Add the populate method so we can test the ArraySerializable hydrator:
+     *
+     * @param array $data
+     * @psalm-param array<string, mixed> $data
+     */
     public function populate($data): void
     {
         foreach ($data as $name => $value) {
