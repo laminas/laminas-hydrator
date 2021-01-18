@@ -97,10 +97,10 @@ The ObjectPropertyHydrator hydrates objects and extracts data using publicly acc
 ```php
 class User
 {
-    private $firstName;
-    private $lastName;
-    private $emailAddress;
-    private $phoneNumber;
+    public $firstName;
+    public $lastName;
+    public $emailAddress;
+    public $phoneNumber;
 }
 
 $data = [
