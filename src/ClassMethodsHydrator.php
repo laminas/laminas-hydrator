@@ -59,7 +59,7 @@ class ClassMethodsHydrator extends AbstractHydrator implements HydratorOptionsIn
     /**
      * @var Filter\FilterInterface
      */
-    private $optionalParameterFilter;
+    private $optionalParametersFilter;
 
     /**
      * Define if extract values will use camel case or name with underscore
@@ -69,7 +69,7 @@ class ClassMethodsHydrator extends AbstractHydrator implements HydratorOptionsIn
         $this->setUnderscoreSeparatedKeys($underscoreSeparatedKeys);
         $this->setMethodExistsCheck($methodExistsCheck);
 
-        $this->optionalParameterFilter = new Filter\OptionalParametersFilter();
+        $this->optionalParametersFilter = new Filter\OptionalParametersFilter();
 
         $compositeFilter = $this->getCompositeFilter();
         $compositeFilter->addFilter('is', new Filter\IsFilter());
@@ -151,7 +151,7 @@ class ClassMethodsHydrator extends AbstractHydrator implements HydratorOptionsIn
             foreach ($methods as $method) {
                 $methodFqn = $objectClass . '::' . $method;
 
-                if (! ($filter->filter($methodFqn) && $this->optionalParameterFilter->filter($methodFqn))) {
+                if (! ($filter->filter($methodFqn) && $this->optionalParametersFilter->filter($methodFqn))) {
                     continue;
                 }
 
