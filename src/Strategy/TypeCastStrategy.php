@@ -73,6 +73,10 @@ final class TypeCastStrategy implements StrategyInterface
      */
     public function hydrate($value, ?array $data)
     {
+        if ($value === null) {
+            return null;
+        }
+
         switch ($this->type) {
             case self::TYPE_INT:
                 return (int)$value;

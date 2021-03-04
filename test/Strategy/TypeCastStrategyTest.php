@@ -23,6 +23,7 @@ final class TypeCastStrategyTest extends TestCase
     public function testHydrate(): void
     {
         $this->assertSame(123, TypeCastStrategy::createToInt()->hydrate('123', null));
+        $this->assertNull(TypeCastStrategy::createToInt()->hydrate(null, null));
         $this->assertSame(123.99, TypeCastStrategy::createToFloat()->hydrate('123.99', null));
 
         $stringable = new class {
