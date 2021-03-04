@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace Laminas\Hydrator\Strategy;
 
+use Laminas\Hydrator\Exception\InvalidArgumentException;
+
 /**
  * @template T
  */
@@ -71,6 +73,21 @@ final class TypeCastStrategy implements StrategyInterface
      */
     public function hydrate($value, ?array $data)
     {
-        return ($this->type . 'val')($value);
+        switch ($this->type) {
+            case self::TYPE_INT:
+                return (int)$value;
+            case self::TYPE_FLOAT:
+                return (float)$value;
+            case self::TYPE_STRING:
+                return (string)$value;
+            default:
+                throw new InvalidArgumentException(
+                    sprintf(
+                        'Unable to hydrate. Target type must be one of %s, %s was given.',
+                        join(', ', [self::TYPE_INT, self::TYPE_FLOAT, self::TYPE_STRING]),
+                        $this->type
+                    )
+                );
+        }
     }
 }
