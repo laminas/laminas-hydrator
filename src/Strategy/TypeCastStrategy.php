@@ -71,6 +71,6 @@ final class TypeCastStrategy implements StrategyInterface
      */
     public function hydrate($value, ?array $data)
     {
-        return call_user_func_array($this->type . 'val', [$value]);
+        return ($this->type . 'val')($value);
     }
 }
