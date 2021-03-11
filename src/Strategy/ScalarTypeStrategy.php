@@ -15,11 +15,12 @@ use Laminas\Hydrator\Exception\InvalidArgumentException;
 /**
  * @template T
  */
-final class TypeCastStrategy implements StrategyInterface
+final class ScalarTypeStrategy implements StrategyInterface
 {
     private const TYPE_INT = 'int';
     private const TYPE_FLOAT = 'float';
     private const TYPE_STRING = 'str';
+    private const TYPE_BOOLEAN = 'boolean';
 
     /** @var string */
     private $type;
@@ -46,6 +47,14 @@ final class TypeCastStrategy implements StrategyInterface
     public static function createToString(): self
     {
         return new self(self::TYPE_STRING);
+    }
+
+    /**
+     * @return self<bool>
+     */
+    public static function createToBoolean(): self
+    {
+        return new self(self::TYPE_BOOLEAN);
     }
 
     /**
@@ -84,6 +93,8 @@ final class TypeCastStrategy implements StrategyInterface
                 return (float)$value;
             case self::TYPE_STRING:
                 return (string)$value;
+            case self::TYPE_BOOLEAN:
+                return (bool)$value;
             default:
                 throw new InvalidArgumentException(
                     sprintf(
