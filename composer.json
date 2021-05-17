@@ -1,33 +1,19 @@
 {
     "name": "laminas/laminas-hydrator",
     "description": "Serialize objects to arrays, and vice versa",
-    "license": "BSD-3-Clause",
     "keywords": [
         "laminas",
         "hydrator"
     ],
     "homepage": "https://laminas.dev",
-    "support": {
-        "docs": "https://docs.laminas.dev/laminas-hydrator/",
-        "issues": "https://github.com/laminas/laminas-hydrator/issues",
-        "source": "https://github.com/laminas/laminas-hydrator",
-        "rss": "https://github.com/laminas/laminas-hydrator/releases.atom",
-        "chat": "https://laminas.dev/chat",
-        "forum": "https://discourse.laminas.dev"
-    },
-    "config": {
-        "sort-packages": true
-    },
-    "extra": {
-        "laminas": {
-            "component": "Laminas\\Hydrator",
-            "config-provider": "Laminas\\Hydrator\\ConfigProvider"
-        }
-    },
+    "license": "BSD-3-Clause",
     "require": {
         "php": "^7.3 || ~8.0.0",
         "laminas/laminas-stdlib": "^3.3",
         "laminas/laminas-zendframework-bridge": "^1.0"
+    },
+    "replace": {
+        "zendframework/zend-hydrator": "^3.0.2"
     },
     "require-dev": {
         "laminas/laminas-coding-standard": "~1.0.0",
@@ -43,6 +29,15 @@
         "laminas/laminas-eventmanager": "^3.2, to support aggregate hydrator usage",
         "laminas/laminas-serializer": "^2.9, to use the SerializableStrategy",
         "laminas/laminas-servicemanager": "^3.3, to support hydrator plugin manager usage"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laminas": {
+            "component": "Laminas\\Hydrator",
+            "config-provider": "Laminas\\Hydrator\\ConfigProvider"
+        }
     },
     "autoload": {
         "psr-4": {
@@ -65,7 +60,12 @@
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
-    "replace": {
-        "zendframework/zend-hydrator": "^3.0.2"
+    "support": {
+        "issues": "https://github.com/laminas/laminas-hydrator/issues",
+        "forum": "https://discourse.laminas.dev",
+        "chat": "https://laminas.dev/chat",
+        "source": "https://github.com/laminas/laminas-hydrator",
+        "docs": "https://docs.laminas.dev/laminas-hydrator/",
+        "rss": "https://github.com/laminas/laminas-hydrator/releases.atom"
     }
 }
