@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace Laminas\Hydrator\Aggregate;
@@ -25,14 +19,10 @@ class HydrateEvent extends Event
      */
     protected $name = self::EVENT_HYDRATE;
 
-    /**
-     * @var object
-     */
+    /** @var object */
     protected $hydratedObject;
 
-    /**
-     * @var mixed[] Data being used to hydrate the $hydratedObject
-     */
+    /** @var mixed[] Data being used to hydrate the $hydratedObject */
     protected $hydrationData;
 
     /**
@@ -49,12 +39,12 @@ class HydrateEvent extends Event
     /**
      * Retrieves the object that is being hydrated
      */
-    public function getHydratedObject() : object
+    public function getHydratedObject(): object
     {
         return $this->hydratedObject;
     }
 
-    public function setHydratedObject(object $hydratedObject) : void
+    public function setHydratedObject(object $hydratedObject): void
     {
         $this->hydratedObject = $hydratedObject;
     }
@@ -64,7 +54,7 @@ class HydrateEvent extends Event
      *
      * @return mixed[]
      */
-    public function getHydrationData() : array
+    public function getHydrationData(): array
     {
         return $this->hydrationData;
     }
@@ -72,7 +62,7 @@ class HydrateEvent extends Event
     /**
      * @param mixed[] $hydrationData
      */
-    public function setHydrationData(array $hydrationData) : void
+    public function setHydrationData(array $hydrationData): void
     {
         $this->hydrationData = $hydrationData;
     }

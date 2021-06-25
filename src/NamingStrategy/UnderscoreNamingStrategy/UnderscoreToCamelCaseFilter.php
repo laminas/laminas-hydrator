@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace Laminas\Hydrator\NamingStrategy\UnderscoreNamingStrategy;
@@ -24,7 +18,7 @@ final class UnderscoreToCamelCaseFilter
 {
     use StringSupportTrait;
 
-    public function filter(string $value) : string
+    public function filter(string $value): string
     {
         $pcreInfo = $this->getPatternAndReplacement(
             // a unicode safe way of converting characters to \x00\x00 notation
@@ -41,7 +35,7 @@ final class UnderscoreToCamelCaseFilter
         return $lcFirstFunction($filtered);
     }
 
-    private function getPatternAndReplacement(string $pregQuotedSeparator) : PcreReplacement
+    private function getPatternAndReplacement(string $pregQuotedSeparator): PcreReplacement
     {
         return $this->hasPcreUnicodeSupport()
             ? $this->getUnicodePatternAndReplacement($pregQuotedSeparator)
@@ -53,7 +47,7 @@ final class UnderscoreToCamelCaseFilter
             );
     }
 
-    private function getUnicodePatternAndReplacement(string $pregQuotedSeparator) : PcreReplacement
+    private function getUnicodePatternAndReplacement(string $pregQuotedSeparator): PcreReplacement
     {
         return $this->hasMbStringSupport()
             ? new PcreReplacement(
@@ -71,7 +65,7 @@ final class UnderscoreToCamelCaseFilter
             );
     }
 
-    private function getLcFirstFunction() : callable
+    private function getLcFirstFunction(): callable
     {
         return $this->hasMbStringSupport()
             ? function ($value) {

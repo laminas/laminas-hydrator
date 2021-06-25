@@ -1,21 +1,16 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator\Strategy;
 
 use DateTime;
 use DateTimeImmutable;
-use DateTimezone;
+use DateTimeZone;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Laminas\Hydrator\Strategy\Exception\InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 
 /**
  * Tests for {@see DateTimeFormatterStrategy}
@@ -24,7 +19,6 @@ use PHPUnit\Framework\TestCase;
  */
 class DateTimeFormatterStrategyTest extends TestCase
 {
-
     public function testHydrate(): void
     {
         $strategy = new DateTimeFormatterStrategy('Y-m-d');
@@ -39,7 +33,7 @@ class DateTimeFormatterStrategyTest extends TestCase
     public function testExtract(): void
     {
         $strategy = new DateTimeFormatterStrategy('d/m/Y');
-        $this->assertEquals('26/04/2014', $strategy->extract(new \DateTime('2014-04-26')));
+        $this->assertEquals('26/04/2014', $strategy->extract(new DateTime('2014-04-26')));
     }
 
     public function testGetNullWithInvalidDateOnHydration(): void
@@ -52,9 +46,9 @@ class DateTimeFormatterStrategyTest extends TestCase
     public function testCanExtractIfNotDateTime(): void
     {
         $strategy = new DateTimeFormatterStrategy();
-        $date = $strategy->extract(new \stdClass);
+        $date     = $strategy->extract(new stdClass());
 
-        $this->assertInstanceOf(\stdClass::class, $date);
+        $this->assertInstanceOf(stdClass::class, $date);
     }
 
     public function testCanHydrateWithInvalidDateTime(): void
@@ -92,11 +86,8 @@ class DateTimeFormatterStrategyTest extends TestCase
 
     /**
      * @dataProvider formatsWithSpecialCharactersProvider
-     *
      * @param string $format
      * @param string $expectedValue
-     *
-     * @return void
      */
     public function testAcceptsCreateFromFormatSpecialCharacters($format, $expectedValue): void
     {
@@ -109,11 +100,8 @@ class DateTimeFormatterStrategyTest extends TestCase
 
     /**
      * @dataProvider formatsWithSpecialCharactersProvider
-     *
      * @param string $format
      * @param string $expectedValue
-     *
-     * @return void
      */
     public function testCanExtractWithCreateFromFormatSpecialCharacters($format, $expectedValue): void
     {
@@ -134,7 +122,6 @@ class DateTimeFormatterStrategyTest extends TestCase
 
     /**
      * @return string[][]
-     *
      * @psalm-return array<string, array{0: string, 1: string}>
      */
     public function formatsWithSpecialCharactersProvider(): array
@@ -149,17 +136,17 @@ class DateTimeFormatterStrategyTest extends TestCase
     public function testCanHydrateWithDateTimeFallback(): void
     {
         $strategy = new DateTimeFormatterStrategy('Y-m-d', null, true);
-        $date = $strategy->hydrate('2018-09-06T12:10:30');
+        $date     = $strategy->hydrate('2018-09-06T12:10:30');
 
         $this->assertSame('2018-09-06', $date->format('Y-m-d'));
 
         $strategy = new DateTimeFormatterStrategy('Y-m-d', new DateTimeZone('Europe/Prague'), true);
-        $date = $strategy->hydrate('2018-09-06T12:10:30');
+        $date     = $strategy->hydrate('2018-09-06T12:10:30');
 
         $this->assertSame('Europe/Prague', $date->getTimezone()->getName());
     }
 
-    public function invalidValuesForHydration() : iterable
+    public function invalidValuesForHydration(): iterable
     {
         return [
             'zero'       => [0],
@@ -173,10 +160,7 @@ class DateTimeFormatterStrategyTest extends TestCase
 
     /**
      * @dataProvider invalidValuesForHydration
-     *
      * @param mixed $value
-     *
-     * @return void
      */
     public function testHydrateRaisesExceptionIfValueIsInvalid($value): void
     {
@@ -187,7 +171,7 @@ class DateTimeFormatterStrategyTest extends TestCase
         $strategy->hydrate($value);
     }
 
-    public function validUnhydratableValues() : iterable
+    public function validUnhydratableValues(): iterable
     {
         return [
             'empty string' => [''],
@@ -198,10 +182,7 @@ class DateTimeFormatterStrategyTest extends TestCase
 
     /**
      * @dataProvider validUnhydratableValues
-     *
      * @param mixed $value
-     *
-     * @return void
      */
     public function testReturnsValueVerbatimUnderSpecificConditions($value): void
     {

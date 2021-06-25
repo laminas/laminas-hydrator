@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace Laminas\Hydrator;
@@ -20,9 +14,7 @@ use function get_object_vars;
 
 class ObjectPropertyHydrator extends AbstractHydrator
 {
-    /**
-     * @var (null|array)[] indexed by class name and then property name
-     */
+    /** @var (null|array)[] indexed by class name and then property name */
     private static $skippedPropertiesCache = [];
 
     /**
@@ -30,7 +22,7 @@ class ObjectPropertyHydrator extends AbstractHydrator
      *
      * {@inheritDoc}
      */
-    public function extract(object $object) : array
+    public function extract(object $object): array
     {
         $data   = get_object_vars($object);
         $filter = $this->getFilter();
@@ -65,7 +57,7 @@ class ObjectPropertyHydrator extends AbstractHydrator
      */
     public function hydrate(array $data, object $object)
     {
-        $properties =& self::$skippedPropertiesCache[get_class($object)] ?? null;
+        $properties = &self::$skippedPropertiesCache[get_class($object)] ?? null;
 
         if (null === $properties) {
             $reflection = new ReflectionClass($object);

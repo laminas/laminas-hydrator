@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace Laminas\Hydrator\Filter;
@@ -31,14 +25,10 @@ final class FilterComposite implements FilterInterface
      */
     public const CONDITION_AND = 2;
 
-    /**
-     * @var ArrayObject
-     */
+    /** @var ArrayObject */
     protected $andFilter;
 
-    /**
-     * @var ArrayObject
-     */
+    /** @var ArrayObject */
     protected $orFilter;
 
     /**
@@ -53,7 +43,7 @@ final class FilterComposite implements FilterInterface
         array_walk($orFilters, Closure::fromCallable([$this, 'validateFilter']));
         array_walk($andFilters, Closure::fromCallable([$this, 'validateFilter']));
 
-        $this->orFilter = new ArrayObject($orFilters);
+        $this->orFilter  = new ArrayObject($orFilters);
         $this->andFilter = new ArrayObject($andFilters);
     }
 
@@ -78,7 +68,7 @@ final class FilterComposite implements FilterInterface
      *     FilterComposite::CONDITION_OR or FilterComposite::CONDITION_AND
      * @throws InvalidArgumentException
      */
-    public function addFilter(string $name, $filter, int $condition = self::CONDITION_OR) : void
+    public function addFilter(string $name, $filter, int $condition = self::CONDITION_OR): void
     {
         $this->validateFilter($filter, $name);
 
@@ -96,7 +86,7 @@ final class FilterComposite implements FilterInterface
     /**
      * Check if $name has a filter registered
      */
-    public function hasFilter(string $name) : bool
+    public function hasFilter(string $name): bool
     {
         return isset($this->orFilter[$name]) || isset($this->andFilter[$name]);
     }
@@ -104,7 +94,7 @@ final class FilterComposite implements FilterInterface
     /**
      * Remove a filter from the composition
      */
-    public function removeFilter(string $name) : void
+    public function removeFilter(string $name): void
     {
         if (isset($this->orFilter[$name])) {
             unset($this->orFilter[$name]);
@@ -123,13 +113,13 @@ final class FilterComposite implements FilterInterface
      *
      * @param string $property Parameter will be e.g. Parent\Namespace\Class::method
      */
-    public function filter(string $property, ?object $instance = null) : bool
+    public function filter(string $property, ?object $instance = null): bool
     {
         return $this->atLeastOneOrFilterIsTrue($property, $instance)
             && $this->allAndFiltersAreTrue($property, $instance);
     }
 
-    private function atLeastOneOrFilterIsTrue(string $property, ?object $instance = null) : bool
+    private function atLeastOneOrFilterIsTrue(string $property, ?object $instance = null): bool
     {
         if (count($this->orFilter) === 0) {
             return true;
@@ -144,7 +134,7 @@ final class FilterComposite implements FilterInterface
         return false;
     }
 
-    private function allAndFiltersAreTrue(string $property, ?object $instance = null) : bool
+    private function allAndFiltersAreTrue(string $property, ?object $instance = null): bool
     {
         if (count($this->andFilter) === 0) {
             return true;
@@ -162,7 +152,7 @@ final class FilterComposite implements FilterInterface
     /**
      * @param callable|FilterInterface $filter
      */
-    private function executeFilter($filter, string $property, ?object $instance = null) : bool
+    private function executeFilter($filter, string $property, ?object $instance = null): bool
     {
         if (is_callable($filter)) {
             /** @psalm-var callable(string, ?object):bool $filter */
@@ -175,10 +165,10 @@ final class FilterComposite implements FilterInterface
     /**
      * @param mixed $filter Filters should be callable or
      *     FilterInterface instances.
-     * @throws InvalidArgumentException if $filter is neither a
-     *     callable nor FilterInterface
+     * @throws InvalidArgumentException If $filter is neither a
+     *     callable nor FilterInterface.
      */
-    private function validateFilter($filter, string $name) : void
+    private function validateFilter($filter, string $name): void
     {
         if (! is_callable($filter) && ! $filter instanceof FilterInterface) {
             throw new InvalidArgumentException(sprintf(

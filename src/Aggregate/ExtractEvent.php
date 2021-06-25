@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace Laminas\Hydrator\Aggregate;
@@ -27,14 +21,10 @@ class ExtractEvent extends Event
      */
     protected $name = self::EVENT_EXTRACT;
 
-    /**
-     * @var object
-     */
+    /** @var object */
     protected $extractionObject;
 
-    /**
-     * @var mixed[] Data being extracted from the $extractionObject
-     */
+    /** @var mixed[] Data being extracted from the $extractionObject */
     protected $extractedData = [];
 
     public function __construct(object $target, object $extractionObject)
@@ -47,12 +37,12 @@ class ExtractEvent extends Event
     /**
      * Retrieves the object from which data is extracted
      */
-    public function getExtractionObject() : object
+    public function getExtractionObject(): object
     {
         return $this->extractionObject;
     }
 
-    public function setExtractionObject(object $extractionObject) : void
+    public function setExtractionObject(object $extractionObject): void
     {
         $this->extractionObject = $extractionObject;
     }
@@ -62,7 +52,7 @@ class ExtractEvent extends Event
      *
      * @return mixed[]
      */
-    public function getExtractedData() : array
+    public function getExtractedData(): array
     {
         return $this->extractedData;
     }
@@ -70,7 +60,7 @@ class ExtractEvent extends Event
     /**
      * @param mixed[] $extractedData
      */
-    public function setExtractedData(array $extractedData) : void
+    public function setExtractedData(array $extractedData): void
     {
         $this->extractedData = $extractedData;
     }
@@ -80,7 +70,7 @@ class ExtractEvent extends Event
      *
      * @param mixed[] $additionalData
      */
-    public function mergeExtractedData(array $additionalData) : void
+    public function mergeExtractedData(array $additionalData): void
     {
         $this->extractedData = array_merge($this->extractedData, $additionalData);
     }

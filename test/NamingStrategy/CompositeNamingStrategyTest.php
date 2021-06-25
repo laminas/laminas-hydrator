@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator\NamingStrategy;
@@ -13,6 +7,7 @@ namespace LaminasTest\Hydrator\NamingStrategy;
 use Laminas\Hydrator\NamingStrategy\CompositeNamingStrategy;
 use Laminas\Hydrator\NamingStrategy\NamingStrategyInterface;
 use PHPUnit\Framework\TestCase;
+use PHPUnit_Framework_MockObject_MockObject;
 
 /**
  * Tests for {@see CompositeNamingStrategy}
@@ -24,7 +19,7 @@ class CompositeNamingStrategyTest extends TestCase
     public function testGetSameNameWhenNoNamingStrategyExistsForTheName(): void
     {
         $compositeNamingStrategy = new CompositeNamingStrategy([
-            'foo' => $this->createMock(NamingStrategyInterface::class)
+            'foo' => $this->createMock(NamingStrategyInterface::class),
         ]);
 
         $this->assertEquals('bar', $compositeNamingStrategy->hydrate('bar'));
@@ -33,7 +28,7 @@ class CompositeNamingStrategyTest extends TestCase
 
     public function testUseDefaultNamingStrategy(): void
     {
-        /* @var $defaultNamingStrategy NamingStrategyInterface|\PHPUnit_Framework_MockObject_MockObject*/
+        /** @var NamingStrategyInterface|PHPUnit_Framework_MockObject_MockObject $defaultNamingStrategy */
         $defaultNamingStrategy = $this->createMock(NamingStrategyInterface::class);
         $defaultNamingStrategy->expects($this->once())
             ->method('hydrate')

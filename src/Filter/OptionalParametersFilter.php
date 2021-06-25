@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace Laminas\Hydrator\Filter;
@@ -16,6 +10,7 @@ use ReflectionMethod;
 use ReflectionParameter;
 
 use function array_filter;
+use function array_key_exists;
 use function sprintf;
 
 /**
@@ -35,10 +30,10 @@ final class OptionalParametersFilter implements FilterInterface
     /**
      * {@inheritDoc}
      *
-     * @throws InvalidArgumentException if reflection fails due to the method
+     * @throws InvalidArgumentException If reflection fails due to the method
      *     not existing.
      */
-    public function filter(string $property, ?object $instance = null) : bool
+    public function filter(string $property, ?object $instance = null): bool
     {
         $cacheName = $instance !== null
             ? (new ReflectionMethod($instance, $property))->getName()

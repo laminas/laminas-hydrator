@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator\TestAsset;
@@ -25,12 +19,16 @@ class HydratorStrategy extends DefaultStrategy
 
     public function __construct()
     {
-        $this->simulatedStorageDevice = [];
+        $this->simulatedStorageDevice   = [];
         $this->simulatedStorageDevice[] = new HydratorStrategyEntityB(111, 'AAA');
         $this->simulatedStorageDevice[] = new HydratorStrategyEntityB(222, 'BBB');
         $this->simulatedStorageDevice[] = new HydratorStrategyEntityB(333, 'CCC');
     }
 
+    /**
+     * @param array $value
+     * @return mixed
+     */
     public function extract($value, ?object $object = null)
     {
         $result = [];
@@ -40,6 +38,10 @@ class HydratorStrategy extends DefaultStrategy
         return $result;
     }
 
+    /**
+     * @param mixed $value
+     * @return mixed
+     */
     public function hydrate($value, ?array $data = null)
     {
         $result = $value;
@@ -52,11 +54,15 @@ class HydratorStrategy extends DefaultStrategy
         return $result;
     }
 
+    /**
+     * @param mixed $field1
+     * @return mixed
+     */
     private function findEntity($field1)
     {
         $result = null;
         foreach ($this->simulatedStorageDevice as $entity) {
-            if ($entity->getField1() == $field1) {
+            if ($entity->getField1() === $field1) {
                 $result = $entity;
                 break;
             }

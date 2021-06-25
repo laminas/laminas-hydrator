@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace Laminas\Hydrator\Strategy;
@@ -24,14 +18,10 @@ use function sprintf;
 
 class SerializableStrategy implements StrategyInterface
 {
-    /**
-     * @var string|SerializerAdapter
-     */
+    /** @var string|SerializerAdapter */
     protected $serializer;
 
-    /**
-     * @var mixed[]
-     */
+    /** @var mixed[] */
     protected $serializerOptions = [];
 
     /**
@@ -73,9 +63,9 @@ class SerializableStrategy implements StrategyInterface
      *
      * @param  mixed $serializer Should be a string or
      *     SerializerAdapter instance
-     * @throws InvalidArgumentException for invalid $serializer values
+     * @throws InvalidArgumentException For invalid $serializer values.
      */
-    public function setSerializer($serializer) : void
+    public function setSerializer($serializer): void
     {
         if (! is_string($serializer) && ! $serializer instanceof SerializerAdapter) {
             throw new InvalidArgumentException(sprintf(
@@ -91,10 +81,10 @@ class SerializableStrategy implements StrategyInterface
     /**
      * Get serializer
      */
-    public function getSerializer() : SerializerAdapter
+    public function getSerializer(): SerializerAdapter
     {
         if (is_string($this->serializer)) {
-            $options = $this->getSerializerOptions();
+            $options          = $this->getSerializerOptions();
             $this->serializer = SerializerFactory::factory($this->serializer, $options);
         } elseif (null === $this->serializer) {
             $this->serializer = SerializerFactory::getDefaultAdapter();
@@ -108,7 +98,7 @@ class SerializableStrategy implements StrategyInterface
      *
      * @param mixed[] $serializerOptions
      */
-    public function setSerializerOptions(iterable $serializerOptions) : void
+    public function setSerializerOptions(iterable $serializerOptions): void
     {
         $this->serializerOptions = is_array($serializerOptions)
             ? $serializerOptions
@@ -120,7 +110,7 @@ class SerializableStrategy implements StrategyInterface
      *
      * @return mixed[]
      */
-    public function getSerializerOptions() : array
+    public function getSerializerOptions(): array
     {
         return $this->serializerOptions;
     }

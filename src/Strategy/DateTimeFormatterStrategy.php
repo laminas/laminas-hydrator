@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace Laminas\Hydrator\Strategy;
@@ -30,9 +24,7 @@ final class DateTimeFormatterStrategy implements StrategyInterface
      */
     private $format;
 
-    /**
-     * @var DateTimeZone|null
-     */
+    /** @var DateTimeZone|null */
     private $timezone;
 
     /**
@@ -56,7 +48,7 @@ final class DateTimeFormatterStrategy implements StrategyInterface
 
     /**
      * @param bool $dateTimeFallback try to parse with DateTime when createFromFormat fails
-     * @throws Exception\InvalidArgumentException for invalid $format values
+     * @throws Exception\InvalidArgumentException For invalid $format values.
      */
     public function __construct(
         string $format = DateTime::RFC3339,
@@ -104,7 +96,7 @@ final class DateTimeFormatterStrategy implements StrategyInterface
      *
      * @param mixed|string $value
      * @return mixed|DateTimeInterface
-     * @throws Exception\InvalidArgumentException if $value is not null, not a
+     * @throws Exception\InvalidArgumentException If $value is not null, not a
      *     string, nor a DateTimeInterface.
      */
     public function hydrate($value, ?array $data = null)

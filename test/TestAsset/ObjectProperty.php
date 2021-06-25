@@ -1,33 +1,36 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator\TestAsset;
 
 class ObjectProperty
 {
-    public $foo = null;
-    public $bar = null;
-    public $blubb = null;
-    public $quo = null;
-    protected $quin = null;
+    /** @var string */
+    public $foo;
+
+    /** @var string */
+    public $bar;
+
+    /** @var string */
+    public $blubb;
+
+    /** @var string */
+    public $quo;
+
+    /** @var string */
+    protected $quin;
 
     public function __construct()
     {
-        $this->foo = "bar";
-        $this->bar = "foo";
-        $this->blubb = "baz";
-        $this->quo = "blubb";
-        $this->quin = 'five';
+        $this->foo   = 'bar';
+        $this->bar   = 'foo';
+        $this->blubb = 'baz';
+        $this->quo   = 'blubb';
+        $this->quin  = 'five';
     }
 
-    public function get(string $name)
+    public function get(string $name): string
     {
         return $this->$name;
     }

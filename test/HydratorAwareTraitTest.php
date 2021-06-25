@@ -1,15 +1,11 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator;
 
+use Laminas\Hydrator\AbstractHydrator;
+use Laminas\Hydrator\HydratorAwareTrait;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -19,11 +15,11 @@ class HydratorAwareTraitTest extends TestCase
 {
     public function testSetHydrator(): void
     {
-        $object = $this->getObjectForTrait('\Laminas\Hydrator\HydratorAwareTrait');
+        $object = $this->getObjectForTrait(HydratorAwareTrait::class);
 
         $this->assertSame(null, $object->getHydrator());
 
-        $hydrator = $this->getMockForAbstractClass('\Laminas\Hydrator\AbstractHydrator');
+        $hydrator = $this->getMockForAbstractClass(AbstractHydrator::class);
 
         $object->setHydrator($hydrator);
 
@@ -32,11 +28,11 @@ class HydratorAwareTraitTest extends TestCase
 
     public function testGetHydrator(): void
     {
-        $object = $this->getObjectForTrait('\Laminas\Hydrator\HydratorAwareTrait');
+        $object = $this->getObjectForTrait(HydratorAwareTrait::class);
 
         $this->assertNull($object->getHydrator());
 
-        $hydrator = $this->getMockForAbstractClass('\Laminas\Hydrator\AbstractHydrator');
+        $hydrator = $this->getMockForAbstractClass(AbstractHydrator::class);
 
         $object->setHydrator($hydrator);
 

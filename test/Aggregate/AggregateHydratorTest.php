@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator\Aggregate;
@@ -15,6 +9,7 @@ use Laminas\Hydrator\Aggregate\AggregateHydrator;
 use Laminas\Hydrator\Aggregate\ExtractEvent;
 use Laminas\Hydrator\Aggregate\HydrateEvent;
 use Laminas\Hydrator\HydratorInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
@@ -23,21 +18,19 @@ use stdClass;
  */
 class AggregateHydratorTest extends TestCase
 {
-    /**
-     * @var AggregateHydrator
-     */
+    /** @var AggregateHydrator */
     protected $hydrator;
 
     /**
-     * @var EventManager|\PHPUnit\Framework\MockObject\MockObject
-     * @psalm-var EventManager&\PHPUnit\Framework\MockObject\MockObject
+     * @var EventManager|MockObject
+     * @psalm-var EventManager&MockObject
      */
     protected $eventManager;
 
     /**
      * {@inheritDoc}
      */
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->eventManager = $this->createMock(EventManager::class);
         $this->hydrator     = new AggregateHydrator();
@@ -47,8 +40,6 @@ class AggregateHydratorTest extends TestCase
 
     /**
      * @covers \Laminas\Hydrator\Aggregate\AggregateHydrator::add
-     *
-     * @return void
      */
     public function testAdd(): void
     {
@@ -67,8 +58,6 @@ class AggregateHydratorTest extends TestCase
 
     /**
      * @covers \Laminas\Hydrator\Aggregate\AggregateHydrator::hydrate
-     *
-     * @return void
      */
     public function testHydrate(): void
     {
@@ -84,8 +73,6 @@ class AggregateHydratorTest extends TestCase
 
     /**
      * @covers \Laminas\Hydrator\Aggregate\AggregateHydrator::extract
-     *
-     * @return void
      */
     public function testExtract(): void
     {
@@ -102,8 +89,6 @@ class AggregateHydratorTest extends TestCase
     /**
      * @covers \Laminas\Hydrator\Aggregate\AggregateHydrator::getEventManager
      * @covers \Laminas\Hydrator\Aggregate\AggregateHydrator::setEventManager
-     *
-     * @return void
      */
     public function testGetSetManager(): void
     {

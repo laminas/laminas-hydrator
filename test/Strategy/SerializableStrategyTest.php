@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator\Strategy;
@@ -14,7 +8,7 @@ use Laminas\Hydrator\Exception\InvalidArgumentException;
 use Laminas\Hydrator\Strategy\SerializableStrategy;
 use Laminas\Serializer\Adapter\PhpSerialize;
 use Laminas\Serializer\Serializer;
-use PHPUnit\Framework\TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 
 use function get_class;
 
@@ -31,7 +25,7 @@ class SerializableStrategyTest extends TestCase
 
     public function testUseBadSerializerObject(): void
     {
-        $serializer = Serializer::factory('phpserialize');
+        $serializer         = Serializer::factory('phpserialize');
         $serializerStrategy = new SerializableStrategy($serializer);
         $this->assertEquals($serializer, $serializerStrategy->getSerializer());
     }
@@ -44,17 +38,17 @@ class SerializableStrategyTest extends TestCase
 
     public function testCanSerialize(): void
     {
-        $serializer = Serializer::factory('phpserialize');
+        $serializer         = Serializer::factory('phpserialize');
         $serializerStrategy = new SerializableStrategy($serializer);
-        $serialized = $serializerStrategy->extract('foo');
+        $serialized         = $serializerStrategy->extract('foo');
         $this->assertEquals($serialized, 's:3:"foo";');
     }
 
     public function testCanUnserialize(): void
     {
-        $serializer = Serializer::factory('phpserialize');
+        $serializer         = Serializer::factory('phpserialize');
         $serializerStrategy = new SerializableStrategy($serializer);
-        $serialized = $serializerStrategy->hydrate('s:3:"foo";');
+        $serialized         = $serializerStrategy->hydrate('s:3:"foo";');
         $this->assertEquals($serialized, 'foo');
     }
 }

@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace Laminas\Hydrator\Strategy;
@@ -13,6 +7,13 @@ namespace Laminas\Hydrator\Strategy;
 use Laminas\Hydrator\HydratorInterface;
 use ReflectionClass;
 use ReflectionException;
+
+use function class_exists;
+use function get_class;
+use function gettype;
+use function is_array;
+use function is_object;
+use function sprintf;
 
 class HydratorStrategy implements StrategyInterface
 {
@@ -72,7 +73,8 @@ class HydratorStrategy implements StrategyInterface
      */
     public function hydrate($value, ?array $data = null)
     {
-        if ($value === ''
+        if (
+            $value === ''
             || $value === null
             || $value instanceof $this->objectClassName
         ) {

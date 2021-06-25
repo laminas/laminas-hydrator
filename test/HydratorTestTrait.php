@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator;
@@ -26,16 +20,14 @@ trait HydratorTestTrait
             ->expects($this->any())
             ->method('hydrate')
             ->with($this->anything())
-            ->will($this->returnValue('value'))
-        ;
+            ->will($this->returnValue('value'));
 
         $strategy = $this->createMock(StrategyInterface::class);
         $strategy
             ->expects($this->any())
             ->method('hydrate')
             ->with($this->anything())
-            ->will($this->returnValue('hydrate'))
-        ;
+            ->will($this->returnValue('hydrate'));
 
         $this->hydrator->setNamingStrategy($namingStrategy);
         $this->hydrator->addStrategy('value', $strategy);

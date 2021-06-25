@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace Laminas\Hydrator;
@@ -21,7 +15,7 @@ class ConfigProvider
      *
      * @return mixed[]
      */
-    public function __invoke() : array
+    public function __invoke(): array
     {
         return [
             'dependencies' => $this->getDependencyConfig(),
@@ -37,18 +31,18 @@ class ConfigProvider
      *
      * @return string[][]
      */
-    public function getDependencyConfig() : array
+    public function getDependencyConfig(): array
     {
         $hydratorManagerTarget = class_exists(ServiceManager::class)
             ? HydratorPluginManager::class
             : StandaloneHydratorPluginManager::class;
 
         return [
-            'aliases' => [
+            'aliases'   => [
                 'HydratorManager' => $hydratorManagerTarget,
 
                 // Legacy Zend Framework aliases
-                \Zend\Hydrator\HydratorPluginManager::class => HydratorPluginManager::class,
+                \Zend\Hydrator\HydratorPluginManager::class           => HydratorPluginManager::class,
                 \Zend\Hydrator\StandaloneHydratorPluginManager::class => StandaloneHydratorPluginManager::class,
             ],
             'factories' => [

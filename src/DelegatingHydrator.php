@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace Laminas\Hydrator;
@@ -16,9 +10,7 @@ use function get_class;
 
 class DelegatingHydrator implements HydratorInterface
 {
-    /**
-     * @var ContainerInterface
-     */
+    /** @var ContainerInterface */
     protected $hydrators;
 
     public function __construct(ContainerInterface $hydrators)
@@ -37,7 +29,7 @@ class DelegatingHydrator implements HydratorInterface
     /**
      * {@inheritdoc}
      */
-    public function extract(object $object) : array
+    public function extract(object $object): array
     {
         return $this->getHydrator($object)->extract($object);
     }
@@ -45,7 +37,7 @@ class DelegatingHydrator implements HydratorInterface
     /**
      * Gets hydrator for an object
      */
-    protected function getHydrator(object $object) : HydratorInterface
+    protected function getHydrator(object $object): HydratorInterface
     {
         return $this->hydrators->get(get_class($object));
     }

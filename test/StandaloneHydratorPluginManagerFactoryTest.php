@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator;
@@ -15,14 +9,12 @@ use Laminas\Hydrator\ArraySerializableHydrator;
 use Laminas\Hydrator\ClassMethods;
 use Laminas\Hydrator\ClassMethodsHydrator;
 use Laminas\Hydrator\DelegatingHydrator;
-use Laminas\Hydrator\DelegatingHydratorFactory;
 use Laminas\Hydrator\ObjectProperty;
 use Laminas\Hydrator\ObjectPropertyHydrator;
 use Laminas\Hydrator\Reflection;
 use Laminas\Hydrator\ReflectionHydrator;
 use Laminas\Hydrator\StandaloneHydratorPluginManager;
 use Laminas\Hydrator\StandaloneHydratorPluginManagerFactory;
-use PHPUnit\Framework\Error\Notice;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
@@ -32,7 +24,7 @@ class StandaloneHydratorPluginManagerFactoryTest extends TestCase
 {
     private const MESSAGE_DEFAULT_SERVICES = 'Missing the service %s';
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->factory   = new StandaloneHydratorPluginManagerFactory();
         $this->container = $this->createMock(ContainerInterface::class);

@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator;
@@ -15,12 +9,10 @@ use PHPUnit\Framework\TestCase;
 
 class HydratorObjectPropertyTest extends TestCase
 {
-    /**
-     * @var ObjectPropertyHydrator
-     */
+    /** @var ObjectPropertyHydrator */
     private $hydrator;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->hydrator = new ObjectPropertyHydrator();
     }

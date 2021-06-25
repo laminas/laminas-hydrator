@@ -1,15 +1,10 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator\Filter;
 
+use Generator;
 use Laminas\Hydrator\Exception\InvalidArgumentException;
 use Laminas\Hydrator\Filter\FilterComposite;
 use Laminas\Hydrator\Filter\FilterInterface;
@@ -30,8 +25,6 @@ class FilterCompositeTest extends TestCase
 {
     /**
      * @dataProvider validFiltersProvider
-     *
-     * @return void
      */
     public function testFilters(array $orFilters, array $andFilters): void
     {
@@ -42,7 +35,7 @@ class FilterCompositeTest extends TestCase
         }
     }
 
-    public function validFiltersProvider() : array
+    public function validFiltersProvider(): array
     {
         return [
             [
@@ -62,11 +55,11 @@ class FilterCompositeTest extends TestCase
         ];
     }
 
-    public function invalidFiltersProvider() : array
+    public function invalidFiltersProvider(): array
     {
         $callback = /**
-         * @return true
-         */
+                     * @return true
+                     */
         static function (): bool {
             return true;
         };
@@ -102,8 +95,6 @@ class FilterCompositeTest extends TestCase
 
     /**
      * @dataProvider invalidFiltersProvider
-     *
-     * @return void
      */
     public function testConstructWithInvalidFilter(array $orFilters, array $andFilters, string $expectedKey): void
     {
@@ -123,17 +114,19 @@ class FilterCompositeTest extends TestCase
         self::assertTrue($filter->filter('any_value'));
     }
 
-    private function buildFilters(array $values) : array
+    private function buildFilters(array $values): array
     {
         $filters = [];
         foreach ($values as $value) {
-            $filters[] = new class($value) implements FilterInterface
+            $filters[] = new class ($value) implements FilterInterface
             {
+                /** @param mixed $value */
                 public function __construct($value)
                 {
                     $this->value = $value;
                 }
-                public function filter(string $property, ?object $instance = null) : bool
+
+                public function filter(string $property, ?object $instance = null): bool
                 {
                     return $this->value;
                 }
@@ -143,29 +136,28 @@ class FilterCompositeTest extends TestCase
     }
 
     /**
-     * @return \Generator
-     *
-     * @psalm-return \Generator<int, array{orFilters: array, andFilters: array, expected: bool}, mixed, void>
+     * @psalm-return Generator<int, array{orFilters: array, andFilters: array, expected: bool}, mixed, void>
      */
-    private function generateFilters(array $orCompositionFilters, array $andCompositionFilters, bool $expected): \Generator
-    {
+    private function generateFilters(
+        array $orCompositionFilters,
+        array $andCompositionFilters,
+        bool $expected
+    ): Generator {
         foreach ($orCompositionFilters as $orFilters) {
             foreach ($andCompositionFilters as $andFilters) {
                 yield [
-                    'orFilters' => $this->buildFilters($orFilters),  // boolean sum : true
+                    'orFilters'  => $this->buildFilters($orFilters), // boolean sum : true
                     'andFilters' => $this->buildFilters($andFilters),
-                    'expected' => $expected,
+                    'expected'   => $expected,
                 ];
             }
         }
     }
 
     /**
-     * @return \Generator
-     *
-     * @psalm-return \Generator<mixed, mixed, mixed, void>
+     * @psalm-return Generator<mixed, mixed, mixed, void>
      */
-    public function providerCompositionFiltering(): \Generator
+    public function providerCompositionFiltering(): Generator
     {
         $orCompositionFilters = [
             'truthy' => [
@@ -175,10 +167,10 @@ class FilterCompositeTest extends TestCase
                 [true, true],
                 [false, true],
             ],
-            'falsy' => [
+            'falsy'  => [
                 [false],
                 [false, false],
-            ]
+            ],
         ];
 
         $andCompositionFilters = [
@@ -187,12 +179,12 @@ class FilterCompositeTest extends TestCase
                 [true],
                 [true, true],
             ],
-            'falsy' => [
+            'falsy'  => [
                 [false],
                 [true, false],
                 [false, true],
                 [false, false],
-            ]
+            ],
         ];
 
         yield from $this->generateFilters(
@@ -219,8 +211,6 @@ class FilterCompositeTest extends TestCase
 
     /**
      * @dataProvider providerCompositionFiltering
-     *
-     * @return void
      */
     public function testCompositionFiltering(array $orFilters, array $andFilters, bool $expected): void
     {

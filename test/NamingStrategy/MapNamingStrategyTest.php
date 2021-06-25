@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator\NamingStrategy;
@@ -21,7 +15,7 @@ use PHPUnit\Framework\TestCase;
  */
 class MapNamingStrategyTest extends TestCase
 {
-    public function invalidMapValues() : iterable
+    public function invalidMapValues(): iterable
     {
         yield 'null'       => [null];
         yield 'true'       => [true];
@@ -32,7 +26,7 @@ class MapNamingStrategyTest extends TestCase
         yield 'object'     => [(object) ['foo' => 'bar']];
     }
 
-    public function invalidKeyValues() : iterable
+    public function invalidKeyValues(): iterable
     {
         yield 'null'       => [null];
         yield 'true'       => [true];
@@ -43,13 +37,11 @@ class MapNamingStrategyTest extends TestCase
 
     /**
      * @dataProvider invalidMapValues
-     *
      * @param mixed $invalidValue
-     *
-     * @return void
      */
-    public function testExtractionMapConstructorRaisesExceptionWhenFlippingHydrationMapForInvalidValues($invalidValue): void
-    {
+    public function testExtractionMapConstructorRaisesExceptionWhenFlippingHydrationMapForInvalidValues(
+        $invalidValue
+    ): void {
         $this->expectException(Exception\InvalidArgumentException::class);
         $this->expectExceptionMessage('can not be flipped');
 
@@ -58,13 +50,11 @@ class MapNamingStrategyTest extends TestCase
 
     /**
      * @dataProvider invalidKeyValues
-     *
      * @param mixed $invalidKey
-     *
-     * @return void
      */
-    public function testExtractionMapConstructorRaisesExceptionWhenFlippingHydrationMapForInvalidKeys($invalidKey): void
-    {
+    public function testExtractionMapConstructorRaisesExceptionWhenFlippingHydrationMapForInvalidKeys(
+        $invalidKey
+    ): void {
         $this->expectException(Exception\InvalidArgumentException::class);
         $this->expectExceptionMessage('can not be flipped');
 
@@ -73,13 +63,11 @@ class MapNamingStrategyTest extends TestCase
 
     /**
      * @dataProvider invalidMapValues
-     *
      * @param mixed $invalidValue
-     *
-     * @return void
      */
-    public function testHydrationMapConstructorRaisesExceptionWhenFlippingExtractionMapForInvalidValues($invalidValue): void
-    {
+    public function testHydrationMapConstructorRaisesExceptionWhenFlippingExtractionMapForInvalidValues(
+        $invalidValue
+    ): void {
         $this->expectException(Exception\InvalidArgumentException::class);
         $this->expectExceptionMessage('can not be flipped');
 
@@ -88,10 +76,7 @@ class MapNamingStrategyTest extends TestCase
 
     /**
      * @dataProvider invalidKeyValues
-     *
      * @param mixed $invalidKey
-     *
-     * @return void
      */
     public function testHydrationMapConstructorRaisesExceptionWhenFlippingExtractionMapForInvalidKeys($invalidKey): void
     {

@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator;
@@ -23,7 +17,7 @@ class HydratorPluginManagerFactoryTest extends TestCase
     public function testFactoryReturnsPluginManager(): void
     {
         $container = $this->createMock(ContainerInterface::class);
-        $factory = new HydratorPluginManagerFactory();
+        $factory   = new HydratorPluginManagerFactory();
 
         $hydrators = $factory($container, HydratorPluginManagerFactory::class);
         $this->assertInstanceOf(HydratorPluginManager::class, $hydrators);
@@ -31,15 +25,13 @@ class HydratorPluginManagerFactoryTest extends TestCase
 
     /**
      * @depends testFactoryReturnsPluginManager
-     *
-     * @return void
      */
     public function testFactoryConfiguresPluginManagerUnderContainerInterop(): void
     {
         $container = $this->createMock(ContainerInterface::class);
-        $hydrator = $this->createMock(HydratorInterface::class);
+        $hydrator  = $this->createMock(HydratorInterface::class);
 
-        $factory = new HydratorPluginManagerFactory();
+        $factory   = new HydratorPluginManagerFactory();
         $hydrators = $factory($container, HydratorPluginManagerFactory::class, [
             'services' => [
                 'test' => $hydrator,
@@ -51,13 +43,13 @@ class HydratorPluginManagerFactoryTest extends TestCase
     public function testConfiguresHydratorServicesWhenFound(): void
     {
         $hydrator = $this->createMock(HydratorInterface::class);
-        $config = [
+        $config   = [
             'hydrators' => [
-                'aliases' => [
+                'aliases'   => [
                     'test' => ReflectionHydrator::class,
                 ],
                 'factories' => [
-                    /** @psalm-return \PHPUnit\Framework\MockObject\MockObject&HydratorInterface */
+                    /** @psalm-return MockObject&HydratorInterface */
                     'test-too' => function ($container) use ($hydrator): HydratorInterface {
                         return $hydrator;
                     },
@@ -83,7 +75,7 @@ class HydratorPluginManagerFactoryTest extends TestCase
             ->with('config')
             ->willReturn($config);
 
-        $factory = new HydratorPluginManagerFactory();
+        $factory   = new HydratorPluginManagerFactory();
         $hydrators = $factory($container, 'HydratorManager');
 
         $this->assertInstanceOf(HydratorPluginManager::class, $hydrators);
@@ -111,7 +103,7 @@ class HydratorPluginManagerFactoryTest extends TestCase
             ->expects($this->never())
             ->method('get');
 
-        $factory = new HydratorPluginManagerFactory();
+        $factory   = new HydratorPluginManagerFactory();
         $hydrators = $factory($container, 'HydratorManager');
 
         $this->assertInstanceOf(HydratorPluginManager::class, $hydrators);
@@ -137,7 +129,7 @@ class HydratorPluginManagerFactoryTest extends TestCase
             ->expects($this->never())
             ->method('get');
 
-        $factory = new HydratorPluginManagerFactory();
+        $factory   = new HydratorPluginManagerFactory();
         $hydrators = $factory($container, 'HydratorManager');
 
         $this->assertInstanceOf(HydratorPluginManager::class, $hydrators);
@@ -163,7 +155,7 @@ class HydratorPluginManagerFactoryTest extends TestCase
             ->with('config')
             ->willReturn(['foo' => 'bar']);
 
-        $factory = new HydratorPluginManagerFactory();
+        $factory   = new HydratorPluginManagerFactory();
         $hydrators = $factory($container, 'HydratorManager');
 
         $this->assertInstanceOf(HydratorPluginManager::class, $hydrators);

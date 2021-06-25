@@ -1,15 +1,10 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator\Strategy;
 
+use Generator;
 use Laminas\Hydrator\Exception;
 use Laminas\Hydrator\HydratorInterface;
 use Laminas\Hydrator\ReflectionHydrator;
@@ -17,6 +12,7 @@ use Laminas\Hydrator\Strategy\CollectionStrategy;
 use Laminas\Hydrator\Strategy\StrategyInterface;
 use LaminasTest\Hydrator\TestAsset;
 use PHPUnit\Framework\TestCase;
+use PHPUnit_Framework_MockObject_MockObject;
 use ReflectionClass;
 use stdClass;
 use TypeError;
@@ -52,10 +48,7 @@ class CollectionStrategyTest extends TestCase
 
     /**
      * @dataProvider providerInvalidObjectClassName
-     *
      * @param mixed $objectClassName
-     *
-     * @return void
      */
     public function testConstructorRejectsInvalidObjectClassName(
         $objectClassName,
@@ -71,7 +64,7 @@ class CollectionStrategyTest extends TestCase
         );
     }
 
-    public function providerInvalidObjectClassName() : array
+    public function providerInvalidObjectClassName(): array
     {
         // @codingStandardsIgnoreStart
         return [
@@ -90,10 +83,7 @@ class CollectionStrategyTest extends TestCase
 
     /**
      * @dataProvider providerInvalidValueForExtraction
-     *
      * @param mixed $value
-     *
-     * @return void
      */
     public function testExtractRejectsInvalidValue($value): void
     {
@@ -112,7 +102,7 @@ class CollectionStrategyTest extends TestCase
     }
 
     /**
-     * @return \Generator
+     * @return Generator
      */
     public function providerInvalidValueForExtraction()
     {
@@ -134,10 +124,7 @@ class CollectionStrategyTest extends TestCase
 
     /**
      * @dataProvider providerInvalidObjectForExtraction
-     *
      * @param mixed $object
-     *
-     * @return void
      */
     public function testExtractRejectsInvalidObject($object): void
     {
@@ -159,7 +146,7 @@ class CollectionStrategyTest extends TestCase
     }
 
     /**
-     * @return \Generator
+     * @return Generator
      */
     public function providerInvalidObjectForExtraction()
     {
@@ -188,13 +175,12 @@ class CollectionStrategyTest extends TestCase
         ];
 
         $extraction = /**
-         * @return string[]
-         *
-         * @psalm-return array{value: string}
+        $extraction =  * @return string[]
+        $extraction =  * @psalm-return array{value: string}
          */
         function (TestAsset\User $value): array {
             return [
-                'value' => spl_object_hash($value)
+                'value' => spl_object_hash($value),
             ];
         };
 
@@ -217,10 +203,7 @@ class CollectionStrategyTest extends TestCase
 
     /**
      * @dataProvider providerInvalidValueForHydration
-     *
      * @param mixed $value
-     *
-     * @return void
      */
     public function testHydrateRejectsInvalidValue($value): void
     {
@@ -239,7 +222,7 @@ class CollectionStrategyTest extends TestCase
     }
 
     /**
-     * @return \Generator
+     * @return Generator
      */
     public function providerInvalidValueForHydration()
     {
@@ -297,7 +280,7 @@ class CollectionStrategyTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|HydratorInterface
+     * @return PHPUnit_Framework_MockObject_MockObject|HydratorInterface
      */
     private function createHydratorMock()
     {

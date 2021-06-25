@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator\NamingStrategy\UnderscoreNamingStrategy;
@@ -25,18 +19,15 @@ class UnderscoreToCamelCaseFilterTest extends TestCase
 {
     /**
      * @dataProvider nonUnicodeProvider
-     *
      * @param string $string
      * @param string $expected
-     *
-     * @return void
      */
     public function testFilterCamelCasesNonUnicodeStrings($string, $expected): void
     {
-        $filter   = new UnderscoreToCamelCaseFilter();
+        $filter = new UnderscoreToCamelCaseFilter();
 
         $reflectionClass = new ReflectionClass($filter);
-        $property = $reflectionClass->getProperty('pcreUnicodeSupport');
+        $property        = $reflectionClass->getProperty('pcreUnicodeSupport');
         $property->setAccessible(true);
         $property->setValue($filter, false);
 
@@ -48,38 +39,34 @@ class UnderscoreToCamelCaseFilterTest extends TestCase
 
     /**
      * @return string[][]
-     *
      * @psalm-return array<string, array{0: string, 1: string}>
      */
     public function nonUnicodeProvider(): array
     {
         return [
-            'one word' => [
+            'one word'                       => [
                 'Studly',
-                'studly'
+                'studly',
             ],
-            'multiple words' => [
+            'multiple words'                 => [
                 'studly_cases_me',
-                'studlyCasesMe'
+                'studlyCasesMe',
             ],
-            'alphanumeric in single word' => [
+            'alphanumeric in single word'    => [
                 'one_2_three',
-                'one2Three'
+                'one2Three',
             ],
             'alphanumeric in separate words' => [
                 'one2_three',
-                'one2Three'
+                'one2Three',
             ],
         ];
     }
 
     /**
      * @dataProvider unicodeProvider
-     *
      * @param string $string
      * @param string $expected
-     *
-     * @return void
      */
     public function testFilterCamelCasesUnicodeStrings($string, $expected): void
     {
@@ -96,56 +83,51 @@ class UnderscoreToCamelCaseFilterTest extends TestCase
 
     /**
      * @return string[][]
-     *
      * @psalm-return array<string, array{0: string, 1: string}>
      */
     public function unicodeProvider(): array
     {
         return [
-            'uppercase first letter' => [
+            'uppercase first letter'            => [
                 'Camel',
-                'camel'
+                'camel',
             ],
-            'multiple words' => [
+            'multiple words'                    => [
                 'studly_cases_me',
-                'studlyCasesMe'
+                'studlyCasesMe',
             ],
-            'alphanumeric in single word' => [
+            'alphanumeric in single word'       => [
                 'one_2_three',
-                'one2Three'
+                'one2Three',
             ],
-            'alphanumeric in separate words' => [
+            'alphanumeric in separate words'    => [
                 'one2_three',
-                'one2Three'
+                'one2Three',
             ],
-            'unicode character' => [
+            'unicode character'                 => [
                 'test_Šuma',
-                'testŠuma'
+                'testŠuma',
             ],
             'unicode character [Laminas-10517]' => [
                 'test_šuma',
-                'testŠuma'
-            ]
+                'testŠuma',
+            ],
         ];
     }
 
     /**
      * @dataProvider unicodeWithoutMbStringsProvider
-     *
      * @param string $string
      * @param string $expected
-     *
-     * @return void
      */
     public function testFilterCamelCasesUnicodeStringsWithoutMbStrings(
         $string,
         $expected
     ): void {
-
-        $filter   = new UnderscoreToCamelCaseFilter();
+        $filter = new UnderscoreToCamelCaseFilter();
 
         $reflectionClass = new ReflectionClass($filter);
-        $property = $reflectionClass->getProperty('mbStringSupport');
+        $property        = $reflectionClass->getProperty('mbStringSupport');
         $property->setAccessible(true);
         $property->setValue($filter, false);
 
@@ -155,32 +137,31 @@ class UnderscoreToCamelCaseFilterTest extends TestCase
 
     /**
      * @return string[][]
-     *
      * @psalm-return array<string, array{0: string, 1: string}>
      */
     public function unicodeWithoutMbStringsProvider(): array
     {
         return [
-            'multiple words' => [
+            'multiple words'                 => [
                 'studly_cases_me',
-                'studlyCasesMe'
+                'studlyCasesMe',
             ],
-            'alphanumeric in single word' => [
+            'alphanumeric in single word'    => [
                 'one_2_three',
-                'one2Three'
+                'one2Three',
             ],
             'alphanumeric in separate words' => [
                 'one2_three',
-                'one2Three'
+                'one2Three',
             ],
-            'uppercase unicode character' => [
+            'uppercase unicode character'    => [
                 'test_Šuma',
-                'testŠuma'
+                'testŠuma',
             ],
-            'lowercase unicode character' => [
+            'lowercase unicode character'    => [
                 'test_šuma',
-                'test_šuma'
-            ]
+                'test_šuma',
+            ],
         ];
     }
 }

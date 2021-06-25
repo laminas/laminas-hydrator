@@ -1,28 +1,31 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator\TestAsset;
 
 class ClassMethodsInvalidParameter
 {
+    /**
+     * @param mixed $alias
+     * @return mixed
+     */
     public function hasAlias($alias)
     {
         return $alias;
     }
 
+    /**
+     * @param mixed $foo
+     * @return mixed
+     */
     public function getTest($foo)
     {
         return $foo;
     }
 
-    public function isTest($bar)
+    /** @param mixed $bar */
+    public function isTest($bar): bool
     {
         return $bar;
     }

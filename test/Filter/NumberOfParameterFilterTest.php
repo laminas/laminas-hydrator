@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator\Filter;
@@ -23,32 +17,26 @@ class NumberOfParameterFilterTest extends TestCase
 {
     /**
      * @group 6083
-     *
-     * @return void
      */
     public function testArityZero(): void
     {
         $filter = new NumberOfParameterFilter();
-        $this->assertTrue($filter->filter(__CLASS__ . '::methodWithNoParameters'));
-        $this->assertFalse($filter->filter(__CLASS__ . '::methodWithOptionalParameters'));
+        $this->assertTrue($filter->filter(self::class . '::methodWithNoParameters'));
+        $this->assertFalse($filter->filter(self::class . '::methodWithOptionalParameters'));
     }
 
     /**
      * @group 6083
-     *
-     * @return void
      */
     public function testArityOne(): void
     {
         $filter = new NumberOfParameterFilter(1);
-        $this->assertFalse($filter->filter(__CLASS__ . '::methodWithNoParameters'));
-        $this->assertTrue($filter->filter(__CLASS__ . '::methodWithOptionalParameters'));
+        $this->assertFalse($filter->filter(self::class . '::methodWithNoParameters'));
+        $this->assertTrue($filter->filter(self::class . '::methodWithOptionalParameters'));
     }
 
     /**
      * Verifies an InvalidArgumentException is thrown for a method that doesn't exist
-     *
-     * @return void
      */
     public function testFilterPropertyDoesNotExist(): void
     {
@@ -57,22 +45,18 @@ class NumberOfParameterFilterTest extends TestCase
             'Method LaminasTest\Hydrator\Filter\NumberOfParameterFilterTest::methodDoesNotExist does not exist'
         );
         $filter = new NumberOfParameterFilter(1);
-        $filter->filter(__CLASS__ . '::methodDoesNotExist');
+        $filter->filter(self::class . '::methodDoesNotExist');
     }
 
     /**
      * Test asset method
-     *
-     * @return void
      */
-    public function methodWithOptionalParameters($parameter = 'foo'): void
+    public function methodWithOptionalParameters(string $parameter = 'foo'): void
     {
     }
 
     /**
      * Test asset method
-     *
-     * @return void
      */
     public function methodWithNoParameters(): void
     {

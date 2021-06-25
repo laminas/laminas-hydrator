@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator;
@@ -25,12 +19,13 @@ class DelegatingHydratorFactoryTest extends TestCase
     public function testFactoryUsesContainerToSeedDelegatingHydratorWhenItIsAHydratorPluginManager(): void
     {
         $hydrators = $this->createMock(HydratorPluginManager::class);
-        $factory = new DelegatingHydratorFactory();
+        $factory   = new DelegatingHydratorFactory();
 
         $hydrator = $factory($hydrators, '');
         $this->assertInstanceOf(DelegatingHydrator::class, $hydrator);
     }
 
+    // phpcs:ignore Generic.Files.LineLength.TooLong
     public function testFactoryUsesHydratorPluginManagerServiceFromContainerToSeedDelegatingHydratorWhenAvailable(): void
     {
         // phpcs:enable

@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace Laminas\Hydrator\Aggregate;
@@ -21,9 +15,7 @@ use Laminas\Hydrator\HydratorInterface;
  */
 class HydratorListener extends AbstractListenerAggregate
 {
-    /**
-     * @var HydratorInterface
-     */
+    /** @var HydratorInterface */
     protected $hydrator;
 
     public function __construct(HydratorInterface $hydrator)
@@ -34,7 +26,7 @@ class HydratorListener extends AbstractListenerAggregate
     /**
      * {@inheritDoc}
      */
-    public function attach(EventManagerInterface $events, $priority = 1) : void
+    public function attach(EventManagerInterface $events, $priority = 1): void
     {
         $this->listeners[] = $events->attach(HydrateEvent::EVENT_HYDRATE, [$this, 'onHydrate'], $priority);
         $this->listeners[] = $events->attach(ExtractEvent::EVENT_EXTRACT, [$this, 'onExtract'], $priority);
@@ -45,7 +37,7 @@ class HydratorListener extends AbstractListenerAggregate
      *
      * @internal
      */
-    public function onHydrate(HydrateEvent $event) : object
+    public function onHydrate(HydrateEvent $event): object
     {
         $object = $this->hydrator->hydrate($event->getHydrationData(), $event->getHydratedObject());
         $event->setHydratedObject($object);
@@ -56,9 +48,10 @@ class HydratorListener extends AbstractListenerAggregate
      * Callback to be used when {@see ExtractEvent::EVENT_EXTRACT} is triggered
      *
      * @internal
+     *
      * @return mixed[]
      */
-    public function onExtract(ExtractEvent $event) : array
+    public function onExtract(ExtractEvent $event): array
     {
         $data = $this->hydrator->extract($event->getExtractionObject());
         $event->mergeExtractedData($data);

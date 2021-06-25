@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace Laminas\Hydrator;
@@ -29,7 +23,7 @@ class ReflectionHydrator extends AbstractHydrator
      *
      * {@inheritDoc}
      */
-    public function extract(object $object) : array
+    public function extract(object $object): array
     {
         $result = [];
         foreach (self::getReflProperties($object) as $property) {
@@ -38,7 +32,7 @@ class ReflectionHydrator extends AbstractHydrator
                 continue;
             }
 
-            $value = $property->getValue($object);
+            $value                 = $property->getValue($object);
             $result[$propertyName] = $this->extractValue($propertyName, $value, $object);
         }
 
@@ -68,7 +62,7 @@ class ReflectionHydrator extends AbstractHydrator
      *
      * @return ReflectionProperty[]
      */
-    protected static function getReflProperties(object $input) : array
+    protected static function getReflProperties(object $input): array
     {
         $class = get_class($input);
 

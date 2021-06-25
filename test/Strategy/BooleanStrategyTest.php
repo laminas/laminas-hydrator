@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator\Strategy;
@@ -13,6 +7,7 @@ namespace LaminasTest\Hydrator\Strategy;
 use Laminas\Hydrator\Exception\InvalidArgumentException;
 use Laminas\Hydrator\Strategy\BooleanStrategy;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 
 /**
  * Tests for {@see BooleanStrategy}
@@ -106,6 +101,6 @@ class BooleanStrategyTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Unable to hydrate');
         $hydrator = new BooleanStrategy(1, 0);
-        $hydrator->hydrate(new \stdClass());
+        $hydrator->hydrate(new stdClass());
     }
 }

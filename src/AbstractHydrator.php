@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace Laminas\Hydrator;
@@ -45,13 +39,14 @@ abstract class AbstractHydrator implements
      * @param string $name The name of the strategy to get.
      * @throws Exception\InvalidArgumentException
      */
-    public function getStrategy(string $name) : Strategy\StrategyInterface
+    public function getStrategy(string $name): Strategy\StrategyInterface
     {
         if (isset($this->strategies[$name])) {
             return $this->strategies[$name];
         }
 
-        if ($this->hasNamingStrategy()
+        if (
+            $this->hasNamingStrategy()
             && ($hydrated = $this->getNamingStrategy()->hydrate($name))
             && isset($this->strategies[$hydrated])
         ) {
@@ -74,13 +69,14 @@ abstract class AbstractHydrator implements
      *
      * @param string $name The name of the strategy to check for.
      */
-    public function hasStrategy(string $name) : bool
+    public function hasStrategy(string $name): bool
     {
         if (isset($this->strategies[$name])) {
             return true;
         }
 
-        if ($this->hasNamingStrategy()
+        if (
+            $this->hasNamingStrategy()
             && isset($this->strategies[$this->getNamingStrategy()->hydrate($name)])
         ) {
             return true;
@@ -95,7 +91,7 @@ abstract class AbstractHydrator implements
      * @param string $name The name of the strategy to register.
      * @param Strategy\StrategyInterface $strategy The strategy to register.
      */
-    public function addStrategy(string $name, Strategy\StrategyInterface $strategy) : void
+    public function addStrategy(string $name, Strategy\StrategyInterface $strategy): void
     {
         $this->strategies[$name] = $strategy;
     }
@@ -105,7 +101,7 @@ abstract class AbstractHydrator implements
      *
      * @param string $name The name of the strategy to remove.
      */
-    public function removeStrategy(string $name) : void
+    public function removeStrategy(string $name): void
     {
         unset($this->strategies[$name]);
     }
@@ -160,7 +156,7 @@ abstract class AbstractHydrator implements
      * @param  string       $name  The name to convert.
      * @param  null|mixed[] $data  The whole data is optionally provided as context.
      */
-    public function hydrateName(string $name, ?array $data = null) : string
+    public function hydrateName(string $name, ?array $data = null): string
     {
         return $this->hasNamingStrategy()
             ? $this->getNamingStrategy()->hydrate($name, $data)
@@ -170,7 +166,7 @@ abstract class AbstractHydrator implements
     /**
      * Get the filter instance
      */
-    public function getFilter() : Filter\FilterInterface
+    public function getFilter(): Filter\FilterInterface
     {
         return $this->getCompositeFilter();
     }
@@ -194,7 +190,7 @@ abstract class AbstractHydrator implements
      * @param string $name Index in the composite
      * @param callable|Filter\FilterInterface $filter
      */
-    public function addFilter(string $name, $filter, int $condition = Filter\FilterComposite::CONDITION_OR) : void
+    public function addFilter(string $name, $filter, int $condition = Filter\FilterComposite::CONDITION_OR): void
     {
         $this->getCompositeFilter()->addFilter($name, $filter, $condition);
     }
@@ -204,7 +200,7 @@ abstract class AbstractHydrator implements
      *
      * @param string $name Index/name in the composite
      */
-    public function hasFilter(string $name) : bool
+    public function hasFilter(string $name): bool
     {
         return $this->getCompositeFilter()->hasFilter($name);
     }
@@ -218,7 +214,7 @@ abstract class AbstractHydrator implements
      * $filterComposite->removeFilter('has');
      * </code>
      */
-    public function removeFilter(string $name) : void
+    public function removeFilter(string $name): void
     {
         $this->getCompositeFilter()->removeFilter($name);
     }
@@ -228,7 +224,7 @@ abstract class AbstractHydrator implements
      *
      * @param NamingStrategy\NamingStrategyInterface $strategy The naming to register.
      */
-    public function setNamingStrategy(NamingStrategy\NamingStrategyInterface $strategy) : void
+    public function setNamingStrategy(NamingStrategy\NamingStrategyInterface $strategy): void
     {
         $this->namingStrategy = $strategy;
     }
@@ -241,7 +237,7 @@ abstract class AbstractHydrator implements
      *
      * {@inheritDoc}
      */
-    public function getNamingStrategy() : NamingStrategy\NamingStrategyInterface
+    public function getNamingStrategy(): NamingStrategy\NamingStrategyInterface
     {
         if (null === $this->namingStrategy) {
             $this->namingStrategy = new NamingStrategy\IdentityNamingStrategy();
@@ -252,7 +248,7 @@ abstract class AbstractHydrator implements
     /**
      * Checks if a naming strategy exists.
      */
-    public function hasNamingStrategy() : bool
+    public function hasNamingStrategy(): bool
     {
         return isset($this->namingStrategy);
     }
@@ -260,7 +256,7 @@ abstract class AbstractHydrator implements
     /**
      * Removes the naming strategy
      */
-    public function removeNamingStrategy() : void
+    public function removeNamingStrategy(): void
     {
         $this->namingStrategy = null;
     }
@@ -271,10 +267,10 @@ abstract class AbstractHydrator implements
      * If no instance is yet registerd for the $filterComposite property, this
      * method will lazy load one.
      *
-     * @throws Exception\DomainException if composed $filterComposite is not a
+     * @throws Exception\DomainException If composed $filterComposite is not a
      *     Filter\FilterComposite instance, nor null.
      */
-    protected function getCompositeFilter() : Filter\FilterComposite
+    protected function getCompositeFilter(): Filter\FilterComposite
     {
         if (! $this->filterComposite) {
             $this->filterComposite = new Filter\FilterComposite();

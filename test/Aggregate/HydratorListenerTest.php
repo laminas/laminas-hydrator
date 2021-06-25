@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator\Aggregate;
@@ -16,6 +10,7 @@ use Laminas\Hydrator\Aggregate\HydrateEvent;
 use Laminas\Hydrator\Aggregate\HydratorListener;
 use Laminas\Hydrator\HydratorInterface;
 use PHPUnit\Framework\TestCase;
+use PHPUnit_Framework_MockObject_MockObject;
 use stdClass;
 
 /**
@@ -23,14 +18,10 @@ use stdClass;
  */
 class HydratorListenerTest extends TestCase
 {
-    /**
-     * @var HydratorInterface|\PHPUnit_Framework_MockObject_MockObject
-     */
+    /** @var HydratorInterface|PHPUnit_Framework_MockObject_MockObject */
     protected $hydrator;
 
-    /**
-     * @var HydratorListener
-     */
+    /** @var HydratorListener */
     protected $listener;
 
     /**
@@ -38,7 +29,7 @@ class HydratorListenerTest extends TestCase
      *
      * @covers \Laminas\Hydrator\Aggregate\HydratorListener::__construct
      */
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->hydrator = $this->createMock(HydratorInterface::class);
         $this->listener = new HydratorListener($this->hydrator);
@@ -46,8 +37,6 @@ class HydratorListenerTest extends TestCase
 
     /**
      * @covers \Laminas\Hydrator\Aggregate\HydratorListener::attach
-     *
-     * @return void
      */
     public function testAttach(): void
     {
@@ -69,8 +58,6 @@ class HydratorListenerTest extends TestCase
 
     /**
      * @covers \Laminas\Hydrator\Aggregate\HydratorListener::onHydrate
-     *
-     * @return void
      */
     public function testOnHydrate(): void
     {
@@ -98,8 +85,6 @@ class HydratorListenerTest extends TestCase
 
     /**
      * @covers \Laminas\Hydrator\Aggregate\HydratorListener::onExtract
-     *
-     * @return void
      */
     public function testOnExtract(): void
     {
@@ -109,7 +94,6 @@ class HydratorListenerTest extends TestCase
             ->getMockBuilder(ExtractEvent::class)
             ->disableOriginalConstructor()
             ->getMock();
-
 
         $event->expects($this->any())->method('getExtractionObject')->will($this->returnValue($object));
 

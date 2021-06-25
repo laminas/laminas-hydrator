@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator;
@@ -21,7 +15,7 @@ use function sprintf;
 
 class StandaloneHydratorPluginManagerTest extends TestCase
 {
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->manager = new StandaloneHydratorPluginManager();
     }
@@ -39,7 +33,7 @@ class StandaloneHydratorPluginManagerTest extends TestCase
     /**
      * @psalm-return iterable<string, array{0: string}>
      */
-    public function hydratorsWithoutConstructors() : iterable
+    public function hydratorsWithoutConstructors(): iterable
     {
         yield 'ArraySerializable'               => [Hydrator\ArraySerializableHydrator::class];
         yield 'ArraySerializableHydrator'       => [Hydrator\ArraySerializableHydrator::class];
@@ -57,8 +51,6 @@ class StandaloneHydratorPluginManagerTest extends TestCase
 
     /**
      * @dataProvider hydratorsWithoutConstructors
-     *
-     * @return void
      */
     public function testInstantiationInitializesFactoriesForHydratorsWithoutConstructorArguments(string $class): void
     {
@@ -82,7 +74,7 @@ class StandaloneHydratorPluginManagerTest extends TestCase
         $this->assertFalse($this->manager->has('unknown-service-name'));
     }
 
-    public function knownServices() : iterable
+    public function knownServices(): iterable
     {
         foreach ($this->hydratorsWithoutConstructors() as $key => $data) {
             $class = array_pop($data);
@@ -99,8 +91,6 @@ class StandaloneHydratorPluginManagerTest extends TestCase
 
     /**
      * @dataProvider knownServices
-     *
-     * @return void
      */
     public function testHasReturnsTrueForKnownServices(string $service): void
     {
@@ -115,8 +105,6 @@ class StandaloneHydratorPluginManagerTest extends TestCase
 
     /**
      * @dataProvider knownServices
-     *
-     * @return void
      */
     public function testGetReturnsExpectedTypesForKnownServices(string $service, string $expectedType): void
     {

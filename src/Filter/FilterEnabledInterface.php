@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace Laminas\Hydrator\Filter;
@@ -33,14 +27,14 @@ interface FilterEnabledInterface extends FilterProviderInterface
      * @param string $name Index in the composite
      * @param callable|FilterInterface $filter
      */
-    public function addFilter(string $name, $filter, int $condition = FilterComposite::CONDITION_OR) : void;
+    public function addFilter(string $name, $filter, int $condition = FilterComposite::CONDITION_OR): void;
 
     /**
      * Check whether a specific filter exists at key $name or not
      *
      * @param string $name Index in the composite
      */
-    public function hasFilter(string $name) : bool;
+    public function hasFilter(string $name): bool;
 
     /**
      * Remove a filter from the composition.
@@ -51,5 +45,5 @@ interface FilterEnabledInterface extends FilterProviderInterface
      * $filterComposite->removeFilter('has');
      * </code>
      */
-    public function removeFilter(string $name) : void;
+    public function removeFilter(string $name): void;
 }

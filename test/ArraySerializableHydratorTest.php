@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator;
@@ -13,6 +7,7 @@ namespace LaminasTest\Hydrator;
 use ArrayObject;
 use Laminas\Hydrator\ArraySerializableHydrator;
 use LaminasTest\Hydrator\TestAsset\ArraySerializable as ArraySerializableAsset;
+use LaminasTest\Hydrator\TestAsset\ArraySerializableNoGetArrayCopy;
 use PHPUnit\Framework\TestCase;
 use TypeError;
 
@@ -27,23 +22,19 @@ class ArraySerializableHydratorTest extends TestCase
 {
     use HydratorTestTrait;
 
-    /**
-     * @var ArraySerializableHydrator
-     */
+    /** @var ArraySerializableHydrator */
     protected $hydrator;
 
     /**
      * {@inheritDoc}
      */
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->hydrator = new ArraySerializableHydrator();
     }
 
     /**
      * Verify that we get an exception when trying to extract on a non-object
-     *
-     * @return void
      */
     public function testHydratorExtractThrowsExceptionOnNonObjectParameter(): void
     {
@@ -54,8 +45,6 @@ class ArraySerializableHydratorTest extends TestCase
 
     /**
      * Verify that we get an exception when trying to hydrate a non-object
-     *
-     * @return void
      */
     public function testHydratorHydrateThrowsExceptionOnNonObjectParameter(): void
     {
@@ -66,8 +55,6 @@ class ArraySerializableHydratorTest extends TestCase
 
     /**
      * Verifies that we can extract from an ArraySerializableInterface
-     *
-     * @return void
      */
     public function testCanExtractFromArraySerializableObject(): void
     {
@@ -84,12 +71,10 @@ class ArraySerializableHydratorTest extends TestCase
 
     /**
      * Verifies we can hydrate an ArraySerializableInterface
-     *
-     * @return void
      */
     public function testCanHydrateToArraySerializableObject(): void
     {
-        $data = [
+        $data   = [
             'foo'   => 'bar1',
             'bar'   => 'foo1',
             'blubb' => 'baz1',
@@ -106,15 +91,13 @@ class ArraySerializableHydratorTest extends TestCase
      * existing properties should get overwritten
      *
      * @group 65
-     *
-     * @return void
      */
     public function testWillPreserveOriginalPropsAtHydration(): void
     {
         $original = new ArraySerializableAsset();
 
         $data = [
-            'bar' => 'foo1'
+            'bar' => 'foo1',
         ];
 
         $expected = array_merge($original->getArrayCopy(), $data);
@@ -129,15 +112,13 @@ class ArraySerializableHydratorTest extends TestCase
      * by the to-be hydrated object, simply exchange the array
      *
      * @group 65
-     *
-     * @return void
      */
     public function testWillReplaceArrayIfNoGetArrayCopy(): void
     {
-        $original = new \LaminasTest\Hydrator\TestAsset\ArraySerializableNoGetArrayCopy();
+        $original = new ArraySerializableNoGetArrayCopy();
 
         $data = [
-                'bar' => 'foo1'
+            'bar' => 'foo1',
         ];
 
         $expected = $data;
@@ -148,7 +129,6 @@ class ArraySerializableHydratorTest extends TestCase
 
     /**
      * @return string[][][]
-     *
      * @psalm-return array<string, array{0: string[], 1: string[], 2: string[]}>
      */
     public function arrayDataProvider(): array
@@ -171,13 +151,16 @@ class ArraySerializableHydratorTest extends TestCase
      * submitted value should _replace_ the original.
      *
      * @group 66
-     *
      * @dataProvider arrayDataProvider
-     *
-     * @return void
+     * @param string[] $start
+     * @param string[] $submit
+     * @param string[] $expected
      */
-    public function testHydrationWillReplaceNestedArrayData($start, $submit, $expected): void
-    {
+    public function testHydrationWillReplaceNestedArrayData(
+        array $start,
+        array $submit,
+        array $expected
+    ): void {
         $original = new ArraySerializableAsset();
         $original->exchangeArray([
             'tags' => $start,
