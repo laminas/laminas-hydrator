@@ -58,6 +58,7 @@ class MapNamingStrategyTest extends TestCase
         $this->expectException(Exception\InvalidArgumentException::class);
         $this->expectExceptionMessage('can not be flipped');
 
+        /** @psalm-suppress MixedArrayOffset */
         MapNamingStrategy::createFromExtractionMap([$invalidKey => 'foo']);
     }
 
@@ -71,6 +72,7 @@ class MapNamingStrategyTest extends TestCase
         $this->expectException(Exception\InvalidArgumentException::class);
         $this->expectExceptionMessage('can not be flipped');
 
+        /** @psalm-suppress MixedArrayOffset */
         MapNamingStrategy::createFromHydrationMap(['foo' => $invalidValue]);
     }
 
@@ -83,6 +85,7 @@ class MapNamingStrategyTest extends TestCase
         $this->expectException(Exception\InvalidArgumentException::class);
         $this->expectExceptionMessage('can not be flipped');
 
+        /** @psalm-suppress MixedArrayOffset */
         MapNamingStrategy::createFromHydrationMap([$invalidKey => 'foo']);
     }
 

@@ -19,6 +19,7 @@ class ClassMethodsTest extends TestCase
     {
         $test = (object) ['message' => false];
 
+        /** @psalm-suppress UnusedClosureParam */
         set_error_handler(function ($errno, $errstr) use ($test) {
             $test->message = $errstr;
             return true;

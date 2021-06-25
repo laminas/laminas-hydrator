@@ -8,7 +8,6 @@ use Laminas\Hydrator\Strategy\Exception\InvalidArgumentException;
 use Laminas\Hydrator\Strategy\ExplodeStrategy;
 use PHPUnit\Framework\TestCase;
 use stdClass;
-use TypeError;
 
 use function is_numeric;
 
@@ -57,13 +56,6 @@ class ExplodeStrategyTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
 
         new ExplodeStrategy('');
-    }
-
-    public function testGetExceptionWithInvalidDelimiter(): void
-    {
-        $this->expectException(TypeError::class);
-
-        new ExplodeStrategy([]);
     }
 
     public function testHydrateWithExplodeLimit(): void

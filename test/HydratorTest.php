@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace LaminasTest\Hydrator;
 
+use Laminas\Hydrator\AbstractHydrator;
 use Laminas\Hydrator\ArraySerializableHydrator;
 use Laminas\Hydrator\ClassMethodsHydrator;
 use Laminas\Hydrator\Filter\FilterComposite;
-use Laminas\Hydrator\HydratorInterface;
 use Laminas\Hydrator\ObjectPropertyHydrator;
 use Laminas\Hydrator\ReflectionHydrator;
 use Laminas\Hydrator\Strategy\DefaultStrategy;
 use Laminas\Hydrator\Strategy\SerializableStrategy;
-use Laminas\Stdlib\ArraySerializableInterface;
 use LaminasTest\Hydrator\TestAsset\ArraySerializable as ArraySerializableAsset;
 use LaminasTest\Hydrator\TestAsset\ClassMethodsCamelCase;
 use LaminasTest\Hydrator\TestAsset\ClassMethodsCamelCaseMissing;
@@ -217,8 +216,8 @@ class HydratorTest extends TestCase
     public function testHydratorClassMethodsUnderscoreWithUnderscoreUpperCasedHydrateDataKeys(): void
     {
         $hydrator = new ClassMethodsHydrator(true);
-        $datas    = $hydrator->extract($this->classMethodsUnderscore);
-        $test     = $hydrator->hydrate(
+        $hydrator->extract($this->classMethodsUnderscore);
+        $test = $hydrator->hydrate(
             [
                 'FOO_BAR'     => 'foo',
                 'FOO_BAR_BAZ' => 'bar',
@@ -353,11 +352,11 @@ class HydratorTest extends TestCase
     public function testHydratorClassMethodsWithCustomFilter(): void
     {
         $hydrator = new ClassMethodsHydrator(false);
-        $datas    = $hydrator->extract($this->classMethodsCamelCase);
+        $hydrator->extract($this->classMethodsCamelCase);
         $hydrator->addFilter(
             'exclude',
             function ($property) {
-                [$class, $method] = explode('::', $property);
+                $method = explode('::', $property)[1];
 
                 if ($method === 'getHasFoo') {
                     return false;
@@ -376,7 +375,7 @@ class HydratorTest extends TestCase
      * @dataProvider filterProvider
      */
     public function testArraySerializableFilter(
-        HydratorInterface $hydrator,
+        AbstractHydrator $hydrator,
         object $serializable
     ): void {
         self::assertSame(
@@ -435,7 +434,7 @@ class HydratorTest extends TestCase
     }
 
     /**
-     * @psalm-return list<array{0: HydratorInterface, 1: object}>
+     * @psalm-return list<array{0: AbstractHydrator, 1: object}>
      */
     public function filterProvider(): array
     {

@@ -99,8 +99,7 @@ class HydratorPluginManager extends AbstractPluginManager implements HydratorPlu
     /**
      * {inheritDoc}
      *
-     * @var string
-     * @psalm-var class-string
+     * @var null|string
      */
     protected $instanceOf = HydratorInterface::class;
 

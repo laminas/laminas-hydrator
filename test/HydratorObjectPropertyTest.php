@@ -26,7 +26,7 @@ class HydratorObjectPropertyTest extends TestCase
         $instance->object     = (object) [];
         $instance->object->id = 4;
 
-        $this->hydrator->addFilter('values', function ($property) {
+        $this->hydrator->addFilter('values', function () {
             return true;
         });
         $result = $this->hydrator->extract($instance);

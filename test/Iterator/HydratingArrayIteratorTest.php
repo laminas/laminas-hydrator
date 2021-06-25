@@ -53,6 +53,6 @@ class HydratingArrayIteratorTest extends TestCase
     public function testThrowingInvalidArgumentExceptionWhenSettingPrototypeToInvalidClass(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $hydratingIterator = new HydratingArrayIterator(new ArraySerializableHydrator(), [], 'not a real class');
+        new HydratingArrayIterator(new ArraySerializableHydrator(), [], 'not a real class');
     }
 }

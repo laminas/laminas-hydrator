@@ -6,8 +6,8 @@ namespace LaminasTest\Hydrator\NamingStrategy;
 
 use Laminas\Hydrator\NamingStrategy\CompositeNamingStrategy;
 use Laminas\Hydrator\NamingStrategy\NamingStrategyInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use PHPUnit_Framework_MockObject_MockObject;
 
 /**
  * Tests for {@see CompositeNamingStrategy}
@@ -28,7 +28,7 @@ class CompositeNamingStrategyTest extends TestCase
 
     public function testUseDefaultNamingStrategy(): void
     {
-        /** @var NamingStrategyInterface|PHPUnit_Framework_MockObject_MockObject $defaultNamingStrategy */
+        /** @var NamingStrategyInterface&MockObject $defaultNamingStrategy */
         $defaultNamingStrategy = $this->createMock(NamingStrategyInterface::class);
         $defaultNamingStrategy->expects($this->once())
             ->method('hydrate')

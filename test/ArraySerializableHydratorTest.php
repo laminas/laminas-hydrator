@@ -168,7 +168,7 @@ class ArraySerializableHydratorTest extends TestCase
 
         $data = ['tags' => $submit];
 
-        $actual = $this->hydrator->hydrate($data, $original);
+        $this->hydrator->hydrate($data, $original);
 
         $final = $original->getArrayCopy();
 

@@ -67,7 +67,6 @@ class DelegatingHydratorFactoryTest extends TestCase
 
     public function testFactoryCreatesHydratorPluginManagerToSeedDelegatingHydratorAsFallback(): void
     {
-        $hydrators = $this->createMock(HydratorPluginManager::class);
         $container = $this->createMock(ContainerInterface::class);
         $container
             ->expects($this->exactly(3))

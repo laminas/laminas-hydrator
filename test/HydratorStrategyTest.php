@@ -146,8 +146,8 @@ class HydratorStrategyTest extends TestCase
         $strategy = new TestAsset\HydratorStrategyContextAware();
         $this->hydrator->addStrategy('field2', $strategy);
 
-        $entityB    = new TestAsset\HydratorStrategyEntityB('X', 'Y');
-        $attributes = $this->hydrator->extract($entityB);
+        $entityB = new TestAsset\HydratorStrategyEntityB('X', 'Y');
+        $this->hydrator->extract($entityB);
 
         $this->assertEquals($entityB, $strategy->object);
     }
@@ -157,9 +157,9 @@ class HydratorStrategyTest extends TestCase
         $strategy = new TestAsset\HydratorStrategyContextAware();
         $this->hydrator->addStrategy('field2', $strategy);
 
-        $entityB    = new TestAsset\HydratorStrategyEntityB('X', 'Y');
-        $data       = ['field1' => 'A', 'field2' => 'B'];
-        $attributes = $this->hydrator->hydrate($data, $entityB);
+        $entityB = new TestAsset\HydratorStrategyEntityB('X', 'Y');
+        $data    = ['field1' => 'A', 'field2' => 'B'];
+        $this->hydrator->hydrate($data, $entityB);
 
         $this->assertEquals($data, $strategy->data);
     }

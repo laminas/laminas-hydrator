@@ -11,8 +11,8 @@ use Laminas\Hydrator\ReflectionHydrator;
 use Laminas\Hydrator\Strategy\CollectionStrategy;
 use Laminas\Hydrator\Strategy\StrategyInterface;
 use LaminasTest\Hydrator\TestAsset;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use PHPUnit_Framework_MockObject_MockObject;
 use ReflectionClass;
 use stdClass;
 use TypeError;
@@ -280,7 +280,7 @@ class CollectionStrategyTest extends TestCase
     }
 
     /**
-     * @return PHPUnit_Framework_MockObject_MockObject|HydratorInterface
+     * @return HydratorInterface&MockObject
      */
     private function createHydratorMock()
     {

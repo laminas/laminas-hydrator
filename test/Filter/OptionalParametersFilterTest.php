@@ -61,7 +61,7 @@ class OptionalParametersFilterTest extends TestCase
      * @psalm-return array<array-key, array{
      *     0: string,
      *     1: bool
-     * ]
+     * }>
      */
     public function methodProvider(): array
     {

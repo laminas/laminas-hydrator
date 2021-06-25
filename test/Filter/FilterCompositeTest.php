@@ -14,6 +14,7 @@ use Laminas\Hydrator\Filter\IsFilter;
 use Laminas\Hydrator\Filter\NumberOfParameterFilter;
 use PHPUnit\Framework\TestCase;
 
+use function array_keys;
 use function sprintf;
 
 /**
@@ -30,7 +31,7 @@ class FilterCompositeTest extends TestCase
     {
         $filter = new FilterComposite($orFilters, $andFilters);
 
-        foreach ($orFilters as $name => $value) {
+        foreach (array_keys($orFilters) as $name) {
             $this->assertTrue($filter->hasFilter($name));
         }
     }

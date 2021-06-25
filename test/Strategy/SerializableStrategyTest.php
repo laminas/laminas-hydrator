@@ -20,7 +20,7 @@ class SerializableStrategyTest extends TestCase
     public function testCannotUseBadArgumentSerializer(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $serializerStrategy = new SerializableStrategy(false);
+        new SerializableStrategy(false);
     }
 
     public function testUseBadSerializerObject(): void

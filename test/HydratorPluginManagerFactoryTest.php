@@ -50,7 +50,7 @@ class HydratorPluginManagerFactoryTest extends TestCase
                 ],
                 'factories' => [
                     /** @psalm-return MockObject&HydratorInterface */
-                    'test-too' => function ($container) use ($hydrator): HydratorInterface {
+                    'test-too' => function () use ($hydrator): HydratorInterface {
                         return $hydrator;
                     },
                 ],
