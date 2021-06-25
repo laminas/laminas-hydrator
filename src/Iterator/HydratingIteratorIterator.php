@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace Laminas\Hydrator\Iterator;
@@ -21,19 +15,13 @@ use function sprintf;
 
 class HydratingIteratorIterator extends IteratorIterator implements HydratingIteratorInterface
 {
-    /**
-     * @var HydratorInterface
-     */
+    /** @var HydratorInterface */
     protected $hydrator;
 
-    /**
-     * @var object
-     */
+    /** @var object */
     protected $prototype;
 
     /**
-     * @param HydratorInterface $hydrator
-     * @param Iterator $data
      * @param string|object $prototype Object or class name to use for prototype.
      */
     public function __construct(HydratorInterface $hydrator, Iterator $data, $prototype)
@@ -44,12 +32,11 @@ class HydratingIteratorIterator extends IteratorIterator implements HydratingIte
     }
 
     /**
-     * @inheritdoc
-     *
-     * @throws InvalidArgumentException if $prototype is a string, but refers to
+     * @inheritDoc
+     * @throws InvalidArgumentException If $prototype is a string, but refers to
      *     a non-existent class.
      */
-    public function setPrototype($prototype) : void
+    public function setPrototype($prototype): void
     {
         if (is_object($prototype)) {
             $this->prototype = $prototype;
@@ -62,13 +49,13 @@ class HydratingIteratorIterator extends IteratorIterator implements HydratingIte
             );
         }
 
-        $this->prototype = new $prototype;
+        $this->prototype = new $prototype();
     }
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function setHydrator(HydratorInterface $hydrator) : void
+    public function setHydrator(HydratorInterface $hydrator): void
     {
         $this->hydrator = $hydrator;
     }

@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator\Filter;
@@ -21,15 +15,13 @@ use PHPUnit\Framework\TestCase;
  */
 class OptionalParametersFilterTest extends TestCase
 {
-    /**
-     * @var OptionalParametersFilter
-     */
+    /** @var OptionalParametersFilter */
     protected $filter;
 
     /**
      * {@inheritDoc}
      */
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->filter = new OptionalParametersFilter();
     }
@@ -37,14 +29,9 @@ class OptionalParametersFilterTest extends TestCase
     /**
      * Verifies a list of methods against expected results
      *
-     * @param string $method
-     * @param bool   $expectedResult
-     *
      * @dataProvider methodProvider
-     *
-     * @return void
      */
-    public function testMethods($method, $expectedResult): void
+    public function testMethods(string $method, bool $expectedResult): void
     {
         $this->assertSame($expectedResult, $this->filter->filter($method));
     }
@@ -53,14 +40,9 @@ class OptionalParametersFilterTest extends TestCase
      * Verifies a list of methods against expected results over subsequent calls, checking
      * that the filter behaves consistently regardless of cache optimizations
      *
-     * @param string $method
-     * @param bool   $expectedResult
-     *
      * @dataProvider methodProvider
-     *
-     * @return void
      */
-    public function testMethodsOnSubsequentCalls($method, $expectedResult): void
+    public function testMethodsOnSubsequentCalls(string $method, bool $expectedResult): void
     {
         for ($i = 0; $i < 5; $i += 1) {
             $this->assertSame($expectedResult, $this->filter->filter($method));
@@ -70,29 +52,30 @@ class OptionalParametersFilterTest extends TestCase
     public function testTriggersExceptionOnUnknownMethod(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->filter->filter(__CLASS__ . '::' . 'nonExistingMethod');
+        $this->filter->filter(self::class . '::nonExistingMethod');
     }
 
     /**
      * Provides a list of methods to be checked against the filter
      *
-     * @return array
+     * @psalm-return array<array-key, array{
+     *     0: string,
+     *     1: bool
+     * }>
      */
-    public function methodProvider()
+    public function methodProvider(): array
     {
         return [
-            [__CLASS__ . '::' . 'methodWithoutParameters', true],
-            [__CLASS__ . '::' . 'methodWithSingleMandatoryParameter', false],
-            [__CLASS__ . '::' . 'methodWithSingleOptionalParameter', true],
-            [__CLASS__ . '::' . 'methodWithMultipleMandatoryParameters', false],
-            [__CLASS__ . '::' . 'methodWithMultipleOptionalParameters', true],
+            [self::class . '::methodWithoutParameters', true],
+            [self::class . '::methodWithSingleMandatoryParameter', false],
+            [self::class . '::methodWithSingleOptionalParameter', true],
+            [self::class . '::methodWithMultipleMandatoryParameters', false],
+            [self::class . '::methodWithMultipleOptionalParameters', true],
         ];
     }
 
     /**
      * Test asset method
-     *
-     * @return void
      */
     public function methodWithoutParameters(): void
     {
@@ -101,7 +84,7 @@ class OptionalParametersFilterTest extends TestCase
     /**
      * Test asset method
      *
-     * @return void
+     * @param mixed $parameter
      */
     public function methodWithSingleMandatoryParameter($parameter): void
     {
@@ -110,7 +93,7 @@ class OptionalParametersFilterTest extends TestCase
     /**
      * Test asset method
      *
-     * @return void
+     * @param mixed $parameter
      */
     public function methodWithSingleOptionalParameter($parameter = null): void
     {
@@ -119,7 +102,8 @@ class OptionalParametersFilterTest extends TestCase
     /**
      * Test asset method
      *
-     * @return void
+     * @param mixed $parameter
+     * @param mixed $otherParameter
      */
     public function methodWithMultipleMandatoryParameters($parameter, $otherParameter): void
     {
@@ -128,7 +112,8 @@ class OptionalParametersFilterTest extends TestCase
     /**
      * Test asset method
      *
-     * @return void
+     * @param mixed $parameter
+     * @param mixed $otherParameter
      */
     public function methodWithMultipleOptionalParameters($parameter = null, $otherParameter = null): void
     {

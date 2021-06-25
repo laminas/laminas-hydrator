@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator\Iterator;
@@ -28,7 +22,7 @@ class HydratingArrayIteratorTest extends TestCase
             ['baz' => 'bat'],
         ];
 
-        $object   = new ArrayObject();
+        $object = new ArrayObject();
 
         $hydratingIterator = new HydratingArrayIterator(new ArraySerializableHydrator(), $data, $object);
 
@@ -50,7 +44,7 @@ class HydratingArrayIteratorTest extends TestCase
             ['foo' => 'bar'],
         ];
 
-        $hydratingIterator = new HydratingArrayIterator(new ArraySerializableHydrator(), $data, '\ArrayObject');
+        $hydratingIterator = new HydratingArrayIterator(new ArraySerializableHydrator(), $data, ArrayObject::class);
 
         $hydratingIterator->rewind();
         $this->assertEquals(new ArrayObject($data[0]), $hydratingIterator->current());
@@ -59,6 +53,6 @@ class HydratingArrayIteratorTest extends TestCase
     public function testThrowingInvalidArgumentExceptionWhenSettingPrototypeToInvalidClass(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $hydratingIterator = new HydratingArrayIterator(new ArraySerializableHydrator(), [], 'not a real class');
+        new HydratingArrayIterator(new ArraySerializableHydrator(), [], 'not a real class');
     }
 }

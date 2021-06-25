@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace Laminas\Hydrator\Strategy;
@@ -24,14 +18,10 @@ use function sprintf;
 
 class CollectionStrategy implements StrategyInterface
 {
-    /**
-     * @var HydratorInterface
-     */
+    /** @var HydratorInterface */
     private $objectHydrator;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $objectClassName;
 
     /**
@@ -46,7 +36,7 @@ class CollectionStrategy implements StrategyInterface
             ));
         }
 
-        $this->objectHydrator = $objectHydrator;
+        $this->objectHydrator  = $objectHydrator;
         $this->objectClassName = $objectClassName;
     }
 

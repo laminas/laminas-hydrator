@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace Laminas\Hydrator;
@@ -65,14 +59,14 @@ class HydratorPluginManager extends AbstractPluginManager implements HydratorPlu
 
         // Legacy Zend Framework aliases
         \Zend\Hydrator\ArraySerializableHydrator::class => ArraySerializableHydrator::class,
-        \Zend\Hydrator\ClassMethodsHydrator::class => ClassMethodsHydrator::class,
-        \Zend\Hydrator\DelegatingHydrator::class => DelegatingHydrator::class,
-        \Zend\Hydrator\ObjectPropertyHydrator::class => ObjectPropertyHydrator::class,
-        \Zend\Hydrator\ReflectionHydrator::class => ReflectionHydrator::class,
-        \Zend\Hydrator\ArraySerializable::class => ArraySerializableHydrator::class,
-        \Zend\Hydrator\ClassMethods::class => ClassMethodsHydrator::class,
-        \Zend\Hydrator\ObjectProperty::class => ObjectPropertyHydrator::class,
-        \Zend\Hydrator\Reflection::class => ReflectionHydrator::class,
+        \Zend\Hydrator\ClassMethodsHydrator::class      => ClassMethodsHydrator::class,
+        \Zend\Hydrator\DelegatingHydrator::class        => DelegatingHydrator::class,
+        \Zend\Hydrator\ObjectPropertyHydrator::class    => ObjectPropertyHydrator::class,
+        \Zend\Hydrator\ReflectionHydrator::class        => ReflectionHydrator::class,
+        \Zend\Hydrator\ArraySerializable::class         => ArraySerializableHydrator::class,
+        \Zend\Hydrator\ClassMethods::class              => ClassMethodsHydrator::class,
+        \Zend\Hydrator\ObjectProperty::class            => ObjectPropertyHydrator::class,
+        \Zend\Hydrator\Reflection::class                => ReflectionHydrator::class,
     ];
 
     /**
@@ -104,6 +98,8 @@ class HydratorPluginManager extends AbstractPluginManager implements HydratorPlu
 
     /**
      * {inheritDoc}
+     *
+     * @var null|string
      */
     protected $instanceOf = HydratorInterface::class;
 

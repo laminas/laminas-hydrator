@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator\TestAsset;
@@ -29,6 +23,7 @@ class ClassMethodsFilterProviderInterface implements FilterProviderInterface
     }
 
     /**
+     * @param mixed $foo
      * @return false
      */
     public function isScalar($foo): bool
@@ -54,7 +49,7 @@ class ClassMethodsFilterProviderInterface implements FilterProviderInterface
         return "eventmanager";
     }
 
-    public function getFilter() : FilterInterface
+    public function getFilter(): FilterInterface
     {
         $filterComposite = new FilterComposite();
 

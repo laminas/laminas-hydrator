@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace Laminas\Hydrator\NamingStrategy;
@@ -18,22 +12,18 @@ use function is_string;
 
 final class MapNamingStrategy implements NamingStrategyInterface
 {
-    /**
-     * @var array<string, string>
-     */
+    /** @var array<string, string> */
     private $extractionMap = [];
 
-    /**
-     * @var array<string, string>
-     */
+    /** @var array<string, string> */
     private $hydrationMap = [];
 
     /**
      * @param array<string, string> $extractionMap
      */
-    public static function createFromExtractionMap(array $extractionMap) : self
+    public static function createFromExtractionMap(array $extractionMap): self
     {
-        $strategy = new self();
+        $strategy                = new self();
         $strategy->extractionMap = $extractionMap;
         $strategy->hydrationMap  = $strategy->flipMapping($extractionMap);
         return $strategy;
@@ -42,9 +32,9 @@ final class MapNamingStrategy implements NamingStrategyInterface
     /**
      * @param array<string, string> $hydrationMap
      */
-    public static function createFromHydrationMap(array $hydrationMap) : self
+    public static function createFromHydrationMap(array $hydrationMap): self
     {
-        $strategy = new self();
+        $strategy                = new self();
         $strategy->hydrationMap  = $hydrationMap;
         $strategy->extractionMap = $strategy->flipMapping($hydrationMap);
         return $strategy;
@@ -54,9 +44,9 @@ final class MapNamingStrategy implements NamingStrategyInterface
      * @param array<string, string> $extractionMap
      * @param array<string, string> $hydrationMap
      */
-    public static function createFromAsymmetricMap(array $extractionMap, array $hydrationMap) : self
+    public static function createFromAsymmetricMap(array $extractionMap, array $hydrationMap): self
     {
-        $strategy = new self();
+        $strategy                = new self();
         $strategy->extractionMap = $extractionMap;
         $strategy->hydrationMap  = $hydrationMap;
         return $strategy;
@@ -65,7 +55,7 @@ final class MapNamingStrategy implements NamingStrategyInterface
     /**
      * {@inheritDoc}
      */
-    public function extract(string $name, ?object $object = null) : string
+    public function extract(string $name, ?object $object = null): string
     {
         return $this->extractionMap[$name] ?? $name;
     }
@@ -73,7 +63,7 @@ final class MapNamingStrategy implements NamingStrategyInterface
     /**
      * {@inheritDoc}
      */
-    public function hydrate(string $name, ?array $data = null) : string
+    public function hydrate(string $name, ?array $data = null): string
     {
         return $this->hydrationMap[$name] ?? $name;
     }
@@ -96,10 +86,10 @@ final class MapNamingStrategy implements NamingStrategyInterface
      *
      * @param  string[] $array Array to flip
      * @return string[] Flipped array
-     * @throws Exception\InvalidArgumentException if any value of the $array is
+     * @throws Exception\InvalidArgumentException If any value of the $array is
      *     a non-string or empty string value or key.
      */
-    private function flipMapping(array $array) : array
+    private function flipMapping(array $array): array
     {
         array_walk($array, function ($value, $key) {
             if (! is_string($value) || $value === '') {

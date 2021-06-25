@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace Laminas\Hydrator\Strategy;
@@ -46,7 +40,7 @@ class DateTimeImmutableFormatterStrategy implements StrategyInterface
      *
      * @param mixed|string $value
      * @return mixed|DateTimeImmutable
-     * @throws Exception\InvalidArgumentException if $value is not null, not a
+     * @throws Exception\InvalidArgumentException If $value is not null, not a
      *     string, nor a DateTimeInterface.
      */
     public function hydrate($value, ?array $data = null)

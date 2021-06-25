@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator;
@@ -14,6 +8,7 @@ use Laminas\Hydrator\ObjectPropertyHydrator;
 use LaminasTest\Hydrator\TestAsset\ClassWithPublicStaticProperties;
 use LaminasTest\Hydrator\TestAsset\ObjectProperty as ObjectPropertyTestAsset;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 use TypeError;
 
 /**
@@ -25,15 +20,13 @@ class ObjectPropertyHydratorTest extends TestCase
 {
     use HydratorTestTrait;
 
-    /**
-     * @var ObjectPropertyHydrator
-     */
+    /** @var ObjectPropertyHydrator */
     private $hydrator;
 
     /**
      * {@inheritDoc}
      */
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->hydrator = new ObjectPropertyHydrator();
     }
@@ -61,7 +54,7 @@ class ObjectPropertyHydratorTest extends TestCase
      */
     public function testCanExtractFromStdClass(): void
     {
-        $object = new \stdClass();
+        $object      = new stdClass();
         $object->foo = 'bar';
 
         $this->assertSame(['foo' => 'bar'], $this->hydrator->extract($object));
@@ -74,10 +67,10 @@ class ObjectPropertyHydratorTest extends TestCase
     {
         $this->assertSame(
             [
-                'foo' => 'bar',
-                'bar' => 'foo',
+                'foo'   => 'bar',
+                'bar'   => 'foo',
                 'blubb' => 'baz',
-                'quo' => 'blubb'
+                'quo'   => 'blubb',
             ],
             $this->hydrator->extract(new ObjectPropertyTestAsset())
         );
@@ -88,7 +81,7 @@ class ObjectPropertyHydratorTest extends TestCase
      */
     public function testCanHydrateStdClass(): void
     {
-        $object = new \stdClass();
+        $object      = new stdClass();
         $object->foo = 'bar';
 
         $object = $this->hydrator->hydrate(['foo' => 'baz'], $object);
@@ -101,7 +94,7 @@ class ObjectPropertyHydratorTest extends TestCase
      */
     public function testCanHydrateAdditionalPropertiesToStdClass(): void
     {
-        $object = new \stdClass();
+        $object      = new stdClass();
         $object->foo = 'bar';
 
         $object = $this->hydrator->hydrate(['foo' => 'baz', 'bar' => 'baz'], $object);
@@ -118,11 +111,11 @@ class ObjectPropertyHydratorTest extends TestCase
     {
         $object = $this->hydrator->hydrate(
             [
-                'foo' => 'foo',
-                'bar' => 'bar',
+                'foo'   => 'foo',
+                'bar'   => 'bar',
                 'blubb' => 'blubb',
-                'quo' => 'quo',
-                'quin' => 'quin'
+                'quo'   => 'quo',
+                'quin'  => 'quin',
             ],
             new ObjectPropertyTestAsset()
         );
@@ -174,10 +167,10 @@ class ObjectPropertyHydratorTest extends TestCase
         };
         $this->assertSame(
             [
-                'foo' => 'bar',
-                'bar' => 'foo',
+                'foo'   => 'bar',
+                'bar'   => 'foo',
                 'blubb' => 'baz',
-                'quo' => 'blubb'
+                'quo'   => 'blubb',
             ],
             $this->hydrator->extract($anonymous)
         );
@@ -188,11 +181,11 @@ class ObjectPropertyHydratorTest extends TestCase
         /** @psalm-var ObjectPropertyTestAsset $object */
         $object = $this->hydrator->hydrate(
             [
-                'foo' => 'foo',
-                'bar' => 'bar',
+                'foo'   => 'foo',
+                'bar'   => 'bar',
                 'blubb' => 'blubb',
-                'quo' => 'quo',
-                'quin' => 'quin'
+                'quo'   => 'quo',
+                'quin'  => 'quin',
             ],
             new class extends ObjectPropertyTestAsset {
             }

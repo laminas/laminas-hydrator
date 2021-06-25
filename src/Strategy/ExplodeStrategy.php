@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace Laminas\Hydrator\Strategy;
@@ -22,14 +16,10 @@ use function sprintf;
 
 final class ExplodeStrategy implements StrategyInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $valueDelimiter;
 
-    /**
-     * @var int|null
-     */
+    /** @var int|null */
     private $explodeLimit;
 
     /**
@@ -47,7 +37,7 @@ final class ExplodeStrategy implements StrategyInterface
     /**
      * Sets the delimiter string that the values will be split upon
      */
-    private function setValueDelimiter(string $delimiter) : void
+    private function setValueDelimiter(string $delimiter): void
     {
         if (empty($delimiter)) {
             throw new Exception\InvalidArgumentException('Delimiter cannot be empty.');
@@ -93,7 +83,7 @@ final class ExplodeStrategy implements StrategyInterface
      *
      * @param string[] $value The original value.
      * @return string|null
-     * @throws Exception\InvalidArgumentException for non-array $value values
+     * @throws Exception\InvalidArgumentException For non-array $value values.
      */
     public function extract($value, ?object $object = null)
     {

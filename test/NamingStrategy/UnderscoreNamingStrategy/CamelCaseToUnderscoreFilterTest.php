@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator\NamingStrategy\UnderscoreNamingStrategy;
@@ -25,18 +19,15 @@ class CamelCaseToUnderscoreFilterTest extends TestCase
 {
     /**
      * @dataProvider nonUnicodeProvider
-     *
      * @param string $string
      * @param string $expected
-     *
-     * @return void
      */
     public function testFilterUnderscoresNonUnicodeStrings($string, $expected): void
     {
-        $filter   = new CamelCaseToUnderscoreFilter();
+        $filter = new CamelCaseToUnderscoreFilter();
 
         $reflectionClass = new ReflectionClass($filter);
-        $property = $reflectionClass->getProperty('pcreUnicodeSupport');
+        $property        = $reflectionClass->getProperty('pcreUnicodeSupport');
         $property->setAccessible(true);
         $property->setValue($filter, false);
 
@@ -48,11 +39,8 @@ class CamelCaseToUnderscoreFilterTest extends TestCase
 
     /**
      * @dataProvider unicodeProvider
-     *
      * @param string $string
      * @param string $expected
-     *
-     * @return void
      */
     public function testFilterUnderscoresUnicodeStrings($string, $expected): void
     {
@@ -60,7 +48,7 @@ class CamelCaseToUnderscoreFilterTest extends TestCase
             $this->markTestSkipped('Extension mbstring not available');
         }
 
-        $filter   = new CamelCaseToUnderscoreFilter();
+        $filter = new CamelCaseToUnderscoreFilter();
 
         $filtered = $filter->filter($string);
 
@@ -70,18 +58,15 @@ class CamelCaseToUnderscoreFilterTest extends TestCase
 
     /**
      * @dataProvider unicodeProviderWithoutMbStrings
-     *
      * @param string $string
      * @param string $expected
-     *
-     * @return void
      */
     public function testFilterUnderscoresUnicodeStringsWithoutMbStrings($string, $expected): void
     {
-        $filter   = new CamelCaseToUnderscoreFilter();
+        $filter = new CamelCaseToUnderscoreFilter();
 
         $reflectionClass = new ReflectionClass($filter);
-        $property = $reflectionClass->getProperty('mbStringSupport');
+        $property        = $reflectionClass->getProperty('mbStringSupport');
         $property->setAccessible(true);
         $property->setValue($filter, false);
 
@@ -93,33 +78,32 @@ class CamelCaseToUnderscoreFilterTest extends TestCase
 
     /**
      * @return string[][]
-     *
      * @psalm-return array<string, array{0: string, 1: string}>
      */
     public function nonUnicodeProvider(): array
     {
         return [
-            'upcased first letter' => [
+            'upcased first letter'                        => [
                 'Camel',
-                'camel'
+                'camel',
             ],
-            'multiple words' => [
+            'multiple words'                              => [
                 'underscoresMe',
-                'underscores_me'
+                'underscores_me',
             ],
-            'alphanumeric' => [
+            'alphanumeric'                                => [
                 'one2Three',
-                'one2_three'
+                'one2_three',
             ],
             'multiple uppercased letters and underscores' => [
                 'TheseAre_SOME_CamelCASEDWords',
-                'these_are_some_camel_cased_words'
+                'these_are_some_camel_cased_words',
             ],
-            'alphanumeric multiple up cases' => [
+            'alphanumeric multiple up cases'              => [
                 'one2THR23ree',
-                'one2_thr23ree'
+                'one2_thr23ree',
             ],
-            'lowercased alphanumeric' => [
+            'lowercased alphanumeric'                     => [
                 'bfd7b82e9cfceaa82704d1c1Foo',
                 'bfd7b82e9cfceaa82704d1c1_foo',
             ],
@@ -128,70 +112,68 @@ class CamelCaseToUnderscoreFilterTest extends TestCase
 
     /**
      * @return string[][]
-     *
      * @psalm-return array<string, array{0: string, 1: string}>
      */
     public function unicodeProvider(): array
     {
         return [
-            'upcased first letter' => [
+            'upcased first letter'                        => [
                 'Camel',
-                'camel'
+                'camel',
             ],
-            'multiple words' => [
+            'multiple words'                              => [
                 'underscoresMe',
-                'underscores_me'
+                'underscores_me',
             ],
-            'alphanumeric' => [
+            'alphanumeric'                                => [
                 'one2Three',
-                'one2_three'
+                'one2_three',
             ],
             'multiple uppercased letters and underscores' => [
                 'TheseAre_SOME_CamelCASEDWords',
-                'these_are_some_camel_cased_words'
+                'these_are_some_camel_cased_words',
             ],
-            'alphanumeric multiple up cases' => [
+            'alphanumeric multiple up cases'              => [
                 'one2THR23ree',
-                'one2_thr23ree'
+                'one2_thr23ree',
             ],
-            'unicode' => [
+            'unicode'                                     => [
                 'testŠuma',
-                'test_šuma'
-            ]
+                'test_šuma',
+            ],
         ];
     }
 
     /**
      * @return string[][]
-     *
      * @psalm-return array<string, array{0: string, 1: string}>
      */
     public function unicodeProviderWithoutMbStrings(): array
     {
         return [
-            'upcased first letter' => [
+            'upcased first letter'                        => [
                 'Camel',
-                'camel'
+                'camel',
             ],
-            'multiple words' => [
+            'multiple words'                              => [
                 'underscoresMe',
-                'underscores_me'
+                'underscores_me',
             ],
-            'alphanumeric' => [
+            'alphanumeric'                                => [
                 'one2Three',
-                'one2_three'
+                'one2_three',
             ],
             'multiple uppercased letters and underscores' => [
                 'TheseAre_SOME_CamelCASEDWords',
-                'these_are_some_camel_cased_words'
+                'these_are_some_camel_cased_words',
             ],
-            'alphanumeric multiple up cases' => [
+            'alphanumeric multiple up cases'              => [
                 'one2THR23ree',
-                'one2_thr23ree'
+                'one2_thr23ree',
             ],
-            'unicode uppercase character' => [
+            'unicode uppercase character'                 => [
                 'testŠuma',
-                'test_Šuma'
+                'test_Šuma',
             ],
         ];
     }

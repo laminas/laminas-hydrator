@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace Laminas\Hydrator;
@@ -17,7 +11,7 @@ class DelegatingHydratorFactory
     /**
      * Creates DelegatingHydrator
      */
-    public function __invoke(ContainerInterface $container) : DelegatingHydrator
+    public function __invoke(ContainerInterface $container): DelegatingHydrator
     {
         $container = $this->marshalHydratorPluginManager($container);
         return new DelegatingHydrator($container);
@@ -26,7 +20,7 @@ class DelegatingHydratorFactory
     /**
      * Locate and return a HydratorPluginManager instance.
      */
-    private function marshalHydratorPluginManager(ContainerInterface $container) : ContainerInterface
+    private function marshalHydratorPluginManager(ContainerInterface $container): ContainerInterface
     {
         // Already one? Return it.
         if ($container instanceof HydratorPluginManagerInterface) {

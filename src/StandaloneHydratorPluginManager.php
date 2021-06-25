@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace Laminas\Hydrator;
@@ -62,18 +56,17 @@ final class StandaloneHydratorPluginManager implements HydratorPluginManagerInte
 
         // Legacy Zend Framework aliases
         \Zend\Hydrator\ArraySerializable::class => ArraySerializableHydrator::class,
-        \Zend\Hydrator\ClassMethods::class => ClassMethodsHydrator::class,
-        \Zend\Hydrator\ObjectProperty::class => ObjectPropertyHydrator::class,
-        \Zend\Hydrator\Reflection::class => ReflectionHydrator::class,
+        \Zend\Hydrator\ClassMethods::class      => ClassMethodsHydrator::class,
+        \Zend\Hydrator\ObjectProperty::class    => ObjectPropertyHydrator::class,
+        \Zend\Hydrator\Reflection::class        => ReflectionHydrator::class,
     ];
 
-    /**
-     * @var array<string, callable>
-     */
+    /** @var array<string, callable> */
     private $factories = [];
 
     public function __construct()
     {
+        /** @psalm-suppress UnusedClosureParam */
         $invokableFactory = function (ContainerInterface $container, string $class): object {
             return new $class();
         };
@@ -97,9 +90,7 @@ final class StandaloneHydratorPluginManager implements HydratorPluginManagerInte
             throw Exception\MissingHydratorServiceException::forService($id);
         }
 
-        $instance = ($this->factories[$class])($this, $class);
-
-        return $instance;
+        return ($this->factories[$class])($this, $class);
     }
 
     /**
@@ -113,7 +104,7 @@ final class StandaloneHydratorPluginManager implements HydratorPluginManagerInte
     /**
      * Resolve a service name from an identifier.
      */
-    private function resolveName(string $name) : ?string
+    private function resolveName(string $name): ?string
     {
         if (isset($this->factories[$name])) {
             return $name;

@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator\Strategy;
@@ -16,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class NullableStrategyTest extends TestCase
 {
-    public function testExtractNonNullAndNonEmptyValue() : void
+    public function testExtractNonNullAndNonEmptyValue(): void
     {
         $strategy = $this->createMock(StrategyInterface::class);
         $strategy->expects(self::once())
@@ -28,7 +22,7 @@ class NullableStrategyTest extends TestCase
         self::assertEquals('extracted value', $nullableStrategy->extract('original value'));
     }
 
-    public function testExtractNullValue() : void
+    public function testExtractNullValue(): void
     {
         $strategy = $this->createMock(StrategyInterface::class);
         $strategy->expects(self::never())
@@ -38,7 +32,7 @@ class NullableStrategyTest extends TestCase
         self::assertNull($nullableStrategy->extract(null));
     }
 
-    public function testExtractEmptyValueAsNull() : void
+    public function testExtractEmptyValueAsNull(): void
     {
         $strategy = $this->createMock(StrategyInterface::class);
         $strategy->expects(self::never())
@@ -48,7 +42,7 @@ class NullableStrategyTest extends TestCase
         self::assertNull($nullableStrategy->extract(''));
     }
 
-    public function testExtractEmptyValueByHydrator() : void
+    public function testExtractEmptyValueByHydrator(): void
     {
         $strategy = $this->createMock(StrategyInterface::class);
         $strategy->expects(self::once())
@@ -61,7 +55,7 @@ class NullableStrategyTest extends TestCase
         self::assertEquals('extracted empty value', $nullableStrategy->extract(''));
     }
 
-    public function testHydrateNonNullValue() : void
+    public function testHydrateNonNullValue(): void
     {
         $strategy = $this->createMock(StrategyInterface::class);
         $strategy->expects(self::once())
@@ -73,7 +67,7 @@ class NullableStrategyTest extends TestCase
         self::assertEquals('hydrated value', $nullableStrategy->hydrate('original value'));
     }
 
-    public function testHydrateNullValue() : void
+    public function testHydrateNullValue(): void
     {
         $strategy = $this->createMock(StrategyInterface::class);
         $strategy->expects(self::never())
@@ -83,7 +77,7 @@ class NullableStrategyTest extends TestCase
         self::assertNull($nullableStrategy->hydrate(null));
     }
 
-    public function testHydrateEmptyValueAsNull() : void
+    public function testHydrateEmptyValueAsNull(): void
     {
         $strategy = $this->createMock(StrategyInterface::class);
         $strategy->expects(self::never())
@@ -93,7 +87,7 @@ class NullableStrategyTest extends TestCase
         self::assertNull($nullableStrategy->hydrate(''));
     }
 
-    public function testHydrateEmptyValueByHydrator() : void
+    public function testHydrateEmptyValueByHydrator(): void
     {
         $strategy = $this->createMock(StrategyInterface::class);
         $strategy->expects(self::once())

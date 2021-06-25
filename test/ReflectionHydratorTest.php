@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator;
@@ -25,15 +19,13 @@ class ReflectionHydratorTest extends TestCase
 {
     use HydratorTestTrait;
 
-    /**
-     * @var ReflectionHydrator
-     */
+    /** @var ReflectionHydrator */
     protected $hydrator;
 
     /**
      * {@inheritDoc}
      */
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->hydrator = new ReflectionHydrator();
     }
@@ -67,7 +59,7 @@ class ReflectionHydratorTest extends TestCase
         $this->expectException(TypeError::class);
         $this->expectExceptionMessage('object');
 
-        $this->hydrator->hydrate([ 'foo' => 'bar' ], $argument);
+        $this->hydrator->hydrate(['foo' => 'bar'], $argument);
     }
 
     public function testCanExtractFromAnonymousClass(): void

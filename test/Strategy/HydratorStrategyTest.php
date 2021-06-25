@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator\Strategy;
@@ -35,14 +29,13 @@ class HydratorStrategyTest extends TestCase
 {
     /**
      * @dataProvider providerInvalidObjectClassName
-     *
      * @param mixed $objectClassName
      */
     public function testConstructorRejectsInvalidObjectClassName(
         $objectClassName,
         string $expectedExceptionType,
         string $expectedExceptionMessage
-    ) : void {
+    ): void {
         $this->expectException($expectedExceptionType);
         $this->expectExceptionMessage($expectedExceptionMessage);
 
@@ -52,7 +45,7 @@ class HydratorStrategyTest extends TestCase
         );
     }
 
-    public function providerInvalidObjectClassName() : array
+    public function providerInvalidObjectClassName(): array
     {
         // @codingStandardsIgnoreStart
         return [
@@ -71,10 +64,9 @@ class HydratorStrategyTest extends TestCase
 
     /**
      * @dataProvider providerInvalidValueForExtraction
-     *
      * @param mixed $value
      */
-    public function testExtractRejectsInvalidValue($value) : void
+    public function testExtractRejectsInvalidValue($value): void
     {
         $strategy = new HydratorStrategy(
             $this->createHydratorMock(),
@@ -93,7 +85,7 @@ class HydratorStrategyTest extends TestCase
         $strategy->extract($value);
     }
 
-    public function providerInvalidValueForExtraction() : ?Generator
+    public function providerInvalidValueForExtraction(): ?Generator
     {
         $values = [
             'boolean-false'             => false,
@@ -113,10 +105,9 @@ class HydratorStrategyTest extends TestCase
 
     /**
      * @dataProvider providerInvalidObjectForExtraction
-     *
      * @param mixed $object
      */
-    public function testExtractRejectsInvalidObject($object) : void
+    public function testExtractRejectsInvalidObject($object): void
     {
         $strategy = new HydratorStrategy(
             $this->createHydratorMock(),
@@ -135,7 +126,7 @@ class HydratorStrategyTest extends TestCase
         $strategy->extract($object);
     }
 
-    public function providerInvalidObjectForExtraction() : ?Generator
+    public function providerInvalidObjectForExtraction(): ?Generator
     {
         $values = [
             'boolean-false'                           => false,
@@ -153,15 +144,14 @@ class HydratorStrategyTest extends TestCase
         }
     }
 
-    public function testExtractUsesHydratorToExtractValues() : void
+    public function testExtractUsesHydratorToExtractValues(): void
     {
         $value = new TestAsset\User();
 
         $extraction = /**
-         * @return string[]
-         *
-         * @psalm-return array{value: string}
-         */
+        $extraction =  * @return string[]
+        $extraction =  * @psalm-return array{value: string}
+                       */
         static function (TestAsset\User $value): array {
             return [
                 'value' => spl_object_hash($value),
@@ -184,10 +174,9 @@ class HydratorStrategyTest extends TestCase
 
     /**
      * @dataProvider providerInvalidValueForHydration
-     *
      * @param mixed $value
      */
-    public function testHydrateRejectsInvalidValue($value) : void
+    public function testHydrateRejectsInvalidValue($value): void
     {
         $strategy = new HydratorStrategy(
             $this->createHydratorMock(),
@@ -205,7 +194,7 @@ class HydratorStrategyTest extends TestCase
         $strategy->hydrate($value);
     }
 
-    public function providerInvalidValueForHydration() : ?Generator
+    public function providerInvalidValueForHydration(): ?Generator
     {
         $values = [
             'boolean-false'             => false,
@@ -224,10 +213,9 @@ class HydratorStrategyTest extends TestCase
 
     /**
      * @dataProvider providerEmptyOrSameObjects
-     *
      * @param mixed $value
      */
-    public function testHydrateShouldReturnEmptyOrSameObjects($value) : void
+    public function testHydrateShouldReturnEmptyOrSameObjects($value): void
     {
         $strategy = new HydratorStrategy(
             $this->createHydratorMock(),
@@ -237,7 +225,7 @@ class HydratorStrategyTest extends TestCase
         $this->assertSame($value, $strategy->hydrate($value));
     }
 
-    public function providerEmptyOrSameObjects() : ?Generator
+    public function providerEmptyOrSameObjects(): ?Generator
     {
         $values = [
             'null'                => null,
@@ -250,7 +238,7 @@ class HydratorStrategyTest extends TestCase
         }
     }
 
-    public function testHydrateUsesHydratorToHydrateValues() : void
+    public function testHydrateUsesHydratorToHydrateValues(): void
     {
         $value = ['name' => 'John Doe'];
 

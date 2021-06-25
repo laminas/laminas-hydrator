@@ -1,15 +1,10 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator;
 
+use ArrayObject;
 use Laminas\Hydrator\ClassMethodsHydrator;
 use LaminasTest\Hydrator\TestAsset\ArraySerializable;
 use LaminasTest\Hydrator\TestAsset\ClassMethodsCamelCase;
@@ -27,15 +22,13 @@ class ClassMethodsHydratorTest extends TestCase
 {
     use HydratorTestTrait;
 
-    /**
-     * @var ClassMethodsHydrator
-     */
+    /** @var ClassMethodsHydrator */
     protected $hydrator;
 
     /**
      * {@inheritDoc}
      */
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->hydrator = new ClassMethodsHydrator();
     }
@@ -53,27 +46,27 @@ class ClassMethodsHydratorTest extends TestCase
      */
     public function testCanHydratedPromiscuousInstances(): void
     {
-        /* @var $classMethodsCamelCase ClassMethodsCamelCase */
+        /** @var ClassMethodsCamelCase $classMethodsCamelCase */
         $classMethodsCamelCase = $this->hydrator->hydrate(
             ['fooBar' => 'baz-tab'],
             new ClassMethodsCamelCase()
         );
-        /* @var $classMethodsCamelCaseMissing ClassMethodsCamelCaseMissing */
+        /** @var ClassMethodsCamelCaseMissing $classMethodsCamelCaseMissing */
         $classMethodsCamelCaseMissing = $this->hydrator->hydrate(
             ['fooBar' => 'baz-tab'],
             new ClassMethodsCamelCaseMissing()
         );
-        /* @var $arraySerializable ArraySerializable */
+        /** @var ArraySerializable $arraySerializable */
         $arraySerializable = $this->hydrator->hydrate(['fooBar' => 'baz-tab'], new ArraySerializable());
 
         $this->assertSame('baz-tab', $classMethodsCamelCase->getFooBar());
         $this->assertSame('baz-tab', $classMethodsCamelCaseMissing->getFooBar());
         $this->assertSame(
             [
-                "foo" => "bar",
-                "bar" => "foo",
+                "foo"   => "bar",
+                "bar"   => "foo",
                 "blubb" => "baz",
-                "quo" => "blubb"
+                "quo"   => "blubb",
             ],
             $arraySerializable->getArrayCopy()
         );
@@ -94,7 +87,7 @@ class ClassMethodsHydratorTest extends TestCase
      */
     public function testSetOptionsFromTraversable(): void
     {
-        $options = new \ArrayObject([
+        $options = new ArrayObject([
             'underscoreSeparatedKeys' => false,
         ]);
         $this->hydrator->setOptions($options);

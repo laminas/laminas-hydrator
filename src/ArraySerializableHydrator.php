@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace Laminas\Hydrator;
@@ -23,9 +17,10 @@ class ArraySerializableHydrator extends AbstractHydrator
      * Extracts values via the object's getArrayCopy() method.
      *
      * {@inheritDoc}
-     * @throws Exception\BadMethodCallException for an $object not implementing getArrayCopy()
+     *
+     * @throws Exception\BadMethodCallException For an $object not implementing getArrayCopy().
      */
-    public function extract(object $object) : array
+    public function extract(object $object): array
     {
         if (! method_exists($object, 'getArrayCopy') || ! is_callable([$object, 'getArrayCopy'])) {
             throw new Exception\BadMethodCallException(
@@ -65,13 +60,14 @@ class ArraySerializableHydrator extends AbstractHydrator
      * populate() method.
      *
      * {@inheritDoc}
-     * @throws Exception\BadMethodCallException for an $object not implementing exchangeArray() or populate()
+     *
+     * @throws Exception\BadMethodCallException For an $object not implementing exchangeArray() or populate().
      */
     public function hydrate(array $data, object $object)
     {
         $replacement = [];
         foreach ($data as $key => $value) {
-            $name = $this->hydrateName($key, $data);
+            $name               = $this->hydrateName($key, $data);
             $replacement[$name] = $this->hydrateValue($name, $value, $data);
         }
 
@@ -79,7 +75,7 @@ class ArraySerializableHydrator extends AbstractHydrator
             // Ensure any previously populated values not in the replacement
             // remain following population.
             if (method_exists($object, 'getArrayCopy') && is_callable([$object, 'getArrayCopy'])) {
-                $original = $object->getArrayCopy();
+                $original    = $object->getArrayCopy();
                 $replacement = array_merge($original, $replacement);
             }
             $object->exchangeArray($replacement);

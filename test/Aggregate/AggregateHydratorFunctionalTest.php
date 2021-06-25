@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator\Aggregate;
@@ -26,23 +20,19 @@ use stdClass;
  */
 class AggregateHydratorFunctionalTest extends TestCase
 {
-    /**
-     * @var AggregateHydrator
-     */
+    /** @var AggregateHydrator */
     protected $hydrator;
 
     /**
      * {@inheritDoc}
      */
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->hydrator = new AggregateHydrator();
     }
 
     /**
      * Verifies that no interaction happens when the aggregate hydrator is empty
-     *
-     * @return void
      */
     public function testEmptyAggregate(): void
     {
@@ -55,13 +45,11 @@ class AggregateHydratorFunctionalTest extends TestCase
     }
 
     /**
-     * @dataProvider getHydratorSet
-
      * Verifies that using a single hydrator will have the aggregate hydrator behave like that single hydrator
      *
-     * @return void
+     * @dataProvider getHydratorSet
      */
-    public function testSingleHydratorExtraction(HydratorInterface $comparisonHydrator, $object): void
+    public function testSingleHydratorExtraction(HydratorInterface $comparisonHydrator, object $object): void
     {
         $blueprint = clone $object;
 
@@ -71,14 +59,15 @@ class AggregateHydratorFunctionalTest extends TestCase
     }
 
     /**
-     * @dataProvider getHydratorSet
-
      * Verifies that using a single hydrator will have the aggregate hydrator behave like that single hydrator
      *
-     * @return void
+     * @dataProvider getHydratorSet
      */
-    public function testSingleHydratorHydration(HydratorInterface $comparisonHydrator, $object, $data): void
-    {
+    public function testSingleHydratorHydration(
+        HydratorInterface $comparisonHydrator,
+        object $object,
+        array $data
+    ): void {
         $blueprint = clone $object;
 
         $this->hydrator->add($comparisonHydrator);
@@ -95,8 +84,6 @@ class AggregateHydratorFunctionalTest extends TestCase
 
     /**
      * Verifies that multiple hydrators in an aggregate merge the extracted data
-     *
-     * @return void
      */
     public function testExtractWithMultipleHydrators(): void
     {
@@ -115,8 +102,6 @@ class AggregateHydratorFunctionalTest extends TestCase
 
     /**
      * Verifies that multiple hydrators in an aggregate merge the extracted data
-     *
-     * @return void
      */
     public function testHydrateWithMultipleHydrators(): void
     {
@@ -140,8 +125,6 @@ class AggregateHydratorFunctionalTest extends TestCase
     /**
      * Verifies that stopping propagation within a listener in the hydrator allows modifying how the
      * hydrator behaves
-     *
-     * @return void
      */
     public function testStoppedPropagationInExtraction(): void
     {
@@ -160,14 +143,12 @@ class AggregateHydratorFunctionalTest extends TestCase
     /**
      * Verifies that stopping propagation within a listener in the hydrator allows modifying how the
      * hydrator behaves
-     *
-     * @return void
      */
     public function testStoppedPropagationInHydration(): void
     {
         $object        = new ArrayObject();
         $swappedObject = new stdClass();
-        $callback = function (HydrateEvent $event) use ($swappedObject): void {
+        $callback      = function (HydrateEvent $event) use ($swappedObject): void {
             $event->setHydratedObject($swappedObject);
             $event->stopPropagation();
         };

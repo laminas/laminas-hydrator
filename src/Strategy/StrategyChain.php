@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace Laminas\Hydrator\Strategy;
@@ -36,7 +30,7 @@ final class StrategyChain implements StrategyInterface
      */
     public function __construct(iterable $extractionStrategies)
     {
-        $extractionStrategies = ArrayUtils::iteratorToArray($extractionStrategies);
+        $extractionStrategies       = ArrayUtils::iteratorToArray($extractionStrategies);
         $this->extractionStrategies = array_map(
             function (StrategyInterface $strategy) {
                 // this callback is here only to ensure type-safety

@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator\TestAsset;
@@ -16,14 +10,10 @@ namespace LaminasTest\Hydrator\TestAsset;
  */
 class AggregateObject
 {
-    /**
-     * @var array
-     */
-    public $arrayData  = ['president' => 'Zaphod'];
+    /** @var array */
+    public $arrayData = ['president' => 'Zaphod'];
 
-    /**
-     * @var string
-     */
+    /** @var string */
     public $maintainer = 'Marvin';
 
     /**
@@ -36,8 +26,6 @@ class AggregateObject
 
     /**
      * @param string $maintainer
-     *
-     * @return void
      */
     public function setMaintainer($maintainer): void
     {
@@ -54,8 +42,6 @@ class AggregateObject
 
     /**
      * @param array $data
-     *
-     * @return void
      */
     public function exchangeArray(array $data): void
     {

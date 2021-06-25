@@ -1,29 +1,26 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator\TestAsset;
 
 class Reflection
 {
+    /** @var string */
     public $foo = '1';
 
+    /** @var string */
     protected $fooBar = '2';
 
+    /** @var string */
     private $fooBarBaz = '3';
 
-    public function getFooBar()
+    public function getFooBar(): string
     {
         return $this->fooBar;
     }
 
-    public function getFooBarBaz()
+    public function getFooBarBaz(): string
     {
         return $this->fooBarBaz;
     }

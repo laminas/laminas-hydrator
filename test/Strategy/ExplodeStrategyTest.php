@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator\Strategy;
@@ -13,7 +7,7 @@ namespace LaminasTest\Hydrator\Strategy;
 use Laminas\Hydrator\Strategy\Exception\InvalidArgumentException;
 use Laminas\Hydrator\Strategy\ExplodeStrategy;
 use PHPUnit\Framework\TestCase;
-use TypeError;
+use stdClass;
 
 use function is_numeric;
 
@@ -26,12 +20,9 @@ class ExplodeStrategyTest extends TestCase
 {
     /**
      * @dataProvider getValidHydratedValues
-     *
      * @param string   $expected
      * @param string   $delimiter
      * @param string[] $extractValue
-     *
-     * @return void
      */
     public function testExtract($expected, $delimiter, $extractValue): void
     {
@@ -67,13 +58,6 @@ class ExplodeStrategyTest extends TestCase
         new ExplodeStrategy('');
     }
 
-    public function testGetExceptionWithInvalidDelimiter(): void
-    {
-        $this->expectException(TypeError::class);
-
-        new ExplodeStrategy([]);
-    }
-
     public function testHydrateWithExplodeLimit(): void
     {
         $strategy = new ExplodeStrategy('-', 2);
@@ -106,7 +90,7 @@ class ExplodeStrategyTest extends TestCase
             . ' stdClass provided instead'
         );
 
-        $strategy->hydrate(new \stdClass());
+        $strategy->hydrate(new stdClass());
     }
 
     public function testExtractWithInvalidObjectType(): void
@@ -119,17 +103,14 @@ class ExplodeStrategyTest extends TestCase
             . ' stdClass provided instead'
         );
 
-        $strategy->extract(new \stdClass());
+        $strategy->extract(new stdClass());
     }
 
     /**
      * @dataProvider getValidHydratedValues
-     *
      * @param mixed    $value
      * @param string   $delimiter
      * @param string[] $expected
-     *
-     * @return void
      */
     public function testHydration($value, $delimiter, array $expected): void
     {

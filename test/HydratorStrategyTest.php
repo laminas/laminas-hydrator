@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator;
@@ -24,7 +18,7 @@ class HydratorStrategyTest extends TestCase
      */
     private $hydrator;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->hydrator = new ClassMethodsHydrator();
     }
@@ -91,7 +85,7 @@ class HydratorStrategyTest extends TestCase
         $entityA->addEntity(new TestAsset\HydratorStrategyEntityB(111, 'AAA'));
         $entityA->addEntity(new TestAsset\HydratorStrategyEntityB(222, 'BBB'));
 
-        $attributes = $this->hydrator->extract($entityA);
+        $attributes               = $this->hydrator->extract($entityA);
         $attributes['entities'][] = 333;
 
         $this->hydrator->hydrate($attributes, $entityA);
@@ -102,19 +96,17 @@ class HydratorStrategyTest extends TestCase
 
     /**
      * @dataProvider underscoreHandlingDataProvider
-     *
-     * @return void
      */
     public function testWhenUsingUnderscoreSeparatedKeysHydratorStrategyIsAlwaysConsideredUnderscoreSeparatedToo(
-        $underscoreSeparatedKeys,
-        $formFieldKey
+        bool $underscoreSeparatedKeys,
+        string $formFieldKey
     ): void {
         $hydrator = new ClassMethodsHydrator($underscoreSeparatedKeys);
 
         $strategy = $this->createMock(StrategyInterface::class);
 
         $entity = new TestAsset\ClassMethodsUnderscore();
-        $value = $entity->getFooBar();
+        $value  = $entity->getFooBar();
 
         $hydrator->addStrategy($formFieldKey, $strategy);
 
@@ -122,8 +114,7 @@ class HydratorStrategyTest extends TestCase
             ->expects($this->once())
             ->method('extract')
             ->with($this->identicalTo($value))
-            ->will($this->returnValue($value))
-        ;
+            ->will($this->returnValue($value));
 
         $attributes = $hydrator->extract($entity);
 
@@ -131,16 +122,16 @@ class HydratorStrategyTest extends TestCase
             ->expects($this->once())
             ->method('hydrate')
             ->with($this->identicalTo($value))
-            ->will($this->returnValue($value))
-        ;
+            ->will($this->returnValue($value));
 
         $hydrator->hydrate($attributes, $entity);
     }
 
     /**
-     * @return (bool|string)[][]
-     *
-     * @psalm-return array{0: array{0: true, 1: string}, 1: array{0: false, 1: string}}
+     * @psalm-return array<array-key, array{
+     *     0: bool,
+     *     1: string
+     * }>
      */
     public function underscoreHandlingDataProvider(): array
     {
@@ -156,7 +147,7 @@ class HydratorStrategyTest extends TestCase
         $this->hydrator->addStrategy('field2', $strategy);
 
         $entityB = new TestAsset\HydratorStrategyEntityB('X', 'Y');
-        $attributes = $this->hydrator->extract($entityB);
+        $this->hydrator->extract($entityB);
 
         $this->assertEquals($entityB, $strategy->object);
     }
@@ -167,8 +158,8 @@ class HydratorStrategyTest extends TestCase
         $this->hydrator->addStrategy('field2', $strategy);
 
         $entityB = new TestAsset\HydratorStrategyEntityB('X', 'Y');
-        $data = ['field1' => 'A', 'field2' => 'B'];
-        $attributes = $this->hydrator->hydrate($data, $entityB);
+        $data    = ['field1' => 'A', 'field2' => 'B'];
+        $this->hydrator->hydrate($data, $entityB);
 
         $this->assertEquals($data, $strategy->data);
     }

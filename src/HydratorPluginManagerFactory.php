@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace Laminas\Hydrator;
@@ -28,9 +22,10 @@ class HydratorPluginManagerFactory
      * configuration.
      *
      * @see https://docs.mezzio.dev/mezzio/v3/features/container/config/
-     * @throws Exception\DomainException if laminas-servicemanager is not installed.
+     *
+     * @throws Exception\DomainException If laminas-servicemanager is not installed.
      */
-    public function __invoke(ContainerInterface $container, string $name, ?array $options = []) : HydratorPluginManager
+    public function __invoke(ContainerInterface $container, string $name, ?array $options = []): HydratorPluginManager
     {
         if (! class_exists(Config::class)) {
             throw new Exception\DomainException(sprintf(

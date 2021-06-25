@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace Laminas\Hydrator\NamingStrategy\UnderscoreNamingStrategy;
@@ -22,10 +16,10 @@ final class CamelCaseToUnderscoreFilter
 {
     use StringSupportTrait;
 
-    public function filter(string $value) : string
+    public function filter(string $value): string
     {
         [$pattern, $replacement] = $this->getPatternAndReplacement();
-        $filtered = preg_replace($pattern, $replacement, $value);
+        $filtered                = preg_replace($pattern, $replacement, $value);
 
         $lowerFunction = $this->getLowerFunction();
         return $lowerFunction($filtered);
@@ -35,7 +29,7 @@ final class CamelCaseToUnderscoreFilter
      * @return string[][] Array with two elements, first the patterns, then the
      *     replacements. Each element is an array of strings.
      */
-    private function getPatternAndReplacement() : array
+    private function getPatternAndReplacement(): array
     {
         return $this->hasPcreUnicodeSupport()
             ? [
@@ -60,7 +54,7 @@ final class CamelCaseToUnderscoreFilter
             ];
     }
 
-    private function getLowerFunction() : callable
+    private function getLowerFunction(): callable
     {
         return $this->hasMbStringSupport()
             ? function ($value) {

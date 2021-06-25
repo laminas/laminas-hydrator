@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator;
@@ -14,6 +8,7 @@ use ArrayObject;
 use Interop\Container\ContainerInterface;
 use Laminas\Hydrator\DelegatingHydrator;
 use Laminas\Hydrator\HydratorInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -23,30 +18,26 @@ use PHPUnit\Framework\TestCase;
  */
 class DelegatingHydratorTest extends TestCase
 {
-    /**
-     * @var DelegatingHydrator
-     */
+    /** @var DelegatingHydrator */
     protected $hydrator;
 
     /**
-     * @var ContainerInterface|\PHPUnit\Framework\MockObject\MockObject
-     * @psalm-var ContainerInterface&\PHPUnit\Framework\MockObject\MockObject
+     * @var ContainerInterface|MockObject
+     * @psalm-var ContainerInterface&MockObject
      */
     protected $hydrators;
 
-    /**
-     * @var ArrayObject
-     */
+    /** @var ArrayObject */
     protected $object;
 
     /**
      * {@inheritDoc}
      */
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->hydrators = $this->createMock(ContainerInterface::class);
-        $this->hydrator = new DelegatingHydrator($this->hydrators);
-        $this->object = new ArrayObject;
+        $this->hydrator  = new DelegatingHydrator($this->hydrators);
+        $this->object    = new ArrayObject();
     }
 
     public function testExtract(): void
