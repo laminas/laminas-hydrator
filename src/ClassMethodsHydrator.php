@@ -158,7 +158,9 @@ class ClassMethodsHydrator extends AbstractHydrator implements HydratorOptionsIn
                     ? $method
                     : $objectClass . '::' . $method;
 
-                if (! ($filter->filter($methodFqn) && $this->optionalParametersFilter->filter($methodFqn))) {
+                if (! $filter->filter($methodFqn) 
+                    || ! $this->optionalParametersFilter->filter($methodFqn, $isAnonymous ? $object : null)
+                ) {
                     continue;
                 }
 
