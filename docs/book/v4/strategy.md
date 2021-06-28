@@ -134,6 +134,16 @@ This strategy is a wrapper around PHP's `implode()` and `explode()` functions.
 The delimiter and a limit can be provided to the constructor; the limit will
 only be used for `extract` operations.
 
+### Laminas\\Hydrator\\Strategy\\NullableStrategy
+
+- Since 4.1.0
+
+This strategy acts as a decorator around another strategy, allowing extraction and hydration of nullable values.
+The constructor accepts two arguments: the strategy to decorate, and a boolean flag indicating whether or not to treat empty values as `null`.
+By default, the flag is `false`, indicating only `null` values should be treated as `null`.
+
+Usage of this strategy also ensures a value is extracted or hydrated when it is `null`, instead of being dropped from the representation.
+
 ### Laminas\\Hydrator\\Strategy\\StrategyChain
 
 This strategy takes an array of `StrategyInterface` instances and iterates
