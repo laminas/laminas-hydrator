@@ -16,7 +16,7 @@ class Foo
     public $barBat;
 }
 
-$mapStrategy = new Laminas\Hydrator\NamingStrategy\MapNamingStrategy([
+$mapStrategy = Laminas\Hydrator\NamingStrategy\MapNamingStrategy::createFromHydrationMap([
     'foo' => 'bar'
 ]);
 
