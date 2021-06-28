@@ -415,7 +415,7 @@ to the array key <code>foo</code> (using the <code>MapNamingStrategy</code>), an
     public $barBat;
 }
 
-$mapStrategy = new Laminas\Hydrator\NamingStrategy\MapNamingStrategy([
+$mapStrategy = Laminas\Hydrator\NamingStrategy\MapNamingStrategy::createFromHydrationMap([
     'foo' =&gt; 'bar'
 ]);
 

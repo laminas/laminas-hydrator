@@ -487,6 +487,9 @@ if present, will use it to translate the property name prior to looking up a
   strategy for it.</p>
 <h2 id="available-implementations">Available implementations</h2>
 <h3 id="laminashydratorstrategybooleanstrategy">Laminas\Hydrator\Strategy\BooleanStrategy</h3>
+<blockquote>
+<p>Deprecated since version 4.2.0. Use the [ScalarTypeStrategy](#laminashydratorstrategyscalartypestrategy] instead.</p>
+</blockquote>
 <p>This strategy converts values into Booleans and vice versa. It expects two
 arguments at the constructor, which are used to define value maps for <code>true</code> and
 <code>false</code>.</p>
@@ -532,6 +535,26 @@ only be used for <code>extract</code> operations.</p>
 The constructor accepts two arguments: the strategy to decorate, and a boolean flag indicating whether or not to treat empty values as <code>null</code>.
 By default, the flag is <code>false</code>, indicating only <code>null</code> values should be treated as <code>null</code>.</p>
 <p>Usage of this strategy also ensures a value is extracted or hydrated when it is <code>null</code>, instead of being dropped from the representation.</p>
+<h3 id="laminashydratorstrategyscalartypestrategy">Laminas\Hydrator\Strategy\ScalarTypeStrategy</h3>
+<blockquote>
+<p>Available since version 4.2.0</p>
+</blockquote>
+<p>This strategy allows extraction and hydration of the scalar types <code>int</code>, <code>float</code>, <code>string</code>, and <code>bool</code>.
+The constructor accepts one argument, one of the constants:</p>
+<ul>
+<li><code>Laminas\Hydrator\Strategy\ScalarTypeStrategy::TYPE_INT</code> ("int")</li>
+<li><code>Laminas\Hydrator\Strategy\ScalarTypeStrategy::TYPE_FLOAT</code> ("float")</li>
+<li><code>Laminas\Hydrator\Strategy\ScalarTypeStrategy::TYPE_STRING</code> ("string")</li>
+<li><code>Laminas\Hydrator\Strategy\ScalarTypeStrategy::TYPE_BOOL</code> ("bool")</li>
+</ul>
+<p>Alternately, you can use one of the named constructors to create the instance via the following static methods:</p>
+<ul>
+<li><code>Laminas\Hydrator\Strategy\ScalarTypeStrategy::createToInt()</code></li>
+<li><code>Laminas\Hydrator\Strategy\ScalarTypeStrategy::createToFloat()</code></li>
+<li><code>Laminas\Hydrator\Strategy\ScalarTypeStrategy::createToString()</code></li>
+<li><code>Laminas\Hydrator\Strategy\ScalarTypeStrategy::createToBoolean()</code></li>
+</ul>
+<p>In each case, calling hydrate() will cast the <code>$value</code> provided to it to the appropriate scalar type.</p>
 <h3 id="laminashydratorstrategystrategychain">Laminas\Hydrator\Strategy\StrategyChain</h3>
 <p>This strategy takes an array of <code>StrategyInterface</code> instances and iterates
 over them when performing <code>extract()</code> and <code>hydrate()</code> operations. Each operates
