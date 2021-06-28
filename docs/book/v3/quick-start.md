@@ -6,7 +6,7 @@ The component contains [concrete implementations](#available_implementations) fo
 
 ## Basic Usage
 
-### Hydrating an Object
+### Hydrating an Object
 
 To hydrate an object with data, instantiate the hydrator and then pass to it the data for hydrating the object.
 
@@ -23,7 +23,7 @@ $data = [
 $object = $hydrator->hydrate($data, new ArrayObject());
 ```
 
-### Extracting Values From an Object
+### Extracting Values From an Object
 
 To extract data from an object, instantiate the applicable hydrator and then call `extract`, passing to it the object to extract data from.
 

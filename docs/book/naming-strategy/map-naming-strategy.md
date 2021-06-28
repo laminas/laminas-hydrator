@@ -1,3 +1,4 @@
+<!-- markdownlint-disable -->
 <noscript><meta http-equiv="refresh" content="0; url=/laminas-hydrator/v2/naming-strategy/map-naming-strategy/"></noscript>
 <script>
   document.addEventListener("DOMContentLoaded", function (event) {
