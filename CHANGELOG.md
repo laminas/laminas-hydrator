@@ -26,9 +26,6 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ## 4.1.0 - 2020-12-16
 
-
------
-
 ### Release Notes for [4.1.0](https://github.com/laminas/laminas-hydrator/milestone/10)
 
 Feature release (minor)
@@ -46,6 +43,24 @@ Feature release (minor)
 #### Feature Request
 
  - [42: HydratorStrategy extract empty value](https://github.com/laminas/laminas-hydrator/issues/42) thanks to @eugene-borovov
+
+## 4.0.3 - 2021-06-28
+
+### Release Notes for [4.0.3](https://github.com/laminas/laminas-hydrator/milestone/13)
+
+### Fixed
+
+- Forward ports a patch from 3.2.1 that resolves a false positive cache hit in the `ClassMethodsHydrator`.
+
+### 4.0.3
+
+- Total issues resolved: **0**
+- Total pull requests resolved: **1**
+- Total contributors: **1**
+
+#### Bug
+
+ - [59: Merge release 3.2.1 into 4.0.x](https://github.com/laminas/laminas-hydrator/pull/59) thanks to @github-actions[bot]
 
 ## 4.0.2 - 2020-12-16
 
@@ -81,7 +96,6 @@ Feature release (minor)
 
 - [#30](https://github.com/laminas/laminas-hydrator/pull/30) fixes the filter system to allow usage with anonymous objects.
 
-
 -----
 
 ### Release Notes for [4.0.0](https://github.com/laminas/laminas-hydrator/milestone/2)
@@ -105,6 +119,25 @@ next backward compatibility break release (major)
 #### Enhancement,hacktoberfest-accepted
 
  - [29: PHP 8.0 support](https://github.com/laminas/laminas-hydrator/issues/29) thanks to @boesing
+
+## 3.2.1 - 2021-06-28
+
+### Release Notes for [3.2.1](https://github.com/laminas/laminas-hydrator/milestone/7)
+
+### Fixed
+
+- The `ClassMethodsHydrator` would occasionally have a scenario whereby no methods were cached, but a conditional would miss this fact, which would lead to a logic error later. The conditional has been updated.
+
+### 3.2.1
+
+- Total issues resolved: **0**
+- Total pull requests resolved: **2**
+- Total contributors: **1**
+
+#### Bug
+
+- [53: 3.2.x - remove class-methods-hydrator redundant filter](https://github.com/laminas/laminas-hydrator/pull/53) thanks to @pine3ree
+- [48: fix never met condition](https://github.com/laminas/laminas-hydrator/pull/48) thanks to @pine3ree
 
 ## 3.2.0 - 2020-10-06
 
