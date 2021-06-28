@@ -1,9 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- */
-
 declare(strict_types=1);
 
 namespace Laminas\Hydrator\Strategy;
@@ -13,46 +9,31 @@ use Laminas\Hydrator\Exception\InvalidArgumentException;
 use function implode;
 use function sprintf;
 
-/**
- * @template T
- */
 final class ScalarTypeStrategy implements StrategyInterface
 {
     private const TYPE_INT     = 'int';
     private const TYPE_FLOAT   = 'float';
-    private const TYPE_STRING  = 'str';
-    private const TYPE_BOOLEAN = 'boolean';
+    private const TYPE_STRING  = 'string';
+    private const TYPE_BOOLEAN = 'bool';
 
     /** @var string */
     private $type;
 
-    /**
-     * @return self<int>
-     */
     public static function createToInt(): self
     {
         return new self(self::TYPE_INT);
     }
 
-    /**
-     * @return self<float>
-     */
     public static function createToFloat(): self
     {
         return new self(self::TYPE_FLOAT);
     }
 
-    /**
-     * @return self<string>
-     */
     public static function createToString(): self
     {
         return new self(self::TYPE_STRING);
     }
 
-    /**
-     * @return self<bool>
-     */
     public static function createToBoolean(): self
     {
         return new self(self::TYPE_BOOLEAN);
@@ -75,7 +56,7 @@ final class ScalarTypeStrategy implements StrategyInterface
     /**
      * @param mixed $value
      * @param array|null $data
-     * @return T
+     * @psalm-return null|scalar
      */
     public function hydrate($value, ?array $data)
     {

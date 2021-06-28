@@ -1,9 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- */
-
 declare(strict_types=1);
 
 namespace LaminasTest\Hydrator\Strategy;
@@ -12,8 +8,6 @@ use Laminas\Hydrator\Strategy\ScalarTypeStrategy;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Tests for {@see ScalarTypeStrategy}
- *
  * @covers \Laminas\Hydrator\Strategy\ScalarTypeStrategy
  */
 final class ScalarTypeStrategyTest extends TestCase
