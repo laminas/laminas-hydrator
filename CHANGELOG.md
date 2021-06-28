@@ -2,27 +2,27 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 3.2.1 - TBD
+## 3.2.1 - 2021-06-28
 
-### Added
 
-- Nothing.
+-----
 
-### Changed
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
+### Release Notes for [3.2.1](https://github.com/laminas/laminas-hydrator/milestone/7)
 
 ### Fixed
 
-- Nothing.
+- The `ClassMethodsHydrator` would occasionally have a scenario whereby no methods were cached, but a conditional would miss this fact, which would lead to a logic error later. The conditional has been updated.
+
+### 3.2.1
+
+- Total issues resolved: **0**
+- Total pull requests resolved: **2**
+- Total contributors: **1**
+
+#### Bug
+
+ - [53: 3.2.x - remove class-methods-hydrator redundant filter](https://github.com/laminas/laminas-hydrator/pull/53) thanks to @pine3ree
+ - [48: fix never met condition](https://github.com/laminas/laminas-hydrator/pull/48) thanks to @pine3ree
 
 ## 3.2.0 - 2020-10-06
 
