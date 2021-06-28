@@ -2,27 +2,26 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 4.0.3 - TBD
+## 4.0.3 - 2021-06-28
 
-### Added
 
-- Nothing.
+-----
 
-### Changed
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
+### Release Notes for [4.0.3](https://github.com/laminas/laminas-hydrator/milestone/13)
 
 ### Fixed
 
-- Nothing.
+- Forward ports a patch from 3.2.1 that resolves a false positive cache hit in the `ClassMethodsHydrator`.
+
+### 4.0.3
+
+- Total issues resolved: **0**
+- Total pull requests resolved: **1**
+- Total contributors: **1**
+
+#### Bug
+
+ - [59: Merge release 3.2.1 into 4.0.x](https://github.com/laminas/laminas-hydrator/pull/59) thanks to @github-actions[bot]
 
 ## 4.0.2 - 2020-12-16
 
