@@ -26,9 +26,6 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ## 4.0.2 - 2020-12-16
 
-
------
-
 ### Release Notes for [4.0.2](https://github.com/laminas/laminas-hydrator/milestone/12)
 
 4.0.x bugfix release (patch)
@@ -42,7 +39,6 @@ All notable changes to this project will be documented in this file, in reverse 
  - [36: Fix example in quick-start.md](https://github.com/laminas/laminas-hydrator/pull/36) thanks to @vjik
 
 ## 4.0.1 - 2020-11-11
-
 
 -----
 
@@ -72,7 +68,6 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - [#30](https://github.com/laminas/laminas-hydrator/pull/30) fixes the filter system to allow usage with anonymous objects.
 
-
 -----
 
 ### Release Notes for [4.0.0](https://github.com/laminas/laminas-hydrator/milestone/2)
@@ -96,6 +91,25 @@ next backward compatibility break release (major)
 #### Enhancement,hacktoberfest-accepted
 
  - [29: PHP 8.0 support](https://github.com/laminas/laminas-hydrator/issues/29) thanks to @boesing
+
+## 3.2.1 - 2021-06-28
+
+### Release Notes for [3.2.1](https://github.com/laminas/laminas-hydrator/milestone/7)
+
+### Fixed
+
+- The `ClassMethodsHydrator` would occasionally have a scenario whereby no methods were cached, but a conditional would miss this fact, which would lead to a logic error later. The conditional has been updated.
+
+### 3.2.1
+
+- Total issues resolved: **0**
+- Total pull requests resolved: **2**
+- Total contributors: **1**
+
+#### Bug
+
+- [53: 3.2.x - remove class-methods-hydrator redundant filter](https://github.com/laminas/laminas-hydrator/pull/53) thanks to @pine3ree
+- [48: fix never met condition](https://github.com/laminas/laminas-hydrator/pull/48) thanks to @pine3ree
 
 ## 3.2.0 - 2020-10-06
 
