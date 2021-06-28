@@ -6,6 +6,7 @@ namespace Laminas\Hydrator;
 
 use Laminas\Stdlib\ArrayUtils;
 use Traversable;
+use Webmozart\Assert\Assert;
 
 use function get_class;
 use function get_class_methods;
@@ -14,6 +15,7 @@ use function lcfirst;
 use function method_exists;
 use function property_exists;
 use function spl_object_hash;
+use function sprintf;
 use function strpos;
 use function substr;
 use function ucfirst;
@@ -164,13 +166,27 @@ class ClassMethodsHydrator extends AbstractHydrator implements HydratorOptionsIn
 
         $values = [];
 
-        if (null === $this->extractionMethodsCache[$objectClass]) {
+        if (
+            null === $this->extractionMethodsCache[$objectClass]
+            || [] === $this->extractionMethodsCache[$objectClass]
+        ) {
             return $values;
         }
 
         // pass 2 - actually extract data
         foreach ($this->extractionMethodsCache[$objectClass] as $methodName => $attributeName) {
-            $realAttributeName          = $this->extractName($attributeName, $object);
+            $realAttributeName = $this->extractName($attributeName, $object);
+            Assert::stringNotEmpty($methodName);
+
+            if (! method_exists($object, $methodName)) {
+                throw new Exception\BadMethodCallException(sprintf(
+                    'Cannot extract data for attribute "%s" on class of type "%s"; method "%s" does not exist',
+                    $realAttributeName,
+                    get_class($object),
+                    $methodName
+                ));
+            }
+
             $values[$realAttributeName] = $this->extractValue($realAttributeName, $object->$methodName(), $object);
         }
 

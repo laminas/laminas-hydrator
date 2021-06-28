@@ -66,8 +66,7 @@
       <code>$value</code>
       <code>$values[$realAttributeName]</code>
     </MixedAssignment>
-    <MixedMethodCall occurrences="2">
-      <code>$methodName</code>
+    <MixedMethodCall occurrences="1">
       <code>$this-&gt;hydrationMethodsCache[$propertyFqn]</code>
     </MixedMethodCall>
   </file>
