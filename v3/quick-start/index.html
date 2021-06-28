@@ -415,7 +415,7 @@
 <p>The laminas-hydrator component provides functionality for hydrating objects (which is the act of populating an object from a set of data) and extracting data from them.</p>
 <p>The component contains <a href="#available_implementations">concrete implementations</a> for a number of common use cases, such as by using arrays, object methods, and reflection, and provides <a href="#base_interfaces">interfaces</a> for creating custom implementations.</p>
 <h2 id="basic-usage">Basic Usage</h2>
-<h3>Hydrating an Object</h3>
+<h3 id="hydrating-an-object">Hydrating an Object</h3>
 <p>To hydrate an object with data, instantiate the hydrator and then pass to it the data for hydrating the object.</p>
 <pre class="highlight"><code class="language-php">$hydrator = new Laminas\Hydrator\ArraySerializableHydrator();
 
@@ -427,17 +427,17 @@ $data = [
 ];
 
 $object = $hydrator-&gt;hydrate($data, new ArrayObject());</code></pre>
-<h3>Extracting Values From an Object</h3>
+<h3 id="extracting-values-from-an-object">Extracting Values From an Object</h3>
 <p>To extract data from an object, instantiate the applicable hydrator and then call <code>extract</code>, passing to it the object to extract data from.</p>
 <pre class="highlight"><code class="language-php">$hydrator = new Laminas\Hydrator\ArraySerializableHydrator();
 
 // ... Assuming that $object has already been initialised
 $data = $hydrator-&gt;extract($object);</code></pre>
 <h2 id="available-implementations">Available Implementations</h2>
-<h3>ArraySerializableHydrator</h3>
+<h3 id="arrayserializablehydrator">ArraySerializableHydrator</h3>
 <p>The ArraySerializableHydrator hydrates data from an array and extracts an object’s data returning it as an array.
 Objects passed to the hydrate method must implement either <code>exchangeArray()</code> or <code>populate()</code> to support hydration, and must implement <code>getArrayCopy()</code> to support extraction.</p>
-<h3>ClassMethodsHydrator</h3>
+<h3 id="classmethodshydrator">ClassMethodsHydrator</h3>
 <p>The ClassMethodsHydrator calls "setter" methods matching keys in the data set to hydrate objects and calls "getter" methods matching keys in the data set during extraction, based on the following rules:</p>
 <ul>
 <li><code>is*()</code>, <code>has*()</code>, and <code>get*()</code> methods will be used when extracting data.
@@ -482,7 +482,7 @@ $data = [
 $hydrator = new Laminas\Hydrator\ClassMethodsHydrator();
 $user     = $hydrator-&gt;hydrate($data, new User());
 $data     = $hydrator-&gt;extract(new User());</code></pre>
-<h3>ObjectPropertyHydrator</h3>
+<h3 id="objectpropertyhydrator">ObjectPropertyHydrator</h3>
 <p>The ObjectPropertyHydrator hydrates objects and extracts data using publicly accessible properties which match a key in the data set.</p>
 <pre class="highlight"><code class="language-php">class User
 {
@@ -502,7 +502,7 @@ $data = [
 $hydrator = new Laminas\Hydrator\ObjectPropertyHydrator();
 $user     = $hydrator-&gt;hydrate($data, new User());
 $data     = $hydrator-&gt;extract(new User());</code></pre>
-<h3>ReflectionHydrator</h3>
+<h3 id="reflectionhydrator">ReflectionHydrator</h3>
 <p>The ReflectionHydrator is similar to the <code>ObjectPropertyHydrator</code>, however it uses <a href="http://php.net/manual/en/intro.reflection.php">PHP's reflection API</a> to hydrate or extract properties of any visibility.
 Any data key matching an existing property will be hydrated.
 Any existing properties will be used for extracting data.</p>
@@ -524,7 +524,7 @@ $data = [
 $hydrator = new Laminas\Hydrator\ReflectionHydrator();
 $user     = $hydrator-&gt;hydrate($data, new User());
 $data     = $hydrator-&gt;extract(new User());</code></pre>
-<h3>DelegatingHydrator</h3>
+<h3 id="delegatinghydrator">DelegatingHydrator</h3>
 <p>The DelegatingHydrator composes a hydrator locator, and will delegate <code>hydrate()</code> and <code>extract()</code> calls to the appropriate one based upon the class name of the object being operated on.</p>
 <pre class="highlight"><code class="language-php">// Instantiate each hydrator you wish to delegate to
 $albumHydrator  = new Laminas\Hydrator\ClassMethodsHydrator();
@@ -571,16 +571,6 @@ $artist = $delegating-&gt;hydrate($data, new Artist());</code></pre>
 </nav>
 
 
-
-
-    <div class="help-wanted">
-        <p>
-            Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/laminas/laminas-hydrator/edit/master/docs/book/v3/quick-start.md" target="_blank" class="help-wanted__link">
-                Edit this page on GitHub!
-            </a>
-        </p>
-    </div>
 
                 
             </div>
@@ -745,6 +735,7 @@ $artist = $delegating-&gt;hydrate($data, new Artist());</code></pre>
         </ul>
     </div>
 
+                    
                 
             </div>
         </div>
@@ -817,7 +808,7 @@ $artist = $delegating-&gt;hydrate($data, new Artist());</code></pre>
                         <p>
                             <!--Built with love by the Laminas team with the help of our
                             <a href="https://github.com/laminas/laminas-hydrator/graphs/contributors">contributors</a>.<br>-->
-                            &copy; 2020 <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
+                            &copy; 2021 <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
                         </p>
                     </div>
                 </div>

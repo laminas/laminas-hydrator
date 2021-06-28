@@ -456,17 +456,17 @@ interface StrategyEnabledInterface
 <code>AbstractHydrator</code> fully implements it as well. As such, if you want to use this
 functionality in your own hydrators, you should extend <code>AbstractHydrator</code>.</p>
 <h2 id="available-implementations">Available implementations</h2>
-<h3>Laminas\Hydrator\Strategy\BooleanStrategy</h3>
+<h3 id="laminashydratorstrategybooleanstrategy">Laminas\Hydrator\Strategy\BooleanStrategy</h3>
 <p>This strategy converts values into Booleans and vice versa. It expects two
 arguments at the constructor, which are used to define value maps for <code>true</code> and
 <code>false</code>.</p>
-<h3>Laminas\Hydrator\Strategy\ClosureStrategy</h3>
+<h3 id="laminashydratorstrategyclosurestrategy">Laminas\Hydrator\Strategy\ClosureStrategy</h3>
 <p>This is a strategy that allows you to pass in options for:</p>
 <ul>
 <li><code>hydrate</code>, a callback to be called when hydrating a value, and</li>
 <li><code>extract</code>, a callback to be called when extracting a value.</li>
 </ul>
-<h3>Laminas\Hydrator\Strategy\DateTimeFormatterStrategy</h3>
+<h3 id="laminashydratorstrategydatetimeformatterstrategy">Laminas\Hydrator\Strategy\DateTimeFormatterStrategy</h3>
 <p><code>DateTimeFormatterStrategy</code> provides bidirectional conversion between strings
 and DateTime instances. The input and output formats can be provided as
 constructor arguments.</p>
@@ -475,18 +475,18 @@ prepend the format, or <code>|</code> or <code>+</code> to append it; these ensu
 hydration, the new <code>DateTime</code> instance created will set the time element
 accordingly. As a specific example, <code>Y-m-d|</code> will drop the time component,
 ensuring comparisons are based on a midnight time value.</p>
-<h3>Laminas\Hydrator\Strategy\DefaultStrategy</h3>
+<h3 id="laminashydratorstrategydefaultstrategy">Laminas\Hydrator\Strategy\DefaultStrategy</h3>
 <p>The <code>DefaultStrategy</code> simply proxies everything through, without performing any
 conversion of values.</p>
-<h3>Laminas\Hydrator\Strategy\ExplodeStrategy</h3>
+<h3 id="laminashydratorstrategyexplodestrategy">Laminas\Hydrator\Strategy\ExplodeStrategy</h3>
 <p>This strategy is a wrapper around PHP's <code>implode()</code> and <code>explode()</code> functions.
 The delimiter and a limit can be provided to the constructor; the limit will
 only be used for <code>extract</code> operations.</p>
-<h3>Laminas\Hydrator\Strategy\SerializableStrategy</h3>
+<h3 id="laminashydratorstrategyserializablestrategy">Laminas\Hydrator\Strategy\SerializableStrategy</h3>
 <p><code>SerializableStrategy</code> provides the functionality backing
 <code>Laminas\Hydrator\ArraySerializable</code>. You can use it with custom implementations
 for <code>Laminas\Serializer\Adapter\AdapterInterface</code> if you want to as well.</p>
-<h3>Laminas\Hydrator\Strategy\StrategyChain</h3>
+<h3 id="laminashydratorstrategystrategychain">Laminas\Hydrator\Strategy\StrategyChain</h3>
 <p>This strategy takes an array of <code>StrategyInterface</code> instances and iterates
 over them when performing <code>extract()</code> and <code>hydrate()</code> operations. Each operates
 on the return value of the previous, allowing complex operations based on
@@ -588,16 +588,6 @@ receive the following:</p>
 </nav>
 
 
-
-
-    <div class="help-wanted">
-        <p>
-            Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/laminas/laminas-hydrator/edit/master/docs/book/v2/strategy.md" target="_blank" class="help-wanted__link">
-                Edit this page on GitHub!
-            </a>
-        </p>
-    </div>
 
                 
             </div>
@@ -720,6 +710,7 @@ receive the following:</p>
         </ul>
     </div>
 
+                    
                 
             </div>
         </div>
@@ -792,7 +783,7 @@ receive the following:</p>
                         <p>
                             <!--Built with love by the Laminas team with the help of our
                             <a href="https://github.com/laminas/laminas-hydrator/graphs/contributors">contributors</a>.<br>-->
-                            &copy; 2020 <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
+                            &copy; 2021 <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
                         </p>
                     </div>
                 </div>

@@ -424,17 +424,17 @@ can be set.</p>
 <h2 id="basic-usage">Basic Usage</h2>
 <p>The following code example shows standalone usage without adding the strategy
 to a hydrator.</p>
-<h3>Create and configure strategy</h3>
+<h3 id="create-and-configure-strategy">Create and configure strategy</h3>
 <p>Create the strategy and set the <a href="../../strategy/#laminas-hydrator-strategy-datetimeformatterstrategy">input and output formats</a>
 via the <code>DateTimeFormatterStrategy</code>.</p>
 <pre class="highlight"><code class="language-php">$strategy = new Laminas\Hydrator\Strategy\DateTimeImmutableFormatterStrategy(
     new Laminas\Hydrator\Strategy\DateTimeFormatterStrategy('Y-m-d')
 );</code></pre>
-<h3>Hydrate data</h3>
+<h3 id="hydrate-data">Hydrate data</h3>
 <pre class="highlight"><code class="language-php">$hydrated = $strategy-&gt;hydrate('2020-07-01');
 
 var_dump($hydrated instanceof DateTimeImmutable); // true</code></pre>
-<h3>Extract data</h3>
+<h3 id="extract-data">Extract data</h3>
 <pre class="highlight"><code class="language-php">$extracted = $strategy-&gt;extract(
     DateTimeImmutable::createFromFormat('Y-m-d', '2020-07-01')
 );
@@ -457,7 +457,7 @@ echo $extracted // '2020-07-01'</code></pre>
         return $this-&gt;releaseDate;
     }
 }</code></pre>
-<h3>Create hydrator and add strategy</h3>
+<h3 id="create-hydrator-and-add-strategy">Create hydrator and add strategy</h3>
 <p>Create a hydrator and add <code>DateTimeImmutableFormatterStrategy</code> as strategy:</p>
 <pre class="highlight"><code class="language-php">$hydrator = new Laminas\Hydrator\ReflectionHydrator();
 $hydrator-&gt;addStrategy(
@@ -466,13 +466,13 @@ $hydrator-&gt;addStrategy(
         new Laminas\Hydrator\Strategy\DateTimeFormatterStrategy('Y-m-d')
     )
 );</code></pre>
-<h3>Hydrate data</h3>
+<h3 id="hydrate-data_1">Hydrate data</h3>
 <p>Create an instance of the example class and hydrate data:</p>
 <pre class="highlight"><code class="language-php">$album = new Album();
 $hydrator-&gt;hydrate(['releaseDate' =&gt; '2020-07-01'], $album);
 
 var_dump($album-&gt;getReleaseDate() instanceof DateTimeImmutable); // true</code></pre>
-<h3>Extract data</h3>
+<h3 id="extract-data_1">Extract data</h3>
 <pre class="highlight"><code class="language-php">$extracted = $hydrator-&gt;extract($album);
 
 echo $extracted; // '2020-07-01'</code></pre>
@@ -504,16 +504,6 @@ echo $extracted; // '2020-07-01'</code></pre>
 </nav>
 
 
-
-
-    <div class="help-wanted">
-        <p>
-            Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/laminas/laminas-hydrator/edit/master/docs/book/v4/strategies/datetime-immutable-formatter-strategy.md" target="_blank" class="help-wanted__link">
-                Edit this page on GitHub!
-            </a>
-        </p>
-    </div>
 
                 
             </div>
@@ -678,6 +668,7 @@ echo $extracted; // '2020-07-01'</code></pre>
         </ul>
     </div>
 
+                    
                 
             </div>
         </div>
@@ -750,7 +741,7 @@ echo $extracted; // '2020-07-01'</code></pre>
                         <p>
                             <!--Built with love by the Laminas team with the help of our
                             <a href="https://github.com/laminas/laminas-hydrator/graphs/contributors">contributors</a>.<br>-->
-                            &copy; 2020 <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
+                            &copy; 2021 <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
                         </p>
                     </div>
                 </div>
