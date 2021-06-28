@@ -161,7 +161,9 @@ class ClassMethodsHydrator extends AbstractHydrator implements HydratorOptionsIn
 
         $values = [];
 
-        if (empty($this->extractionMethodsCache[$objectClass])) {
+        if (null === $this->extractionMethodsCache[$objectClass]
+            || [] === $this->extractionMethodsCache[$objectClass]
+        ) {
             return $values;
         }
 
