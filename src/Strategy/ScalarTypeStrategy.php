@@ -2,8 +2,6 @@
 
 /**
  * @see       https://github.com/laminas/laminas-hydrator for the canonical source repository
- * @copyright https://github.com/laminas/laminas-hydrator/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-hydrator/blob/master/LICENSE.md New BSD License
  */
 
 declare(strict_types=1);
@@ -12,14 +10,17 @@ namespace Laminas\Hydrator\Strategy;
 
 use Laminas\Hydrator\Exception\InvalidArgumentException;
 
+use function implode;
+use function sprintf;
+
 /**
  * @template T
  */
 final class ScalarTypeStrategy implements StrategyInterface
 {
-    private const TYPE_INT = 'int';
-    private const TYPE_FLOAT = 'float';
-    private const TYPE_STRING = 'str';
+    private const TYPE_INT     = 'int';
+    private const TYPE_FLOAT   = 'float';
+    private const TYPE_STRING  = 'str';
     private const TYPE_BOOLEAN = 'boolean';
 
     /** @var string */
@@ -57,9 +58,6 @@ final class ScalarTypeStrategy implements StrategyInterface
         return new self(self::TYPE_BOOLEAN);
     }
 
-    /**
-     * @param string $type
-     */
     private function __construct(string $type)
     {
         $this->type = $type;
@@ -67,7 +65,6 @@ final class ScalarTypeStrategy implements StrategyInterface
 
     /**
      * @param mixed $value
-     * @param object|null $object
      * @return mixed
      */
     public function extract($value, ?object $object = null)
@@ -88,18 +85,18 @@ final class ScalarTypeStrategy implements StrategyInterface
 
         switch ($this->type) {
             case self::TYPE_INT:
-                return (int)$value;
+                return (int) $value;
             case self::TYPE_FLOAT:
-                return (float)$value;
+                return (float) $value;
             case self::TYPE_STRING:
-                return (string)$value;
+                return (string) $value;
             case self::TYPE_BOOLEAN:
-                return (bool)$value;
+                return (bool) $value;
             default:
                 throw new InvalidArgumentException(
                     sprintf(
                         'Unable to hydrate. Target type must be one of %s, %s was given.',
-                        join(', ', [self::TYPE_INT, self::TYPE_FLOAT, self::TYPE_STRING]),
+                        implode(', ', [self::TYPE_INT, self::TYPE_FLOAT, self::TYPE_STRING]),
                         $this->type
                     )
                 );
