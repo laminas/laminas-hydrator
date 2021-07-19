@@ -16,8 +16,6 @@ use function sprintf;
 
 /**
  * This Strategy extracts and hydrates int and string values to Boolean values
- *
- * @deprecated Since version 4.2.0; use the {@see ScalarTypeStrategy} instead.
  */
 final class BooleanStrategy implements StrategyInterface
 {
