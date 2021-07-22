@@ -36,10 +36,10 @@
         "laminas/laminas-modulemanager": "^2.8",
         "laminas/laminas-serializer": "^2.9",
         "laminas/laminas-servicemanager": "^3.3.2",
+        "phpbench/phpbench": "^1.0",
         "phpunit/phpunit": "~9.3.0",
         "psalm/plugin-phpunit": "^0.16.1",
-        "vimeo/psalm": "^4.8.1",
-        "phpbench/phpbench": "^1.0.0-beta2"
+        "vimeo/psalm": "^4.8.1"
     },
     "suggest": {
         "laminas/laminas-eventmanager": "^3.2, to support aggregate hydrator usage",
