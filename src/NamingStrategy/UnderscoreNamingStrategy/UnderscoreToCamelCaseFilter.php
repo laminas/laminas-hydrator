@@ -18,10 +18,16 @@ final class UnderscoreToCamelCaseFilter
 {
     use StringSupportTrait;
 
+    private $transformedFilters = [];
+
     public function filter(string $value): string
     {
+        if (array_key_exists($value, $this->transformedFilters)) {
+            return $this->transformedFilters[$value];
+        }
+
         $pcreInfo = $this->getPatternAndReplacement(
-            // a unicode safe way of converting characters to \x00\x00 notation
+        // a unicode safe way of converting characters to \x00\x00 notation
             preg_quote('_', '#')
         );
 
@@ -32,7 +38,11 @@ final class UnderscoreToCamelCaseFilter
         );
 
         $lcFirstFunction = $this->getLcFirstFunction();
-        return $lcFirstFunction($filtered);
+        $filteredValue = $lcFirstFunction($filtered);
+
+        $this->transformedFilters[$value] = $filteredValue;
+
+        return $filteredValue;
     }
 
     private function getPatternAndReplacement(string $pregQuotedSeparator): PcreReplacement
@@ -58,7 +68,7 @@ final class UnderscoreToCamelCaseFilter
             )
             : new PcreReplacement(
                 '#(' . $pregQuotedSeparator . ')'
-                    . '([^\p{Z}\p{Ll}]{1}|[a-zA-Z]{1})#u',
+                . '([^\p{Z}\p{Ll}]{1}|[a-zA-Z]{1})#u',
                 function ($matches) {
                     return strtoupper($matches[2]);
                 }

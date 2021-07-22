@@ -38,7 +38,8 @@
         "laminas/laminas-servicemanager": "^3.3.2",
         "phpunit/phpunit": "~9.3.0",
         "psalm/plugin-phpunit": "^0.16.1",
-        "vimeo/psalm": "^4.8.1"
+        "vimeo/psalm": "^4.8.1",
+        "phpbench/phpbench": "^1.0.0-beta2"
     },
     "suggest": {
         "laminas/laminas-eventmanager": "^3.2, to support aggregate hydrator usage",
@@ -52,10 +53,12 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "LaminasTest\\Hydrator\\": "test/"
+            "LaminasTest\\Hydrator\\": "test/",
+            "LaminasBench\\Hydrator\\": "benchmark/"
         }
     },
     "scripts": {
+        "benchmark": "phpbench run --revs=2 --iterations=2 --report=aggregate",
         "check": [
             "@cs-check",
             "@test"
