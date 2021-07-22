@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Laminas\Hydrator\NamingStrategy\UnderscoreNamingStrategy;
 
+use function array_key_exists;
 use function mb_strtolower;
 use function mb_strtoupper;
 use function preg_quote;
@@ -18,6 +19,7 @@ final class UnderscoreToCamelCaseFilter
 {
     use StringSupportTrait;
 
+    /** @var string[] $transformedFilters */
     private $transformedFilters = [];
 
     public function filter(string $value): string
@@ -38,6 +40,7 @@ final class UnderscoreToCamelCaseFilter
         );
 
         $lcFirstFunction = $this->getLcFirstFunction();
+        /** @var string $filteredValue */
         $filteredValue = $lcFirstFunction($filtered);
 
         $this->transformedFilters[$value] = $filteredValue;
