@@ -16,13 +16,23 @@ final class CamelCaseToUnderscoreFilter
 {
     use StringSupportTrait;
 
+    private $transformedFilters = [];
+
     public function filter(string $value): string
     {
+        if (array_key_exists($value, $this->transformedFilters)) {
+            return $this->transformedFilters[$value];
+        }
+
         [$pattern, $replacement] = $this->getPatternAndReplacement();
-        $filtered                = preg_replace($pattern, $replacement, $value);
+        $filtered = preg_replace($pattern, $replacement, $value);
 
         $lowerFunction = $this->getLowerFunction();
-        return $lowerFunction($filtered);
+        $filteredValue = $lowerFunction($filtered);
+
+        $this->transformedFilters[$value] = $filteredValue;
+
+        return $filteredValue;
     }
 
     /**
