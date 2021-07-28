@@ -46,17 +46,14 @@ class ClassMethodsHydratorTest extends TestCase
      */
     public function testCanHydratedPromiscuousInstances(): void
     {
-        /** @var ClassMethodsCamelCase $classMethodsCamelCase */
         $classMethodsCamelCase = $this->hydrator->hydrate(
             ['fooBar' => 'baz-tab'],
             new ClassMethodsCamelCase()
         );
-        /** @var ClassMethodsCamelCaseMissing $classMethodsCamelCaseMissing */
         $classMethodsCamelCaseMissing = $this->hydrator->hydrate(
             ['fooBar' => 'baz-tab'],
             new ClassMethodsCamelCaseMissing()
         );
-        /** @var ArraySerializable $arraySerializable */
         $arraySerializable = $this->hydrator->hydrate(['fooBar' => 'baz-tab'], new ArraySerializable());
 
         $this->assertSame('baz-tab', $classMethodsCamelCase->getFooBar());
