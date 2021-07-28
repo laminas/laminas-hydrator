@@ -80,6 +80,7 @@ class HydratorListenerTest extends TestCase
             ->will($this->returnValue($hydrated));
         $event->expects($this->once())->method('setHydratedObject')->with($hydrated);
 
+        /** @psalm-suppress MixedArgumentTypeCoercion */
         $this->assertSame($hydrated, $this->listener->onHydrate($event));
     }
 
