@@ -16,12 +16,6 @@
     </projectFiles>
 
     <issueHandlers>
-        <DeprecatedClass>
-            <errorLevel type="suppress">
-                <file name="test/Strategy/BooleanStrategyTest.php"/>
-            </errorLevel>
-        </DeprecatedClass>
-
         <InternalMethod>
             <errorLevel type="suppress">
                 <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::method"/>
