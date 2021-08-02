@@ -84,11 +84,24 @@ if present, will use it to translate the property name prior to looking up a
 
 ### Laminas\\Hydrator\\Strategy\\BooleanStrategy
 
-> Deprecated since version 4.2.0. Use the [ScalarTypeStrategy](#laminashydratorstrategyscalartypestrategy] instead.
-
-This strategy converts values into Booleans and vice versa. It expects two
+This strategy converts values into booleans and vice versa. It expects two
 arguments at the constructor, which are used to define value maps for `true` and
 `false`.
+
+The arguments could be strings:
+
+```php
+$boolStrategy = new Laminas\Hydrator\Strategy\BooleanStrategy('1', '0');
+```
+
+or integers:
+
+```php
+$boolStrategy = new Laminas\Hydrator\Strategy\BooleanStrategy(1, 0);
+```
+
+The main difference from [ScalarTypeStrategy](#laminashydratorstrategyscalartypestrategy)
+is extracting booleans back to arguments given at the constructor.
 
 ### Laminas\\Hydrator\\Strategy\\ClosureStrategy
 
