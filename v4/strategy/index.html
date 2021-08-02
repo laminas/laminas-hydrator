@@ -487,12 +487,15 @@ if present, will use it to translate the property name prior to looking up a
   strategy for it.</p>
 <h2 id="available-implementations">Available implementations</h2>
 <h3 id="laminashydratorstrategybooleanstrategy">Laminas\Hydrator\Strategy\BooleanStrategy</h3>
-<blockquote>
-<p>Deprecated since version 4.2.0. Use the [ScalarTypeStrategy](#laminashydratorstrategyscalartypestrategy] instead.</p>
-</blockquote>
-<p>This strategy converts values into Booleans and vice versa. It expects two
+<p>This strategy converts values into booleans and vice versa. It expects two
 arguments at the constructor, which are used to define value maps for <code>true</code> and
 <code>false</code>.</p>
+<p>The arguments could be strings:</p>
+<pre class="highlight"><code class="language-php">$boolStrategy = new Laminas\Hydrator\Strategy\BooleanStrategy('1', '0');</code></pre>
+<p>or integers:</p>
+<pre class="highlight"><code class="language-php">$boolStrategy = new Laminas\Hydrator\Strategy\BooleanStrategy(1, 0);</code></pre>
+<p>The main difference from <a href="#laminashydratorstrategyscalartypestrategy">ScalarTypeStrategy</a>
+is extracting booleans back to arguments given at the constructor.</p>
 <h3 id="laminashydratorstrategyclosurestrategy">Laminas\Hydrator\Strategy\ClosureStrategy</h3>
 <p>This is a strategy that allows you to pass in options for:</p>
 <ul>
