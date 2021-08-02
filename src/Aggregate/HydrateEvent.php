@@ -9,6 +9,8 @@ use Laminas\EventManager\Event;
 /**
  * Event triggered when the {@see AggregateHydrator} hydrates
  * data into an object
+ *
+ * @template T of object
  */
 class HydrateEvent extends Event
 {
@@ -19,7 +21,10 @@ class HydrateEvent extends Event
      */
     protected $name = self::EVENT_HYDRATE;
 
-    /** @var object */
+    /**
+     * @var object
+     * @psalm-var T
+     */
     protected $hydratedObject;
 
     /** @var mixed[] Data being used to hydrate the $hydratedObject */
@@ -27,6 +32,7 @@ class HydrateEvent extends Event
 
     /**
      * @param mixed[] $hydrationData Data being used to hydrate the $hydratedObject
+     * @psalm-param T $hydratedObject
      */
     public function __construct(object $target, object $hydratedObject, array $hydrationData)
     {
@@ -38,12 +44,17 @@ class HydrateEvent extends Event
 
     /**
      * Retrieves the object that is being hydrated
+     *
+     * @psalm-return T
      */
     public function getHydratedObject(): object
     {
         return $this->hydratedObject;
     }
 
+    /**
+     * @psalm-param T $hydratedObject
+     */
     public function setHydratedObject(object $hydratedObject): void
     {
         $this->hydratedObject = $hydratedObject;
