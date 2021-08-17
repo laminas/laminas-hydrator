@@ -21,6 +21,7 @@ class ArraySerializableHydrator extends AbstractHydrator
      * {@inheritDoc}
      *
      * @throws Exception\BadMethodCallException For an $object not implementing getArrayCopy().
+     * @throws Exception\RuntimeException If a part of $data could not be extracted.
      */
     public function extract(object $object): array
     {
@@ -72,6 +73,7 @@ class ArraySerializableHydrator extends AbstractHydrator
      * {@inheritDoc}
      *
      * @throws Exception\BadMethodCallException For an $object not implementing exchangeArray() or populate().
+     * @throws Exception\RuntimeException If a part of $data could not be hydrated.
      */
     public function hydrate(array $data, object $object)
     {
