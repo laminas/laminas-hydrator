@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Laminas\Hydrator;
 
+use Throwable;
+
 use function array_merge;
 use function is_callable;
 use function method_exists;
@@ -49,9 +51,11 @@ class ArraySerializableHydrator extends AbstractHydrator
 
             try {
                 $data[$name] = $this->extractValue($name, $value, $object);
-            } catch (\Throwable $t) {
+            } catch (Throwable $t) {
                 throw new Exception\RuntimeException(
-                    sprintf("Could not extract field %s", $name), 0, $t
+                    sprintf("Could not extract field %s", $name),
+                    0,
+                    $t
                 );
             }
         }
@@ -77,9 +81,11 @@ class ArraySerializableHydrator extends AbstractHydrator
 
             try {
                 $replacement[$name] = $this->hydrateValue($name, $value, $data);
-            } catch (\Throwable $t) {
+            } catch (Throwable $t) {
                 throw new Exception\RuntimeException(
-                    sprintf("Could not hydrate field %s", $name), 0, $t
+                    sprintf("Could not hydrate field %s", $name),
+                    0,
+                    $t
                 );
             }
         }
