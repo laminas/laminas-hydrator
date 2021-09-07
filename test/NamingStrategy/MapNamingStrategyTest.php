@@ -8,6 +8,8 @@ use Laminas\Hydrator\Exception;
 use Laminas\Hydrator\NamingStrategy\MapNamingStrategy;
 use PHPUnit\Framework\TestCase;
 
+use const PHP_VERSION_ID;
+
 /**
  * Tests for {@see MapNamingStrategy}
  *
