@@ -84,7 +84,7 @@ final class MapNamingStrategy implements NamingStrategyInterface
     /**
      * Safely flip mapping array.
      *
-     * @param  string[] $array Array to flip
+     * @param  array $array Array to flip
      * @return string[] Flipped array
      * @throws Exception\InvalidArgumentException If any value of the $array is
      *     a non-string or empty string value or key.
@@ -105,6 +105,7 @@ final class MapNamingStrategy implements NamingStrategyInterface
             }
         });
 
+        /** @psalm-suppress PossiblyInvalidArgument Argument is validated in above routine */
         return array_flip($array);
     }
 }
