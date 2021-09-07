@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Laminas\Hydrator;
 
+use Throwable;
+
 use function array_merge;
 use function is_callable;
 use function method_exists;
@@ -19,6 +21,7 @@ class ArraySerializableHydrator extends AbstractHydrator
      * {@inheritDoc}
      *
      * @throws Exception\BadMethodCallException For an $object not implementing getArrayCopy().
+     * @throws Exception\RuntimeException If a part of $data could not be extracted.
      */
     public function extract(object $object): array
     {
@@ -47,7 +50,15 @@ class ArraySerializableHydrator extends AbstractHydrator
                 $name = $extractedName;
             }
 
-            $data[$name] = $this->extractValue($name, $value, $object);
+            try {
+                $data[$name] = $this->extractValue($name, $value, $object);
+            } catch (Throwable $t) {
+                throw new Exception\RuntimeException(
+                    sprintf("Could not extract field %s", $name),
+                    0,
+                    $t
+                );
+            }
         }
 
         return $data;
@@ -62,13 +73,23 @@ class ArraySerializableHydrator extends AbstractHydrator
      * {@inheritDoc}
      *
      * @throws Exception\BadMethodCallException For an $object not implementing exchangeArray() or populate().
+     * @throws Exception\RuntimeException If a part of $data could not be hydrated.
      */
     public function hydrate(array $data, object $object)
     {
         $replacement = [];
         foreach ($data as $key => $value) {
-            $name               = $this->hydrateName($key, $data);
-            $replacement[$name] = $this->hydrateValue($name, $value, $data);
+            $name = $this->hydrateName($key, $data);
+
+            try {
+                $replacement[$name] = $this->hydrateValue($name, $value, $data);
+            } catch (Throwable $t) {
+                throw new Exception\RuntimeException(
+                    sprintf("Could not hydrate field %s", $name),
+                    0,
+                    $t
+                );
+            }
         }
 
         if (method_exists($object, 'exchangeArray') && is_callable([$object, 'exchangeArray'])) {
