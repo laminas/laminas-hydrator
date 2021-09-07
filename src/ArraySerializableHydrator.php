@@ -79,7 +79,7 @@ class ArraySerializableHydrator extends AbstractHydrator
     {
         $replacement = [];
         foreach ($data as $key => $value) {
-            $name               = $this->hydrateName($key, $data);
+            $name = $this->hydrateName($key, $data);
 
             try {
                 $replacement[$name] = $this->hydrateValue($name, $value, $data);
