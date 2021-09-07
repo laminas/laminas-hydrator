@@ -31,12 +31,14 @@ class MapNamingStrategyTest extends TestCase
     /** @psalm-return iterable<string, array{0: mixed, 1: null|string}> */
     public function invalidKeyValues(): iterable
     {
+        // phpcs:disable WebimpressCodingStandard.NamingConventions.ValidVariableName.NotCamelCaps
         $isPHP81 = PHP_VERSION_ID >= 80100;
         yield 'null'       => [null, null];
         yield 'true'       => [true, null];
         yield 'false'      => [false, null];
         yield 'zero-float' => [0.0, null];
         yield 'float'      => [1.1, $isPHP81 ? 'Implicit conversion' : null];
+        // phpcs:enable
     }
 
     /**
