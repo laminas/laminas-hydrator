@@ -37,7 +37,7 @@
         "laminas/laminas-serializer": "^2.9",
         "laminas/laminas-servicemanager": "^3.3.2",
         "phpbench/phpbench": "^1.0",
-        "phpunit/phpunit": "~9.3.0",
+        "phpunit/phpunit": "~9.5.5",
         "psalm/plugin-phpunit": "^0.16.1",
         "vimeo/psalm": "^4.8.1"
     },
