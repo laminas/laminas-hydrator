@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Laminas\Hydrator\NamingStrategy\UnderscoreNamingStrategy;
 
+use function array_key_exists;
 use function mb_strtolower;
 use function preg_replace;
 use function preg_replace_callback;
@@ -16,13 +17,26 @@ final class CamelCaseToUnderscoreFilter
 {
     use StringSupportTrait;
 
+    /** @var string[] $transformedFilters */
+    private $transformedFilters = [];
+
     public function filter(string $value): string
     {
+        if (array_key_exists($value, $this->transformedFilters)) {
+            return $this->transformedFilters[$value];
+        }
+
         [$pattern, $replacement] = $this->getPatternAndReplacement();
-        $filtered                = preg_replace($pattern, $replacement, $value);
+
+        $filtered = preg_replace($pattern, $replacement, $value);
 
         $lowerFunction = $this->getLowerFunction();
-        return $lowerFunction($filtered);
+        /** @var string $filteredValue */
+        $filteredValue = $lowerFunction($filtered);
+
+        $this->transformedFilters[$value] = $filteredValue;
+
+        return $filteredValue;
     }
 
     /**
