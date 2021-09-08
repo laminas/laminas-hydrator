@@ -20,6 +20,7 @@ class SerializableStrategyTest extends TestCase
     public function testCannotUseBadArgumentSerializer(): void
     {
         $this->expectException(InvalidArgumentException::class);
+        /** @psalm-suppress InvalidArgument */
         new SerializableStrategy(false);
     }
 

@@ -8,6 +8,8 @@ use Laminas\Hydrator\Exception;
 use Laminas\Hydrator\NamingStrategy\MapNamingStrategy;
 use PHPUnit\Framework\TestCase;
 
+use const PHP_VERSION_ID;
+
 /**
  * Tests for {@see MapNamingStrategy}
  *
@@ -26,13 +28,17 @@ class MapNamingStrategyTest extends TestCase
         yield 'object'     => [(object) ['foo' => 'bar']];
     }
 
+    /** @psalm-return iterable<string, array{0: mixed, 1: null|string}> */
     public function invalidKeyValues(): iterable
     {
-        yield 'null'       => [null];
-        yield 'true'       => [true];
-        yield 'false'      => [false];
-        yield 'zero-float' => [0.0];
-        yield 'float'      => [1.1];
+        // phpcs:disable WebimpressCodingStandard.NamingConventions.ValidVariableName.NotCamelCaps
+        $isPHP81 = PHP_VERSION_ID >= 80100;
+        yield 'null'       => [null, null];
+        yield 'true'       => [true, null];
+        yield 'false'      => [false, null];
+        yield 'zero-float' => [0.0, null];
+        yield 'float'      => [1.1, $isPHP81 ? 'Implicit conversion' : null];
+        // phpcs:enable
     }
 
     /**
@@ -53,10 +59,17 @@ class MapNamingStrategyTest extends TestCase
      * @param mixed $invalidKey
      */
     public function testExtractionMapConstructorRaisesExceptionWhenFlippingHydrationMapForInvalidKeys(
-        $invalidKey
+        $invalidKey,
+        ?string $errorMessage
     ): void {
-        $this->expectException(Exception\InvalidArgumentException::class);
-        $this->expectExceptionMessage('can not be flipped');
+        if (null === $errorMessage) {
+            // PHP < 8.1, or PHP >= 8.1 AND non-float value
+            $this->expectException(Exception\InvalidArgumentException::class);
+            $this->expectExceptionMessage('can not be flipped');
+        } else {
+            $this->expectError();
+            $this->expectErrorMessage($errorMessage);
+        }
 
         /** @psalm-suppress MixedArrayOffset */
         MapNamingStrategy::createFromExtractionMap([$invalidKey => 'foo']);
@@ -80,10 +93,18 @@ class MapNamingStrategyTest extends TestCase
      * @dataProvider invalidKeyValues
      * @param mixed $invalidKey
      */
-    public function testHydrationMapConstructorRaisesExceptionWhenFlippingExtractionMapForInvalidKeys($invalidKey): void
-    {
-        $this->expectException(Exception\InvalidArgumentException::class);
-        $this->expectExceptionMessage('can not be flipped');
+    public function testHydrationMapConstructorRaisesExceptionWhenFlippingExtractionMapForInvalidKeys(
+        $invalidKey,
+        ?string $errorMessage
+    ): void {
+        if (null === $errorMessage) {
+            // PHP < 8.1, or PHP >= 8.1 AND non-float value
+            $this->expectException(Exception\InvalidArgumentException::class);
+            $this->expectExceptionMessage('can not be flipped');
+        } else {
+            $this->expectError();
+            $this->expectErrorMessage($errorMessage);
+        }
 
         /** @psalm-suppress MixedArrayOffset */
         MapNamingStrategy::createFromHydrationMap([$invalidKey => 'foo']);

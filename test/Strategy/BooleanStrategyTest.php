@@ -101,6 +101,7 @@ class BooleanStrategyTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Unable to hydrate');
         $hydrator = new BooleanStrategy(1, 0);
+        /** @psalm-suppress InvalidArgument */
         $hydrator->hydrate(new stdClass());
     }
 }

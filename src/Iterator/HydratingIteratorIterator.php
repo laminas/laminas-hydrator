@@ -8,6 +8,7 @@ use Iterator;
 use IteratorIterator;
 use Laminas\Hydrator\Exception\InvalidArgumentException;
 use Laminas\Hydrator\HydratorInterface;
+use ReturnTypeWillChange;
 
 use function class_exists;
 use function is_object;
@@ -63,6 +64,7 @@ class HydratingIteratorIterator extends IteratorIterator implements HydratingIte
     /**
      * @return object Returns hydrated clone of $prototype
      */
+    #[ReturnTypeWillChange]
     public function current()
     {
         $currentValue = parent::current();
