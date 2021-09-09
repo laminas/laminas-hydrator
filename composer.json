@@ -27,7 +27,6 @@
     "require": {
         "php": "^7.3 || ~8.0.0 || ~8.1.0",
         "laminas/laminas-stdlib": "^3.3",
-        "psr/cache": "1.0.1",
         "webmozart/assert": "^1.10"
     },
     "require-dev": {
@@ -39,6 +38,7 @@
         "phpbench/phpbench": "^1.0",
         "phpunit/phpunit": "~9.5.5",
         "psalm/plugin-phpunit": "^0.16.1",
+        "psr/cache": "1.0.1",
         "vimeo/psalm": "^4.8.1"
     },
     "suggest": {
