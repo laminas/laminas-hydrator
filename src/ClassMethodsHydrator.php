@@ -205,7 +205,7 @@ class ClassMethodsHydrator extends AbstractHydrator implements HydratorOptionsIn
         return $this->getCompositeFilter();
     }
 
-    private function identifyAttributeName(object $object, string $method): string
+    protected function identifyAttributeName(object $object, string $method): string
     {
         if (strpos($method, 'get') === 0) {
             $attribute = substr($method, 3);
