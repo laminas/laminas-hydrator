@@ -23,7 +23,10 @@ class DelegatingHydrator implements HydratorInterface
      */
     public function hydrate(array $data, object $object)
     {
-        return $this->getHydrator($object)->hydrate($data, $object);
+        if (! $object instanceof ProxyObject) {
+            return $this->getHydrator($object)->hydrate($data, $object);
+        }
+        return $this->hydrators->get($object->getObjectClassName())->hydrate($data, $object);
     }
 
     /**

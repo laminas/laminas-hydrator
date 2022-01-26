@@ -6,6 +6,7 @@ namespace Laminas\Hydrator\Strategy;
 
 use Laminas\Hydrator\Exception;
 use Laminas\Hydrator\HydratorInterface;
+use Laminas\Hydrator\ProxyObject;
 use ReflectionClass;
 
 use function array_map;
@@ -24,11 +25,17 @@ class CollectionStrategy implements StrategyInterface
     /** @var string */
     private $objectClassName;
 
+    /** @var bool */
+    private $useProxyObject;
+
     /**
      * @throws Exception\InvalidArgumentException
      */
-    public function __construct(HydratorInterface $objectHydrator, string $objectClassName)
-    {
+    public function __construct(
+        HydratorInterface $objectHydrator,
+        string $objectClassName,
+        bool $useProxyObject = false
+    ) {
         if (! class_exists($objectClassName)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Object class name needs to be the name of an existing class, got "%s" instead.',
@@ -38,6 +45,7 @@ class CollectionStrategy implements StrategyInterface
 
         $this->objectHydrator  = $objectHydrator;
         $this->objectClassName = $objectClassName;
+        $this->useProxyObject  = $useProxyObject;
     }
 
     /**
@@ -83,6 +91,15 @@ class CollectionStrategy implements StrategyInterface
                 'Value needs to be an array, got "%s" instead.',
                 is_object($value) ? get_class($value) : gettype($value)
             ));
+        }
+
+        if ($this->useProxyObject) {
+            return array_map(function ($data) {
+                return $this->objectHydrator->hydrate(
+                    $data,
+                    new ProxyObject($this->objectClassName)
+                );
+            }, $value);
         }
 
         $reflection = new ReflectionClass($this->objectClassName);
