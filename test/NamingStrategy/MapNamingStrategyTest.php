@@ -12,7 +12,6 @@ use function error_reporting;
 
 use const E_ALL;
 use const E_DEPRECATED;
-use const PHP_VERSION_ID;
 
 /**
  * Tests for {@see MapNamingStrategy}
@@ -21,19 +20,6 @@ use const PHP_VERSION_ID;
  */
 class MapNamingStrategyTest extends TestCase
 {
-    /** @var int */
-    private $errorLevel;
-
-    public function setUp(): void
-    {
-        $this->errorLevel = error_reporting();
-    }
-
-    public function tearDown(): void
-    {
-        error_reporting($this->errorLevel);
-    }
-
     public function invalidMapValues(): iterable
     {
         yield 'null'       => [null];
@@ -45,17 +31,14 @@ class MapNamingStrategyTest extends TestCase
         yield 'object'     => [(object) ['foo' => 'bar']];
     }
 
-    /** @psalm-return iterable<string, array{0: mixed, 1: null|string}> */
+    /** @psalm-return iterable<string, array{0: mixed}> */
     public function invalidKeyValues(): iterable
     {
-        yield 'null'       => [null, null];
-        yield 'true'       => [true, null];
-        yield 'false'      => [false, null];
-        yield 'zero-float' => [0.0, null];
-        if (PHP_VERSION_ID >= 80100) {
-            error_reporting(E_ALL & ~E_DEPRECATED);
-        }
-        yield 'float'      => [1.1, null];
+        yield 'null'       => [null];
+        yield 'true'       => [true];
+        yield 'false'      => [false];
+        yield 'zero-float' => [0.0];
+        yield 'float'      => [1.1];
     }
 
     /**
@@ -81,8 +64,13 @@ class MapNamingStrategyTest extends TestCase
         $this->expectException(Exception\InvalidArgumentException::class);
         $this->expectExceptionMessage('can not be flipped');
 
+        // To avoid "PHP Deprecated" about float key (PHP 8.1)
+        $errorLevel    = error_reporting(E_ALL&~E_DEPRECATED);
+        $extractionMap = [$invalidKey => 'foo'];
+        error_reporting($errorLevel);
+
         /** @psalm-suppress MixedArrayOffset */
-        MapNamingStrategy::createFromExtractionMap([$invalidKey => 'foo']);
+        MapNamingStrategy::createFromExtractionMap($extractionMap);
     }
 
     /**
@@ -104,20 +92,18 @@ class MapNamingStrategyTest extends TestCase
      * @param mixed $invalidKey
      */
     public function testHydrationMapConstructorRaisesExceptionWhenFlippingExtractionMapForInvalidKeys(
-        $invalidKey,
-        ?string $errorMessage
+        $invalidKey
     ): void {
-        if (null === $errorMessage) {
-            // PHP < 8.1, or PHP >= 8.1 AND non-float value
-            $this->expectException(Exception\InvalidArgumentException::class);
-            $this->expectExceptionMessage('can not be flipped');
-        } else {
-            $this->expectError();
-            $this->expectErrorMessage($errorMessage);
-        }
+        $this->expectException(Exception\InvalidArgumentException::class);
+        $this->expectExceptionMessage('can not be flipped');
+
+        // To avoid "PHP Deprecated" about float key (PHP 8.1)
+        $errorLevel   = error_reporting(E_ALL&~E_DEPRECATED);
+        $hydrationMap = [$invalidKey => 'foo'];
+        error_reporting($errorLevel);
 
         /** @psalm-suppress MixedArrayOffset */
-        MapNamingStrategy::createFromHydrationMap([$invalidKey => 'foo']);
+        MapNamingStrategy::createFromHydrationMap($hydrationMap);
     }
 
     public function testExtractReturnsVerbatimWhenEmptyExtractionMapProvided(): void
