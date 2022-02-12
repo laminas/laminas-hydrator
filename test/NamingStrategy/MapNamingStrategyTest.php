@@ -8,6 +8,10 @@ use Laminas\Hydrator\Exception;
 use Laminas\Hydrator\NamingStrategy\MapNamingStrategy;
 use PHPUnit\Framework\TestCase;
 
+use function error_reporting;
+
+use const E_ALL;
+use const E_DEPRECATED;
 use const PHP_VERSION_ID;
 
 /**
@@ -17,6 +21,19 @@ use const PHP_VERSION_ID;
  */
 class MapNamingStrategyTest extends TestCase
 {
+    /** @var int */
+    private $errorLevel;
+
+    public function setUp(): void
+    {
+        $this->errorLevel = error_reporting();
+    }
+
+    public function tearDown(): void
+    {
+        error_reporting($this->errorLevel);
+    }
+
     public function invalidMapValues(): iterable
     {
         yield 'null'       => [null];
@@ -31,14 +48,14 @@ class MapNamingStrategyTest extends TestCase
     /** @psalm-return iterable<string, array{0: mixed, 1: null|string}> */
     public function invalidKeyValues(): iterable
     {
-        // phpcs:disable WebimpressCodingStandard.NamingConventions.ValidVariableName.NotCamelCaps
-        $isPHP81 = PHP_VERSION_ID >= 80100;
         yield 'null'       => [null, null];
         yield 'true'       => [true, null];
         yield 'false'      => [false, null];
         yield 'zero-float' => [0.0, null];
-        yield 'float'      => [1.1, $isPHP81 ? 'Implicit conversion' : null];
-        // phpcs:enable
+        if (PHP_VERSION_ID >= 80100) {
+            error_reporting(E_ALL & ~E_DEPRECATED);
+        }
+        yield 'float'      => [1.1, null];
     }
 
     /**
@@ -60,16 +77,9 @@ class MapNamingStrategyTest extends TestCase
      */
     public function testExtractionMapConstructorRaisesExceptionWhenFlippingHydrationMapForInvalidKeys(
         $invalidKey,
-        ?string $errorMessage
     ): void {
-        if (null === $errorMessage) {
-            // PHP < 8.1, or PHP >= 8.1 AND non-float value
-            $this->expectException(Exception\InvalidArgumentException::class);
-            $this->expectExceptionMessage('can not be flipped');
-        } else {
-            $this->expectError();
-            $this->expectErrorMessage($errorMessage);
-        }
+        $this->expectException(Exception\InvalidArgumentException::class);
+        $this->expectExceptionMessage('can not be flipped');
 
         /** @psalm-suppress MixedArrayOffset */
         MapNamingStrategy::createFromExtractionMap([$invalidKey => 'foo']);
