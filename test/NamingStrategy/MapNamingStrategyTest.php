@@ -76,7 +76,7 @@ class MapNamingStrategyTest extends TestCase
      * @param mixed $invalidKey
      */
     public function testExtractionMapConstructorRaisesExceptionWhenFlippingHydrationMapForInvalidKeys(
-        $invalidKey,
+        $invalidKey
     ): void {
         $this->expectException(Exception\InvalidArgumentException::class);
         $this->expectExceptionMessage('can not be flipped');
