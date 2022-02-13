@@ -651,9 +651,7 @@
     </PropertyNotSetInConstructor>
   </file>
   <file src="test/NamingStrategy/MapNamingStrategyTest.php">
-    <MixedArgumentTypeCoercion occurrences="4">
-      <code>[$invalidKey =&gt; 'foo']</code>
-      <code>[$invalidKey =&gt; 'foo']</code>
+    <MixedArgumentTypeCoercion occurrences="2">
       <code>['foo' =&gt; $invalidValue]</code>
       <code>['foo' =&gt; $invalidValue]</code>
     </MixedArgumentTypeCoercion>
