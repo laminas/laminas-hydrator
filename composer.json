@@ -42,7 +42,7 @@
         "phpunit/phpunit": "~9.5.5",
         "psalm/plugin-phpunit": "^0.16.1",
         "psr/cache": "1.0.1",
-        "vimeo/psalm": "^4.8.1"
+        "vimeo/psalm": "^4.20"
     },
     "suggest": {
         "laminas/laminas-eventmanager": "^3.2, to support aggregate hydrator usage",

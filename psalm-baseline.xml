@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.8.1@f73f2299dbc59a3e6c4d66cff4605176e728ee69">
+<files psalm-version="4.20.0@f82a70e7edfc6cf2705e9374c8a0b6a974a779ed">
   <file src="src/Aggregate/AggregateHydrator.php">
     <DocblockTypeContradiction occurrences="1">
       <code>null === $this-&gt;eventManager</code>
@@ -150,25 +150,14 @@
     </MixedReturnTypeCoercion>
   </file>
   <file src="src/NamingStrategy/UnderscoreNamingStrategy/CamelCaseToUnderscoreFilter.php">
-    <MissingClosureParamType occurrences="3">
-      <code>$matches</code>
+    <MissingClosureParamType occurrences="2">
       <code>$value</code>
       <code>$value</code>
     </MissingClosureParamType>
-    <MixedArgument occurrences="3">
-      <code>$matches[1]</code>
+    <MixedArgument occurrences="2">
       <code>$value</code>
       <code>$value</code>
     </MixedArgument>
-    <MixedArrayAccess occurrences="1">
-      <code>$matches[1]</code>
-    </MixedArrayAccess>
-    <MixedInferredReturnType occurrences="1">
-      <code>string</code>
-    </MixedInferredReturnType>
-    <MixedReturnStatement occurrences="1">
-      <code>$lowerFunction($filtered)</code>
-    </MixedReturnStatement>
   </file>
   <file src="src/NamingStrategy/UnderscoreNamingStrategy/StringSupportTrait.php">
     <DocblockTypeContradiction occurrences="2">
@@ -205,12 +194,6 @@
       <code>$matches[2]</code>
       <code>$value[0]</code>
     </MixedArrayAccess>
-    <MixedInferredReturnType occurrences="1">
-      <code>string</code>
-    </MixedInferredReturnType>
-    <MixedReturnStatement occurrences="1">
-      <code>$lcFirstFunction($filtered)</code>
-    </MixedReturnStatement>
   </file>
   <file src="src/ObjectProperty.php">
     <DeprecatedClass occurrences="1">
@@ -397,11 +380,6 @@
       <code>'thisIsNotAnObject'</code>
       <code>'thisIsNotAnObject'</code>
     </InvalidArgument>
-    <MixedMethodCall occurrences="3">
-      <code>getArrayCopy</code>
-      <code>getArrayCopy</code>
-      <code>getData</code>
-    </MixedMethodCall>
     <PropertyNotSetInConstructor occurrences="3">
       <code>$hydrator</code>
       <code>ArraySerializableHydratorTest</code>
@@ -412,17 +390,10 @@
     <DeprecatedClass occurrences="1">
       <code>new ArraySerializable()</code>
     </DeprecatedClass>
-    <MissingClosureParamType occurrences="2">
-      <code>$errno</code>
-      <code>$errstr</code>
-    </MissingClosureParamType>
     <PropertyNotSetInConstructor occurrences="2">
       <code>ArraySerializableTest</code>
       <code>ArraySerializableTest</code>
     </PropertyNotSetInConstructor>
-    <RedundantCondition occurrences="1">
-      <code>assertInstanceOf</code>
-    </RedundantCondition>
   </file>
   <file src="test/ClassMethodsHydratorTest.php">
     <InvalidArgument occurrences="4">
@@ -441,29 +412,16 @@
     <DeprecatedClass occurrences="1">
       <code>new ClassMethods()</code>
     </DeprecatedClass>
-    <MissingClosureParamType occurrences="2">
-      <code>$errno</code>
-      <code>$errstr</code>
-    </MissingClosureParamType>
     <PropertyNotSetInConstructor occurrences="2">
       <code>ClassMethodsTest</code>
       <code>ClassMethodsTest</code>
     </PropertyNotSetInConstructor>
-    <RedundantCondition occurrences="1">
-      <code>assertInstanceOf</code>
-    </RedundantCondition>
   </file>
   <file src="test/DelegatingHydratorFactoryTest.php">
     <PropertyNotSetInConstructor occurrences="2">
       <code>DelegatingHydratorFactoryTest</code>
       <code>DelegatingHydratorFactoryTest</code>
     </PropertyNotSetInConstructor>
-    <RedundantCondition occurrences="4">
-      <code>assertInstanceOf</code>
-      <code>assertInstanceOf</code>
-      <code>assertInstanceOf</code>
-      <code>assertInstanceOf</code>
-    </RedundantCondition>
     <TooManyArguments occurrences="4">
       <code>$factory</code>
       <code>$factory</code>
@@ -613,13 +571,6 @@
       <code>HydratorPluginManagerFactoryTest</code>
       <code>HydratorPluginManagerFactoryTest</code>
     </PropertyNotSetInConstructor>
-    <RedundantCondition occurrences="5">
-      <code>assertInstanceOf</code>
-      <code>assertInstanceOf</code>
-      <code>assertInstanceOf</code>
-      <code>assertInstanceOf</code>
-      <code>assertInstanceOf</code>
-    </RedundantCondition>
   </file>
   <file src="test/HydratorStrategyTest.php">
     <MixedArgument occurrences="2">
@@ -664,10 +615,6 @@
       <code>$property</code>
       <code>$property</code>
     </MixedArgument>
-    <MixedMethodCall occurrences="2">
-      <code>getFooBar</code>
-      <code>getFooBarBaz</code>
-    </MixedMethodCall>
     <PropertyNotSetInConstructor occurrences="8">
       <code>$classMethodsCamelCase</code>
       <code>$classMethodsCamelCaseMissing</code>
@@ -678,11 +625,6 @@
       <code>HydratorTest</code>
       <code>HydratorTest</code>
     </PropertyNotSetInConstructor>
-  </file>
-  <file src="test/HydratorTestTrait.php">
-    <MixedMethodCall occurrences="1">
-      <code>getValue</code>
-    </MixedMethodCall>
   </file>
   <file src="test/Iterator/HydratingArrayIteratorTest.php">
     <PropertyNotSetInConstructor occurrences="2">
@@ -709,9 +651,7 @@
     </PropertyNotSetInConstructor>
   </file>
   <file src="test/NamingStrategy/MapNamingStrategyTest.php">
-    <MixedArgumentTypeCoercion occurrences="4">
-      <code>[$invalidKey =&gt; 'foo']</code>
-      <code>[$invalidKey =&gt; 'foo']</code>
+    <MixedArgumentTypeCoercion occurrences="2">
       <code>['foo' =&gt; $invalidValue]</code>
       <code>['foo' =&gt; $invalidValue]</code>
     </MixedArgumentTypeCoercion>
@@ -763,14 +703,6 @@
       <code>'thisIsNotAnObject'</code>
       <code>'thisIsNotAnObject'</code>
     </InvalidArgument>
-    <MixedMethodCall occurrences="6">
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-    </MixedMethodCall>
     <PropertyNotSetInConstructor occurrences="3">
       <code>$hydrator</code>
       <code>ObjectPropertyHydratorTest</code>
@@ -781,17 +713,10 @@
     <DeprecatedClass occurrences="1">
       <code>new ObjectProperty()</code>
     </DeprecatedClass>
-    <MissingClosureParamType occurrences="2">
-      <code>$errno</code>
-      <code>$errstr</code>
-    </MissingClosureParamType>
     <PropertyNotSetInConstructor occurrences="2">
       <code>ObjectPropertyTest</code>
       <code>ObjectPropertyTest</code>
     </PropertyNotSetInConstructor>
-    <RedundantCondition occurrences="1">
-      <code>assertInstanceOf</code>
-    </RedundantCondition>
   </file>
   <file src="test/ReflectionHydratorTest.php">
     <InvalidArgument occurrences="2">
@@ -808,17 +733,10 @@
     <DeprecatedClass occurrences="1">
       <code>new Reflection()</code>
     </DeprecatedClass>
-    <MissingClosureParamType occurrences="2">
-      <code>$errno</code>
-      <code>$errstr</code>
-    </MissingClosureParamType>
     <PropertyNotSetInConstructor occurrences="2">
       <code>ReflectionTest</code>
       <code>ReflectionTest</code>
     </PropertyNotSetInConstructor>
-    <RedundantCondition occurrences="1">
-      <code>assertInstanceOf</code>
-    </RedundantCondition>
   </file>
   <file src="test/StandaloneHydratorPluginManagerFactoryTest.php">
     <DeprecatedClass occurrences="8">
@@ -905,9 +823,6 @@
       <code>5</code>
       <code>true</code>
     </InvalidScalarArgument>
-    <PossiblyFalseArgument occurrences="1">
-      <code>false</code>
-    </PossiblyFalseArgument>
     <PropertyNotSetInConstructor occurrences="2">
       <code>BooleanStrategyTest</code>
       <code>BooleanStrategyTest</code>
@@ -1035,9 +950,6 @@
       <code>$serialized</code>
       <code>$serialized</code>
     </MixedAssignment>
-    <PossiblyFalseArgument occurrences="1">
-      <code>false</code>
-    </PossiblyFalseArgument>
     <PropertyNotSetInConstructor occurrences="2">
       <code>SerializableStrategyTest</code>
       <code>SerializableStrategyTest</code>
