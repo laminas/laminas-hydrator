@@ -50,7 +50,7 @@ final class ConstructorParametersHydratorDecorator implements HydratorInterface
                 $value = null;
             }
 
-            $value = $this->castScalarValue($value, $constructorParameter);
+            $value        = $this->castScalarValue($value, $constructorParameter);
             $parameters[] = $this->decoratedHydrator->hydrateValue($parameterName, $value, $data);
         }
 
