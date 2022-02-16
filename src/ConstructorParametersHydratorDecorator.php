@@ -6,6 +6,7 @@ namespace Laminas\Hydrator;
 
 use ReflectionClass;
 use ReflectionException;
+use ReflectionNamedType;
 use ReflectionParameter;
 
 final class ConstructorParametersHydratorDecorator implements HydratorInterface
@@ -48,6 +49,8 @@ final class ConstructorParametersHydratorDecorator implements HydratorInterface
             } catch (ReflectionException $e) {
                 $value = null;
             }
+
+            $value = $this->castScalarValue($value, $constructorParameter);
             $parameters[] = $this->decoratedHydrator->hydrateValue($parameterName, $value, $data);
         }
 
@@ -68,5 +71,30 @@ final class ConstructorParametersHydratorDecorator implements HydratorInterface
         }
 
         return self::$parametersCache[$object->getObjectClassName()];
+    }
+
+    /**
+     * @param mixed $value
+     * @param ReflectionParameter $constructorParameter
+     * @return mixed
+     */
+    private function castScalarValue($value, ReflectionParameter $constructorParameter)
+    {
+        if ($value === null || !$constructorParameter->getType() instanceof ReflectionNamedType) {
+            return $value;
+        }
+
+        switch ($constructorParameter->getType()->getName()) {
+            case 'string':
+                return (string)$value;
+            case 'int':
+                return (int)$value;
+            case 'float':
+                return (float)$value;
+            case 'bool':
+                return (bool)$value;
+            default:
+                return $value;
+        }
     }
 }

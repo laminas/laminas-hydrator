@@ -20,12 +20,28 @@ final class ConstructorParametersHydratorDecoratorTest extends TestCase
             'foo'         => 'bar',
             'bar'         => 99,
             'isMandatory' => true,
+            'price'       => 19.98,
         ];
         $subject = new ConstructorParametersHydratorDecorator(new ClassMethodsHydrator(false));
         $object  = $subject->hydrate($data, new ProxyObject(ObjectWithConstructor::class));
 
         Assert::assertInstanceOf(ObjectWithConstructor::class, $object);
-        Assert::assertEquals(new ObjectWithConstructor('bar', 99, true), $object);
+        Assert::assertEquals(new ObjectWithConstructor('bar', true, 19.98, 99), $object);
+    }
+
+    public function testWithWrongScalarType(): void
+    {
+        $data    = [
+            'foo'         => 123,
+            'bar'         => '99',
+            'isMandatory' => 1,
+            'price'       => '19.98',
+        ];
+        $subject = new ConstructorParametersHydratorDecorator(new ClassMethodsHydrator(false));
+        $object  = $subject->hydrate($data, new ProxyObject(ObjectWithConstructor::class));
+
+        Assert::assertInstanceOf(ObjectWithConstructor::class, $object);
+        Assert::assertEquals(new ObjectWithConstructor('123', true, 19.98, 99), $object);
     }
 
     public function testWithAdditionalSetter(): void
@@ -34,6 +50,7 @@ final class ConstructorParametersHydratorDecoratorTest extends TestCase
             'foo'         => 'bar',
             'bar'         => 99,
             'isMandatory' => true,
+            'price'       => 19.98,
             'baz'         => 'Hello world',
         ];
         $subject = new ConstructorParametersHydratorDecorator(new ClassMethodsHydrator(false));
@@ -41,7 +58,7 @@ final class ConstructorParametersHydratorDecoratorTest extends TestCase
 
         Assert::assertInstanceOf(ObjectWithConstructor::class, $object);
         Assert::assertEquals(
-            (new ObjectWithConstructor('bar', 99, true))->setBaz('Hello world'),
+            (new ObjectWithConstructor('bar', true, 19.98, 99))->setBaz('Hello world'),
             $object
         );
     }
@@ -51,12 +68,13 @@ final class ConstructorParametersHydratorDecoratorTest extends TestCase
         $data    = [
             'foo'         => 'bar',
             'isMandatory' => true,
+            'price'       => 19.98,
         ];
         $subject = new ConstructorParametersHydratorDecorator(new ClassMethodsHydrator(false));
         $object  = $subject->hydrate($data, new ProxyObject(ObjectWithConstructor::class));
 
         Assert::assertInstanceOf(ObjectWithConstructor::class, $object);
-        Assert::assertEquals(new ObjectWithConstructor('bar', 42, true), $object);
+        Assert::assertEquals(new ObjectWithConstructor('bar', true, 19.98, 42), $object);
     }
 
     public function testWithMissingMandatoryParameter(): void
@@ -71,12 +89,13 @@ final class ConstructorParametersHydratorDecoratorTest extends TestCase
     public function testExtract(): void
     {
         $subject = new ConstructorParametersHydratorDecorator(new ClassMethodsHydrator(false));
-        $data    = $subject->extract(new ObjectWithConstructor('bar', 99, true));
+        $data    = $subject->extract(new ObjectWithConstructor('bar', true, 19.98, 99));
         Assert::assertSame(
             [
                 'foo'         => 'bar',
-                'bar'         => 99,
                 'isMandatory' => true,
+                'price'       => 19.98,
+                'bar'         => 99,
                 'baz'         => null,
             ],
             $data
