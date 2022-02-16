@@ -75,24 +75,23 @@ final class ConstructorParametersHydratorDecorator implements HydratorInterface
 
     /**
      * @param mixed $value
-     * @param ReflectionParameter $constructorParameter
      * @return mixed
      */
     private function castScalarValue($value, ReflectionParameter $constructorParameter)
     {
-        if ($value === null || !$constructorParameter->getType() instanceof ReflectionNamedType) {
+        if ($value === null || ! $constructorParameter->getType() instanceof ReflectionNamedType) {
             return $value;
         }
 
         switch ($constructorParameter->getType()->getName()) {
             case 'string':
-                return (string)$value;
+                return (string) $value;
             case 'int':
-                return (int)$value;
+                return (int) $value;
             case 'float':
-                return (float)$value;
+                return (float) $value;
             case 'bool':
-                return (bool)$value;
+                return (bool) $value;
             default:
                 return $value;
         }

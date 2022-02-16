@@ -23,10 +23,10 @@ final class ObjectWithConstructor
 
     public function __construct(string $foo, bool $isMandatory, float $price, ?int $bar = 42)
     {
-        $this->foo = $foo;
+        $this->foo         = $foo;
         $this->isMandatory = $isMandatory;
-        $this->bar = $bar;
-        $this->price = $price;
+        $this->bar         = $bar;
+        $this->price       = $price;
     }
 
     public function getFoo(): string
