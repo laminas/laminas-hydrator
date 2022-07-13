@@ -5,12 +5,16 @@ declare(strict_types=1);
 namespace Laminas\Hydrator;
 
 use Laminas\ServiceManager\Config;
+use Laminas\ServiceManager\ServiceManager;
 use Psr\Container\ContainerInterface;
 
 use function class_exists;
 use function is_array;
 use function sprintf;
 
+/**
+ * @psalm-import-type ServiceManagerConfiguration from ServiceManager
+ */
 class HydratorPluginManagerFactory
 {
     /**
@@ -22,6 +26,8 @@ class HydratorPluginManagerFactory
      * configuration.
      *
      * @see https://docs.mezzio.dev/mezzio/v3/features/container/config/
+     *
+     * @param ServiceManagerConfiguration|null $options
      *
      * @throws Exception\DomainException If laminas-servicemanager is not installed.
      */

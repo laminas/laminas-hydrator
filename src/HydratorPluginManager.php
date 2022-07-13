@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Laminas\Hydrator;
 
 use Laminas\ServiceManager\AbstractPluginManager;
+use Laminas\ServiceManager\ConfigInterface;
 use Laminas\ServiceManager\Exception\InvalidServiceException;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 
@@ -17,6 +18,9 @@ use function sprintf;
  * Plugin manager implementation for hydrators.
  *
  * Enforces that adapters retrieved are instances of HydratorInterface
+ *
+ * @psalm-import-type FactoriesConfigurationType from ConfigInterface
+ * @extends AbstractPluginManager<HydratorInterface>
  */
 class HydratorPluginManager extends AbstractPluginManager implements HydratorPluginManagerInterface
 {
@@ -72,7 +76,7 @@ class HydratorPluginManager extends AbstractPluginManager implements HydratorPlu
     /**
      * Default factory-based adapters
      *
-     * @var string[]|callable[]
+     * @var FactoriesConfigurationType
      */
     protected $factories = [
         ArraySerializableHydrator::class => InvokableFactory::class,
@@ -99,7 +103,7 @@ class HydratorPluginManager extends AbstractPluginManager implements HydratorPlu
     /**
      * {inheritDoc}
      *
-     * @var null|string
+     * @var class-string<HydratorInterface>|null
      */
     protected $instanceOf = HydratorInterface::class;
 
@@ -110,6 +114,7 @@ class HydratorPluginManager extends AbstractPluginManager implements HydratorPlu
      *
      * @param mixed $instance
      * @throws InvalidServiceException
+     * @psalm-assert HydratorInterface $instance
      */
     public function validate($instance)
     {
