@@ -24,30 +24,30 @@ class StrategyChainTest extends TestCase
     {
         $chain = new StrategyChain([
             new ClosureStrategy(
-                static fn($value) => $value % 12
+                static fn(int $value): int => $value % 12
             ),
             new ClosureStrategy(
-                static fn($value) => $value % 9
+                static fn(int $value): int => $value % 9
             ),
         ]);
         $this->assertEquals(3, $chain->extract(87));
 
         $chain = new StrategyChain([
             new ClosureStrategy(
-                static fn($value) => $value % 8
+                static fn(int $value): int => $value % 8
             ),
             new ClosureStrategy(
-                static fn($value) => $value % 3
+                static fn(int $value): int => $value % 3
             ),
         ]);
         $this->assertEquals(1, $chain->extract(20));
 
         $chain = new StrategyChain([
             new ClosureStrategy(
-                static fn($value) => $value % 7
+                static fn(int $value): int => $value % 7
             ),
             new ClosureStrategy(
-                static fn($value) => $value % 6
+                static fn(int $value): int => $value % 6
             ),
         ]);
         $this->assertEquals(2, $chain->extract(30));
@@ -58,11 +58,11 @@ class StrategyChainTest extends TestCase
         $chain = new StrategyChain([
             new ClosureStrategy(
                 null,
-                static fn($value) => $value % 3
+                static fn(int $value): int => $value % 3
             ),
             new ClosureStrategy(
                 null,
-                static fn($value) => $value % 7
+                static fn(int $value): int => $value % 7
             ),
         ]);
         $this->assertEquals(0, $chain->hydrate(87));
@@ -70,11 +70,11 @@ class StrategyChainTest extends TestCase
         $chain = new StrategyChain([
             new ClosureStrategy(
                 null,
-                static fn($value) => $value % 8
+                static fn(int $value): int => $value % 8
             ),
             new ClosureStrategy(
                 null,
-                static fn($value) => $value % 3
+                static fn(int $value): int => $value % 3
             ),
         ]);
         $this->assertEquals(2, $chain->hydrate(20));
@@ -82,11 +82,11 @@ class StrategyChainTest extends TestCase
         $chain = new StrategyChain([
             new ClosureStrategy(
                 null,
-                static fn($value) => $value % 4
+                static fn(int $value): int => $value % 4
             ),
             new ClosureStrategy(
                 null,
-                static fn($value) => $value % 9
+                static fn(int $value): int => $value % 9
             ),
         ]);
         $this->assertEquals(3, $chain->hydrate(30));

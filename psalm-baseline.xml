@@ -944,7 +944,7 @@
       <code>$value</code>
       <code>$value</code>
     </MissingClosureParamType>
-    <MissingClosureReturnType occurrences="13">
+    <MissingClosureReturnType occurrences="12">
       <code>function ($value) {</code>
       <code>function ($value) {</code>
       <code>function ($value) {</code>
