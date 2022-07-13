@@ -21,8 +21,7 @@ final class CompositeNamingStrategy implements NamingStrategyInterface
     public function __construct(array $strategies, ?NamingStrategyInterface $defaultNamingStrategy = null)
     {
         $this->namingStrategies = array_map(
-            fn(NamingStrategyInterface $strategy) => // this callback is here only to ensure type-safety
-            $strategy,
+            static fn(NamingStrategyInterface $strategy) => $strategy,
             $strategies
         );
 

@@ -63,7 +63,7 @@ class ObjectPropertyHydrator extends AbstractHydrator
             $reflection = new ReflectionClass($object);
             $properties = array_fill_keys(
                 array_map(
-                    fn(ReflectionProperty $property) => $property->getName(),
+                    static fn(ReflectionProperty $property) => $property->getName(),
                     $reflection->getProperties(
                         ReflectionProperty::IS_PRIVATE
                         + ReflectionProperty::IS_PROTECTED

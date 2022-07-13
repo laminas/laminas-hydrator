@@ -179,7 +179,7 @@ class CollectionStrategyTest extends TestCase
         $extraction =  * @return string[]
         $extraction =  * @psalm-return array{value: string}
          */
-        fn(TestAsset\User $value): array => [
+        static fn(TestAsset\User $value): array => [
             'value' => spl_object_hash($value),
         ];
 

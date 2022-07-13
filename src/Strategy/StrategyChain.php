@@ -32,8 +32,7 @@ final class StrategyChain implements StrategyInterface
     {
         $extractionStrategies       = ArrayUtils::iteratorToArray($extractionStrategies);
         $this->extractionStrategies = array_map(
-            fn(StrategyInterface $strategy) => // this callback is here only to ensure type-safety
-            $strategy,
+            static fn(StrategyInterface $strategy) => $strategy,
             $extractionStrategies
         );
 

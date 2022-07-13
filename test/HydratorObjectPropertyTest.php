@@ -37,7 +37,7 @@ class HydratorObjectPropertyTest extends TestCase
             }
         };
 
-        $this->hydrator->addFilter('values', fn() => true);
+        $this->hydrator->addFilter('values', static fn() => true);
         $result = $this->hydrator->extract($instance);
         $this->assertArrayHasKey('id', $result);
         $this->assertEquals($instance->id, $result['id']);
