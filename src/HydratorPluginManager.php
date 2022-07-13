@@ -58,15 +58,15 @@ class HydratorPluginManager extends AbstractPluginManager implements HydratorPlu
         'ReflectionHydrator'        => ReflectionHydrator::class,
 
         // Legacy Zend Framework aliases
-        \Zend\Hydrator\ArraySerializableHydrator::class => ArraySerializableHydrator::class,
-        \Zend\Hydrator\ClassMethodsHydrator::class      => ClassMethodsHydrator::class,
-        \Zend\Hydrator\DelegatingHydrator::class        => DelegatingHydrator::class,
-        \Zend\Hydrator\ObjectPropertyHydrator::class    => ObjectPropertyHydrator::class,
-        \Zend\Hydrator\ReflectionHydrator::class        => ReflectionHydrator::class,
-        \Zend\Hydrator\ArraySerializable::class         => ArraySerializableHydrator::class,
-        \Zend\Hydrator\ClassMethods::class              => ClassMethodsHydrator::class,
-        \Zend\Hydrator\ObjectProperty::class            => ObjectPropertyHydrator::class,
-        \Zend\Hydrator\Reflection::class                => ReflectionHydrator::class,
+        'Zend\Hydrator\ArraySerializableHydrator' => ArraySerializableHydrator::class,
+        'Zend\Hydrator\ClassMethodsHydrator'      => ClassMethodsHydrator::class,
+        'Zend\Hydrator\DelegatingHydrator'        => DelegatingHydrator::class,
+        'Zend\Hydrator\ObjectPropertyHydrator'    => ObjectPropertyHydrator::class,
+        'Zend\Hydrator\ReflectionHydrator'        => ReflectionHydrator::class,
+        'Zend\Hydrator\ArraySerializable'         => ArraySerializableHydrator::class,
+        'Zend\Hydrator\ClassMethods'              => ClassMethodsHydrator::class,
+        'Zend\Hydrator\ObjectProperty'            => ObjectPropertyHydrator::class,
+        'Zend\Hydrator\Reflection'                => ReflectionHydrator::class,
     ];
 
     /**

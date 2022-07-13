@@ -49,7 +49,7 @@ class DelegatingHydratorFactoryTest extends TestCase
             ->method('has')
             ->withConsecutive(
                 [HydratorPluginManager::class],
-                [\Zend\Hydrator\HydratorPluginManager::class],
+                ['Zend\Hydrator\HydratorPluginManager'],
                 ['HydratorManager']
             )
             ->willReturnOnConsecutiveCalls(
@@ -73,7 +73,7 @@ class DelegatingHydratorFactoryTest extends TestCase
             ->method('has')
             ->withConsecutive(
                 [HydratorPluginManager::class],
-                [\Zend\Hydrator\HydratorPluginManager::class],
+                ['Zend\Hydrator\HydratorPluginManager'],
                 ['HydratorManager']
             )
             ->willReturnOnConsecutiveCalls(
