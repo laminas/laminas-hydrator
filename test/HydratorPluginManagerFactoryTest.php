@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace LaminasTest\Hydrator;
 
-use Interop\Container\ContainerInterface;
 use Laminas\Hydrator\HydratorInterface;
 use Laminas\Hydrator\HydratorPluginManager;
 use Laminas\Hydrator\HydratorPluginManagerFactory;
 use Laminas\Hydrator\ReflectionHydrator;
 use Laminas\ServiceManager\ServiceLocatorInterface;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerInterface;
 
 class HydratorPluginManagerFactoryTest extends TestCase
 {

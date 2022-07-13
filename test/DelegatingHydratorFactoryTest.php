@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace LaminasTest\Hydrator;
 
-use Interop\Container\ContainerInterface;
 use Laminas\Hydrator\DelegatingHydrator;
 use Laminas\Hydrator\DelegatingHydratorFactory;
 use Laminas\Hydrator\HydratorPluginManager;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerInterface;
 use ReflectionProperty;
 
 /**

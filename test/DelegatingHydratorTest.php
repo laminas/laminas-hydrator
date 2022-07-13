@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace LaminasTest\Hydrator;
 
 use ArrayObject;
-use Interop\Container\ContainerInterface;
 use Laminas\Hydrator\DelegatingHydrator;
 use Laminas\Hydrator\HydratorInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerInterface;
 
 /**
  * Unit tests for {@see DelegatingHydrator}
