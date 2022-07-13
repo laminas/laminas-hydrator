@@ -66,11 +66,11 @@ class HydratorClosureStrategyTest extends TestCase
     public function testExtractingObjects(): void
     {
         $this->hydrator->addStrategy('field1', new ClosureStrategy(
-            static fn($value) => sprintf('%s', $value),
+            static fn($value): string => sprintf('%s', $value),
             null
         ));
         $this->hydrator->addStrategy('field2', new ClosureStrategy(
-            static fn($value) => sprintf('hello, %s!', $value),
+            static fn($value): string => sprintf('hello, %s!', $value),
             null
         ));
 
@@ -85,11 +85,11 @@ class HydratorClosureStrategyTest extends TestCase
     {
         $this->hydrator->addStrategy('field2', new ClosureStrategy(
             null,
-            static fn($value) => sprintf('hello, %s!', $value)
+            static fn($value): string => sprintf('hello, %s!', $value)
         ));
         $this->hydrator->addStrategy('field3', new ClosureStrategy(
             null,
-            static fn($value) => new TestAsset\HydratorClosureStrategyEntity($value, sprintf('111%s', $value))
+            static fn($value): \LaminasTest\Hydrator\TestAsset\HydratorClosureStrategyEntity => new TestAsset\HydratorClosureStrategyEntity($value, sprintf('111%s', $value))
         ));
 
         $entity = new TestAsset\HydratorClosureStrategyEntity(111, 'world');

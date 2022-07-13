@@ -85,7 +85,7 @@ class CollectionStrategy implements StrategyInterface
 
         $reflection = new ReflectionClass($this->objectClassName);
 
-        return array_map(fn($data) => $this->objectHydrator->hydrate(
+        return array_map(fn($data): object => $this->objectHydrator->hydrate(
             $data,
             $reflection->newInstanceWithoutConstructor()
         ), $value);

@@ -53,7 +53,7 @@ final class OptionalParametersFilter implements FilterInterface
 
         $mandatoryParameters = array_filter(
             $reflectionMethod->getParameters(),
-            static fn(ReflectionParameter $parameter) => ! $parameter->isOptional()
+            static fn(ReflectionParameter $parameter): bool => ! $parameter->isOptional()
         );
 
         return static::$propertiesCache[$cacheName] = empty($mandatoryParameters);
