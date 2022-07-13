@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 class DateTimeImmutableFormatterStrategyTest extends TestCase
 {
-    private \Laminas\Hydrator\Strategy\DateTimeImmutableFormatterStrategy $strategy;
+    private DateTimeImmutableFormatterStrategy $strategy;
 
     protected function setUp(): void
     {

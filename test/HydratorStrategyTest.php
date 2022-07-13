@@ -14,7 +14,7 @@ class HydratorStrategyTest extends TestCase
     /**
      * The hydrator that is used during testing.
      */
-    private \Laminas\Hydrator\HydratorInterface $hydrator;
+    private HydratorInterface $hydrator;
 
     protected function setUp(): void
     {

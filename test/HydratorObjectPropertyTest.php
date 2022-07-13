@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class HydratorObjectPropertyTest extends TestCase
 {
-    private \Laminas\Hydrator\ObjectPropertyHydrator $hydrator;
+    private ObjectPropertyHydrator $hydrator;
 
     protected function setUp(): void
     {

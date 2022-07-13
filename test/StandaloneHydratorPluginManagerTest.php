@@ -46,7 +46,7 @@ class StandaloneHydratorPluginManagerTest extends TestCase
         yield 'ObjectPropertyHydrator'          => [Hydrator\ObjectPropertyHydrator::class];
         yield 'ObjectProperty'                  => [Hydrator\ObjectPropertyHydrator::class];
         yield 'ReflectionHydrator'              => [Hydrator\ReflectionHydrator::class];
-        yield \Reflection::class                      => [Hydrator\ReflectionHydrator::class];
+        yield 'Reflection'                      => [Hydrator\ReflectionHydrator::class];
     }
 
     /**
