@@ -89,7 +89,7 @@ class HydratorClosureStrategyTest extends TestCase
         ));
         $this->hydrator->addStrategy('field3', new ClosureStrategy(
             null,
-            static fn($value): \LaminasTest\Hydrator\TestAsset\HydratorClosureStrategyEntity => new TestAsset\HydratorClosureStrategyEntity($value, sprintf('111%s', $value))
+            static fn($value): TestAsset\HydratorClosureStrategyEntity => new TestAsset\HydratorClosureStrategyEntity($value, sprintf('111%s', $value))
         ));
 
         $entity = new TestAsset\HydratorClosureStrategyEntity(111, 'world');

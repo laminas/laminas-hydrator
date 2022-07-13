@@ -22,7 +22,7 @@ final class CompositeNamingStrategy implements NamingStrategyInterface
     {
         $this->namingStrategies = array_map(
             // this callback is here only to ensure type-safety
-            static fn(NamingStrategyInterface $strategy): \Laminas\Hydrator\NamingStrategy\NamingStrategyInterface => $strategy,
+            static fn(NamingStrategyInterface $strategy): NamingStrategyInterface => $strategy,
             $strategies
         );
 
