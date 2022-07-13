@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Laminas\Hydrator\Strategy;
 
 use Laminas\Hydrator\HydratorInterface;
+use Laminas\Hydrator\ProxyObject;
 use ReflectionClass;
 use ReflectionException;
 
@@ -23,12 +24,16 @@ class HydratorStrategy implements StrategyInterface
     /** @var string */
     private $objectClassName;
 
+    /** @var bool */
+    private $useProxyObject;
+
     /**
      * @throws Exception\InvalidArgumentException
      */
     public function __construct(
         HydratorInterface $objectHydrator,
-        string $objectClassName
+        string $objectClassName,
+        bool $useProxyObject = false
     ) {
         if (! class_exists($objectClassName)) {
             throw new Exception\InvalidArgumentException(
@@ -41,6 +46,7 @@ class HydratorStrategy implements StrategyInterface
 
         $this->objectHydrator  = $objectHydrator;
         $this->objectClassName = $objectClassName;
+        $this->useProxyObject  = $useProxyObject;
     }
 
     /**
@@ -88,6 +94,10 @@ class HydratorStrategy implements StrategyInterface
                     is_object($value) ? get_class($value) : gettype($value)
                 )
             );
+        }
+
+        if ($this->useProxyObject) {
+            return new ProxyObject($this->objectClassName);
         }
 
         $reflection = new ReflectionClass($this->objectClassName);
