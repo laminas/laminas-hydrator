@@ -9,6 +9,7 @@ use Laminas\ServiceManager\ConfigInterface;
 use Laminas\ServiceManager\Exception\InvalidServiceException;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 
+use function get_class;
 use function gettype;
 use function is_object;
 use function sprintf;
@@ -55,7 +56,7 @@ class HydratorPluginManager extends AbstractPluginManager implements HydratorPlu
         'objectPropertyHydrator'    => ObjectPropertyHydrator::class,
         'ObjectPropertyHydrator'    => ObjectPropertyHydrator::class,
         'reflection'                => ReflectionHydrator::class,
-        \Reflection::class          => ReflectionHydrator::class,
+        'Reflection'                => ReflectionHydrator::class,
         'reflectionhydrator'        => ReflectionHydrator::class,
         'reflectionHydrator'        => ReflectionHydrator::class,
         'ReflectionHydrator'        => ReflectionHydrator::class,

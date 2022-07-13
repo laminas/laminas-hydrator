@@ -6,6 +6,7 @@ namespace Laminas\Hydrator\Strategy;
 
 use Laminas\Hydrator\Exception\InvalidArgumentException;
 
+use function get_class;
 use function gettype;
 use function is_bool;
 use function is_int;

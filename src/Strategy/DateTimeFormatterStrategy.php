@@ -8,6 +8,7 @@ use DateTime;
 use DateTimeInterface;
 use DateTimeZone;
 
+use function get_class;
 use function gettype;
 use function is_object;
 use function is_string;

@@ -9,6 +9,7 @@ use Laminas\Stdlib\ArrayUtils;
 use Traversable;
 use Webmozart\Assert\Assert;
 
+use function get_class;
 use function get_class_methods;
 use function is_callable;
 use function lcfirst;

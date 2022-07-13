@@ -7,6 +7,7 @@ namespace Laminas\Hydrator;
 use ReflectionClass;
 use ReflectionProperty;
 
+use function get_class;
 use function array_fill_keys;
 use function array_map;
 use function get_object_vars;
