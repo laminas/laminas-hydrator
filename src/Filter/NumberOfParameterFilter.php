@@ -15,7 +15,7 @@ final class NumberOfParameterFilter implements FilterInterface
     /**
      * The number of parameters being accepted
      */
-    protected int $numberOfParameters;
+    private int $numberOfParameters;
 
     /**
      * @param int $numberOfParameters Number of accepted parameters

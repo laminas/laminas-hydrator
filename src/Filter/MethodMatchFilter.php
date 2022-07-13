@@ -12,12 +12,12 @@ final class MethodMatchFilter implements FilterInterface
     /**
      * The method to exclude
      */
-    protected string $method;
+    private string $method;
 
     /**
      * Either an exclude or an include
      */
-    protected bool $exclude;
+    private bool $exclude;
 
     /**
      * @param string $method The method to exclude or include

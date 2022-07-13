@@ -25,7 +25,7 @@ final class OptionalParametersFilter implements FilterInterface
      *
      * @var bool[]
      */
-    protected static array $propertiesCache = [];
+    private static array $propertiesCache = [];
 
     /**
      * {@inheritDoc}

@@ -25,9 +25,9 @@ final class FilterComposite implements FilterInterface
      */
     public const CONDITION_AND = 2;
 
-    protected ArrayObject $andFilter;
+    private ArrayObject $andFilter;
 
-    protected ArrayObject $orFilter;
+    private ArrayObject $orFilter;
 
     /**
      * We can pass a list of OR/AND filters through construct
