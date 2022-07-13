@@ -98,7 +98,7 @@ class CollectionStrategyTest extends TestCase
             is_object($value) ? get_class($value) : gettype($value)
         ));
 
-        /** @psalm-suppress PossiblyInvalidArgument */
+        /** @psalm-suppress MixedArgument */
         $strategy->extract($value);
     }
 
@@ -219,7 +219,7 @@ class CollectionStrategyTest extends TestCase
             is_object($value) ? get_class($value) : gettype($value)
         ));
 
-        /** @psalm-suppress PossiblyInvalidArgument */
+        /** @psalm-suppress MixedArgument */
         $strategy->hydrate($value);
     }
 

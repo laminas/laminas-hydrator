@@ -17,7 +17,10 @@ class ClassMethodsTest extends TestCase
 {
     public function testTriggerUserDeprecatedError(): void
     {
-        $test = (object) ['message' => false];
+        $test = new class {
+            /** @var bool|string */
+            public $message = false;
+        };
 
         /** @psalm-suppress UnusedClosureParam */
         set_error_handler(function ($errno, $errstr) use ($test) {
