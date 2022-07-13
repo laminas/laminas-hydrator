@@ -12,8 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 class DateTimeImmutableFormatterStrategyTest extends TestCase
 {
-    /** @var DateTimeImmutableFormatterStrategy */
-    private $strategy;
+    private DateTimeImmutableFormatterStrategy $strategy;
 
     protected function setUp(): void
     {

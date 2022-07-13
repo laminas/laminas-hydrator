@@ -9,11 +9,9 @@ use Laminas\Hydrator\NamingStrategy\UnderscoreNamingStrategy\UnderscoreToCamelCa
 
 class UnderscoreNamingStrategy implements NamingStrategyInterface
 {
-    /** @var CamelCaseToUnderscoreFilter|null */
-    private static $camelCaseToUnderscoreFilter;
+    private static ?CamelCaseToUnderscoreFilter $camelCaseToUnderscoreFilter = null;
 
-    /** @var UnderscoreToCamelCaseFilter|null */
-    private static $underscoreToCamelCaseFilter;
+    private static ?UnderscoreToCamelCaseFilter $underscoreToCamelCaseFilter = null;
 
     /**
      * Remove underscores and capitalize letters

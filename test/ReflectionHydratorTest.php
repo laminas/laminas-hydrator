@@ -65,10 +65,8 @@ class ReflectionHydratorTest extends TestCase
     public function testCanExtractFromAnonymousClass(): void
     {
         $instance = new class {
-            /** @var string */
-            private $foo = 'bar';
-            /** @var string */
-            private $bar = 'baz';
+            private string $foo = 'bar';
+            private string $bar = 'baz';
         };
         $this->assertSame([
             'foo' => 'bar',
@@ -79,8 +77,7 @@ class ReflectionHydratorTest extends TestCase
     public function testCanHydrateAnonymousObject(): void
     {
         $instance = new class {
-            /** @var null|string */
-            private $foo;
+            private ?string $foo = null;
         };
 
         $hydrated = $this->hydrator->hydrate(['foo' => 'bar'], $instance);

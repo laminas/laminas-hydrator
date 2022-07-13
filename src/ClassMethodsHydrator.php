@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Laminas\Hydrator;
 
+use Laminas\Hydrator\Filter\FilterInterface;
 use Laminas\Stdlib\ArrayUtils;
 use Traversable;
 use Webmozart\Assert\Assert;
@@ -53,8 +54,7 @@ class ClassMethodsHydrator extends AbstractHydrator implements HydratorOptionsIn
      */
     private $extractionMethodsCache = [];
 
-    /** @var Filter\FilterInterface */
-    private $optionalParametersFilter;
+    private FilterInterface $optionalParametersFilter;
 
     /**
      * Define if extract values will use camel case or name with underscore

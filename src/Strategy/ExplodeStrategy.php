@@ -16,11 +16,9 @@ use function sprintf;
 
 final class ExplodeStrategy implements StrategyInterface
 {
-    /** @var string */
-    private $valueDelimiter;
+    private string $valueDelimiter;
 
-    /** @var int|null */
-    private $explodeLimit;
+    private ?int $explodeLimit;
 
     /**
      * Constructor

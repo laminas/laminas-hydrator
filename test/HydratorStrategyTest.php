@@ -13,10 +13,8 @@ class HydratorStrategyTest extends TestCase
 {
     /**
      * The hydrator that is used during testing.
-     *
-     * @var HydratorInterface
      */
-    private $hydrator;
+    private HydratorInterface $hydrator;
 
     protected function setUp(): void
     {

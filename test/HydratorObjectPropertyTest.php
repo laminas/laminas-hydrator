@@ -9,8 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class HydratorObjectPropertyTest extends TestCase
 {
-    /** @var ObjectPropertyHydrator */
-    private $hydrator;
+    private ObjectPropertyHydrator $hydrator;
 
     protected function setUp(): void
     {
@@ -38,9 +37,7 @@ class HydratorObjectPropertyTest extends TestCase
             }
         };
 
-        $this->hydrator->addFilter('values', function () {
-            return true;
-        });
+        $this->hydrator->addFilter('values', static fn(): bool => true);
         $result = $this->hydrator->extract($instance);
         $this->assertArrayHasKey('id', $result);
         $this->assertEquals($instance->id, $result['id']);

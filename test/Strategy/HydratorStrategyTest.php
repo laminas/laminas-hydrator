@@ -152,11 +152,9 @@ class HydratorStrategyTest extends TestCase
         $extraction =  * @return string[]
         $extraction =  * @psalm-return array{value: string}
                        */
-        static function (TestAsset\User $value): array {
-            return [
-                'value' => spl_object_hash($value),
-            ];
-        };
+        static fn(TestAsset\User $value): array => [
+            'value' => spl_object_hash($value),
+        ];
 
         $hydrator = $this->createHydratorMock();
 

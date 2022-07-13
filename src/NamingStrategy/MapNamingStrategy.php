@@ -13,10 +13,10 @@ use function is_string;
 final class MapNamingStrategy implements NamingStrategyInterface
 {
     /** @var array<string, string> */
-    private $extractionMap = [];
+    private array $extractionMap = [];
 
     /** @var array<string, string> */
-    private $hydrationMap = [];
+    private array $hydrationMap = [];
 
     /**
      * @param array<string, string> $extractionMap

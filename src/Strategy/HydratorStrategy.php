@@ -17,11 +17,9 @@ use function sprintf;
 
 class HydratorStrategy implements StrategyInterface
 {
-    /** @var HydratorInterface */
-    private $objectHydrator;
+    private HydratorInterface $objectHydrator;
 
-    /** @var string */
-    private $objectClassName;
+    private string $objectClassName;
 
     /**
      * @throws Exception\InvalidArgumentException

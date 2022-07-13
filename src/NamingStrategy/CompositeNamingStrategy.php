@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace Laminas\Hydrator\NamingStrategy;
 
+use Laminas\Hydrator\NamingStrategy\NamingStrategyInterface;
+
 use function array_map;
 
 final class CompositeNamingStrategy implements NamingStrategyInterface
 {
     /** @var NamingStrategyInterface[] */
-    private $namingStrategies = [];
+    private array $namingStrategies = [];
 
-    /** @var NamingStrategyInterface */
-    private $defaultNamingStrategy;
+    private NamingStrategyInterface $defaultNamingStrategy;
 
     /**
      * @param NamingStrategyInterface[]    $strategies            indexed by the name they translate
@@ -20,10 +21,8 @@ final class CompositeNamingStrategy implements NamingStrategyInterface
     public function __construct(array $strategies, ?NamingStrategyInterface $defaultNamingStrategy = null)
     {
         $this->namingStrategies = array_map(
-            function (NamingStrategyInterface $strategy) {
-                // this callback is here only to ensure type-safety
-                return $strategy;
-            },
+            // this callback is here only to ensure type-safety
+            static fn(NamingStrategyInterface $strategy): NamingStrategyInterface => $strategy,
             $strategies
         );
 

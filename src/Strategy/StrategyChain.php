@@ -16,14 +16,14 @@ final class StrategyChain implements StrategyInterface
      *
      * @var StrategyInterface[]
      */
-    private $extractionStrategies;
+    private array $extractionStrategies;
 
     /**
      * Strategy chain for hydration
      *
      * @var StrategyInterface[]
      */
-    private $hydrationStrategies;
+    private array $hydrationStrategies;
 
     /**
      * @param StrategyInterface[] $extractionStrategies
@@ -32,10 +32,8 @@ final class StrategyChain implements StrategyInterface
     {
         $extractionStrategies       = ArrayUtils::iteratorToArray($extractionStrategies);
         $this->extractionStrategies = array_map(
-            function (StrategyInterface $strategy) {
-                // this callback is here only to ensure type-safety
-                return $strategy;
-            },
+            // this callback is here only to ensure type-safety
+            static fn(StrategyInterface $strategy): StrategyInterface => $strategy,
             $extractionStrategies
         );
 

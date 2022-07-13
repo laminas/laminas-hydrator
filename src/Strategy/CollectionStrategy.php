@@ -18,11 +18,9 @@ use function sprintf;
 
 class CollectionStrategy implements StrategyInterface
 {
-    /** @var HydratorInterface */
-    private $objectHydrator;
+    private HydratorInterface $objectHydrator;
 
-    /** @var string */
-    private $objectClassName;
+    private string $objectClassName;
 
     /**
      * @throws Exception\InvalidArgumentException
@@ -87,11 +85,9 @@ class CollectionStrategy implements StrategyInterface
 
         $reflection = new ReflectionClass($this->objectClassName);
 
-        return array_map(function ($data) use ($reflection) {
-            return $this->objectHydrator->hydrate(
-                $data,
-                $reflection->newInstanceWithoutConstructor()
-            );
-        }, $value);
+        return array_map(fn($data): object => $this->objectHydrator->hydrate(
+            $data,
+            $reflection->newInstanceWithoutConstructor()
+        ), $value);
     }
 }

@@ -25,7 +25,7 @@ final class OptionalParametersFilter implements FilterInterface
      *
      * @var bool[]
      */
-    protected static $propertiesCache = [];
+    private static array $propertiesCache = [];
 
     /**
      * {@inheritDoc}
@@ -53,9 +53,7 @@ final class OptionalParametersFilter implements FilterInterface
 
         $mandatoryParameters = array_filter(
             $reflectionMethod->getParameters(),
-            function (ReflectionParameter $parameter) {
-                return ! $parameter->isOptional();
-            }
+            static fn(ReflectionParameter $parameter): bool => ! $parameter->isOptional()
         );
 
         return static::$propertiesCache[$cacheName] = empty($mandatoryParameters);

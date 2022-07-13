@@ -11,17 +11,13 @@ final class MethodMatchFilter implements FilterInterface
 {
     /**
      * The method to exclude
-     *
-     * @var string
      */
-    protected $method;
+    private string $method;
 
     /**
      * Either an exclude or an include
-     *
-     * @var bool
      */
-    protected $exclude;
+    private bool $exclude;
 
     /**
      * @param string $method The method to exclude or include

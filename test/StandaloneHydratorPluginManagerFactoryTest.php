@@ -58,7 +58,7 @@ class StandaloneHydratorPluginManagerFactoryTest extends TestCase
             sprintf($message, ObjectPropertyHydrator::class)
         );
 
-        $this->assertTrue($manager->has('Reflection'), sprintf($message, 'Reflection'));
+        $this->assertTrue($manager->has(\Reflection::class), sprintf($message, \Reflection::class));
         $this->assertTrue($manager->has('ReflectionHydrator'), sprintf($message, 'ReflectionHydrator'));
         $this->assertTrue($manager->has(Reflection::class), sprintf($message, Reflection::class));
         $this->assertTrue($manager->has(ReflectionHydrator::class), sprintf($message, ReflectionHydrator::class));
