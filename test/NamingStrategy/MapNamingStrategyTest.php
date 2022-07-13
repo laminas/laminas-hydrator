@@ -73,7 +73,6 @@ class MapNamingStrategyTest extends TestCase
         $this->expectException(Exception\InvalidArgumentException::class);
         $this->expectExceptionMessage('can not be flipped');
 
-        /** @psalm-suppress MixedArrayOffset */
         MapNamingStrategy::createFromHydrationMap(['foo' => $invalidValue]);
     }
 
