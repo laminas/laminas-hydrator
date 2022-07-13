@@ -71,7 +71,9 @@ final class CamelCaseToUnderscoreFilter
     private function getLowerFunction(): callable
     {
         return $this->hasMbStringSupport()
-            ? static fn($value) => mb_strtolower($value, 'UTF-8')
+            ? static fn($value) =>
+                // ignore unicode characters w/ strtolower
+                mb_strtolower($value, 'UTF-8')
             : static fn($value) => preg_replace_callback('#([A-Z])#', static fn($matches) => strtolower($matches[1]), $value);
     }
 }
