@@ -179,11 +179,9 @@ class CollectionStrategyTest extends TestCase
         $extraction =  * @return string[]
         $extraction =  * @psalm-return array{value: string}
          */
-        function (TestAsset\User $value): array {
-            return [
-                'value' => spl_object_hash($value),
-            ];
-        };
+        fn(TestAsset\User $value): array => [
+            'value' => spl_object_hash($value),
+        ];
 
         $hydrator = $this->createHydratorMock();
 

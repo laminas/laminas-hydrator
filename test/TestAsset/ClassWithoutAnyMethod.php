@@ -6,6 +6,5 @@ namespace LaminasTest\Hydrator\TestAsset;
 
 class ClassWithoutAnyMethod
 {
-    /** @var string */
-    private $foo = 'bar';
+    private string $foo = 'bar';
 }

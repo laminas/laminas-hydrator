@@ -61,9 +61,7 @@ class FilterCompositeTest extends TestCase
         $callback = /**
                      * @return true
                      */
-        static function (): bool {
-            return true;
-        };
+        static fn(): bool => true;
 
         return [
             [

@@ -8,7 +8,6 @@ use DateTime;
 use DateTimeInterface;
 use DateTimeZone;
 
-use function get_class;
 use function gettype;
 use function is_object;
 use function is_string;
@@ -19,13 +18,10 @@ final class DateTimeFormatterStrategy implements StrategyInterface
 {
     /**
      * Format to use during hydration.
-     *
-     * @var string
      */
-    private $format;
+    private string $format;
 
-    /** @var DateTimeZone|null */
-    private $timezone;
+    private ?DateTimeZone $timezone;
 
     /**
      * Format to use during extraction.
@@ -34,17 +30,13 @@ final class DateTimeFormatterStrategy implements StrategyInterface
      * `DateTime` instance uses the formatted time string (which is useful
      * during hydration).  These include `!` at the beginning of the string and
      * `|` at the end.
-     *
-     * @var string
      */
-    private $extractionFormat;
+    private string $extractionFormat;
 
     /**
      * Whether or not to allow hydration of values that do not follow the format exactly.
-     *
-     * @var bool
      */
-    private $dateTimeFallback;
+    private bool $dateTimeFallback;
 
     /**
      * @param bool $dateTimeFallback try to parse with DateTime when createFromFormat fails

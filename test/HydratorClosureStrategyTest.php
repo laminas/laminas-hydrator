@@ -15,10 +15,8 @@ class HydratorClosureStrategyTest extends TestCase
 {
     /**
      * The hydrator that is used during testing.
-     *
-     * @var HydratorInterface
      */
-    private $hydrator;
+    private HydratorInterface $hydrator;
 
     protected function setUp(): void
     {
@@ -68,15 +66,11 @@ class HydratorClosureStrategyTest extends TestCase
     public function testExtractingObjects(): void
     {
         $this->hydrator->addStrategy('field1', new ClosureStrategy(
-            function ($value) {
-                return sprintf('%s', $value);
-            },
+            fn($value) => sprintf('%s', $value),
             null
         ));
         $this->hydrator->addStrategy('field2', new ClosureStrategy(
-            function ($value) {
-                return sprintf('hello, %s!', $value);
-            },
+            fn($value) => sprintf('hello, %s!', $value),
             null
         ));
 
@@ -91,15 +85,11 @@ class HydratorClosureStrategyTest extends TestCase
     {
         $this->hydrator->addStrategy('field2', new ClosureStrategy(
             null,
-            function ($value) {
-                return sprintf('hello, %s!', $value);
-            }
+            fn($value) => sprintf('hello, %s!', $value)
         ));
         $this->hydrator->addStrategy('field3', new ClosureStrategy(
             null,
-            function ($value) {
-                return new TestAsset\HydratorClosureStrategyEntity($value, sprintf('111%s', $value));
-            }
+            fn($value) => new TestAsset\HydratorClosureStrategyEntity($value, sprintf('111%s', $value))
         ));
 
         $entity = new TestAsset\HydratorClosureStrategyEntity(111, 'world');

@@ -39,7 +39,7 @@ final class StandaloneHydratorPluginManager implements HydratorPluginManagerInte
      *
      * @var array<string, string>
      */
-    private $aliases = [
+    private array $aliases = [
         'arrayserializable'         => ArraySerializableHydrator::class,
         ArraySerializable::class    => ArraySerializableHydrator::class,
         'arrayserializablehydrator' => ArraySerializableHydrator::class,
@@ -62,14 +62,12 @@ final class StandaloneHydratorPluginManager implements HydratorPluginManagerInte
     ];
 
     /** @var array<string, callable> */
-    private $factories = [];
+    private array $factories = [];
 
     public function __construct()
     {
         /** @psalm-suppress UnusedClosureParam */
-        $invokableFactory = function (ContainerInterface $container, string $class): object {
-            return new $class();
-        };
+        $invokableFactory = fn(ContainerInterface $container, string $class): object => new $class();
 
         $this->factories = [
             ArraySerializableHydrator::class => $invokableFactory,

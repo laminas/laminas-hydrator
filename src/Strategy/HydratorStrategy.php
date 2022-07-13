@@ -9,7 +9,6 @@ use ReflectionClass;
 use ReflectionException;
 
 use function class_exists;
-use function get_class;
 use function gettype;
 use function is_array;
 use function is_object;
@@ -17,11 +16,9 @@ use function sprintf;
 
 class HydratorStrategy implements StrategyInterface
 {
-    /** @var HydratorInterface */
-    private $objectHydrator;
+    private HydratorInterface $objectHydrator;
 
-    /** @var string */
-    private $objectClassName;
+    private string $objectClassName;
 
     /**
      * @throws Exception\InvalidArgumentException

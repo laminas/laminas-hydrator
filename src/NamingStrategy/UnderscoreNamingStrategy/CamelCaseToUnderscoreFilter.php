@@ -18,7 +18,7 @@ final class CamelCaseToUnderscoreFilter
     use StringSupportTrait;
 
     /** @var string[] $transformedFilters */
-    private $transformedFilters = [];
+    private array $transformedFilters = [];
 
     public function filter(string $value): string
     {
@@ -71,14 +71,8 @@ final class CamelCaseToUnderscoreFilter
     private function getLowerFunction(): callable
     {
         return $this->hasMbStringSupport()
-            ? function ($value) {
-                return mb_strtolower($value, 'UTF-8');
-            }
-            : function ($value) {
-                // ignore unicode characters w/ strtolower
-                return preg_replace_callback('#([A-Z])#', function ($matches) {
-                    return strtolower($matches[1]);
-                }, $value);
-            };
+            ? fn($value) => mb_strtolower($value, 'UTF-8')
+            : fn($value) => // ignore unicode characters w/ strtolower
+preg_replace_callback('#([A-Z])#', fn($matches) => strtolower($matches[1]), $value);
     }
 }

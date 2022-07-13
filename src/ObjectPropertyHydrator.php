@@ -9,13 +9,12 @@ use ReflectionProperty;
 
 use function array_fill_keys;
 use function array_map;
-use function get_class;
 use function get_object_vars;
 
 class ObjectPropertyHydrator extends AbstractHydrator
 {
     /** @var (null|array)[] indexed by class name and then property name */
-    private static $skippedPropertiesCache = [];
+    private static array $skippedPropertiesCache = [];
 
     /**
      * Extracts the accessible non-static properties of the given $object.
@@ -63,9 +62,7 @@ class ObjectPropertyHydrator extends AbstractHydrator
             $reflection = new ReflectionClass($object);
             $properties = array_fill_keys(
                 array_map(
-                    function (ReflectionProperty $property) {
-                        return $property->getName();
-                    },
+                    fn(ReflectionProperty $property) => $property->getName(),
                     $reflection->getProperties(
                         ReflectionProperty::IS_PRIVATE
                         + ReflectionProperty::IS_PROTECTED

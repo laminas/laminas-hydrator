@@ -16,8 +16,7 @@ final class ScalarTypeStrategy implements StrategyInterface
     private const TYPE_STRING  = 'string';
     private const TYPE_BOOLEAN = 'bool';
 
-    /** @var string */
-    private $type;
+    private string $type;
 
     public static function createToInt(): self
     {

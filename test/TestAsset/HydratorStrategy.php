@@ -12,10 +12,8 @@ class HydratorStrategy extends DefaultStrategy
 {
     /**
      * A simulated storage device which is just an array with Car objects.
-     *
-     * @var array
      */
-    private $simulatedStorageDevice;
+    private array $simulatedStorageDevice;
 
     public function __construct()
     {

@@ -12,8 +12,7 @@ class Reflection
     /** @var string */
     protected $fooBar = '2';
 
-    /** @var string */
-    private $fooBarBaz = '3';
+    private string $fooBarBaz = '3';
 
     public function getFooBar(): string
     {

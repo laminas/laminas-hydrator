@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Laminas\Hydrator\Strategy;
 
 use function explode;
-use function get_class;
 use function gettype;
 use function implode;
 use function is_array;
@@ -16,11 +15,9 @@ use function sprintf;
 
 final class ExplodeStrategy implements StrategyInterface
 {
-    /** @var string */
-    private $valueDelimiter;
+    private string $valueDelimiter;
 
-    /** @var int|null */
-    private $explodeLimit;
+    private ?int $explodeLimit;
 
     /**
      * Constructor

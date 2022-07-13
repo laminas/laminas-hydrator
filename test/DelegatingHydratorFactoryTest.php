@@ -21,7 +21,7 @@ class DelegatingHydratorFactoryTest extends TestCase
         $hydrators = $this->createMock(HydratorPluginManager::class);
         $factory   = new DelegatingHydratorFactory();
 
-        $hydrator = $factory($hydrators, '');
+        $hydrator = $factory($hydrators);
         $this->assertInstanceOf(DelegatingHydrator::class, $hydrator);
     }
 
@@ -36,7 +36,7 @@ class DelegatingHydratorFactoryTest extends TestCase
 
         $factory = new DelegatingHydratorFactory();
 
-        $hydrator = $factory($container, '');
+        $hydrator = $factory($container);
         $this->assertInstanceOf(DelegatingHydrator::class, $hydrator);
     }
 
@@ -61,7 +61,7 @@ class DelegatingHydratorFactoryTest extends TestCase
 
         $factory = new DelegatingHydratorFactory();
 
-        $hydrator = $factory($container, '');
+        $hydrator = $factory($container);
         $this->assertInstanceOf(DelegatingHydrator::class, $hydrator);
     }
 
@@ -85,7 +85,7 @@ class DelegatingHydratorFactoryTest extends TestCase
 
         $factory = new DelegatingHydratorFactory();
 
-        $hydrator = $factory($container, '');
+        $hydrator = $factory($container);
         $this->assertInstanceOf(DelegatingHydrator::class, $hydrator);
 
         $r = new ReflectionProperty($hydrator, 'hydrators');

@@ -6,8 +6,7 @@ namespace LaminasTest\Hydrator\TestAsset;
 
 final class User
 {
-    /** @var string */
-    private $name;
+    private ?string $name = null;
 
     /**
      * @return string
