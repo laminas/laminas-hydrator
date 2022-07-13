@@ -56,15 +56,18 @@ nav:
             - "Mapping": v2/naming-strategy/map-naming-strategy.md
             - "Underscore Mapping": v2/naming-strategy/underscore-naming-strategy.md
             - "Composite": v2/naming-strategy/composite-naming-strategy.md
-    - "_hidden-legacy-page-links":
-        - "_quick_start": quick-start.md
-        - "_filters": filter.md
-        - "_strategies": strategy.md
-        - "_aggregates": aggregate.md
-        - "_naming_strategies-identity": naming-strategy/identity-naming-strategy.md
-        - "_naming_strategies-mapping": naming-strategy/map-naming-strategy.md
-        - "_naming_strategies-underscore_mapping": naming-strategy/underscore-naming-strategy.md
-        - "_naming_strategies-composite": naming-strategy/composite-naming-strategy.md
 site_name: laminas-hydrator
 site_description: "Serialize objects to arrays, and vice versa"
 repo_url: 'https://github.com/laminas/laminas-hydrator'
+plugins:
+  - search
+  - redirects:
+      redirect_maps:
+        aggregate.md: v2/aggregate.md
+        filter.md: v2/filter.md
+        naming-strategy/composite-naming-strategy.md: v2/naming-strategy/composite-naming-strategy.md
+        naming-strategy/identity-naming-strategy.md: v2/naming-strategy/identity-naming-strategy.md
+        naming-strategy/map-naming-strategy.md: v2/naming-strategy/map-naming-strategy.md
+        naming-strategy/underscore-naming-strategy.md: v2/naming-strategy/underscore-naming-strategy.md
+        quick-start.md: v2/quick-start.md
+        strategy.md: v2/strategy.md
