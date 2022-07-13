@@ -32,7 +32,6 @@
     },
     "require": {
         "php": "^7.4 || ~8.0.0 || ~8.1.0",
-        "laminas/laminas-servicemanager": "^3.14.0",
         "laminas/laminas-stdlib": "^3.3",
         "webmozart/assert": "^1.10"
     },
@@ -41,6 +40,7 @@
         "laminas/laminas-eventmanager": "^3.5.0",
         "laminas/laminas-modulemanager": "^2.11.0",
         "laminas/laminas-serializer": "^2.13.0",
+        "laminas/laminas-servicemanager": "^3.14.0",
         "phpbench/phpbench": "^1.2.5",
         "phpunit/phpunit": "~9.5.21",
         "psalm/plugin-phpunit": "^0.17.0",
@@ -49,7 +49,8 @@
     },
     "suggest": {
         "laminas/laminas-eventmanager": "^3.2, to support aggregate hydrator usage",
-        "laminas/laminas-serializer": "^2.9, to use the SerializableStrategy"
+        "laminas/laminas-serializer": "^2.9, to use the SerializableStrategy",
+        "laminas/laminas-servicemanager": "^3.14, to support hydrator plugin manager usage"
     },
     "autoload": {
         "psr-4": {
@@ -75,6 +76,7 @@
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
     "conflict": {
-        "zendframework/zend-hydrator": "*"
+        "zendframework/zend-hydrator": "*",
+        "laminas/laminas-servicemanager": "<3.14.0"
     }
 }
