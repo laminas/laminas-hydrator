@@ -17,7 +17,6 @@ use TypeError;
 
 use function count;
 use function fopen;
-use function get_class;
 use function gettype;
 use function is_object;
 use function mt_getrandmax;
@@ -78,7 +77,7 @@ class HydratorStrategyTest extends TestCase
             sprintf(
                 'Value needs to be an instance of "%s", got "%s" instead.',
                 TestAsset\User::class,
-                is_object($value) ? get_class($value) : gettype($value)
+                is_object($value) ? $value::class : gettype($value)
             )
         );
 
@@ -119,7 +118,7 @@ class HydratorStrategyTest extends TestCase
             sprintf(
                 'Value needs to be an instance of "%s", got "%s" instead.',
                 TestAsset\User::class,
-                is_object($object) ? get_class($object) : gettype($object)
+                is_object($object) ? $object::class : gettype($object)
             )
         );
 
@@ -185,7 +184,7 @@ class HydratorStrategyTest extends TestCase
         $this->expectExceptionMessage(
             sprintf(
                 'Value needs to be an array, got "%s" instead.',
-                is_object($value) ? get_class($value) : gettype($value)
+                is_object($value) ? $value::class : gettype($value)
             )
         );
 

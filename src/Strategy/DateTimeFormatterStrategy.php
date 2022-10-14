@@ -8,7 +8,6 @@ use DateTime;
 use DateTimeInterface;
 use DateTimeZone;
 
-use function get_class;
 use function gettype;
 use function is_object;
 use function is_string;
@@ -101,7 +100,7 @@ final class DateTimeFormatterStrategy implements StrategyInterface
         if (! is_string($value)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Unable to hydrate. Expected null, string, or DateTimeInterface; %s was given.',
-                is_object($value) ? get_class($value) : gettype($value)
+                is_object($value) ? $value::class : gettype($value)
             ));
         }
 
