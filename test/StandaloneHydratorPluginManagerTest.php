@@ -15,6 +15,8 @@ use function sprintf;
 
 class StandaloneHydratorPluginManagerTest extends TestCase
 {
+    private StandaloneHydratorPluginManager $manager;
+
     protected function setUp(): void
     {
         $this->manager = new StandaloneHydratorPluginManager();

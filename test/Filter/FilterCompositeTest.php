@@ -119,15 +119,16 @@ class FilterCompositeTest extends TestCase
         foreach ($values as $value) {
             $filters[] = new class ($value) implements FilterInterface
             {
-                /** @param mixed $value */
-                public function __construct($value)
+                public mixed $value;
+
+                public function __construct(mixed $value)
                 {
                     $this->value = $value;
                 }
 
                 public function filter(string $property, ?object $instance = null): bool
                 {
-                    return $this->value;
+                    return (bool) $this->value;
                 }
             };
         }
