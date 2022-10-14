@@ -20,18 +20,16 @@ class ExplodeStrategyTest extends TestCase
 {
     /**
      * @dataProvider getValidHydratedValues
-     * @param string   $expected
-     * @param string   $delimiter
      * @param string[] $extractValue
      */
-    public function testExtract($expected, $delimiter, $extractValue): void
+    public function testExtract(mixed $expected, string $delimiter, array $extractValue): void
     {
         $strategy = new ExplodeStrategy($delimiter);
 
         if (is_numeric($expected)) {
-            $this->assertEquals($expected, $strategy->extract($extractValue));
+            self::assertEquals($expected, $strategy->extract($extractValue));
         } else {
-            $this->assertSame($expected, $strategy->extract($extractValue));
+            self::assertSame($expected, $strategy->extract($extractValue));
         }
     }
 
@@ -41,6 +39,7 @@ class ExplodeStrategyTest extends TestCase
 
         $this->expectException(InvalidArgumentException::class);
 
+        /** @psalm-suppress InvalidArgument */
         $strategy->extract('');
     }
 
@@ -48,7 +47,7 @@ class ExplodeStrategyTest extends TestCase
     {
         $strategy = new ExplodeStrategy();
 
-        $this->assertSame([], $strategy->hydrate(null));
+        self::assertSame([], $strategy->hydrate(null));
     }
 
     public function testGetExceptionWithEmptyDelimiter(): void
@@ -61,10 +60,10 @@ class ExplodeStrategyTest extends TestCase
     public function testHydrateWithExplodeLimit(): void
     {
         $strategy = new ExplodeStrategy('-', 2);
-        $this->assertSame(['foo', 'bar-baz-bat'], $strategy->hydrate('foo-bar-baz-bat'));
+        self::assertSame(['foo', 'bar-baz-bat'], $strategy->hydrate('foo-bar-baz-bat'));
 
         $strategy = new ExplodeStrategy('-', 3);
-        $this->assertSame(['foo', 'bar', 'baz-bat'], $strategy->hydrate('foo-bar-baz-bat'));
+        self::assertSame(['foo', 'bar', 'baz-bat'], $strategy->hydrate('foo-bar-baz-bat'));
     }
 
     public function testHydrateWithInvalidScalarType(): void
@@ -77,6 +76,7 @@ class ExplodeStrategyTest extends TestCase
             . ' array provided instead'
         );
 
+        /** @psalm-suppress InvalidArgument */
         $strategy->hydrate([]);
     }
 
@@ -90,6 +90,7 @@ class ExplodeStrategyTest extends TestCase
             . ' stdClass provided instead'
         );
 
+        /** @psalm-suppress InvalidArgument */
         $strategy->hydrate(new stdClass());
     }
 
@@ -103,28 +104,25 @@ class ExplodeStrategyTest extends TestCase
             . ' stdClass provided instead'
         );
 
+        /** @psalm-suppress InvalidArgument */
         $strategy->extract(new stdClass());
     }
 
     /**
      * @dataProvider getValidHydratedValues
-     * @param mixed    $value
-     * @param string   $delimiter
-     * @param string[] $expected
      */
-    public function testHydration($value, $delimiter, array $expected): void
+    public function testHydration(mixed $value, string $delimiter, array $expected): void
     {
         $strategy = new ExplodeStrategy($delimiter);
 
-        $this->assertSame($expected, $strategy->hydrate($value));
+        /** @psalm-suppress MixedArgument */
+        self::assertSame($expected, $strategy->hydrate($value));
     }
 
     /**
-     * Data provider
-     *
-     * @return mixed[][]
+     * @return array<string, array{0: mixed, 1: string, 2: list<string>}>
      */
-    public function getValidHydratedValues()
+    public function getValidHydratedValues(): array
     {
         // @codingStandardsIgnoreStart
         return [

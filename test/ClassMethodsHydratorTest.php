@@ -78,7 +78,6 @@ class ClassMethodsHydratorTest extends TestCase
     public function testSetOptionsThrowsException(): void
     {
         $this->expectException(TypeError::class);
-        $this->expectExceptionMessage('iterable');
         $this->hydrator->setOptions('invalid options');
     }
 

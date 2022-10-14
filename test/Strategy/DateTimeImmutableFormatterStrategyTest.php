@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace LaminasTest\Hydrator\Strategy;
 
 use DateTimeImmutable;
-use Generator;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Laminas\Hydrator\Strategy\DateTimeImmutableFormatterStrategy;
 use PHPUnit\Framework\TestCase;
@@ -23,7 +22,7 @@ class DateTimeImmutableFormatterStrategyTest extends TestCase
 
     public function testExtraction(): void
     {
-        $this->assertEquals(
+        self::assertEquals(
             '2020-05-25',
             $this->strategy->extract(new DateTimeImmutable('2020-05-25'))
         );
@@ -32,12 +31,12 @@ class DateTimeImmutableFormatterStrategyTest extends TestCase
     public function testHydrationWithDateTimeImmutableObjectShouldReturnSame(): void
     {
         $dateTime = new DateTimeImmutable('2020-05-25');
-        $this->assertEquals($dateTime, $this->strategy->hydrate($dateTime));
+        self::assertEquals($dateTime, $this->strategy->hydrate($dateTime));
     }
 
     public function testHydrationShouldReturnImmutableDateTimeObject(): void
     {
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             DateTimeImmutable::class,
             $this->strategy->hydrate('2020-05-25')
         );
@@ -45,31 +44,27 @@ class DateTimeImmutableFormatterStrategyTest extends TestCase
 
     public function testHydrationShouldReturnDateTimeObjectWithSameValue(): void
     {
-        $this->assertSame(
+        self::assertSame(
             '2020-05-25',
             $this->strategy->hydrate('2020-05-25')->format('Y-m-d')
         );
     }
 
     /**
-     * @param mixed $value
      * @dataProvider dataProviderForInvalidDateValues
      */
-    public function testHydrationShouldReturnInvalidDateValuesAsIs($value): void
+    public function testHydrationShouldReturnInvalidDateValuesAsIs(string|null $value): void
     {
-        $this->assertSame($value, $this->strategy->hydrate($value));
+        self::assertSame($value, $this->strategy->hydrate($value));
     }
 
-    public function dataProviderForInvalidDateValues(): Generator
+    /** @return array<string, array{0: null|string}> */
+    public function dataProviderForInvalidDateValues(): array
     {
-        $values = [
-            'null'         => null,
-            'empty-string' => '',
-            'foo'          => 'foo',
+        return [
+            'null'         => [null],
+            'empty-string' => [''],
+            'foo'          => ['foo'],
         ];
-
-        foreach ($values as $key => $value) {
-            yield $key => [$value];
-        }
     }
 }

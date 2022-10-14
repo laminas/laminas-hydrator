@@ -9,7 +9,6 @@ use Laminas\ServiceManager\ConfigInterface;
 use Laminas\ServiceManager\Exception\InvalidServiceException;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 
-use function get_class;
 use function gettype;
 use function is_object;
 use function sprintf;
@@ -125,7 +124,7 @@ class HydratorPluginManager extends AbstractPluginManager implements HydratorPlu
 
         throw new InvalidServiceException(sprintf(
             'Plugin of type %s is invalid; must implement %s',
-            is_object($instance) ? get_class($instance) : gettype($instance),
+            is_object($instance) ? $instance::class : gettype($instance),
             HydratorInterface::class
         ));
     }

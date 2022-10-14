@@ -21,7 +21,7 @@
             "dealerdirect/phpcodesniffer-composer-installer": true
         },
         "platform": {
-            "php": "7.4.99"
+            "php": "8.0.99"
         }
     },
     "extra": {
@@ -31,20 +31,20 @@
         }
     },
     "require": {
-        "php": "^7.4 || ~8.0.0 || ~8.1.0",
+        "php": "~8.0.0 || ~8.1.0 || ~8.2.0",
         "laminas/laminas-stdlib": "^3.3",
         "webmozart/assert": "^1.10"
     },
     "require-dev": {
         "laminas/laminas-coding-standard": "~2.4.0",
-        "laminas/laminas-eventmanager": "^3.5.0",
-        "laminas/laminas-modulemanager": "^2.11.0",
+        "laminas/laminas-eventmanager": "^3.6",
+        "laminas/laminas-modulemanager": "^2.12",
         "laminas/laminas-serializer": "^2.13.0",
-        "laminas/laminas-servicemanager": "^3.14.0",
-        "phpbench/phpbench": "^1.2.5",
-        "phpunit/phpunit": "~9.5.21",
+        "laminas/laminas-servicemanager": "^3.19",
+        "phpbench/phpbench": "^1.2.6",
+        "phpunit/phpunit": "^9.5.25",
         "psalm/plugin-phpunit": "^0.17.0",
-        "vimeo/psalm": "^4.24.0"
+        "vimeo/psalm": "^4.29"
     },
     "suggest": {
         "laminas/laminas-eventmanager": "^3.2, to support aggregate hydrator usage",

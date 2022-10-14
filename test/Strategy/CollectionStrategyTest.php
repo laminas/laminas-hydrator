@@ -15,12 +15,12 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use stdClass;
+use Throwable;
 use TypeError;
 
 use function array_map;
 use function count;
 use function fopen;
-use function get_class;
 use function gettype;
 use function is_object;
 use function mt_getrandmax;
@@ -39,7 +39,7 @@ class CollectionStrategyTest extends TestCase
     {
         $reflection = new ReflectionClass(CollectionStrategy::class);
 
-        $this->assertTrue($reflection->implementsInterface(StrategyInterface::class), sprintf(
+        self::assertTrue($reflection->implementsInterface(StrategyInterface::class), sprintf(
             'Failed to assert that "%s" implements "%s"',
             CollectionStrategy::class,
             StrategyInterface::class
@@ -48,22 +48,24 @@ class CollectionStrategyTest extends TestCase
 
     /**
      * @dataProvider providerInvalidObjectClassName
-     * @param mixed $objectClassName
+     * @param class-string<Throwable> $expectedExceptionType
      */
     public function testConstructorRejectsInvalidObjectClassName(
-        $objectClassName,
+        mixed $objectClassName,
         string $expectedExceptionType,
         string $expectedExceptionMessage
     ): void {
         $this->expectException($expectedExceptionType);
         $this->expectExceptionMessage($expectedExceptionMessage);
 
+        /** @psalm-suppress MixedArgument */
         new CollectionStrategy(
             $this->createHydratorMock(),
             $objectClassName
         );
     }
 
+    /** @return array<string, array{0:mixed, 1: class-string<Throwable>, 2: string}> */
     public function providerInvalidObjectClassName(): array
     {
         // @codingStandardsIgnoreStart
@@ -83,9 +85,8 @@ class CollectionStrategyTest extends TestCase
 
     /**
      * @dataProvider providerInvalidValueForExtraction
-     * @param mixed $value
      */
-    public function testExtractRejectsInvalidValue($value): void
+    public function testExtractRejectsInvalidValue(mixed $value): void
     {
         $strategy = new CollectionStrategy(
             $this->createHydratorMock(),
@@ -95,7 +96,7 @@ class CollectionStrategyTest extends TestCase
         $this->expectException(Exception\InvalidArgumentException::class);
         $this->expectExceptionMessage(sprintf(
             'Value needs to be an array, got "%s" instead.',
-            is_object($value) ? get_class($value) : gettype($value)
+            is_object($value) ? $value::class : gettype($value)
         ));
 
         /** @psalm-suppress MixedArgument */
@@ -103,9 +104,9 @@ class CollectionStrategyTest extends TestCase
     }
 
     /**
-     * @return Generator
+     * @return Generator<string, list<mixed>>
      */
-    public function providerInvalidValueForExtraction()
+    public function providerInvalidValueForExtraction(): Generator
     {
         $values = [
             'boolean-false'             => false,
@@ -140,16 +141,16 @@ class CollectionStrategyTest extends TestCase
         $this->expectExceptionMessage(sprintf(
             'Value needs to be an instance of "%s", got "%s" instead.',
             TestAsset\User::class,
-            is_object($object) ? get_class($object) : gettype($object)
+            is_object($object) ? $object::class : gettype($object)
         ));
 
         $strategy->extract($value);
     }
 
     /**
-     * @return Generator
+     * @return Generator<string, list<mixed>>
      */
-    public function providerInvalidObjectForExtraction()
+    public function providerInvalidObjectForExtraction(): Generator
     {
         $values = [
             'boolean-false'                           => false,
@@ -186,7 +187,7 @@ class CollectionStrategyTest extends TestCase
         $hydrator = $this->createHydratorMock();
 
         $hydrator
-            ->expects($this->exactly(count($value)))
+            ->expects(self::exactly(count($value)))
             ->method('extract')
             ->willReturnCallback($extraction);
 
@@ -197,14 +198,13 @@ class CollectionStrategyTest extends TestCase
 
         $expected = array_map($extraction, $value);
 
-        $this->assertSame($expected, $strategy->extract($value));
+        self::assertSame($expected, $strategy->extract($value));
     }
 
     /**
      * @dataProvider providerInvalidValueForHydration
-     * @param mixed $value
      */
-    public function testHydrateRejectsInvalidValue($value): void
+    public function testHydrateRejectsInvalidValue(mixed $value): void
     {
         $strategy = new CollectionStrategy(
             $this->createHydratorMock(),
@@ -214,7 +214,7 @@ class CollectionStrategyTest extends TestCase
         $this->expectException(Exception\InvalidArgumentException::class);
         $this->expectExceptionMessage(sprintf(
             'Value needs to be an array, got "%s" instead.',
-            is_object($value) ? get_class($value) : gettype($value)
+            is_object($value) ? $value::class : gettype($value)
         ));
 
         /** @psalm-suppress MixedArgument */
@@ -222,9 +222,9 @@ class CollectionStrategyTest extends TestCase
     }
 
     /**
-     * @return Generator
+     * @return Generator<string, list<mixed>>
      */
-    public function providerInvalidValueForHydration()
+    public function providerInvalidValueForHydration(): Generator
     {
         $values = [
             'boolean-false'             => false,
@@ -265,7 +265,7 @@ class CollectionStrategyTest extends TestCase
         $hydrator = $this->createHydratorMock();
 
         $hydrator
-            ->expects($this->exactly(count($value)))
+            ->expects(self::exactly(count($value)))
             ->method('hydrate')
             ->willReturnCallback($hydration);
 
@@ -276,7 +276,7 @@ class CollectionStrategyTest extends TestCase
 
         $expected = array_map($hydration, $value);
 
-        $this->assertEquals($expected, $strategy->hydrate($value));
+        self::assertEquals($expected, $strategy->hydrate($value));
     }
 
     /**

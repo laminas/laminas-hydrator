@@ -36,6 +36,7 @@ class FilterCompositeTest extends TestCase
         }
     }
 
+    /** @return list<array{0: array, 1: array}> */
     public function validFiltersProvider(): array
     {
         return [
@@ -56,12 +57,10 @@ class FilterCompositeTest extends TestCase
         ];
     }
 
+    /** @return list<array{0: array, 1: array, 2: string}> */
     public function invalidFiltersProvider(): array
     {
-        $callback = /**
-                     * @return true
-                     */
-        static fn(): bool => true;
+        $callback = static fn(): bool => true;
 
         return [
             [
@@ -119,15 +118,16 @@ class FilterCompositeTest extends TestCase
         foreach ($values as $value) {
             $filters[] = new class ($value) implements FilterInterface
             {
-                /** @param mixed $value */
-                public function __construct($value)
+                public mixed $value;
+
+                public function __construct(mixed $value)
                 {
                     $this->value = $value;
                 }
 
                 public function filter(string $property, ?object $instance = null): bool
                 {
-                    return $this->value;
+                    return (bool) $this->value;
                 }
             };
         }
@@ -154,7 +154,7 @@ class FilterCompositeTest extends TestCase
     }
 
     /**
-     * @psalm-return Generator<mixed, mixed, mixed, void>
+     * @psalm-return Generator<int, array{orFilters: array, andFilters: array, expected: bool}, mixed, void>
      */
     public function providerCompositionFiltering(): Generator
     {

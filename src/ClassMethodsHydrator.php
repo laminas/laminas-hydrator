@@ -9,7 +9,6 @@ use Laminas\Stdlib\ArrayUtils;
 use Traversable;
 use Webmozart\Assert\Assert;
 
-use function get_class;
 use function get_class_methods;
 use function is_callable;
 use function lcfirst;
@@ -129,7 +128,7 @@ class ClassMethodsHydrator extends AbstractHydrator implements HydratorOptionsIn
      */
     public function extract(object $object): array
     {
-        $objectClass = get_class($object);
+        $objectClass = $object::class;
         $isAnonymous = false !== strpos($objectClass, '@anonymous');
 
         if ($isAnonymous) {
@@ -182,7 +181,7 @@ class ClassMethodsHydrator extends AbstractHydrator implements HydratorOptionsIn
                 throw new Exception\BadMethodCallException(sprintf(
                     'Cannot extract data for attribute "%s" on class of type "%s"; method "%s" does not exist',
                     $realAttributeName,
-                    get_class($object),
+                    $object::class,
                     $methodName
                 ));
             }
@@ -223,7 +222,7 @@ class ClassMethodsHydrator extends AbstractHydrator implements HydratorOptionsIn
      */
     public function hydrate(array $data, object $object)
     {
-        $objectClass = get_class($object);
+        $objectClass = $object::class;
 
         foreach ($data as $property => $value) {
             $propertyFqn = $objectClass . '::$' . $property;

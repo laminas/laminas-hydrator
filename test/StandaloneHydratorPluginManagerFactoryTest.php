@@ -15,6 +15,7 @@ use Laminas\Hydrator\Reflection;
 use Laminas\Hydrator\ReflectionHydrator;
 use Laminas\Hydrator\StandaloneHydratorPluginManager;
 use Laminas\Hydrator\StandaloneHydratorPluginManagerFactory;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
@@ -23,6 +24,10 @@ use function sprintf;
 class StandaloneHydratorPluginManagerFactoryTest extends TestCase
 {
     private const MESSAGE_DEFAULT_SERVICES = 'Missing the service %s';
+
+    private StandaloneHydratorPluginManagerFactory $factory;
+    /** @var ContainerInterface&MockObject */
+    private ContainerInterface|MockObject $container;
 
     protected function setUp(): void
     {
