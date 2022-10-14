@@ -6,6 +6,7 @@ namespace LaminasTest\Hydrator\Strategy;
 
 use DateTime;
 use DateTimeImmutable;
+use DateTimeInterface;
 use DateTimeZone;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Laminas\Hydrator\Strategy\Exception\InvalidArgumentException;
@@ -22,25 +23,25 @@ class DateTimeFormatterStrategyTest extends TestCase
     public function testHydrate(): void
     {
         $strategy = new DateTimeFormatterStrategy('Y-m-d');
-        $this->assertEquals('2014-04-26', $strategy->hydrate('2014-04-26')->format('Y-m-d'));
+        self::assertEquals('2014-04-26', $strategy->hydrate('2014-04-26')->format('Y-m-d'));
 
         $strategy = new DateTimeFormatterStrategy('Y-m-d', new DateTimeZone('Asia/Kathmandu'));
 
         $date = $strategy->hydrate('2014-04-26');
-        $this->assertEquals('Asia/Kathmandu', $date->getTimezone()->getName());
+        self::assertEquals('Asia/Kathmandu', $date->getTimezone()->getName());
     }
 
     public function testExtract(): void
     {
         $strategy = new DateTimeFormatterStrategy('d/m/Y');
-        $this->assertEquals('26/04/2014', $strategy->extract(new DateTime('2014-04-26')));
+        self::assertEquals('26/04/2014', $strategy->extract(new DateTime('2014-04-26')));
     }
 
     public function testGetNullWithInvalidDateOnHydration(): void
     {
         $strategy = new DateTimeFormatterStrategy('Y-m-d');
-        $this->assertEquals(null, $strategy->hydrate(null));
-        $this->assertEquals(null, $strategy->hydrate(''));
+        self::assertEquals(null, $strategy->hydrate(null));
+        self::assertEquals(null, $strategy->hydrate(''));
     }
 
     public function testCanExtractIfNotDateTime(): void
@@ -48,13 +49,13 @@ class DateTimeFormatterStrategyTest extends TestCase
         $strategy = new DateTimeFormatterStrategy();
         $date     = $strategy->extract(new stdClass());
 
-        $this->assertInstanceOf(stdClass::class, $date);
+        self::assertInstanceOf(stdClass::class, $date);
     }
 
     public function testCanHydrateWithInvalidDateTime(): void
     {
         $strategy = new DateTimeFormatterStrategy('d/m/Y');
-        $this->assertSame('foo bar baz', $strategy->hydrate('foo bar baz'));
+        self::assertSame('foo bar baz', $strategy->hydrate('foo bar baz'));
     }
 
     public function testCanExtractAnyDateTimeInterface(): void
@@ -65,7 +66,7 @@ class DateTimeFormatterStrategyTest extends TestCase
 
         $format = 'Y-m-d';
         $dateMock
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('format')
             ->with($format);
 
@@ -74,7 +75,7 @@ class DateTimeFormatterStrategyTest extends TestCase
             ->getMock();
 
         $dateImmutableMock
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('format')
             ->with($format);
 
@@ -94,22 +95,20 @@ class DateTimeFormatterStrategyTest extends TestCase
         $strategy = new DateTimeFormatterStrategy($format);
         $hydrated = $strategy->hydrate($expectedValue);
 
-        $this->assertInstanceOf(DateTime::class, $hydrated);
-        $this->assertEquals($expectedValue, $hydrated->format('Y-m-d'));
+        self::assertInstanceOf(DateTime::class, $hydrated);
+        self::assertEquals($expectedValue, $hydrated->format('Y-m-d'));
     }
 
     /**
      * @dataProvider formatsWithSpecialCharactersProvider
-     * @param string $format
-     * @param string $expectedValue
      */
-    public function testCanExtractWithCreateFromFormatSpecialCharacters($format, $expectedValue): void
+    public function testCanExtractWithCreateFromFormatSpecialCharacters(string $format, string $expectedValue): void
     {
         $date      = DateTime::createFromFormat($format, $expectedValue);
         $strategy  = new DateTimeFormatterStrategy($format);
         $extracted = $strategy->extract($date);
 
-        $this->assertEquals($expectedValue, $extracted);
+        self::assertEquals($expectedValue, $extracted);
     }
 
     public function testCanExtractWithCreateFromFormatEscapedSpecialCharacters(): void
@@ -117,7 +116,7 @@ class DateTimeFormatterStrategyTest extends TestCase
         $date      = DateTime::createFromFormat('Y-m-d', '2018-02-05');
         $strategy  = new DateTimeFormatterStrategy('Y-m-d\\+');
         $extracted = $strategy->extract($date);
-        $this->assertEquals('2018-02-05+', $extracted);
+        self::assertEquals('2018-02-05+', $extracted);
     }
 
     /**
@@ -138,15 +137,18 @@ class DateTimeFormatterStrategyTest extends TestCase
         $strategy = new DateTimeFormatterStrategy('Y-m-d', null, true);
         $date     = $strategy->hydrate('2018-09-06T12:10:30');
 
-        $this->assertSame('2018-09-06', $date->format('Y-m-d'));
+        self::assertInstanceOf(DateTimeInterface::class, $date);
+        self::assertSame('2018-09-06', $date->format('Y-m-d'));
 
         $strategy = new DateTimeFormatterStrategy('Y-m-d', new DateTimeZone('Europe/Prague'), true);
         $date     = $strategy->hydrate('2018-09-06T12:10:30');
 
-        $this->assertSame('Europe/Prague', $date->getTimezone()->getName());
+        self::assertInstanceOf(DateTimeInterface::class, $date);
+        self::assertSame('Europe/Prague', $date->getTimezone()->getName());
     }
 
-    public function invalidValuesForHydration(): iterable
+    /** @return array<string, list<mixed>> */
+    public function invalidValuesForHydration(): array
     {
         return [
             'zero'       => [0],
@@ -160,9 +162,8 @@ class DateTimeFormatterStrategyTest extends TestCase
 
     /**
      * @dataProvider invalidValuesForHydration
-     * @param mixed $value
      */
-    public function testHydrateRaisesExceptionIfValueIsInvalid($value): void
+    public function testHydrateRaisesExceptionIfValueIsInvalid(mixed $value): void
     {
         $strategy = new DateTimeFormatterStrategy('Y-m-d');
 
@@ -171,7 +172,8 @@ class DateTimeFormatterStrategyTest extends TestCase
         $strategy->hydrate($value);
     }
 
-    public function validUnhydratableValues(): iterable
+    /** @return array<string, list<mixed>> */
+    public function validUnHydratableValues(): array
     {
         return [
             'empty string' => [''],
@@ -181,13 +183,12 @@ class DateTimeFormatterStrategyTest extends TestCase
     }
 
     /**
-     * @dataProvider validUnhydratableValues
-     * @param mixed $value
+     * @dataProvider validUnHydratableValues
      */
-    public function testReturnsValueVerbatimUnderSpecificConditions($value): void
+    public function testReturnsValueVerbatimUnderSpecificConditions(mixed $value): void
     {
         $strategy = new DateTimeFormatterStrategy('Y-m-d');
         $hydrated = $strategy->hydrate($value);
-        $this->assertSame($value, $hydrated);
+        self::assertSame($value, $hydrated);
     }
 }

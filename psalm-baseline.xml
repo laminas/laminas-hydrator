@@ -360,7 +360,6 @@
       <code>$value</code>
       <code>$value</code>
     </MixedAssignment>
-    <MixedInferredReturnType occurrences="1"/>
   </file>
   <file src="test/HydratorAwareTraitTest.php">
     <MixedMethodCall occurrences="6">
@@ -453,12 +452,6 @@
       <code>$property</code>
     </MixedArgument>
   </file>
-  <file src="test/NamingStrategy/MapNamingStrategyTest.php">
-    <MixedArgumentTypeCoercion occurrences="2">
-      <code>['foo' =&gt; $invalidValue]</code>
-      <code>['foo' =&gt; $invalidValue]</code>
-    </MixedArgumentTypeCoercion>
-  </file>
   <file src="test/NamingStrategy/UnderscoreNamingStrategy/CamelCaseToUnderscoreFilterTest.php">
     <InternalClass occurrences="3">
       <code>new CamelCaseToUnderscoreFilter()</code>
@@ -518,9 +511,6 @@
     </DeprecatedClass>
   </file>
   <file src="test/StandaloneHydratorPluginManagerTest.php">
-    <ArgumentTypeCoercion occurrences="1">
-      <code>$expectedType</code>
-    </ArgumentTypeCoercion>
     <DeprecatedClass occurrences="4">
       <code>Hydrator\ArraySerializable::class</code>
       <code>Hydrator\ClassMethods::class</code>
@@ -548,25 +538,21 @@
     </InvalidScalarArgument>
   </file>
   <file src="test/Strategy/CollectionStrategyTest.php">
-    <ArgumentTypeCoercion occurrences="1">
-      <code>$expectedExceptionType</code>
-    </ArgumentTypeCoercion>
     <MissingClosureParamType occurrences="1">
       <code>$data</code>
     </MissingClosureParamType>
     <MissingClosureReturnType occurrences="1">
       <code>function ($data) {</code>
     </MissingClosureReturnType>
-    <MixedArgument occurrences="2">
+    <MixedArgument occurrences="1">
       <code>$data</code>
-      <code>$objectClassName</code>
     </MixedArgument>
     <MixedMethodCall occurrences="1">
       <code>hydrate</code>
     </MixedMethodCall>
   </file>
   <file src="test/Strategy/DateTimeFormatterStrategyTest.php">
-    <MixedAssignment occurrences="6">
+    <MixedAssignment occurrences="5">
       <code>$date</code>
       <code>$date</code>
       <code>$date</code>
@@ -574,7 +560,7 @@
       <code>$extracted</code>
       <code>$hydrated</code>
     </MixedAssignment>
-    <MixedMethodCall occurrences="6">
+    <MixedMethodCall occurrences="3">
       <code>format</code>
       <code>format</code>
       <code>getName</code>
@@ -588,20 +574,7 @@
       <code>format</code>
     </MixedMethodCall>
   </file>
-  <file src="test/Strategy/ExplodeStrategyTest.php">
-    <InvalidArgument occurrences="4">
-      <code>''</code>
-      <code>[]</code>
-      <code>[]</code>
-    </InvalidArgument>
-    <MixedArgument occurrences="1">
-      <code>$value</code>
-    </MixedArgument>
-  </file>
   <file src="test/Strategy/HydratorStrategyTest.php">
-    <ArgumentTypeCoercion occurrences="1">
-      <code>$expectedExceptionType</code>
-    </ArgumentTypeCoercion>
     <MissingClosureParamType occurrences="1">
       <code>$data</code>
     </MissingClosureParamType>
@@ -614,26 +587,9 @@
       <code>$objectClassName</code>
       <code>$value</code>
     </MixedArgument>
-    <MixedMethodCall occurrences="5">
+    <MixedMethodCall occurrences="1">
       <code>hydrate</code>
-      <code>method</code>
-      <code>method</code>
-      <code>willReturnCallback</code>
-      <code>willReturnCallback</code>
     </MixedMethodCall>
-    <PossiblyInvalidArgument occurrences="7">
-      <code>$hydrator</code>
-      <code>$hydrator</code>
-      <code>$this-&gt;createHydratorMock()</code>
-      <code>$this-&gt;createHydratorMock()</code>
-      <code>$this-&gt;createHydratorMock()</code>
-      <code>$this-&gt;createHydratorMock()</code>
-      <code>$this-&gt;createHydratorMock()</code>
-    </PossiblyInvalidArgument>
-    <PossiblyUndefinedMethod occurrences="2">
-      <code>expects</code>
-      <code>expects</code>
-    </PossiblyUndefinedMethod>
   </file>
   <file src="test/Strategy/SerializableStrategyTest.php">
     <MixedAssignment occurrences="2">

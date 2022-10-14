@@ -20,8 +20,7 @@ use stdClass;
  */
 class AggregateHydratorFunctionalTest extends TestCase
 {
-    /** @var AggregateHydrator */
-    protected $hydrator;
+    protected AggregateHydrator $hydrator;
 
     /**
      * {@inheritDoc}
@@ -38,10 +37,10 @@ class AggregateHydratorFunctionalTest extends TestCase
     {
         $object = new ArrayObject(['zaphod' => 'beeblebrox']);
 
-        $this->assertSame([], $this->hydrator->extract($object));
-        $this->assertSame($object, $this->hydrator->hydrate(['arthur' => 'dent'], $object));
+        self::assertSame([], $this->hydrator->extract($object));
+        self::assertSame($object, $this->hydrator->hydrate(['arthur' => 'dent'], $object));
 
-        $this->assertSame(['zaphod' => 'beeblebrox'], $object->getArrayCopy());
+        self::assertSame(['zaphod' => 'beeblebrox'], $object->getArrayCopy());
     }
 
     /**
@@ -55,7 +54,7 @@ class AggregateHydratorFunctionalTest extends TestCase
 
         $this->hydrator->add($comparisonHydrator);
 
-        $this->assertSame($comparisonHydrator->extract($blueprint), $this->hydrator->extract($object));
+        self::assertSame($comparisonHydrator->extract($blueprint), $this->hydrator->extract($object));
     }
 
     /**
@@ -75,10 +74,10 @@ class AggregateHydratorFunctionalTest extends TestCase
         $hydratedBlueprint = $comparisonHydrator->hydrate($data, $blueprint);
         $hydrated          = $this->hydrator->hydrate($data, $object);
 
-        $this->assertEquals($hydratedBlueprint, $hydrated);
+        self::assertEquals($hydratedBlueprint, $hydrated);
 
         if ($hydratedBlueprint === $blueprint) {
-            $this->assertSame($hydrated, $object);
+            self::assertSame($hydrated, $object);
         }
     }
 
@@ -94,10 +93,10 @@ class AggregateHydratorFunctionalTest extends TestCase
 
         $extracted = $this->hydrator->extract($object);
 
-        $this->assertArrayHasKey('maintainer', $extracted);
-        $this->assertArrayHasKey('president', $extracted);
-        $this->assertSame('Marvin', $extracted['maintainer']);
-        $this->assertSame('Zaphod', $extracted['president']);
+        self::assertArrayHasKey('maintainer', $extracted);
+        self::assertArrayHasKey('president', $extracted);
+        self::assertSame('Marvin', $extracted['maintainer']);
+        self::assertSame('Zaphod', $extracted['president']);
     }
 
     /**
@@ -110,16 +109,16 @@ class AggregateHydratorFunctionalTest extends TestCase
 
         $object = new AggregateObject();
 
-        $this->assertSame(
+        self::assertSame(
             $object,
             $this->hydrator->hydrate(['maintainer' => 'Trillian', 'president' => '???'], $object)
         );
 
-        $this->assertArrayHasKey('maintainer', $object->arrayData);
-        $this->assertArrayHasKey('president', $object->arrayData);
-        $this->assertSame('Trillian', $object->arrayData['maintainer']);
-        $this->assertSame('???', $object->arrayData['president']);
-        $this->assertSame('Trillian', $object->maintainer);
+        self::assertArrayHasKey('maintainer', $object->arrayData);
+        self::assertArrayHasKey('president', $object->arrayData);
+        self::assertSame('Trillian', $object->arrayData['maintainer']);
+        self::assertSame('???', $object->arrayData['president']);
+        self::assertSame('Trillian', $object->maintainer);
     }
 
     /**
@@ -137,7 +136,7 @@ class AggregateHydratorFunctionalTest extends TestCase
         $this->hydrator->add(new ArraySerializableHydrator());
         $this->hydrator->getEventManager()->attach(ExtractEvent::EVENT_EXTRACT, $callback, 1000);
 
-        $this->assertSame(['Ravenous Bugblatter Beast of Traal'], $this->hydrator->extract($object));
+        self::assertSame(['Ravenous Bugblatter Beast of Traal'], $this->hydrator->extract($object));
     }
 
     /**
@@ -156,15 +155,15 @@ class AggregateHydratorFunctionalTest extends TestCase
         $this->hydrator->add(new ArraySerializableHydrator());
         $this->hydrator->getEventManager()->attach(HydrateEvent::EVENT_HYDRATE, $callback, 1000);
 
-        $this->assertSame($swappedObject, $this->hydrator->hydrate(['president' => 'Zaphod'], $object));
+        self::assertSame($swappedObject, $this->hydrator->hydrate(['president' => 'Zaphod'], $object));
     }
 
     /**
      * Data provider method
      *
-     * @return array
+     * @return list<array{0: HydratorInterface, 1: object, 2: array}>
      */
-    public function getHydratorSet()
+    public function getHydratorSet(): array
     {
         return [
             [new ArraySerializableHydrator(), new ArrayObject(['zaphod' => 'beeblebrox']), ['arthur' => 'dent']],

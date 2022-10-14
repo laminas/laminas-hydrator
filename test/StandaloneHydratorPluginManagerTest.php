@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace LaminasTest\Hydrator;
 
 use Closure;
+use Generator;
 use Laminas\Hydrator;
 use Laminas\Hydrator\StandaloneHydratorPluginManager;
 use PHPUnit\Framework\TestCase;
@@ -33,9 +34,9 @@ class StandaloneHydratorPluginManagerTest extends TestCase
     }
 
     /**
-     * @psalm-return iterable<string, array{0: string}>
+     * @psalm-return Generator<string, array{0: class-string}>
      */
-    public function hydratorsWithoutConstructors(): iterable
+    public function hydratorsWithoutConstructors(): Generator
     {
         yield 'ArraySerializable'               => [Hydrator\ArraySerializableHydrator::class];
         yield 'ArraySerializableHydrator'       => [Hydrator\ArraySerializableHydrator::class];
@@ -58,14 +59,14 @@ class StandaloneHydratorPluginManagerTest extends TestCase
     {
         $factories = $this->reflectProperty($this->manager, 'factories');
 
-        $this->assertArrayHasKey($class, $factories);
-        $this->assertInstanceOf(Closure::class, $factories[$class]);
+        self::assertArrayHasKey($class, $factories);
+        self::assertInstanceOf(Closure::class, $factories[$class]);
     }
 
     public function testDelegatingHydratorFactoryIsInitialized(): void
     {
         $factories = $this->reflectProperty($this->manager, 'factories');
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             Hydrator\DelegatingHydratorFactory::class,
             $factories[Hydrator\DelegatingHydrator::class]
         );
@@ -73,10 +74,11 @@ class StandaloneHydratorPluginManagerTest extends TestCase
 
     public function testHasReturnsFalseForUnknownNames(): void
     {
-        $this->assertFalse($this->manager->has('unknown-service-name'));
+        self::assertFalse($this->manager->has('unknown-service-name'));
     }
 
-    public function knownServices(): iterable
+    /** @return Generator<string, array{0: string, 1: class-string}> */
+    public function knownServices(): Generator
     {
         foreach ($this->hydratorsWithoutConstructors() as $key => $data) {
             $class = array_pop($data);
@@ -96,7 +98,7 @@ class StandaloneHydratorPluginManagerTest extends TestCase
      */
     public function testHasReturnsTrueForKnownServices(string $service): void
     {
-        $this->assertTrue($this->manager->has($service));
+        self::assertTrue($this->manager->has($service));
     }
 
     public function testGetRaisesExceptionForUnknownService(): void
@@ -107,10 +109,12 @@ class StandaloneHydratorPluginManagerTest extends TestCase
 
     /**
      * @dataProvider knownServices
+     * @param string|class-string $service
+     * @param class-string $expectedType
      */
     public function testGetReturnsExpectedTypesForKnownServices(string $service, string $expectedType): void
     {
         $instance = $this->manager->get($service);
-        $this->assertInstanceOf($expectedType, $instance);
+        self::assertInstanceOf($expectedType, $instance);
     }
 }

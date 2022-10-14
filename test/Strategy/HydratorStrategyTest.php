@@ -13,6 +13,7 @@ use LaminasTest\Hydrator\TestAsset;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use stdClass;
+use Throwable;
 use TypeError;
 
 use function count;
@@ -28,10 +29,10 @@ class HydratorStrategyTest extends TestCase
 {
     /**
      * @dataProvider providerInvalidObjectClassName
-     * @param mixed $objectClassName
+     * @param class-string<Throwable> $expectedExceptionType
      */
     public function testConstructorRejectsInvalidObjectClassName(
-        $objectClassName,
+        mixed $objectClassName,
         string $expectedExceptionType,
         string $expectedExceptionMessage
     ): void {
@@ -44,6 +45,7 @@ class HydratorStrategyTest extends TestCase
         );
     }
 
+    /** @return array<string, array{0: mixed, class-string<Throwable>, string}> */
     public function providerInvalidObjectClassName(): array
     {
         // @codingStandardsIgnoreStart
@@ -84,7 +86,8 @@ class HydratorStrategyTest extends TestCase
         $strategy->extract($value);
     }
 
-    public function providerInvalidValueForExtraction(): ?Generator
+    /** @return Generator<string, array{0: mixed}> */
+    public function providerInvalidValueForExtraction(): Generator
     {
         $values = [
             'boolean-false'             => false,
@@ -125,7 +128,8 @@ class HydratorStrategyTest extends TestCase
         $strategy->extract($object);
     }
 
-    public function providerInvalidObjectForExtraction(): ?Generator
+    /** @return Generator<string, array{0: mixed}> */
+    public function providerInvalidObjectForExtraction(): Generator
     {
         $values = [
             'boolean-false'                           => false,
@@ -157,7 +161,7 @@ class HydratorStrategyTest extends TestCase
 
         $hydrator = $this->createHydratorMock();
 
-        $hydrator->expects($this->once())
+        $hydrator->expects(self::once())
             ->method('extract')
             ->willReturnCallback($extraction);
 
@@ -166,7 +170,7 @@ class HydratorStrategyTest extends TestCase
             TestAsset\User::class
         );
 
-        $this->assertSame($extraction($value), $strategy->extract($value));
+        self::assertSame($extraction($value), $strategy->extract($value));
     }
 
     /**
@@ -191,7 +195,8 @@ class HydratorStrategyTest extends TestCase
         $strategy->hydrate($value);
     }
 
-    public function providerInvalidValueForHydration(): ?Generator
+    /** @return Generator<string, array{0: mixed}> */
+    public function providerInvalidValueForHydration(): Generator
     {
         $values = [
             'boolean-false'             => false,
@@ -219,10 +224,11 @@ class HydratorStrategyTest extends TestCase
             TestAsset\User::class
         );
 
-        $this->assertSame($value, $strategy->hydrate($value));
+        self::assertSame($value, $strategy->hydrate($value));
     }
 
-    public function providerEmptyOrSameObjects(): ?Generator
+    /** @return Generator<string, array{0: mixed}> */
+    public function providerEmptyOrSameObjects(): Generator
     {
         $values = [
             'null'                => null,
@@ -254,7 +260,7 @@ class HydratorStrategyTest extends TestCase
 
         $hydrator = $this->createHydratorMock();
 
-        $hydrator->expects($this->exactly(count($value)))
+        $hydrator->expects(self::exactly(count($value)))
             ->method('hydrate')
             ->willReturnCallback($hydration);
 
@@ -263,13 +269,13 @@ class HydratorStrategyTest extends TestCase
             TestAsset\User::class
         );
 
-        $this->assertEquals($hydration($value), $strategy->hydrate($value));
+        self::assertEquals($hydration($value), $strategy->hydrate($value));
     }
 
     /**
-     * @return MockObject|HydratorInterface
+     * @return MockObject&HydratorInterface
      */
-    private function createHydratorMock()
+    private function createHydratorMock(): HydratorInterface
     {
         return $this->createMock(HydratorInterface::class);
     }
