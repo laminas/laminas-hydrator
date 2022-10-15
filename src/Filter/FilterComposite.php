@@ -166,7 +166,7 @@ final class FilterComposite implements FilterInterface
      * @throws InvalidArgumentException If $filter is neither a
      *     callable nor FilterInterface.
      */
-    private function validateFilter($filter, string $name): void
+    private function validateFilter(mixed $filter, string $name): void
     {
         if (! is_callable($filter) && ! $filter instanceof FilterInterface) {
             throw new InvalidArgumentException(sprintf(

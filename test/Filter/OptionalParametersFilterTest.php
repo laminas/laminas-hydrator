@@ -83,39 +83,29 @@ class OptionalParametersFilterTest extends TestCase
 
     /**
      * Test asset method
-     *
-     * @param mixed $parameter
      */
-    public function methodWithSingleMandatoryParameter($parameter): void
+    public function methodWithSingleMandatoryParameter(mixed $parameter): void
     {
     }
 
     /**
      * Test asset method
-     *
-     * @param mixed $parameter
      */
-    public function methodWithSingleOptionalParameter($parameter = null): void
+    public function methodWithSingleOptionalParameter(mixed $parameter = null): void
     {
     }
 
     /**
      * Test asset method
-     *
-     * @param mixed $parameter
-     * @param mixed $otherParameter
      */
-    public function methodWithMultipleMandatoryParameters($parameter, $otherParameter): void
+    public function methodWithMultipleMandatoryParameters(mixed $parameter, mixed $otherParameter): void
     {
     }
 
     /**
      * Test asset method
-     *
-     * @param mixed $parameter
-     * @param mixed $otherParameter
      */
-    public function methodWithMultipleOptionalParameters($parameter = null, $otherParameter = null): void
+    public function methodWithMultipleOptionalParameters(mixed $parameter = null, mixed $otherParameter = null): void
     {
     }
 }

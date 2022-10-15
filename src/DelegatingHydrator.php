@@ -8,12 +8,8 @@ use Psr\Container\ContainerInterface;
 
 class DelegatingHydrator implements HydratorInterface
 {
-    /** @var ContainerInterface */
-    protected $hydrators;
-
-    public function __construct(ContainerInterface $hydrators)
+    public function __construct(protected ContainerInterface $hydrators)
     {
-        $this->hydrators = $hydrators;
     }
 
     /**

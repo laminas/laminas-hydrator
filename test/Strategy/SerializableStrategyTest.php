@@ -10,8 +10,6 @@ use Laminas\Serializer\Adapter\PhpSerialize;
 use Laminas\Serializer\Serializer;
 use PHPUnit\Framework\TestCase;
 
-use function get_class;
-
 /**
  * @covers Laminas\Hydrator\Strategy\SerializableStrategy
  */
@@ -34,7 +32,7 @@ class SerializableStrategyTest extends TestCase
     public function testUseBadSerializerString(): void
     {
         $serializerStrategy = new SerializableStrategy('phpserialize');
-        $this->assertEquals(PhpSerialize::class, get_class($serializerStrategy->getSerializer()));
+        $this->assertEquals(PhpSerialize::class, $serializerStrategy->getSerializer()::class);
     }
 
     public function testCanSerialize(): void

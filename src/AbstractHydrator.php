@@ -114,7 +114,7 @@ abstract class AbstractHydrator implements
      * @param  null|object $object The object is optionally provided as context.
      * @return mixed
      */
-    public function extractValue(string $name, $value, ?object $object = null)
+    public function extractValue(string $name, mixed $value, ?object $object = null)
     {
         return $this->hasStrategy($name)
             ? $this->getStrategy($name)->extract($value, $object)
@@ -129,7 +129,7 @@ abstract class AbstractHydrator implements
      * @param  null|array $data  The whole data is optionally provided as context.
      * @return mixed
      */
-    public function hydrateValue(string $name, $value, ?array $data = null)
+    public function hydrateValue(string $name, mixed $value, ?array $data = null)
     {
         return $this->hasStrategy($name)
             ? $this->getStrategy($name)->hydrate($value, $data)

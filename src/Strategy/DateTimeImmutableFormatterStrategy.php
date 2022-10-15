@@ -11,11 +11,8 @@ use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 
 class DateTimeImmutableFormatterStrategy implements StrategyInterface
 {
-    private DateTimeFormatterStrategy $dateTimeStrategy;
-
-    public function __construct(DateTimeFormatterStrategy $dateTimeStrategy)
+    public function __construct(private DateTimeFormatterStrategy $dateTimeStrategy)
     {
-        $this->dateTimeStrategy = $dateTimeStrategy;
     }
 
     /**

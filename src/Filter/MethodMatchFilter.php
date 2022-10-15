@@ -10,23 +10,19 @@ use function substr;
 final class MethodMatchFilter implements FilterInterface
 {
     /**
-     * The method to exclude
-     */
-    private string $method;
-
-    /**
-     * Either an exclude or an include
-     */
-    private bool $exclude;
-
-    /**
      * @param string $method The method to exclude or include
      * @param bool $exclude If the method should be excluded
      */
-    public function __construct(string $method, bool $exclude = true)
-    {
-        $this->method  = $method;
-        $this->exclude = $exclude;
+    public function __construct(
+        /**
+         * The method to exclude
+         */
+        private string $method,
+        /**
+         * Either an exclude or an include
+         */
+        private bool $exclude = true
+    ) {
     }
 
     public function filter(string $property, ?object $instance = null): bool

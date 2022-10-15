@@ -15,12 +15,8 @@ use Laminas\Hydrator\HydratorInterface;
  */
 class HydratorListener extends AbstractListenerAggregate
 {
-    /** @var HydratorInterface */
-    protected $hydrator;
-
-    public function __construct(HydratorInterface $hydrator)
+    public function __construct(protected HydratorInterface $hydrator)
     {
-        $this->hydrator = $hydrator;
     }
 
     /**

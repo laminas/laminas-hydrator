@@ -355,7 +355,7 @@ class HydratorTest extends TestCase
         $hydrator->extract($this->classMethodsCamelCase);
         $hydrator->addFilter(
             'exclude',
-            function ($property) {
+            static function ($property): bool {
                 $method = explode('::', $property)[1];
 
                 if ($method === 'getHasFoo') {
@@ -388,7 +388,7 @@ class HydratorTest extends TestCase
             $hydrator->extract($serializable)
         );
 
-        $hydrator->addFilter('foo', function ($property) {
+        $hydrator->addFilter('foo', static function ($property): bool {
             if ($property === 'foo') {
                 return false;
             }
@@ -404,7 +404,7 @@ class HydratorTest extends TestCase
             $hydrator->extract($serializable)
         );
 
-        $hydrator->addFilter('len', function ($property) {
+        $hydrator->addFilter('len', static function ($property): bool {
             if (strlen($property) !== 3) {
                 return false;
             }

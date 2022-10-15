@@ -23,7 +23,7 @@ class ClassMethodsTest extends TestCase
         };
 
         /** @psalm-suppress UnusedClosureParam */
-        set_error_handler(function ($errno, $errstr) use ($test) {
+        set_error_handler(static function ($errno, $errstr) use ($test): bool {
             $test->message = $errstr;
             return true;
         }, E_USER_DEPRECATED);

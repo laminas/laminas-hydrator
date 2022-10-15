@@ -13,16 +13,14 @@ use function sprintf;
 final class NumberOfParameterFilter implements FilterInterface
 {
     /**
-     * The number of parameters being accepted
-     */
-    private int $numberOfParameters;
-
-    /**
      * @param int $numberOfParameters Number of accepted parameters
      */
-    public function __construct(int $numberOfParameters = 0)
-    {
-        $this->numberOfParameters = $numberOfParameters;
+    public function __construct(
+        /**
+         * The number of parameters being accepted
+         */
+        private int $numberOfParameters = 0
+    ) {
     }
 
     /**
@@ -34,7 +32,7 @@ final class NumberOfParameterFilter implements FilterInterface
             $reflectionMethod = $instance !== null
                 ? new ReflectionMethod($instance, $property)
                 : new ReflectionMethod($property);
-        } catch (ReflectionException $exception) {
+        } catch (ReflectionException) {
             throw new InvalidArgumentException(sprintf(
                 'Method %s does not exist',
                 $property
