@@ -542,7 +542,7 @@
       <code>$data</code>
     </MissingClosureParamType>
     <MissingClosureReturnType occurrences="1">
-      <code>function ($data) {</code>
+      <code>static function ($data) {</code>
     </MissingClosureReturnType>
     <MixedArgument occurrences="1">
       <code>$data</code>

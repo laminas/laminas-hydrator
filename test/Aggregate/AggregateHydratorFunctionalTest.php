@@ -128,7 +128,7 @@ class AggregateHydratorFunctionalTest extends TestCase
     public function testStoppedPropagationInExtraction(): void
     {
         $object   = new ArrayObject(['president' => 'Zaphod']);
-        $callback = function (ExtractEvent $event): void {
+        $callback = static function (ExtractEvent $event): void {
             $event->setExtractedData(['Ravenous Bugblatter Beast of Traal']);
             $event->stopPropagation();
         };
@@ -147,7 +147,7 @@ class AggregateHydratorFunctionalTest extends TestCase
     {
         $object        = new ArrayObject();
         $swappedObject = new stdClass();
-        $callback      = function (HydrateEvent $event) use ($swappedObject): void {
+        $callback      = static function (HydrateEvent $event) use ($swappedObject): void {
             $event->setHydratedObject($swappedObject);
             $event->stopPropagation();
         };

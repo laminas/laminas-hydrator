@@ -47,7 +47,7 @@ final class OptionalParametersFilter implements FilterInterface
             $reflectionMethod = $instance !== null
                 ? new ReflectionMethod($instance, $property)
                 : new ReflectionMethod($property);
-        } catch (ReflectionException $exception) {
+        } catch (ReflectionException) {
             throw new InvalidArgumentException(sprintf('Method %s does not exist', $property));
         }
 

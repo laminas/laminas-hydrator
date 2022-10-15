@@ -92,7 +92,7 @@ final class MapNamingStrategy implements NamingStrategyInterface
      */
     private function flipMapping(array $array): array
     {
-        array_walk($array, function ($value, $key) {
+        array_walk($array, static function ($value, $key): void {
             if (! is_string($value) || $value === '') {
                 throw new Exception\InvalidArgumentException(
                     'Mapping array can not be flipped because of invalid value'

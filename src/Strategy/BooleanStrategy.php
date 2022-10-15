@@ -18,11 +18,9 @@ use function sprintf;
  */
 final class BooleanStrategy implements StrategyInterface
 {
-    /** @var int|string */
-    private $trueValue;
+    private int|string $trueValue;
 
-    /** @var int|string */
-    private $falseValue;
+    private int|string $falseValue;
 
     /**
      * @param int|string $trueValue

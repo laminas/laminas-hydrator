@@ -16,8 +16,6 @@ final class ScalarTypeStrategy implements StrategyInterface
     private const TYPE_STRING  = 'string';
     private const TYPE_BOOLEAN = 'bool';
 
-    private string $type;
-
     public static function createToInt(): self
     {
         return new self(self::TYPE_INT);
@@ -38,9 +36,8 @@ final class ScalarTypeStrategy implements StrategyInterface
         return new self(self::TYPE_BOOLEAN);
     }
 
-    private function __construct(string $type)
+    private function __construct(private string $type)
     {
-        $this->type = $type;
     }
 
     /**
@@ -63,23 +60,18 @@ final class ScalarTypeStrategy implements StrategyInterface
             return null;
         }
 
-        switch ($this->type) {
-            case self::TYPE_INT:
-                return (int) $value;
-            case self::TYPE_FLOAT:
-                return (float) $value;
-            case self::TYPE_STRING:
-                return (string) $value;
-            case self::TYPE_BOOLEAN:
-                return (bool) $value;
-            default:
-                throw new InvalidArgumentException(
-                    sprintf(
-                        'Unable to hydrate. Target type must be one of %s, %s was given.',
-                        implode(', ', [self::TYPE_INT, self::TYPE_FLOAT, self::TYPE_STRING]),
-                        $this->type
-                    )
-                );
-        }
+        return match ($this->type) {
+            self::TYPE_INT => (int) $value,
+            self::TYPE_FLOAT => (float) $value,
+            self::TYPE_STRING => (string) $value,
+            self::TYPE_BOOLEAN => (bool) $value,
+            default => throw new InvalidArgumentException(
+                sprintf(
+                    'Unable to hydrate. Target type must be one of %s, %s was given.',
+                    implode(', ', [self::TYPE_INT, self::TYPE_FLOAT, self::TYPE_STRING]),
+                    $this->type
+                )
+            ),
+        };
     }
 }

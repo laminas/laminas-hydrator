@@ -17,18 +17,15 @@ final class ExplodeStrategy implements StrategyInterface
 {
     private string $valueDelimiter;
 
-    private ?int $explodeLimit;
-
     /**
      * Constructor
      *
      * @param string   $delimiter    String that the values will be split upon
      * @param int|null $explodeLimit Explode limit
      */
-    public function __construct(string $delimiter = ',', ?int $explodeLimit = null)
+    public function __construct(string $delimiter = ',', private ?int $explodeLimit = null)
     {
         $this->setValueDelimiter($delimiter);
-        $this->explodeLimit = $explodeLimit;
     }
 
     /**

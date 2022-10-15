@@ -17,14 +17,12 @@ use function sprintf;
 
 class CollectionStrategy implements StrategyInterface
 {
-    private HydratorInterface $objectHydrator;
-
     private string $objectClassName;
 
     /**
      * @throws Exception\InvalidArgumentException
      */
-    public function __construct(HydratorInterface $objectHydrator, string $objectClassName)
+    public function __construct(private HydratorInterface $objectHydrator, string $objectClassName)
     {
         if (! class_exists($objectClassName)) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -32,8 +30,6 @@ class CollectionStrategy implements StrategyInterface
                 $objectClassName
             ));
         }
-
-        $this->objectHydrator  = $objectHydrator;
         $this->objectClassName = $objectClassName;
     }
 
@@ -53,7 +49,7 @@ class CollectionStrategy implements StrategyInterface
             ));
         }
 
-        return array_map(function ($object) {
+        return array_map(function ($object): array {
             if (! $object instanceof $this->objectClassName) {
                 throw new Exception\InvalidArgumentException(sprintf(
                     'Value needs to be an instance of "%s", got "%s" instead.',

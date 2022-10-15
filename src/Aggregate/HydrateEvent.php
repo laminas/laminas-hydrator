@@ -22,24 +22,13 @@ class HydrateEvent extends Event
     protected $name = self::EVENT_HYDRATE;
 
     /**
-     * @var object
-     * @psalm-var T
-     */
-    protected $hydratedObject;
-
-    /** @var mixed[] Data being used to hydrate the $hydratedObject */
-    protected $hydrationData;
-
-    /**
      * @param mixed[] $hydrationData Data being used to hydrate the $hydratedObject
      * @psalm-param T $hydratedObject
      */
-    public function __construct(object $target, object $hydratedObject, array $hydrationData)
+    public function __construct(object $target, protected object $hydratedObject, protected array $hydrationData)
     {
         parent::__construct();
-        $this->target         = $target;
-        $this->hydratedObject = $hydratedObject;
-        $this->hydrationData  = $hydrationData;
+        $this->target = $target;
     }
 
     /**

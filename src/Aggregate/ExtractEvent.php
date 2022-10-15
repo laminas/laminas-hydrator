@@ -21,17 +21,13 @@ class ExtractEvent extends Event
      */
     protected $name = self::EVENT_EXTRACT;
 
-    /** @var object */
-    protected $extractionObject;
-
     /** @var mixed[] Data being extracted from the $extractionObject */
     protected $extractedData = [];
 
-    public function __construct(object $target, object $extractionObject)
+    public function __construct(object $target, protected object $extractionObject)
     {
         parent::__construct();
-        $this->target           = $target;
-        $this->extractionObject = $extractionObject;
+        $this->target = $target;
     }
 
     /**

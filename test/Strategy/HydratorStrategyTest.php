@@ -65,9 +65,8 @@ class HydratorStrategyTest extends TestCase
 
     /**
      * @dataProvider providerInvalidValueForExtraction
-     * @param mixed $value
      */
-    public function testExtractRejectsInvalidValue($value): void
+    public function testExtractRejectsInvalidValue(mixed $value): void
     {
         $strategy = new HydratorStrategy(
             $this->createHydratorMock(),
@@ -107,9 +106,8 @@ class HydratorStrategyTest extends TestCase
 
     /**
      * @dataProvider providerInvalidObjectForExtraction
-     * @param mixed $object
      */
-    public function testExtractRejectsInvalidObject($object): void
+    public function testExtractRejectsInvalidObject(mixed $object): void
     {
         $strategy = new HydratorStrategy(
             $this->createHydratorMock(),
@@ -175,9 +173,8 @@ class HydratorStrategyTest extends TestCase
 
     /**
      * @dataProvider providerInvalidValueForHydration
-     * @param mixed $value
      */
-    public function testHydrateRejectsInvalidValue($value): void
+    public function testHydrateRejectsInvalidValue(mixed $value): void
     {
         $strategy = new HydratorStrategy(
             $this->createHydratorMock(),
@@ -215,9 +212,8 @@ class HydratorStrategyTest extends TestCase
 
     /**
      * @dataProvider providerEmptyOrSameObjects
-     * @param mixed $value
      */
-    public function testHydrateShouldReturnEmptyOrSameObjects($value): void
+    public function testHydrateShouldReturnEmptyOrSameObjects(mixed $value): void
     {
         $strategy = new HydratorStrategy(
             $this->createHydratorMock(),

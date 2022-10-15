@@ -64,7 +64,7 @@ class SerializableStrategy implements StrategyInterface
      *     SerializerAdapter instance
      * @throws InvalidArgumentException For invalid $serializer values.
      */
-    public function setSerializer($serializer): void
+    public function setSerializer(mixed $serializer): void
     {
         if (! is_string($serializer) && ! $serializer instanceof SerializerAdapter) {
             throw new InvalidArgumentException(sprintf(

@@ -126,9 +126,8 @@ class CollectionStrategyTest extends TestCase
 
     /**
      * @dataProvider providerInvalidObjectForExtraction
-     * @param mixed $object
      */
-    public function testExtractRejectsInvalidObject($object): void
+    public function testExtractRejectsInvalidObject(mixed $object): void
     {
         $value = [$object];
 
@@ -249,7 +248,7 @@ class CollectionStrategyTest extends TestCase
             ['name' => 'John Doe'],
         ];
 
-        $hydration = function ($data) {
+        $hydration = static function ($data) {
             static $hydrator;
 
             if (null === $hydrator) {

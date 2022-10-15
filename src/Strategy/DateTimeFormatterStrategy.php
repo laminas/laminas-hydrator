@@ -17,13 +17,6 @@ use function sprintf;
 final class DateTimeFormatterStrategy implements StrategyInterface
 {
     /**
-     * Format to use during hydration.
-     */
-    private string $format;
-
-    private ?DateTimeZone $timezone;
-
-    /**
      * Format to use during extraction.
      *
      * Removes any special anchor characters used to ensure that creation of a
@@ -34,23 +27,20 @@ final class DateTimeFormatterStrategy implements StrategyInterface
     private string $extractionFormat;
 
     /**
-     * Whether or not to allow hydration of values that do not follow the format exactly.
-     */
-    private bool $dateTimeFallback;
-
-    /**
      * @param bool $dateTimeFallback try to parse with DateTime when createFromFormat fails
      * @throws Exception\InvalidArgumentException For invalid $format values.
      */
     public function __construct(
-        string $format = DateTime::RFC3339,
-        ?DateTimeZone $timezone = null,
-        bool $dateTimeFallback = false
+        /**
+         * Format to use during hydration.
+         */
+        private string $format = DateTime::RFC3339,
+        private ?DateTimeZone $timezone = null,
+        /**
+         * Whether or not to allow hydration of values that do not follow the format exactly.
+         */
+        private bool $dateTimeFallback = false
     ) {
-        $this->format           = $format;
-        $this->timezone         = $timezone;
-        $this->dateTimeFallback = $dateTimeFallback;
-
         $extractionFormat = preg_replace('/(?<![\\\\])[+|!\*]/', '', $this->format);
         if (null === $extractionFormat) {
             throw new Exception\InvalidArgumentException(sprintf(

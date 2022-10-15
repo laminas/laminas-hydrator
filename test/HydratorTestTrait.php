@@ -8,7 +8,6 @@ use Laminas\Hydrator\NamingStrategy\NamingStrategyInterface;
 use Laminas\Hydrator\Strategy\StrategyInterface;
 use LaminasTest\Hydrator\TestAsset\SimpleEntity;
 
-use function get_class;
 use function sprintf;
 
 trait HydratorTestTrait
@@ -36,7 +35,7 @@ trait HydratorTestTrait
         $this->assertSame(
             'hydrate',
             $entity->getValue(),
-            sprintf('Hydrator: %s', get_class($this->hydrator))
+            sprintf('Hydrator: %s', $this->hydrator::class)
         );
     }
 

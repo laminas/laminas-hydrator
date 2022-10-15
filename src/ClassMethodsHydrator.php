@@ -16,7 +16,8 @@ use function method_exists;
 use function property_exists;
 use function spl_object_hash;
 use function sprintf;
-use function strpos;
+use function str_contains;
+use function str_starts_with;
 use function substr;
 use function ucfirst;
 
@@ -129,7 +130,7 @@ class ClassMethodsHydrator extends AbstractHydrator implements HydratorOptionsIn
     public function extract(object $object): array
     {
         $objectClass = $object::class;
-        $isAnonymous = false !== strpos($objectClass, '@anonymous');
+        $isAnonymous = str_contains($objectClass, '@anonymous');
 
         if ($isAnonymous) {
             $objectClass = spl_object_hash($object);
@@ -206,7 +207,7 @@ class ClassMethodsHydrator extends AbstractHydrator implements HydratorOptionsIn
 
     private function identifyAttributeName(object $object, string $method): string
     {
-        if (strpos($method, 'get') === 0) {
+        if (str_starts_with($method, 'get')) {
             $attribute = substr($method, 3);
             return property_exists($object, $attribute) ? $attribute : lcfirst($attribute);
         }
