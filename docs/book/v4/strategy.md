@@ -82,6 +82,26 @@ if present, will use it to translate the property name prior to looking up a
 
 ## Available implementations
 
+### Laminas\\Hydrator\\Strategy\\BackedEnumStrategy
+
+**PHP 8.1+** This strategy coverts scalar values into [Backed Enums](https://www.php.net/manual/en/language.enumerations.backed.php)
+and visa versa:
+
+```php
+enum Direction: string
+{
+    case Left  = 'left';
+    case Right = 'right';
+}
+
+$enumStrategy = new Laminas\Hydrator\Strategy\BackedEnumStrategy(Direction::class);
+
+$case = $enumStrategy->hydrate('right', null);
+// enum Direction::Right : string("right");
+$direction = $enumStrategy->extract(Direction::Left);
+// string(4) "left"
+```
+
 ### Laminas\\Hydrator\\Strategy\\BooleanStrategy
 
 This strategy converts values into booleans and vice versa. It expects two
