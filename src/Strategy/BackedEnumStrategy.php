@@ -9,15 +9,19 @@ use Laminas\Hydrator\Exception\DomainException;
 use Laminas\Hydrator\Strategy\Exception\InvalidArgumentException;
 use ValueError;
 
+use function assert;
 use function get_debug_type;
 use function is_a;
+use function is_object;
 use function is_scalar;
+use function property_exists;
 use function sprintf;
 
 use const PHP_VERSION_ID;
 
 final class BackedEnumStrategy implements StrategyInterface
 {
+    /** @var class-string  */
     private string $enumClass;
 
     /**
@@ -49,6 +53,7 @@ final class BackedEnumStrategy implements StrategyInterface
             ));
         }
 
+        assert(is_object($value) && property_exists($value, 'value'));
         return $value->value;
     }
 
@@ -69,11 +74,12 @@ final class BackedEnumStrategy implements StrategyInterface
         }
 
         try {
-            return ($this->enumClass)::from($value);
+            /** @psalm-suppress MixedMethodCall */
+            return $this->enumClass::from($value);
         } catch (ValueError $error) {
             throw new InvalidArgumentException(sprintf(
                 "Value '%s' is not a valid scalar value for %s",
-                $value,
+                (string) $value,
                 $this->enumClass
             ), 0, $error);
         }
