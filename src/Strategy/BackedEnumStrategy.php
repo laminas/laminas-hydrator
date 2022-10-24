@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Laminas\Hydrator\Strategy;
 
 use BackedEnum;
-use Laminas\Hydrator\Exception\DomainException;
 use Laminas\Hydrator\Strategy\Exception\InvalidArgumentException;
 use ValueError;
 
@@ -17,8 +16,6 @@ use function is_scalar;
 use function property_exists;
 use function sprintf;
 
-use const PHP_VERSION_ID;
-
 final class BackedEnumStrategy implements StrategyInterface
 {
     /** @var class-string  */
@@ -29,10 +26,6 @@ final class BackedEnumStrategy implements StrategyInterface
      */
     public function __construct(string $enumClass)
     {
-        if (PHP_VERSION_ID < 80100) {
-            throw new DomainException("Backed enums require PHP 8.1+");
-        }
-
         if (! is_a($enumClass, BackedEnum::class, true)) {
             throw new InvalidArgumentException("$enumClass is not a BackedEnum");
         }

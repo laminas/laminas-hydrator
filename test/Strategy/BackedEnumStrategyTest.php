@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace LaminasTest\Hydrator\Strategy;
 
-use Laminas\Hydrator\Exception\DomainException;
 use Laminas\Hydrator\Strategy\BackedEnumStrategy;
 use Laminas\Hydrator\Strategy\Exception\InvalidArgumentException;
 use LaminasTest\Hydrator\Strategy\TestAsset\TestBackedEnum;
@@ -21,28 +20,23 @@ use const PHP_VERSION_ID;
  */
 final class BackedEnumStrategyTest extends TestCase
 {
-    public function testConstructInvalidPhpVersionThrowsException(): void
+    protected function setUp(): void
     {
-        if (PHP_VERSION_ID >= 80100) {
-            self::markTestSkipped("PHP >=8.1 detected");
-        }
+        parent::setUp();
 
-        self::expectException(DomainException::class);
-        new BackedEnumStrategy(TestBackedEnum::class);
+        if (PHP_VERSION_ID < 80100) {
+            self::markTestSkipped("PHP 8.1+ required");
+        }
     }
 
     public function testConstructUnitEnumThrowsException(): void
     {
-        $this->checkVersion();
-
         self::expectException(InvalidArgumentException::class);
         new BackedEnumStrategy(TestUnitEnum::class);
     }
 
     public function testExtractInvalidValueThrowsException(): void
     {
-        $this->checkVersion();
-
         $strategy = new BackedEnumStrategy(TestBackedEnum::class);
         self::expectException(InvalidArgumentException::class);
         $strategy->extract(TestUnitEnum::One);
@@ -50,8 +44,6 @@ final class BackedEnumStrategyTest extends TestCase
 
     public function testExtractExtractsValue(): void
     {
-        $this->checkVersion();
-
         $strategy = new BackedEnumStrategy(TestBackedEnum::class);
         $actual   = $strategy->extract(TestBackedEnum::One);
         self::assertSame('one', $actual);
@@ -59,8 +51,6 @@ final class BackedEnumStrategyTest extends TestCase
 
     public function testHydrateEnumReturnsEnum(): void
     {
-        $this->checkVersion();
-
         $expected = TestBackedEnum::Two;
         $strategy = new BackedEnumStrategy(TestBackedEnum::class);
         $actual   = $strategy->hydrate($expected, null);
@@ -69,8 +59,6 @@ final class BackedEnumStrategyTest extends TestCase
 
     public function testHydrateNonScalarThrowsException(): void
     {
-        $this->checkVersion();
-
         $strategy = new BackedEnumStrategy(TestBackedEnum::class);
         self::expectException(InvalidArgumentException::class);
         self::expectExceptionMessage("Value must be scalar; array provided");
@@ -79,8 +67,6 @@ final class BackedEnumStrategyTest extends TestCase
 
     public function testHydrateNonCaseThrowsException(): void
     {
-        $this->checkVersion();
-
         $strategy = new BackedEnumStrategy(TestBackedEnum::class);
         self::expectException(InvalidArgumentException::class);
         self::expectExceptionMessage("Value 'three' is not a valid scalar value for " . TestBackedEnum::class);
@@ -89,17 +75,8 @@ final class BackedEnumStrategyTest extends TestCase
 
     public function testHydrateValueReturnsEnum(): void
     {
-        $this->checkVersion();
-
         $strategy = new BackedEnumStrategy(TestBackedEnum::class);
         $actual   = $strategy->hydrate('two', null);
         self::assertSame(TestBackedEnum::Two, $actual);
-    }
-
-    private function checkVersion(): void
-    {
-        if (PHP_VERSION_ID < 80100) {
-            self::markTestSkipped("PHP 8.1+ required");
-        }
     }
 }
