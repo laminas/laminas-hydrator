@@ -14,9 +14,7 @@
             <directory name="test/TestAsset"/>
             <directory name="vendor"/>
             <!-- can be removed once PHP8.0 support dropped -->
-            <file name="src/Strategy/BackedEnumStrategy.php"/>
             <directory name="test/Strategy/TestAsset"/>
-            <file name="test/Strategy/BackedEnumStrategyTest.php"/>
         </ignoreFiles>
     </projectFiles>
 
