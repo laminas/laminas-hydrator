@@ -29,12 +29,6 @@ final class BackedEnumStrategyTest extends TestCase
         }
     }
 
-    public function testConstructUnitEnumThrowsException(): void
-    {
-        self::expectException(InvalidArgumentException::class);
-        new BackedEnumStrategy(TestUnitEnum::class);
-    }
-
     public function testExtractInvalidValueThrowsException(): void
     {
         $strategy = new BackedEnumStrategy(TestBackedEnum::class);
@@ -61,7 +55,7 @@ final class BackedEnumStrategyTest extends TestCase
     {
         $strategy = new BackedEnumStrategy(TestBackedEnum::class);
         self::expectException(InvalidArgumentException::class);
-        self::expectExceptionMessage("Value must be scalar; array provided");
+        self::expectExceptionMessage("Value must be string or int; array provided");
         $strategy->hydrate([], null);
     }
 
