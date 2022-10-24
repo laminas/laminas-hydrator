@@ -74,9 +74,7 @@
     <MixedInferredReturnType occurrences="1">
       <code>HydratorInterface</code>
     </MixedInferredReturnType>
-    <MixedReturnStatement occurrences="1">
-      <code>$this-&gt;hydrators-&gt;get($object::class)</code>
-    </MixedReturnStatement>
+    <MixedReturnStatement occurrences="1"/>
   </file>
   <file src="src/DelegatingHydratorFactory.php">
     <MixedInferredReturnType occurrences="1">
@@ -84,7 +82,6 @@
     </MixedInferredReturnType>
     <MixedReturnStatement occurrences="3">
       <code>$container-&gt;get('HydratorManager')</code>
-      <code>$container-&gt;get('Zend\Hydrator\HydratorPluginManager')</code>
       <code>$container-&gt;get(HydratorPluginManager::class)</code>
     </MixedReturnStatement>
   </file>
@@ -118,9 +115,7 @@
     <MixedAssignment occurrences="1">
       <code>$currentValue</code>
     </MixedAssignment>
-    <MixedMethodCall occurrences="1">
-      <code>new $prototype()</code>
-    </MixedMethodCall>
+    <MixedMethodCall occurrences="1"/>
   </file>
   <file src="src/Module.php">
     <MixedAssignment occurrences="2">
@@ -224,14 +219,6 @@
     <InvalidStringClass occurrences="1">
       <code>new $class()</code>
     </InvalidStringClass>
-  </file>
-  <file src="src/Strategy/BackedEnumStrategy.php">
-    <MixedInferredReturnType occurrences="1">
-      <code>T</code>
-    </MixedInferredReturnType>
-    <MixedReturnStatement occurrences="1">
-      <code>$this-&gt;enumClass::from($value)</code>
-    </MixedReturnStatement>
   </file>
   <file src="src/Strategy/BooleanStrategy.php">
     <DocblockTypeContradiction occurrences="4">
@@ -371,6 +358,7 @@
       <code>$andFilters</code>
       <code>$orFilters</code>
       <code>$value</code>
+      <code>$value</code>
     </MixedAssignment>
   </file>
   <file src="test/HydratorAwareTraitTest.php">
@@ -421,6 +409,7 @@
   </file>
   <file src="test/HydratorObjectPropertyTest.php">
     <MissingClosureParamType occurrences="1">
+      <code>$property</code>
       <code>$property</code>
     </MissingClosureParamType>
   </file>
@@ -541,40 +530,8 @@
       <code>$instance</code>
     </MixedAssignment>
   </file>
-  <file src="test/Strategy/BackedEnumStrategyTest.php">
-    <MixedArgument occurrences="6">
-      <code>TestBackedEnum::class</code>
-      <code>TestBackedEnum::class</code>
-      <code>TestBackedEnum::class</code>
-      <code>TestBackedEnum::class</code>
-      <code>TestBackedEnum::class</code>
-      <code>TestBackedEnum::class</code>
-    </MixedArgument>
-    <MixedAssignment occurrences="1">
-      <code>$expected</code>
-    </MixedAssignment>
-    <MixedOperand occurrences="1">
-      <code>TestBackedEnum::class</code>
-    </MixedOperand>
-    <UndefinedClass occurrences="12">
-      <code>TestBackedEnum</code>
-      <code>TestBackedEnum</code>
-      <code>TestBackedEnum</code>
-      <code>TestBackedEnum</code>
-      <code>TestBackedEnum</code>
-      <code>TestBackedEnum</code>
-      <code>TestBackedEnum</code>
-      <code>TestBackedEnum</code>
-      <code>TestBackedEnum</code>
-      <code>TestBackedEnum</code>
-      <code>TestBackedEnum</code>
-      <code>TestUnitEnum</code>
-    </UndefinedClass>
-  </file>
   <file src="test/Strategy/BooleanStrategyTest.php">
-    <InvalidArgument occurrences="1">
-      <code>false</code>
-    </InvalidArgument>
+    <InvalidArgument occurrences="1"/>
     <InvalidScalarArgument occurrences="2">
       <code>5</code>
       <code>true</code>
@@ -598,13 +555,17 @@
     <MixedAssignment occurrences="5">
       <code>$date</code>
       <code>$date</code>
+      <code>$date</code>
       <code>$extracted</code>
       <code>$extracted</code>
       <code>$hydrated</code>
     </MixedAssignment>
     <MixedMethodCall occurrences="3">
       <code>format</code>
+      <code>format</code>
       <code>getName</code>
+      <code>getName</code>
+      <code>getTimezone</code>
       <code>getTimezone</code>
     </MixedMethodCall>
   </file>
