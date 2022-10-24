@@ -24,32 +24,28 @@ class ArrayObjectIterator implements Iterator
         }
     }
 
-    /** @return void */
-    public function rewind()
+    public function rewind(): void
     {
         reset($this->var);
     }
 
-    /** @return mixed */
-    public function current()
+    public function current(): mixed
     {
         return current($this->var);
     }
 
     /** @return int|string */
-    public function key()
+    public function key(): mixed
     {
         return key($this->var);
     }
 
-    /** @return mixed */
-    public function next()
+    public function next(): void
     {
-        return next($this->var);
+        next($this->var);
     }
 
-    /** @return bool */
-    public function valid()
+    public function valid(): bool
     {
         $key = key($this->var);
         return $key !== null && $key !== false;
