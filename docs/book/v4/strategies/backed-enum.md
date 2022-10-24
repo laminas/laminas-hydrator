@@ -21,12 +21,12 @@ enum Genre: string
 }
 ```
 
-## Basic usage
+## Basic Usage
 
 The following code example shows standalone usage without adding the strategy
 to a hydrator.
 
-### Create and configure strategy
+### Create and Configure Strategy
 
 Create the strategy passing the class name of the enum it will hydrate and extract:
 
@@ -34,14 +34,14 @@ Create the strategy passing the class name of the enum it will hydrate and extra
 $strategy = new Laminas\Hydrator\Strategy\BackedEnumStrategy(Genre::class);
 ```
 
-### Hydrate data
+### Hydrate Data
 
 ```php
 $hydrated = $strategy->hydrate('blues', null);
 var_dump($hydrated); // enum Genre::Blues : string("blues");
 ```
 
-### Extract data
+### Extract Data
 
 ```php
 $extracted = $strategy->extract(Genre::Pop);
@@ -71,7 +71,7 @@ class Album
 }
 ```
 
-### Create hydrator and add strategy
+### Create Hydrator and Add Atrategy
 
 Create a hydrator and add the `BackedEnumStrategy` as a strategy:
 
@@ -83,7 +83,7 @@ $hydrator->addStrategy(
 );
 ```
 
-### Hydrate data
+### Hydrate Data
 
 Create an instance of the example class and hydrate data:
 
@@ -94,7 +94,7 @@ $hydrator->hydrate(['genre' => 'jazz'], $album);
 echo $album->getGenre()->value; // "jazz"
 ```
 
-### Extract data
+### Extract Data
 
 ```php
 $extracted = $hydrator->extract($album);
