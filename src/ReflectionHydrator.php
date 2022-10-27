@@ -26,7 +26,7 @@ class ReflectionHydrator extends AbstractHydrator
         $result = [];
         foreach (self::getReflProperties($object) as $property) {
             $propertyName = $this->extractName($property->getName(), $object);
-            if (! $this->getCompositeFilter()->filter($propertyName)) {
+            if (!$this->getCompositeFilter()->filter($propertyName) || !$property->isInitialized($object)) {
                 continue;
             }
 
