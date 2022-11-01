@@ -43,7 +43,7 @@
         "laminas/laminas-servicemanager": "^3.19",
         "phpbench/phpbench": "^1.2.7",
         "phpunit/phpunit": "^9.5.26",
-        "psalm/plugin-phpunit": "^0.17.0",
+        "psalm/plugin-phpunit": "^0.18.0",
         "vimeo/psalm": "^4.29"
     },
     "suggest": {
