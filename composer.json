@@ -41,8 +41,8 @@
         "laminas/laminas-modulemanager": "^2.14.0",
         "laminas/laminas-serializer": "^2.14.0",
         "laminas/laminas-servicemanager": "^3.19",
-        "phpbench/phpbench": "^1.2.6",
-        "phpunit/phpunit": "^9.5.25",
+        "phpbench/phpbench": "^1.2.7",
+        "phpunit/phpunit": "^9.5.26",
         "psalm/plugin-phpunit": "^0.17.0",
         "vimeo/psalm": "^4.29"
     },
