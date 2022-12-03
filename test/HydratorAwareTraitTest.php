@@ -15,7 +15,6 @@ class HydratorAwareTraitTest extends TestCase
 {
     public function testSetHydrator(): void
     {
-        /** @psalm-suppress InvalidScalarArgument False positive */
         $object = $this->getObjectForTrait(HydratorAwareTrait::class);
 
         $this->assertSame(null, $object->getHydrator());
@@ -29,7 +28,6 @@ class HydratorAwareTraitTest extends TestCase
 
     public function testGetHydrator(): void
     {
-        /** @psalm-suppress InvalidScalarArgument False positive */
         $object = $this->getObjectForTrait(HydratorAwareTrait::class);
 
         $this->assertNull($object->getHydrator());

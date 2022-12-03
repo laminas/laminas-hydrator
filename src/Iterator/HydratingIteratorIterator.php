@@ -14,16 +14,25 @@ use function class_exists;
 use function is_object;
 use function sprintf;
 
+/**
+ * @template TKey
+ * @template TPrototype of object
+ * @template TInputData of array
+ * @template TIterator of Iterator<TKey, TInputData>
+ * @template-extends IteratorIterator<TKey, TInputData, TIterator>
+ * @template-implements HydratingIteratorInterface<TKey, TPrototype>
+ */
 class HydratingIteratorIterator extends IteratorIterator implements HydratingIteratorInterface
 {
     /** @var HydratorInterface */
     protected $hydrator;
 
-    /** @var object */
+    /** @var TPrototype */
     protected $prototype;
 
     /**
-     * @param string|object $prototype Object or class name to use for prototype.
+     * @param Iterator<TKey, TInputData>          $data
+     * @param class-string<TPrototype>|TPrototype $prototype
      */
     public function __construct(HydratorInterface $hydrator, Iterator $data, $prototype)
     {
@@ -62,7 +71,9 @@ class HydratingIteratorIterator extends IteratorIterator implements HydratingIte
     }
 
     /**
-     * @return object Returns hydrated clone of $prototype
+     * @psalm-suppress ImplementedReturnTypeMismatch we are explicitly replacing the type of {@see parent::current()}
+     *                 with a hydrated value here, breaking LSP by design.
+     * @return TPrototype|null
      */
     #[ReturnTypeWillChange]
     public function current()
