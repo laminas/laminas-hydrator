@@ -45,7 +45,7 @@ class HydratorPluginManagerFactory
             ));
         }
 
-        $pluginManager = new HydratorPluginManager($container, $options ?: []);
+        $pluginManager = new HydratorPluginManager($container, $options ?? []);
 
         // If this is in a laminas-mvc application, the ServiceListener will inject
         // merged configuration during bootstrap.
