@@ -233,6 +233,11 @@
     <MixedReturnStatement occurrences="1">
       <code>$this-&gt;enumClass::from($value)</code>
     </MixedReturnStatement>
+    <UndefinedClass occurrences="3">
+      <code>$this-&gt;enumClass</code>
+      <code>$value-&gt;value</code>
+      <code>string</code>
+    </UndefinedClass>
   </file>
   <file src="src/Strategy/BooleanStrategy.php">
     <DocblockTypeContradiction occurrences="4">
