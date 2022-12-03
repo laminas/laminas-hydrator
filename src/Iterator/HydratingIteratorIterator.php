@@ -19,7 +19,6 @@ use function sprintf;
  * @template TPrototype of object
  * @template TInputData of array
  * @template TIterator of Iterator<TKey, TInputData>
- *
  * @template-extends IteratorIterator<TKey, TInputData, TIterator>
  * @template-implements HydratingIteratorInterface<TKey, TPrototype>
  */
@@ -74,7 +73,6 @@ class HydratingIteratorIterator extends IteratorIterator implements HydratingIte
     /**
      * @psalm-suppress ImplementedReturnTypeMismatch we are explicitly replacing the type of {@see parent::current()}
      *                 with a hydrated value here, breaking LSP by design.
-     *
      * @return TPrototype|null
      */
     #[ReturnTypeWillChange]

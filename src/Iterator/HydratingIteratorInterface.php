@@ -10,7 +10,6 @@ use Laminas\Hydrator\HydratorInterface;
 /**
  * @template TKey
  * @template TPrototype of object
- *
  * @template-extends Iterator<TKey, TPrototype>
  */
 interface HydratingIteratorInterface extends Iterator
