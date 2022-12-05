@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.0.0@4e177bf0c9f03c17d2fbfd83b7cc9c47605274d8">
+<files psalm-version="5.1.0@4defa177c89397c5e14737a80fe4896584130674">
   <file src="src/Aggregate/AggregateHydrator.php">
     <DocblockTypeContradiction occurrences="1">
       <code>null === $this-&gt;eventManager</code>
@@ -106,11 +106,6 @@
       <code>ObjectProperty::class</code>
       <code>Reflection::class</code>
     </DeprecatedClass>
-  </file>
-  <file src="src/HydratorPluginManagerFactory.php">
-    <MixedArgument occurrences="1">
-      <code>$config['hydrators']</code>
-    </MixedArgument>
   </file>
   <file src="src/Iterator/HydratingIteratorIterator.php">
     <InvalidArgument occurrences="1">
@@ -433,9 +428,6 @@
     <MissingClosureParamType occurrences="1">
       <code>$property</code>
     </MissingClosureParamType>
-  </file>
-  <file src="test/HydratorPluginManagerFactoryTest.php">
-    <InvalidArgument occurrences="1"/>
   </file>
   <file src="test/HydratorStrategyTest.php">
     <MixedArgument occurrences="2">
