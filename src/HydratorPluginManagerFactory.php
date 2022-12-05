@@ -14,6 +14,7 @@ use function sprintf;
 
 /**
  * @psalm-import-type ServiceManagerConfiguration from ServiceManager
+ * @final
  */
 class HydratorPluginManagerFactory
 {
@@ -45,7 +46,9 @@ class HydratorPluginManagerFactory
             ));
         }
 
-        $pluginManager = new HydratorPluginManager($container, $options ?? []);
+        /** @psalm-var ServiceManagerConfiguration $options */
+        $options       = is_array($options) ? $options : [];
+        $pluginManager = new HydratorPluginManager($container, $options);
 
         // If this is in a laminas-mvc application, the ServiceListener will inject
         // merged configuration during bootstrap.
@@ -64,6 +67,8 @@ class HydratorPluginManagerFactory
         if (! isset($config['hydrators']) || ! is_array($config['hydrators'])) {
             return $pluginManager;
         }
+
+        /** @psalm-var ServiceManagerConfiguration $config['hydrators'] */
 
         // Wire service configuration for hydrators
         (new Config($config['hydrators']))->configureServiceManager($pluginManager);
