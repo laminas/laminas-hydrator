@@ -9,11 +9,9 @@ use Laminas\Hydrator\Exception;
 use Laminas\Hydrator\HydratorInterface;
 use Laminas\Hydrator\ReflectionHydrator;
 use Laminas\Hydrator\Strategy\CollectionStrategy;
-use Laminas\Hydrator\Strategy\StrategyInterface;
 use LaminasTest\Hydrator\TestAsset;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use ReflectionClass;
 use stdClass;
 use Throwable;
 use TypeError;
@@ -35,17 +33,6 @@ use function sprintf;
  */
 class CollectionStrategyTest extends TestCase
 {
-    public function testImplementsStrategyInterface(): void
-    {
-        $reflection = new ReflectionClass(CollectionStrategy::class);
-
-        self::assertTrue($reflection->implementsInterface(StrategyInterface::class), sprintf(
-            'Failed to assert that "%s" implements "%s"',
-            CollectionStrategy::class,
-            StrategyInterface::class
-        ));
-    }
-
     /**
      * @dataProvider providerInvalidObjectClassName
      * @param class-string<Throwable> $expectedExceptionType
