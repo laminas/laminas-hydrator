@@ -45,10 +45,9 @@ class HydratorStrategyTest extends TestCase
         );
     }
 
-    /** @return array<string, array{0: mixed, class-string<Throwable>, string}> */
+    /** @return non-empty-array<non-empty-string, array{mixed, class-string<Throwable>, string}> */
     public function providerInvalidObjectClassName(): array
     {
-        // @codingStandardsIgnoreStart
         return [
             'array'                     => [[], TypeError::class, 'type string'],
             'boolean-false'             => [false, TypeError::class, 'type string'],
@@ -58,9 +57,12 @@ class HydratorStrategyTest extends TestCase
             'null'                      => [null, TypeError::class, 'type string'],
             'object'                    => [new stdClass(), TypeError::class, 'type string'],
             'resource'                  => [fopen(__FILE__, 'r'), TypeError::class, 'type string'],
-            'string-non-existent-class' => ['FooBarBaz9000', InvalidArgumentException::class, 'class name needs to be the name of an existing class'],
+            'string-non-existent-class' => [
+                'FooBarBaz9000',
+                InvalidArgumentException::class,
+                'class name needs to be the name of an existing class',
+            ],
         ];
-        // @codingStandardsIgnoreEnd
     }
 
     /**

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.1.0@4defa177c89397c5e14737a80fe4896584130674">
+<files psalm-version="5.4.0@62db5d4f6a7ae0a20f7cc5a4952d730272fc0863">
   <file src="src/Aggregate/AggregateHydrator.php">
     <DocblockTypeContradiction occurrences="1">
       <code>null === $this-&gt;eventManager</code>
@@ -228,11 +228,6 @@
     <MixedReturnStatement occurrences="1">
       <code>$this-&gt;enumClass::from($value)</code>
     </MixedReturnStatement>
-    <UndefinedClass occurrences="3">
-      <code>$this-&gt;enumClass</code>
-      <code>$value-&gt;value</code>
-      <code>string</code>
-    </UndefinedClass>
   </file>
   <file src="src/Strategy/BooleanStrategy.php">
     <DocblockTypeContradiction occurrences="4">
