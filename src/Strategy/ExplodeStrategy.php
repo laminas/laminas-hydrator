@@ -15,12 +15,13 @@ use function sprintf;
 
 final class ExplodeStrategy implements StrategyInterface
 {
+    /** @var non-empty-string */
     private string $valueDelimiter;
 
     /**
      * Constructor
      *
-     * @param string   $delimiter    String that the values will be split upon
+     * @param non-empty-string $delimiter String that the values will be split upon
      * @param int|null $explodeLimit Explode limit
      */
     public function __construct(string $delimiter = ',', private ?int $explodeLimit = null)

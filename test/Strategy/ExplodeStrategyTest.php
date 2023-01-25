@@ -20,6 +20,7 @@ class ExplodeStrategyTest extends TestCase
 {
     /**
      * @dataProvider getValidHydratedValues
+     * @param non-empty-string $delimiter
      * @param string[] $extractValue
      */
     public function testExtract(mixed $expected, string $delimiter, array $extractValue): void
@@ -54,6 +55,7 @@ class ExplodeStrategyTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
+        /** @psalm-suppress InvalidArgument */
         new ExplodeStrategy('');
     }
 
@@ -110,6 +112,7 @@ class ExplodeStrategyTest extends TestCase
 
     /**
      * @dataProvider getValidHydratedValues
+     * @param non-empty-string $delimiter
      */
     public function testHydration(mixed $value, string $delimiter, array $expected): void
     {
@@ -120,7 +123,7 @@ class ExplodeStrategyTest extends TestCase
     }
 
     /**
-     * @return array<string, array{0: mixed, 1: string, 2: list<string>}>
+     * @return array<string, array{0: mixed, 1: non-empty-string, 2: list<string>}>
      */
     public function getValidHydratedValues(): array
     {
