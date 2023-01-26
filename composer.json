@@ -37,14 +37,14 @@
     },
     "require-dev": {
         "laminas/laminas-coding-standard": "~2.5.0",
-        "laminas/laminas-eventmanager": "^3.6",
+        "laminas/laminas-eventmanager": "^3.10",
         "laminas/laminas-modulemanager": "^2.14.0",
         "laminas/laminas-serializer": "^2.14.0",
-        "laminas/laminas-servicemanager": "^3.19",
-        "phpbench/phpbench": "^1.2.7",
-        "phpunit/phpunit": "^9.5.26",
-        "psalm/plugin-phpunit": "^0.18.0",
-        "vimeo/psalm": "^5.0"
+        "laminas/laminas-servicemanager": "^3.20",
+        "phpbench/phpbench": "^1.2.8",
+        "phpunit/phpunit": "^9.5.28",
+        "psalm/plugin-phpunit": "^0.18.4",
+        "vimeo/psalm": "^5.6"
     },
     "suggest": {
         "laminas/laminas-eventmanager": "^3.2, to support aggregate hydrator usage",
