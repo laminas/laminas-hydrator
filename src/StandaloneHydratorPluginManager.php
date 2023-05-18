@@ -66,7 +66,6 @@ final class StandaloneHydratorPluginManager implements HydratorPluginManagerInte
 
     public function __construct()
     {
-        /** @psalm-suppress UnusedClosureParam */
         $invokableFactory = static fn(ContainerInterface $container, string $class): object => new $class();
 
         $this->factories = [

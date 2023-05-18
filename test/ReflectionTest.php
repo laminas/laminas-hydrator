@@ -22,7 +22,6 @@ class ReflectionTest extends TestCase
             public $message = false;
         };
 
-        /** @psalm-suppress UnusedClosureParam */
         set_error_handler(static function ($errno, $errstr) use ($test): bool {
             $test->message = $errstr;
             return true;

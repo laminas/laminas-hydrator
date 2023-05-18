@@ -21,15 +21,9 @@ class AggregateHydratorTest extends TestCase
     /** @var AggregateHydrator */
     protected $hydrator;
 
-    /**
-     * @var EventManager|MockObject
-     * @psalm-var EventManager&MockObject
-     */
-    protected $eventManager;
+    /** @var EventManager&MockObject */
+    protected EventManager $eventManager;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         $this->eventManager = $this->createMock(EventManager::class);
@@ -46,11 +40,28 @@ class AggregateHydratorTest extends TestCase
         $attached = $this->createMock(HydratorInterface::class);
 
         $this->eventManager
-            ->expects($this->exactly(2))
+            ->expects(self::exactly(2))
             ->method('attach')
-            ->withConsecutive(
-                [HydrateEvent::EVENT_HYDRATE, $this->isType('callable'), 123],
-                [ExtractEvent::EVENT_EXTRACT, $this->isType('callable'), 123],
+            ->with(
+                self::callback(function (mixed $event): bool {
+                    self::assertIsString($event);
+                    self::assertContains($event, [
+                        HydrateEvent::EVENT_HYDRATE,
+                        ExtractEvent::EVENT_EXTRACT,
+                    ]);
+
+                    return true;
+                }),
+                self::callback(function (mixed $listener): bool {
+                    self::assertIsCallable($listener);
+
+                    return true;
+                }),
+                self::callback(function (mixed $priority): bool {
+                    self::assertSame(123, $priority);
+
+                    return true;
+                }),
             );
 
         $this->hydrator->add($attached, 123);
