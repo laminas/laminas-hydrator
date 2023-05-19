@@ -9,11 +9,6 @@ use Laminas\Hydrator\NamingStrategy\NamingStrategyInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Tests for {@see CompositeNamingStrategy}
- *
- * @covers \Laminas\Hydrator\NamingStrategy\CompositeNamingStrategy
- */
 class CompositeNamingStrategyTest extends TestCase
 {
     public function testGetSameNameWhenNoNamingStrategyExistsForTheName(): void

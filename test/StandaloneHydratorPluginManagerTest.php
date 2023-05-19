@@ -8,6 +8,7 @@ use Closure;
 use Generator;
 use Laminas\Hydrator;
 use Laminas\Hydrator\StandaloneHydratorPluginManager;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 
@@ -23,10 +24,7 @@ class StandaloneHydratorPluginManagerTest extends TestCase
         $this->manager = new StandaloneHydratorPluginManager();
     }
 
-    /**
-     * @return mixed
-     */
-    public function reflectProperty(object $class, string $property)
+    public function reflectProperty(object $class, string $property): mixed
     {
         $r = new ReflectionProperty($class, $property);
         return $r->getValue($class);
@@ -35,7 +33,7 @@ class StandaloneHydratorPluginManagerTest extends TestCase
     /**
      * @psalm-return Generator<string, array{0: class-string}>
      */
-    public function hydratorsWithoutConstructors(): Generator
+    public static function hydratorsWithoutConstructors(): Generator
     {
         yield 'ArraySerializable'               => [Hydrator\ArraySerializableHydrator::class];
         yield 'ArraySerializableHydrator'       => [Hydrator\ArraySerializableHydrator::class];
@@ -51,9 +49,7 @@ class StandaloneHydratorPluginManagerTest extends TestCase
         yield 'Reflection'                      => [Hydrator\ReflectionHydrator::class];
     }
 
-    /**
-     * @dataProvider hydratorsWithoutConstructors
-     */
+    #[DataProvider('hydratorsWithoutConstructors')]
     public function testInstantiationInitializesFactoriesForHydratorsWithoutConstructorArguments(string $class): void
     {
         $factories = $this->reflectProperty($this->manager, 'factories');
@@ -77,9 +73,9 @@ class StandaloneHydratorPluginManagerTest extends TestCase
     }
 
     /** @return Generator<string, array{0: string, 1: class-string}> */
-    public function knownServices(): Generator
+    public static function knownServices(): Generator
     {
-        foreach ($this->hydratorsWithoutConstructors() as $key => $data) {
+        foreach (self::hydratorsWithoutConstructors() as $key => $data) {
             $class = array_pop($data);
             $alias = sprintf('%s alias', $key);
             $fqcn  = sprintf('%s class', $key);
@@ -92,9 +88,7 @@ class StandaloneHydratorPluginManagerTest extends TestCase
         yield 'DelegatingHydrator class' => [Hydrator\DelegatingHydrator::class, Hydrator\DelegatingHydrator::class];
     }
 
-    /**
-     * @dataProvider knownServices
-     */
+    #[DataProvider('knownServices')]
     public function testHasReturnsTrueForKnownServices(string $service): void
     {
         self::assertTrue($this->manager->has($service));
@@ -107,10 +101,10 @@ class StandaloneHydratorPluginManagerTest extends TestCase
     }
 
     /**
-     * @dataProvider knownServices
      * @param string|class-string $service
      * @param class-string $expectedType
      */
+    #[DataProvider('knownServices')]
     public function testGetReturnsExpectedTypesForKnownServices(string $service, string $expectedType): void
     {
         $instance = $this->manager->get($service);

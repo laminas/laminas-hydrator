@@ -13,31 +13,17 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
-/**
- * Unit tests for {@see HydratorListener}
- */
 class HydratorListenerTest extends TestCase
 {
-    /** @var HydratorInterface&MockObject */
-    protected $hydrator;
+    private HydratorInterface&MockObject $hydrator;
+    private HydratorListener $listener;
 
-    /** @var HydratorListener */
-    protected $listener;
-
-    /**
-     * {@inheritDoc}
-     *
-     * @covers \Laminas\Hydrator\Aggregate\HydratorListener::__construct
-     */
     protected function setUp(): void
     {
         $this->hydrator = $this->createMock(HydratorInterface::class);
         $this->listener = new HydratorListener($this->hydrator);
     }
 
-    /**
-     * @covers \Laminas\Hydrator\Aggregate\HydratorListener::attach
-     */
     public function testAttach(): void
     {
         $eventManager = $this->createMock(EventManagerInterface::class);
@@ -56,9 +42,6 @@ class HydratorListenerTest extends TestCase
         $this->listener->attach($eventManager);
     }
 
-    /**
-     * @covers \Laminas\Hydrator\Aggregate\HydratorListener::onHydrate
-     */
     public function testOnHydrate(): void
     {
         $object   = new stdClass();
@@ -83,9 +66,6 @@ class HydratorListenerTest extends TestCase
         $this->assertSame($hydrated, $this->listener->onHydrate($event));
     }
 
-    /**
-     * @covers \Laminas\Hydrator\Aggregate\HydratorListener::onExtract
-     */
     public function testOnExtract(): void
     {
         $object = new stdClass();

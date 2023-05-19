@@ -29,9 +29,6 @@ class AggregateHydratorTest extends TestCase
         $this->hydrator->setEventManager($this->eventManager);
     }
 
-    /**
-     * @covers \Laminas\Hydrator\Aggregate\AggregateHydrator::add
-     */
     public function testAdd(): void
     {
         $attached = $this->createMock(HydratorInterface::class);
@@ -64,9 +61,6 @@ class AggregateHydratorTest extends TestCase
         $this->hydrator->add($attached, 123);
     }
 
-    /**
-     * @covers \Laminas\Hydrator\Aggregate\AggregateHydrator::hydrate
-     */
     public function testHydrate(): void
     {
         $object = new stdClass();
@@ -79,9 +73,6 @@ class AggregateHydratorTest extends TestCase
         $this->assertSame($object, $this->hydrator->hydrate(['foo' => 'bar'], $object));
     }
 
-    /**
-     * @covers \Laminas\Hydrator\Aggregate\AggregateHydrator::extract
-     */
     public function testExtract(): void
     {
         $object = new stdClass();
@@ -94,10 +85,6 @@ class AggregateHydratorTest extends TestCase
         $this->assertSame([], $this->hydrator->extract($object));
     }
 
-    /**
-     * @covers \Laminas\Hydrator\Aggregate\AggregateHydrator::getEventManager
-     * @covers \Laminas\Hydrator\Aggregate\AggregateHydrator::setEventManager
-     */
     public function testGetSetManager(): void
     {
         $hydrator     = new AggregateHydrator();

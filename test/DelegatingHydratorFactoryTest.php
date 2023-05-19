@@ -12,9 +12,6 @@ use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use ReflectionProperty;
 
-/**
- * @covers Laminas\Hydrator\DelegatingHydratorFactory
- */
 class DelegatingHydratorFactoryTest extends TestCase
 {
     public function testFactoryUsesContainerToSeedDelegatingHydratorWhenItIsAHydratorPluginManager(): void
@@ -60,7 +57,7 @@ class DelegatingHydratorFactoryTest extends TestCase
         $hydrator = $factory($container);
         $this->assertInstanceOf(DelegatingHydrator::class, $hydrator);
 
-        $r = new ReflectionProperty($hydrator, 'hydrators');
+        $r         = new ReflectionProperty($hydrator, 'hydrators');
         $hydrators = $r->getValue($hydrator);
 
         $this->assertInstanceOf(HydratorPluginManager::class, $hydrators);

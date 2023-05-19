@@ -8,9 +8,6 @@ use Laminas\Hydrator\Strategy\ClosureStrategy;
 use Laminas\Hydrator\Strategy\StrategyChain;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Laminas\Hydrator\Strategy\StrategyChain
- */
 class StrategyChainTest extends TestCase
 {
     public function testEmptyStrategyChainReturnsOriginalValue(): void

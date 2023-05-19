@@ -10,11 +10,6 @@ use ReflectionProperty;
 use stdClass;
 use TypeError;
 
-/**
- * Unit tests for {@see ReflectionHydrator}
- *
- * @covers \Laminas\Hydrator\ReflectionHydrator
- */
 class ReflectionHydratorTest extends TestCase
 {
     use HydratorTestTrait;

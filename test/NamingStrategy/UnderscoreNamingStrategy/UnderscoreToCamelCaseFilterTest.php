@@ -5,23 +5,19 @@ declare(strict_types=1);
 namespace LaminasTest\Hydrator\NamingStrategy\UnderscoreNamingStrategy;
 
 use Laminas\Hydrator\NamingStrategy\UnderscoreNamingStrategy\UnderscoreToCamelCaseFilter;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
 use function extension_loaded;
 
-/**
- * Tests for {@see UnderscoreToCamelCaseFilter}
- *
- * @covers Laminas\Hydrator\NamingStrategy\UnderscoreNamingStrategy\UnderscoreToCamelCaseFilter
- */
 class UnderscoreToCamelCaseFilterTest extends TestCase
 {
     /**
-     * @dataProvider nonUnicodeProvider
      * @param string $string
      * @param string $expected
      */
+    #[DataProvider('nonUnicodeProvider')]
     public function testFilterCamelCasesNonUnicodeStrings($string, $expected): void
     {
         $filter = new UnderscoreToCamelCaseFilter();
@@ -40,7 +36,7 @@ class UnderscoreToCamelCaseFilterTest extends TestCase
      * @return string[][]
      * @psalm-return array<string, array{0: string, 1: string}>
      */
-    public function nonUnicodeProvider(): array
+    public static function nonUnicodeProvider(): array
     {
         return [
             'one word'                       => [
@@ -63,10 +59,10 @@ class UnderscoreToCamelCaseFilterTest extends TestCase
     }
 
     /**
-     * @dataProvider unicodeProvider
      * @param string $string
      * @param string $expected
      */
+    #[DataProvider('unicodeProvider')]
     public function testFilterCamelCasesUnicodeStrings($string, $expected): void
     {
         if (! extension_loaded('mbstring')) {
@@ -84,7 +80,7 @@ class UnderscoreToCamelCaseFilterTest extends TestCase
      * @return string[][]
      * @psalm-return array<string, array{0: string, 1: string}>
      */
-    public function unicodeProvider(): array
+    public static function unicodeProvider(): array
     {
         return [
             'uppercase first letter'            => [
@@ -115,10 +111,10 @@ class UnderscoreToCamelCaseFilterTest extends TestCase
     }
 
     /**
-     * @dataProvider unicodeWithoutMbStringsProvider
      * @param string $string
      * @param string $expected
      */
+    #[DataProvider('unicodeWithoutMbStringsProvider')]
     public function testFilterCamelCasesUnicodeStringsWithoutMbStrings(
         $string,
         $expected
@@ -137,7 +133,7 @@ class UnderscoreToCamelCaseFilterTest extends TestCase
      * @return string[][]
      * @psalm-return array<string, array{0: string, 1: string}>
      */
-    public function unicodeWithoutMbStringsProvider(): array
+    public static function unicodeWithoutMbStringsProvider(): array
     {
         return [
             'multiple words'                 => [

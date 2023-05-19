@@ -11,11 +11,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
-/**
- * Unit tests for {@see DelegatingHydrator}
- *
- * @covers \Laminas\Hydrator\DelegatingHydrator
- */
 class DelegatingHydratorTest extends TestCase
 {
     /** @var DelegatingHydrator */

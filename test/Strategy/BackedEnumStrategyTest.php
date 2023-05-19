@@ -12,12 +12,6 @@ use PHPUnit\Framework\TestCase;
 
 use const PHP_VERSION_ID;
 
-/**
- * @uses \Laminas\Hydrator\Exception\DomainException
- * @uses \Laminas\Hydrator\Strategy\Exception\InvalidArgumentException
- *
- * @covers \Laminas\Hydrator\Strategy\BackedEnumStrategy
- */
 final class BackedEnumStrategyTest extends TestCase
 {
     protected function setUp(): void

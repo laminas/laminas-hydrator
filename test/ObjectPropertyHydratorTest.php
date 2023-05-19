@@ -11,11 +11,6 @@ use PHPUnit\Framework\TestCase;
 use stdClass;
 use TypeError;
 
-/**
- * Unit tests for {@see ObjectPropertyHydrator}
- *
- * @covers \Laminas\Hydrator\ObjectPropertyHydrator
- */
 class ObjectPropertyHydratorTest extends TestCase
 {
     use HydratorTestTrait;
@@ -100,7 +95,7 @@ class ObjectPropertyHydratorTest extends TestCase
         $object = $this->hydrator->hydrate(['foo' => 'baz', 'bar' => 'baz'], $object);
 
         $this->assertEquals('baz', $object->foo);
-        $this->assertObjectHasAttribute('bar', $object);
+        $this->assertObjectHasProperty('bar', $object);
         $this->assertSame('baz', $object->bar);
     }
 

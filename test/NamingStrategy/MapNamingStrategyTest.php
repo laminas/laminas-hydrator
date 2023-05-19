@@ -7,17 +7,13 @@ namespace LaminasTest\Hydrator\NamingStrategy;
 use Generator;
 use Laminas\Hydrator\Exception;
 use Laminas\Hydrator\NamingStrategy\MapNamingStrategy;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Tests for {@see MapNamingStrategy}
- *
- * @covers \Laminas\Hydrator\NamingStrategy\MapNamingStrategy
- */
 class MapNamingStrategyTest extends TestCase
 {
     /** @return Generator<string, list<mixed>> */
-    public function invalidMapValues(): Generator
+    public static function invalidMapValues(): Generator
     {
         yield 'null'       => [null];
         yield 'true'       => [true];
@@ -29,7 +25,7 @@ class MapNamingStrategyTest extends TestCase
     }
 
     /** @psalm-return Generator<string, array{invalidKeyArray: array<array-key, string>}> */
-    public function invalidKeyArrays(): Generator
+    public static function invalidKeyArrays(): Generator
     {
         yield 'int' => [
             'invalidKeyArray' => [1 => 'foo'],
@@ -39,9 +35,7 @@ class MapNamingStrategyTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider invalidMapValues
-     */
+    #[DataProvider('invalidMapValues')]
     public function testExtractionMapConstructorRaisesExceptionWhenFlippingHydrationMapForInvalidValues(
         mixed $invalidValue
     ): void {
@@ -52,9 +46,7 @@ class MapNamingStrategyTest extends TestCase
         MapNamingStrategy::createFromExtractionMap(['foo' => $invalidValue]);
     }
 
-    /**
-     * @dataProvider invalidKeyArrays
-     */
+    #[DataProvider('invalidKeyArrays')]
     public function testExtractionMapConstructorRaisesExceptionWhenFlippingHydrationMapForInvalidKeys(
         array $invalidKeyArray
     ): void {
@@ -65,9 +57,7 @@ class MapNamingStrategyTest extends TestCase
         MapNamingStrategy::createFromExtractionMap($invalidKeyArray);
     }
 
-    /**
-     * @dataProvider invalidMapValues
-     */
+    #[DataProvider('invalidMapValues')]
     public function testHydrationMapConstructorRaisesExceptionWhenFlippingExtractionMapForInvalidValues(
         mixed $invalidValue
     ): void {
@@ -78,9 +68,7 @@ class MapNamingStrategyTest extends TestCase
         MapNamingStrategy::createFromHydrationMap(['foo' => $invalidValue]);
     }
 
-    /**
-     * @dataProvider invalidKeyArrays
-     */
+    #[DataProvider('invalidKeyArrays')]
     public function testHydrationMapConstructorRaisesExceptionWhenFlippingExtractionMapForInvalidKeys(
         array $invalidKeyArray
     ): void {

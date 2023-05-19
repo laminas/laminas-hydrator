@@ -13,11 +13,6 @@ use LaminasTest\Hydrator\TestAsset\ClassMethodsOptionalParameters;
 use PHPUnit\Framework\TestCase;
 use TypeError;
 
-/**
- * Unit tests for {@see ClassMethodsHydrator}
- *
- * @covers \Laminas\Hydrator\ClassMethodsHydrator
- */
 class ClassMethodsHydratorTest extends TestCase
 {
     use HydratorTestTrait;

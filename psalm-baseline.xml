@@ -353,6 +353,11 @@
       <code>removeStrategy</code>
     </PossiblyUnusedMethod>
   </file>
+  <file src="test/Aggregate/AggregateHydratorFunctionalTest.php">
+    <PossiblyUnusedMethod>
+      <code>getHydratorSet</code>
+    </PossiblyUnusedMethod>
+  </file>
   <file src="test/Aggregate/HydratorListenerTest.php">
     <InternalMethod>
       <code>onExtract</code>
@@ -364,6 +369,9 @@
       <code><![CDATA['thisIsNotAnObject']]></code>
       <code><![CDATA['thisIsNotAnObject']]></code>
     </InvalidArgument>
+    <PossiblyUnusedMethod>
+      <code>arrayDataProvider</code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/ArraySerializableTest.php">
     <DeprecatedClass>
@@ -391,9 +399,7 @@
     <MixedArgumentTypeCoercion>
       <code>$andFilters</code>
       <code>$andFilters</code>
-      <code>$andFilters</code>
       <code>$name</code>
-      <code>$orFilters</code>
       <code>$orFilters</code>
       <code>$orFilters</code>
     </MixedArgumentTypeCoercion>
@@ -402,6 +408,16 @@
       <code>$orFilters</code>
       <code>$value</code>
     </MixedAssignment>
+    <PossiblyUnusedMethod>
+      <code>invalidFiltersProvider</code>
+      <code>providerCompositionFiltering</code>
+      <code>validFiltersProvider</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="test/Filter/MethodMatchFilterTest.php">
+    <PossiblyUnusedMethod>
+      <code>providerFilter</code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/Filter/NumberOfParameterFilterTest.php">
     <PossiblyUnusedMethod>
@@ -414,6 +430,7 @@
   </file>
   <file src="test/Filter/OptionalParametersFilterTest.php">
     <PossiblyUnusedMethod>
+      <code>methodProvider</code>
       <code>methodWithMultipleMandatoryParameters</code>
       <code>methodWithMultipleOptionalParameters</code>
       <code>methodWithSingleMandatoryParameter</code>
@@ -428,20 +445,6 @@
       <code>$parameter</code>
       <code>$parameter</code>
     </PossiblyUnusedParam>
-  </file>
-  <file src="test/HydratorAwareTraitTest.php">
-    <InvalidArgument>
-      <code>HydratorAwareTrait::class</code>
-      <code>HydratorAwareTrait::class</code>
-    </InvalidArgument>
-    <MixedMethodCall>
-      <code>getHydrator</code>
-      <code>getHydrator</code>
-      <code>getHydrator</code>
-      <code>getHydrator</code>
-      <code>setHydrator</code>
-      <code>setHydrator</code>
-    </MixedMethodCall>
   </file>
   <file src="test/HydratorClosureStrategyTest.php">
     <MissingClosureParamType>
@@ -492,6 +495,9 @@
     <MixedArrayAssignment>
       <code><![CDATA[$attributes['entities'][]]]></code>
     </MixedArrayAssignment>
+    <PossiblyUnusedMethod>
+      <code>underscoreHandlingDataProvider</code>
+    </PossiblyUnusedMethod>
     <UndefinedInterfaceMethod>
       <code>addStrategy</code>
       <code>addStrategy</code>
@@ -522,6 +528,9 @@
       <code>$property</code>
       <code>$property</code>
     </MixedArgument>
+    <PossiblyUnusedMethod>
+      <code>filterProvider</code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/Iterator/HydratingArrayIteratorTest.php">
     <ArgumentTypeCoercion>
@@ -532,6 +541,17 @@
     <ArgumentTypeCoercion>
       <code><![CDATA['not a real class']]></code>
     </ArgumentTypeCoercion>
+  </file>
+  <file src="test/NamingStrategy/IdentityNamingStrategyTest.php">
+    <PossiblyUnusedMethod>
+      <code>getTestedNames</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="test/NamingStrategy/MapNamingStrategyTest.php">
+    <PossiblyUnusedMethod>
+      <code>invalidKeyArrays</code>
+      <code>invalidMapValues</code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/NamingStrategy/UnderscoreNamingStrategy/CamelCaseToUnderscoreFilterTest.php">
     <InternalClass>
@@ -544,6 +564,11 @@
       <code>filter</code>
       <code>filter</code>
     </InternalMethod>
+    <PossiblyUnusedMethod>
+      <code>nonUnicodeProvider</code>
+      <code>unicodeProvider</code>
+      <code>unicodeProviderWithoutMbStrings</code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/NamingStrategy/UnderscoreNamingStrategy/UnderscoreToCamelCaseFilterTest.php">
     <InternalClass>
@@ -556,11 +581,13 @@
       <code>filter</code>
       <code>filter</code>
     </InternalMethod>
+    <PossiblyUnusedMethod>
+      <code>nonUnicodeProvider</code>
+      <code>unicodeProvider</code>
+      <code>unicodeWithoutMbStringsProvider</code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/ObjectPropertyHydratorTest.php">
-    <DeprecatedMethod>
-      <code>assertObjectHasAttribute</code>
-    </DeprecatedMethod>
     <InvalidArgument>
       <code><![CDATA['thisIsNotAnObject']]></code>
       <code><![CDATA['thisIsNotAnObject']]></code>
@@ -605,7 +632,6 @@
       <code>$factories</code>
     </MixedArgument>
     <MixedArrayAccess>
-      <code>$factories[$class]</code>
       <code>$factories[Hydrator\DelegatingHydrator::class]</code>
     </MixedArrayAccess>
     <MixedAssignment>
@@ -613,6 +639,9 @@
       <code>$factories</code>
       <code>$instance</code>
     </MixedAssignment>
+    <PossiblyUnusedMethod>
+      <code>knownServices</code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/Strategy/BooleanStrategyTest.php">
     <InvalidArgument>
@@ -634,6 +663,12 @@
     <MixedMethodCall>
       <code>hydrate</code>
     </MixedMethodCall>
+    <PossiblyUnusedMethod>
+      <code>providerInvalidObjectClassName</code>
+      <code>providerInvalidObjectForExtraction</code>
+      <code>providerInvalidValueForExtraction</code>
+      <code>providerInvalidValueForHydration</code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/Strategy/DateTimeFormatterStrategyTest.php">
     <MixedAssignment>
@@ -648,11 +683,24 @@
       <code>getName</code>
       <code>getTimezone</code>
     </MixedMethodCall>
+    <PossiblyUnusedMethod>
+      <code>formatsWithSpecialCharactersProvider</code>
+      <code>invalidValuesForHydration</code>
+      <code>validUnHydratableValues</code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/Strategy/DateTimeImmutableFormatterStrategyTest.php">
     <MixedMethodCall>
       <code>format</code>
     </MixedMethodCall>
+    <PossiblyUnusedMethod>
+      <code>dataProviderForInvalidDateValues</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="test/Strategy/ExplodeStrategyTest.php">
+    <PossiblyUnusedMethod>
+      <code>getValidHydratedValues</code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/Strategy/HydratorStrategyTest.php">
     <MissingClosureParamType>
@@ -670,6 +718,13 @@
     <MixedMethodCall>
       <code>hydrate</code>
     </MixedMethodCall>
+    <PossiblyUnusedMethod>
+      <code>providerEmptyOrSameObjects</code>
+      <code>providerInvalidObjectClassName</code>
+      <code>providerInvalidObjectForExtraction</code>
+      <code>providerInvalidValueForExtraction</code>
+      <code>providerInvalidValueForHydration</code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/Strategy/SerializableStrategyTest.php">
     <MixedAssignment>

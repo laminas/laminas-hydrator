@@ -11,9 +11,6 @@ use Laminas\Hydrator\Exception\InvalidArgumentException;
 use Laminas\Hydrator\Iterator\HydratingIteratorIterator;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers Laminas\Hydrator\Iterator\HydratingIteratorIterator
- */
 class HydratingIteratorIteratorTest extends TestCase
 {
     public function testHydratesObjectAndClonesOnCurrent(): void

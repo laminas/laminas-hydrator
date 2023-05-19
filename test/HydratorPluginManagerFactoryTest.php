@@ -9,6 +9,7 @@ use Laminas\Hydrator\HydratorPluginManager;
 use Laminas\Hydrator\HydratorPluginManagerFactory;
 use Laminas\Hydrator\ReflectionHydrator;
 use LaminasTest\Hydrator\TestAsset\InMemoryContainer;
+use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
@@ -23,9 +24,7 @@ class HydratorPluginManagerFactoryTest extends TestCase
         $this->assertInstanceOf(HydratorPluginManager::class, $hydrators);
     }
 
-    /**
-     * @depends testFactoryReturnsPluginManager
-     */
+    #[Depends('testFactoryReturnsPluginManager')]
     public function testFactoryConfiguresPluginManagerUnderContainerInterop(): void
     {
         $container = $this->createMock(ContainerInterface::class);

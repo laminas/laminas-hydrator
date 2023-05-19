@@ -6,13 +6,9 @@ namespace LaminasTest\Hydrator\Filter;
 
 use InvalidArgumentException;
 use Laminas\Hydrator\Filter\OptionalParametersFilter;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Unit tests for {@see OptionalParametersFilter}
- *
- * @covers \Laminas\Hydrator\Filter\OptionalParametersFilter
- */
 class OptionalParametersFilterTest extends TestCase
 {
     /** @var OptionalParametersFilter */
@@ -28,9 +24,8 @@ class OptionalParametersFilterTest extends TestCase
 
     /**
      * Verifies a list of methods against expected results
-     *
-     * @dataProvider methodProvider
      */
+    #[DataProvider('methodProvider')]
     public function testMethods(string $method, bool $expectedResult): void
     {
         $this->assertSame($expectedResult, $this->filter->filter($method));
@@ -39,9 +34,8 @@ class OptionalParametersFilterTest extends TestCase
     /**
      * Verifies a list of methods against expected results over subsequent calls, checking
      * that the filter behaves consistently regardless of cache optimizations
-     *
-     * @dataProvider methodProvider
      */
+    #[DataProvider('methodProvider')]
     public function testMethodsOnSubsequentCalls(string $method, bool $expectedResult): void
     {
         for ($i = 0; $i < 5; $i += 1) {
@@ -63,7 +57,7 @@ class OptionalParametersFilterTest extends TestCase
      *     1: bool
      * }>
      */
-    public function methodProvider(): array
+    public static function methodProvider(): array
     {
         return [
             [self::class . '::methodWithoutParameters', true],

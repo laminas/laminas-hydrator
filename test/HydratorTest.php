@@ -24,6 +24,7 @@ use LaminasTest\Hydrator\TestAsset\ClassMethodsUnderscore;
 use LaminasTest\Hydrator\TestAsset\ObjectProperty as ObjectPropertyAsset;
 use LaminasTest\Hydrator\TestAsset\Reflection as ReflectionAsset;
 use LaminasTest\Hydrator\TestAsset\ReflectionFilter;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 use function explode;
@@ -371,9 +372,7 @@ class HydratorTest extends TestCase
         self::assertArrayNotHaskey('hasFoo', $datas);
     }
 
-    /**
-     * @dataProvider filterProvider
-     */
+    #[DataProvider('filterProvider')]
     public function testArraySerializableFilter(
         AbstractHydrator $hydrator,
         object $serializable
@@ -436,7 +435,7 @@ class HydratorTest extends TestCase
     /**
      * @psalm-return list<array{0: AbstractHydrator, 1: object}>
      */
-    public function filterProvider(): array
+    public static function filterProvider(): array
     {
         return [
             [new ObjectPropertyHydrator(), new ObjectPropertyAsset()],

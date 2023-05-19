@@ -10,14 +10,10 @@ use DateTimeInterface;
 use DateTimeZone;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Laminas\Hydrator\Strategy\Exception\InvalidArgumentException;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
-/**
- * Tests for {@see DateTimeFormatterStrategy}
- *
- * @covers \Laminas\Hydrator\Strategy\DateTimeFormatterStrategy
- */
 class DateTimeFormatterStrategyTest extends TestCase
 {
     public function testHydrate(): void
@@ -86,10 +82,10 @@ class DateTimeFormatterStrategyTest extends TestCase
     }
 
     /**
-     * @dataProvider formatsWithSpecialCharactersProvider
      * @param string $format
      * @param string $expectedValue
      */
+    #[DataProvider('formatsWithSpecialCharactersProvider')]
     public function testAcceptsCreateFromFormatSpecialCharacters($format, $expectedValue): void
     {
         $strategy = new DateTimeFormatterStrategy($format);
@@ -99,9 +95,7 @@ class DateTimeFormatterStrategyTest extends TestCase
         self::assertEquals($expectedValue, $hydrated->format('Y-m-d'));
     }
 
-    /**
-     * @dataProvider formatsWithSpecialCharactersProvider
-     */
+    #[DataProvider('formatsWithSpecialCharactersProvider')]
     public function testCanExtractWithCreateFromFormatSpecialCharacters(string $format, string $expectedValue): void
     {
         $date      = DateTime::createFromFormat($format, $expectedValue);
@@ -123,7 +117,7 @@ class DateTimeFormatterStrategyTest extends TestCase
      * @return string[][]
      * @psalm-return array<string, array{0: string, 1: string}>
      */
-    public function formatsWithSpecialCharactersProvider(): array
+    public static function formatsWithSpecialCharactersProvider(): array
     {
         return [
             '!-prepended' => ['!Y-m-d', '2018-02-05'],
@@ -148,7 +142,7 @@ class DateTimeFormatterStrategyTest extends TestCase
     }
 
     /** @return array<string, list<mixed>> */
-    public function invalidValuesForHydration(): array
+    public static function invalidValuesForHydration(): array
     {
         return [
             'zero'       => [0],
@@ -160,9 +154,7 @@ class DateTimeFormatterStrategyTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider invalidValuesForHydration
-     */
+    #[DataProvider('invalidValuesForHydration')]
     public function testHydrateRaisesExceptionIfValueIsInvalid(mixed $value): void
     {
         $strategy = new DateTimeFormatterStrategy('Y-m-d');
@@ -173,7 +165,7 @@ class DateTimeFormatterStrategyTest extends TestCase
     }
 
     /** @return array<string, list<mixed>> */
-    public function validUnHydratableValues(): array
+    public static function validUnHydratableValues(): array
     {
         return [
             'empty string' => [''],
@@ -182,9 +174,7 @@ class DateTimeFormatterStrategyTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider validUnHydratableValues
-     */
+    #[DataProvider('validUnHydratableValues')]
     public function testReturnsValueVerbatimUnderSpecificConditions(mixed $value): void
     {
         $strategy = new DateTimeFormatterStrategy('Y-m-d');

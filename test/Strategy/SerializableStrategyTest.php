@@ -10,9 +10,6 @@ use Laminas\Serializer\Adapter\PhpSerialize;
 use Laminas\Serializer\Serializer;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers Laminas\Hydrator\Strategy\SerializableStrategy
- */
 class SerializableStrategyTest extends TestCase
 {
     public function testCannotUseBadArgumentSerializer(): void

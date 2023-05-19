@@ -5,13 +5,9 @@ declare(strict_types=1);
 namespace LaminasTest\Hydrator\NamingStrategy;
 
 use Laminas\Hydrator\NamingStrategy\UnderscoreNamingStrategy;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Unit tests for {@see UnderscoreNamingStrategy}
- *
- * @covers \Laminas\Hydrator\NamingStrategy\UnderscoreNamingStrategy
- */
 class UnderscoreNamingStrategyTest extends TestCase
 {
     public function testNameHydratesToCamelCase(): void
@@ -26,10 +22,8 @@ class UnderscoreNamingStrategyTest extends TestCase
         $this->assertEquals('foo_bar_baz', $strategy->extract('fooBarBaz'));
     }
 
-    /**
-     * @group 6422
-     * @group 6420
-     */
+    #[Group('6422')]
+    #[Group('6420')]
     public function testNameHydratesToStudlyCaps(): void
     {
         $strategy = new UnderscoreNamingStrategy();

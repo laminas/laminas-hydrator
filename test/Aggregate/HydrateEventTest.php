@@ -8,14 +8,8 @@ use Laminas\Hydrator\Aggregate\HydrateEvent;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
-/**
- * Unit tests for {@see HydrateEvent}
- */
 class HydrateEventTest extends TestCase
 {
-    /**
-     * @covers \Laminas\Hydrator\Aggregate\HydrateEvent
-     */
     public function testEvent(): void
     {
         $target    = new stdClass();

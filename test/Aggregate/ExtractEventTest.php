@@ -8,14 +8,8 @@ use Laminas\Hydrator\Aggregate\ExtractEvent;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
-/**
- * Unit tests for {@see ExtractEvent}
- */
 class ExtractEventTest extends TestCase
 {
-    /**
-     * @covers \Laminas\Hydrator\Aggregate\ExtractEvent
-     */
     public function testEvent(): void
     {
         $target  = new stdClass();

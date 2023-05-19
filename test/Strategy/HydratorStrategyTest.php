@@ -10,6 +10,7 @@ use Laminas\Hydrator\ReflectionHydrator;
 use Laminas\Hydrator\Strategy\Exception\InvalidArgumentException;
 use Laminas\Hydrator\Strategy\HydratorStrategy;
 use LaminasTest\Hydrator\TestAsset;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use stdClass;
@@ -28,9 +29,9 @@ use function sprintf;
 class HydratorStrategyTest extends TestCase
 {
     /**
-     * @dataProvider providerInvalidObjectClassName
      * @param class-string<Throwable> $expectedExceptionType
      */
+    #[DataProvider('providerInvalidObjectClassName')]
     public function testConstructorRejectsInvalidObjectClassName(
         mixed $objectClassName,
         string $expectedExceptionType,
@@ -46,7 +47,7 @@ class HydratorStrategyTest extends TestCase
     }
 
     /** @return non-empty-array<non-empty-string, array{mixed, class-string<Throwable>, string}> */
-    public function providerInvalidObjectClassName(): array
+    public static function providerInvalidObjectClassName(): array
     {
         return [
             'array'                     => [[], TypeError::class, 'type string'],
@@ -65,9 +66,7 @@ class HydratorStrategyTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider providerInvalidValueForExtraction
-     */
+    #[DataProvider('providerInvalidValueForExtraction')]
     public function testExtractRejectsInvalidValue(mixed $value): void
     {
         $strategy = new HydratorStrategy(
@@ -88,7 +87,7 @@ class HydratorStrategyTest extends TestCase
     }
 
     /** @return Generator<string, array{0: mixed}> */
-    public function providerInvalidValueForExtraction(): Generator
+    public static function providerInvalidValueForExtraction(): Generator
     {
         $values = [
             'boolean-false'             => false,
@@ -106,9 +105,7 @@ class HydratorStrategyTest extends TestCase
         }
     }
 
-    /**
-     * @dataProvider providerInvalidObjectForExtraction
-     */
+    #[DataProvider('providerInvalidObjectForExtraction')]
     public function testExtractRejectsInvalidObject(mixed $object): void
     {
         $strategy = new HydratorStrategy(
@@ -129,7 +126,7 @@ class HydratorStrategyTest extends TestCase
     }
 
     /** @return Generator<string, array{0: mixed}> */
-    public function providerInvalidObjectForExtraction(): Generator
+    public static function providerInvalidObjectForExtraction(): Generator
     {
         $values = [
             'boolean-false'                           => false,
@@ -173,9 +170,7 @@ class HydratorStrategyTest extends TestCase
         self::assertSame($extraction($value), $strategy->extract($value));
     }
 
-    /**
-     * @dataProvider providerInvalidValueForHydration
-     */
+    #[DataProvider('providerInvalidValueForHydration')]
     public function testHydrateRejectsInvalidValue(mixed $value): void
     {
         $strategy = new HydratorStrategy(
@@ -195,7 +190,7 @@ class HydratorStrategyTest extends TestCase
     }
 
     /** @return Generator<string, array{0: mixed}> */
-    public function providerInvalidValueForHydration(): Generator
+    public static function providerInvalidValueForHydration(): Generator
     {
         $values = [
             'boolean-false'             => false,
@@ -212,9 +207,7 @@ class HydratorStrategyTest extends TestCase
         }
     }
 
-    /**
-     * @dataProvider providerEmptyOrSameObjects
-     */
+    #[DataProvider('providerEmptyOrSameObjects')]
     public function testHydrateShouldReturnEmptyOrSameObjects(mixed $value): void
     {
         $strategy = new HydratorStrategy(
@@ -226,7 +219,7 @@ class HydratorStrategyTest extends TestCase
     }
 
     /** @return Generator<string, array{0: mixed}> */
-    public function providerEmptyOrSameObjects(): Generator
+    public static function providerEmptyOrSameObjects(): Generator
     {
         $values = [
             'null'                => null,

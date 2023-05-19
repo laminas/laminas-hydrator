@@ -9,11 +9,6 @@ use Laminas\Hydrator\Strategy\BooleanStrategy;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
-/**
- * Tests for {@see BooleanStrategy}
- *
- * @covers \Laminas\Hydrator\Strategy\BooleanStrategy
- */
 class BooleanStrategyTest extends TestCase
 {
     public function testConstructorWithValidInteger(): void

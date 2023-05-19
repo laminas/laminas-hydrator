@@ -6,23 +6,19 @@ namespace LaminasTest\Hydrator\Strategy;
 
 use Laminas\Hydrator\Strategy\Exception\InvalidArgumentException;
 use Laminas\Hydrator\Strategy\ExplodeStrategy;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
 use function is_numeric;
 
-/**
- * Tests for {@see ExplodeStrategy}
- *
- * @covers \Laminas\Hydrator\Strategy\ExplodeStrategy
- */
 class ExplodeStrategyTest extends TestCase
 {
     /**
-     * @dataProvider getValidHydratedValues
      * @param non-empty-string $delimiter
      * @param string[] $extractValue
      */
+    #[DataProvider('getValidHydratedValues')]
     public function testExtract(mixed $expected, string $delimiter, array $extractValue): void
     {
         $strategy = new ExplodeStrategy($delimiter);
@@ -111,9 +107,9 @@ class ExplodeStrategyTest extends TestCase
     }
 
     /**
-     * @dataProvider getValidHydratedValues
      * @param non-empty-string $delimiter
      */
+    #[DataProvider('getValidHydratedValues')]
     public function testHydration(mixed $value, string $delimiter, array $expected): void
     {
         $strategy = new ExplodeStrategy($delimiter);
@@ -125,7 +121,7 @@ class ExplodeStrategyTest extends TestCase
     /**
      * @return array<string, array{0: mixed, 1: non-empty-string, 2: list<string>}>
      */
-    public function getValidHydratedValues(): array
+    public static function getValidHydratedValues(): array
     {
         // @codingStandardsIgnoreStart
         return [

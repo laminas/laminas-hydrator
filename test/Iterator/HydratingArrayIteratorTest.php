@@ -10,9 +10,6 @@ use Laminas\Hydrator\Exception\InvalidArgumentException;
 use Laminas\Hydrator\Iterator\HydratingArrayIterator;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers Laminas\Hydrator\Iterator\HydratingArrayIterator
- */
 class HydratingArrayIteratorTest extends TestCase
 {
     public function testHydratesObjectAndClonesOnCurrent(): void

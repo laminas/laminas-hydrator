@@ -7,9 +7,6 @@ namespace LaminasTest\Hydrator\Strategy;
 use Laminas\Hydrator\Strategy\ScalarTypeStrategy;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Laminas\Hydrator\Strategy\ScalarTypeStrategy
- */
 final class ScalarTypeStrategyTest extends TestCase
 {
     public function testHydrate(): void
