@@ -15,7 +15,7 @@ class HydratorPluginManagerCompatibilityTest extends TestCase
     use CommonPluginManagerTrait;
 
     /** @return HydratorPluginManager */
-    protected function getPluginManager()
+    protected static function getPluginManager()
     {
         return new HydratorPluginManager(new ServiceManager());
     }
