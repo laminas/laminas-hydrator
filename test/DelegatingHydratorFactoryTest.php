@@ -61,7 +61,6 @@ class DelegatingHydratorFactoryTest extends TestCase
         $this->assertInstanceOf(DelegatingHydrator::class, $hydrator);
 
         $r = new ReflectionProperty($hydrator, 'hydrators');
-        $r->setAccessible(true);
         $hydrators = $r->getValue($hydrator);
 
         $this->assertInstanceOf(HydratorPluginManager::class, $hydrators);

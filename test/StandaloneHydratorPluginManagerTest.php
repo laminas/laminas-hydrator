@@ -29,7 +29,6 @@ class StandaloneHydratorPluginManagerTest extends TestCase
     public function reflectProperty(object $class, string $property)
     {
         $r = new ReflectionProperty($class, $property);
-        $r->setAccessible(true);
         return $r->getValue($class);
     }
 

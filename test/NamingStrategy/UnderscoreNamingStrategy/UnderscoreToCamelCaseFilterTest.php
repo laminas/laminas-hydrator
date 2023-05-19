@@ -28,7 +28,6 @@ class UnderscoreToCamelCaseFilterTest extends TestCase
 
         $reflectionClass = new ReflectionClass($filter);
         $property        = $reflectionClass->getProperty('pcreUnicodeSupport');
-        $property->setAccessible(true);
         $property->setValue($filter, false);
 
         $filtered = $filter->filter($string);
@@ -128,7 +127,6 @@ class UnderscoreToCamelCaseFilterTest extends TestCase
 
         $reflectionClass = new ReflectionClass($filter);
         $property        = $reflectionClass->getProperty('mbStringSupport');
-        $property->setAccessible(true);
         $property->setValue($filter, false);
 
         $filtered = $filter->filter($string);

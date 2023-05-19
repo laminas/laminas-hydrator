@@ -84,7 +84,6 @@ class ReflectionHydratorTest extends TestCase
 
         $this->assertSame($instance, $hydrated);
         $r = new ReflectionProperty($hydrated, 'foo');
-        $r->setAccessible(true);
         $this->assertSame('bar', $r->getValue($hydrated));
     }
 }

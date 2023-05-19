@@ -73,7 +73,6 @@ class ReflectionHydrator extends AbstractHydrator
         $reflProperties                 = $reflClass->getProperties();
 
         foreach ($reflProperties as $property) {
-            $property->setAccessible(true);
             static::$reflProperties[$class][$property->getName()] = $property;
         }
 
