@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.6.0@e784128902dfe01d489c4123d69918a9f3c1eac5">
+<files psalm-version="5.11.0@c9b192ab8400fdaf04b2b13d110575adc879aa90">
   <file src="src/Aggregate/AggregateHydrator.php">
     <DocblockTypeContradiction>
-      <code>null === $this-&gt;eventManager</code>
+      <code><![CDATA[null === $this->eventManager]]></code>
     </DocblockTypeContradiction>
     <MissingConstructor>
       <code>$eventManager</code>
@@ -52,7 +52,7 @@
   <file src="src/ClassMethodsHydrator.php">
     <DocblockTypeContradiction>
       <code>$options instanceof Traversable</code>
-      <code>null === $this-&gt;extractionMethodsCache[$objectClass]</code>
+      <code><![CDATA[null === $this->extractionMethodsCache[$objectClass]]]></code>
     </DocblockTypeContradiction>
     <MixedArgument>
       <code>$options</code>
@@ -68,7 +68,7 @@
       <code>$values[$realAttributeName]</code>
     </MixedAssignment>
     <MixedMethodCall>
-      <code>$this-&gt;hydrationMethodsCache[$propertyFqn]</code>
+      <code><![CDATA[$this->hydrationMethodsCache[$propertyFqn]]]></code>
     </MixedMethodCall>
   </file>
   <file src="src/DelegatingHydrator.php">
@@ -76,7 +76,7 @@
       <code>HydratorInterface</code>
     </MixedInferredReturnType>
     <MixedReturnStatement>
-      <code>$this-&gt;hydrators-&gt;get($object::class)</code>
+      <code><![CDATA[$this->hydrators->get($object::class)]]></code>
     </MixedReturnStatement>
   </file>
   <file src="src/DelegatingHydratorFactory.php">
@@ -84,9 +84,9 @@
       <code>ContainerInterface</code>
     </MixedInferredReturnType>
     <MixedReturnStatement>
-      <code>$container-&gt;get('HydratorManager')</code>
-      <code>$container-&gt;get('Zend\Hydrator\HydratorPluginManager')</code>
-      <code>$container-&gt;get(HydratorPluginManager::class)</code>
+      <code><![CDATA[$container->get('HydratorManager')]]></code>
+      <code><![CDATA[$container->get('Zend\Hydrator\HydratorPluginManager')]]></code>
+      <code><![CDATA[$container->get(HydratorPluginManager::class)]]></code>
     </MixedReturnStatement>
   </file>
   <file src="src/Filter/FilterComposite.php">
@@ -143,8 +143,8 @@
   </file>
   <file src="src/NamingStrategy/UnderscoreNamingStrategy/StringSupportTrait.php">
     <DocblockTypeContradiction>
-      <code>$this-&gt;mbStringSupport === null</code>
-      <code>$this-&gt;pcreUnicodeSupport === null</code>
+      <code><![CDATA[$this->mbStringSupport === null]]></code>
+      <code><![CDATA[$this->pcreUnicodeSupport === null]]></code>
     </DocblockTypeContradiction>
     <MissingConstructor>
       <code>$mbStringSupport</code>
@@ -168,7 +168,7 @@
       <code>$value[0]</code>
     </MixedArgument>
     <MixedArgumentTypeCoercion>
-      <code>$pcreInfo-&gt;replacement</code>
+      <code><![CDATA[$pcreInfo->replacement]]></code>
     </MixedArgumentTypeCoercion>
     <MixedArrayAccess>
       <code>$matches[2]</code>
@@ -192,7 +192,7 @@
       <code>$value</code>
     </MixedAssignment>
     <UnsupportedReferenceUsage>
-      <code>$properties = &amp;self::$skippedPropertiesCache[$object::class]</code>
+      <code><![CDATA[$properties = &self::$skippedPropertiesCache[$object::class]]]></code>
     </UnsupportedReferenceUsage>
   </file>
   <file src="src/Reflection.php">
@@ -226,19 +226,19 @@
       <code>T</code>
     </MixedInferredReturnType>
     <MixedReturnStatement>
-      <code>$this-&gt;enumClass::from($value)</code>
+      <code><![CDATA[$this->enumClass::from($value)]]></code>
     </MixedReturnStatement>
     <UndefinedClass>
-      <code>$this-&gt;enumClass</code>
-      <code>$value-&gt;value</code>
+      <code><![CDATA[$this->enumClass]]></code>
+      <code><![CDATA[$value->value]]></code>
       <code>string</code>
     </UndefinedClass>
   </file>
   <file src="src/Strategy/BooleanStrategy.php">
     <DocblockTypeContradiction>
-      <code>! is_int($falseValue) &amp;&amp; ! is_string($falseValue)</code>
-      <code>! is_int($trueValue) &amp;&amp; ! is_string($trueValue)</code>
-      <code>! is_string($value) &amp;&amp; ! is_int($value)</code>
+      <code><![CDATA[! is_int($falseValue) && ! is_string($falseValue)]]></code>
+      <code><![CDATA[! is_int($trueValue) && ! is_string($trueValue)]]></code>
+      <code><![CDATA[! is_string($value) && ! is_int($value)]]></code>
       <code>is_bool($value)</code>
     </DocblockTypeContradiction>
     <MoreSpecificImplementedParamType>
@@ -248,7 +248,7 @@
   </file>
   <file src="src/Strategy/CollectionStrategy.php">
     <ArgumentTypeCoercion>
-      <code>$this-&gt;objectClassName</code>
+      <code><![CDATA[$this->objectClassName]]></code>
     </ArgumentTypeCoercion>
     <DocblockTypeContradiction>
       <code>is_array($value)</code>
@@ -287,7 +287,7 @@
   </file>
   <file src="src/Strategy/HydratorStrategy.php">
     <ArgumentTypeCoercion>
-      <code>$this-&gt;objectClassName</code>
+      <code><![CDATA[$this->objectClassName]]></code>
     </ArgumentTypeCoercion>
     <DocblockTypeContradiction>
       <code>gettype($value)</code>
@@ -308,7 +308,7 @@
   <file src="src/Strategy/SerializableStrategy.php">
     <DocblockTypeContradiction>
       <code>iterator_to_array($serializerOptions)</code>
-      <code>null === $this-&gt;serializer</code>
+      <code><![CDATA[null === $this->serializer]]></code>
     </DocblockTypeContradiction>
     <MixedArgument>
       <code>$serializerOptions</code>
@@ -421,7 +421,7 @@
       <code>removeStrategy</code>
     </UndefinedInterfaceMethod>
     <UndefinedPropertyFetch>
-      <code>$entity-&gt;field3</code>
+      <code><![CDATA[$entity->field3]]></code>
     </UndefinedPropertyFetch>
   </file>
   <file src="test/HydratorObjectPropertyTest.php">
@@ -503,6 +503,9 @@
     </InternalMethod>
   </file>
   <file src="test/ObjectPropertyHydratorTest.php">
+    <DeprecatedMethod>
+      <code>assertObjectHasAttribute</code>
+    </DeprecatedMethod>
     <InvalidArgument>
       <code>'thisIsNotAnObject'</code>
       <code>'thisIsNotAnObject'</code>
