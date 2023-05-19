@@ -56,8 +56,8 @@
     </DocblockTypeContradiction>
     <MixedArgument>
       <code>$options</code>
-      <code>$options['methodExistsCheck']</code>
-      <code>$options['underscoreSeparatedKeys']</code>
+      <code><![CDATA[$options['methodExistsCheck']]]></code>
+      <code><![CDATA[$options['underscoreSeparatedKeys']]]></code>
     </MixedArgument>
     <MixedArgumentTypeCoercion>
       <code>$property</code>
@@ -105,6 +105,11 @@
       <code>ClassMethods::class</code>
       <code>ObjectProperty::class</code>
       <code>Reflection::class</code>
+    </DeprecatedClass>
+  </file>
+  <file src="src/HydratorPluginManagerFactory.php">
+    <DeprecatedClass>
+      <code><![CDATA[new Config($config['hydrators'])]]></code>
     </DeprecatedClass>
   </file>
   <file src="src/Iterator/HydratingIteratorIterator.php">
@@ -221,19 +226,6 @@
       <code>new $class()</code>
     </InvalidStringClass>
   </file>
-  <file src="src/Strategy/BackedEnumStrategy.php">
-    <MixedInferredReturnType>
-      <code>T</code>
-    </MixedInferredReturnType>
-    <MixedReturnStatement>
-      <code><![CDATA[$this->enumClass::from($value)]]></code>
-    </MixedReturnStatement>
-    <UndefinedClass>
-      <code><![CDATA[$this->enumClass]]></code>
-      <code><![CDATA[$value->value]]></code>
-      <code>string</code>
-    </UndefinedClass>
-  </file>
   <file src="src/Strategy/BooleanStrategy.php">
     <DocblockTypeContradiction>
       <code><![CDATA[! is_int($falseValue) && ! is_string($falseValue)]]></code>
@@ -332,8 +324,8 @@
   </file>
   <file src="test/ArraySerializableHydratorTest.php">
     <InvalidArgument>
-      <code>'thisIsNotAnObject'</code>
-      <code>'thisIsNotAnObject'</code>
+      <code><![CDATA['thisIsNotAnObject']]></code>
+      <code><![CDATA['thisIsNotAnObject']]></code>
     </InvalidArgument>
   </file>
   <file src="test/ArraySerializableTest.php">
@@ -344,9 +336,9 @@
   <file src="test/ClassMethodsHydratorTest.php">
     <InvalidArgument>
       <code>$options</code>
-      <code>'invalid options'</code>
-      <code>'non-object'</code>
-      <code>'non-object'</code>
+      <code><![CDATA['invalid options']]></code>
+      <code><![CDATA['non-object']]></code>
+      <code><![CDATA['non-object']]></code>
     </InvalidArgument>
   </file>
   <file src="test/ClassMethodsTest.php">
@@ -431,11 +423,11 @@
   </file>
   <file src="test/HydratorStrategyTest.php">
     <MixedArgument>
-      <code>$attributes['entities']</code>
-      <code>$attributes['entities']</code>
+      <code><![CDATA[$attributes['entities']]]></code>
+      <code><![CDATA[$attributes['entities']]]></code>
     </MixedArgument>
     <MixedArrayAssignment>
-      <code>$attributes['entities'][]</code>
+      <code><![CDATA[$attributes['entities'][]]]></code>
     </MixedArrayAssignment>
     <UndefinedInterfaceMethod>
       <code>addStrategy</code>
@@ -470,12 +462,12 @@
   </file>
   <file src="test/Iterator/HydratingArrayIteratorTest.php">
     <ArgumentTypeCoercion>
-      <code>'not a real class'</code>
+      <code><![CDATA['not a real class']]></code>
     </ArgumentTypeCoercion>
   </file>
   <file src="test/Iterator/HydratingIteratorIteratorTest.php">
     <ArgumentTypeCoercion>
-      <code>'not a real class'</code>
+      <code><![CDATA['not a real class']]></code>
     </ArgumentTypeCoercion>
   </file>
   <file src="test/NamingStrategy/UnderscoreNamingStrategy/CamelCaseToUnderscoreFilterTest.php">
@@ -507,8 +499,8 @@
       <code>assertObjectHasAttribute</code>
     </DeprecatedMethod>
     <InvalidArgument>
-      <code>'thisIsNotAnObject'</code>
-      <code>'thisIsNotAnObject'</code>
+      <code><![CDATA['thisIsNotAnObject']]></code>
+      <code><![CDATA['thisIsNotAnObject']]></code>
     </InvalidArgument>
   </file>
   <file src="test/ObjectPropertyTest.php">
@@ -558,36 +550,6 @@
       <code>$factories</code>
       <code>$instance</code>
     </MixedAssignment>
-  </file>
-  <file src="test/Strategy/BackedEnumStrategyTest.php">
-    <MixedArgument>
-      <code>TestBackedEnum::class</code>
-      <code>TestBackedEnum::class</code>
-      <code>TestBackedEnum::class</code>
-      <code>TestBackedEnum::class</code>
-      <code>TestBackedEnum::class</code>
-      <code>TestBackedEnum::class</code>
-    </MixedArgument>
-    <MixedAssignment>
-      <code>$expected</code>
-    </MixedAssignment>
-    <MixedOperand>
-      <code>TestBackedEnum::class</code>
-    </MixedOperand>
-    <UndefinedClass>
-      <code>TestBackedEnum</code>
-      <code>TestBackedEnum</code>
-      <code>TestBackedEnum</code>
-      <code>TestBackedEnum</code>
-      <code>TestBackedEnum</code>
-      <code>TestBackedEnum</code>
-      <code>TestBackedEnum</code>
-      <code>TestBackedEnum</code>
-      <code>TestBackedEnum</code>
-      <code>TestBackedEnum</code>
-      <code>TestBackedEnum</code>
-      <code>TestUnitEnum</code>
-    </UndefinedClass>
   </file>
   <file src="test/Strategy/BooleanStrategyTest.php">
     <InvalidArgument>
