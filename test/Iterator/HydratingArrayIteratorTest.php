@@ -8,8 +8,10 @@ use ArrayObject;
 use Laminas\Hydrator\ArraySerializableHydrator;
 use Laminas\Hydrator\Exception\InvalidArgumentException;
 use Laminas\Hydrator\Iterator\HydratingArrayIterator;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(HydratingArrayIterator::class)]
 class HydratingArrayIteratorTest extends TestCase
 {
     public function testHydratesObjectAndClonesOnCurrent(): void

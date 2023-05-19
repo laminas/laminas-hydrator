@@ -12,12 +12,14 @@ use Laminas\Hydrator\Filter\GetFilter;
 use Laminas\Hydrator\Filter\HasFilter;
 use Laminas\Hydrator\Filter\IsFilter;
 use Laminas\Hydrator\Filter\NumberOfParameterFilter;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 use function array_keys;
 use function sprintf;
 
+#[CoversClass(FilterComposite::class)]
 class FilterCompositeTest extends TestCase
 {
     #[DataProvider('validFiltersProvider')]

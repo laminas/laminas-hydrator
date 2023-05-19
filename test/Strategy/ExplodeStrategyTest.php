@@ -6,12 +6,14 @@ namespace LaminasTest\Hydrator\Strategy;
 
 use Laminas\Hydrator\Strategy\Exception\InvalidArgumentException;
 use Laminas\Hydrator\Strategy\ExplodeStrategy;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
 use function is_numeric;
 
+#[CoversClass(ExplodeStrategy::class)]
 class ExplodeStrategyTest extends TestCase
 {
     /**

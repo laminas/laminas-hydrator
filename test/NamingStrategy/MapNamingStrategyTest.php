@@ -7,9 +7,11 @@ namespace LaminasTest\Hydrator\NamingStrategy;
 use Generator;
 use Laminas\Hydrator\Exception;
 use Laminas\Hydrator\NamingStrategy\MapNamingStrategy;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(MapNamingStrategy::class)]
 class MapNamingStrategyTest extends TestCase
 {
     /** @return Generator<string, list<mixed>> */

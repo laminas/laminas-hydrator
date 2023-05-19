@@ -10,6 +10,7 @@ use Laminas\Hydrator\HydratorInterface;
 use Laminas\Hydrator\ReflectionHydrator;
 use Laminas\Hydrator\Strategy\CollectionStrategy;
 use LaminasTest\Hydrator\TestAsset;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -27,6 +28,7 @@ use function mt_rand;
 use function spl_object_hash;
 use function sprintf;
 
+#[CoversClass(CollectionStrategy::class)]
 class CollectionStrategyTest extends TestCase
 {
     /**

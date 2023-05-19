@@ -12,13 +12,12 @@ use Laminas\Hydrator\ArraySerializableHydrator;
 use Laminas\Hydrator\ClassMethodsHydrator;
 use Laminas\Hydrator\HydratorInterface;
 use LaminasTest\Hydrator\TestAsset\AggregateObject;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
-/**
- * Integration tests {@see AggregateHydrator}
- */
+#[CoversClass(AggregateHydrator::class)]
 class AggregateHydratorFunctionalTest extends TestCase
 {
     protected AggregateHydrator $hydrator;

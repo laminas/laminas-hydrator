@@ -6,9 +6,11 @@ namespace LaminasTest\Hydrator\Filter;
 
 use Laminas\Hydrator\Exception\InvalidArgumentException;
 use Laminas\Hydrator\Filter\NumberOfParameterFilter;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(NumberOfParameterFilter::class)]
 class NumberOfParameterFilterTest extends TestCase
 {
     #[Group('6083')]

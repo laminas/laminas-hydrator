@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace LaminasTest\Hydrator\NamingStrategy;
 
 use Laminas\Hydrator\NamingStrategy\IdentityNamingStrategy;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(IdentityNamingStrategy::class)]
 class IdentityNamingStrategyTest extends TestCase
 {
     /**

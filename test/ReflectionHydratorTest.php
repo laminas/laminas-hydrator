@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace LaminasTest\Hydrator;
 
 use Laminas\Hydrator\ReflectionHydrator;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 use stdClass;
 use TypeError;
 
+#[CoversClass(ReflectionHydrator::class)]
 class ReflectionHydratorTest extends TestCase
 {
     use HydratorTestTrait;

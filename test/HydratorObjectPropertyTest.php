@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace LaminasTest\Hydrator;
 
 use Laminas\Hydrator\ObjectPropertyHydrator;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(ObjectPropertyHydrator::class)]
 class HydratorObjectPropertyTest extends TestCase
 {
     private ObjectPropertyHydrator $hydrator;

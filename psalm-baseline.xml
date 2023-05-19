@@ -375,6 +375,7 @@
   </file>
   <file src="test/ArraySerializableTest.php">
     <DeprecatedClass>
+      <code>ArraySerializable::class</code>
       <code>new ArraySerializable()</code>
     </DeprecatedClass>
   </file>
@@ -388,6 +389,7 @@
   </file>
   <file src="test/ClassMethodsTest.php">
     <DeprecatedClass>
+      <code>ClassMethods::class</code>
       <code>new ClassMethods()</code>
     </DeprecatedClass>
   </file>
@@ -595,6 +597,7 @@
   </file>
   <file src="test/ObjectPropertyTest.php">
     <DeprecatedClass>
+      <code>ObjectProperty::class</code>
       <code>new ObjectProperty()</code>
     </DeprecatedClass>
   </file>
@@ -606,6 +609,7 @@
   </file>
   <file src="test/ReflectionTest.php">
     <DeprecatedClass>
+      <code>Reflection::class</code>
       <code>new Reflection()</code>
     </DeprecatedClass>
   </file>

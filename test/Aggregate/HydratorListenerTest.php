@@ -9,10 +9,12 @@ use Laminas\Hydrator\Aggregate\ExtractEvent;
 use Laminas\Hydrator\Aggregate\HydrateEvent;
 use Laminas\Hydrator\Aggregate\HydratorListener;
 use Laminas\Hydrator\HydratorInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
+#[CoversClass(HydratorListener::class)]
 class HydratorListenerTest extends TestCase
 {
     private HydratorInterface&MockObject $hydrator;

@@ -7,10 +7,12 @@ namespace LaminasTest\Hydrator;
 use ArrayObject;
 use Laminas\Hydrator\DelegatingHydrator;
 use Laminas\Hydrator\HydratorInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
+#[CoversClass(DelegatingHydrator::class)]
 class DelegatingHydratorTest extends TestCase
 {
     /** @var DelegatingHydrator */

@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace LaminasTest\Hydrator\Aggregate;
 
 use Laminas\Hydrator\Aggregate\ExtractEvent;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
+#[CoversClass(ExtractEvent::class)]
 class ExtractEventTest extends TestCase
 {
     public function testEvent(): void

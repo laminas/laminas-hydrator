@@ -8,6 +8,7 @@ use Closure;
 use Generator;
 use Laminas\Hydrator;
 use Laminas\Hydrator\StandaloneHydratorPluginManager;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
@@ -15,6 +16,7 @@ use ReflectionProperty;
 use function array_pop;
 use function sprintf;
 
+#[CoversClass(StandaloneHydratorPluginManager::class)]
 class StandaloneHydratorPluginManagerTest extends TestCase
 {
     private StandaloneHydratorPluginManager $manager;

@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace LaminasTest\Hydrator\Aggregate;
 
 use Laminas\Hydrator\Aggregate\HydrateEvent;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
+#[CoversClass(HydrateEvent::class)]
 class HydrateEventTest extends TestCase
 {
     public function testEvent(): void

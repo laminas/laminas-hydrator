@@ -6,6 +6,7 @@ namespace LaminasTest\Hydrator;
 
 use Laminas\Hydrator\Reflection;
 use Laminas\Hydrator\ReflectionHydrator;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 use function restore_error_handler;
@@ -13,6 +14,7 @@ use function set_error_handler;
 
 use const E_USER_DEPRECATED;
 
+#[CoversClass(Reflection::class)]
 class ReflectionTest extends TestCase
 {
     public function testTriggerUserDeprecatedError(): void

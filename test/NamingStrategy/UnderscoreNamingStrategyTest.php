@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace LaminasTest\Hydrator\NamingStrategy;
 
 use Laminas\Hydrator\NamingStrategy\UnderscoreNamingStrategy;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(UnderscoreNamingStrategy::class)]
 class UnderscoreNamingStrategyTest extends TestCase
 {
     public function testNameHydratesToCamelCase(): void

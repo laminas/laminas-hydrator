@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace LaminasTest\Hydrator\Strategy;
 
 use Laminas\Hydrator\Strategy\ScalarTypeStrategy;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-final class ScalarTypeStrategyTest extends TestCase
+#[CoversClass(ScalarTypeStrategy::class)]
+class ScalarTypeStrategyTest extends TestCase
 {
     public function testHydrate(): void
     {

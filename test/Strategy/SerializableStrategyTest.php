@@ -8,8 +8,10 @@ use Laminas\Hydrator\Exception\InvalidArgumentException;
 use Laminas\Hydrator\Strategy\SerializableStrategy;
 use Laminas\Serializer\Adapter\PhpSerialize;
 use Laminas\Serializer\Serializer;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(SerializableStrategy::class)]
 class SerializableStrategyTest extends TestCase
 {
     public function testCannotUseBadArgumentSerializer(): void

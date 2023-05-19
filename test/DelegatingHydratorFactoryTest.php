@@ -8,10 +8,12 @@ use Laminas\Hydrator\DelegatingHydrator;
 use Laminas\Hydrator\DelegatingHydratorFactory;
 use Laminas\Hydrator\HydratorPluginManager;
 use LaminasTest\Hydrator\TestAsset\InMemoryContainer;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use ReflectionProperty;
 
+#[CoversClass(DelegatingHydratorFactory::class)]
 class DelegatingHydratorFactoryTest extends TestCase
 {
     public function testFactoryUsesContainerToSeedDelegatingHydratorWhenItIsAHydratorPluginManager(): void

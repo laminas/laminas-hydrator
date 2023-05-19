@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace LaminasTest\Hydrator\NamingStrategy\UnderscoreNamingStrategy;
 
 use Laminas\Hydrator\NamingStrategy\UnderscoreNamingStrategy\UnderscoreToCamelCaseFilter;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
 use function extension_loaded;
 
+#[CoversClass(UnderscoreToCamelCaseFilter::class)]
 class UnderscoreToCamelCaseFilterTest extends TestCase
 {
     /**

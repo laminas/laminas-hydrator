@@ -10,10 +10,12 @@ use DateTimeInterface;
 use DateTimeZone;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Laminas\Hydrator\Strategy\Exception\InvalidArgumentException;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
+#[CoversClass(DateTimeFormatterStrategy::class)]
 class DateTimeFormatterStrategyTest extends TestCase
 {
     public function testHydrate(): void

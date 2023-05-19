@@ -7,10 +7,12 @@ namespace LaminasTest\Hydrator;
 use Laminas\Hydrator\ObjectPropertyHydrator;
 use LaminasTest\Hydrator\TestAsset\ClassWithPublicStaticProperties;
 use LaminasTest\Hydrator\TestAsset\ObjectProperty as ObjectPropertyTestAsset;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 use TypeError;
 
+#[CoversClass(ObjectPropertyHydrator::class)]
 class ObjectPropertyHydratorTest extends TestCase
 {
     use HydratorTestTrait;

@@ -9,10 +9,12 @@ use Laminas\Hydrator\HydratorPluginManager;
 use Laminas\Hydrator\HydratorPluginManagerFactory;
 use Laminas\Hydrator\ReflectionHydrator;
 use LaminasTest\Hydrator\TestAsset\InMemoryContainer;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
+#[CoversClass(HydratorPluginManagerFactory::class)]
 class HydratorPluginManagerFactoryTest extends TestCase
 {
     public function testFactoryReturnsPluginManager(): void

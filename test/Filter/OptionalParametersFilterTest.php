@@ -6,9 +6,11 @@ namespace LaminasTest\Hydrator\Filter;
 
 use InvalidArgumentException;
 use Laminas\Hydrator\Filter\OptionalParametersFilter;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(OptionalParametersFilter::class)]
 class OptionalParametersFilterTest extends TestCase
 {
     /** @var OptionalParametersFilter */

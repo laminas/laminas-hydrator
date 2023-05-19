@@ -7,9 +7,11 @@ namespace LaminasTest\Hydrator\Strategy;
 use DateTimeImmutable;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Laminas\Hydrator\Strategy\DateTimeImmutableFormatterStrategy;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(DateTimeImmutableFormatterStrategy::class)]
 class DateTimeImmutableFormatterStrategyTest extends TestCase
 {
     private DateTimeImmutableFormatterStrategy $strategy;

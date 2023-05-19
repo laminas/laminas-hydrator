@@ -6,8 +6,10 @@ namespace LaminasTest\Hydrator\Strategy;
 
 use Laminas\Hydrator\Strategy\NullableStrategy;
 use Laminas\Hydrator\Strategy\StrategyInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(NullableStrategy::class)]
 class NullableStrategyTest extends TestCase
 {
     public function testExtractNonNullAndNonEmptyValue(): void

@@ -8,11 +8,13 @@ use Laminas\Hydrator\Strategy\BackedEnumStrategy;
 use Laminas\Hydrator\Strategy\Exception\InvalidArgumentException;
 use LaminasTest\Hydrator\Strategy\TestAsset\TestBackedEnum;
 use LaminasTest\Hydrator\Strategy\TestAsset\TestUnitEnum;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 use const PHP_VERSION_ID;
 
-final class BackedEnumStrategyTest extends TestCase
+#[CoversClass(BackedEnumStrategy::class)]
+class BackedEnumStrategyTest extends TestCase
 {
     protected function setUp(): void
     {

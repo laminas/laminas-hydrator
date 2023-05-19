@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace LaminasTest\Hydrator\Filter;
 
 use Laminas\Hydrator\Filter\MethodMatchFilter;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(MethodMatchFilter::class)]
 class MethodMatchFilterTest extends TestCase
 {
     /**

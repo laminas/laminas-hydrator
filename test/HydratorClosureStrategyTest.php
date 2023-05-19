@@ -7,10 +7,12 @@ namespace LaminasTest\Hydrator;
 use Laminas\Hydrator\HydratorInterface;
 use Laminas\Hydrator\ObjectPropertyHydrator;
 use Laminas\Hydrator\Strategy\ClosureStrategy;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 use function sprintf;
 
+#[CoversClass(ClosureStrategy::class)]
 class HydratorClosureStrategyTest extends TestCase
 {
     /**
