@@ -7,8 +7,11 @@ namespace LaminasTest\Hydrator\Strategy;
 use DateTimeImmutable;
 use Laminas\Hydrator\Strategy\DateTimeFormatterStrategy;
 use Laminas\Hydrator\Strategy\DateTimeImmutableFormatterStrategy;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(DateTimeImmutableFormatterStrategy::class)]
 class DateTimeImmutableFormatterStrategyTest extends TestCase
 {
     private DateTimeImmutableFormatterStrategy $strategy;
@@ -50,16 +53,14 @@ class DateTimeImmutableFormatterStrategyTest extends TestCase
         );
     }
 
-    /**
-     * @dataProvider dataProviderForInvalidDateValues
-     */
+    #[DataProvider('dataProviderForInvalidDateValues')]
     public function testHydrationShouldReturnInvalidDateValuesAsIs(string|null $value): void
     {
         self::assertSame($value, $this->strategy->hydrate($value));
     }
 
     /** @return array<string, array{0: null|string}> */
-    public function dataProviderForInvalidDateValues(): array
+    public static function dataProviderForInvalidDateValues(): array
     {
         return [
             'null'         => [null],

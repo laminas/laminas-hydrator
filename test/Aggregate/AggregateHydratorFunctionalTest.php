@@ -12,12 +12,12 @@ use Laminas\Hydrator\ArraySerializableHydrator;
 use Laminas\Hydrator\ClassMethodsHydrator;
 use Laminas\Hydrator\HydratorInterface;
 use LaminasTest\Hydrator\TestAsset\AggregateObject;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
-/**
- * Integration tests {@see AggregateHydrator}
- */
+#[CoversClass(AggregateHydrator::class)]
 class AggregateHydratorFunctionalTest extends TestCase
 {
     protected AggregateHydrator $hydrator;
@@ -45,9 +45,8 @@ class AggregateHydratorFunctionalTest extends TestCase
 
     /**
      * Verifies that using a single hydrator will have the aggregate hydrator behave like that single hydrator
-     *
-     * @dataProvider getHydratorSet
      */
+    #[DataProvider('getHydratorSet')]
     public function testSingleHydratorExtraction(HydratorInterface $comparisonHydrator, object $object): void
     {
         $blueprint = clone $object;
@@ -59,9 +58,8 @@ class AggregateHydratorFunctionalTest extends TestCase
 
     /**
      * Verifies that using a single hydrator will have the aggregate hydrator behave like that single hydrator
-     *
-     * @dataProvider getHydratorSet
      */
+    #[DataProvider('getHydratorSet')]
     public function testSingleHydratorHydration(
         HydratorInterface $comparisonHydrator,
         object $object,
@@ -163,7 +161,7 @@ class AggregateHydratorFunctionalTest extends TestCase
      *
      * @return list<array{0: HydratorInterface, 1: object, 2: array}>
      */
-    public function getHydratorSet(): array
+    public static function getHydratorSet(): array
     {
         return [
             [new ArraySerializableHydrator(), new ArrayObject(['zaphod' => 'beeblebrox']), ['arthur' => 'dent']],

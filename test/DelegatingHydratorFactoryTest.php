@@ -7,13 +7,13 @@ namespace LaminasTest\Hydrator;
 use Laminas\Hydrator\DelegatingHydrator;
 use Laminas\Hydrator\DelegatingHydratorFactory;
 use Laminas\Hydrator\HydratorPluginManager;
+use LaminasTest\Hydrator\TestAsset\InMemoryContainer;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use ReflectionProperty;
 
-/**
- * @covers Laminas\Hydrator\DelegatingHydratorFactory
- */
+#[CoversClass(DelegatingHydratorFactory::class)]
 class DelegatingHydratorFactoryTest extends TestCase
 {
     public function testFactoryUsesContainerToSeedDelegatingHydratorWhenItIsAHydratorPluginManager(): void
@@ -43,22 +43,8 @@ class DelegatingHydratorFactoryTest extends TestCase
     public function testFactoryUsesHydratorManagerServiceFromContainerToSeedDelegatingHydratorWhenAvailable(): void
     {
         $hydrators = $this->createMock(HydratorPluginManager::class);
-        $container = $this->createMock(ContainerInterface::class);
-        $container
-            ->expects($this->exactly(3))
-            ->method('has')
-            ->withConsecutive(
-                [HydratorPluginManager::class],
-                ['Zend\Hydrator\HydratorPluginManager'],
-                ['HydratorManager']
-            )
-            ->willReturnOnConsecutiveCalls(
-                false,
-                false,
-                true
-            );
-        $container->expects($this->once())->method('get')->with('HydratorManager')->willReturn($hydrators);
-
+        $container = new InMemoryContainer();
+        $container->set('HydratorManager', $hydrators);
         $factory = new DelegatingHydratorFactory();
 
         $hydrator = $factory($container);
@@ -67,29 +53,13 @@ class DelegatingHydratorFactoryTest extends TestCase
 
     public function testFactoryCreatesHydratorPluginManagerToSeedDelegatingHydratorAsFallback(): void
     {
-        $container = $this->createMock(ContainerInterface::class);
-        $container
-            ->expects($this->exactly(3))
-            ->method('has')
-            ->withConsecutive(
-                [HydratorPluginManager::class],
-                ['Zend\Hydrator\HydratorPluginManager'],
-                ['HydratorManager']
-            )
-            ->willReturnOnConsecutiveCalls(
-                false,
-                false,
-                false
-            );
-        $container->expects($this->never())->method('get');
-
-        $factory = new DelegatingHydratorFactory();
+        $container = new InMemoryContainer();
+        $factory   = new DelegatingHydratorFactory();
 
         $hydrator = $factory($container);
         $this->assertInstanceOf(DelegatingHydrator::class, $hydrator);
 
-        $r = new ReflectionProperty($hydrator, 'hydrators');
-        $r->setAccessible(true);
+        $r         = new ReflectionProperty($hydrator, 'hydrators');
         $hydrators = $r->getValue($hydrator);
 
         $this->assertInstanceOf(HydratorPluginManager::class, $hydrators);

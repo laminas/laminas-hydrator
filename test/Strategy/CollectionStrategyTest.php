@@ -10,6 +10,8 @@ use Laminas\Hydrator\HydratorInterface;
 use Laminas\Hydrator\ReflectionHydrator;
 use Laminas\Hydrator\Strategy\CollectionStrategy;
 use LaminasTest\Hydrator\TestAsset;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use stdClass;
@@ -26,17 +28,13 @@ use function mt_rand;
 use function spl_object_hash;
 use function sprintf;
 
-/**
- * Tests for {@see CollectionStrategy}
- *
- * @covers \Laminas\Hydrator\Strategy\CollectionStrategy
- */
+#[CoversClass(CollectionStrategy::class)]
 class CollectionStrategyTest extends TestCase
 {
     /**
-     * @dataProvider providerInvalidObjectClassName
      * @param class-string<Throwable> $expectedExceptionType
      */
+    #[DataProvider('providerInvalidObjectClassName')]
     public function testConstructorRejectsInvalidObjectClassName(
         mixed $objectClassName,
         string $expectedExceptionType,
@@ -53,7 +51,7 @@ class CollectionStrategyTest extends TestCase
     }
 
     /** @return array<string, array{0:mixed, 1: class-string<Throwable>, 2: string}> */
-    public function providerInvalidObjectClassName(): array
+    public static function providerInvalidObjectClassName(): array
     {
         // @codingStandardsIgnoreStart
         return [
@@ -70,9 +68,7 @@ class CollectionStrategyTest extends TestCase
         // @codingStandardsIgnoreEnd
     }
 
-    /**
-     * @dataProvider providerInvalidValueForExtraction
-     */
+    #[DataProvider('providerInvalidValueForExtraction')]
     public function testExtractRejectsInvalidValue(mixed $value): void
     {
         $strategy = new CollectionStrategy(
@@ -93,7 +89,7 @@ class CollectionStrategyTest extends TestCase
     /**
      * @return Generator<string, list<mixed>>
      */
-    public function providerInvalidValueForExtraction(): Generator
+    public static function providerInvalidValueForExtraction(): Generator
     {
         $values = [
             'boolean-false'             => false,
@@ -111,9 +107,7 @@ class CollectionStrategyTest extends TestCase
         }
     }
 
-    /**
-     * @dataProvider providerInvalidObjectForExtraction
-     */
+    #[DataProvider('providerInvalidObjectForExtraction')]
     public function testExtractRejectsInvalidObject(mixed $object): void
     {
         $value = [$object];
@@ -136,7 +130,7 @@ class CollectionStrategyTest extends TestCase
     /**
      * @return Generator<string, list<mixed>>
      */
-    public function providerInvalidObjectForExtraction(): Generator
+    public static function providerInvalidObjectForExtraction(): Generator
     {
         $values = [
             'boolean-false'                           => false,
@@ -187,9 +181,7 @@ class CollectionStrategyTest extends TestCase
         self::assertSame($expected, $strategy->extract($value));
     }
 
-    /**
-     * @dataProvider providerInvalidValueForHydration
-     */
+    #[DataProvider('providerInvalidValueForHydration')]
     public function testHydrateRejectsInvalidValue(mixed $value): void
     {
         $strategy = new CollectionStrategy(
@@ -210,7 +202,7 @@ class CollectionStrategyTest extends TestCase
     /**
      * @return Generator<string, list<mixed>>
      */
-    public function providerInvalidValueForHydration(): Generator
+    public static function providerInvalidValueForHydration(): Generator
     {
         $values = [
             'boolean-false'             => false,

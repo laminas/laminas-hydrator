@@ -6,14 +6,11 @@ namespace LaminasTest\Hydrator\Strategy;
 
 use Laminas\Hydrator\Exception\InvalidArgumentException;
 use Laminas\Hydrator\Strategy\BooleanStrategy;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
-/**
- * Tests for {@see BooleanStrategy}
- *
- * @covers \Laminas\Hydrator\Strategy\BooleanStrategy
- */
+#[CoversClass(BooleanStrategy::class)]
 class BooleanStrategyTest extends TestCase
 {
     public function testConstructorWithValidInteger(): void

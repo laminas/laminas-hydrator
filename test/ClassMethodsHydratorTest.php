@@ -10,14 +10,11 @@ use LaminasTest\Hydrator\TestAsset\ArraySerializable;
 use LaminasTest\Hydrator\TestAsset\ClassMethodsCamelCase;
 use LaminasTest\Hydrator\TestAsset\ClassMethodsCamelCaseMissing;
 use LaminasTest\Hydrator\TestAsset\ClassMethodsOptionalParameters;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use TypeError;
 
-/**
- * Unit tests for {@see ClassMethodsHydrator}
- *
- * @covers \Laminas\Hydrator\ClassMethodsHydrator
- */
+#[CoversClass(ClassMethodsHydrator::class)]
 class ClassMethodsHydratorTest extends TestCase
 {
     use HydratorTestTrait;

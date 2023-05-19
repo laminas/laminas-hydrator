@@ -7,15 +7,12 @@ namespace LaminasTest\Hydrator;
 use Laminas\Hydrator\ObjectPropertyHydrator;
 use LaminasTest\Hydrator\TestAsset\ClassWithPublicStaticProperties;
 use LaminasTest\Hydrator\TestAsset\ObjectProperty as ObjectPropertyTestAsset;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 use TypeError;
 
-/**
- * Unit tests for {@see ObjectPropertyHydrator}
- *
- * @covers \Laminas\Hydrator\ObjectPropertyHydrator
- */
+#[CoversClass(ObjectPropertyHydrator::class)]
 class ObjectPropertyHydratorTest extends TestCase
 {
     use HydratorTestTrait;
@@ -100,7 +97,7 @@ class ObjectPropertyHydratorTest extends TestCase
         $object = $this->hydrator->hydrate(['foo' => 'baz', 'bar' => 'baz'], $object);
 
         $this->assertEquals('baz', $object->foo);
-        $this->assertObjectHasAttribute('bar', $object);
+        $this->assertObjectHasProperty('bar', $object);
         $this->assertSame('baz', $object->bar);
     }
 

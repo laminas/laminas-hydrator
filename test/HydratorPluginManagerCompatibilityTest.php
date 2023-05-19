@@ -8,14 +8,16 @@ use Laminas\Hydrator\HydratorInterface;
 use Laminas\Hydrator\HydratorPluginManager;
 use Laminas\ServiceManager\ServiceManager;
 use Laminas\ServiceManager\Test\CommonPluginManagerTrait;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(HydratorPluginManager::class)]
 class HydratorPluginManagerCompatibilityTest extends TestCase
 {
     use CommonPluginManagerTrait;
 
     /** @return HydratorPluginManager */
-    protected function getPluginManager()
+    protected static function getPluginManager()
     {
         return new HydratorPluginManager(new ServiceManager());
     }

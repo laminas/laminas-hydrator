@@ -6,18 +6,14 @@ namespace LaminasTest\Hydrator\Filter;
 
 use Laminas\Hydrator\Exception\InvalidArgumentException;
 use Laminas\Hydrator\Filter\NumberOfParameterFilter;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Unit tests for {@see NumberOfParameterFilter}
- *
- * @covers \Laminas\Hydrator\Filter\NumberOfParameterFilter
- */
+#[CoversClass(NumberOfParameterFilter::class)]
 class NumberOfParameterFilterTest extends TestCase
 {
-    /**
-     * @group 6083
-     */
+    #[Group('6083')]
     public function testArityZero(): void
     {
         $filter = new NumberOfParameterFilter();
@@ -25,9 +21,7 @@ class NumberOfParameterFilterTest extends TestCase
         $this->assertFalse($filter->filter(self::class . '::methodWithOptionalParameters'));
     }
 
-    /**
-     * @group 6083
-     */
+    #[Group('6083')]
     public function testArityOne(): void
     {
         $filter = new NumberOfParameterFilter(1);

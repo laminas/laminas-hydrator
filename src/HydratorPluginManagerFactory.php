@@ -34,7 +34,7 @@ class HydratorPluginManagerFactory
      */
     public function __invoke(ContainerInterface $container, string $name, ?array $options = []): HydratorPluginManager
     {
-        if (! class_exists(Config::class)) {
+        if (! class_exists(ServiceManager::class)) {
             throw new Exception\DomainException(sprintf(
                 '%s requires the laminas/laminas-servicemanager package, which is not installed.'
                 . ' If you do not want to install that package, you can use the %s instead;'

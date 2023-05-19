@@ -5,16 +5,13 @@ declare(strict_types=1);
 namespace LaminasTest\Hydrator;
 
 use Laminas\Hydrator\ReflectionHydrator;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 use stdClass;
 use TypeError;
 
-/**
- * Unit tests for {@see ReflectionHydrator}
- *
- * @covers \Laminas\Hydrator\ReflectionHydrator
- */
+#[CoversClass(ReflectionHydrator::class)]
 class ReflectionHydratorTest extends TestCase
 {
     use HydratorTestTrait;
@@ -84,7 +81,6 @@ class ReflectionHydratorTest extends TestCase
 
         $this->assertSame($instance, $hydrated);
         $r = new ReflectionProperty($hydrated, 'foo');
-        $r->setAccessible(true);
         $this->assertSame('bar', $r->getValue($hydrated));
     }
 }

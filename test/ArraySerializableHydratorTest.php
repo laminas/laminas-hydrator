@@ -8,16 +8,15 @@ use ArrayObject;
 use Laminas\Hydrator\ArraySerializableHydrator;
 use LaminasTest\Hydrator\TestAsset\ArraySerializable as ArraySerializableAsset;
 use LaminasTest\Hydrator\TestAsset\ArraySerializableNoGetArrayCopy;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use TypeError;
 
 use function array_merge;
 
-/**
- * Unit tests for {@see ArraySerializableHydrator}
- *
- * @covers \Laminas\Hydrator\ArraySerializableHydrator
- */
+#[CoversClass(ArraySerializableHydrator::class)]
 class ArraySerializableHydratorTest extends TestCase
 {
     use HydratorTestTrait;
@@ -89,9 +88,8 @@ class ArraySerializableHydratorTest extends TestCase
      * Verifies that when an object already has properties,
      * these properties are preserved when it's hydrated with new data
      * existing properties should get overwritten
-     *
-     * @group 65
      */
+    #[Group('65')]
     public function testWillPreserveOriginalPropsAtHydration(): void
     {
         $original = new ArraySerializableAsset();
@@ -110,9 +108,8 @@ class ArraySerializableHydratorTest extends TestCase
     /**
      * To preserve backwards compatibility, if getArrayCopy() is not implemented
      * by the to-be hydrated object, simply exchange the array
-     *
-     * @group 65
      */
+    #[Group('65')]
     public function testWillReplaceArrayIfNoGetArrayCopy(): void
     {
         $original = new ArraySerializableNoGetArrayCopy();
@@ -131,7 +128,7 @@ class ArraySerializableHydratorTest extends TestCase
      * @return string[][][]
      * @psalm-return array<string, array{0: string[], 1: string[], 2: string[]}>
      */
-    public function arrayDataProvider(): array
+    public static function arrayDataProvider(): array
     {
         // @codingStandardsIgnoreStart
         return [
@@ -150,12 +147,12 @@ class ArraySerializableHydratorTest extends TestCase
      * one _removes_ data, then no change occurs. Ideally, in these cases, the
      * submitted value should _replace_ the original.
      *
-     * @group 66
-     * @dataProvider arrayDataProvider
      * @param string[] $start
      * @param string[] $submit
      * @param string[] $expected
      */
+    #[DataProvider('arrayDataProvider')]
+    #[Group('66')]
     public function testHydrationWillReplaceNestedArrayData(
         array $start,
         array $submit,

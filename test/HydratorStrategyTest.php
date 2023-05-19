@@ -7,6 +7,7 @@ namespace LaminasTest\Hydrator;
 use Laminas\Hydrator\ClassMethodsHydrator;
 use Laminas\Hydrator\HydratorInterface;
 use Laminas\Hydrator\Strategy\StrategyInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class HydratorStrategyTest extends TestCase
@@ -92,9 +93,7 @@ class HydratorStrategyTest extends TestCase
         $this->assertCount(3, $entities);
     }
 
-    /**
-     * @dataProvider underscoreHandlingDataProvider
-     */
+    #[DataProvider('underscoreHandlingDataProvider')]
     public function testWhenUsingUnderscoreSeparatedKeysHydratorStrategyIsAlwaysConsideredUnderscoreSeparatedToo(
         bool $underscoreSeparatedKeys,
         string $formFieldKey
@@ -131,7 +130,7 @@ class HydratorStrategyTest extends TestCase
      *     1: string
      * }>
      */
-    public function underscoreHandlingDataProvider(): array
+    public static function underscoreHandlingDataProvider(): array
     {
         return [
             [true, 'foo_bar'],

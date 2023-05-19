@@ -6,11 +6,10 @@ namespace LaminasTest\Hydrator\Strategy;
 
 use Laminas\Hydrator\Strategy\ClosureStrategy;
 use Laminas\Hydrator\Strategy\StrategyChain;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Laminas\Hydrator\Strategy\StrategyChain
- */
+#[CoversClass(StrategyChain::class)]
 class StrategyChainTest extends TestCase
 {
     public function testEmptyStrategyChainReturnsOriginalValue(): void

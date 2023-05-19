@@ -5,17 +5,13 @@ declare(strict_types=1);
 namespace LaminasTest\Hydrator\Aggregate;
 
 use Laminas\Hydrator\Aggregate\HydrateEvent;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
-/**
- * Unit tests for {@see HydrateEvent}
- */
+#[CoversClass(HydrateEvent::class)]
 class HydrateEventTest extends TestCase
 {
-    /**
-     * @covers \Laminas\Hydrator\Aggregate\HydrateEvent
-     */
     public function testEvent(): void
     {
         $target    = new stdClass();

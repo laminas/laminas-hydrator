@@ -5,19 +5,17 @@ declare(strict_types=1);
 namespace LaminasTest\Hydrator\NamingStrategy;
 
 use Laminas\Hydrator\NamingStrategy\IdentityNamingStrategy;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Tests for {@see IdentityNamingStrategy}
- *
- * @covers \Laminas\Hydrator\NamingStrategy\IdentityNamingStrategy
- */
+#[CoversClass(IdentityNamingStrategy::class)]
 class IdentityNamingStrategyTest extends TestCase
 {
     /**
-     * @dataProvider getTestedNames
      * @param string $name
      */
+    #[DataProvider('getTestedNames')]
     public function testHydrate($name): void
     {
         $namingStrategy = new IdentityNamingStrategy();
@@ -26,9 +24,9 @@ class IdentityNamingStrategyTest extends TestCase
     }
 
     /**
-     * @dataProvider getTestedNames
      * @param string $name
      */
+    #[DataProvider('getTestedNames')]
     public function testExtract($name): void
     {
         $namingStrategy = new IdentityNamingStrategy();
@@ -41,7 +39,7 @@ class IdentityNamingStrategyTest extends TestCase
      *
      * @return string[][]
      */
-    public function getTestedNames()
+    public static function getTestedNames()
     {
         return [
             'foo' => ['foo'],

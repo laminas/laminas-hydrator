@@ -9,11 +9,10 @@ use ArrayObject;
 use Laminas\Hydrator\ArraySerializableHydrator;
 use Laminas\Hydrator\Exception\InvalidArgumentException;
 use Laminas\Hydrator\Iterator\HydratingIteratorIterator;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers Laminas\Hydrator\Iterator\HydratingIteratorIterator
- */
+#[CoversClass(HydratingIteratorIterator::class)]
 class HydratingIteratorIteratorTest extends TestCase
 {
     public function testHydratesObjectAndClonesOnCurrent(): void

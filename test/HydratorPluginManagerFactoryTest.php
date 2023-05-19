@@ -8,10 +8,13 @@ use Laminas\Hydrator\HydratorInterface;
 use Laminas\Hydrator\HydratorPluginManager;
 use Laminas\Hydrator\HydratorPluginManagerFactory;
 use Laminas\Hydrator\ReflectionHydrator;
-use Laminas\ServiceManager\ServiceLocatorInterface;
+use LaminasTest\Hydrator\TestAsset\InMemoryContainer;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
+#[CoversClass(HydratorPluginManagerFactory::class)]
 class HydratorPluginManagerFactoryTest extends TestCase
 {
     public function testFactoryReturnsPluginManager(): void
@@ -23,9 +26,7 @@ class HydratorPluginManagerFactoryTest extends TestCase
         $this->assertInstanceOf(HydratorPluginManager::class, $hydrators);
     }
 
-    /**
-     * @depends testFactoryReturnsPluginManager
-     */
+    #[Depends('testFactoryReturnsPluginManager')]
     public function testFactoryConfiguresPluginManagerUnderContainerInterop(): void
     {
         $container = $this->createMock(ContainerInterface::class);
@@ -42,8 +43,8 @@ class HydratorPluginManagerFactoryTest extends TestCase
 
     public function testConfiguresHydratorServicesWhenFound(): void
     {
-        $hydrator = $this->createMock(HydratorInterface::class);
-        $config   = [
+        $hydrator  = $this->createMock(HydratorInterface::class);
+        $config    = [
             'hydrators' => [
                 'aliases'   => [
                     'test' => ReflectionHydrator::class,
@@ -54,24 +55,8 @@ class HydratorPluginManagerFactoryTest extends TestCase
                 ],
             ],
         ];
-
-        $container = $this->createMock(ServiceLocatorInterface::class);
-        $container
-            ->expects($this->exactly(2))
-            ->method('has')
-            ->withConsecutive(
-                ['ServiceListener'],
-                ['config']
-            )
-            ->willReturnOnConsecutiveCalls(
-                false,
-                true
-            );
-        $container
-            ->expects($this->once())
-            ->method('get')
-            ->with('config')
-            ->willReturn($config);
+        $container = new InMemoryContainer();
+        $container->set('config', $config);
 
         $factory   = new HydratorPluginManagerFactory();
         $hydrators = $factory($container, 'HydratorManager');
@@ -85,22 +70,7 @@ class HydratorPluginManagerFactoryTest extends TestCase
 
     public function testDoesNotConfigureHydratorServicesWhenServiceListenerPresent(): void
     {
-        $container = $this->createMock(ServiceLocatorInterface::class);
-        $container
-            ->expects($this->exactly(2))
-            ->method('has')
-            ->withConsecutive(
-                ['ServiceListener'],
-                ['config']
-            )
-            ->willReturnOnConsecutiveCalls(
-                false,
-                false
-            );
-        $container
-            ->expects($this->never())
-            ->method('get');
-
+        $container = new InMemoryContainer();
         $factory   = new HydratorPluginManagerFactory();
         $hydrators = $factory($container, 'HydratorManager');
 
@@ -111,22 +81,7 @@ class HydratorPluginManagerFactoryTest extends TestCase
 
     public function testDoesNotConfigureHydratorServicesWhenConfigServiceNotPresent(): void
     {
-        $container = $this->createMock(ServiceLocatorInterface::class);
-        $container
-            ->expects($this->exactly(2))
-            ->method('has')
-            ->withConsecutive(
-                ['ServiceListener'],
-                ['config']
-            )
-            ->willReturnOnConsecutiveCalls(
-                false,
-                false
-            );
-        $container
-            ->expects($this->never())
-            ->method('get');
-
+        $container = new InMemoryContainer();
         $factory   = new HydratorPluginManagerFactory();
         $hydrators = $factory($container, 'HydratorManager');
 
@@ -135,23 +90,8 @@ class HydratorPluginManagerFactoryTest extends TestCase
 
     public function testDoesNotConfigureHydratorServicesWhenConfigServiceDoesNotContainHydratorsConfig(): void
     {
-        $container = $this->createMock(ServiceLocatorInterface::class);
-        $container
-            ->expects($this->exactly(2))
-            ->method('has')
-            ->withConsecutive(
-                ['ServiceListener'],
-                ['config']
-            )
-            ->willReturnOnConsecutiveCalls(
-                false,
-                true
-            );
-        $container
-            ->expects($this->once())
-            ->method('get')
-            ->with('config')
-            ->willReturn(['foo' => 'bar']);
+        $container = new InMemoryContainer();
+        $container->set('config', ['foo' => 'bar']);
 
         $factory   = new HydratorPluginManagerFactory();
         $hydrators = $factory($container, 'HydratorManager');
