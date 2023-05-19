@@ -70,6 +70,9 @@
     <MixedMethodCall>
       <code><![CDATA[$this->hydrationMethodsCache[$propertyFqn]]]></code>
     </MixedMethodCall>
+    <PossiblyUnusedMethod>
+      <code>getMethodExistsCheck</code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="src/DelegatingHydrator.php">
     <MixedInferredReturnType>
@@ -99,6 +102,16 @@
       <code>$filter</code>
     </MixedAssignment>
   </file>
+  <file src="src/Filter/FilterEnabledInterface.php">
+    <PossiblyUnusedMethod>
+      <code>hasFilter</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/HydratorAwareInterface.php">
+    <UnusedClass>
+      <code>HydratorAwareInterface</code>
+    </UnusedClass>
+  </file>
   <file src="src/HydratorPluginManager.php">
     <DeprecatedClass>
       <code>ArraySerializable::class</code>
@@ -106,11 +119,22 @@
       <code>ObjectProperty::class</code>
       <code>Reflection::class</code>
     </DeprecatedClass>
+    <PossiblyUnusedProperty>
+      <code>$shareByDefault</code>
+    </PossiblyUnusedProperty>
   </file>
   <file src="src/HydratorPluginManagerFactory.php">
     <DeprecatedClass>
       <code><![CDATA[new Config($config['hydrators'])]]></code>
     </DeprecatedClass>
+    <UnusedParam>
+      <code>$name</code>
+    </UnusedParam>
+  </file>
+  <file src="src/HydratorProviderInterface.php">
+    <PossiblyUnusedMethod>
+      <code>getHydratorConfig</code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="src/Iterator/HydratingIteratorIterator.php">
     <InvalidArgument>
@@ -129,6 +153,9 @@
       <code>addServiceManager</code>
       <code>get</code>
     </MixedMethodCall>
+    <UnusedClass>
+      <code>Module</code>
+    </UnusedClass>
   </file>
   <file src="src/NamingStrategy/MapNamingStrategy.php">
     <MissingClosureParamType>
@@ -226,6 +253,11 @@
       <code>new $class()</code>
     </InvalidStringClass>
   </file>
+  <file src="src/StandaloneHydratorPluginManagerFactory.php">
+    <UnusedParam>
+      <code>$container</code>
+    </UnusedParam>
+  </file>
   <file src="src/Strategy/BooleanStrategy.php">
     <DocblockTypeContradiction>
       <code><![CDATA[! is_int($falseValue) && ! is_string($falseValue)]]></code>
@@ -316,6 +348,11 @@
       <code>$value</code>
     </MixedAssignment>
   </file>
+  <file src="src/Strategy/StrategyEnabledInterface.php">
+    <PossiblyUnusedMethod>
+      <code>removeStrategy</code>
+    </PossiblyUnusedMethod>
+  </file>
   <file src="test/Aggregate/HydratorListenerTest.php">
     <InternalMethod>
       <code>onExtract</code>
@@ -365,6 +402,32 @@
       <code>$orFilters</code>
       <code>$value</code>
     </MixedAssignment>
+  </file>
+  <file src="test/Filter/NumberOfParameterFilterTest.php">
+    <PossiblyUnusedMethod>
+      <code>methodWithNoParameters</code>
+      <code>methodWithOptionalParameters</code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedParam>
+      <code>$parameter</code>
+    </PossiblyUnusedParam>
+  </file>
+  <file src="test/Filter/OptionalParametersFilterTest.php">
+    <PossiblyUnusedMethod>
+      <code>methodWithMultipleMandatoryParameters</code>
+      <code>methodWithMultipleOptionalParameters</code>
+      <code>methodWithSingleMandatoryParameter</code>
+      <code>methodWithSingleOptionalParameter</code>
+      <code>methodWithoutParameters</code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedParam>
+      <code>$otherParameter</code>
+      <code>$otherParameter</code>
+      <code>$parameter</code>
+      <code>$parameter</code>
+      <code>$parameter</code>
+      <code>$parameter</code>
+    </PossiblyUnusedParam>
   </file>
   <file src="test/HydratorAwareTraitTest.php">
     <InvalidArgument>
