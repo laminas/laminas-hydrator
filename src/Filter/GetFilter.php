@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Laminas\Hydrator\Filter;
 
 use function strpos;
-use function substr;
 
 final class GetFilter implements FilterInterface
 {
@@ -18,6 +17,6 @@ final class GetFilter implements FilterInterface
             $pos = 0;
         }
 
-        return substr($property, $pos, 3) === 'get';
+        return strpos($property, 'get', $pos) === $pos;
     }
 }
