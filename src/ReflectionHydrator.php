@@ -21,10 +21,10 @@ class ReflectionHydrator extends AbstractHydrator
      *
      * {@inheritDoc}
      */
-    public function extract(object $object): array
+    public function extract(object $object, bool $includeParentProperties = false): array
     {
         $result = [];
-        foreach (self::getReflProperties($object) as $property) {
+        foreach (self::getReflProperties($object, $includeParentProperties) as $property) {
             $propertyName = $this->extractName($property->getName(), $object);
             if (! $this->getCompositeFilter()->filter($propertyName)) {
                 continue;
@@ -42,9 +42,9 @@ class ReflectionHydrator extends AbstractHydrator
      *
      * {@inheritDoc}
      */
-    public function hydrate(array $data, object $object)
+    public function hydrate(array $data, object $object, bool $includeParentProperties = false)
     {
-        $reflProperties = self::getReflProperties($object);
+        $reflProperties = self::getReflProperties($object, $includeParentProperties);
         foreach ($data as $key => $value) {
             $name = $this->hydrateName($key, $data);
             if (isset($reflProperties[$name])) {
@@ -60,21 +60,23 @@ class ReflectionHydrator extends AbstractHydrator
      *
      * @return ReflectionProperty[]
      */
-    protected static function getReflProperties(object $input): array
+    protected static function getReflProperties(object $input, bool $includeParentProperties): array
     {
-        $class = $input::class;
+        $class = get_class($input);
 
         if (isset(static::$reflProperties[$class])) {
             return static::$reflProperties[$class];
         }
 
         static::$reflProperties[$class] = [];
-        $reflClass                      = new ReflectionClass($class);
-        $reflProperties                 = $reflClass->getProperties();
+        $reflClass = new ReflectionClass($class);
 
-        foreach ($reflProperties as $property) {
-            static::$reflProperties[$class][$property->getName()] = $property;
-        }
+        do {
+            foreach ($reflClass->getProperties() as $property) {
+                $property->setAccessible(true);
+                static::$reflProperties[$class][$property->getName()] = $property;
+            }
+        } while ($includeParentProperties === true && ($reflClass = $reflClass->getParentClass()) !== false);
 
         return static::$reflProperties[$class];
     }
