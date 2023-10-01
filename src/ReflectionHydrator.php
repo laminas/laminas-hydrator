@@ -24,7 +24,7 @@ class ReflectionHydrator extends AbstractHydrator
     public function extract(object $object): array
     {
         $result = [];
-        foreach (self::getReflProperties($object) as $property) {
+        foreach (static::getReflProperties($object) as $property) {
             $propertyName = $this->extractName($property->getName(), $object);
             if (! $this->getCompositeFilter()->filter($propertyName)) {
                 continue;
@@ -44,7 +44,7 @@ class ReflectionHydrator extends AbstractHydrator
      */
     public function hydrate(array $data, object $object)
     {
-        $reflProperties = self::getReflProperties($object);
+        $reflProperties = static::getReflProperties($object);
         foreach ($data as $key => $value) {
             $name = $this->hydrateName($key, $data);
             if (isset($reflProperties[$name])) {
