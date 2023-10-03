@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace LaminasTest\Hydrator;
 
 use Laminas\Hydrator\ReflectionHydrator;
+use LaminasTest\Hydrator\TestAsset\ReflectionHydratorTestData;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
@@ -61,10 +62,7 @@ class ReflectionHydratorTest extends TestCase
 
     public function testCanExtractFromAnonymousClass(): void
     {
-        $instance = new class {
-            private string $foo = 'bar';
-            private string $bar = 'baz';
-        };
+        $instance = new ReflectionHydratorTestData();
         $this->assertSame([
             'foo' => 'bar',
             'bar' => 'baz',
@@ -81,6 +79,50 @@ class ReflectionHydratorTest extends TestCase
 
         $this->assertSame($instance, $hydrated);
         $r = new ReflectionProperty($hydrated, 'foo');
+        $this->assertSame('bar', $r->getValue($hydrated));
+    }
+
+    public function testCanExtractFromExtendedClass(): void
+    {
+        $instance = new class extends ReflectionHydratorTestData {
+        };
+        $this->assertSame([
+            'foo' => 'bar',
+            'bar' => 'baz',
+        ], $this->hydrator->extract($instance, true));
+    }
+
+    public function testFailToExtractFromExtendedClass(): void
+    {
+        $instance = new class extends ReflectionHydratorTestData {
+        };
+        $this->assertNotSame([
+            'foo' => 'bar',
+            'bar' => 'baz',
+        ], $this->hydrator->extract($instance, false));
+    }
+
+    public function testCanHydrateExtendedClass(): void
+    {
+        $instance = new class extends ReflectionHydratorTestData {
+        };
+
+        $hydrated = $this->hydrator->hydrate(['foo' => 'foo-foo'], $instance, true);
+
+        $this->assertSame($instance, $hydrated);
+        $r = new ReflectionProperty(get_parent_class($hydrated), 'foo');
+        $this->assertSame('foo-foo', $r->getValue($hydrated));
+    }
+
+    public function testFailToHydrateExtendedClass(): void
+    {
+        $instance = new class extends ReflectionHydratorTestData {
+        };
+
+        $hydrated = $this->hydrator->hydrate(['foo' => 'foo-foo'], $instance, false);
+
+        $this->assertSame($instance, $hydrated);
+        $r = new ReflectionProperty(get_parent_class($hydrated), 'foo');
         $this->assertSame('bar', $r->getValue($hydrated));
     }
 }
