@@ -12,6 +12,8 @@ use ReflectionProperty;
 use stdClass;
 use TypeError;
 
+use function get_parent_class;
+
 #[CoversClass(ReflectionHydrator::class)]
 class ReflectionHydratorTest extends TestCase
 {

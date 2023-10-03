@@ -62,17 +62,18 @@ class ReflectionHydrator extends AbstractHydrator
      */
     protected static function getReflProperties(object $input, bool $includeParentProperties): array
     {
-        $class = get_class($input);
+        $reflClass = new ReflectionClass($input);
+        $class     = $reflClass->getName();
 
         if (isset(static::$reflProperties[$class])) {
             return static::$reflProperties[$class];
         }
 
         static::$reflProperties[$class] = [];
-        $reflClass = new ReflectionClass($class);
 
         do {
             foreach ($reflClass->getProperties() as $property) {
+                /** @psalm-suppress UnusedMethodCall - Bizarre, this is a void return!!! */
                 $property->setAccessible(true);
                 static::$reflProperties[$class][$property->getName()] = $property;
             }
