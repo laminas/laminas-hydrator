@@ -172,6 +172,9 @@
       <code>$value</code>
       <code>$value</code>
     </MixedArgument>
+    <ArgumentTypeCoercion>
+      <code>$pattern</code>
+    </ArgumentTypeCoercion>
   </file>
   <file src="src/NamingStrategy/UnderscoreNamingStrategy/StringSupportTrait.php">
     <DocblockTypeContradiction>
@@ -208,6 +211,9 @@
       <code>$matches[2]</code>
       <code>$value[0]</code>
     </MixedArrayAccess>
+    <ArgumentTypeCoercion>
+      <code>$pcreInfo->pattern</code>
+    </ArgumentTypeCoercion>
   </file>
   <file src="src/ObjectProperty.php">
     <DeprecatedClass>
@@ -341,6 +347,9 @@
     <RedundantConditionGivenDocblockType>
       <code>is_array($serializerOptions)</code>
     </RedundantConditionGivenDocblockType>
+    <DeprecatedClass occurrences="2">
+      <code>Serializer::class</code>
+    </DeprecatedClass>
   </file>
   <file src="src/Strategy/StrategyChain.php">
     <MixedAssignment>
@@ -363,6 +372,9 @@
       <code>onExtract</code>
       <code>onHydrate</code>
     </InternalMethod>
+    <DeprecatedMethod occurrences="5">
+      <code>$this->returnValue</code>
+    </DeprecatedMethod>
   </file>
   <file src="test/ArraySerializableHydratorTest.php">
     <InvalidArgument>
@@ -519,6 +531,19 @@
       <code>hasStrategy</code>
       <code>removeStrategy</code>
     </UndefinedInterfaceMethod>
+    <DeprecatedMethod occurrences="2">
+      <code>$this->returnValue</code>
+    </DeprecatedMethod>
+  </file>
+  <file src="test/HydratorTestTrait.php">
+    <DeprecatedMethod occurrences="4">
+      <code>$this->returnValue</code>
+    </DeprecatedMethod>
+  </file>
+  <file src="test/NamingStrategy/CompositeNamingStrategyTest.php">
+    <DeprecatedMethod occurrences="4">
+      <code>$this->returnValue</code>
+    </DeprecatedMethod>
   </file>
   <file src="test/HydratorTest.php">
     <MissingClosureParamType>
@@ -735,5 +760,8 @@
       <code>$serialized</code>
       <code>$serialized</code>
     </MixedAssignment>
+    <DeprecatedClass occurrences="3">
+      <code>Serializer::class</code>
+    </DeprecatedClass>
   </file>
 </files>
