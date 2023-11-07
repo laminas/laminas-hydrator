@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.11.0@c9b192ab8400fdaf04b2b13d110575adc879aa90">
+<files psalm-version="5.15.0@5c774aca4746caf3d239d9c8cadb9f882ca29352">
   <file src="src/Aggregate/AggregateHydrator.php">
     <DocblockTypeContradiction>
       <code><![CDATA[null === $this->eventManager]]></code>
@@ -330,6 +330,10 @@
     </RedundantConditionGivenDocblockType>
   </file>
   <file src="src/Strategy/SerializableStrategy.php">
+    <DeprecatedClass>
+      <code><![CDATA[SerializerFactory::factory($this->serializer, $options)]]></code>
+      <code>SerializerFactory::getDefaultAdapter()</code>
+    </DeprecatedClass>
     <DocblockTypeContradiction>
       <code>iterator_to_array($serializerOptions)</code>
       <code><![CDATA[null === $this->serializer]]></code>
@@ -731,6 +735,11 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="test/Strategy/SerializableStrategyTest.php">
+    <DeprecatedClass>
+      <code><![CDATA[Serializer::factory('phpserialize')]]></code>
+      <code><![CDATA[Serializer::factory('phpserialize')]]></code>
+      <code><![CDATA[Serializer::factory('phpserialize')]]></code>
+    </DeprecatedClass>
     <MixedAssignment>
       <code>$serialized</code>
       <code>$serialized</code>

@@ -40,7 +40,7 @@ final class CamelCaseToUnderscoreFilter
     }
 
     /**
-     * @return string[][] Array with two elements, first the patterns, then the
+     * @return non-empty-string[][] Array with two elements, first the patterns, then the
      *     replacements. Each element is an array of strings.
      */
     private function getPatternAndReplacement(): array

@@ -54,15 +54,15 @@ class HydratorListenerTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $event->expects($this->any())->method('getHydratedObject')->will($this->returnValue($object));
-        $event->expects($this->any())->method('getHydrationData')->will($this->returnValue($data));
+        $event->expects($this->any())->method('getHydratedObject')->willReturn($object);
+        $event->expects($this->any())->method('getHydrationData')->willReturn($data);
 
         $this
             ->hydrator
             ->expects($this->once())
             ->method('hydrate')
             ->with($data, $object)
-            ->will($this->returnValue($hydrated));
+            ->willReturn($hydrated);
         $event->expects($this->once())->method('setHydratedObject')->with($hydrated);
 
         $this->assertSame($hydrated, $this->listener->onHydrate($event));
@@ -77,14 +77,14 @@ class HydratorListenerTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $event->expects($this->any())->method('getExtractionObject')->will($this->returnValue($object));
+        $event->expects($this->any())->method('getExtractionObject')->willReturn($object);
 
         $this
             ->hydrator
             ->expects($this->once())
             ->method('extract')
             ->with($object)
-            ->will($this->returnValue($data));
+            ->willReturn($data);
         $event->expects($this->once())->method('mergeExtractedData')->with($data);
 
         $this->assertSame($data, $this->listener->onExtract($event));
