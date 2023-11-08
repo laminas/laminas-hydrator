@@ -13,9 +13,15 @@ class PcreReplacement
 {
     /** @var callable */
     public $replacement;
+    /** @var non-empty-string */
+    public string $pattern;
 
-    public function __construct(public string $pattern, callable $replacement)
+    /**
+     * @param non-empty-string $pattern
+     */
+    public function __construct(string $pattern, callable $replacement)
     {
         $this->replacement = $replacement;
+        $this->pattern     = $pattern;
     }
 }

@@ -30,11 +30,11 @@ class CompositeNamingStrategyTest extends TestCase
         $defaultNamingStrategy->expects($this->once())
             ->method('hydrate')
             ->with('foo')
-            ->will($this->returnValue('Foo'));
+            ->willReturn('Foo');
         $defaultNamingStrategy->expects($this->once())
             ->method('extract')
             ->with('Foo')
-            ->will($this->returnValue('foo'));
+            ->willReturn('foo');
 
         $compositeNamingStrategy = new CompositeNamingStrategy(
             ['bar' => $this->createMock(NamingStrategyInterface::class)],
@@ -50,7 +50,7 @@ class CompositeNamingStrategyTest extends TestCase
         $fooNamingStrategy->expects($this->once())
             ->method('hydrate')
             ->with('foo')
-            ->will($this->returnValue('FOO'));
+            ->willReturn('FOO');
         $compositeNamingStrategy = new CompositeNamingStrategy(['foo' => $fooNamingStrategy]);
         $this->assertEquals('FOO', $compositeNamingStrategy->hydrate('foo'));
     }
@@ -61,7 +61,7 @@ class CompositeNamingStrategyTest extends TestCase
         $fooNamingStrategy->expects($this->once())
             ->method('extract')
             ->with('FOO')
-            ->will($this->returnValue('foo'));
+            ->willReturn('foo');
         $compositeNamingStrategy = new CompositeNamingStrategy(['FOO' => $fooNamingStrategy]);
         $this->assertEquals('foo', $compositeNamingStrategy->extract('FOO'));
     }

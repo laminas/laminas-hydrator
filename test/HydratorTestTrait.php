@@ -19,14 +19,14 @@ trait HydratorTestTrait
             ->expects($this->any())
             ->method('hydrate')
             ->with($this->anything())
-            ->will($this->returnValue('value'));
+            ->willReturn('value');
 
         $strategy = $this->createMock(StrategyInterface::class);
         $strategy
             ->expects($this->any())
             ->method('hydrate')
             ->with($this->anything())
-            ->will($this->returnValue('hydrate'));
+            ->willReturn('hydrate');
 
         $this->hydrator->setNamingStrategy($namingStrategy);
         $this->hydrator->addStrategy('value', $strategy);
@@ -49,14 +49,14 @@ trait HydratorTestTrait
             ->expects($this->any())
             ->method('extract')
             ->with($this->anything())
-            ->will($this->returnValue('extractedName'));
+            ->willReturn('extractedName');
 
         $strategy = $this->createMock(StrategyInterface::class);
         $strategy
             ->expects($this->any())
             ->method('extract')
             ->with($this->anything())
-            ->will($this->returnValue('extractedValue'));
+            ->willReturn('extractedValue');
 
         $this->hydrator->setNamingStrategy($namingStrategy);
         $this->hydrator->addStrategy('extractedName', $strategy);

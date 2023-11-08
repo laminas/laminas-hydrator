@@ -111,7 +111,7 @@ class HydratorStrategyTest extends TestCase
             ->expects($this->once())
             ->method('extract')
             ->with($this->identicalTo($value))
-            ->will($this->returnValue($value));
+            ->willReturn($value);
 
         $attributes = $hydrator->extract($entity);
 
@@ -119,7 +119,7 @@ class HydratorStrategyTest extends TestCase
             ->expects($this->once())
             ->method('hydrate')
             ->with($this->identicalTo($value))
-            ->will($this->returnValue($value));
+            ->willReturn($value);
 
         $hydrator->hydrate($attributes, $entity);
     }
