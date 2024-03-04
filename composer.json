@@ -40,7 +40,7 @@
         "laminas/laminas-eventmanager": "^3.12",
         "laminas/laminas-modulemanager": "^2.15.0",
         "laminas/laminas-serializer": "^2.17.0",
-        "laminas/laminas-servicemanager": "^3.22.1",
+        "laminas/laminas-servicemanager": "^4.0.0",
         "phpbench/phpbench": "^1.2.14",
         "phpunit/phpunit": "^10.4.2",
         "psalm/plugin-phpunit": "^0.18.4",
