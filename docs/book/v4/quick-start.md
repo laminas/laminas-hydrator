@@ -2,7 +2,7 @@
 
 The laminas-hydrator component provides functionality for hydrating objects (which is the act of populating an object from a set of data) and extracting data from them.
 
-The component contains [concrete implementations](#available-implementations) for a number of common use cases, such as by using arrays, object methods, and reflection, and provides [interfaces](#base-interfaces) for creating custom implementations.
+The component contains [concrete implementations](#available-implementations) for a number of common use cases, such as by using arrays, object methods, and reflection, and provides [interfaces](#basic-usage) for creating custom implementations.
 
 ## Basic Usage
 
