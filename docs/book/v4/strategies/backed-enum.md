@@ -6,10 +6,10 @@ Available since version 4.8.0
 MISSING: **Installation Requirements**
 [Enumerations](https://www.php.net/manual/language.enumerations.overview.php) require PHP version 8.1 or higher.
 
-The `BackedEnumStrategy` provides **bidirectional conversion between strings 
+The `BackedEnumStrategy` provides **bidirectional conversion between strings
 or integers and [Backed Enums](https://www.php.net/manual/en/language.enumerations.backed.php)**.
 
-The code examples below will use the following backed enum, representing a 
+The code examples below will use the following backed enum, representing a
 genre of music:
 
 ```php

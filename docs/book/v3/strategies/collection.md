@@ -4,7 +4,7 @@ The `CollectionStrategy` can be used to **hydrate a collection of objects
 with data from an array with multiple items and vice versa**.
 
 The strategy uses a hydrator to hydrate and extract data from each item of a
-collection. 
+collection.
 
 ## Basic usage
 

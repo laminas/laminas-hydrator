@@ -3,6 +3,7 @@
 `Laminas\Hydrator\NamingStrategy\CompositeNamingStrategy` allows you to specify which naming
 strategy should be used for each key encountered during hydration or extraction.
 
+<!-- markdownlint-disable-next-line single-title single-h1 -->
 # Basic Usage
 
 When invoked, the following composite strategy will extract the property `bar`
