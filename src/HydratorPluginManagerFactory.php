@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Laminas\Hydrator;
 
-use Laminas\ServiceManager\Config;
 use Laminas\ServiceManager\ServiceManager;
 use Psr\Container\ContainerInterface;
 
@@ -68,9 +67,6 @@ class HydratorPluginManagerFactory
 
         /** @psalm-var ServiceManagerConfiguration $config['hydrators'] */
 
-        // Wire service configuration for hydrators
-        (new Config($config['hydrators']))->configureServiceManager($pluginManager);
-
-        return $pluginManager;
+        return new HydratorPluginManager($container, $config['hydrators']);
     }
 }

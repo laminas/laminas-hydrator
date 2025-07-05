@@ -30,9 +30,6 @@ class ClassMethodsInvalidParameter
         return $bar;
     }
 
-    /**
-     * @return true
-     */
     public function hasBar(): bool
     {
         return true;
@@ -43,9 +40,6 @@ class ClassMethodsInvalidParameter
         return "Bar";
     }
 
-    /**
-     * @return false
-     */
     public function isBla(): bool
     {
         return false;

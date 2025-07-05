@@ -12,6 +12,7 @@ use Laminas\Hydrator\ObjectPropertyHydrator;
 use Laminas\Hydrator\ReflectionHydrator;
 use Laminas\Hydrator\Strategy\DefaultStrategy;
 use Laminas\Hydrator\Strategy\SerializableStrategy;
+use Laminas\Serializer\Adapter\PhpSerialize;
 use LaminasTest\Hydrator\TestAsset\ArraySerializable as ArraySerializableAsset;
 use LaminasTest\Hydrator\TestAsset\ClassMethodsCamelCase;
 use LaminasTest\Hydrator\TestAsset\ClassMethodsCamelCaseMissing;
@@ -278,7 +279,7 @@ class HydratorTest extends TestCase
     {
         $hydrator = new ClassMethodsHydrator();
         $hydrator->addStrategy('default', new DefaultStrategy());
-        $hydrator->addStrategy('*', new SerializableStrategy('phpserialize'));
+        $hydrator->addStrategy('*', new SerializableStrategy(new PhpSerialize()));
         $default = $hydrator->getStrategy('default');
         self::assertInstanceOf(DefaultStrategy::class, $default);
         $serializable = $hydrator->getStrategy('*');
@@ -292,7 +293,7 @@ class HydratorTest extends TestCase
 
         self::assertSame('1', $datas['foo_bar']);
 
-        $hydrator->addStrategy('*', new SerializableStrategy('phpserialize'));
+        $hydrator->addStrategy('*', new SerializableStrategy(new PhpSerialize()));
         $datas = $hydrator->extract($this->classMethodsUnderscore);
 
         self::assertSame('s:1:"1";', $datas['foo_bar']);
@@ -305,7 +306,7 @@ class HydratorTest extends TestCase
         self::assertSame('1', $datas['foo_bar']);
 
         $hydrator->addStrategy('foo_bar', new DefaultStrategy());
-        $hydrator->addStrategy('*', new SerializableStrategy('phpserialize'));
+        $hydrator->addStrategy('*', new SerializableStrategy(new PhpSerialize()));
         $datas = $hydrator->extract($this->classMethodsUnderscore);
         self::assertSame('1', $datas['foo_bar']);
         self::assertSame('s:1:"2";', $datas['foo_bar_baz']);

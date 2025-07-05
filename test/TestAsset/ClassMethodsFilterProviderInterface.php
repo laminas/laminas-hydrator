@@ -24,16 +24,12 @@ class ClassMethodsFilterProviderInterface implements FilterProviderInterface
 
     /**
      * @param mixed $foo
-     * @return false
      */
     public function isScalar($foo): bool
     {
         return false;
     }
 
-    /**
-     * @return true
-     */
     public function hasFooBar(): bool
     {
         return true;

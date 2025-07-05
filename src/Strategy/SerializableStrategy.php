@@ -6,33 +6,14 @@ namespace Laminas\Hydrator\Strategy;
 
 use Laminas\Hydrator\Exception\InvalidArgumentException;
 use Laminas\Serializer\Adapter\AdapterInterface as SerializerAdapter;
-use Laminas\Serializer\Serializer as SerializerFactory;
-
-use function gettype;
-use function is_array;
-use function is_object;
-use function is_string;
-use function iterator_to_array;
-use function sprintf;
 
 class SerializableStrategy implements StrategyInterface
 {
-    /** @var string|SerializerAdapter */
-    protected $serializer;
+    protected SerializerAdapter $serializer;
 
-    /** @var mixed[] */
-    protected $serializerOptions = [];
-
-    /**
-     * @param string|SerializerAdapter $serializer
-     * @param null|mixed[] $serializerOptions
-     */
-    public function __construct($serializer, ?iterable $serializerOptions = null)
+    public function __construct(SerializerAdapter $serializer)
     {
         $this->setSerializer($serializer);
-        if ($serializerOptions) {
-            $this->setSerializerOptions($serializerOptions);
-        }
     }
 
     /**
@@ -60,20 +41,10 @@ class SerializableStrategy implements StrategyInterface
     /**
      * Set serializer
      *
-     * @param  mixed $serializer Should be a string or
-     *     SerializerAdapter instance
      * @throws InvalidArgumentException For invalid $serializer values.
      */
-    public function setSerializer(mixed $serializer): void
+    public function setSerializer(SerializerAdapter $serializer): void
     {
-        if (! is_string($serializer) && ! $serializer instanceof SerializerAdapter) {
-            throw new InvalidArgumentException(sprintf(
-                '%s expects either a string serializer name or Laminas\Serializer\Adapter\AdapterInterface instance; '
-                . 'received "%s"',
-                __METHOD__,
-                is_object($serializer) ? $serializer::class : gettype($serializer)
-            ));
-        }
         $this->serializer = $serializer;
     }
 
@@ -82,35 +53,6 @@ class SerializableStrategy implements StrategyInterface
      */
     public function getSerializer(): SerializerAdapter
     {
-        if (is_string($this->serializer)) {
-            $options          = $this->getSerializerOptions();
-            $this->serializer = SerializerFactory::factory($this->serializer, $options);
-        } elseif (null === $this->serializer) {
-            $this->serializer = SerializerFactory::getDefaultAdapter();
-        }
-
         return $this->serializer;
-    }
-
-    /**
-     * Set configuration options for instantiating a serializer adapter
-     *
-     * @param mixed[] $serializerOptions
-     */
-    public function setSerializerOptions(iterable $serializerOptions): void
-    {
-        $this->serializerOptions = is_array($serializerOptions)
-            ? $serializerOptions
-            : iterator_to_array($serializerOptions);
-    }
-
-    /**
-     * Get configuration options for instantiating a serializer adapter
-     *
-     * @return mixed[]
-     */
-    public function getSerializerOptions(): array
-    {
-        return $this->serializerOptions;
     }
 }
