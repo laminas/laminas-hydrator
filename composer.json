@@ -70,7 +70,7 @@
         ],
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
-        "dep-analysis": "composer-dependency-analyser --disable-ext-analysis",
+        "dep-analysis": "composer-dependency-analyser",
         "rector": "rector -n -vv",
         "rector:fix": "rector -vv",
         "static-analysis": "psalm --shepherd --stats",

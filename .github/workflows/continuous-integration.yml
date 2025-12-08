@@ -25,15 +25,3 @@ jobs:
           tools: composer
       - uses: ramsey/composer-install@v3
       - run: composer rector
-
-  dep-analyser:
-    runs-on: ubuntu-latest
-    name: Run Dependency analysis
-    steps:
-      - uses: actions/checkout@v4.2.2
-      - uses: shivammathur/setup-php@2.34.1
-        with:
-          php-version: ${{ env.default_php }}
-          tools: composer
-      - uses: ramsey/composer-install@v3
-      - run: composer dep-analysis
