@@ -15,7 +15,7 @@ use Laminas\Hydrator\HydratorInterface;
  * @template-extends HydratingIteratorIterator<TKey, TPrototype, TInputData, TIterator>
  * @final
  */
-class HydratingArrayIterator extends HydratingIteratorIterator
+final class HydratingArrayIterator extends HydratingIteratorIterator
 {
     /**
      * @param array<TKey, TInputData>             $data Data being used to hydrate the $prototype

@@ -8,10 +8,8 @@ trait HydratorAwareTrait
 {
     /**
      * Hydrator instance
-     *
-     * @var null|HydratorInterface
      */
-    protected $hydrator;
+    protected ?HydratorInterface $hydrator = null;
 
     /**
      * Set hydrator

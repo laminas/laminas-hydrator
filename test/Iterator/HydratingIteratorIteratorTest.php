@@ -39,6 +39,23 @@ final class HydratingIteratorIteratorTest extends TestCase
         $this->assertEquals(new ArrayObject($data[1]), $hydratingIterator->current());
     }
 
+    public function testEmptyIterator(): void
+    {
+        $data      = [];
+        $iterator  = new ArrayIterator($data);
+        $prototype = new ArrayObject();
+
+        $hydratingIterator = new HydratingIteratorIterator(
+            new ArraySerializableHydrator(),
+            $iterator,
+            $prototype
+        );
+
+        $hydratingIterator->rewind();
+
+        $this->assertNotInstanceOf(ArrayObject::class, $hydratingIterator->current());
+    }
+
     public function testUsingStringForObjectName(): void
     {
         $data = [

@@ -24,8 +24,7 @@ use function sprintf;
  */
 class HydratingIteratorIterator extends IteratorIterator implements HydratingIteratorInterface
 {
-    /** @var HydratorInterface */
-    protected $hydrator;
+    protected HydratorInterface $hydrator;
 
     /** @var TPrototype */
     protected $prototype;
@@ -46,7 +45,7 @@ class HydratingIteratorIterator extends IteratorIterator implements HydratingIte
      * @throws InvalidArgumentException If $prototype is a string, but refers to
      *     a non-existent class.
      */
-    public function setPrototype($prototype): void
+    public function setPrototype(string|object $prototype): void
     {
         if (is_object($prototype)) {
             $this->prototype = $prototype;
@@ -79,13 +78,13 @@ class HydratingIteratorIterator extends IteratorIterator implements HydratingIte
     public function current()
     {
         $currentValue = parent::current();
-
         if ($currentValue === null) {
             return null;
         }
 
         $object = clone $this->prototype;
         $this->hydrator->hydrate($currentValue, $object);
+
         return $object;
     }
 }

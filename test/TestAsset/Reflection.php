@@ -6,11 +6,9 @@ namespace LaminasTest\Hydrator\TestAsset;
 
 class Reflection
 {
-    /** @var string */
-    public $foo = '1';
+    public string $foo = '1';
 
-    /** @var string */
-    protected $fooBar = '2';
+    protected string $fooBar = '2';
 
     private string $fooBarBaz = '3';
 

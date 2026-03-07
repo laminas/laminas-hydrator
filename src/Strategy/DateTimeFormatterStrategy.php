@@ -8,8 +8,7 @@ use DateTime;
 use DateTimeInterface;
 use DateTimeZone;
 
-use function gettype;
-use function is_object;
+use function get_debug_type;
 use function is_string;
 use function preg_replace;
 use function sprintf;
@@ -24,7 +23,7 @@ final class DateTimeFormatterStrategy implements StrategyInterface
      * during hydration).  These include `!` at the beginning of the string and
      * `|` at the end.
      */
-    private string $extractionFormat;
+    private readonly string $extractionFormat;
 
     /**
      * @param bool $dateTimeFallback try to parse with DateTime when createFromFormat fails
@@ -34,12 +33,12 @@ final class DateTimeFormatterStrategy implements StrategyInterface
         /**
          * Format to use during hydration.
          */
-        private string $format = DateTime::RFC3339,
-        private ?DateTimeZone $timezone = null,
+        private readonly string $format = DateTime::RFC3339,
+        private readonly ?DateTimeZone $timezone = null,
         /**
          * Whether or not to allow hydration of values that do not follow the format exactly.
          */
-        private bool $dateTimeFallback = false
+        private readonly bool $dateTimeFallback = false
     ) {
         $extractionFormat = preg_replace('/(?<![\\\\])[+|!\*]/', '', $this->format);
         if (null === $extractionFormat) {
@@ -62,7 +61,7 @@ final class DateTimeFormatterStrategy implements StrategyInterface
      *     will be returned unmodified; otherwise, it will be extracted to a
      *     string.
      */
-    public function extract($value, ?object $object = null)
+    public function extract(mixed $value, ?object $object = null): mixed
     {
         if ($value instanceof DateTimeInterface) {
             return $value->format($this->extractionFormat);
@@ -81,7 +80,7 @@ final class DateTimeFormatterStrategy implements StrategyInterface
      * @throws Exception\InvalidArgumentException If $value is not null, not a
      *     string, nor a DateTimeInterface.
      */
-    public function hydrate($value, ?array $data = null)
+    public function hydrate(mixed $value, ?array $data = null): mixed
     {
         if ($value === '' || $value === null || $value instanceof DateTimeInterface) {
             return $value;
@@ -90,16 +89,16 @@ final class DateTimeFormatterStrategy implements StrategyInterface
         if (! is_string($value)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Unable to hydrate. Expected null, string, or DateTimeInterface; %s was given.',
-                is_object($value) ? $value::class : gettype($value)
+                get_debug_type($value)
             ));
         }
 
-        $hydrated = $this->timezone
+        $hydrated = $this->timezone instanceof DateTimeZone
             ? DateTime::createFromFormat($this->format, $value, $this->timezone)
             : DateTime::createFromFormat($this->format, $value);
 
         if ($hydrated === false && $this->dateTimeFallback) {
-            $hydrated = $this->timezone
+            $hydrated = $this->timezone instanceof DateTimeZone
                 ? new DateTime($value, $this->timezone)
                 : new DateTime($value);
         }

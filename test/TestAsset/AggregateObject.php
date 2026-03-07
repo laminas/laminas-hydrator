@@ -10,32 +10,21 @@ namespace LaminasTest\Hydrator\TestAsset;
  */
 class AggregateObject
 {
-    /** @var array */
-    public $arrayData = ['president' => 'Zaphod'];
+    public array $arrayData = ['president' => 'Zaphod'];
 
-    /** @var string */
-    public $maintainer = 'Marvin';
+    public string $maintainer = 'Marvin';
 
-    /**
-     * @return string
-     */
-    public function getMaintainer()
+    public function getMaintainer(): string
     {
         return $this->maintainer;
     }
 
-    /**
-     * @param string $maintainer
-     */
-    public function setMaintainer($maintainer): void
+    public function setMaintainer(string $maintainer): void
     {
         $this->maintainer = $maintainer;
     }
 
-    /**
-     * @return array
-     */
-    public function getArrayCopy()
+    public function getArrayCopy(): array
     {
         return $this->arrayData;
     }

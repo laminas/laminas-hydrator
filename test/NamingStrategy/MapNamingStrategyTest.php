@@ -26,14 +26,14 @@ final class MapNamingStrategyTest extends TestCase
         yield 'object'     => [(object) ['foo' => 'bar']];
     }
 
-    /** @psalm-return Generator<string, array{invalidKeyArray: array<array-key, string>}> */
+    /** @psalm-return Generator<string, array{array<array-key, string>}> */
     public static function invalidKeyArrays(): Generator
     {
         yield 'int' => [
-            'invalidKeyArray' => [1 => 'foo'],
+            [1 => 'foo'],
         ];
         yield 'emtpy-string' => [
-            'invalidKeyArray' => ['' => 'foo'],
+            ['' => 'foo'],
         ];
     }
 
@@ -84,43 +84,43 @@ final class MapNamingStrategyTest extends TestCase
     public function testExtractReturnsVerbatimWhenEmptyExtractionMapProvided(): void
     {
         $strategy = MapNamingStrategy::createFromExtractionMap([]);
-        self::assertEquals('some_stuff', $strategy->extract('some_stuff'));
+        $this->assertSame('some_stuff', $strategy->extract('some_stuff'));
     }
 
     public function testHydrateReturnsVerbatimWhenEmptyHydrationMapProvided(): void
     {
         $strategy = MapNamingStrategy::createFromHydrationMap([]);
-        self::assertEquals('some_stuff', $strategy->hydrate('some_stuff'));
+        $this->assertSame('some_stuff', $strategy->hydrate('some_stuff'));
     }
 
     public function testExtractUsesProvidedExtractionMap(): void
     {
         $strategy = MapNamingStrategy::createFromExtractionMap(['stuff3' => 'stuff4']);
-        self::assertEquals('stuff4', $strategy->extract('stuff3'));
+        $this->assertSame('stuff4', $strategy->extract('stuff3'));
     }
 
     public function testExtractUsesFlippedHydrationMapWhenOnlyHydrationMapProvided(): void
     {
         $strategy = MapNamingStrategy::createFromHydrationMap(['stuff3' => 'stuff4']);
-        self::assertEquals('stuff3', $strategy->extract('stuff4'));
+        $this->assertSame('stuff3', $strategy->extract('stuff4'));
     }
 
     public function testHydrateUsesProvidedHydrationMap(): void
     {
         $strategy = MapNamingStrategy::createFromHydrationMap(['stuff3' => 'stuff4']);
-        self::assertEquals('stuff4', $strategy->hydrate('stuff3'));
+        $this->assertSame('stuff4', $strategy->hydrate('stuff3'));
     }
 
     public function testHydrateUsesFlippedExtractionMapOnlyExtractionMapProvided(): void
     {
         $strategy = MapNamingStrategy::createFromExtractionMap(['foo' => 'bar']);
-        self::assertEquals('foo', $strategy->hydrate('bar'));
+        $this->assertSame('foo', $strategy->hydrate('bar'));
     }
 
     public function testHydrateAndExtractUseAsymmetricMapProvided(): void
     {
         $strategy = MapNamingStrategy::createFromAsymmetricMap(['foo' => 'bar'], ['bat' => 'baz']);
-        self::assertEquals('bar', $strategy->extract('foo'));
-        self::assertEquals('baz', $strategy->hydrate('bat'));
+        $this->assertSame('bar', $strategy->extract('foo'));
+        $this->assertSame('baz', $strategy->hydrate('bat'));
     }
 }

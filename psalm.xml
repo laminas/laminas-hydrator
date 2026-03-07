@@ -15,16 +15,9 @@
         <ignoreFiles>
             <directory name="test/TestAsset"/>
             <directory name="vendor"/>
-            <!-- can be removed once PHP8.0 support dropped -->
-            <directory name="test/Strategy/TestAsset"/>
         </ignoreFiles>
     </projectFiles>
     <issueHandlers>
-        <ClassMustBeFinal>
-            <errorLevel type="suppress">
-                <directory name="src" />
-            </errorLevel>
-        </ClassMustBeFinal>
         <MissingOverrideAttribute>
             <errorLevel type="suppress">
                 <directory name="src" />

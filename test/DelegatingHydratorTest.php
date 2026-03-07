@@ -15,17 +15,11 @@ use Psr\Container\ContainerInterface;
 #[CoversClass(DelegatingHydrator::class)]
 final class DelegatingHydratorTest extends TestCase
 {
-    /** @var DelegatingHydrator */
-    protected $hydrator;
+    private DelegatingHydrator $hydrator;
 
-    /**
-     * @var ContainerInterface|MockObject
-     * @psalm-var ContainerInterface&MockObject
-     */
-    protected $hydrators;
+    private ContainerInterface&MockObject $hydrators;
 
-    /** @var ArrayObject */
-    protected $object;
+    private ArrayObject $object;
 
     /**
      * {@inheritDoc}
@@ -48,7 +42,7 @@ final class DelegatingHydratorTest extends TestCase
             ->with(ArrayObject::class)
             ->willReturn($hydrator);
 
-        $this->assertEquals(['foo' => 'bar'], $this->hydrator->extract($this->object));
+        $this->assertSame(['foo' => 'bar'], $this->hydrator->extract($this->object));
     }
 
     public function testHydrate(): void

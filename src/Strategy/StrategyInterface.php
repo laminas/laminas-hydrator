@@ -13,7 +13,7 @@ interface StrategyInterface
      * @param  null|object $object (optional) The original object for context.
      * @return mixed       Returns the value that should be extracted.
      */
-    public function extract($value, ?object $object = null);
+    public function extract(mixed $value, ?object $object = null): mixed;
 
     /**
      * Converts the given value so that it can be hydrated by the hydrator.
@@ -22,5 +22,5 @@ interface StrategyInterface
      * @param  null|array $data The original data for context.
      * @return mixed      Returns the value that should be hydrated.
      */
-    public function hydrate($value, ?array $data);
+    public function hydrate(mixed $value, ?array $data = null): mixed;
 }

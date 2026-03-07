@@ -12,6 +12,7 @@ use Laminas\Hydrator\ObjectPropertyHydrator;
 use Laminas\Hydrator\ReflectionHydrator;
 use Laminas\Hydrator\Strategy\DefaultStrategy;
 use Laminas\Hydrator\Strategy\SerializableStrategy;
+use Laminas\Serializer\Adapter\PhpSerialize;
 use LaminasTest\Hydrator\TestAsset\ArraySerializable as ArraySerializableAsset;
 use LaminasTest\Hydrator\TestAsset\ClassMethodsCamelCase;
 use LaminasTest\Hydrator\TestAsset\ClassMethodsCamelCaseMissing;
@@ -32,23 +33,17 @@ use function strlen;
 
 final class HydratorTest extends TestCase
 {
-    /** @var ClassMethodsCamelCase */
-    protected $classMethodsCamelCase;
+    private ClassMethodsCamelCase $classMethodsCamelCase;
 
-    /** @var ClassMethodsTitleCase */
-    protected $classMethodsTitleCase;
+    private ClassMethodsTitleCase $classMethodsTitleCase;
 
-    /** @var ClassMethodsCamelCaseMissing */
-    protected $classMethodsCamelCaseMissing;
+    private ClassMethodsCamelCaseMissing $classMethodsCamelCaseMissing;
 
-    /** @var ClassMethodsUnderscore */
-    protected $classMethodsUnderscore;
+    private ClassMethodsUnderscore $classMethodsUnderscore;
 
-    /** @var ClassMethodsInvalidParameter */
-    protected $classMethodsInvalidParameter;
+    private ClassMethodsInvalidParameter $classMethodsInvalidParameter;
 
-    /** @var ReflectionAsset */
-    protected $reflection;
+    private ReflectionAsset $reflection;
 
     protected function setUp(): void
     {
@@ -63,61 +58,61 @@ final class HydratorTest extends TestCase
 
     public function testInitiateValues(): void
     {
-        self::assertSame('1', $this->classMethodsCamelCase->getFooBar());
-        self::assertSame('2', $this->classMethodsCamelCase->getFooBarBaz());
-        self::assertSame(true, $this->classMethodsCamelCase->getIsFoo());
-        self::assertSame(true, $this->classMethodsCamelCase->isBar());
-        self::assertSame(true, $this->classMethodsCamelCase->getHasFoo());
-        self::assertSame(true, $this->classMethodsCamelCase->hasBar());
+        $this->assertSame('1', $this->classMethodsCamelCase->getFooBar());
+        $this->assertSame('2', $this->classMethodsCamelCase->getFooBarBaz());
+        $this->assertTrue($this->classMethodsCamelCase->getIsFoo());
+        $this->assertTrue($this->classMethodsCamelCase->isBar());
+        $this->assertTrue($this->classMethodsCamelCase->getHasFoo());
+        $this->assertTrue($this->classMethodsCamelCase->hasBar());
 
-        self::assertSame('1', $this->classMethodsTitleCase->getFooBar());
-        self::assertSame('2', $this->classMethodsTitleCase->getFooBarBaz());
-        self::assertSame(true, $this->classMethodsTitleCase->getIsFoo());
-        self::assertSame(true, $this->classMethodsTitleCase->getIsBar());
-        self::assertSame(true, $this->classMethodsTitleCase->getHasFoo());
-        self::assertSame(true, $this->classMethodsTitleCase->getHasBar());
+        $this->assertSame('1', $this->classMethodsTitleCase->getFooBar());
+        $this->assertSame('2', $this->classMethodsTitleCase->getFooBarBaz());
+        $this->assertTrue($this->classMethodsTitleCase->getIsFoo());
+        $this->assertTrue($this->classMethodsTitleCase->getIsBar());
+        $this->assertTrue($this->classMethodsTitleCase->getHasFoo());
+        $this->assertTrue($this->classMethodsTitleCase->getHasBar());
 
-        self::assertSame('1', $this->classMethodsUnderscore->getFooBar());
-        self::assertSame('2', $this->classMethodsUnderscore->getFooBarBaz());
-        self::assertSame(true, $this->classMethodsUnderscore->getIsFoo());
-        self::assertSame(true, $this->classMethodsUnderscore->isBar());
-        self::assertSame(true, $this->classMethodsUnderscore->getHasFoo());
-        self::assertSame(true, $this->classMethodsUnderscore->hasBar());
+        $this->assertSame('1', $this->classMethodsUnderscore->getFooBar());
+        $this->assertSame('2', $this->classMethodsUnderscore->getFooBarBaz());
+        $this->assertTrue($this->classMethodsUnderscore->getIsFoo());
+        $this->assertTrue($this->classMethodsUnderscore->isBar());
+        $this->assertTrue($this->classMethodsUnderscore->getHasFoo());
+        $this->assertTrue($this->classMethodsUnderscore->hasBar());
     }
 
     public function testHydratorReflection(): void
     {
         $hydrator = new ReflectionHydrator();
         $datas    = $hydrator->extract($this->reflection);
-        self::assertArrayHaskey('foo', $datas);
-        self::assertSame('1', $datas['foo']);
-        self::assertArrayHaskey('fooBar', $datas);
-        self::assertSame('2', $datas['fooBar']);
-        self::assertArrayHaskey('fooBarBaz', $datas);
-        self::assertSame('3', $datas['fooBarBaz']);
+        $this->assertArrayHaskey('foo', $datas);
+        $this->assertSame('1', $datas['foo']);
+        $this->assertArrayHaskey('fooBar', $datas);
+        $this->assertSame('2', $datas['fooBar']);
+        $this->assertArrayHaskey('fooBarBaz', $datas);
+        $this->assertSame('3', $datas['fooBarBaz']);
 
         $test = $hydrator->hydrate(['foo' => 'foo', 'fooBar' => 'bar', 'fooBarBaz' => 'baz'], $this->reflection);
-        self::assertSame('foo', $test->foo);
-        self::assertSame('bar', $test->getFooBar());
-        self::assertSame('baz', $test->getFooBarBaz());
+        $this->assertSame('foo', $test->foo);
+        $this->assertSame('bar', $test->getFooBar());
+        $this->assertSame('baz', $test->getFooBarBaz());
     }
 
     public function testHydratorClassMethodsCamelCase(): void
     {
         $hydrator = new ClassMethodsHydrator(false);
         $datas    = $hydrator->extract($this->classMethodsCamelCase);
-        self::assertArrayHaskey('fooBar', $datas);
-        self::assertSame('1', $datas['fooBar']);
-        self::assertArrayHaskey('fooBarBaz', $datas);
-        self::assertArrayNotHasKey('foo_bar', $datas);
-        self::assertArrayHaskey('isFoo', $datas);
-        self::assertSame(true, $datas['isFoo']);
-        self::assertArrayHaskey('isBar', $datas);
-        self::assertSame(true, $datas['isBar']);
-        self::assertArrayHaskey('hasFoo', $datas);
-        self::assertSame(true, $datas['hasFoo']);
-        self::assertArrayHaskey('hasBar', $datas);
-        self::assertSame(true, $datas['hasBar']);
+        $this->assertArrayHaskey('fooBar', $datas);
+        $this->assertSame('1', $datas['fooBar']);
+        $this->assertArrayHaskey('fooBarBaz', $datas);
+        $this->assertArrayNotHasKey('foo_bar', $datas);
+        $this->assertArrayHaskey('isFoo', $datas);
+        $this->assertTrue($datas['isFoo']);
+        $this->assertArrayHaskey('isBar', $datas);
+        $this->assertTrue($datas['isBar']);
+        $this->assertArrayHaskey('hasFoo', $datas);
+        $this->assertTrue($datas['hasFoo']);
+        $this->assertArrayHaskey('hasBar', $datas);
+        $this->assertTrue($datas['hasBar']);
         $test = $hydrator->hydrate(
             [
                 'fooBar'    => 'foo',
@@ -129,31 +124,31 @@ final class HydratorTest extends TestCase
             ],
             $this->classMethodsCamelCase
         );
-        self::assertSame($this->classMethodsCamelCase, $test);
-        self::assertSame('foo', $test->getFooBar());
-        self::assertSame('bar', $test->getFooBarBaz());
-        self::assertSame(false, $test->getIsFoo());
-        self::assertSame(false, $test->isBar());
-        self::assertSame(false, $test->getHasFoo());
-        self::assertSame(false, $test->hasBar());
+        $this->assertSame($this->classMethodsCamelCase, $test);
+        $this->assertSame('foo', $test->getFooBar());
+        $this->assertSame('bar', $test->getFooBarBaz());
+        $this->assertFalse($test->getIsFoo());
+        $this->assertFalse($test->isBar());
+        $this->assertFalse($test->getHasFoo());
+        $this->assertFalse($test->hasBar());
     }
 
     public function testHydratorClassMethodsTitleCase(): void
     {
         $hydrator = new ClassMethodsHydrator(false);
         $datas    = $hydrator->extract($this->classMethodsTitleCase);
-        self::assertArrayHaskey('FooBar', $datas);
-        self::assertSame('1', $datas['FooBar']);
-        self::assertArrayHaskey('FooBarBaz', $datas);
-        self::assertArrayNotHasKey('foo_bar', $datas);
-        self::assertArrayHaskey('IsFoo', $datas);
-        self::assertSame(true, $datas['IsFoo']);
-        self::assertArrayHaskey('IsBar', $datas);
-        self::assertSame(true, $datas['IsBar']);
-        self::assertArrayHaskey('HasFoo', $datas);
-        self::assertSame(true, $datas['HasFoo']);
-        self::assertArrayHaskey('HasBar', $datas);
-        self::assertSame(true, $datas['HasBar']);
+        $this->assertArrayHaskey('FooBar', $datas);
+        $this->assertSame('1', $datas['FooBar']);
+        $this->assertArrayHaskey('FooBarBaz', $datas);
+        $this->assertArrayNotHasKey('foo_bar', $datas);
+        $this->assertArrayHaskey('IsFoo', $datas);
+        $this->assertTrue($datas['IsFoo']);
+        $this->assertArrayHaskey('IsBar', $datas);
+        $this->assertTrue($datas['IsBar']);
+        $this->assertArrayHaskey('HasFoo', $datas);
+        $this->assertTrue($datas['HasFoo']);
+        $this->assertArrayHaskey('HasBar', $datas);
+        $this->assertTrue($datas['HasBar']);
         $test = $hydrator->hydrate(
             [
                 'FooBar'    => 'foo',
@@ -165,35 +160,35 @@ final class HydratorTest extends TestCase
             ],
             $this->classMethodsTitleCase
         );
-        self::assertSame($this->classMethodsTitleCase, $test);
-        self::assertSame('foo', $test->getFooBar());
-        self::assertSame('bar', $test->getFooBarBaz());
-        self::assertSame(false, $test->getIsFoo());
-        self::assertSame(false, $test->getIsBar());
-        self::assertSame(false, $test->getHasFoo());
-        self::assertSame(false, $test->getHasBar());
+        $this->assertSame($this->classMethodsTitleCase, $test);
+        $this->assertSame('foo', $test->getFooBar());
+        $this->assertSame('bar', $test->getFooBarBaz());
+        $this->assertFalse($test->getIsFoo());
+        $this->assertFalse($test->getIsBar());
+        $this->assertFalse($test->getHasFoo());
+        $this->assertFalse($test->getHasBar());
     }
 
     public function testHydratorClassMethodsUnderscore(): void
     {
         $hydrator = new ClassMethodsHydrator(true);
         $datas    = $hydrator->extract($this->classMethodsUnderscore);
-        self::assertArrayHaskey('foo_bar', $datas);
-        self::assertSame('1', $datas['foo_bar']);
-        self::assertArrayHaskey('foo_bar_baz', $datas);
-        self::assertArrayNotHasKey('fooBar', $datas);
-        self::assertArrayHaskey('is_foo', $datas);
-        self::assertArrayNotHasKey('isFoo', $datas);
-        self::assertSame(true, $datas['is_foo']);
-        self::assertArrayHaskey('is_bar', $datas);
-        self::assertArrayNotHasKey('isBar', $datas);
-        self::assertSame(true, $datas['is_bar']);
-        self::assertArrayHaskey('has_foo', $datas);
-        self::assertArrayNotHasKey('hasFoo', $datas);
-        self::assertSame(true, $datas['has_foo']);
-        self::assertArrayHaskey('has_bar', $datas);
-        self::assertArrayNotHasKey('hasBar', $datas);
-        self::assertSame(true, $datas['has_bar']);
+        $this->assertArrayHaskey('foo_bar', $datas);
+        $this->assertSame('1', $datas['foo_bar']);
+        $this->assertArrayHaskey('foo_bar_baz', $datas);
+        $this->assertArrayNotHasKey('fooBar', $datas);
+        $this->assertArrayHaskey('is_foo', $datas);
+        $this->assertArrayNotHasKey('isFoo', $datas);
+        $this->assertTrue($datas['is_foo']);
+        $this->assertArrayHaskey('is_bar', $datas);
+        $this->assertArrayNotHasKey('isBar', $datas);
+        $this->assertTrue($datas['is_bar']);
+        $this->assertArrayHaskey('has_foo', $datas);
+        $this->assertArrayNotHasKey('hasFoo', $datas);
+        $this->assertTrue($datas['has_foo']);
+        $this->assertArrayHaskey('has_bar', $datas);
+        $this->assertArrayNotHasKey('hasBar', $datas);
+        $this->assertTrue($datas['has_bar']);
         $test = $hydrator->hydrate(
             [
                 'foo_bar'     => 'foo',
@@ -205,13 +200,13 @@ final class HydratorTest extends TestCase
             ],
             $this->classMethodsUnderscore
         );
-        self::assertSame($this->classMethodsUnderscore, $test);
-        self::assertSame('foo', $test->getFooBar());
-        self::assertSame('bar', $test->getFooBarBaz());
-        self::assertSame(false, $test->getIsFoo());
-        self::assertSame(false, $test->isBar());
-        self::assertSame(false, $test->getHasFoo());
-        self::assertSame(false, $test->hasBar());
+        $this->assertSame($this->classMethodsUnderscore, $test);
+        $this->assertSame('foo', $test->getFooBar());
+        $this->assertSame('bar', $test->getFooBarBaz());
+        $this->assertFalse($test->getIsFoo());
+        $this->assertFalse($test->isBar());
+        $this->assertFalse($test->getHasFoo());
+        $this->assertFalse($test->hasBar());
     }
 
     public function testHydratorClassMethodsUnderscoreWithUnderscoreUpperCasedHydrateDataKeys(): void
@@ -229,23 +224,23 @@ final class HydratorTest extends TestCase
             ],
             $this->classMethodsUnderscore
         );
-        self::assertSame($this->classMethodsUnderscore, $test);
-        self::assertSame('foo', $test->getFooBar());
-        self::assertSame('bar', $test->getFooBarBaz());
-        self::assertSame(false, $test->getIsFoo());
-        self::assertSame(false, $test->isBar());
-        self::assertSame(false, $test->getHasFoo());
-        self::assertSame(false, $test->hasBar());
+        $this->assertSame($this->classMethodsUnderscore, $test);
+        $this->assertSame('foo', $test->getFooBar());
+        $this->assertSame('bar', $test->getFooBarBaz());
+        $this->assertFalse($test->getIsFoo());
+        $this->assertFalse($test->isBar());
+        $this->assertFalse($test->getHasFoo());
+        $this->assertFalse($test->hasBar());
     }
 
     public function testHydratorClassMethodsOptions(): void
     {
         $hydrator = new ClassMethodsHydrator();
-        self::assertTrue($hydrator->getUnderscoreSeparatedKeys());
+        $this->assertTrue($hydrator->getUnderscoreSeparatedKeys());
         $hydrator->setOptions(['underscoreSeparatedKeys' => false]);
-        self::assertFalse($hydrator->getUnderscoreSeparatedKeys());
+        $this->assertFalse($hydrator->getUnderscoreSeparatedKeys());
         $hydrator->setUnderscoreSeparatedKeys(true);
-        self::assertTrue($hydrator->getUnderscoreSeparatedKeys());
+        $this->assertTrue($hydrator->getUnderscoreSeparatedKeys());
     }
 
     public function testHydratorClassMethodsIgnoresInvalidValues(): void
@@ -257,32 +252,32 @@ final class HydratorTest extends TestCase
             'invalid'     => 'value',
         ];
         $test     = $hydrator->hydrate($data, $this->classMethodsUnderscore);
-        self::assertSame($this->classMethodsUnderscore, $test);
+        $this->assertSame($this->classMethodsUnderscore, $test);
     }
 
     public function testHydratorClassMethodsDefaultBehaviorIsConvertUnderscoreToCamelCase(): void
     {
         $hydrator = new ClassMethodsHydrator();
         $datas    = $hydrator->extract($this->classMethodsUnderscore);
-        self::assertArrayHaskey('foo_bar', $datas);
-        self::assertSame('1', $datas['foo_bar']);
-        self::assertArrayHaskey('foo_bar_baz', $datas);
-        self::assertArrayNotHaskey('fooBar', $datas);
+        $this->assertArrayHaskey('foo_bar', $datas);
+        $this->assertSame('1', $datas['foo_bar']);
+        $this->assertArrayHaskey('foo_bar_baz', $datas);
+        $this->assertArrayNotHaskey('fooBar', $datas);
         $test = $hydrator->hydrate(['foo_bar' => 'foo', 'foo_bar_baz' => 'bar'], $this->classMethodsUnderscore);
-        self::assertSame($this->classMethodsUnderscore, $test);
-        self::assertSame('foo', $test->getFooBar());
-        self::assertSame('bar', $test->getFooBarBaz());
+        $this->assertSame($this->classMethodsUnderscore, $test);
+        $this->assertSame('foo', $test->getFooBar());
+        $this->assertSame('bar', $test->getFooBarBaz());
     }
 
     public function testRetrieveWildStrategyAndOther(): void
     {
         $hydrator = new ClassMethodsHydrator();
         $hydrator->addStrategy('default', new DefaultStrategy());
-        $hydrator->addStrategy('*', new SerializableStrategy('phpserialize'));
+        $hydrator->addStrategy('*', new SerializableStrategy(new PhpSerialize()));
         $default = $hydrator->getStrategy('default');
-        self::assertInstanceOf(DefaultStrategy::class, $default);
+        $this->assertInstanceOf(DefaultStrategy::class, $default);
         $serializable = $hydrator->getStrategy('*');
-        self::assertInstanceOf(SerializableStrategy::class, $serializable);
+        $this->assertInstanceOf(SerializableStrategy::class, $serializable);
     }
 
     public function testUseWildStrategyByDefault(): void
@@ -290,25 +285,25 @@ final class HydratorTest extends TestCase
         $hydrator = new ClassMethodsHydrator();
         $datas    = $hydrator->extract($this->classMethodsUnderscore);
 
-        self::assertSame('1', $datas['foo_bar']);
+        $this->assertSame('1', $datas['foo_bar']);
 
-        $hydrator->addStrategy('*', new SerializableStrategy('phpserialize'));
+        $hydrator->addStrategy('*', new SerializableStrategy(new PhpSerialize()));
         $datas = $hydrator->extract($this->classMethodsUnderscore);
 
-        self::assertSame('s:1:"1";', $datas['foo_bar']);
+        $this->assertSame('s:1:"1";', $datas['foo_bar']);
     }
 
     public function testUseWildStrategyAndOther(): void
     {
         $hydrator = new ClassMethodsHydrator();
         $datas    = $hydrator->extract($this->classMethodsUnderscore);
-        self::assertSame('1', $datas['foo_bar']);
+        $this->assertSame('1', $datas['foo_bar']);
 
         $hydrator->addStrategy('foo_bar', new DefaultStrategy());
-        $hydrator->addStrategy('*', new SerializableStrategy('phpserialize'));
+        $hydrator->addStrategy('*', new SerializableStrategy(new PhpSerialize()));
         $datas = $hydrator->extract($this->classMethodsUnderscore);
-        self::assertSame('1', $datas['foo_bar']);
-        self::assertSame('s:1:"2";', $datas['foo_bar_baz']);
+        $this->assertSame('1', $datas['foo_bar']);
+        $this->assertSame('s:1:"2";', $datas['foo_bar_baz']);
     }
 
     public function testHydratorClassMethodsCamelCaseWithSetterMissing(): void
@@ -316,14 +311,14 @@ final class HydratorTest extends TestCase
         $hydrator = new ClassMethodsHydrator(false);
 
         $datas = $hydrator->extract($this->classMethodsCamelCaseMissing);
-        self::assertArrayHaskey('fooBar', $datas);
-        self::assertSame('1', $datas['fooBar']);
-        self::assertArrayHaskey('fooBarBaz', $datas);
-        self::assertArrayNotHaskey('foo_bar', $datas);
+        $this->assertArrayHaskey('fooBar', $datas);
+        $this->assertSame('1', $datas['fooBar']);
+        $this->assertArrayHaskey('fooBarBaz', $datas);
+        $this->assertArrayNotHaskey('foo_bar', $datas);
         $test = $hydrator->hydrate(['fooBar' => 'foo', 'fooBarBaz' => 1], $this->classMethodsCamelCaseMissing);
-        self::assertSame($this->classMethodsCamelCaseMissing, $test);
-        self::assertSame('foo', $test->getFooBar());
-        self::assertSame('2', $test->getFooBarBaz());
+        $this->assertSame($this->classMethodsCamelCaseMissing, $test);
+        $this->assertSame('foo', $test->getFooBar());
+        $this->assertSame('2', $test->getFooBarBaz());
     }
 
     public function testHydratorClassMethodsManipulateFilter(): void
@@ -331,23 +326,23 @@ final class HydratorTest extends TestCase
         $hydrator = new ClassMethodsHydrator(false);
         $datas    = $hydrator->extract($this->classMethodsCamelCase);
 
-        self::assertArrayHaskey('fooBar', $datas);
-        self::assertSame('1', $datas['fooBar']);
-        self::assertArrayHaskey('fooBarBaz', $datas);
-        self::assertArrayNotHasKey('foo_bar', $datas);
-        self::assertArrayHaskey('isFoo', $datas);
-        self::assertSame(true, $datas['isFoo']);
-        self::assertArrayHaskey('isBar', $datas);
-        self::assertSame(true, $datas['isBar']);
-        self::assertArrayHaskey('hasFoo', $datas);
-        self::assertSame(true, $datas['hasFoo']);
-        self::assertArrayHaskey('hasBar', $datas);
-        self::assertSame(true, $datas['hasBar']);
+        $this->assertArrayHaskey('fooBar', $datas);
+        $this->assertSame('1', $datas['fooBar']);
+        $this->assertArrayHaskey('fooBarBaz', $datas);
+        $this->assertArrayNotHasKey('foo_bar', $datas);
+        $this->assertArrayHaskey('isFoo', $datas);
+        $this->assertTrue($datas['isFoo']);
+        $this->assertArrayHaskey('isBar', $datas);
+        $this->assertTrue($datas['isBar']);
+        $this->assertArrayHaskey('hasFoo', $datas);
+        $this->assertTrue($datas['hasFoo']);
+        $this->assertArrayHaskey('hasBar', $datas);
+        $this->assertTrue($datas['hasBar']);
 
         $hydrator->removeFilter('has');
         $datas = $hydrator->extract($this->classMethodsCamelCase);
-        self::assertArrayHaskey('hasFoo', $datas); //method is getHasFoo
-        self::assertArrayNotHaskey('hasBar', $datas); //method is hasBar
+        $this->assertArrayHaskey('hasFoo', $datas); //method is getHasFoo
+        $this->assertArrayNotHaskey('hasBar', $datas); //method is hasBar
     }
 
     public function testHydratorClassMethodsWithCustomFilter(): void
@@ -358,18 +353,13 @@ final class HydratorTest extends TestCase
             'exclude',
             static function ($property): bool {
                 $method = explode('::', $property)[1];
-
-                if ($method === 'getHasFoo') {
-                    return false;
-                }
-
-                return true;
+                return $method !== 'getHasFoo';
             },
             FilterComposite::CONDITION_AND
         );
 
         $datas = $hydrator->extract($this->classMethodsCamelCase);
-        self::assertArrayNotHaskey('hasFoo', $datas);
+        $this->assertArrayNotHaskey('hasFoo', $datas);
     }
 
     #[DataProvider('filterProvider')]
@@ -377,59 +367,41 @@ final class HydratorTest extends TestCase
         AbstractHydrator $hydrator,
         object $serializable
     ): void {
-        self::assertSame(
-            [
-                'foo'   => 'bar',
-                'bar'   => 'foo',
-                'blubb' => 'baz',
-                'quo'   => 'blubb',
-            ],
-            $hydrator->extract($serializable)
+        $this->assertSame([
+            'foo'   => 'bar',
+            'bar'   => 'foo',
+            'blubb' => 'baz',
+            'quo'   => 'blubb',
+        ], $hydrator->extract($serializable));
+
+        $hydrator->addFilter('foo', static fn($property): bool => $property !== 'foo');
+
+        $this->assertSame([
+            'bar'   => 'foo',
+            'blubb' => 'baz',
+            'quo'   => 'blubb',
+        ], $hydrator->extract($serializable));
+
+        $hydrator->addFilter(
+            'len',
+            static fn($property): bool => strlen($property) === 3,
+            FilterComposite::CONDITION_AND
         );
 
-        $hydrator->addFilter('foo', static function ($property): bool {
-            if ($property === 'foo') {
-                return false;
-            }
-            return true;
-        });
-
-        self::assertSame(
-            [
-                'bar'   => 'foo',
-                'blubb' => 'baz',
-                'quo'   => 'blubb',
-            ],
-            $hydrator->extract($serializable)
-        );
-
-        $hydrator->addFilter('len', static function ($property): bool {
-            if (strlen($property) !== 3) {
-                return false;
-            }
-            return true;
-        }, FilterComposite::CONDITION_AND);
-
-        self::assertSame(
-            [
-                'bar' => 'foo',
-                'quo' => 'blubb',
-            ],
-            $hydrator->extract($serializable)
-        );
+        $this->assertSame([
+            'bar' => 'foo',
+            'quo' => 'blubb',
+        ], $hydrator->extract($serializable));
 
         $hydrator->removeFilter('len');
         $hydrator->removeFilter('foo');
 
-        self::assertSame(
-            [
-                'foo'   => 'bar',
-                'bar'   => 'foo',
-                'blubb' => 'baz',
-                'quo'   => 'blubb',
-            ],
-            $hydrator->extract($serializable)
-        );
+        $this->assertSame([
+            'foo'   => 'bar',
+            'bar'   => 'foo',
+            'blubb' => 'baz',
+            'quo'   => 'blubb',
+        ], $hydrator->extract($serializable));
     }
 
     /**
@@ -449,9 +421,9 @@ final class HydratorTest extends TestCase
         $hydrator = new ClassMethodsHydrator(false);
         $datas    = $hydrator->extract($this->classMethodsInvalidParameter);
 
-        self::assertTrue($datas['hasBar']);
-        self::assertSame('Bar', $datas['foo']);
-        self::assertFalse($datas['isBla']);
+        $this->assertTrue($datas['hasBar']);
+        $this->assertSame('Bar', $datas['foo']);
+        $this->assertFalse($datas['isBla']);
     }
 
     public function testObjectBasedFilters(): void
@@ -459,9 +431,9 @@ final class HydratorTest extends TestCase
         $hydrator = new ClassMethodsHydrator(false);
         $foo      = new ClassMethodsFilterProviderInterface();
         $data     = $hydrator->extract($foo);
-        self::assertArrayNotHasKey('filter', $data);
-        self::assertSame('bar', $data['foo']);
-        self::assertSame('foo', $data['bar']);
+        $this->assertArrayNotHasKey('filter', $data);
+        $this->assertSame('bar', $data['foo']);
+        $this->assertSame('foo', $data['bar']);
     }
 
     public function testHydratorClassMethodsWithProtectedSetter(): void
@@ -471,7 +443,7 @@ final class HydratorTest extends TestCase
         $hydrator->hydrate(['foo' => 'bar', 'bar' => 'BAR'], $object);
         $data = $hydrator->extract($object);
 
-        self::assertSame('BAR', $data['bar']);
+        $this->assertSame('BAR', $data['bar']);
     }
 
     public function testHydratorClassMethodsWithMagicMethodSetter(): void
@@ -481,7 +453,7 @@ final class HydratorTest extends TestCase
         $hydrator->hydrate(['foo' => 'bar'], $object);
         $data = $hydrator->extract($object);
 
-        self::assertSame('bar', $data['foo']);
+        $this->assertSame('bar', $data['foo']);
     }
 
     public function testHydratorClassMethodsWithMagicMethodSetterAndMethodExistsCheck(): void
@@ -491,6 +463,6 @@ final class HydratorTest extends TestCase
         $hydrator->hydrate(['foo' => 'bar'], $object);
         $data = $hydrator->extract($object);
 
-        self::assertNull($data['foo']);
+        $this->assertNull($data['foo']);
     }
 }

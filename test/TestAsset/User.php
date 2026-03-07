@@ -8,10 +8,7 @@ final class User
 {
     private ?string $name = null;
 
-    /**
-     * @return string
-     */
-    public function name()
+    public function name(): ?string
     {
         return $this->name;
     }

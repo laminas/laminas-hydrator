@@ -8,15 +8,13 @@ use Laminas\ServiceManager\ServiceManager;
 
 use function class_exists;
 
-/**
- * @final
- */
-class ConfigProvider
+/** @psalm-import-type ServiceManagerConfiguration from ServiceManager */
+final class ConfigProvider
 {
     /**
      * Return configuration for this component.
      *
-     * @return mixed[]
+     * @return array{dependencies: ServiceManagerConfiguration}
      */
     public function __invoke(): array
     {
@@ -32,7 +30,7 @@ class ConfigProvider
      * to the `HydratorManager` service; otherwise, it aliases the
      * StandaloneHydratorPluginManager.
      *
-     * @return string[][]
+     * @return ServiceManagerConfiguration
      */
     public function getDependencyConfig(): array
     {
@@ -43,10 +41,6 @@ class ConfigProvider
         return [
             'aliases'   => [
                 'HydratorManager' => $hydratorManagerTarget,
-
-                // Legacy Zend Framework aliases
-                'Zend\Hydrator\HydratorPluginManager'           => HydratorPluginManager::class,
-                'Zend\Hydrator\StandaloneHydratorPluginManager' => StandaloneHydratorPluginManager::class,
             ],
             'factories' => [
                 HydratorPluginManager::class           => HydratorPluginManagerFactory::class,

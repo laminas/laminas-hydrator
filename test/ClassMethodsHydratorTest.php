@@ -19,8 +19,7 @@ final class ClassMethodsHydratorTest extends TestCase
 {
     use HydratorTestTrait;
 
-    /** @var ClassMethodsHydrator */
-    protected $hydrator;
+    protected ClassMethodsHydrator $hydrator;
 
     /**
      * {@inheritDoc}
@@ -88,7 +87,7 @@ final class ClassMethodsHydratorTest extends TestCase
         ]);
         $this->hydrator->setOptions($options);
 
-        $this->assertSame(false, $this->hydrator->getUnderscoreSeparatedKeys());
+        $this->assertFalse($this->hydrator->getUnderscoreSeparatedKeys());
     }
 
     /**
@@ -116,7 +115,7 @@ final class ClassMethodsHydratorTest extends TestCase
         $data = $this->hydrator->extract(
             new TestAsset\ClassWithoutAnyMethod()
         );
-        self::assertSame([], $data);
+        $this->assertSame([], $data);
     }
 
     public function testCanExtractFromAnonymousClassMethods(): void

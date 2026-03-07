@@ -16,25 +16,15 @@ final class HydratorPluginManagerCompatibilityTest extends TestCase
 {
     use CommonPluginManagerTrait;
 
-    /** @return HydratorPluginManager */
-    protected static function getPluginManager()
+    protected static function getPluginManager(array $config = []): HydratorPluginManager
     {
         return new HydratorPluginManager(new ServiceManager());
     }
 
     /**
-     * @return void
-     */
-    protected function getV2InvalidPluginException()
-    {
-        // no-op
-    }
-
-    /**
-     * @return string
      * @psalm-return class-string
      */
-    protected function getInstanceOf()
+    protected function getInstanceOf(): string
     {
         return HydratorInterface::class;
     }

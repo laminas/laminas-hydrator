@@ -13,9 +13,8 @@ use Laminas\EventManager\Event;
  * @template T of object
  * @template TTarget of object
  * @extends Event<TTarget, array<empty, empty>>
- * @final
  */
-class HydrateEvent extends Event
+final class HydrateEvent extends Event
 {
     public const EVENT_HYDRATE = 'hydrate';
 
@@ -29,7 +28,7 @@ class HydrateEvent extends Event
      * @psalm-param TTarget $target
      * @psalm-param T $hydratedObject
      */
-    public function __construct(object $target, protected object $hydratedObject, protected array $hydrationData)
+    public function __construct(object $target, private object $hydratedObject, private array $hydrationData)
     {
         parent::__construct(self::EVENT_HYDRATE, $target, []);
     }

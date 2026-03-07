@@ -6,10 +6,7 @@ namespace Laminas\Hydrator;
 
 use Psr\Container\ContainerInterface;
 
-/**
- * @final
- */
-class DelegatingHydratorFactory
+final class DelegatingHydratorFactory
 {
     /**
      * Creates DelegatingHydrator
@@ -33,10 +30,6 @@ class DelegatingHydratorFactory
         // As typically registered with v3 (FQCN)
         if ($container->has(HydratorPluginManager::class)) {
             return $container->get(HydratorPluginManager::class);
-        }
-
-        if ($container->has('Zend\Hydrator\HydratorPluginManager')) {
-            return $container->get('Zend\Hydrator\HydratorPluginManager');
         }
 
         // As registered by laminas-mvc

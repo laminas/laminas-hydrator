@@ -21,25 +21,25 @@ final class DateTimeFormatterStrategyTest extends TestCase
     public function testHydrate(): void
     {
         $strategy = new DateTimeFormatterStrategy('Y-m-d');
-        self::assertEquals('2014-04-26', $strategy->hydrate('2014-04-26')->format('Y-m-d'));
+        $this->assertEquals('2014-04-26', $strategy->hydrate('2014-04-26')->format('Y-m-d'));
 
         $strategy = new DateTimeFormatterStrategy('Y-m-d', new DateTimeZone('Asia/Kathmandu'));
 
         $date = $strategy->hydrate('2014-04-26');
-        self::assertEquals('Asia/Kathmandu', $date->getTimezone()->getName());
+        $this->assertEquals('Asia/Kathmandu', $date->getTimezone()->getName());
     }
 
     public function testExtract(): void
     {
         $strategy = new DateTimeFormatterStrategy('d/m/Y');
-        self::assertEquals('26/04/2014', $strategy->extract(new DateTime('2014-04-26')));
+        $this->assertEquals('26/04/2014', $strategy->extract(new DateTime('2014-04-26')));
     }
 
     public function testGetNullWithInvalidDateOnHydration(): void
     {
         $strategy = new DateTimeFormatterStrategy('Y-m-d');
-        self::assertEquals(null, $strategy->hydrate(null));
-        self::assertEquals(null, $strategy->hydrate(''));
+        $this->assertEquals(null, $strategy->hydrate(null));
+        $this->assertEquals(null, $strategy->hydrate(''));
     }
 
     public function testCanExtractIfNotDateTime(): void
@@ -47,33 +47,29 @@ final class DateTimeFormatterStrategyTest extends TestCase
         $strategy = new DateTimeFormatterStrategy();
         $date     = $strategy->extract(new stdClass());
 
-        self::assertInstanceOf(stdClass::class, $date);
+        $this->assertInstanceOf(stdClass::class, $date);
     }
 
     public function testCanHydrateWithInvalidDateTime(): void
     {
         $strategy = new DateTimeFormatterStrategy('d/m/Y');
-        self::assertSame('foo bar baz', $strategy->hydrate('foo bar baz'));
+        $this->assertSame('foo bar baz', $strategy->hydrate('foo bar baz'));
     }
 
     public function testCanExtractAnyDateTimeInterface(): void
     {
-        $dateMock = $this
-            ->getMockBuilder(DateTime::class)
-            ->getMock();
+        $dateMock = $this->createMock(DateTime::class);
 
         $format = 'Y-m-d';
         $dateMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('format')
             ->with($format);
 
-        $dateImmutableMock = $this
-            ->getMockBuilder(DateTimeImmutable::class)
-            ->getMock();
+        $dateImmutableMock = $this->createMock(DateTimeImmutable::class);
 
         $dateImmutableMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('format')
             ->with($format);
 
@@ -83,18 +79,14 @@ final class DateTimeFormatterStrategyTest extends TestCase
         $strategy->extract($dateImmutableMock);
     }
 
-    /**
-     * @param string $format
-     * @param string $expectedValue
-     */
     #[DataProvider('formatsWithSpecialCharactersProvider')]
-    public function testAcceptsCreateFromFormatSpecialCharacters($format, $expectedValue): void
+    public function testAcceptsCreateFromFormatSpecialCharacters(string $format, string $expectedValue): void
     {
         $strategy = new DateTimeFormatterStrategy($format);
         $hydrated = $strategy->hydrate($expectedValue);
 
-        self::assertInstanceOf(DateTime::class, $hydrated);
-        self::assertEquals($expectedValue, $hydrated->format('Y-m-d'));
+        $this->assertInstanceOf(DateTime::class, $hydrated);
+        $this->assertSame($expectedValue, $hydrated->format('Y-m-d'));
     }
 
     #[DataProvider('formatsWithSpecialCharactersProvider')]
@@ -104,7 +96,7 @@ final class DateTimeFormatterStrategyTest extends TestCase
         $strategy  = new DateTimeFormatterStrategy($format);
         $extracted = $strategy->extract($date);
 
-        self::assertEquals($expectedValue, $extracted);
+        $this->assertEquals($expectedValue, $extracted);
     }
 
     public function testCanExtractWithCreateFromFormatEscapedSpecialCharacters(): void
@@ -112,7 +104,7 @@ final class DateTimeFormatterStrategyTest extends TestCase
         $date      = DateTime::createFromFormat('Y-m-d', '2018-02-05');
         $strategy  = new DateTimeFormatterStrategy('Y-m-d\\+');
         $extracted = $strategy->extract($date);
-        self::assertEquals('2018-02-05+', $extracted);
+        $this->assertEquals('2018-02-05+', $extracted);
     }
 
     /**
@@ -133,14 +125,14 @@ final class DateTimeFormatterStrategyTest extends TestCase
         $strategy = new DateTimeFormatterStrategy('Y-m-d', null, true);
         $date     = $strategy->hydrate('2018-09-06T12:10:30');
 
-        self::assertInstanceOf(DateTimeInterface::class, $date);
-        self::assertSame('2018-09-06', $date->format('Y-m-d'));
+        $this->assertInstanceOf(DateTimeInterface::class, $date);
+        $this->assertSame('2018-09-06', $date->format('Y-m-d'));
 
         $strategy = new DateTimeFormatterStrategy('Y-m-d', new DateTimeZone('Europe/Prague'), true);
         $date     = $strategy->hydrate('2018-09-06T12:10:30');
 
-        self::assertInstanceOf(DateTimeInterface::class, $date);
-        self::assertSame('Europe/Prague', $date->getTimezone()->getName());
+        $this->assertInstanceOf(DateTimeInterface::class, $date);
+        $this->assertSame('Europe/Prague', $date->getTimezone()->getName());
     }
 
     /** @return array<string, list<mixed>> */
@@ -181,6 +173,6 @@ final class DateTimeFormatterStrategyTest extends TestCase
     {
         $strategy = new DateTimeFormatterStrategy('Y-m-d');
         $hydrated = $strategy->hydrate($value);
-        self::assertSame($value, $hydrated);
+        $this->assertSame($value, $hydrated);
     }
 }

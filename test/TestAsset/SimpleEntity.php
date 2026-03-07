@@ -8,32 +8,22 @@ use function array_key_exists;
 
 class SimpleEntity
 {
-    /** @var mixed */
-    public $value;
+    public mixed $value;
 
-    /**
-     * @param  mixed $value
-     * @return void
-     */
-    public function setValue($value)
+    public function setValue(mixed $value): void
     {
         $this->value = $value;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getValue()
+    public function getValue(): mixed
     {
-        return $this->value;
+        return $this->value ?? null;
     }
 
     /**
      * Exchange internal values from provided array
-     *
-     * @return void
      */
-    public function exchangeArray(array $array)
+    public function exchangeArray(array $array): void
     {
         if (array_key_exists('value', $array)) {
             $this->setValue($array['value']);
@@ -42,10 +32,8 @@ class SimpleEntity
 
     /**
      * Return an array representation of the object
-     *
-     * @return array
      */
-    public function getArrayCopy()
+    public function getArrayCopy(): array
     {
         return ['value' => $this->getValue()];
     }

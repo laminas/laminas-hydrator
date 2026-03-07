@@ -4,73 +4,31 @@ declare(strict_types=1);
 
 namespace Laminas\Hydrator;
 
-use Laminas\ServiceManager\Config;
 use Laminas\ServiceManager\ServiceManager;
 use Psr\Container\ContainerInterface;
 
-use function class_exists;
+use function assert;
 use function is_array;
-use function sprintf;
 
 /**
+ * @internal
+ *
  * @psalm-import-type ServiceManagerConfiguration from ServiceManager
- * @final
  */
-class HydratorPluginManagerFactory
+final class HydratorPluginManagerFactory
 {
-    /**
-     * Create a HydratorPluginManager instance.
-     *
-     * If the `config` service is available, and the top-level key `hydrators`
-     * exists and is an array, that value will be used to configure the plugin
-     * manager. In such cases, the array should follow standard container
-     * configuration.
-     *
-     * @see https://docs.mezzio.dev/mezzio/v3/features/container/config/
-     *
-     * @param ServiceManagerConfiguration|null $options
-     *
-     * @throws Exception\DomainException If laminas-servicemanager is not installed.
-     */
-    public function __invoke(ContainerInterface $container, string $name, ?array $options = []): HydratorPluginManager
+    public function __invoke(ContainerInterface $container): HydratorPluginManager
     {
-        if (! class_exists(ServiceManager::class)) {
-            throw new Exception\DomainException(sprintf(
-                '%s requires the laminas/laminas-servicemanager package, which is not installed.'
-                . ' If you do not want to install that package, you can use the %s instead;'
-                . ' however, that version does not have support for the "hydrators"'
-                . ' configuration outside of aliases, invokables, and factories. If you'
-                . ' need those features, please install laminas/laminas-servicemanager.',
-                HydratorPluginManager::class,
-                StandaloneHydratorPluginManager::class
-            ));
-        }
+        $config = $container->has('config')
+            ? $container->get('config')
+            : [];
+        assert(is_array($config));
 
-        $pluginManager = new HydratorPluginManager($container, $options ?? []);
+        /** @psalm-var ServiceManagerConfiguration $hydrators */
+        $hydrators = isset($config['hydrators']) && is_array($config['hydrators'])
+            ? $config['hydrators']
+            : [];
 
-        // If this is in a laminas-mvc application, the ServiceListener will inject
-        // merged configuration during bootstrap.
-        if ($container->has('ServiceListener')) {
-            return $pluginManager;
-        }
-
-        // If we do not have a config service, nothing more to do
-        if (! $container->has('config')) {
-            return $pluginManager;
-        }
-
-        $config = $container->get('config');
-
-        // If we do not have hydrators configuration, nothing more to do
-        if (! isset($config['hydrators']) || ! is_array($config['hydrators'])) {
-            return $pluginManager;
-        }
-
-        /** @psalm-var ServiceManagerConfiguration $config['hydrators'] */
-
-        // Wire service configuration for hydrators
-        (new Config($config['hydrators']))->configureServiceManager($pluginManager);
-
-        return $pluginManager;
+        return new HydratorPluginManager($container, $hydrators);
     }
 }

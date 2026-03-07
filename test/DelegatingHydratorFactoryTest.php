@@ -7,6 +7,7 @@ namespace LaminasTest\Hydrator;
 use Laminas\Hydrator\DelegatingHydrator;
 use Laminas\Hydrator\DelegatingHydratorFactory;
 use Laminas\Hydrator\HydratorPluginManager;
+use Laminas\Hydrator\HydratorPluginManagerInterface;
 use LaminasTest\Hydrator\TestAsset\InMemoryContainer;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
@@ -18,7 +19,7 @@ final class DelegatingHydratorFactoryTest extends TestCase
 {
     public function testFactoryUsesContainerToSeedDelegatingHydratorWhenItIsAHydratorPluginManager(): void
     {
-        $hydrators = $this->createMock(HydratorPluginManager::class);
+        $hydrators = $this->createMock(HydratorPluginManagerInterface::class);
         $factory   = new DelegatingHydratorFactory();
 
         $hydrator = $factory($hydrators);
@@ -29,7 +30,7 @@ final class DelegatingHydratorFactoryTest extends TestCase
     public function testFactoryUsesHydratorPluginManagerServiceFromContainerToSeedDelegatingHydratorWhenAvailable(): void
     {
         // phpcs:enable
-        $hydrators = $this->createMock(HydratorPluginManager::class);
+        $hydrators = $this->createMock(HydratorPluginManagerInterface::class);
         $container = $this->createMock(ContainerInterface::class);
         $container->expects($this->once())->method('has')->with(HydratorPluginManager::class)->willReturn(true);
         $container->expects($this->once())->method('get')->with(HydratorPluginManager::class)->willReturn($hydrators);
@@ -42,7 +43,7 @@ final class DelegatingHydratorFactoryTest extends TestCase
 
     public function testFactoryUsesHydratorManagerServiceFromContainerToSeedDelegatingHydratorWhenAvailable(): void
     {
-        $hydrators = $this->createMock(HydratorPluginManager::class);
+        $hydrators = $this->createMock(HydratorPluginManagerInterface::class);
         $container = new InMemoryContainer();
         $container->set('HydratorManager', $hydrators);
         $factory = new DelegatingHydratorFactory();

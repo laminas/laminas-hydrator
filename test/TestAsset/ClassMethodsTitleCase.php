@@ -6,79 +6,79 @@ namespace LaminasTest\Hydrator\TestAsset;
 
 class ClassMethodsTitleCase
 {
-    protected $FooBar = '1';
+    protected string $FooBar = '1';
 
-    protected $FooBarBaz = '2';
+    protected string $FooBarBaz = '2';
 
-    protected $IsFoo = true;
+    protected bool $IsFoo = true;
 
-    protected $IsBar = true;
+    protected bool $IsBar = true;
 
-    protected $HasFoo = true;
+    protected bool $HasFoo = true;
 
-    protected $HasBar = true;
+    protected bool $HasBar = true;
 
-    public function getFooBar()
+    public function getFooBar(): string
     {
         return $this->FooBar;
     }
 
-    public function setFooBar($value): self
+    public function setFooBar(string $value): self
     {
         $this->FooBar = $value;
         return $this;
     }
 
-    public function getFooBarBaz()
+    public function getFooBarBaz(): string
     {
         return $this->FooBarBaz;
     }
 
-    public function setFooBarBaz($value): self
+    public function setFooBarBaz(string $value): self
     {
         $this->FooBarBaz = $value;
         return $this;
     }
 
-    public function getIsFoo()
+    public function getIsFoo(): bool
     {
         return $this->IsFoo;
     }
 
-    public function setIsFoo($IsFoo): self
+    public function setIsFoo(bool $IsFoo): self
     {
         $this->IsFoo = $IsFoo;
         return $this;
     }
 
-    public function getIsBar()
+    public function getIsBar(): bool
     {
         return $this->IsBar;
     }
 
-    public function setIsBar($IsBar): self
+    public function setIsBar(bool $IsBar): self
     {
         $this->IsBar = $IsBar;
         return $this;
     }
 
-    public function getHasFoo()
+    public function getHasFoo(): bool
     {
         return $this->HasFoo;
     }
 
-    public function getHasBar()
+    public function getHasBar(): bool
     {
         return $this->HasBar;
     }
 
-    public function setHasFoo($HasFoo): self
+    public function setHasFoo(bool $HasFoo): self
     {
         $this->HasFoo = $HasFoo;
         return $this;
     }
 
-    public function setHasBar($HasBar): void
+    public function setHasBar(bool $HasBar): void
     {
         $this->HasBar = $HasBar;
     }

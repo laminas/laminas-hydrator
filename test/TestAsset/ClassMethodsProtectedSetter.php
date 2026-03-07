@@ -6,26 +6,21 @@ namespace LaminasTest\Hydrator\TestAsset;
 
 class ClassMethodsProtectedSetter
 {
-    /** @var mixed */
-    protected $foo;
+    protected mixed $foo;
 
-    /** @var mixed */
-    protected $bar;
+    protected mixed $bar;
 
-    /** @param mixed $foo */
-    protected function setFoo($foo): void
+    protected function setFoo(mixed $foo): void
     {
         $this->foo = $foo;
     }
 
-    /** @param mixed $bar */
-    public function setBar($bar): void
+    public function setBar(mixed $bar): void
     {
         $this->bar = $bar;
     }
 
-    /** @return mixed */
-    public function getBar()
+    public function getBar(): mixed
     {
         return $this->bar;
     }

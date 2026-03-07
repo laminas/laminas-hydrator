@@ -9,20 +9,15 @@ use AllowDynamicProperties;
 #[AllowDynamicProperties]
 class ObjectProperty
 {
-    /** @var string */
-    public $foo;
+    public string $foo;
 
-    /** @var string */
-    public $bar;
+    public string $bar;
 
-    /** @var string */
-    public $blubb;
+    public string $blubb;
 
-    /** @var string */
-    public $quo;
+    public string $quo;
 
-    /** @var string */
-    protected $quin;
+    protected string $quin;
 
     public function __construct()
     {

@@ -13,7 +13,7 @@ final class CompositeNamingStrategy implements NamingStrategyInterface
     /** @var NamingStrategyInterface[] */
     private array $namingStrategies = [];
 
-    private NamingStrategyInterface $defaultNamingStrategy;
+    private readonly NamingStrategyInterface $defaultNamingStrategy;
 
     /**
      * @param NamingStrategyInterface[]    $strategies            indexed by the name they translate

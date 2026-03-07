@@ -9,23 +9,14 @@ namespace LaminasTest\Hydrator\TestAsset;
  */
 class ClassMethodsOptionalParameters
 {
-    /** @var string */
-    public $foo = 'bar';
+    public string $foo = 'bar';
 
-    /**
-     * @param mixed $optional
-     * @return string
-     */
-    public function getFoo($optional = null)
+    public function getFoo(mixed $optional = null): string
     {
         return $this->foo;
     }
 
-    /**
-     * @param string $foo
-     * @param mixed  $optional
-     */
-    public function setFoo($foo, $optional = null): void
+    public function setFoo(string $foo, mixed $optional = null): void
     {
         $this->foo = $foo;
     }

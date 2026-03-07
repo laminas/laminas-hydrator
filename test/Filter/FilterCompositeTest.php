@@ -103,7 +103,7 @@ final class FilterCompositeTest extends TestCase
     public function testNoFilters(): void
     {
         $filter = new FilterComposite();
-        self::assertTrue($filter->filter('any_value'));
+        $this->assertTrue($filter->filter('any_value'));
     }
 
     /**
@@ -218,6 +218,6 @@ final class FilterCompositeTest extends TestCase
     public function testCompositionFiltering(array $orFilters, array $andFilters, bool $expected): void
     {
         $filter = new FilterComposite($orFilters, $andFilters);
-        self::assertSame($expected, $filter->filter('any_value'));
+        $this->assertSame($expected, $filter->filter('any_value'));
     }
 }

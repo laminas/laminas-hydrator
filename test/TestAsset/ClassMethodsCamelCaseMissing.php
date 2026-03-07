@@ -6,27 +6,22 @@ namespace LaminasTest\Hydrator\TestAsset;
 
 class ClassMethodsCamelCaseMissing
 {
-    /** @var string */
-    protected $fooBar = '1';
+    protected string $fooBar = '1';
 
-    /** @var string */
-    protected $fooBarBaz = '2';
+    protected string $fooBarBaz = '2';
 
-    /** @return string */
-    public function getFooBar()
+    public function getFooBar(): string
     {
         return $this->fooBar;
     }
 
-    /** @param string $value */
-    public function setFooBar($value): self
+    public function setFooBar(string $value): self
     {
         $this->fooBar = $value;
         return $this;
     }
 
-    /** @return string */
-    public function getFooBarBaz()
+    public function getFooBarBaz(): string
     {
         return $this->fooBarBaz;
     }

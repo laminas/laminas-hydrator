@@ -30,9 +30,9 @@ final class MethodMatchFilterTest extends TestCase
     public function testFilter(string $methodName, bool $expected): void
     {
         $testedInstance = new MethodMatchFilter('foo', false);
-        self::assertEquals($expected, $testedInstance->filter($methodName));
+        $this->assertSame($expected, $testedInstance->filter($methodName));
 
         $testedInstance = new MethodMatchFilter('foo', true);
-        self::assertEquals(! $expected, $testedInstance->filter($methodName));
+        $this->assertSame(! $expected, $testedInstance->filter($methodName));
     }
 }

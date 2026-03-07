@@ -15,9 +15,9 @@ use Laminas\Hydrator\HydratorInterface;
  *
  * @final
  */
-class HydratorListener extends AbstractListenerAggregate
+final class HydratorListener extends AbstractListenerAggregate
 {
-    public function __construct(protected HydratorInterface $hydrator)
+    public function __construct(private readonly HydratorInterface $hydrator)
     {
     }
 
@@ -26,8 +26,8 @@ class HydratorListener extends AbstractListenerAggregate
      */
     public function attach(EventManagerInterface $events, $priority = 1): void
     {
-        $this->listeners[] = $events->attach(HydrateEvent::EVENT_HYDRATE, [$this, 'onHydrate'], $priority);
-        $this->listeners[] = $events->attach(ExtractEvent::EVENT_EXTRACT, [$this, 'onExtract'], $priority);
+        $this->listeners[] = $events->attach(HydrateEvent::EVENT_HYDRATE, $this->onHydrate(...), $priority);
+        $this->listeners[] = $events->attach(ExtractEvent::EVENT_EXTRACT, $this->onExtract(...), $priority);
     }
 
     /**

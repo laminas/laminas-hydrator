@@ -25,9 +25,13 @@ interface FilterEnabledInterface extends FilterProviderInterface
      * </code>
      *
      * @param string $name Index in the composite
-     * @param callable|FilterInterface $filter
+     * @param (callable(string, ?object):bool)|FilterInterface $filter
      */
-    public function addFilter(string $name, $filter, int $condition = FilterComposite::CONDITION_OR): void;
+    public function addFilter(
+        string $name,
+        callable|FilterInterface $filter,
+        int $condition = FilterComposite::CONDITION_OR,
+    ): void;
 
     /**
      * Check whether a specific filter exists at key $name or not

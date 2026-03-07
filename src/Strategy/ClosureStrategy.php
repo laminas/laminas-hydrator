@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace Laminas\Hydrator\Strategy;
 
-/**
- * @final
- */
-class ClosureStrategy implements StrategyInterface
+final class ClosureStrategy implements StrategyInterface
 {
     /**
      * Function, used in extract method, default:
@@ -20,7 +17,7 @@ class ClosureStrategy implements StrategyInterface
      *
      * @var null|callable
      */
-    protected $extractFunc;
+    private $extractFunc;
 
     /**
      * Function, used in hydrate method, default:
@@ -33,7 +30,7 @@ class ClosureStrategy implements StrategyInterface
      *
      * @var null|callable
      */
-    protected $hydrateFunc;
+    private $hydrateFunc;
 
     /**
      * You can describe how your values will extract and hydrate, like this:
@@ -63,7 +60,7 @@ class ClosureStrategy implements StrategyInterface
      *
      * {@inheritDoc}
      */
-    public function extract($value, ?object $object = null)
+    public function extract(mixed $value, ?object $object = null): mixed
     {
         $func = $this->extractFunc;
         return $func
@@ -76,7 +73,7 @@ class ClosureStrategy implements StrategyInterface
      *
      * {@inheritDoc}
      */
-    public function hydrate($value, ?array $data = null)
+    public function hydrate(mixed $value, ?array $data = null): mixed
     {
         $func = $this->hydrateFunc;
         return $func

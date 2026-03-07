@@ -9,17 +9,18 @@ use Laminas\EventManager\EventManagerAwareInterface;
 use Laminas\EventManager\EventManagerInterface;
 use Laminas\Hydrator\HydratorInterface;
 
+use function assert;
+
 /**
  * Aggregate hydrator that composes multiple hydrators via events
  *
  * @final
  */
-class AggregateHydrator implements HydratorInterface, EventManagerAwareInterface
+final class AggregateHydrator implements HydratorInterface, EventManagerAwareInterface
 {
     public const DEFAULT_PRIORITY = 1;
 
-    /** @var EventManagerInterface */
-    protected $eventManager;
+    private ?EventManagerInterface $eventManager = null;
 
     /**
      * Attaches the provided hydrator to the list of hydrators to be used while hydrating/extracting data
@@ -43,7 +44,7 @@ class AggregateHydrator implements HydratorInterface, EventManagerAwareInterface
     /**
      * {@inheritDoc}
      */
-    public function hydrate(array $data, object $object)
+    public function hydrate(array $data, object $object): object
     {
         $event = new HydrateEvent($this, $object, $data);
         $this->getEventManager()->triggerEvent($event);
@@ -55,7 +56,7 @@ class AggregateHydrator implements HydratorInterface, EventManagerAwareInterface
      */
     public function setEventManager(EventManagerInterface $eventManager): void
     {
-        $eventManager->setIdentifiers([self::class, static::class]);
+        $eventManager->setIdentifiers([self::class, self::class]);
         $this->eventManager = $eventManager;
     }
 
@@ -64,8 +65,9 @@ class AggregateHydrator implements HydratorInterface, EventManagerAwareInterface
      */
     public function getEventManager(): EventManagerInterface
     {
-        if (null === $this->eventManager) {
+        if (! $this->eventManager instanceof EventManagerInterface) {
             $this->setEventManager(new EventManager());
+            assert($this->eventManager instanceof EventManagerInterface);
         }
 
         return $this->eventManager;

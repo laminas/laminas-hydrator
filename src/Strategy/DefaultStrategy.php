@@ -10,23 +10,17 @@ namespace Laminas\Hydrator\Strategy;
 class DefaultStrategy implements StrategyInterface
 {
     /**
-     * Converts the given value so that it can be extracted by the hydrator.
-     *
-     * @param mixed $value The original value.
-     * @return mixed Returns the value that should be extracted.
+     * @inheritDoc
      */
-    public function extract($value, ?object $object = null)
+    public function extract(mixed $value, ?object $object = null): mixed
     {
         return $value;
     }
 
     /**
-     * Converts the given value so that it can be hydrated by the hydrator.
-     *
-     * @param mixed $value The original value.
-     * @return mixed Returns the value that should be hydrated.
+     * @inheritDoc
      */
-    public function hydrate($value, ?array $data = null)
+    public function hydrate(mixed $value, ?array $data = null): mixed
     {
         return $value;
     }

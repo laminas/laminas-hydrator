@@ -13,8 +13,7 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(OptionalParametersFilter::class)]
 final class OptionalParametersFilterTest extends TestCase
 {
-    /** @var OptionalParametersFilter */
-    protected $filter;
+    private OptionalParametersFilter $filter;
 
     /**
      * {@inheritDoc}

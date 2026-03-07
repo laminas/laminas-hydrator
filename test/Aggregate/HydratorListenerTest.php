@@ -37,7 +37,7 @@ final class HydratorListenerTest extends TestCase
                 $this->logicalOr(HydrateEvent::EVENT_HYDRATE, ExtractEvent::EVENT_EXTRACT),
                 $this->logicalAnd(
                     $this->callback('is_callable'),
-                    $this->logicalOr([$this->listener, 'onHydrate'], [$this->listener, 'onExtract'])
+                    $this->logicalOr($this->listener->onHydrate(...), $this->listener->onExtract(...))
                 )
             );
 
@@ -49,13 +49,7 @@ final class HydratorListenerTest extends TestCase
         $object   = new stdClass();
         $hydrated = new stdClass();
         $data     = ['foo' => 'bar'];
-        $event    = $this
-            ->getMockBuilder(HydrateEvent::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $event->expects($this->any())->method('getHydratedObject')->willReturn($object);
-        $event->expects($this->any())->method('getHydrationData')->willReturn($data);
+        $event    = new HydrateEvent((object) [], (object) [], $data);
 
         $this
             ->hydrator
@@ -63,7 +57,6 @@ final class HydratorListenerTest extends TestCase
             ->method('hydrate')
             ->with($data, $object)
             ->willReturn($hydrated);
-        $event->expects($this->once())->method('setHydratedObject')->with($hydrated);
 
         $this->assertSame($hydrated, $this->listener->onHydrate($event));
     }
@@ -72,12 +65,7 @@ final class HydratorListenerTest extends TestCase
     {
         $object = new stdClass();
         $data   = ['foo' => 'bar'];
-        $event  = $this
-            ->getMockBuilder(ExtractEvent::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $event->expects($this->any())->method('getExtractionObject')->willReturn($object);
+        $event  = new ExtractEvent((object) [], $object);
 
         $this
             ->hydrator
@@ -85,7 +73,6 @@ final class HydratorListenerTest extends TestCase
             ->method('extract')
             ->with($object)
             ->willReturn($data);
-        $event->expects($this->once())->method('mergeExtractedData')->with($data);
 
         $this->assertSame($data, $this->listener->onExtract($event));
     }

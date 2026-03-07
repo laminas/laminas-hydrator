@@ -26,9 +26,9 @@ final class ExplodeStrategyTest extends TestCase
         $strategy = new ExplodeStrategy($delimiter);
 
         if (is_numeric($expected)) {
-            self::assertEquals($expected, $strategy->extract($extractValue));
+            $this->assertEquals($expected, $strategy->extract($extractValue));
         } else {
-            self::assertSame($expected, $strategy->extract($extractValue));
+            $this->assertSame($expected, $strategy->extract($extractValue));
         }
     }
 
@@ -46,7 +46,7 @@ final class ExplodeStrategyTest extends TestCase
     {
         $strategy = new ExplodeStrategy();
 
-        self::assertSame([], $strategy->hydrate(null));
+        $this->assertSame([], $strategy->hydrate(null));
     }
 
     public function testGetExceptionWithEmptyDelimiter(): void
@@ -60,10 +60,10 @@ final class ExplodeStrategyTest extends TestCase
     public function testHydrateWithExplodeLimit(): void
     {
         $strategy = new ExplodeStrategy('-', 2);
-        self::assertSame(['foo', 'bar-baz-bat'], $strategy->hydrate('foo-bar-baz-bat'));
+        $this->assertSame(['foo', 'bar-baz-bat'], $strategy->hydrate('foo-bar-baz-bat'));
 
         $strategy = new ExplodeStrategy('-', 3);
-        self::assertSame(['foo', 'bar', 'baz-bat'], $strategy->hydrate('foo-bar-baz-bat'));
+        $this->assertSame(['foo', 'bar', 'baz-bat'], $strategy->hydrate('foo-bar-baz-bat'));
     }
 
     public function testHydrateWithInvalidScalarType(): void
@@ -76,7 +76,6 @@ final class ExplodeStrategyTest extends TestCase
             . ' array provided instead'
         );
 
-        /** @psalm-suppress InvalidArgument */
         $strategy->hydrate([]);
     }
 
@@ -90,7 +89,6 @@ final class ExplodeStrategyTest extends TestCase
             . ' stdClass provided instead'
         );
 
-        /** @psalm-suppress InvalidArgument */
         $strategy->hydrate(new stdClass());
     }
 
@@ -116,8 +114,7 @@ final class ExplodeStrategyTest extends TestCase
     {
         $strategy = new ExplodeStrategy($delimiter);
 
-        /** @psalm-suppress MixedArgument */
-        self::assertSame($expected, $strategy->hydrate($value));
+        $this->assertSame($expected, $strategy->hydrate($value));
     }
 
     /**

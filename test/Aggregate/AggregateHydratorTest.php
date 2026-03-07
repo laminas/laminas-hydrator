@@ -17,8 +17,8 @@ use stdClass;
 #[CoversClass(AggregateHydrator::class)]
 final class AggregateHydratorTest extends TestCase
 {
-    protected AggregateHydrator $hydrator;
-    protected EventManager&MockObject $eventManager;
+    private AggregateHydrator $hydrator;
+    private EventManager&MockObject $eventManager;
 
     protected function setUp(): void
     {
@@ -33,12 +33,12 @@ final class AggregateHydratorTest extends TestCase
         $attached = $this->createMock(HydratorInterface::class);
 
         $this->eventManager
-            ->expects(self::exactly(2))
+            ->expects($this->exactly(2))
             ->method('attach')
             ->with(
                 self::callback(function (mixed $event): bool {
-                    self::assertIsString($event);
-                    self::assertContains($event, [
+                    $this->assertIsString($event);
+                    $this->assertContains($event, [
                         HydrateEvent::EVENT_HYDRATE,
                         ExtractEvent::EVENT_EXTRACT,
                     ]);
@@ -46,12 +46,12 @@ final class AggregateHydratorTest extends TestCase
                     return true;
                 }),
                 self::callback(function (mixed $listener): bool {
-                    self::assertIsCallable($listener);
+                    $this->assertIsCallable($listener);
 
                     return true;
                 }),
                 self::callback(function (mixed $priority): bool {
-                    self::assertSame(123, $priority);
+                    $this->assertSame(123, $priority);
 
                     return true;
                 }),

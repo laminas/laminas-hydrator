@@ -19,8 +19,8 @@ final class CompositeNamingStrategyTest extends TestCase
             'foo' => $this->createMock(NamingStrategyInterface::class),
         ]);
 
-        $this->assertEquals('bar', $compositeNamingStrategy->hydrate('bar'));
-        $this->assertEquals('bar', $compositeNamingStrategy->extract('bar'));
+        $this->assertSame('bar', $compositeNamingStrategy->hydrate('bar'));
+        $this->assertSame('bar', $compositeNamingStrategy->extract('bar'));
     }
 
     public function testUseDefaultNamingStrategy(): void
@@ -40,8 +40,8 @@ final class CompositeNamingStrategyTest extends TestCase
             ['bar' => $this->createMock(NamingStrategyInterface::class)],
             $defaultNamingStrategy
         );
-        $this->assertEquals('Foo', $compositeNamingStrategy->hydrate('foo'));
-        $this->assertEquals('foo', $compositeNamingStrategy->extract('Foo'));
+        $this->assertSame('Foo', $compositeNamingStrategy->hydrate('foo'));
+        $this->assertSame('foo', $compositeNamingStrategy->extract('Foo'));
     }
 
     public function testHydrate(): void
@@ -52,7 +52,7 @@ final class CompositeNamingStrategyTest extends TestCase
             ->with('foo')
             ->willReturn('FOO');
         $compositeNamingStrategy = new CompositeNamingStrategy(['foo' => $fooNamingStrategy]);
-        $this->assertEquals('FOO', $compositeNamingStrategy->hydrate('foo'));
+        $this->assertSame('FOO', $compositeNamingStrategy->hydrate('foo'));
     }
 
     public function testExtract(): void
@@ -63,6 +63,6 @@ final class CompositeNamingStrategyTest extends TestCase
             ->with('FOO')
             ->willReturn('foo');
         $compositeNamingStrategy = new CompositeNamingStrategy(['FOO' => $fooNamingStrategy]);
-        $this->assertEquals('foo', $compositeNamingStrategy->extract('FOO'));
+        $this->assertSame('foo', $compositeNamingStrategy->extract('FOO'));
     }
 }

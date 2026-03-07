@@ -12,22 +12,16 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(IdentityNamingStrategy::class)]
 final class IdentityNamingStrategyTest extends TestCase
 {
-    /**
-     * @param string $name
-     */
     #[DataProvider('getTestedNames')]
-    public function testHydrate($name): void
+    public function testHydrate(string $name): void
     {
         $namingStrategy = new IdentityNamingStrategy();
 
         $this->assertSame($name, $namingStrategy->hydrate($name));
     }
 
-    /**
-     * @param string $name
-     */
     #[DataProvider('getTestedNames')]
-    public function testExtract($name): void
+    public function testExtract(string $name): void
     {
         $namingStrategy = new IdentityNamingStrategy();
 
@@ -39,7 +33,7 @@ final class IdentityNamingStrategyTest extends TestCase
      *
      * @return string[][]
      */
-    public static function getTestedNames()
+    public static function getTestedNames(): array
     {
         return [
             'foo' => ['foo'],

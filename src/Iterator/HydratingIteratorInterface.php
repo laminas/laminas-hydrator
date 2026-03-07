@@ -22,7 +22,7 @@ interface HydratingIteratorInterface extends Iterator
      *
      * @param class-string<TPrototype>|TPrototype $prototype
      */
-    public function setPrototype($prototype): void;
+    public function setPrototype(string|object $prototype): void;
 
     /**
      * Sets the hydrator to use during iteration.

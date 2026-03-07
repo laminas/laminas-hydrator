@@ -14,9 +14,8 @@ use function array_merge;
  *
  * @template TTarget of object
  * @extends Event<TTarget, array<empty, empty>>
- * @final
  */
-class ExtractEvent extends Event
+final class ExtractEvent extends Event
 {
     public const EVENT_EXTRACT = 'extract';
 
@@ -26,10 +25,10 @@ class ExtractEvent extends Event
     protected $name = self::EVENT_EXTRACT;
 
     /** @var mixed[] Data being extracted from the $extractionObject */
-    protected $extractedData = [];
+    private array $extractedData = [];
 
     /** @psalm-param TTarget $target */
-    public function __construct(object $target, protected object $extractionObject)
+    public function __construct(object $target, private object $extractionObject)
     {
         parent::__construct(self::EVENT_EXTRACT, $target, []);
     }

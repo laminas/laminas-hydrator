@@ -21,25 +21,18 @@ use function str_starts_with;
 use function substr;
 use function ucfirst;
 
-/**
- * @final
- */
-class ClassMethodsHydrator extends AbstractHydrator implements HydratorOptionsInterface
+final class ClassMethodsHydrator extends AbstractHydrator implements HydratorOptionsInterface
 {
     /**
      * Flag defining whether array keys are underscore-separated (true) or camel case (false)
-     *
-     * @var bool
      */
-    protected $underscoreSeparatedKeys = true;
+    private bool $underscoreSeparatedKeys = true;
 
     /**
      * Flag defining whether to check the setter method with method_exists to prevent the
      * hydrator from calling __call during hydration
-     *
-     * @var bool
      */
-    protected $methodExistsCheck = false;
+    private bool $methodExistsCheck = false;
 
     /**
      * Holds the names of the methods used for hydration, indexed by class::property name,
@@ -47,7 +40,7 @@ class ClassMethodsHydrator extends AbstractHydrator implements HydratorOptionsIn
      *
      * @var string[]|bool[]
      */
-    private $hydrationMethodsCache = [];
+    private array $hydrationMethodsCache = [];
 
     /**
      * A map of extraction methods to property name to be used during extraction, indexed
@@ -55,9 +48,9 @@ class ClassMethodsHydrator extends AbstractHydrator implements HydratorOptionsIn
      *
      * @var null[]|string[][]
      */
-    private $extractionMethodsCache = [];
+    private array $extractionMethodsCache = [];
 
-    private FilterInterface $optionalParametersFilter;
+    private readonly FilterInterface $optionalParametersFilter;
 
     /**
      * Define if extract values will use camel case or name with underscore
@@ -224,7 +217,7 @@ class ClassMethodsHydrator extends AbstractHydrator implements HydratorOptionsIn
      *
      * {@inheritDoc}
      */
-    public function hydrate(array $data, object $object)
+    public function hydrate(array $data, object $object): object
     {
         $objectClass = $object::class;
 
@@ -251,8 +244,11 @@ class ClassMethodsHydrator extends AbstractHydrator implements HydratorOptionsIn
     /**
      * {@inheritDoc}
      */
-    public function addFilter(string $name, $filter, int $condition = Filter\FilterComposite::CONDITION_OR): void
-    {
+    public function addFilter(
+        string $name,
+        callable|FilterInterface $filter,
+        int $condition = Filter\FilterComposite::CONDITION_OR
+    ): void {
         $this->resetCaches();
         parent::addFilter($name, $filter, $condition);
     }

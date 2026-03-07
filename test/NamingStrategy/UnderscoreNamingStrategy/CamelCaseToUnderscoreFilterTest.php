@@ -15,12 +15,8 @@ use function extension_loaded;
 #[CoversClass(CamelCaseToUnderscoreFilter::class)]
 final class CamelCaseToUnderscoreFilterTest extends TestCase
 {
-    /**
-     * @param string $string
-     * @param string $expected
-     */
     #[DataProvider('nonUnicodeProvider')]
-    public function testFilterUnderscoresNonUnicodeStrings($string, $expected): void
+    public function testFilterUnderscoresNonUnicodeStrings(string $string, string $expected): void
     {
         $filter = new CamelCaseToUnderscoreFilter();
 
@@ -30,16 +26,12 @@ final class CamelCaseToUnderscoreFilterTest extends TestCase
 
         $filtered = $filter->filter($string);
 
-        $this->assertNotEquals($string, $filtered);
-        $this->assertEquals($expected, $filtered);
+        $this->assertNotSame($string, $filtered);
+        $this->assertSame($expected, $filtered);
     }
 
-    /**
-     * @param string $string
-     * @param string $expected
-     */
     #[DataProvider('unicodeProvider')]
-    public function testFilterUnderscoresUnicodeStrings($string, $expected): void
+    public function testFilterUnderscoresUnicodeStrings(string $string, string $expected): void
     {
         if (! extension_loaded('mbstring')) {
             $this->markTestSkipped('Extension mbstring not available');
@@ -49,16 +41,12 @@ final class CamelCaseToUnderscoreFilterTest extends TestCase
 
         $filtered = $filter->filter($string);
 
-        $this->assertNotEquals($string, $filtered);
-        $this->assertEquals($expected, $filtered);
+        $this->assertNotSame($string, $filtered);
+        $this->assertSame($expected, $filtered);
     }
 
-    /**
-     * @param string $string
-     * @param string $expected
-     */
     #[DataProvider('unicodeProviderWithoutMbStrings')]
-    public function testFilterUnderscoresUnicodeStringsWithoutMbStrings($string, $expected): void
+    public function testFilterUnderscoresUnicodeStringsWithoutMbStrings(string $string, string $expected): void
     {
         $filter = new CamelCaseToUnderscoreFilter();
 
@@ -68,8 +56,8 @@ final class CamelCaseToUnderscoreFilterTest extends TestCase
 
         $filtered = $filter->filter($string);
 
-        $this->assertNotEquals($string, $filtered);
-        $this->assertEquals($expected, $filtered);
+        $this->assertNotSame($string, $filtered);
+        $this->assertSame($expected, $filtered);
     }
 
     /**

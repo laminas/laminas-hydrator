@@ -20,7 +20,7 @@ final class NumberOfParameterFilter implements FilterInterface
         /**
          * The number of parameters being accepted
          */
-        private int $numberOfParameters = 0
+        private readonly int $numberOfParameters = 0
     ) {
     }
 

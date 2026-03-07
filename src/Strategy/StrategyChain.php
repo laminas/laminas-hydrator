@@ -16,14 +16,14 @@ final class StrategyChain implements StrategyInterface
      *
      * @var StrategyInterface[]
      */
-    private array $extractionStrategies;
+    private readonly array $extractionStrategies;
 
     /**
      * Strategy chain for hydration
      *
      * @var StrategyInterface[]
      */
-    private array $hydrationStrategies;
+    private readonly array $hydrationStrategies;
 
     /**
      * @param StrategyInterface[] $extractionStrategies
@@ -43,7 +43,7 @@ final class StrategyChain implements StrategyInterface
     /**
      * {@inheritDoc}
      */
-    public function extract($value, ?object $object = null)
+    public function extract(mixed $value, ?object $object = null): mixed
     {
         foreach ($this->extractionStrategies as $strategy) {
             $value = $strategy->extract($value, $object);
@@ -55,7 +55,7 @@ final class StrategyChain implements StrategyInterface
     /**
      * {@inheritDoc}
      */
-    public function hydrate($value, ?array $data = null)
+    public function hydrate(mixed $value, ?array $data = null): mixed
     {
         foreach ($this->hydrationStrategies as $strategy) {
             $value = $strategy->hydrate($value, $data);

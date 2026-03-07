@@ -11,10 +11,7 @@ use function is_callable;
 use function method_exists;
 use function sprintf;
 
-/**
- * @final
- */
-class ArraySerializableHydrator extends AbstractHydrator
+final class ArraySerializableHydrator extends AbstractHydrator
 {
     /**
      * Extract values from the provided object
@@ -78,7 +75,7 @@ class ArraySerializableHydrator extends AbstractHydrator
      * @throws Exception\BadMethodCallException For an $object not implementing exchangeArray() or populate().
      * @throws Exception\RuntimeException If a part of $data could not be hydrated.
      */
-    public function hydrate(array $data, object $object)
+    public function hydrate(array $data, object $object): object
     {
         $replacement = [];
         foreach ($data as $key => $value) {

@@ -10,23 +10,17 @@ use function substr;
 
 class ClassMethodsMagicMethodSetter
 {
-    /** @var mixed */
-    protected $foo;
+    protected mixed $foo;
 
-    /**
-     * @param string $method
-     * @param array $args
-     */
-    public function __call($method, $args)
+    public function __call(string $method, array $args)
     {
         if (strlen($method) > 3 && strtolower(substr($method, 3)) === 'foo') {
             $this->foo = $args[0];
         }
     }
 
-    /** @return mixed */
-    public function getFoo()
+    public function getFoo(): mixed
     {
-        return $this->foo;
+        return $this->foo ?? null;
     }
 }

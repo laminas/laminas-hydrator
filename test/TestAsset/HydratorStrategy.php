@@ -25,9 +25,9 @@ class HydratorStrategy extends DefaultStrategy
 
     /**
      * @param array $value
-     * @return mixed
+     * @return list
      */
-    public function extract($value, ?object $object = null)
+    public function extract(mixed $value, ?object $object = null): array
     {
         $result = [];
         foreach ($value as $instance) {
@@ -36,11 +36,7 @@ class HydratorStrategy extends DefaultStrategy
         return $result;
     }
 
-    /**
-     * @param mixed $value
-     * @return mixed
-     */
-    public function hydrate($value, ?array $data = null)
+    public function hydrate(mixed $value, ?array $data = null): mixed
     {
         $result = $value;
         if (is_array($value)) {
@@ -52,11 +48,7 @@ class HydratorStrategy extends DefaultStrategy
         return $result;
     }
 
-    /**
-     * @param mixed $field1
-     * @return mixed
-     */
-    private function findEntity($field1)
+    private function findEntity(mixed $field1): mixed
     {
         $result = null;
         foreach ($this->simulatedStorageDevice as $entity) {

@@ -13,11 +13,9 @@ use function extension_loaded;
  */
 trait StringSupportTrait
 {
-    /** @var bool */
-    private $pcreUnicodeSupport;
+    private ?bool $pcreUnicodeSupport = null;
 
-    /** @var bool */
-    private $mbStringSupport;
+    private ?bool $mbStringSupport = null;
 
     private function hasPcreUnicodeSupport(): bool
     {

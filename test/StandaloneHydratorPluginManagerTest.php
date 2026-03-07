@@ -41,10 +41,6 @@ final class StandaloneHydratorPluginManagerTest extends TestCase
         yield 'ArraySerializableHydrator'       => [Hydrator\ArraySerializableHydrator::class];
         yield 'ClassMethods'                    => [Hydrator\ClassMethodsHydrator::class];
         yield 'ClassMethodsHydrator'            => [Hydrator\ClassMethodsHydrator::class];
-        yield Hydrator\ArraySerializable::class => [Hydrator\ArraySerializableHydrator::class];
-        yield Hydrator\ClassMethods::class      => [Hydrator\ClassMethodsHydrator::class];
-        yield Hydrator\ObjectProperty::class    => [Hydrator\ObjectPropertyHydrator::class];
-        yield Hydrator\Reflection::class        => [Hydrator\ReflectionHydrator::class];
         yield 'ObjectPropertyHydrator'          => [Hydrator\ObjectPropertyHydrator::class];
         yield 'ObjectProperty'                  => [Hydrator\ObjectPropertyHydrator::class];
         yield 'ReflectionHydrator'              => [Hydrator\ReflectionHydrator::class];
@@ -56,14 +52,14 @@ final class StandaloneHydratorPluginManagerTest extends TestCase
     {
         $factories = $this->reflectProperty($this->manager, 'factories');
 
-        self::assertArrayHasKey($class, $factories);
-        self::assertInstanceOf(Closure::class, $factories[$class]);
+        $this->assertArrayHasKey($class, $factories);
+        $this->assertInstanceOf(Closure::class, $factories[$class]);
     }
 
     public function testDelegatingHydratorFactoryIsInitialized(): void
     {
         $factories = $this->reflectProperty($this->manager, 'factories');
-        self::assertInstanceOf(
+        $this->assertInstanceOf(
             Hydrator\DelegatingHydratorFactory::class,
             $factories[Hydrator\DelegatingHydrator::class]
         );
@@ -71,7 +67,7 @@ final class StandaloneHydratorPluginManagerTest extends TestCase
 
     public function testHasReturnsFalseForUnknownNames(): void
     {
-        self::assertFalse($this->manager->has('unknown-service-name'));
+        $this->assertFalse($this->manager->has('unknown-service-name'));
     }
 
     /** @return Generator<string, array{0: string, 1: class-string}> */
@@ -93,7 +89,7 @@ final class StandaloneHydratorPluginManagerTest extends TestCase
     #[DataProvider('knownServices')]
     public function testHasReturnsTrueForKnownServices(string $service): void
     {
-        self::assertTrue($this->manager->has($service));
+        $this->assertTrue($this->manager->has($service));
     }
 
     public function testGetRaisesExceptionForUnknownService(): void
@@ -110,6 +106,6 @@ final class StandaloneHydratorPluginManagerTest extends TestCase
     public function testGetReturnsExpectedTypesForKnownServices(string $service, string $expectedType): void
     {
         $instance = $this->manager->get($service);
-        self::assertInstanceOf($expectedType, $instance);
+        $this->assertInstanceOf($expectedType, $instance);
     }
 }

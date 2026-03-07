@@ -21,6 +21,15 @@ final class NumberOfParameterFilterTest extends TestCase
         $this->assertFalse($filter->filter(self::class . '::methodWithOptionalParameters'));
     }
 
+    /**
+     * Test asset method.
+     *
+     * @psalm-suppress UnusedParam
+     */
+    public function methodWithOptionalParameters(string $parameter = 'foo'): void
+    {
+    }
+
     #[Group('6083')]
     public function testArityOne(): void
     {
@@ -40,15 +49,6 @@ final class NumberOfParameterFilterTest extends TestCase
         );
         $filter = new NumberOfParameterFilter(1);
         $filter->filter(self::class . '::methodDoesNotExist');
-    }
-
-    /**
-     * Test asset method
-     *
-     * @psalm-suppress UnusedParam
-     */
-    public function methodWithOptionalParameters(string $parameter = 'foo'): void
-    {
     }
 
     /**

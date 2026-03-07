@@ -7,6 +7,6 @@ namespace Laminas\Hydrator\Exception;
 /**
  * Domain exception
  */
-class DomainException extends \DomainException implements ExceptionInterface
+final class DomainException extends \DomainException implements ExceptionInterface
 {
 }

@@ -15,12 +15,8 @@ use function extension_loaded;
 #[CoversClass(UnderscoreToCamelCaseFilter::class)]
 final class UnderscoreToCamelCaseFilterTest extends TestCase
 {
-    /**
-     * @param string $string
-     * @param string $expected
-     */
     #[DataProvider('nonUnicodeProvider')]
-    public function testFilterCamelCasesNonUnicodeStrings($string, $expected): void
+    public function testFilterCamelCasesNonUnicodeStrings(string $string, string $expected): void
     {
         $filter = new UnderscoreToCamelCaseFilter();
 
@@ -30,8 +26,8 @@ final class UnderscoreToCamelCaseFilterTest extends TestCase
 
         $filtered = $filter->filter($string);
 
-        $this->assertNotEquals($string, $filtered);
-        $this->assertEquals($expected, $filtered);
+        $this->assertNotSame($string, $filtered);
+        $this->assertSame($expected, $filtered);
     }
 
     /**
@@ -60,12 +56,8 @@ final class UnderscoreToCamelCaseFilterTest extends TestCase
         ];
     }
 
-    /**
-     * @param string $string
-     * @param string $expected
-     */
     #[DataProvider('unicodeProvider')]
-    public function testFilterCamelCasesUnicodeStrings($string, $expected): void
+    public function testFilterCamelCasesUnicodeStrings(string $string, string $expected): void
     {
         if (! extension_loaded('mbstring')) {
             $this->markTestSkipped('Extension mbstring not available');
@@ -74,8 +66,8 @@ final class UnderscoreToCamelCaseFilterTest extends TestCase
         $filter   = new UnderscoreToCamelCaseFilter();
         $filtered = $filter->filter($string);
 
-        $this->assertNotEquals($string, $filtered);
-        $this->assertEquals($expected, $filtered);
+        $this->assertNotSame($string, $filtered);
+        $this->assertSame($expected, $filtered);
     }
 
     /**
@@ -112,14 +104,10 @@ final class UnderscoreToCamelCaseFilterTest extends TestCase
         ];
     }
 
-    /**
-     * @param string $string
-     * @param string $expected
-     */
     #[DataProvider('unicodeWithoutMbStringsProvider')]
     public function testFilterCamelCasesUnicodeStringsWithoutMbStrings(
-        $string,
-        $expected
+        string $string,
+        string $expected
     ): void {
         $filter = new UnderscoreToCamelCaseFilter();
 
@@ -128,7 +116,7 @@ final class UnderscoreToCamelCaseFilterTest extends TestCase
         $property->setValue($filter, false);
 
         $filtered = $filter->filter($string);
-        $this->assertEquals($expected, $filtered);
+        $this->assertSame($expected, $filtered);
     }
 
     /**

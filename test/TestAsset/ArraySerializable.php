@@ -8,8 +8,7 @@ use Laminas\Stdlib\ArraySerializableInterface;
 
 class ArraySerializable implements ArraySerializableInterface
 {
-    /** @var array */
-    protected $data = [];
+    protected array $data = [];
 
     public function __construct()
     {
@@ -23,10 +22,8 @@ class ArraySerializable implements ArraySerializableInterface
 
     /**
      * Exchange internal values from provided array
-     *
-     * @return void
      */
-    public function exchangeArray(array $array)
+    public function exchangeArray(array $array): void
     {
         $this->data = $array;
     }

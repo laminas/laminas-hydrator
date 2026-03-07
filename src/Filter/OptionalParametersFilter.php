@@ -40,8 +40,8 @@ final class OptionalParametersFilter implements FilterInterface
             ? (new ReflectionMethod($instance, $property))->getName()
             : $property;
 
-        if (array_key_exists($cacheName, static::$propertiesCache)) {
-            return static::$propertiesCache[$cacheName];
+        if (array_key_exists($cacheName, self::$propertiesCache)) {
+            return self::$propertiesCache[$cacheName];
         }
 
         try {
@@ -60,6 +60,6 @@ final class OptionalParametersFilter implements FilterInterface
             static fn(ReflectionParameter $parameter): bool => ! $parameter->isOptional()
         );
 
-        return static::$propertiesCache[$cacheName] = empty($mandatoryParameters);
+        return self::$propertiesCache[$cacheName] = $mandatoryParameters === [];
     }
 }

@@ -17,7 +17,7 @@ final class BackedEnumStrategyTest extends TestCase
     public function testExtractInvalidValueThrowsException(): void
     {
         $strategy = new BackedEnumStrategy(TestBackedEnum::class);
-        self::expectException(InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $strategy->extract(TestUnitEnum::One);
     }
 
@@ -25,7 +25,7 @@ final class BackedEnumStrategyTest extends TestCase
     {
         $strategy = new BackedEnumStrategy(TestBackedEnum::class);
         $actual   = $strategy->extract(TestBackedEnum::One);
-        self::assertSame('one', $actual);
+        $this->assertSame('one', $actual);
     }
 
     public function testHydrateEnumReturnsEnum(): void
@@ -33,22 +33,22 @@ final class BackedEnumStrategyTest extends TestCase
         $expected = TestBackedEnum::Two;
         $strategy = new BackedEnumStrategy(TestBackedEnum::class);
         $actual   = $strategy->hydrate($expected, null);
-        self::assertSame(TestBackedEnum::Two, $actual);
+        $this->assertSame(TestBackedEnum::Two, $actual);
     }
 
     public function testHydrateNonScalarThrowsException(): void
     {
         $strategy = new BackedEnumStrategy(TestBackedEnum::class);
-        self::expectException(InvalidArgumentException::class);
-        self::expectExceptionMessage("Value must be string or int; array provided");
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("Value must be string or int; array provided");
         $strategy->hydrate([], null);
     }
 
     public function testHydrateNonCaseThrowsException(): void
     {
         $strategy = new BackedEnumStrategy(TestBackedEnum::class);
-        self::expectException(InvalidArgumentException::class);
-        self::expectExceptionMessage("Value 'three' is not a valid scalar value for " . TestBackedEnum::class);
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("Value 'three' is not a valid scalar value for " . TestBackedEnum::class);
         $strategy->hydrate('three', null);
     }
 
@@ -56,6 +56,6 @@ final class BackedEnumStrategyTest extends TestCase
     {
         $strategy = new BackedEnumStrategy(TestBackedEnum::class);
         $actual   = $strategy->hydrate('two', null);
-        self::assertSame(TestBackedEnum::Two, $actual);
+        $this->assertSame(TestBackedEnum::Two, $actual);
     }
 }

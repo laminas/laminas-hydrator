@@ -8,7 +8,7 @@ use Psr\Container\NotFoundExceptionInterface;
 
 use function sprintf;
 
-class MissingHydratorServiceException extends InvalidArgumentException implements NotFoundExceptionInterface
+final class MissingHydratorServiceException extends InvalidArgumentException implements NotFoundExceptionInterface
 {
     public static function forService(string $serviceName): self
     {

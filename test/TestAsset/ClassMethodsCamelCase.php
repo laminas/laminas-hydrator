@@ -6,97 +6,79 @@ namespace LaminasTest\Hydrator\TestAsset;
 
 class ClassMethodsCamelCase
 {
-    /** @var string */
-    protected $fooBar = '1';
+    protected string $fooBar = '1';
 
-    /** @var string */
-    protected $fooBarBaz = '2';
+    protected string $fooBarBaz = '2';
 
-    /** @var bool */
-    protected $isFoo = true;
+    protected bool $isFoo = true;
 
-    /** @var bool */
-    protected $isBar = true;
+    protected bool $isBar = true;
 
-    /** @var bool */
-    protected $hasFoo = true;
+    protected bool $hasFoo = true;
 
-    /** @var bool */
-    protected $hasBar = true;
+    protected bool $hasBar = true;
 
-    /** @return string */
-    public function getFooBar()
+    public function getFooBar(): string
     {
         return $this->fooBar;
     }
 
-    /** @param string $value */
-    public function setFooBar($value): self
+    public function setFooBar(string $value): self
     {
         $this->fooBar = $value;
         return $this;
     }
 
-    /** @return string */
-    public function getFooBarBaz()
+    public function getFooBarBaz(): string
     {
         return $this->fooBarBaz;
     }
 
-    /** @param string $value */
-    public function setFooBarBaz($value): self
+    public function setFooBarBaz(string $value): self
     {
         $this->fooBarBaz = $value;
         return $this;
     }
 
-    /** @return bool */
-    public function getIsFoo()
+    public function getIsFoo(): bool
     {
         return $this->isFoo;
     }
 
-    /** @param bool $value */
-    public function setIsFoo($value): self
+    public function setIsFoo(bool $value): self
     {
         $this->isFoo = $value;
         return $this;
     }
 
-    /** @return bool */
-    public function isBar()
+    public function isBar(): bool
     {
         return $this->isBar;
     }
 
-    /** @param bool $value */
-    public function setIsBar($value): self
+    public function setIsBar(bool $value): self
     {
         $this->isBar = $value;
         return $this;
     }
 
-    /** @return bool */
-    public function getHasFoo()
+    public function getHasFoo(): bool
     {
         return $this->hasFoo;
     }
 
-    /** @param bool $value */
-    public function setHasFoo($value): self
+    public function setHasFoo(bool $value): self
     {
         $this->hasFoo = $value;
         return $this;
     }
 
-    /** @return bool */
-    public function hasBar()
+    public function hasBar(): bool
     {
         return $this->hasBar;
     }
 
-    /** @param bool $value */
-    public function setHasBar($value): self
+    public function setHasBar(bool $value): self
     {
         $this->hasBar = $value;
         return $this;

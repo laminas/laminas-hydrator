@@ -8,27 +8,17 @@ use Laminas\Hydrator\Strategy\DefaultStrategy;
 
 class HydratorStrategyContextAware extends DefaultStrategy
 {
-    /** @var object */
-    public $object;
+    public object $object;
 
-    /** @var mixed */
-    public $data;
+    public mixed $data;
 
-    /**
-     * @param array $value
-     * @return mixed
-     */
-    public function extract($value, ?object $object = null)
+    public function extract(mixed $value, ?object $object = null): mixed
     {
         $this->object = $object;
         return $value;
     }
 
-    /**
-     * @param mixed $value
-     * @return mixed
-     */
-    public function hydrate($value, ?array $data = null)
+    public function hydrate(mixed $value, ?array $data = null): mixed
     {
         $this->data = $data;
         return $value;

@@ -9,7 +9,7 @@ use function get_object_vars;
 class HydratorStrategyEntityA
 {
     /** @var HydratorStrategyEntityB[] */
-    public $entities; // public to make testing easier!
+    public array $entities; // public to make testing easier!
 
     public function __construct()
     {
@@ -24,7 +24,7 @@ class HydratorStrategyEntityA
     /**
      * @return HydratorStrategyEntityB[]
      */
-    public function getEntities()
+    public function getEntities(): array
     {
         return $this->entities;
     }
@@ -32,7 +32,7 @@ class HydratorStrategyEntityA
     /**
      * @param HydratorStrategyEntityB[] $entities
      */
-    public function setEntities($entities): void
+    public function setEntities(array $entities): void
     {
         $this->entities = $entities;
     }
@@ -50,10 +50,9 @@ class HydratorStrategyEntityA
     /**
      * Add the populate method so we can test the ArraySerializable hydrator:
      *
-     * @param array $data
      * @psalm-param array<string, mixed> $data
      */
-    public function populate($data): void
+    public function populate(array $data): void
     {
         foreach ($data as $name => $value) {
             $this->$name = $value;

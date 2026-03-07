@@ -7,97 +7,79 @@ namespace LaminasTest\Hydrator\TestAsset;
 
 class ClassMethodsUnderscore
 {
-    /** @var string */
-    protected $foo_bar = '1';
+    protected string $foo_bar = '1';
 
-    /** @var string */
-    protected $foo_bar_baz = '2';
+    protected string $foo_bar_baz = '2';
 
-    /** @var bool */
-    protected $is_foo = true;
+    protected bool $is_foo = true;
 
-    /** @var bool */
-    protected $is_bar = true;
+    protected bool $is_bar = true;
 
-    /** @var bool */
-    protected $has_foo = true;
+    protected bool $has_foo = true;
 
-    /** @var bool */
-    protected $has_bar = true;
+    protected bool $has_bar = true;
 
-    /** @return string */
-    public function getFooBar()
+    public function getFooBar(): string
     {
         return $this->foo_bar;
     }
 
-    /** @param string $value */
-    public function setFooBar($value): self
+    public function setFooBar(string $value): self
     {
         $this->foo_bar = $value;
         return $this;
     }
 
-    /** @return string */
-    public function getFooBarBaz()
+    public function getFooBarBaz(): string
     {
         return $this->foo_bar_baz;
     }
 
-    /** @param string $value */
-    public function setFooBarBaz($value): self
+    public function setFooBarBaz(string $value): self
     {
         $this->foo_bar_baz = $value;
         return $this;
     }
 
-    /** @return bool */
-    public function getIsFoo()
+    public function getIsFoo(): bool
     {
         return $this->is_foo;
     }
 
-    /** @param bool $value */
-    public function setIsFoo($value): self
+    public function setIsFoo(bool $value): self
     {
         $this->is_foo = $value;
         return $this;
     }
 
-    /** @return bool */
-    public function isBar()
+    public function isBar(): bool
     {
         return $this->is_bar;
     }
 
-    /** @param bool $value */
-    public function setIsBar($value): self
+    public function setIsBar(bool $value): self
     {
         $this->is_bar = $value;
         return $this;
     }
 
-    /** @return bool */
-    public function getHasFoo()
+    public function getHasFoo(): bool
     {
         return $this->has_foo;
     }
 
-    /** @param bool $value */
-    public function setHasFoo($value): self
+    public function setHasFoo(bool $value): self
     {
         $this->has_foo = $value;
         return $this;
     }
 
-    /** @return bool */
-    public function hasBar()
+    public function hasBar(): bool
     {
         return $this->has_bar;
     }
 
-    /** @param bool $value */
-    public function setHasBar($value): self
+    public function setHasBar(bool $value): self
     {
         $this->has_bar = $value;
         return $this;

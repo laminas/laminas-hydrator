@@ -17,5 +17,5 @@ interface HydrationInterface
      * @psalm-return T
      * @template T of object
      */
-    public function hydrate(array $data, object $object);
+    public function hydrate(array $data, object $object): object;
 }

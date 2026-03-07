@@ -124,7 +124,7 @@ final class FilterComposite implements FilterInterface
         }
 
         foreach ($this->orFilter as $filter) {
-            if ($this->executeFilter($filter, $property, $instance) === true) {
+            if ($this->executeFilter($filter, $property, $instance)) {
                 return true;
             }
         }

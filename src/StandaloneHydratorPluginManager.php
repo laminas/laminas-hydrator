@@ -37,28 +37,18 @@ final class StandaloneHydratorPluginManager implements HydratorPluginManagerInte
      * did not have the Hydrator suffix, it also maps the class name without
      * the suffix.
      *
-     * @var array<string, string>
+     * @var array<string, class-string>
      */
     private array $aliases = [
         'arrayserializable'         => ArraySerializableHydrator::class,
-        ArraySerializable::class    => ArraySerializableHydrator::class,
         'arrayserializablehydrator' => ArraySerializableHydrator::class,
-        ClassMethods::class         => ClassMethodsHydrator::class,
         'classmethods'              => ClassMethodsHydrator::class,
         'classmethodshydrator'      => ClassMethodsHydrator::class,
         'delegatinghydrator'        => DelegatingHydrator::class,
-        ObjectProperty::class       => ObjectPropertyHydrator::class,
         'objectpropertyhydrator'    => ObjectPropertyHydrator::class,
         'objectproperty'            => ObjectPropertyHydrator::class,
-        Reflection::class           => ReflectionHydrator::class,
         'reflectionhydrator'        => ReflectionHydrator::class,
         'reflection'                => ReflectionHydrator::class,
-
-        // Legacy Zend Framework aliases
-        'Zend\Hydrator\ArraySerializable' => ArraySerializableHydrator::class,
-        'Zend\Hydrator\ClassMethods'      => ClassMethodsHydrator::class,
-        'Zend\Hydrator\ObjectProperty'    => ObjectPropertyHydrator::class,
-        'Zend\Hydrator\Reflection'        => ReflectionHydrator::class,
     ];
 
     /** @var array<string, callable> */
@@ -93,7 +83,7 @@ final class StandaloneHydratorPluginManager implements HydratorPluginManagerInte
     /**
      * {@inheritDoc}
      */
-    public function has($id)
+    public function has($id): bool
     {
         return null !== $this->resolveName($id);
     }
@@ -107,10 +97,6 @@ final class StandaloneHydratorPluginManager implements HydratorPluginManagerInte
             return $name;
         }
 
-        if (isset($this->aliases[$name])) {
-            return $this->aliases[$name];
-        }
-
-        return $this->aliases[strtolower($name)] ?? null;
+        return $this->aliases[$name] ?? $this->aliases[strtolower($name)] ?? null;
     }
 }

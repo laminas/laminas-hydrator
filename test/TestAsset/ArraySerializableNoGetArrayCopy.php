@@ -6,8 +6,7 @@ namespace LaminasTest\Hydrator\TestAsset;
 
 class ArraySerializableNoGetArrayCopy
 {
-    /** @var array */
-    protected $data = [];
+    protected array $data = [];
 
     public function __construct()
     {

@@ -10,51 +10,53 @@ use ReflectionClass;
 
 use function array_map;
 use function class_exists;
-use function gettype;
+use function get_debug_type;
 use function is_array;
-use function is_object;
 use function sprintf;
 
-class CollectionStrategy implements StrategyInterface
+/**
+ * @template T of object
+ */
+final class CollectionStrategy implements StrategyInterface
 {
-    private string $objectClassName;
-
     /**
+     * @param class-string<T> $objectClassName
      * @throws Exception\InvalidArgumentException
      */
-    public function __construct(private HydratorInterface $objectHydrator, string $objectClassName)
-    {
-        if (! class_exists($objectClassName)) {
+    public function __construct(
+        private readonly HydratorInterface $objectHydrator,
+        private readonly string $objectClassName
+    ) {
+        if (! class_exists($this->objectClassName)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Object class name needs to be the name of an existing class, got "%s" instead.',
-                $objectClassName
+                $this->objectClassName
             ));
         }
-        $this->objectClassName = $objectClassName;
     }
 
     /**
      * Converts the given value so that it can be extracted by the hydrator.
      *
-     * @param  mixed[] $value The original value.
+     * @param  array<array-key, T> $value The original value.
      * @throws Exception\InvalidArgumentException
      * @return mixed Returns the value that should be extracted.
      */
-    public function extract($value, ?object $object = null)
+    public function extract(mixed $value, ?object $object = null): array
     {
         if (! is_array($value)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Value needs to be an array, got "%s" instead.',
-                is_object($value) ? $value::class : gettype($value)
+                get_debug_type($value)
             ));
         }
 
-        return array_map(function ($object): array {
+        return array_map(function (object $object): array {
             if (! $object instanceof $this->objectClassName) {
                 throw new Exception\InvalidArgumentException(sprintf(
                     'Value needs to be an instance of "%s", got "%s" instead.',
                     $this->objectClassName,
-                    is_object($object) ? $object::class : gettype($object)
+                    get_debug_type($object)
                 ));
             }
 
@@ -65,16 +67,16 @@ class CollectionStrategy implements StrategyInterface
     /**
      * Converts the given value so that it can be hydrated by the hydrator.
      *
-     * @param  mixed[] $value The original value.
+     * @param mixed[] $value The original value.
      * @throws Exception\InvalidArgumentException
-     * @return object[] Returns the value that should be hydrated.
+     * @return array<array-key, T> Returns the value that should be hydrated.
      */
-    public function hydrate($value, ?array $data = null)
+    public function hydrate($value, ?array $data = null): array
     {
         if (! is_array($value)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Value needs to be an array, got "%s" instead.',
-                is_object($value) ? $value::class : gettype($value)
+                get_debug_type($value)
             ));
         }
 

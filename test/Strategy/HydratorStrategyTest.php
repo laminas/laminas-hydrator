@@ -20,8 +20,7 @@ use TypeError;
 
 use function count;
 use function fopen;
-use function gettype;
-use function is_object;
+use function get_debug_type;
 use function mt_getrandmax;
 use function mt_rand;
 use function spl_object_hash;
@@ -81,7 +80,7 @@ final class HydratorStrategyTest extends TestCase
             sprintf(
                 'Value needs to be an instance of "%s", got "%s" instead.',
                 TestAsset\User::class,
-                is_object($value) ? $value::class : gettype($value)
+                get_debug_type($value)
             )
         );
 
@@ -120,7 +119,7 @@ final class HydratorStrategyTest extends TestCase
             sprintf(
                 'Value needs to be an instance of "%s", got "%s" instead.',
                 TestAsset\User::class,
-                is_object($object) ? $object::class : gettype($object)
+                get_debug_type($object)
             )
         );
 
@@ -160,7 +159,7 @@ final class HydratorStrategyTest extends TestCase
 
         $hydrator = $this->createHydratorMock();
 
-        $hydrator->expects(self::once())
+        $hydrator->expects($this->once())
             ->method('extract')
             ->willReturnCallback($extraction);
 
@@ -169,7 +168,7 @@ final class HydratorStrategyTest extends TestCase
             TestAsset\User::class
         );
 
-        self::assertSame($extraction($value), $strategy->extract($value));
+        $this->assertSame($extraction($value), $strategy->extract($value));
     }
 
     #[DataProvider('providerInvalidValueForHydration')]
@@ -184,7 +183,7 @@ final class HydratorStrategyTest extends TestCase
         $this->expectExceptionMessage(
             sprintf(
                 'Value needs to be an array, got "%s" instead.',
-                is_object($value) ? $value::class : gettype($value)
+                get_debug_type($value)
             )
         );
 
@@ -217,7 +216,7 @@ final class HydratorStrategyTest extends TestCase
             TestAsset\User::class
         );
 
-        self::assertSame($value, $strategy->hydrate($value));
+        $this->assertSame($value, $strategy->hydrate($value));
     }
 
     /** @return Generator<string, array{0: mixed}> */
@@ -238,7 +237,7 @@ final class HydratorStrategyTest extends TestCase
     {
         $value = ['name' => 'John Doe'];
 
-        $hydration = static function ($data) {
+        $hydration = static function ($data): mixed {
             static $hydrator;
 
             if (null === $hydrator) {
@@ -253,7 +252,7 @@ final class HydratorStrategyTest extends TestCase
 
         $hydrator = $this->createHydratorMock();
 
-        $hydrator->expects(self::exactly(count($value)))
+        $hydrator->expects($this->exactly(count($value)))
             ->method('hydrate')
             ->willReturnCallback($hydration);
 
@@ -262,13 +261,10 @@ final class HydratorStrategyTest extends TestCase
             TestAsset\User::class
         );
 
-        self::assertEquals($hydration($value), $strategy->hydrate($value));
+        $this->assertEquals($hydration($value), $strategy->hydrate($value));
     }
 
-    /**
-     * @return MockObject&HydratorInterface
-     */
-    private function createHydratorMock(): HydratorInterface
+    private function createHydratorMock(): MockObject&HydratorInterface
     {
         return $this->createMock(HydratorInterface::class);
     }

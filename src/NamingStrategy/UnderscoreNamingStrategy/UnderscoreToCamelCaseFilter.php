@@ -54,7 +54,7 @@ final class UnderscoreToCamelCaseFilter
             ? $this->getUnicodePatternAndReplacement($pregQuotedSeparator)
             : new PcreReplacement(
                 '#(' . $pregQuotedSeparator . ')([\S]{1})#',
-                static fn($matches): string => strtoupper($matches[2])
+                static fn($matches): string => strtoupper((string) $matches[2])
             );
     }
 
@@ -63,19 +63,19 @@ final class UnderscoreToCamelCaseFilter
         return $this->hasMbStringSupport()
             ? new PcreReplacement(
                 '#(' . $pregQuotedSeparator . ')(\P{Z}{1})#u',
-                static fn($matches): string => mb_strtoupper($matches[2], 'UTF-8')
+                static fn($matches): string => mb_strtoupper((string) $matches[2], 'UTF-8')
             )
             : new PcreReplacement(
                 '#(' . $pregQuotedSeparator . ')'
                     . '([^\p{Z}\p{Ll}]{1}|[a-zA-Z]{1})#u',
-                static fn($matches): string => strtoupper($matches[2])
+                static fn($matches): string => strtoupper((string) $matches[2])
             );
     }
 
     private function getLcFirstFunction(): callable
     {
         return $this->hasMbStringSupport()
-            ? static fn($value): string => mb_strtolower($value[0], 'UTF-8') . substr($value, 1)
+            ? static fn($value): string => mb_strtolower((string) $value[0], 'UTF-8') . substr((string) $value, 1)
             : 'lcfirst';
     }
 }
