@@ -13,7 +13,7 @@ use function is_string;
 use function preg_replace;
 use function sprintf;
 
-final class DateTimeFormatterStrategy implements StrategyInterface
+final readonly class DateTimeFormatterStrategy implements StrategyInterface
 {
     /**
      * Format to use during extraction.
@@ -23,7 +23,7 @@ final class DateTimeFormatterStrategy implements StrategyInterface
      * during hydration).  These include `!` at the beginning of the string and
      * `|` at the end.
      */
-    private readonly string $extractionFormat;
+    private string $extractionFormat;
 
     /**
      * @param bool $dateTimeFallback try to parse with DateTime when createFromFormat fails
@@ -33,12 +33,12 @@ final class DateTimeFormatterStrategy implements StrategyInterface
         /**
          * Format to use during hydration.
          */
-        private readonly string $format = DateTime::RFC3339,
-        private readonly ?DateTimeZone $timezone = null,
+        private string $format = DateTime::RFC3339,
+        private ?DateTimeZone $timezone = null,
         /**
          * Whether or not to allow hydration of values that do not follow the format exactly.
          */
-        private readonly bool $dateTimeFallback = false
+        private bool $dateTimeFallback = false
     ) {
         $extractionFormat = preg_replace('/(?<![\\\\])[+|!\*]/', '', $this->format);
         if (null === $extractionFormat) {

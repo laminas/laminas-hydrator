@@ -10,7 +10,7 @@ use Laminas\Hydrator\HydratorPluginManagerFactory;
 use Laminas\Hydrator\ReflectionHydrator;
 use LaminasTest\Hydrator\TestAsset\InMemoryContainer;
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -29,14 +29,14 @@ final class HydratorPluginManagerFactoryTest extends TestCase
 
     public function testConfiguresHydratorServicesWhenFound(): void
     {
-        $hydrator  = $this->createMock(HydratorInterface::class);
+        $hydrator  = $this->createStub(HydratorInterface::class);
         $config    = [
             'hydrators' => [
                 'aliases'   => [
                     'test' => ReflectionHydrator::class,
                 ],
                 'factories' => [
-                    'test-too' => static fn(): MockObject&HydratorInterface => $hydrator,
+                    'test-too' => static fn(): Stub&HydratorInterface => $hydrator,
                 ],
             ],
         ];

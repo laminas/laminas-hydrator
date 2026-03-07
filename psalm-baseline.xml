@@ -203,9 +203,6 @@
       <code><![CDATA[is_array($value)]]></code>
       <code><![CDATA[is_array($value)]]></code>
     </DocblockTypeContradiction>
-    <MixedArgument>
-      <code><![CDATA[$data]]></code>
-    </MixedArgument>
     <MoreSpecificImplementedParamType>
       <code><![CDATA[$value]]></code>
       <code><![CDATA[$value]]></code>
@@ -308,18 +305,6 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="test/HydratorClosureStrategyTest.php">
-    <MissingClosureParamType>
-      <code><![CDATA[$value]]></code>
-      <code><![CDATA[$value]]></code>
-      <code><![CDATA[$value]]></code>
-      <code><![CDATA[$value]]></code>
-    </MissingClosureParamType>
-    <MixedArgument>
-      <code><![CDATA[$value]]></code>
-      <code><![CDATA[$value]]></code>
-      <code><![CDATA[$value]]></code>
-      <code><![CDATA[$value]]></code>
-    </MixedArgument>
     <UndefinedInterfaceMethod>
       <code><![CDATA[addStrategy]]></code>
       <code><![CDATA[addStrategy]]></code>

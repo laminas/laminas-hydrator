@@ -13,15 +13,15 @@ use function get_debug_type;
 use function is_array;
 use function sprintf;
 
-final class HydratorStrategy implements StrategyInterface
+final readonly class HydratorStrategy implements StrategyInterface
 {
-    private readonly string $objectClassName;
+    private string $objectClassName;
 
     /**
      * @throws Exception\InvalidArgumentException
      */
     public function __construct(
-        private readonly HydratorInterface $objectHydrator,
+        private HydratorInterface $objectHydrator,
         string $objectClassName
     ) {
         if (! class_exists($objectClassName)) {

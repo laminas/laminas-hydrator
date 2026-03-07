@@ -15,9 +15,9 @@ use function sprintf;
 /**
  * This Strategy extracts and hydrates int and string values to Boolean values
  */
-final class BooleanStrategy implements StrategyInterface
+final readonly class BooleanStrategy implements StrategyInterface
 {
-    public function __construct(private readonly int|string $trueValue, private readonly int|string $falseValue)
+    public function __construct(private int|string $trueValue, private int|string $falseValue)
     {
     }
 

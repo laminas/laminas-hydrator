@@ -6,9 +6,9 @@ namespace Laminas\Hydrator\Strategy;
 
 use Laminas\Serializer\Adapter\AdapterInterface as SerializerAdapter;
 
-final class SerializableStrategy implements StrategyInterface
+final readonly class SerializableStrategy implements StrategyInterface
 {
-    public function __construct(private readonly SerializerAdapter $serializer)
+    public function __construct(private SerializerAdapter $serializer)
     {
     }
 

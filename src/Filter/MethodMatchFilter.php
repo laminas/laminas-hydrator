@@ -7,7 +7,7 @@ namespace Laminas\Hydrator\Filter;
 use function strpos;
 use function substr;
 
-final class MethodMatchFilter implements FilterInterface
+final readonly class MethodMatchFilter implements FilterInterface
 {
     /**
      * @param string $method The method to exclude or include
@@ -17,11 +17,11 @@ final class MethodMatchFilter implements FilterInterface
         /**
          * The method to exclude
          */
-        private readonly string $method,
+        private string $method,
         /**
          * Either an exclude or an include
          */
-        private readonly bool $exclude = true
+        private bool $exclude = true
     ) {
     }
 

@@ -16,7 +16,7 @@ final class CompositeNamingStrategyTest extends TestCase
     public function testGetSameNameWhenNoNamingStrategyExistsForTheName(): void
     {
         $compositeNamingStrategy = new CompositeNamingStrategy([
-            'foo' => $this->createMock(NamingStrategyInterface::class),
+            'foo' => $this->createStub(NamingStrategyInterface::class),
         ]);
 
         $this->assertSame('bar', $compositeNamingStrategy->hydrate('bar'));
@@ -37,7 +37,7 @@ final class CompositeNamingStrategyTest extends TestCase
             ->willReturn('foo');
 
         $compositeNamingStrategy = new CompositeNamingStrategy(
-            ['bar' => $this->createMock(NamingStrategyInterface::class)],
+            ['bar' => $this->createStub(NamingStrategyInterface::class)],
             $defaultNamingStrategy
         );
         $this->assertSame('Foo', $compositeNamingStrategy->hydrate('foo'));

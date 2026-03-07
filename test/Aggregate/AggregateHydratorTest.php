@@ -30,7 +30,7 @@ final class AggregateHydratorTest extends TestCase
 
     public function testAdd(): void
     {
-        $attached = $this->createMock(HydratorInterface::class);
+        $attached = $this->createStub(HydratorInterface::class);
 
         $this->eventManager
             ->expects($this->exactly(2))

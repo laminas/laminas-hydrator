@@ -7,7 +7,7 @@ use Rector\PHPUnit\CodeQuality\Rector\Class_\YieldDataProviderRector;
 use Rector\PHPUnit\CodeQuality\Rector\MethodCall\AssertEqualsOrAssertSameFloatParameterToSpecificMethodsTypeRector;
 
 return RectorConfig::configure()
-    ->withPhpSets(php81: true)
+    ->withPhpSets(php82: true)
     ->withAttributesSets()
     ->withPaths([
         __DIR__ . '/src',

@@ -19,7 +19,7 @@ final class DelegatingHydratorFactoryTest extends TestCase
 {
     public function testFactoryUsesContainerToSeedDelegatingHydratorWhenItIsAHydratorPluginManager(): void
     {
-        $hydrators = $this->createMock(HydratorPluginManagerInterface::class);
+        $hydrators = $this->createStub(HydratorPluginManagerInterface::class);
         $factory   = new DelegatingHydratorFactory();
 
         $hydrator = $factory($hydrators);
@@ -30,7 +30,7 @@ final class DelegatingHydratorFactoryTest extends TestCase
     public function testFactoryUsesHydratorPluginManagerServiceFromContainerToSeedDelegatingHydratorWhenAvailable(): void
     {
         // phpcs:enable
-        $hydrators = $this->createMock(HydratorPluginManagerInterface::class);
+        $hydrators = $this->createStub(HydratorPluginManagerInterface::class);
         $container = $this->createMock(ContainerInterface::class);
         $container->expects($this->once())->method('has')->with(HydratorPluginManager::class)->willReturn(true);
         $container->expects($this->once())->method('get')->with(HydratorPluginManager::class)->willReturn($hydrators);
@@ -43,7 +43,7 @@ final class DelegatingHydratorFactoryTest extends TestCase
 
     public function testFactoryUsesHydratorManagerServiceFromContainerToSeedDelegatingHydratorWhenAvailable(): void
     {
-        $hydrators = $this->createMock(HydratorPluginManagerInterface::class);
+        $hydrators = $this->createStub(HydratorPluginManagerInterface::class);
         $container = new InMemoryContainer();
         $container->set('HydratorManager', $hydrators);
         $factory = new DelegatingHydratorFactory();
