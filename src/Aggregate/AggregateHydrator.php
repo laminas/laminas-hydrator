@@ -13,8 +13,6 @@ use function assert;
 
 /**
  * Aggregate hydrator that composes multiple hydrators via events
- *
- * @final
  */
 final class AggregateHydrator implements HydratorInterface, EventManagerAwareInterface
 {

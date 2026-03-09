@@ -13,7 +13,6 @@ use Laminas\Hydrator\HydratorInterface;
  * @template TInputData of array
  * @template TIterator of ArrayIterator<TKey, TInputData>
  * @template-extends HydratingIteratorIterator<TKey, TPrototype, TInputData, TIterator>
- * @final
  */
 final class HydratingArrayIterator extends HydratingIteratorIterator
 {

@@ -12,8 +12,6 @@ use Laminas\Hydrator\HydratorInterface;
  * Aggregate listener wrapping around a hydrator.
  *
  * Listens to {@see HydrateEvent::EVENT_HYDRATE} and {@see ExtractEvent::EVENT_EXTRACT}
- *
- * @final
  */
 final class HydratorListener extends AbstractListenerAggregate
 {
