@@ -213,8 +213,8 @@ final class FilterCompositeTest extends TestCase
     }
 
     /**
-     * @param list<FilterInterface> $orFilters
-     * @param list<FilterInterface> $andFilters
+     * @param array<array-key, FilterInterface> $orFilters
+     * @param array<array-key, FilterInterface> $andFilters
      */
     #[DataProvider('providerCompositionFiltering')]
     public function testCompositionFiltering(array $orFilters, array $andFilters, bool $expected): void
