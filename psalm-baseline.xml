@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="6.13.0@70cdf647255a1362b426bb0f522a85817b8c791c">
+<files psalm-version="6.15.1@28dc127af1b5aecd52314f6f645bafc10d0e11f9">
   <file src="src/ArraySerializableHydrator.php">
     <MixedArgument>
       <code><![CDATA[$original]]></code>
@@ -203,9 +203,6 @@
       <code><![CDATA[is_array($value)]]></code>
       <code><![CDATA[is_array($value)]]></code>
     </DocblockTypeContradiction>
-    <MixedArgument>
-      <code><![CDATA[$data]]></code>
-    </MixedArgument>
     <MoreSpecificImplementedParamType>
       <code><![CDATA[$value]]></code>
       <code><![CDATA[$value]]></code>
@@ -308,18 +305,6 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="test/HydratorClosureStrategyTest.php">
-    <MissingClosureParamType>
-      <code><![CDATA[$value]]></code>
-      <code><![CDATA[$value]]></code>
-      <code><![CDATA[$value]]></code>
-      <code><![CDATA[$value]]></code>
-    </MissingClosureParamType>
-    <MixedArgument>
-      <code><![CDATA[$value]]></code>
-      <code><![CDATA[$value]]></code>
-      <code><![CDATA[$value]]></code>
-      <code><![CDATA[$value]]></code>
-    </MixedArgument>
     <UndefinedInterfaceMethod>
       <code><![CDATA[addStrategy]]></code>
       <code><![CDATA[addStrategy]]></code>

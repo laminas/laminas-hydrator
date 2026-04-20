@@ -17,15 +17,15 @@ use function sprintf;
 /**
  * @template T of object
  */
-final class CollectionStrategy implements StrategyInterface
+final readonly class CollectionStrategy implements StrategyInterface
 {
     /**
      * @param class-string<T> $objectClassName
      * @throws Exception\InvalidArgumentException
      */
     public function __construct(
-        private readonly HydratorInterface $objectHydrator,
-        private readonly string $objectClassName
+        private HydratorInterface $objectHydrator,
+        private string $objectClassName
     ) {
         if (! class_exists($this->objectClassName)) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -82,7 +82,7 @@ final class CollectionStrategy implements StrategyInterface
 
         $reflection = new ReflectionClass($this->objectClassName);
 
-        return array_map(fn($data): object => $this->objectHydrator->hydrate(
+        return array_map(fn(array $data): object => $this->objectHydrator->hydrate(
             $data,
             $reflection->newInstanceWithoutConstructor()
         ), $value);

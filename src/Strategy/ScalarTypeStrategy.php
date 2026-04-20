@@ -9,7 +9,7 @@ use Laminas\Hydrator\Exception\InvalidArgumentException;
 use function implode;
 use function sprintf;
 
-final class ScalarTypeStrategy implements StrategyInterface
+final readonly class ScalarTypeStrategy implements StrategyInterface
 {
     private const TYPE_INT     = 'int';
     private const TYPE_FLOAT   = 'float';
@@ -36,7 +36,7 @@ final class ScalarTypeStrategy implements StrategyInterface
         return new self(self::TYPE_BOOLEAN);
     }
 
-    private function __construct(private readonly string $type)
+    private function __construct(private string $type)
     {
     }
 

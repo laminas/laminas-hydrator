@@ -4,15 +4,10 @@
     xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
     bootstrap="./vendor/autoload.php"
     colors="true"
-    displayDetailsOnTestsThatTriggerWarnings="true"
-    displayDetailsOnTestsThatTriggerNotices="true"
-    displayDetailsOnTestsThatTriggerErrors="true"
-    displayDetailsOnTestsThatTriggerDeprecations="true"
-    displayDetailsOnSkippedTests="true"
-    displayDetailsOnIncompleteTests="true"
+    displayDetailsOnAllIssues="true"
+    failOnWarning="true"
     failOnNotice="true"
     failOnDeprecation="true"
-    failOnWarning="true"
 >
     <coverage includeUncoveredFiles="true"/>
     <testsuites>
@@ -23,7 +18,7 @@
     <php>
         <ini name="date.timezone" value="UTC"/>
     </php>
-    <source>
+    <source ignoreIndirectDeprecations="true">
         <include>
             <directory suffix=".php">./src</directory>
         </include>

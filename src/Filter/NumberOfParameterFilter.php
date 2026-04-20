@@ -11,7 +11,7 @@ use ReflectionMethod;
 use function method_exists;
 use function sprintf;
 
-final class NumberOfParameterFilter implements FilterInterface
+final readonly class NumberOfParameterFilter implements FilterInterface
 {
     /**
      * @param int $numberOfParameters Number of accepted parameters
@@ -20,7 +20,7 @@ final class NumberOfParameterFilter implements FilterInterface
         /**
          * The number of parameters being accepted
          */
-        private readonly int $numberOfParameters = 0
+        private int $numberOfParameters = 0
     ) {
     }
 

@@ -16,12 +16,12 @@ use function sprintf;
 /**
  * @template T of BackedEnum
  */
-final class BackedEnumStrategy implements StrategyInterface
+final readonly class BackedEnumStrategy implements StrategyInterface
 {
     /**
      * @param class-string<T> $enumClass
      */
-    public function __construct(private readonly string $enumClass)
+    public function __construct(private string $enumClass)
     {
     }
 

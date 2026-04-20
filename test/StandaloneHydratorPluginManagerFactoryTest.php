@@ -12,7 +12,6 @@ use Laminas\Hydrator\ReflectionHydrator;
 use Laminas\Hydrator\StandaloneHydratorPluginManager;
 use Laminas\Hydrator\StandaloneHydratorPluginManagerFactory;
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Reflection;
@@ -25,12 +24,10 @@ final class StandaloneHydratorPluginManagerFactoryTest extends TestCase
     private const MESSAGE_DEFAULT_SERVICES = 'Missing the service %s';
 
     private StandaloneHydratorPluginManagerFactory $factory;
-    private ContainerInterface&MockObject $container;
 
     protected function setUp(): void
     {
-        $this->factory   = new StandaloneHydratorPluginManagerFactory();
-        $this->container = $this->createMock(ContainerInterface::class);
+        $this->factory = new StandaloneHydratorPluginManagerFactory();
     }
 
     public function assertDefaultServices(
@@ -65,7 +62,9 @@ final class StandaloneHydratorPluginManagerFactoryTest extends TestCase
 
     public function testCreatesPluginManagerWithDefaultServices(): void
     {
-        $manager = ($this->factory)($this->container);
+        /** @var ContainerInterface $container */
+        $container = $this->createStub(ContainerInterface::class);
+        $manager   = ($this->factory)($container);
         $this->assertDefaultServices($manager);
     }
 }

@@ -17,17 +17,14 @@
             <directory name="vendor"/>
         </ignoreFiles>
     </projectFiles>
-
     <issueHandlers>
-        <InternalClass>
+        <MissingOverrideAttribute>
             <errorLevel type="suppress">
-                <file name="test/HydratorPluginManagerFactoryTest.php" />
+                <directory name="src" />
+                <directory name="test" />
             </errorLevel>
-        </InternalClass>
-<!--        #[Override] attribute support was introduced in PHP 8.3 -->
-        <MissingOverrideAttribute errorLevel="suppress" />
+        </MissingOverrideAttribute>
     </issueHandlers>
-
     <plugins>
         <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
     </plugins>

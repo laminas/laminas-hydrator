@@ -9,21 +9,21 @@ use Laminas\Stdlib\ArrayUtils;
 use function array_map;
 use function array_reverse;
 
-final class StrategyChain implements StrategyInterface
+final readonly class StrategyChain implements StrategyInterface
 {
     /**
      * Strategy chain for extraction
      *
      * @var StrategyInterface[]
      */
-    private readonly array $extractionStrategies;
+    private array $extractionStrategies;
 
     /**
      * Strategy chain for hydration
      *
      * @var StrategyInterface[]
      */
-    private readonly array $hydrationStrategies;
+    private array $hydrationStrategies;
 
     /**
      * @param StrategyInterface[] $extractionStrategies
