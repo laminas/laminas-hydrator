@@ -14,16 +14,6 @@ use function sprintf;
 
 final class FilterComposite implements FilterInterface
 {
-    /**
-     * Constant to add with "or" condition
-     */
-    public const CONDITION_OR = 1;
-
-    /**
-     * Constant to add with "and" condition
-     */
-    public const CONDITION_AND = 2;
-
     private ArrayObject $andFilter;
 
     private ArrayObject $orFilter;
@@ -56,28 +46,23 @@ final class FilterComposite implements FilterInterface
      *             return false;
      *         }
      *         return true;
-     *     }, FilterComposite::CONDITION_AND
+     *     }, FilterCondition::And
      * );
      * </code>
      *
      * @param  callable|FilterInterface $filter
-     * @param  int                      $condition Can be either
-     *     FilterComposite::CONDITION_OR or FilterComposite::CONDITION_AND
      * @throws InvalidArgumentException
      */
-    public function addFilter(string $name, $filter, int $condition = self::CONDITION_OR): void
+    public function addFilter(string $name, $filter, FilterCondition $condition = FilterCondition::Or): void
     {
         $this->validateFilter($filter, $name);
 
-        if ($condition === self::CONDITION_OR) {
+        if ($condition === FilterCondition::Or) {
             $this->orFilter[$name] = $filter;
             return;
         }
 
-        if ($condition === self::CONDITION_AND) {
-            $this->andFilter[$name] = $filter;
-            return;
-        }
+        $this->andFilter[$name] = $filter;
     }
 
     /**

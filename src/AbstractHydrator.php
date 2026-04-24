@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Laminas\Hydrator;
 
 use Laminas\Hydrator\Filter\FilterComposite;
+use Laminas\Hydrator\Filter\FilterCondition;
 use Laminas\Hydrator\Filter\FilterInterface;
 use Laminas\Hydrator\NamingStrategy\NamingStrategyInterface;
 
@@ -180,7 +181,7 @@ abstract class AbstractHydrator implements
      *             return false;
      *         }
      *         return true;
-     *     }, FilterComposite::CONDITION_AND
+     *     }, FilterCondition::And
      * );
      * </code>
      *
@@ -190,7 +191,7 @@ abstract class AbstractHydrator implements
     public function addFilter(
         string $name,
         callable|FilterInterface $filter,
-        int $condition = FilterComposite::CONDITION_OR
+        FilterCondition $condition = FilterCondition::Or
     ): void {
         $this->getCompositeFilter()->addFilter($name, $filter, $condition);
     }

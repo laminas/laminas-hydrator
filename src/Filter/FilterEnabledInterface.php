@@ -20,7 +20,7 @@ interface FilterEnabledInterface extends FilterProviderInterface
      *         }
      *         return true;
      *     },
-     *     FilterComposite::CONDITION_AND
+     *     FilterCondition::And
      * );
      * </code>
      *
@@ -30,7 +30,7 @@ interface FilterEnabledInterface extends FilterProviderInterface
     public function addFilter(
         string $name,
         callable|FilterInterface $filter,
-        int $condition = FilterComposite::CONDITION_OR,
+        FilterCondition $condition = FilterCondition::Or,
     ): void;
 
     /**

@@ -42,6 +42,26 @@ Please update your codebase to use the corresponding `*Hydrator` classes:
 | `Laminas\Hydrator\ObjectProperty`         | `Laminas\Hydrator\ObjectPropertyHydrator`          |
 | `Laminas\Hydrator\Reflection`             | `Laminas\Hydrator\ReflectionHydrator`              |
 
+### `FilterComposite`: Integer Constants Replaced by `FilterCondition` Enum
+
+The `FilterComposite::CONDITION_OR` and `FilterComposite::CONDITION_AND` integer constants have been removed.
+Replace them with the new `FilterCondition` enum.
+
+```php
+// Before (v4)
+use Laminas\Hydrator\Filter\FilterComposite;
+
+$hydrator->addFilter('exclude', $myFilter, FilterComposite::CONDITION_AND);
+
+// After (v5)
+use Laminas\Hydrator\Filter\FilterCondition;
+
+$hydrator->addFilter('exclude', $myFilter, FilterCondition::And);
+```
+
+The `$condition` parameter of `addFilter()` now requires a `FilterCondition` value instead of an `int`
+on `FilterComposite`, `FilterEnabledInterface`, `AbstractHydrator`, and `ClassMethodsHydrator`.
+
 ## Removed Features
 
 ### Removal of Module Manager Support
