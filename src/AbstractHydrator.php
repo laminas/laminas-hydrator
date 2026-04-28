@@ -183,15 +183,20 @@ abstract class AbstractHydrator implements
      *             return false;
      *         }
      *         return true;
-     *     }, FilterComposite::CONDITION_AND
+     *     }, FilterCondition::And
      * );
      * </code>
      *
      * @param string $name Index in the composite
      * @param callable|Filter\FilterInterface $filter
+     * @param Filter\FilterCondition|int $condition Passing an int is deprecated;
+     *     use {@see Filter\FilterCondition} instead.
      */
-    public function addFilter(string $name, $filter, int $condition = Filter\FilterComposite::CONDITION_OR): void
-    {
+    public function addFilter(
+        string $name,
+        $filter,
+        Filter\FilterCondition|int $condition = Filter\FilterCondition::Or
+    ): void {
         $this->getCompositeFilter()->addFilter($name, $filter, $condition);
     }
 

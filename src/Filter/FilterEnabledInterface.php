@@ -20,14 +20,15 @@ interface FilterEnabledInterface extends FilterProviderInterface
      *         }
      *         return true;
      *     },
-     *     FilterComposite::CONDITION_AND
+     *     FilterCondition::And
      * );
      * </code>
      *
      * @param string $name Index in the composite
      * @param callable|FilterInterface $filter
+     * @param FilterCondition|int $condition Passing an int is deprecated; use {@see FilterCondition} instead.
      */
-    public function addFilter(string $name, $filter, int $condition = FilterComposite::CONDITION_OR): void;
+    public function addFilter(string $name, $filter, FilterCondition|int $condition = FilterCondition::Or): void;
 
     /**
      * Check whether a specific filter exists at key $name or not

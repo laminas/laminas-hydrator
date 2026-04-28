@@ -11,17 +11,22 @@ use Laminas\Hydrator\Exception\InvalidArgumentException;
 use function array_walk;
 use function count;
 use function is_callable;
+use function is_int;
 use function sprintf;
 
 final class FilterComposite implements FilterInterface
 {
     /**
      * Constant to add with "or" condition
+     *
+     * @deprecated Use {@see FilterCondition::Or} instead. This constant will be removed in v5.
      */
     public const CONDITION_OR = 1;
 
     /**
      * Constant to add with "and" condition
+     *
+     * @deprecated Use {@see FilterCondition::And} instead. This constant will be removed in v5.
      */
     public const CONDITION_AND = 2;
 
@@ -57,28 +62,30 @@ final class FilterComposite implements FilterInterface
      *             return false;
      *         }
      *         return true;
-     *     }, FilterComposite::CONDITION_AND
+     *     }, FilterCondition::And
      * );
      * </code>
      *
-     * @param  callable|FilterInterface $filter
-     * @param  int                      $condition Can be either
-     *     FilterComposite::CONDITION_OR or FilterComposite::CONDITION_AND
+     * @param  callable|FilterInterface    $filter
+     * @param  FilterCondition|int         $condition Can be either
+     *     {@see FilterCondition::Or} or {@see FilterCondition::And}.
+     *     Passing an int is deprecated; use {@see FilterCondition} instead.
      * @throws InvalidArgumentException
      */
-    public function addFilter(string $name, $filter, int $condition = self::CONDITION_OR): void
+    public function addFilter(string $name, $filter, FilterCondition|int $condition = FilterCondition::Or): void
     {
         $this->validateFilter($filter, $name);
 
-        if ($condition === self::CONDITION_OR) {
+        if (is_int($condition)) {
+            $condition = FilterCondition::from($condition);
+        }
+
+        if ($condition === FilterCondition::Or) {
             $this->orFilter[$name] = $filter;
             return;
         }
 
-        if ($condition === self::CONDITION_AND) {
-            $this->andFilter[$name] = $filter;
-            return;
-        }
+        $this->andFilter[$name] = $filter;
     }
 
     /**
