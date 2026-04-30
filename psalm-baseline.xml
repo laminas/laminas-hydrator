@@ -16,6 +16,11 @@
       <code><![CDATA[ArraySerializableHydrator]]></code>
     </InvalidExtendClass>
   </file>
+  <file src="src/AbstractHydrator.php">
+    <DeprecatedConstant>
+      <code><![CDATA[Filter\FilterComposite::CONDITION_OR]]></code>
+    </DeprecatedConstant>
+  </file>
   <file src="src/ArraySerializableHydrator.php">
     <MixedArgument>
       <code><![CDATA[$original]]></code>
@@ -53,6 +58,9 @@
     </InvalidExtendClass>
   </file>
   <file src="src/ClassMethodsHydrator.php">
+    <DeprecatedConstant>
+      <code><![CDATA[Filter\FilterComposite::CONDITION_OR]]></code>
+    </DeprecatedConstant>
     <DocblockTypeContradiction>
       <code><![CDATA[$options instanceof Traversable]]></code>
       <code><![CDATA[null === $this->extractionMethodsCache[$objectClass]]]></code>
@@ -95,12 +103,20 @@
     </MixedReturnStatement>
   </file>
   <file src="src/Filter/FilterComposite.php">
+    <DeprecatedConstant>
+      <code><![CDATA[self::CONDITION_OR]]></code>
+      <code><![CDATA[self::CONDITION_OR]]></code>
+      <code><![CDATA[self::CONDITION_AND]]></code>
+    </DeprecatedConstant>
     <MixedArgumentTypeCoercion>
       <code><![CDATA[$filter]]></code>
       <code><![CDATA[$filter]]></code>
     </MixedArgumentTypeCoercion>
   </file>
   <file src="src/Filter/FilterEnabledInterface.php">
+    <DeprecatedConstant>
+      <code><![CDATA[FilterComposite::CONDITION_OR]]></code>
+    </DeprecatedConstant>
     <PossiblyUnusedMethod>
       <code><![CDATA[hasFilter]]></code>
     </PossiblyUnusedMethod>
@@ -571,6 +587,10 @@
     </UndefinedInterfaceMethod>
   </file>
   <file src="test/HydratorTest.php">
+    <DeprecatedConstant>
+      <code><![CDATA[FilterComposite::CONDITION_AND]]></code>
+      <code><![CDATA[FilterComposite::CONDITION_AND]]></code>
+    </DeprecatedConstant>
     <MissingClosureParamType>
       <code><![CDATA[$property]]></code>
       <code><![CDATA[$property]]></code>

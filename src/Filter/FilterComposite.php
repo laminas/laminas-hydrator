@@ -17,11 +17,15 @@ final class FilterComposite implements FilterInterface
 {
     /**
      * Constant to add with "or" condition
+     *
+     * @deprecated This constant will be replaced with FilterCondition::class in the v5
      */
     public const CONDITION_OR = 1;
 
     /**
      * Constant to add with "and" condition
+     *
+     * @deprecated This constant will be replaced with FilterCondition::class in the v5
      */
     public const CONDITION_AND = 2;
 
