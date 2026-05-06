@@ -155,9 +155,6 @@
       <code><![CDATA[$value]]></code>
       <code><![CDATA[$value]]></code>
     </MixedAssignment>
-    <UnsupportedReferenceUsage>
-      <code><![CDATA[$properties = &self::$skippedPropertiesCache[$object::class]]]></code>
-    </UnsupportedReferenceUsage>
   </file>
   <file src="src/ReflectionHydrator.php">
     <MixedArgumentTypeCoercion>

@@ -13,8 +13,8 @@ use function get_object_vars;
 
 final class ObjectPropertyHydrator extends AbstractHydrator
 {
-    /** @var (null|array)[] indexed by class name and then property name */
-    private static array $skippedPropertiesCache = [];
+    /** @var array<class-string, array<string, true>> indexed by class name and then property name */
+    private array $skippedPropertiesCache = [];
 
     /**
      * Extracts the accessible non-static properties of the given $object.
@@ -56,11 +56,11 @@ final class ObjectPropertyHydrator extends AbstractHydrator
      */
     public function hydrate(array $data, object $object): object
     {
-        $properties = &self::$skippedPropertiesCache[$object::class] ?? null;
+        $className = $object::class;
 
-        if (null === $properties) {
-            $reflection = new ReflectionClass($object);
-            $properties = array_fill_keys(
+        if (! isset($this->skippedPropertiesCache[$className])) {
+            $reflection                               = new ReflectionClass($object);
+            $this->skippedPropertiesCache[$className] = array_fill_keys(
                 array_map(
                     static fn(ReflectionProperty $property): string => $property->getName(),
                     $reflection->getProperties(
@@ -72,6 +72,8 @@ final class ObjectPropertyHydrator extends AbstractHydrator
                 true
             );
         }
+
+        $properties = $this->skippedPropertiesCache[$className];
 
         foreach ($data as $name => $value) {
             $property = $this->hydrateName($name, $data);

@@ -14,7 +14,7 @@ final class ReflectionHydrator extends AbstractHydrator
      *
      * @var ReflectionProperty[][]
      */
-    private static array $reflProperties = [];
+    private array $reflProperties = [];
 
     /**
      * Extract values from an object
@@ -64,18 +64,18 @@ final class ReflectionHydrator extends AbstractHydrator
     {
         $class = $input::class;
 
-        if (isset(self::$reflProperties[$class])) {
-            return self::$reflProperties[$class];
+        if (isset($this->reflProperties[$class])) {
+            return $this->reflProperties[$class];
         }
 
-        self::$reflProperties[$class] = [];
+        $this->reflProperties[$class] = [];
         $reflClass                    = new ReflectionClass($class);
         $reflProperties               = $reflClass->getProperties();
 
         foreach ($reflProperties as $property) {
-            self::$reflProperties[$class][$property->getName()] = $property;
+            $this->reflProperties[$class][$property->getName()] = $property;
         }
 
-        return self::$reflProperties[$class];
+        return $this->reflProperties[$class];
     }
 }
