@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Laminas\Hydrator;
 
+use Laminas\Hydrator\Filter\FilterCondition;
 use Laminas\Hydrator\Filter\FilterInterface;
 use Laminas\Stdlib\ArrayUtils;
 use Traversable;
@@ -247,7 +248,7 @@ final class ClassMethodsHydrator extends AbstractHydrator implements HydratorOpt
     public function addFilter(
         string $name,
         callable|FilterInterface $filter,
-        int $condition = Filter\FilterComposite::CONDITION_OR
+        FilterCondition $condition = FilterCondition::Or
     ): void {
         $this->resetCaches();
         parent::addFilter($name, $filter, $condition);

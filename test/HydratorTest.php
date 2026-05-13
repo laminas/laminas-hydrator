@@ -7,7 +7,7 @@ namespace LaminasTest\Hydrator;
 use Laminas\Hydrator\AbstractHydrator;
 use Laminas\Hydrator\ArraySerializableHydrator;
 use Laminas\Hydrator\ClassMethodsHydrator;
-use Laminas\Hydrator\Filter\FilterComposite;
+use Laminas\Hydrator\Filter\FilterCondition;
 use Laminas\Hydrator\ObjectPropertyHydrator;
 use Laminas\Hydrator\ReflectionHydrator;
 use Laminas\Hydrator\Strategy\DefaultStrategy;
@@ -355,7 +355,7 @@ final class HydratorTest extends TestCase
                 $method = explode('::', $property)[1];
                 return $method !== 'getHasFoo';
             },
-            FilterComposite::CONDITION_AND
+            FilterCondition::And
         );
 
         $datas = $hydrator->extract($this->classMethodsCamelCase);
@@ -385,7 +385,7 @@ final class HydratorTest extends TestCase
         $hydrator->addFilter(
             'len',
             static fn($property): bool => strlen($property) === 3,
-            FilterComposite::CONDITION_AND
+            FilterCondition::And
         );
 
         $this->assertSame([

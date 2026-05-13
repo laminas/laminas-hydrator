@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace LaminasTest\Hydrator\TestAsset;
 
 use Laminas\Hydrator\Filter\FilterComposite;
+use Laminas\Hydrator\Filter\FilterCondition;
 use Laminas\Hydrator\Filter\FilterInterface;
 use Laminas\Hydrator\Filter\FilterProviderInterface;
 use Laminas\Hydrator\Filter\GetFilter;
@@ -54,14 +55,14 @@ class ClassMethodsFilterProviderInterface implements FilterProviderInterface
         $excludes->addFilter(
             "servicemanager",
             new MethodMatchFilter("getServiceManager"),
-            FilterComposite::CONDITION_AND
+            FilterCondition::And
         );
         $excludes->addFilter(
             "eventmanager",
             new MethodMatchFilter("getEventManager"),
-            FilterComposite::CONDITION_AND
+            FilterCondition::And
         );
-        $filterComposite->addFilter("excludes", $excludes, FilterComposite::CONDITION_AND);
+        $filterComposite->addFilter("excludes", $excludes, FilterCondition::And);
 
         return $filterComposite;
     }
