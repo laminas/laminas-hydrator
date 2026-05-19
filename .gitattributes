@@ -9,6 +9,7 @@
 /phpcs.xml export-ignore
 /phpunit.xml.dist export-ignore
 /psalm.xml export-ignore
-/psalm-baseline.xml
+/psalm-baseline.xml export-ignore
 /mkdocs.yml export-ignore
+/renovate.json export-ignore
 /composer-dependency-analyser.php export-ignore
