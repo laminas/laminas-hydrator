@@ -71,7 +71,7 @@ class Album
 }
 ```
 
-### Create Hydrator and Add Atrategy
+### Create Hydrator and Add Strategy
 
 Create a hydrator and add the `BackedEnumStrategy` as a strategy:
 

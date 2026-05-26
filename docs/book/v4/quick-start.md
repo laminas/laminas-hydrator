@@ -87,7 +87,7 @@ $data = [
 
 $hydrator = new Laminas\Hydrator\ClassMethodsHydrator();
 $user     = $hydrator->hydrate($data, new User());
-$data     = $hydrator->extract(new User());
+$data     = $hydrator->extract($user);
 ```
 
 ### ObjectPropertyHydrator
@@ -112,7 +112,7 @@ $data = [
 
 $hydrator = new Laminas\Hydrator\ObjectPropertyHydrator();
 $user     = $hydrator->hydrate($data, new User());
-$data     = $hydrator->extract(new User());
+$data     = $hydrator->extract($user);
 ```
 
 ### ReflectionHydrator
@@ -139,7 +139,7 @@ $data = [
 
 $hydrator = new Laminas\Hydrator\ReflectionHydrator();
 $user     = $hydrator->hydrate($data, new User());
-$data     = $hydrator->extract(new User());
+$data     = $hydrator->extract($user);
 ```
 
 ### DelegatingHydrator

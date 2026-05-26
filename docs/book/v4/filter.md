@@ -232,10 +232,8 @@ $extractedArray = $hydrator->extract(new Foo());
 `$extractedArray` will only have 'foo' =&gt; 'foo'; all other values are
 excluded from extraction.
 
-> ### Note
->
-> All pre-registered filters from the `ClassMethodsHydrator` hydrator are ignored when
-> this interface is used. More on those methods below.
+NOTE: All pre-registered filters from the `ClassMethodsHydrator` hydrator are ignored when this interface is used.
+More on those methods below.
 
 ## Filter-enabled hydrators and the composite filter
 
@@ -287,8 +285,7 @@ interface FilterEnabledInterface extends FilterProviderInterface
 }
 ```
 
-> Note that the interface extends `FilterProviderInterface`, which means it also
-> includes the `getFilter()` method.
+NOTE: The interface extends `FilterProviderInterface`, which means it also includes the `getFilter()` method.
 
 The `FilterEnabledInterface` makes the assumption that the class will be backed
 by a `Laminas\Hydrator\Filter\FilterComposite`; the various `addFilter()`,

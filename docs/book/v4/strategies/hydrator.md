@@ -1,7 +1,5 @@
 # Hydrator
 
-> Available since version 3.1.0
-
 The `HydratorStrategy` can be used to **hydrate an object and its child objects
 with data from a nested array and vice versa**.
 

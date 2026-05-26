@@ -6,7 +6,7 @@
 strings and `DateTimeImmutable` instances**.
 
 The strategy uses `DateTimeFormatterStrategy` for conversion where the
-[input and output formats](../strategy.md#laminas-hydrator-strategy-datetimeformatterstrategy)
+[input and output formats](../strategy.md#laminashydratorstrategydatetimeformatterstrategy)
 can be set.
 
 ## Basic Usage
@@ -16,7 +16,7 @@ to a hydrator.
 
 ### Create and configure strategy
 
-Create the strategy and set the [input and output formats](../strategy.md#laminas-hydrator-strategy-datetimeformatterstrategy)
+Create the strategy and set the [input and output formats](../strategy.md#laminashydratorstrategydatetimeformatterstrategy)
 via the `DateTimeFormatterStrategy`.
 
 ```php
