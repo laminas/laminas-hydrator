@@ -2,13 +2,46 @@ docs_dir: docs/book
 site_dir: docs/html
 extra:
   project: Components
-  current_version: v4
+  current_version: v5
   versions:
+    - v5
     - v4
     - v3
     - v2
+  installation:
+    config_provider_class: 'Laminas\Hydrators\ConfigProvider'
 nav:
     - Home: index.md
+    - v5:
+      - Introduction: v5/introduction.md
+      - Installation: v5/installation.md
+      - "Basic Usage": v5/basic-usage.md
+      - Hydrators:
+        - ArraySerializableHydrator: v5/hydrators/array-serializable-hydrator.md
+        - ClassMethodsHydrator: v5/hydrators/class-methods-hydrator.md
+        - DelegatingHydrator: v5/hydrators/delegating-hydrator.md
+        - ObjectPropertyHydrator: v5/hydrators/object-property-hydrator.md
+        - ReflectionHydrator: v5/hydrators/reflection-hydrator.md
+      - "Filters": v5/filter.md
+      - "Strategies":
+        - Introduction: v5/strategy.md
+        - BackedEnum: v5/strategies/backed-enum.md
+        - Collection: v5/strategies/collection.md
+        - DateTimeImmutableFormatter: v5/strategies/datetime-immutable-formatter-strategy.md
+        - Hydrator: v5/strategies/hydrator.md
+        - Serializable: v5/strategies/serializable.md
+      - "Aggregates": v5/aggregate.md
+      - "Naming Strategies":
+        - "Introduction": v5/naming-strategy/intro.md
+        - "Identity": v5/naming-strategy/identity-naming-strategy.md
+        - "Mapping": v5/naming-strategy/map-naming-strategy.md
+        - "Underscore Mapping": v5/naming-strategy/underscore-naming-strategy.md
+        - "Composite": v5/naming-strategy/composite-naming-strategy.md
+      - "Plugin Managers": v5/plugin-managers.md
+      - Cookbook:
+        - "Hydrators in Forms": v5/cookbook/hydrators-in-forms.md
+      - Migration:
+          - "Migration from Version 4 to 5": v5/migration/v4-to-v5.md
     - v4:
       - "Quick Start": v4/quick-start.md
       - "Filters": v4/filter.md
@@ -61,14 +94,13 @@ site_name: laminas-hydrator
 site_description: "Serialize objects to arrays, and vice versa"
 repo_url: 'https://github.com/laminas/laminas-hydrator'
 plugins:
-  - search
   - redirects:
       redirect_maps:
-        aggregate.md: v2/aggregate.md
-        filter.md: v2/filter.md
-        naming-strategy/composite-naming-strategy.md: v2/naming-strategy/composite-naming-strategy.md
-        naming-strategy/identity-naming-strategy.md: v2/naming-strategy/identity-naming-strategy.md
-        naming-strategy/map-naming-strategy.md: v2/naming-strategy/map-naming-strategy.md
-        naming-strategy/underscore-naming-strategy.md: v2/naming-strategy/underscore-naming-strategy.md
-        quick-start.md: v2/quick-start.md
-        strategy.md: v2/strategy.md
+        aggregate.md: v5/aggregate.md
+        filter.md: v5/filter.md
+        naming-strategy/composite-naming-strategy.md: v5/naming-strategy/composite-naming-strategy.md
+        naming-strategy/identity-naming-strategy.md: v5/naming-strategy/identity-naming-strategy.md
+        naming-strategy/map-naming-strategy.md: v5/naming-strategy/map-naming-strategy.md
+        naming-strategy/underscore-naming-strategy.md: v5/naming-strategy/underscore-naming-strategy.md
+        quick-start.md: v5/basic-usage.md
+        strategy.md: v5/strategy.md

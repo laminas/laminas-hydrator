@@ -298,7 +298,5 @@ $extractedArray = $hydrator->extract(new Foo());
 `$extractedArray` will only have 'foo' =&gt; 'foo'; all other values are
 excluded from extraction.
 
-> ### Note
->
-> All pre-registered filters from the `ClassMethods` hydrator are ignored when
-> this interface is used.
+NOTE: All pre-registered filters from the `ClassMethodsHydrator` hydrator are ignored when this interface is used.
+More on those methods below.

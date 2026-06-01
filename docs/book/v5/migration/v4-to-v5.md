@@ -47,23 +47,26 @@ Please update your codebase to use the corresponding `*Hydrator` classes:
 The `FilterComposite::CONDITION_OR` and `FilterComposite::CONDITION_AND` integer constants have been removed.
 Replace them with the new `FilterCondition` enum.
 
+#### Before in Version 4
+
 ```php
-// Before (v4)
 use Laminas\Hydrator\Filter\FilterComposite;
 
 $hydrator->addFilter('exclude', $myFilter, FilterComposite::CONDITION_AND);
+```
 
-// After (v5)
+#### Now in Version 5
+
+```php
 use Laminas\Hydrator\Filter\FilterCondition;
 
 $hydrator->addFilter('exclude', $myFilter, FilterCondition::And);
 ```
 
-The `$condition` parameter of `addFilter()` now requires a `FilterCondition` value instead of an `int`
-on `FilterComposite`, `FilterEnabledInterface`, `AbstractHydrator`, and `ClassMethodsHydrator`.
+The `$condition` parameter of `addFilter()` now requires a `FilterCondition` value instead of an `int` on `FilterComposite`, `FilterEnabledInterface`, `AbstractHydrator`, and `ClassMethodsHydrator`.
 
 ## Removed Features
 
 ### Removal of Module Manager Support
 
-[Module Manager](https://docs.laminas.dev/laminas-modulemanager/) support has been removed along with the interface `Laminas\Hydrator\HydratorProviderInterface`
+[Module Manager](https://docs.laminas.dev/laminas-modulemanager/) support has been removed along with the interface `Laminas\Hydrator\HydratorProviderInterface`.
