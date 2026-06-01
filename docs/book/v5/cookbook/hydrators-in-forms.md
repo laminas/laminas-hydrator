@@ -12,6 +12,7 @@ A hydrator can be added directly in a form class itself, using the class name of
 
 [Create a form as a separate class](https://docs.laminas.dev/laminas-form/v3/quick-start/#factory-backed-form-extension), define its [`init` method](https://docs.laminas.dev/laminas-form/v3/advanced/#initialization), and set the hydrator via the `setHydratorByName()` method of `Laminas\Form\Form`, e.g. `module/Album/src/Form/AlbumForm.php`:
 
+<!-- markdownlint-disable no-inline-html -->
 <pre class="language-php" data-line="11-12"><code>
 namespace Album\Form;
 
@@ -39,6 +40,7 @@ final class AlbumForm extends Form
     }
 }
 </code></pre>
+<!-- markdownlint-enable no-inline-html -->
 
 > INFO: **`setHydratorByName` vs. `setHydrator`**
 > The example use the `setHydratorByName()` method of `Laminas\Form\Form` instead of `setHydrator` method.
@@ -85,6 +87,7 @@ final class AlbumHydrator implements Laminas\Hydrator\HydratorInterface
 
 Like before, the custom hydrator can be added directly in a form class itself, using the class name of the hydrator:
 
+<!-- markdownlint-disable no-inline-html -->
 <pre class="language-php" data-line="10-11"><code>
 namespace Album\Form;
 
@@ -102,6 +105,7 @@ final class AlbumForm extends Form
     }
 }
 </code></pre>
+<!-- markdownlint-enable no-inline-html -->
 
 If no separate factory is required for the hydrator, then the hydrator plugin manager will be instantiating the hydrator class without prior registration. Otherwise, the hydrator must be registered.
 
@@ -109,6 +113,7 @@ If no separate factory is required for the hydrator, then the hydrator plugin ma
 
 Forms can be defined via configuration and the hydrator can be added to the form with the `hydrator` key:
 
+<!-- markdownlint-disable no-inline-html -->
 <pre class="language-php" data-line="3"><code>
 $factory = new Laminas\Form\Factory();
 $form    = $factory->createForm([
@@ -127,6 +132,7 @@ $form    = $factory->createForm([
     ],
 ]);
 </code></pre>
+<!-- markdownlint-enable no-inline-html -->
 
 More information on using configuration and factory creation can be found in the [laminas-form documentation](https://docs.laminas.dev/laminas-form/v3/form-creation/creation-via-factory/).
 
@@ -134,6 +140,7 @@ More information on using configuration and factory creation can be found in the
 
 If annotations on domain models are used to define the form, then the hydrator can be added to the form via the `Laminas\Form\Annotation\Hydrator` attribute:
 
+<!-- markdownlint-disable no-inline-html -->
 <pre class="language-php" data-line="7"><code>
 namespace Album\Model;
 
@@ -147,10 +154,11 @@ final class Album
     #[Annotation\Filter(StringTrim::class)]
     #[Annotation\Options(["label" => "Title:"])]
     public string $title;
-    
+
     // …
 }
 </code></pre>
+<!-- markdownlint-enable no-inline-html -->
 
 (DocBlock annotations are also supported.)
 
