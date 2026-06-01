@@ -1,9 +1,6 @@
 docs_dir: docs/book
 site_dir: docs/html
 extra:
-  repo_name: laminas/laminas-hydrator
-  base_url: https://docs.laminas.dev/
-  project_url: https://docs.laminas.dev/components/
   project: Components
   current_version: v5
   versions:
@@ -97,7 +94,6 @@ site_name: laminas-hydrator
 site_description: "Serialize objects to arrays, and vice versa"
 repo_url: 'https://github.com/laminas/laminas-hydrator'
 plugins:
-  - search
   - redirects:
       redirect_maps:
         aggregate.md: v5/aggregate.md
@@ -108,23 +104,3 @@ plugins:
         naming-strategy/underscore-naming-strategy.md: v5/naming-strategy/underscore-naming-strategy.md
         quick-start.md: v5/basic-usage.md
         strategy.md: v5/strategy.md
-theme:
-    name: null
-    custom_dir: theme
-    static_templates:
-      - pages/404.html
-markdown_extensions:
-    - attr_list:
-    - callouts:
-    - pymdownx.snippets:
-          url_download: true
-          base_path:
-              - docs/snippets
-    - pymdownx.superfences:
-          custom_fences:
-              - name: mermaid
-                class: mermaid
-                format: !!python/name:pymdownx.superfences.fence_div_format
-    - pymdownx.tabbed:
-    - toc:
-        toc_depth: 2
