@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d02fc761f0ed5c458028201966a2bfca",
+    "content-hash": "05836abc53fb961943cc9b2a41682bf4",
     "packages": [
         {
             "name": "brick/varexporter",
@@ -127,83 +127,20 @@
             "time": "2025-10-31T10:29:01+00:00"
         },
         {
-            "name": "laminas/laminas-json",
-            "version": "3.8.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laminas/laminas-json.git",
-                "reference": "5448d357c4520d79f5caf4d46a1fe03ec8b8e4b0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-json/zipball/5448d357c4520d79f5caf4d46a1fe03ec8b8e4b0",
-                "reference": "5448d357c4520d79f5caf4d46a1fe03ec8b8e4b0",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^8.1.0"
-            },
-            "conflict": {
-                "zendframework/zend-json": "*"
-            },
-            "require-dev": {
-                "laminas/laminas-coding-standard": "~2.4.0",
-                "laminas/laminas-stdlib": "^2.7.7 || ^3.19",
-                "phpunit/phpunit": "^9.5.25"
-            },
-            "suggest": {
-                "laminas/laminas-json-server": "For implementing JSON-RPC servers",
-                "laminas/laminas-xml2json": "For converting XML documents to JSON"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Laminas\\Json\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "provides convenience methods for serializing native PHP to JSON and decoding JSON to native PHP",
-            "homepage": "https://laminas.dev",
-            "keywords": [
-                "json",
-                "laminas"
-            ],
-            "support": {
-                "chat": "https://laminas.dev/chat",
-                "docs": "https://docs.laminas.dev/laminas-json/",
-                "forum": "https://discourse.laminas.dev",
-                "issues": "https://github.com/laminas/laminas-json/issues",
-                "rss": "https://github.com/laminas/laminas-json/releases.atom",
-                "source": "https://github.com/laminas/laminas-json"
-            },
-            "funding": [
-                {
-                    "url": "https://funding.communitybridge.org/projects/laminas-project",
-                    "type": "community_bridge"
-                }
-            ],
-            "abandoned": true,
-            "time": "2026-01-23T11:10:11+00:00"
-        },
-        {
             "name": "laminas/laminas-serializer",
-            "version": "3.3.0",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-serializer.git",
-                "reference": "1b3845cb3f31253a2256b72b318a45e7568b8664"
+                "reference": "7af96ee0a5a9beaf4efae3cb6ca8a9540f545e53"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-serializer/zipball/1b3845cb3f31253a2256b72b318a45e7568b8664",
-                "reference": "1b3845cb3f31253a2256b72b318a45e7568b8664",
+                "url": "https://api.github.com/repos/laminas/laminas-serializer/zipball/7af96ee0a5a9beaf4efae3cb6ca8a9540f545e53",
+                "reference": "7af96ee0a5a9beaf4efae3cb6ca8a9540f545e53",
                 "shasum": ""
             },
             "require": {
-                "laminas/laminas-json": "^3.1",
                 "laminas/laminas-servicemanager": "^4.5",
                 "laminas/laminas-stdlib": "^3.19",
                 "php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0"
@@ -212,15 +149,15 @@
                 "zendframework/zend-serializer": "*"
             },
             "require-dev": {
+                "ext-igbinary": "*",
                 "laminas/laminas-coding-standard": "~3.1.0",
-                "phpunit/phpunit": "^11.5.37",
-                "psalm/plugin-phpunit": "^0.19.0",
-                "vimeo/psalm": "^6"
+                "phpunit/phpunit": "^11.5.55",
+                "psalm/plugin-phpunit": "^0.19.5",
+                "vimeo/psalm": "^6.15.1"
             },
             "type": "library",
             "extra": {
                 "laminas": {
-                    "component": "Laminas\\Serializer",
                     "config-provider": "Laminas\\Serializer\\ConfigProvider"
                 }
             },
@@ -249,11 +186,11 @@
             },
             "funding": [
                 {
-                    "url": "https://funding.communitybridge.org/projects/laminas-project",
-                    "type": "community_bridge"
+                    "url": "https://crowdfunding.linuxfoundation.org/initiatives/laminas-project",
+                    "type": "custom"
                 }
             ],
-            "time": "2026-04-20T12:14:24+00:00"
+            "time": "2026-08-13T13:20:07+00:00"
         },
         {
             "name": "laminas/laminas-servicemanager",
