@@ -11,7 +11,7 @@
     
         
     
-    <meta name="docsearch:version" content="4.0.0,latest">
+    <meta name="docsearch:version" content="5.0.0,latest">
     <meta name="docsearch:language" content="en">
     <meta name="docsearch:component" content="laminas-hydrator">
 
@@ -120,6 +120,14 @@
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
 
         <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                
             
 
                 
@@ -313,9 +321,17 @@
         <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left" aria-labelledby="version-selector-dropdown">
             
                 
+                    <a href="../../v5/introduction/" class="dropdown-item">
+                        
+                            v5 (latest)
+                        
+                    </a>
+                
+            
+                
                     <a href="../quick-start/" class="dropdown-item active">
                         
-                            v4 (latest)
+                            v4
                         
                     </a>
                 
@@ -420,6 +436,14 @@
 </nav>
 
 
+
+    <div class="alert alert-danger" role="alert">
+        <h4>Caution</h4>
+        <p>
+            The documentation you are viewing is for an older version of this component.<br>
+            <a href="../..">Switch to the latest (v5) version.</a>
+        </p>
+    </div>
 
 
 
@@ -610,11 +634,11 @@ $hydrator = new ClassMethodsHydrator(false);
 $extractedArray = $hydrator-&gt;extract(new Foo());</code></pre>
 <p><code>$extractedArray</code> will only have 'foo' =&gt; 'foo'; all other values are
 excluded from extraction.</p>
-<blockquote>
-<h3 id="note">Note</h3>
-<p>All pre-registered filters from the <code>ClassMethodsHydrator</code> hydrator are ignored when
-this interface is used. More on those methods below.</p>
-</blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All pre-registered filters from the <code>ClassMethodsHydrator</code> hydrator are ignored when this interface is used.
+More on those methods below.</p>
+</div>
 <h2 id="filter-enabled-hydrators-and-the-composite-filter">Filter-enabled hydrators and the composite filter</h2>
 <p>Hydrators can indicate they are filter-enabled by implementing
 <code>Laminas\Hydrator\Filter\FilterEnabledInterface</code>:</p>
@@ -660,10 +684,10 @@ interface FilterEnabledInterface extends FilterProviderInterface
      */
     public function removeFilter(string $name) : void;
 }</code></pre>
-<blockquote>
-<p>Note that the interface extends <code>FilterProviderInterface</code>, which means it also
-includes the <code>getFilter()</code> method.</p>
-</blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The interface extends <code>FilterProviderInterface</code>, which means it also includes the <code>getFilter()</code> method.</p>
+</div>
 <p>The <code>FilterEnabledInterface</code> makes the assumption that the class will be backed
 by a <code>Laminas\Hydrator\Filter\FilterComposite</code>; the various <code>addFilter()</code>,
 <code>hasFilter()</code>, and <code>removeFilter()</code> methods are expected to proxy to a
@@ -776,6 +800,14 @@ want to represent, such as a service manager instance:</p>
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
 
         <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                
             
 
                 

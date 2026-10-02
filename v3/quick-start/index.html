@@ -11,7 +11,7 @@
     
         
     
-    <meta name="docsearch:version" content="4.0.0,latest">
+    <meta name="docsearch:version" content="5.0.0,latest">
     <meta name="docsearch:language" content="en">
     <meta name="docsearch:component" content="laminas-hydrator">
 
@@ -120,6 +120,14 @@
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
 
         <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                
             
 
                 
@@ -307,9 +315,17 @@
         <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left" aria-labelledby="version-selector-dropdown">
             
                 
+                    <a href="../../v5/introduction/" class="dropdown-item">
+                        
+                            v5 (latest)
+                        
+                    </a>
+                
+            
+                
                     <a href="../../v4/quick-start/" class="dropdown-item">
                         
-                            v4 (latest)
+                            v4
                         
                     </a>
                 
@@ -411,7 +427,7 @@
         <h4>Caution</h4>
         <p>
             The documentation you are viewing is for an older version of this component.<br>
-            <a href="../..">Switch to the latest (v4) version.</a>
+            <a href="../..">Switch to the latest (v5) version.</a>
         </p>
     </div>
 
@@ -491,7 +507,7 @@ $data = [
 
 $hydrator = new Laminas\Hydrator\ClassMethodsHydrator();
 $user     = $hydrator-&gt;hydrate($data, new User());
-$data     = $hydrator-&gt;extract(new User());</code></pre>
+$data     = $hydrator-&gt;extract($user);</code></pre>
 <h3 id="objectpropertyhydrator">ObjectPropertyHydrator</h3>
 <p>The ObjectPropertyHydrator hydrates objects and extracts data using publicly accessible properties which match a key in the data set.</p>
 <pre class="highlight"><code class="language-php">class User
@@ -511,7 +527,7 @@ $data = [
 
 $hydrator = new Laminas\Hydrator\ObjectPropertyHydrator();
 $user     = $hydrator-&gt;hydrate($data, new User());
-$data     = $hydrator-&gt;extract(new User());</code></pre>
+$data     = $hydrator-&gt;extract($user);</code></pre>
 <h3 id="reflectionhydrator">ReflectionHydrator</h3>
 <p>The ReflectionHydrator is similar to the <code>ObjectPropertyHydrator</code>, however it uses <a href="http://php.net/manual/en/intro.reflection.php">PHP's reflection API</a> to hydrate or extract properties of any visibility.
 Any data key matching an existing property will be hydrated.
@@ -533,7 +549,7 @@ $data = [
 
 $hydrator = new Laminas\Hydrator\ReflectionHydrator();
 $user     = $hydrator-&gt;hydrate($data, new User());
-$data     = $hydrator-&gt;extract(new User());</code></pre>
+$data     = $hydrator-&gt;extract($user);</code></pre>
 <h3 id="delegatinghydrator">DelegatingHydrator</h3>
 <p>The DelegatingHydrator composes a hydrator locator, and will delegate <code>hydrate()</code> and <code>extract()</code> calls to the appropriate one based upon the class name of the object being operated on.</p>
 <pre class="highlight"><code class="language-php">// Instantiate each hydrator you wish to delegate to
@@ -620,6 +636,14 @@ $artist = $delegating-&gt;hydrate($data, new Artist());</code></pre>
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
 
         <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                
             
 
                 

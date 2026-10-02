@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Serialize objects to arrays, and vice versa"> 
+
+    
+    
+        
+    
+    <meta name="docsearch:version" content="5.0.0,latest">
+    <meta name="docsearch:language" content="en">
+    <meta name="docsearch:component" content="laminas-hydrator">
+
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-hydrator/v5/strategies/hydrator/">
+    <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
+
+    <title>Hydrator - laminas-hydrator - Laminas Docs</title>
+
+    <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
+    
+</head>
+<body id="page-top" class="components" data-spy="scroll" data-target=".toc" data-offset="20">
+
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        
+        <a class="logo-link navbar-brand" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
+            <img src="https://docs.laminas.dev/img/laminas-foundation-white.svg" height="28" alt="Laminas">
+        </a>
+        <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
+            Documentation
+        </a>
+
+        
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <div class="dropdown sub-project-selector">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a href="https://docs.mezzio.dev/" class="dropdown-item">
+                                <div class="row align-items-center">
+                                    <div class="col-md-4 col-sm-12">
+                                        <img src="https://docs.laminas.dev/img/mezzio-logo.svg">
+                                    </div>
+                                    <div class="col-md-8 col-sm-12">
+                                        <strong>Mezzio</strong><br>
+                                        PSR-15 Middleware in Minutes
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="https://docs.laminas.dev/components/" class="dropdown-item">
+                                <div class="row align-items-center">
+                                    <div class="col-md-4 col-sm-12">
+                                        <img src="https://docs.laminas.dev/img/laminas-components-rgb.svg">
+                                    </div>
+                                    <div class="col-md-8 col-sm-12">
+                                        <strong>Components</strong><br>
+                                        Components for Enterprise Applications
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item dropdown-item--secondardy" href="https://docs.laminas.dev/migration/">
+                                <div class="row align-items-center">
+                                    <div class="col-md-8 offset-md-4 col-sm-12">
+                                        Migration to Laminas
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item dropdown-item--secondardy" href="https://docs.laminas.dev/tutorials/">
+                                <div class="row align-items-center">
+                                    <div class="col-md-8 offset-md-4 col-sm-12">
+                                        Tutorials
+                                    </div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item dropdown-item--secondardy" href="https://docs.laminas.dev/mvc">
+                                <div class="row align-items-center">
+                                    <div class="col-md-8 offset-md-4 col-sm-12">
+                                        MVC <small><em>(security-only maintenance mode)</em></small>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
+                </li>
+            </ul>
+
+            
+            
+                <div class="d-block d-sm-none">
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="../../..">
+                
+                
+    laminas-hydrator
+
+            </a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../introduction/" class="subnavigation__link">Introduction</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../installation/" class="subnavigation__link">Installation</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../basic-usage/" class="subnavigation__link">Basic Usage</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Hydrators</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../hydrators/array-serializable-hydrator/" class="subnavigation__link">ArraySerializableHydrator</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../hydrators/class-methods-hydrator/" class="subnavigation__link">ClassMethodsHydrator</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../hydrators/delegating-hydrator/" class="subnavigation__link">DelegatingHydrator</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../hydrators/object-property-hydrator/" class="subnavigation__link">ObjectPropertyHydrator</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../hydrators/reflection-hydrator/" class="subnavigation__link">ReflectionHydrator</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../filter/" class="subnavigation__link">Filters</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Strategies</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../strategy/" class="subnavigation__link">Introduction</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../backed-enum/" class="subnavigation__link">BackedEnum</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../collection/" class="subnavigation__link">Collection</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../datetime-immutable-formatter-strategy/" class="subnavigation__link">DateTimeImmutableFormatter</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Hydrator</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../serializable/" class="subnavigation__link">Serializable</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../aggregate/" class="subnavigation__link">Aggregates</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Naming Strategies</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../naming-strategy/intro/" class="subnavigation__link">Introduction</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../naming-strategy/identity-naming-strategy/" class="subnavigation__link">Identity</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../naming-strategy/map-naming-strategy/" class="subnavigation__link">Mapping</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../naming-strategy/underscore-naming-strategy/" class="subnavigation__link">Underscore Mapping</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../naming-strategy/composite-naming-strategy/" class="subnavigation__link">Composite</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../plugin-managers/" class="subnavigation__link">Plugin Managers</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Cookbook</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../cookbook/hydrators-in-forms/" class="subnavigation__link">Hydrators in Forms</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Migration</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../migration/v4-to-v5/" class="subnavigation__link">Migration from Version 4 to 5</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                
+            
+        </ul>
+    </div>
+
+                </div>
+            
+
+            
+            <div class="d-block d-sm-none">
+                <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    
+    <header class="header">
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="col-8">
+                <h1 class="header__title">
+                    Components
+
+                    
+                        <small class="header__subtitle">
+                            
+                            
+    laminas-hydrator
+
+                        </small>
+                    
+                </h1>
+            </div>
+
+            
+            <div class="col-4 text-right">
+                
+                    
+<div class="version-selector">
+    <div class="btn-group">
+        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false" id="version-selector-dropdown">
+            
+                v5
+            
+        </button>
+        <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left" aria-labelledby="version-selector-dropdown">
+            
+                
+                    <a href="../../introduction/" class="dropdown-item active">
+                        
+                            v5 (latest)
+                        
+                    </a>
+                
+            
+                
+                    <a href="../../../v4/quick-start/" class="dropdown-item">
+                        
+                            v4
+                        
+                    </a>
+                
+            
+                
+                    <a href="../../../v3/quick-start/" class="dropdown-item">
+                        
+                            v3
+                        
+                    </a>
+                
+            
+                
+                    <a href="../../../v2/quick-start/" class="dropdown-item">
+                        
+                            v2
+                        
+                    </a>
+                
+            
+        </div>
+    </div>
+</div>
+
+
+                    <a href="#" class="header__link header__link--search" data-toggle="modal" data-target="#mkdocs_search_modal" title="Open search">
+                        <i class="bi bi-search"></i> Search
+                    </a>
+                    <a href="https://github.com/laminas/laminas-hydrator" class="header__link header__link--github" title="Go to repository of laminas-hydrator">
+                        <i class="bi-github"></i> GitHub
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+</header>
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 col-sm-12 content" role="main">
+                
+                
+                    
+    
+
+    
+    
+        <div class="toc">
+            <h6 class="toc__headline">On this page</h6>
+            <ul class="toc__list">
+                
+                    <li class="toc__entry">
+                        <a href="#basic-usage" class="toc__link nav-link">Basic usage</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#example" class="toc__link nav-link">Example</a>
+                    </li>
+                
+            </ul>
+        </div>
+    
+
+                
+
+                
+                    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        
+            <li class="breadcrumb-item"><a href="https://docs.laminas.dev/">Overview</a></li>
+            <li class="breadcrumb-item"><a href="https://docs.laminas.dev/components/">Components</a></li>
+
+            
+                <li class="breadcrumb-item">
+                    <a href="../../..">
+                        
+    laminas-hydrator
+
+                    </a>
+                </li>
+
+                
+                    
+                        
+                        
+                    
+                
+                    
+                        
+                        
+                            <li class="breadcrumb-item">Strategies</li>
+                        
+                    
+                
+
+                <li class="breadcrumb-item active" aria-current="page">Hydrator</li>
+            
+        
+    </ol>
+</nav>
+
+
+
+
+
+
+    
+    
+        <h2 class="chapter__headline">Strategies</h2>
+    
+
+    <h1 id="hydrator">Hydrator</h1>
+<p>The <code>HydratorStrategy</code> can be used to <strong>hydrate an object and its child objects
+with data from a nested array and vice versa</strong>.</p>
+<h2 id="basic-usage">Basic usage</h2>
+<p>The following code example shows standalone usage without adding the strategy
+to a hydrator.</p>
+<h3 id="create-and-configure-strategy">Create and configure strategy</h3>
+<p>Create the strategy and set a hydrator and a classname for the handled object.</p>
+<pre class="highlight"><code class="language-php">$strategy = new Laminas\Hydrator\Strategy\HydratorStrategy(
+    new Laminas\Hydrator\ObjectPropertyHydrator(),
+    stdClass::class
+);</code></pre>
+<h3 id="hydrate-data">Hydrate data</h3>
+<pre class="highlight"><code class="language-php">$hydrated = $strategy-&gt;hydrate([
+    'firstName' =&gt; 'David',
+    'lastName'  =&gt; 'Bowie',
+]);
+
+echo $hydrated-&gt;firstName; // 'David'
+echo $hydrated-&gt;lastName; // 'Bowie'</code></pre>
+<h3 id="extract-data">Extract data</h3>
+<pre class="highlight"><code class="language-php">$class            = new stdClass();
+$class-&gt;firstName = 'David';
+$class-&gt;lastName  = 'Bowie';
+
+$extracted = $strategy-&gt;extract($class);
+
+var_dump($extracted); // ['firstName' =&gt; 'David', 'lastName' =&gt; 'Bowie']</code></pre>
+<h2 id="example">Example</h2>
+<p>The following example shows the hydration for a class with a property that
+consumes another class.</p>
+<p>An example class which represents a music album.</p>
+<pre class="highlight"><code class="language-php">class Album
+{
+    private ?int $id = null;
+
+    private ?string $title = null;
+
+    private ?Artist $artist = null;
+
+    public function __construct(
+        ?int $id = null,
+        ?string $title = null,
+        ?Artist $artist = null
+    ) {
+        $this-&gt;id     = $id;
+        $this-&gt;title  = $title;
+        $this-&gt;artist = $artist;
+    }
+
+    public function getId() : ?int
+    {
+        return $this-&gt;id;
+    }
+
+    public function getTitle() : ?string
+    {
+        return $this-&gt;title;
+    }
+
+    public function getArtist() : ?Artist
+    {
+        return $this-&gt;artist;
+    }
+}</code></pre>
+<p>An example class representing the artist of an album.</p>
+<pre class="highlight"><code class="language-php">class Artist
+{
+    private ?string $firstName;
+
+    private ?string $lastName;
+
+    public function __construct(
+        ?string $firstName = null,
+        ?string $lastName = null
+    ) {
+        $this-&gt;firstName = $firstName;
+        $this-&gt;lastName  = $lastName;
+    }
+
+    public function getFirstName() : ?string
+    {
+        return $this-&gt;firstName;
+    }
+
+    public function getLastName() : ?string
+    {
+        return $this-&gt;lastName;
+    }
+}</code></pre>
+<h3 id="create-hydrator-and-add-strategy">Create hydrator and add strategy</h3>
+<p>Create a hydrator and add <code>HydratorStrategy</code> as a strategy, with a hydrator and a
+classname for the handled object.</p>
+<pre class="highlight"><code class="language-php">$hydrator = new Laminas\Hydrator\ReflectionHydrator();
+$hydrator-&gt;addStrategy(
+    'artist',
+    new Laminas\Hydrator\Strategy\HydratorStrategy(
+        new Laminas\Hydrator\ReflectionHydrator(),
+        Artist::class
+    )
+);</code></pre>
+<h3 id="hydrate-data_1">Hydrate data</h3>
+<p>Create an instance of the example <code>Album</code> class and hydrate data.</p>
+<pre class="highlight"><code class="language-php">$album = new Album();
+$hydrator-&gt;hydrate(
+    [
+        'id'     =&gt; 100,
+        'title'  =&gt; 'The Next Day (Deluxe Version)',
+        'artist' =&gt; [
+            'firstName' =&gt; 'David',
+            'lastName'  =&gt; 'Bowie',
+        ],
+    ],
+    $album
+);
+
+echo $album-&gt;getTitle(); // 'The Next Day (Deluxe Version)'
+echo $album-&gt;getArtist()-&gt;getFirstName(); // 'David'
+echo $album-&gt;getArtist()-&gt;getLastName(); // 'Bowie'</code></pre>
+<h3 id="extract-data_1">Extract data</h3>
+<pre class="highlight"><code class="language-php">var_dump($hydrator-&gt;extract($album));
+/*
+array(3) {
+  'id' =&gt;
+  int(100)
+  'title' =&gt;
+  string(29) "The Next Day (Deluxe Version)"
+  'artist' =&gt;
+  array(2) {
+    'firstName' =&gt;
+    string(5) "David"
+    'lastName' =&gt;
+    string(5) "Bowie"
+  }
+}
+*/</code></pre>
+
+
+
+
+    <nav>
+    <ul class="page-nav hidden-print">
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../datetime-immutable-formatter-strategy/">
+                    <small class="page-nav__label">Previous</small>
+                    <i class="bi bi-arrow-left"></i>
+                    DateTimeImmutableFormatter
+                </a>
+            
+        </li>
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../serializable/">
+                    <small class="page-nav__label">Next</small>
+                    Serializable
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            
+        </li>
+    </ul>
+</nav>
+
+
+
+                
+            </div>
+            <div class="col-md-3 col-sm-12 sidebar">
+                <div class="donation-banner">
+    <a href="https://getlaminas.org/support/">
+        <h2>Donate</h2>
+        <p>Support Laminas Developers Directly</p>
+        <img src="https://funding.communitybridge.org/assets/cb-f-horizontal-white.svg">
+    </a>
+</div>
+
+                
+                    <div class="component-selector">
+    
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="../../..">
+                
+                
+    laminas-hydrator
+
+            </a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../introduction/" class="subnavigation__link">Introduction</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../installation/" class="subnavigation__link">Installation</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../basic-usage/" class="subnavigation__link">Basic Usage</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Hydrators</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../hydrators/array-serializable-hydrator/" class="subnavigation__link">ArraySerializableHydrator</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../hydrators/class-methods-hydrator/" class="subnavigation__link">ClassMethodsHydrator</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../hydrators/delegating-hydrator/" class="subnavigation__link">DelegatingHydrator</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../hydrators/object-property-hydrator/" class="subnavigation__link">ObjectPropertyHydrator</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../hydrators/reflection-hydrator/" class="subnavigation__link">ReflectionHydrator</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../filter/" class="subnavigation__link">Filters</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Strategies</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../strategy/" class="subnavigation__link">Introduction</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../backed-enum/" class="subnavigation__link">BackedEnum</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../collection/" class="subnavigation__link">Collection</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../datetime-immutable-formatter-strategy/" class="subnavigation__link">DateTimeImmutableFormatter</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Hydrator</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../serializable/" class="subnavigation__link">Serializable</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../aggregate/" class="subnavigation__link">Aggregates</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Naming Strategies</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../naming-strategy/intro/" class="subnavigation__link">Introduction</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../naming-strategy/identity-naming-strategy/" class="subnavigation__link">Identity</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../naming-strategy/map-naming-strategy/" class="subnavigation__link">Mapping</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../naming-strategy/underscore-naming-strategy/" class="subnavigation__link">Underscore Mapping</a>
+    </li>
+
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../naming-strategy/composite-naming-strategy/" class="subnavigation__link">Composite</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item ">
+        <a href="../../plugin-managers/" class="subnavigation__link">Plugin Managers</a>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Cookbook</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../cookbook/hydrators-in-forms/" class="subnavigation__link">Hydrators in Forms</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                        
+    <li class="subnavigation__list-item">
+        <span class="subnavigation__headline">Migration</span>
+        <ul class="subnavigation__list">
+            
+                
+    <li class="subnavigation__list-item ">
+        <a href="../../migration/v4-to-v5/" class="subnavigation__link">Migration from Version 4 to 5</a>
+    </li>
+
+            
+        </ul>
+    </li>
+
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                
+            
+        </ul>
+    </div>
+
+                    
+                
+            </div>
+        </div>
+    </div>
+
+    
+    <footer class="footer">
+    <div class="container">
+
+        
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a class="footer__button" href="#page-top"><i class="bi bi-arrow-up-square" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <h5 class="text-white">Laminas – The Linux Foundation's only PHP project</h5>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <ul>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas Components <a href="https://docs.laminas.dev/components">Enterprise-ready PHP components</a></li>
+                    <li>Maintenance Overview <a href="https://getlaminas.org/packages-maintenance-status/">Current maintenance status of Laminas &amp; Mezzio packages</a></li>
+                    <li>Laminas Integrations <a href="https://getlaminas.org/integrations/">List of packages using Laminas & Mezzio components</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+
+                    
+                    <div class="col-md-4">
+                        <h5 class="footer__headline text-white">Support</h5>
+                        <ul class="support__list">
+                            <li class="support__list-item">
+                                <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="bi-chat-text-fill"></i><span class="visually-hidden">Laminas &amp; Mezzio Forum</span></a>
+                            </li>
+                            <li class="support__list-item">
+                                <a href="https://laminas.dev/chat" class="support__link" title="Chat"><i class="bi-slack"></i><span class="visually-hidden">Laminas Community Slack</span></a>
+                            </li>
+                            <li class="support__list-item">
+                                <a href="https://github.com/laminas" class="support__link" title="Github"><i class="bi-github"></i><span class="visually-hidden">Laminas GitHub Organisation Page</span></a>
+                            </li>
+                            <li class="support__list-item">
+                                <a href="https://phpc.social/@getlaminas" class="support__link" title="Mastodon"><i class="bi-mastodon"></i><span class="visually-hidden">Laminas on Mastodon</span></a>
+                            </li>
+                            <li class="support__list-item">
+                                <a href="https://getlaminas.org/blog/rss.xml" class="support__link" title="Blog feed"><i class="bi-rss"></i><span class="visually-hidden">Blog article RSS Feed</span></a>
+                            </li>
+                            <li class="support__list-item">
+                                <a href="https://getlaminas.org/security/feed" class="support__link" title="Security feed">
+                                    <i class="bi-rss-fill"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    
+                    <div class="col-md-4">
+                        <h5 class="footer__headline text-white">License</h5>
+                        <p>
+                            Code licensed under <a
+                                href="https://github.com/laminas/laminas-hydrator/blob/-/LICENSE.md">BSD 3-Clause</a>.
+                        </p>
+                    </div>
+
+                    
+                    <div class="col-md-4">
+                        <h5 class="footer__headline text-white">Copyright</h5>
+                        <p>
+                            <!--Built with love by the Laminas team with the help of our
+                            <a href="https://github.com/laminas/laminas-hydrator/graphs/contributors">contributors</a>.<br>-->
+                            &copy; 2026 <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        let base_url = '../../..',
+            project  = "components",
+            siteName = 'laminas-hydrator';
+    </script>
+    <script src="https://docs.laminas.dev/js/scripts.js"></script>
+    
+        <script src="../../../search/main.js"></script>
+    
+
+    
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Search</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search in laminas-hydrator" id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+</html>

@@ -11,7 +11,7 @@
     
         
     
-    <meta name="docsearch:version" content="4.0.0,latest">
+    <meta name="docsearch:version" content="5.0.0,latest">
     <meta name="docsearch:language" content="en">
     <meta name="docsearch:component" content="laminas-hydrator">
 
@@ -120,6 +120,14 @@
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
 
         <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                
             
 
                 
@@ -265,9 +273,17 @@
         <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left" aria-labelledby="version-selector-dropdown">
             
                 
+                    <a href="../../v5/introduction/" class="dropdown-item">
+                        
+                            v5 (latest)
+                        
+                    </a>
+                
+            
+                
                     <a href="../../v4/quick-start/" class="dropdown-item">
                         
-                            v4 (latest)
+                            v4
                         
                     </a>
                 
@@ -388,7 +404,7 @@
         <h4>Caution</h4>
         <p>
             The documentation you are viewing is for an older version of this component.<br>
-            <a href="../..">Switch to the latest (v4) version.</a>
+            <a href="../..">Switch to the latest (v5) version.</a>
         </p>
     </div>
 
@@ -630,11 +646,11 @@ $hydrator = new ClassMethods(false);
 $extractedArray = $hydrator-&gt;extract(new Foo());</code></pre>
 <p><code>$extractedArray</code> will only have 'foo' =&gt; 'foo'; all other values are
 excluded from extraction.</p>
-<blockquote>
-<h3 id="note">Note</h3>
-<p>All pre-registered filters from the <code>ClassMethods</code> hydrator are ignored when
-this interface is used.</p>
-</blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All pre-registered filters from the <code>ClassMethodsHydrator</code> hydrator are ignored when this interface is used.
+More on those methods below.</p>
+</div>
 
 
 
@@ -702,6 +718,14 @@ this interface is used.</p>
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
 
         <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                
             
 
                 

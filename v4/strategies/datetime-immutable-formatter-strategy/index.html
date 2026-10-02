@@ -11,7 +11,7 @@
     
         
     
-    <meta name="docsearch:version" content="4.0.0,latest">
+    <meta name="docsearch:version" content="5.0.0,latest">
     <meta name="docsearch:language" content="en">
     <meta name="docsearch:component" content="laminas-hydrator">
 
@@ -120,6 +120,14 @@
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
 
         <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                
             
 
                 
@@ -313,9 +321,17 @@
         <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left" aria-labelledby="version-selector-dropdown">
             
                 
+                    <a href="../../../v5/introduction/" class="dropdown-item">
+                        
+                            v5 (latest)
+                        
+                    </a>
+                
+            
+                
                     <a href="../../quick-start/" class="dropdown-item active">
                         
-                            v4 (latest)
+                            v4
                         
                     </a>
                 
@@ -420,6 +436,14 @@
 
 
 
+    <div class="alert alert-danger" role="alert">
+        <h4>Caution</h4>
+        <p>
+            The documentation you are viewing is for an older version of this component.<br>
+            <a href="../../..">Switch to the latest (v5) version.</a>
+        </p>
+    </div>
+
 
 
 
@@ -429,19 +453,16 @@
     
 
     <h1 id="datetimeimmutableformatter">DateTimeImmutableFormatter</h1>
-<blockquote>
-<p>Available since version 3.1.0</p>
-</blockquote>
 <p><code>DateTimeImmutableFormatterStrategy</code> provides <strong>bidirectional conversion between
 strings and <code>DateTimeImmutable</code> instances</strong>.</p>
 <p>The strategy uses <code>DateTimeFormatterStrategy</code> for conversion where the
-<a href="../../strategy/#laminas-hydrator-strategy-datetimeformatterstrategy">input and output formats</a>
+<a href="../../strategy/#laminashydratorstrategydatetimeformatterstrategy">input and output formats</a>
 can be set.</p>
 <h2 id="basic-usage">Basic Usage</h2>
 <p>The following code example shows standalone usage without adding the strategy
 to a hydrator.</p>
 <h3 id="create-and-configure-strategy">Create and configure strategy</h3>
-<p>Create the strategy and set the <a href="../../strategy/#laminas-hydrator-strategy-datetimeformatterstrategy">input and output formats</a>
+<p>Create the strategy and set the <a href="../../strategy/#laminashydratorstrategydatetimeformatterstrategy">input and output formats</a>
 via the <code>DateTimeFormatterStrategy</code>.</p>
 <pre class="highlight"><code class="language-php">$strategy = new Laminas\Hydrator\Strategy\DateTimeImmutableFormatterStrategy(
     new Laminas\Hydrator\Strategy\DateTimeFormatterStrategy('Y-m-d')
@@ -559,6 +580,14 @@ echo $extracted; // '2020-07-01'</code></pre>
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
 
         <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                
             
 
                 
