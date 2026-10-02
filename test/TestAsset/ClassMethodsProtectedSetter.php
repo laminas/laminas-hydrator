@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace LaminasTest\Hydrator\TestAsset;
 
-class ClassMethodsProtectedSetter
+final class ClassMethodsProtectedSetter
 {
     protected mixed $foo;
 

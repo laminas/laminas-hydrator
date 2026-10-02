@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace LaminasTest\Hydrator\TestAsset;
 
-class ClassMethodsTitleCase
+final class ClassMethodsTitleCase
 {
     protected string $FooBar = '1';
 

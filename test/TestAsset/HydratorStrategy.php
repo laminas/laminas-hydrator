@@ -8,7 +8,7 @@ use Laminas\Hydrator\Strategy\DefaultStrategy;
 
 use function is_array;
 
-class HydratorStrategy extends DefaultStrategy
+final class HydratorStrategy extends DefaultStrategy
 {
     /**
      * A simulated storage device which is just an array with Car objects.

@@ -8,7 +8,7 @@ namespace LaminasTest\Hydrator\TestAsset;
  * Test asset to verify that a composition of a class-methods and an array-serializable
  * hydrator produces the expected output
  */
-class AggregateObject
+final class AggregateObject
 {
     public array $arrayData = ['president' => 'Zaphod'];
 

@@ -6,7 +6,7 @@ namespace LaminasTest\Hydrator\TestAsset;
 
 use function get_object_vars;
 
-class HydratorStrategyEntityA
+final class HydratorStrategyEntityA
 {
     /** @var HydratorStrategyEntityB[] */
     public array $entities; // public to make testing easier!

@@ -13,3 +13,4 @@
 /mkdocs.yml export-ignore
 /renovate.json export-ignore
 /composer-dependency-analyser.php export-ignore
+/structarmed.php export-ignore

@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace LaminasTest\Hydrator\TestAsset;
 
-class ClassMethodsUnderscore
+final class ClassMethodsUnderscore
 {
     protected string $foo_bar = '1';
 

@@ -8,7 +8,7 @@ use function strlen;
 use function strtolower;
 use function substr;
 
-class ClassMethodsMagicMethodSetter
+final class ClassMethodsMagicMethodSetter
 {
     protected mixed $foo;
 

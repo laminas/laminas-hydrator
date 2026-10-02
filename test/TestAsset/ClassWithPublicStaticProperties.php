@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace LaminasTest\Hydrator\TestAsset;
 
-class ClassWithPublicStaticProperties
+final class ClassWithPublicStaticProperties
 {
     /** @var string */
     public static $foo = 'foo';
