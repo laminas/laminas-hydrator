@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace LaminasTest\Hydrator\TestAsset;
 
-class ClassMethodsCamelCaseMissing
+final class ClassMethodsCamelCaseMissing
 {
     protected string $fooBar = '1';
 

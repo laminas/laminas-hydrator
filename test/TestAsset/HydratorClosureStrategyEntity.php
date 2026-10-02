@@ -7,7 +7,7 @@ namespace LaminasTest\Hydrator\TestAsset;
 use AllowDynamicProperties;
 
 #[AllowDynamicProperties]
-class HydratorClosureStrategyEntity
+final class HydratorClosureStrategyEntity
 {
     public function __construct(public mixed $field1 = null, public mixed $field2 = null)
     {

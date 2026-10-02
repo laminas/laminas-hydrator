@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace LaminasTest\Hydrator\TestAsset;
 
-class Reflection
+final class Reflection
 {
     public string $foo = '1';
 
