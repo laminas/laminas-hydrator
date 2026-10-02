@@ -40,13 +40,13 @@
         "webmozart/assert": "^1.11 || ^2.0"
     },
     "require-dev": {
-        "laminas/laminas-coding-standard": "~3.0",
-        "phpbench/phpbench": "^1.3.1",
-        "phpunit/phpunit": "^11.5.42",
-        "psalm/plugin-phpunit": "^0.19.0",
-        "rector/rector": "^2.3.8",
-        "shipmonk/composer-dependency-analyser": "^1.8",
-        "vimeo/psalm": "^6.13.1"
+        "laminas/laminas-coding-standard": "^3.1",
+        "phpbench/phpbench": "^1.7.0",
+        "phpunit/phpunit": "^11.5.56",
+        "psalm/plugin-phpunit": "^0.19.7",
+        "rector/rector": "^2.6.7",
+        "shipmonk/composer-dependency-analyser": "^1.8.4",
+        "vimeo/psalm": "^6.19.1"
     },
     "autoload": {
         "psr-4": {

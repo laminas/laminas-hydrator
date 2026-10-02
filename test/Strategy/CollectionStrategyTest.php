@@ -185,12 +185,12 @@ final class CollectionStrategyTest extends TestCase
             ['name' => 'John Doe'],
         ];
 
-        $hydration = static function ($data) {
+        $hydration = static function (mixed $data): object {
             static $hydrator;
 
-            if (null === $hydrator) {
-                $hydrator = new ReflectionHydrator();
-            }
+            /** @psalm-suppress MixedAssignment */
+            $hydrator ??= new ReflectionHydrator();
+            self::assertInstanceOf(HydratorInterface::class, $hydrator);
 
             return $hydrator->hydrate(
                 $data,
