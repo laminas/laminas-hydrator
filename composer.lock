@@ -1402,16 +1402,16 @@
         },
         {
             "name": "boundwize/structarmed",
-            "version": "0.18.9",
+            "version": "0.18.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/boundwize/structarmed.git",
-                "reference": "49465f0c678f81ee29051df7a6d756678874339f"
+                "reference": "21d20e29234b4b106718639a12dc3dd343d2e05b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/boundwize/structarmed/zipball/49465f0c678f81ee29051df7a6d756678874339f",
-                "reference": "49465f0c678f81ee29051df7a6d756678874339f",
+                "url": "https://api.github.com/repos/boundwize/structarmed/zipball/21d20e29234b4b106718639a12dc3dd343d2e05b",
+                "reference": "21d20e29234b4b106718639a12dc3dd343d2e05b",
                 "shasum": ""
             },
             "require": {
@@ -1468,7 +1468,7 @@
             ],
             "support": {
                 "issues": "https://github.com/boundwize/structarmed/issues",
-                "source": "https://github.com/boundwize/structarmed/tree/0.18.9"
+                "source": "https://github.com/boundwize/structarmed/tree/0.18.11"
             },
             "funding": [
                 {
@@ -1476,7 +1476,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-10-01T12:16:20+00:00"
+            "time": "2026-10-04T10:04:54+00:00"
         },
         {
             "name": "composer/pcre",
@@ -3146,11 +3146,11 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.2.16",
+            "version": "2.2.17",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/46a6d9060e5a7763adfcc21ebcb8b504ebdbcb92",
-                "reference": "46a6d9060e5a7763adfcc21ebcb8b504ebdbcb92",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e676a49fa70cee9f5bf6ff4796186b928a08673f",
+                "reference": "e676a49fa70cee9f5bf6ff4796186b928a08673f",
                 "shasum": ""
             },
             "require": {
@@ -3206,7 +3206,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-09-25T09:31:51+00:00"
+            "time": "2026-10-04T19:40:09+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
