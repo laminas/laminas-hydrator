@@ -16,7 +16,7 @@ use Laminas\EventManager\Event;
  */
 final class HydrateEvent extends Event
 {
-    public const EVENT_HYDRATE = 'hydrate';
+    public const string EVENT_HYDRATE = 'hydrate';
 
     /**
      * {@inheritDoc}

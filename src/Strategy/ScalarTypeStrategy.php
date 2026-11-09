@@ -11,10 +11,10 @@ use function sprintf;
 
 final readonly class ScalarTypeStrategy implements StrategyInterface
 {
-    private const TYPE_INT     = 'int';
-    private const TYPE_FLOAT   = 'float';
-    private const TYPE_STRING  = 'string';
-    private const TYPE_BOOLEAN = 'bool';
+    private const string TYPE_INT     = 'int';
+    private const string TYPE_FLOAT   = 'float';
+    private const string TYPE_STRING  = 'string';
+    private const string TYPE_BOOLEAN = 'bool';
 
     public static function createToInt(): self
     {

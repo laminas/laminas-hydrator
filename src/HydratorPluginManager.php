@@ -24,7 +24,7 @@ use function sprintf;
  */
 final class HydratorPluginManager extends AbstractSingleInstancePluginManager implements HydratorPluginManagerInterface
 {
-    private const DEFAULT_CONFIGURATION = [
+    private const array DEFAULT_CONFIGURATION = [
         'factories' => [
             ArraySerializableHydrator::class => InvokableFactory::class,
             ClassMethodsHydrator::class      => InvokableFactory::class,
