@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="6.19.1@e2ca44251c1f1aa2e35452d426895746b47de64e">
+<files psalm-version="6.20.10@7fc81490f861c801061836a9010603d2393bf8da">
   <file src="src/ArraySerializableHydrator.php">
     <MixedArgument>
       <code><![CDATA[$original]]></code>
@@ -79,25 +79,6 @@
     <PossiblyUnusedMethod>
       <code><![CDATA[hasFilter]]></code>
     </PossiblyUnusedMethod>
-  </file>
-  <file src="src/Filter/NumberOfParameterFilter.php">
-    <MixedAssignment>
-      <code><![CDATA[$reflectionMethod]]></code>
-    </MixedAssignment>
-    <MixedMethodCall>
-      <code><![CDATA[getNumberOfParameters]]></code>
-    </MixedMethodCall>
-  </file>
-  <file src="src/Filter/OptionalParametersFilter.php">
-    <MixedArgument>
-      <code><![CDATA[$reflectionMethod->getParameters()]]></code>
-    </MixedArgument>
-    <MixedAssignment>
-      <code><![CDATA[$reflectionMethod]]></code>
-    </MixedAssignment>
-    <MixedMethodCall>
-      <code><![CDATA[getParameters]]></code>
-    </MixedMethodCall>
   </file>
   <file src="src/HydratorAwareInterface.php">
     <UnusedClass>
