@@ -15,7 +15,7 @@ use function is_callable;
 use function lcfirst;
 use function method_exists;
 use function property_exists;
-use function spl_object_hash;
+use function spl_object_id;
 use function sprintf;
 use function str_contains;
 use function str_starts_with;
@@ -130,7 +130,7 @@ final class ClassMethodsHydrator extends AbstractHydrator implements HydratorOpt
         $isAnonymous = str_contains($objectClass, '@anonymous');
 
         if ($isAnonymous) {
-            $objectClass = spl_object_hash($object);
+            $objectClass = spl_object_id($object);
         }
 
         // reset the hydrator's hydrator's cache for this object, as the filter may be per-instance
