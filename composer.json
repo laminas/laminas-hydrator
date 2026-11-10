@@ -48,7 +48,7 @@
         "psalm/plugin-phpunit": "^0.22.0",
         "rector/rector": "^2.8.4",
         "shipmonk/composer-dependency-analyser": "^1.8.4",
-        "vimeo/psalm": "^6.20.10"
+        "vimeo/psalm": "^7.0.0"
     },
     "autoload": {
         "psr-4": {
