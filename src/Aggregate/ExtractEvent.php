@@ -17,7 +17,7 @@ use function array_merge;
  */
 final class ExtractEvent extends Event
 {
-    public const EVENT_EXTRACT = 'extract';
+    public const string EVENT_EXTRACT = 'extract';
 
     /**
      * {@inheritDoc}

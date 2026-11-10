@@ -16,7 +16,7 @@ use function assert;
  */
 final class AggregateHydrator implements HydratorInterface, EventManagerAwareInterface
 {
-    public const DEFAULT_PRIORITY = 1;
+    public const int DEFAULT_PRIORITY = 1;
 
     private ?EventManagerInterface $eventManager = null;
 

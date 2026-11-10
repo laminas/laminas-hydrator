@@ -1,47 +1,48 @@
-name: "Continuous Integration"
-
-on:
-  pull_request:
+name: 'Continuous Integration'
+'on':
+  pull_request: 
   push:
-    branches:
-    tags:
-
-
+    branches: 
+    tags: 
 env:
-  default_php: 8.2
-
+  default_php: '8.3'
 jobs:
   matrix:
-    name: Generate job matrix
+    name: 'Generate job matrix'
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.matrix.outputs.matrix }}
+      matrix: '${{ steps.matrix.outputs.matrix }}'
     steps:
-      -   name: Gather CI configuration
-          id: matrix
-          uses: laminas/laminas-ci-matrix-action@1816e09e14bfc59d5c544779adcb9bc91089f424 # v1
-
+      -
+        name: 'Gather CI configuration'
+        id: matrix
+        uses: laminas/laminas-ci-matrix-action@1816e09e14bfc59d5c544779adcb9bc91089f424
   qa:
-    name: QA Checks
-    needs: [ matrix ]
-    runs-on: ${{ matrix.operatingSystem }}
+    name: 'QA Checks'
+    needs:
+      - matrix
+    runs-on: '${{ matrix.operatingSystem }}'
     strategy:
       fail-fast: false
-      matrix: ${{ fromJSON(needs.matrix.outputs.matrix) }}
+      matrix: '${{ fromJSON(needs.matrix.outputs.matrix) }}'
     steps:
-      -   name: ${{ matrix.name }}
-          uses: laminas/laminas-continuous-integration-action@cb7d4165f568f679dae98b2ad06dc64d0219d04e # v1
-          with:
-            job: ${{ matrix.job }}
-
+      -
+        name: '${{ matrix.name }}'
+        uses: laminas/laminas-continuous-integration-action@cb7d4165f568f679dae98b2ad06dc64d0219d04e
+        with:
+          job: '${{ matrix.job }}'
   rector:
     runs-on: ubuntu-latest
-    name: Run Rector on PHP
+    name: 'Run Rector on PHP'
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: shivammathur/setup-php@7c071dfe9dc99bdf297fa79cb49ea005b9fcadbc # 2.37.1
+      -
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      -
+        uses: shivammathur/setup-php@7c071dfe9dc99bdf297fa79cb49ea005b9fcadbc
         with:
-          php-version: ${{ env.default_php }}
+          php-version: '${{ env.default_php }}'
           tools: composer
-      - uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
-      - run: composer rector
+      -
+        uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda
+      -
+        run: 'composer rector'

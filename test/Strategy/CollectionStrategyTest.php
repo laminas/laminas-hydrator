@@ -24,7 +24,7 @@ use function fopen;
 use function get_debug_type;
 use function mt_getrandmax;
 use function mt_rand;
-use function spl_object_hash;
+use function spl_object_id;
 use function sprintf;
 
 #[CoversClass(CollectionStrategy::class)]
@@ -119,7 +119,7 @@ final class CollectionStrategyTest extends TestCase
           *  $extraction =  * @psalm-return array{value: string}
           */
         $extraction = static fn(TestAsset\User $value): array => [
-            'value' => spl_object_hash($value),
+            'value' => spl_object_id($value),
         ];
 
         $hydrator = $this->createHydratorMock();

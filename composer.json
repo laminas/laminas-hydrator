@@ -21,7 +21,7 @@
             "dealerdirect/phpcodesniffer-composer-installer": true
         },
         "platform": {
-            "php": "8.2.99"
+            "php": "8.3.99"
         }
     },
     "extra": {
@@ -31,23 +31,24 @@
         }
     },
     "require": {
-        "php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0",
-        "laminas/laminas-eventmanager": "^3.14",
+        "php": "~8.3.0 || ~8.4.0 || ~8.5.0 || ~8.6.0",
+        "laminas/laminas-eventmanager": "^3.15",
         "laminas/laminas-serializer": "^4.0.0",
-        "laminas/laminas-servicemanager": "^4.4.0",
-        "laminas/laminas-stdlib": "^3.20",
-        "psr/container": "^1.1 || ^2.0",
-        "webmozart/assert": "^1.11 || ^2.0"
+        "laminas/laminas-servicemanager": "^4.5.1",
+        "laminas/laminas-stdlib": "^3.22",
+        "psr/container": "^1.1 || ^2.0.2",
+        "webmozart/assert": "^1.11 || ^2.5"
     },
     "require-dev": {
-        "boundwize/structarmed": "^0.18.9",
+        "boundwize/structarmed": "^0.18.11",
+        "laminas/internal-tooling": "^1.0",
         "laminas/laminas-coding-standard": "^3.1",
         "phpbench/phpbench": "^1.7.0",
-        "phpunit/phpunit": "^11.5.56",
+        "phpunit/phpunit": "^11.5.57",
         "psalm/plugin-phpunit": "^0.19.7",
-        "rector/rector": "^2.6.7",
+        "rector/rector": "^2.8.4",
         "shipmonk/composer-dependency-analyser": "^1.8.4",
-        "vimeo/psalm": "^6.19.1"
+        "vimeo/psalm": "^6.20.10"
     },
     "autoload": {
         "psr-4": {

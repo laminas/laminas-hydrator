@@ -75,7 +75,7 @@ class HydratingIteratorIterator extends IteratorIterator implements HydratingIte
      * @return TPrototype|null
      */
     #[ReturnTypeWillChange]
-    public function current()
+    public function current(): mixed
     {
         $currentValue = parent::current();
         if ($currentValue === null) {
